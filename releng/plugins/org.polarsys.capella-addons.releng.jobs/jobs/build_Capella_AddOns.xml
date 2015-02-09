@@ -1,0 +1,7 @@
+<project name="Capella_AddOns">
+
+	<echo message="Running Job TransitionSystemSubSystem in Capella_AddOns_TransitionSystemSubSystem/releng"/>
+	<ant dir="Capella_AddOns_TransitionSystemSubSystem/releng"/>
+
+
+</project>
