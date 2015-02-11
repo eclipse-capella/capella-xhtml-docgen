@@ -8,32 +8,20 @@
       <domains xmi:type="domain:EMFDomain" xmi:id="_1jFg4O6LEeCOPs2PMWw0Bg" helperImplementation="org.eclipse.egf.domain.emf.EMFDomainHelper"
           uri="platform:/resource/org.polarsys.capella-addons.releng/model/Chain_CapellaAddOns.egfbuild"/>
     </viewpoints>
-    <viewpoints xmi:type="pattern:PatternViewpoint" xmi:id="_yj-2AO6MEeCOPs2PMWw0Bg">
-      <libraries xmi:id="_yj-2Ae6MEeCOPs2PMWw0Bg" name="org.polarsys.capella.addons.releng">
-        <elements xmi:id="_yj-2Au6MEeCOPs2PMWw0Bg" name="rmap local add com.thalesgroup.mde"
-            superPattern="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_pFGKYZloEd-GKqXx_evxEw"
-            headerMethod="#_yj-2BO6MEeCOPs2PMWw0Bg" conditionMethod="#_yj-2Bu6MEeCOPs2PMWw0Bg"
-            initMethod="#_yj-2Be6MEeCOPs2PMWw0Bg" footerMethod="#_yj-2CO6MEeCOPs2PMWw0Bg">
-          <nature xmi:type="jetpattern:JetNature" xmi:id="_yj-2A-6MEeCOPs2PMWw0Bg"
+    <viewpoints xmi:type="pattern:PatternViewpoint" xmi:id="__6ob0LHbEeSzAc1pj8j6oQ">
+      <libraries xmi:id="_G1OPYLHcEeSzAc1pj8j6oQ" name="org.polarsys.capella.addons.releng">
+        <elements xmi:id="_I1KG0LHcEeSzAc1pj8j6oQ" name="install_buckminster_customisation"
+            superPattern="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_WzN4sI6XEd-e7viTqNBNrA"
+            headerMethod="#_I1KG0rHcEeSzAc1pj8j6oQ" conditionMethod="#_I1KG1LHcEeSzAc1pj8j6oQ"
+            initMethod="#_I1KG07HcEeSzAc1pj8j6oQ" footerMethod="#_I1KG1rHcEeSzAc1pj8j6oQ">
+          <nature xmi:type="jetpattern:JetNature" xmi:id="_I1KG0bHcEeSzAc1pj8j6oQ"
               name="JET"/>
-          <methods xmi:id="_yj-2BO6MEeCOPs2PMWw0Bg" name="header" patternFilePath="templates/pattern._yj-2Au6MEeCOPs2PMWw0Bg/method._yj-2BO6MEeCOPs2PMWw0Bg.pt"/>
-          <methods xmi:id="_yj-2Be6MEeCOPs2PMWw0Bg" name="init" patternFilePath="templates/pattern._yj-2Au6MEeCOPs2PMWw0Bg/method._yj-2Be6MEeCOPs2PMWw0Bg.pt"/>
-          <methods xmi:id="_yj-2Bu6MEeCOPs2PMWw0Bg" name="preCondition" patternFilePath="templates/pattern._yj-2Au6MEeCOPs2PMWw0Bg/method._yj-2Bu6MEeCOPs2PMWw0Bg.pt"/>
-          <methods xmi:id="_yj-2B-6MEeCOPs2PMWw0Bg" name="body" patternFilePath="templates/pattern._yj-2Au6MEeCOPs2PMWw0Bg/method._yj-2B-6MEeCOPs2PMWw0Bg.pt"/>
-          <methods xmi:id="_yj-2CO6MEeCOPs2PMWw0Bg" name="footer" patternFilePath="templates/pattern._yj-2Au6MEeCOPs2PMWw0Bg/method._yj-2CO6MEeCOPs2PMWw0Bg.pt"/>
-          <orchestration xmi:type="pattern:SuperCall" xmi:id="_yj-2Ce6MEeCOPs2PMWw0Bg"/>
-        </elements>
-        <elements xmi:id="_fm5RwAfPEeKxIuwyBypAXQ" name="javadoc step custom" superPattern="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_fy4H8Z7VEd-8De2HBT3r0w"
-            headerMethod="#_fm5RwgfPEeKxIuwyBypAXQ" conditionMethod="#_fm5RxAfPEeKxIuwyBypAXQ"
-            initMethod="#_fm5RwwfPEeKxIuwyBypAXQ" footerMethod="#_fm5RxgfPEeKxIuwyBypAXQ">
-          <nature xmi:type="jetpattern:JetNature" xmi:id="_fm5RwQfPEeKxIuwyBypAXQ"
-              name="JET"/>
-          <methods xmi:id="_fm5RwgfPEeKxIuwyBypAXQ" name="header" patternFilePath="templates/pattern._fm5RwAfPEeKxIuwyBypAXQ/method._fm5RwgfPEeKxIuwyBypAXQ.pt"/>
-          <methods xmi:id="_fm5RwwfPEeKxIuwyBypAXQ" name="init" patternFilePath="templates/pattern._fm5RwAfPEeKxIuwyBypAXQ/method._fm5RwwfPEeKxIuwyBypAXQ.pt"/>
-          <methods xmi:id="_fm5RxAfPEeKxIuwyBypAXQ" name="preCondition" patternFilePath="templates/pattern._fm5RwAfPEeKxIuwyBypAXQ/method._fm5RxAfPEeKxIuwyBypAXQ.pt"/>
-          <methods xmi:id="_fm5RxQfPEeKxIuwyBypAXQ" name="body" patternFilePath="templates/pattern._fm5RwAfPEeKxIuwyBypAXQ/method._fm5RxQfPEeKxIuwyBypAXQ.pt"/>
-          <methods xmi:id="_fm5RxgfPEeKxIuwyBypAXQ" name="footer" patternFilePath="templates/pattern._fm5RwAfPEeKxIuwyBypAXQ/method._fm5RxgfPEeKxIuwyBypAXQ.pt"/>
-          <orchestration xmi:type="pattern:SuperCall" xmi:id="_fm5RxwfPEeKxIuwyBypAXQ"/>
+          <methods xmi:id="_I1KG0rHcEeSzAc1pj8j6oQ" name="header" patternFilePath="templates/pattern._I1KG0LHcEeSzAc1pj8j6oQ/method._I1KG0rHcEeSzAc1pj8j6oQ.pt"/>
+          <methods xmi:id="_I1KG07HcEeSzAc1pj8j6oQ" name="init" patternFilePath="templates/pattern._I1KG0LHcEeSzAc1pj8j6oQ/method._I1KG07HcEeSzAc1pj8j6oQ.pt"/>
+          <methods xmi:id="_I1KG1LHcEeSzAc1pj8j6oQ" name="preCondition" patternFilePath="templates/pattern._I1KG0LHcEeSzAc1pj8j6oQ/method._I1KG1LHcEeSzAc1pj8j6oQ.pt"/>
+          <methods xmi:id="_I1KG1bHcEeSzAc1pj8j6oQ" name="install_buckminster" patternFilePath="templates/pattern._I1KG0LHcEeSzAc1pj8j6oQ/method._I1KG1bHcEeSzAc1pj8j6oQ.pt"/>
+          <methods xmi:id="_I1KG1rHcEeSzAc1pj8j6oQ" name="footer" patternFilePath="templates/pattern._I1KG0LHcEeSzAc1pj8j6oQ/method._I1KG1rHcEeSzAc1pj8j6oQ.pt"/>
+          <orchestration xmi:type="pattern:SuperCall" xmi:id="_I1KG17HcEeSzAc1pj8j6oQ"/>
         </elements>
       </libraries>
     </viewpoints>
@@ -48,12 +36,10 @@
           <type xmi:type="types:TypeString" xmi:id="_siyIkO6MEeCOPs2PMWw0Bg" description=""
               value="platform:/resource/org.polarsys.capella-addons.releng.jobs/jobs"/>
         </invocationContracts>
-        <invocationContracts xmi:id="_qAzUCO6MEeCOPs2PMWw0Bg" invokedContract="fcore:FactoryComponentContract platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_mb-o4I_tEd-ggNhbFv1Fiw">
-          <type xmi:type="pattern:TypePatternSubstitution" xmi:id="_xdfvEO6MEeCOPs2PMWw0Bg">
-            <substitutions xmi:id="_xdfvEe6MEeCOPs2PMWw0Bg" replacedElement="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_pFGKYZloEd-GKqXx_evxEw"
-                replacement="#_yj-2Au6MEeCOPs2PMWw0Bg"/>
-            <substitutions xmi:id="_Si6eEAfPEeKxIuwyBypAXQ" replacedElement="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_fy4H8Z7VEd-8De2HBT3r0w"
-                replacement="#_fm5RwAfPEeKxIuwyBypAXQ"/>
+        <invocationContracts xmi:id="_Q-mTILHcEeSzAc1pj8j6oQ" invokedContract="fcore:FactoryComponentContract platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_mb-o4I_tEd-ggNhbFv1Fiw">
+          <type xmi:type="pattern:TypePatternSubstitution" xmi:id="_SHM58LHcEeSzAc1pj8j6oQ">
+            <substitutions xmi:id="_TSLfULHcEeSzAc1pj8j6oQ" replacedElement="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_WzN4sI6XEd-e7viTqNBNrA"
+                replacement="#_I1KG0LHcEeSzAc1pj8j6oQ"/>
           </type>
         </invocationContracts>
       </invocationContractContainer>

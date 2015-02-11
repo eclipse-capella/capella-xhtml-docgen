@@ -11,15 +11,16 @@
   <steps xsi:type="buildstep:BuildStep" xmi:id="__6XPsdpJEeGTBMJ29vOuKA" name="Import All TransitionSystemSubSystem Plugins">
     <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_hJD2sKZDEeShout9m4suYQ" gitLocation="_ITXvgKZDEeShout9m4suYQ" folderName="system2subsystem/features"/>
     <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_QC18oKZDEeShout9m4suYQ" gitLocation="_ITXvgKZDEeShout9m4suYQ" folderName="system2subsystem/plugins"/>
-    <buildLocations xsi:type="buildstep:TargetPlatformBuildLocation" xmi:id="__6XPtNpJEeGTBMJ29vOuKA" path=""/>
+    <buildLocations xsi:type="buildstep:TargetPlatformBuildLocation" xmi:id="__6XPtNpJEeGTBMJ29vOuKA" path="${usedTP}"/>
     <components xsi:type="buildstep:Feature" xmi:id="__6XPtdpJEeGTBMJ29vOuKA" id="org.polarsys.capella.transition.system2subsystem.feature"/>
   </steps>
   <steps xsi:type="buildstep:PublishStep" xmi:id="_zPXHQdpKEeGTBMJ29vOuKA" name="" description="" component="__6XPtdpJEeGTBMJ29vOuKA" generateDropins="true"/>
-  <steps xsi:type="buildfile:RenameStep" xmi:id="_MDoB4Hr9EeSbZo1mpYCKSA" name="Rename feature src" sourcePath="${publish}/com.thalesgroup.mde.melody.transition.system2subsystem.feature" destinationPath="${publish}/${addonName}_src"/>
-  <steps xsi:type="buildfile:RenameStep" xmi:id="_jAMrUHr9EeSbZo1mpYCKSA" name="Rename feature a src" sourcePath="${publish}/${addonName}_src/dropins/com.thalesgroup.mde.melody.transition.system2subsystem.feature" destinationPath="${publish}/${addonName}_src/dropins/${addonName}_src"/>
+  <steps xsi:type="buildfile:RenameStep" xmi:id="_MDoB4Hr9EeSbZo1mpYCKSA" name="Rename feature src" sourcePath="${publish}/org.polarsys.capella.transition.system2subsystem.feature" destinationPath="${publish}/${addonName}_src"/>
+  <steps xsi:type="buildfile:RenameStep" xmi:id="_jAMrUHr9EeSbZo1mpYCKSA" name="Rename feature a src" sourcePath="${publish}/${addonName}_src/dropins/org.polarsys.capella.transition.system2subsystem.feature" destinationPath="${publish}/${addonName}_src/dropins/${addonName}_src"/>
   <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8HsKEeSbZo1mpYCKSA" name="Archive_addon_UpdSiteSrc" description="" baseDir="${publish}/${addonName}_src/site.p2" destinationFilePath="${publish}/${addonName}-updateSite-${buildVersion}-src.zip"/>
   <steps xsi:type="buildfile:DeleteStep" xmi:id="_NclF8XsKEeSbZo1mpYCKSA" name="Clean unused src artifacts" description="">
     <filePaths>${publish}/${addonName}_src/dropins/${addonName}_src/com.thalesgroup.mde.*</filePaths>
+    <filePaths>${publish}/${addonName}_src/dropins/${addonName}_src/org.polarsys.*</filePaths>
   </steps>
   <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8nsKEeSbZo1mpYCKSA" name="Archive_addon_DropinsSrc" description="" baseDir="${publish}/${addonName}_src/dropins/" destinationFilePath="${publish}/${addonName}-dropins-${buildVersion}-src.zip"/>
   <scms xsi:type="buildscm:GIT" xmi:id="_Ee1t8KZDEeShout9m4suYQ">
