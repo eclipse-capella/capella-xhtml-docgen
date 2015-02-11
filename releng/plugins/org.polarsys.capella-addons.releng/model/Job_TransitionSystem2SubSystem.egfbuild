@@ -11,7 +11,7 @@
   <steps xsi:type="buildstep:BuildStep" xmi:id="__6XPsdpJEeGTBMJ29vOuKA" name="Import All TransitionSystemSubSystem Plugins">
     <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_hJD2sKZDEeShout9m4suYQ" gitLocation="_ITXvgKZDEeShout9m4suYQ" folderName="system2subsystem/features"/>
     <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_QC18oKZDEeShout9m4suYQ" gitLocation="_ITXvgKZDEeShout9m4suYQ" folderName="system2subsystem/plugins"/>
-    <buildLocations xsi:type="buildstep:TargetPlatformBuildLocation" xmi:id="__6XPtNpJEeGTBMJ29vOuKA" path="${usedTP}"/>
+    <buildLocations xsi:type="buildstep:TargetPlatformBuildLocation" xmi:id="__6XPtNpJEeGTBMJ29vOuKA" path="${usedTP}/capella/eclipse"/>
     <components xsi:type="buildstep:Feature" xmi:id="__6XPtdpJEeGTBMJ29vOuKA" id="org.polarsys.capella.transition.system2subsystem.feature"/>
   </steps>
   <steps xsi:type="buildstep:PublishStep" xmi:id="_zPXHQdpKEeGTBMJ29vOuKA" name="" description="" component="__6XPtdpJEeGTBMJ29vOuKA" generateDropins="true"/>
