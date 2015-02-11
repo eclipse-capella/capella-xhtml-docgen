@@ -22,7 +22,7 @@
     <filePaths>${publish}/${addonName}_src/dropins/${addonName}_src/org.polarsys.*</filePaths>
   </steps>
   <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8nsKEeSbZo1mpYCKSA" name="Archive_addon_DropinsSrc" description="" baseDir="${publish}/${addonName}_src/dropins/" destinationFilePath="${publish}/${addonName}-dropins-${buildVersion}-src.zip"/>
-  <steps xsi:type="buildstep:AntStep" xmi:id="_T0mOELIXEeSLS7LVRMJKPg" targetName="clean" xml="&lt;target name=&quot;clean&quot;>&#xD;&#xA;&#x9;&lt;delete>&#xD;&#xA;    &#x9;&#x9;&lt;dirset dir=&quot;result/publish&quot; includes=&quot;transitionSystem2SubSystem*&quot; />&#xD;&#xA;    &#x9;&#x9;&lt;fileset dir=&quot;result/publish&quot; includes=&quot;transitionSystem2SubSystem*&quot; />&#xD;&#xA;&#x9;&lt;/delete>&#xD;&#xA;&lt;/target>&#xD;&#xA;"/>
+  <steps xsi:type="buildstep:AntStep" xmi:id="_T0mOELIXEeSLS7LVRMJKPg" targetName="clean" xml="&lt;target name=&quot;clean&quot;>&#xD;&#xA;&#x9;&lt;delete>&#xD;&#xA;    &#x9;&#x9;&lt;dirset dir=&quot;${publish}&quot; includes=&quot;transitionSystem2SubSystem*&quot; />&#xD;&#xA;    &#x9;&#x9;&lt;fileset dir=&quot;${publish}&quot; includes=&quot;transitionSystem2SubSystem*&quot; />&#xD;&#xA;&#x9;&lt;/delete>&#xD;&#xA;&lt;/target>&#xD;&#xA;"/>
   <scms xsi:type="buildscm:GIT" xmi:id="_Ee1t8KZDEeShout9m4suYQ">
     <locations xmi:id="_ITXvgKZDEeShout9m4suYQ" protocol="https://" url="www.polarsys.org/r/capella/capella-addons"/>
   </scms>
