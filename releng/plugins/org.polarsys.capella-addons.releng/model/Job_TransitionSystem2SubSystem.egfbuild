@@ -22,6 +22,8 @@
     <filePaths>${publish}/${addonName}_src/dropins/${addonName}_src/org.polarsys.*</filePaths>
   </steps>
   <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8nsKEeSbZo1mpYCKSA" name="Archive_addon_DropinsSrc" description="" baseDir="${publish}/${addonName}_src/dropins/" destinationFilePath="${publish}/${addonName}-dropins-${buildVersion}-src.zip"/>
+  <steps xsi:type="buildfile:RenameStep" xmi:id="_k3q9MLLKEeS2IoNthQrPLg" name="Rename update site container" description="Rename update site container" sourcePath="${publish}/${addonName}_src" destinationPath="${publish}/org.polarsys.capella.transition.system2subsystem"/>
+  <steps xsi:type="buildstep:AntStep" xmi:id="_QOJ7gLLKEeS2IoNthQrPLg" name="prepare-p2-for-archive" description="Package update site in ${publish}/org.polarsys.capella.transition.system2subsystem directory" targetName="prepare-p2-for-archive" xml="&lt;delete includeemptydirs=&quot;true&quot;>&#xD;&#xA;    &lt;fileset dir=&quot;${publish}/org.polarsys.capella.transition.system2subsystem&quot;>&#xD;&#xA;        &#x9;&lt;include name=&quot;*/&quot;/>&#xD;&#xA;    &#x9;&#x9;&lt;exclude name=&quot;site.p2/&quot;/>&#xD;&#xA;    &lt;/fileset>&#xD;&#xA;&lt;/delete>"/>
   <scms xsi:type="buildscm:GIT" xmi:id="_Ee1t8KZDEeShout9m4suYQ">
     <locations xmi:id="_ITXvgKZDEeShout9m4suYQ" protocol="https://" url="www.polarsys.org/r/capella/capella-addons"/>
   </scms>
