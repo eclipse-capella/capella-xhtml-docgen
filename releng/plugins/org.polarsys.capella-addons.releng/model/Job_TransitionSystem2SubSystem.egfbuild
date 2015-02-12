@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <buildcore:Job xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:buildcore="http://www.eclipse.org/egf/1.0.1/buildcore" xmlns:buildfile="http://www.eclipse.org/egf/1.0.0/buildfile" xmlns:buildscm="http://www.eclipse.org/egf/1.0.0/buildscm" xmlns:buildstep="http://www.eclipse.org/egf/1.0.2/buildstep" xmi:id="_gPxtENokEeGTBMJ29vOuKA" name="TransitionSystemSubSystem">
   <properties xmi:id="_j4PokNokEeGTBMJ29vOuKA" key="usedTP" value="${publish}/transitionSystem2SubSystem" type="INLINED"/>
-  <properties xmi:id="_GVDVgHr9EeSbZo1mpYCKSA" key="addonName" value="SubsystemTransition"/>
   <steps xsi:type="buildstep:CleanStep" xmi:id="_34NbYJMKEeKKWIqJCUuOog" name="Clean Result" type="Result"/>
   <steps xsi:type="buildfile:DeleteStep" xmi:id="_34NbYZMKEeKKWIqJCUuOog" name="delete TP" description="">
     <additionalParameters xmi:id="_34NbYpMKEeKKWIqJCUuOog" key="dir" value="${usedTP}"/>
@@ -14,15 +13,12 @@
     <components xsi:type="buildstep:Feature" xmi:id="__6XPtdpJEeGTBMJ29vOuKA" id="org.polarsys.capella.transition.system2subsystem.feature"/>
   </steps>
   <steps xsi:type="buildstep:PublishStep" xmi:id="_zPXHQdpKEeGTBMJ29vOuKA" name="" description="" component="__6XPtdpJEeGTBMJ29vOuKA" generateDropins="true"/>
-  <steps xsi:type="buildfile:RenameStep" xmi:id="_MDoB4Hr9EeSbZo1mpYCKSA" name="Rename feature src" sourcePath="${publish}/org.polarsys.capella.transition.system2subsystem.feature" destinationPath="${publish}/${addonName}_src"/>
-  <steps xsi:type="buildfile:RenameStep" xmi:id="_jAMrUHr9EeSbZo1mpYCKSA" name="Rename feature a src" sourcePath="${publish}/${addonName}_src/dropins/org.polarsys.capella.transition.system2subsystem.feature" destinationPath="${publish}/${addonName}_src/dropins/${addonName}_src"/>
-  <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8HsKEeSbZo1mpYCKSA" name="Archive_addon_UpdSiteSrc" description="" baseDir="${publish}/${addonName}_src/site.p2" destinationFilePath="${publish}/${addonName}-updateSite-${buildVersion}-src.zip"/>
-  <steps xsi:type="buildfile:DeleteStep" xmi:id="_NclF8XsKEeSbZo1mpYCKSA" name="Clean unused src artifacts" description="">
-    <filePaths>${publish}/${addonName}_src/dropins/${addonName}_src/com.thalesgroup.mde.*</filePaths>
+  <steps xsi:type="buildfile:RenameStep" xmi:id="_MDoB4Hr9EeSbZo1mpYCKSA" name="del-feature-suffix-publish-dir-name" description="Delete feature suffix from publish directory name" sourcePath="${publish}/org.polarsys.capella.transition.system2subsystem" destinationPath="${publish}/org.polarsys.capella.transition.system2subsystem.feature"/>
+  <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8HsKEeSbZo1mpYCKSA" name="Archive_addon_UpdSiteSrc" description="Zip update site" baseDir="${publish}/org.polarsys.capella.transition.system2subsystem/site.p2" destinationFilePath="${publish}/org.polarsys.capella.transition.system2subsystem-updateSite-${buildVersion}-incubation.zip"/>
+  <steps xsi:type="buildfile:DeleteStep" xmi:id="_NclF8XsKEeSbZo1mpYCKSA" name="clean-unused-gen-src-artifacts" description="Clear unused generated src artifacts org.polarsys.*">
     <filePaths>${publish}/${addonName}_src/dropins/${addonName}_src/org.polarsys.*</filePaths>
   </steps>
-  <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8nsKEeSbZo1mpYCKSA" name="Archive_addon_DropinsSrc" description="" baseDir="${publish}/${addonName}_src/dropins/" destinationFilePath="${publish}/${addonName}-dropins-${buildVersion}-src.zip"/>
-  <steps xsi:type="buildfile:RenameStep" xmi:id="_k3q9MLLKEeS2IoNthQrPLg" name="Rename update site container" description="Rename update site container" sourcePath="${publish}/${addonName}_src" destinationPath="${publish}/org.polarsys.capella.transition.system2subsystem"/>
+  <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8nsKEeSbZo1mpYCKSA" name="Archive_addon_DropinsSrc" description="Zip dropins" baseDir="${publish}/org.polarsys.capella.transition.system2subsystem.feature/dropins/" destinationFilePath="${publish}/org.polarsys.capella.transition.system2subsystem-dropins-${buildVersion}-incubation.zip"/>
   <steps xsi:type="buildstep:AntStep" xmi:id="_QOJ7gLLKEeS2IoNthQrPLg" name="clean-p2-container" description="Clean p2 container directory" targetName="clean-p2-container-dir" xml="&lt;target name=&quot;clean-p2-container-dir&quot;>&#xD;&#xA;&#x9;&lt;delete includeemptydirs=&quot;true&quot;>&#xD;&#xA;   &#x9; &#x9;&lt;fileset dir=&quot;${publish}/org.polarsys.capella.transition.system2subsystem&quot;>&#xD;&#xA;        &#x9;&#x9;&lt;include name=&quot;*/&quot;/>&#xD;&#xA;    &#x9;&#x9;&#x9;&lt;exclude name=&quot;site.p2/&quot;/>&#xD;&#xA;    &#x9;&#x9;&lt;/fileset>&#xD;&#xA;&#x9;&lt;/delete>&#xD;&#xA;&lt;/target>"/>
   <scms xsi:type="buildscm:GIT" xmi:id="_Ee1t8KZDEeShout9m4suYQ">
     <locations xmi:id="_ITXvgKZDEeShout9m4suYQ" protocol="https://" url="www.polarsys.org/r/capella/capella-addons"/>
