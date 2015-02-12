@@ -13,7 +13,7 @@
     <components xsi:type="buildstep:Feature" xmi:id="__6XPtdpJEeGTBMJ29vOuKA" id="org.polarsys.capella.transition.system2subsystem.feature"/>
   </steps>
   <steps xsi:type="buildstep:PublishStep" xmi:id="_zPXHQdpKEeGTBMJ29vOuKA" name="" description="" component="__6XPtdpJEeGTBMJ29vOuKA" generateDropins="true"/>
-  <steps xsi:type="buildfile:RenameStep" xmi:id="_MDoB4Hr9EeSbZo1mpYCKSA" name="del-feature-suffix-publish-dir-name" description="Delete feature suffix from publish directory name" sourcePath="${publish}/org.polarsys.capella.transition.system2subsystem" destinationPath="${publish}/org.polarsys.capella.transition.system2subsystem.feature"/>
+  <steps xsi:type="buildfile:RenameStep" xmi:id="_MDoB4Hr9EeSbZo1mpYCKSA" name="del-feature-suffix-publish-dir-name" description="Delete feature suffix from publish directory name" sourcePath="${publish}/org.polarsys.capella.transition.system2subsystem.feature" destinationPath="${publish}/org.polarsys.capella.transition.system2subsystem"/>
   <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8HsKEeSbZo1mpYCKSA" name="Archive_addon_UpdSiteSrc" description="Zip update site" baseDir="${publish}/org.polarsys.capella.transition.system2subsystem/site.p2" destinationFilePath="${publish}/org.polarsys.capella.transition.system2subsystem-updateSite-${buildVersion}-incubation.zip"/>
   <steps xsi:type="buildfile:DeleteStep" xmi:id="_NclF8XsKEeSbZo1mpYCKSA" name="clean-unused-gen-src-artifacts" description="Clear unused generated src artifacts org.polarsys.*">
     <filePaths>${publish}/${addonName}_src/dropins/${addonName}_src/org.polarsys.*</filePaths>
