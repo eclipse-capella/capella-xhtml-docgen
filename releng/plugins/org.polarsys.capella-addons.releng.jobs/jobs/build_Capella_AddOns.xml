@@ -3,5 +3,8 @@
 	<echo message="Running Job TransitionSystemSubSystem in Capella_AddOns_TransitionSystemSubSystem/releng"/>
 	<ant dir="Capella_AddOns_TransitionSystemSubSystem/releng"/>
 
+	<echo message="Running Job AddOn_XMLPivot in Capella_AddOns_AddOn_XMLPivot/releng"/>
+	<ant dir="Capella_AddOns_AddOn_XMLPivot/releng"/>
+
 
 </project>

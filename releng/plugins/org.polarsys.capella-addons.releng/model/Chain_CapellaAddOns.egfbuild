@@ -7,5 +7,6 @@
     <properties xmi:id="_L7cW0Ev-EeG48a7kaF1Bnw" key="buildVersion" value="${CapellaVersion}.${timestamp}"/>
     <properties xmi:id="_TWr84KZMEeShout9m4suYQ" key="hudsonJob" value="https://hudson.polarsys.org/capella/job/capella-${env.GIT_BRANCH}/lastSuccessfulBuild"/>
   </propertyPackages>
-  <jobs href="Job_TransitionSystem2SubSystem.egfbuild#/"/>
+  <jobs href="Job_TransitionSystem2SubSystem.egfbuild#_gPxtENokEeGTBMJ29vOuKA"/>
+  <jobs href="Job_AddOn_XMLPivot.egfbuild#_Q3G18Cs6EeOgOepTKQGF5A"/>
 </buildcore:Chain>
