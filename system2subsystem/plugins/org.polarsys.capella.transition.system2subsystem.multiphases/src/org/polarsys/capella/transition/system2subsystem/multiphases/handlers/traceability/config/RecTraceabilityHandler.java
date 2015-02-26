@@ -40,7 +40,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 
-public class MultiphaseRecTraceabilityHandler implements ITraceabilityHandler {
+public class RecTraceabilityHandler implements ITraceabilityHandler {
 
   private final Map<MultiphasesContext.Mapping, SetMultimap<EObject, EObject>> mappingToTraceability = new HashMap<Mapping, SetMultimap<EObject, EObject>>();
 

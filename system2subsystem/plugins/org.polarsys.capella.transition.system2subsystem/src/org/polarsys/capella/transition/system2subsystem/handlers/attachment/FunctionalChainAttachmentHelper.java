@@ -23,15 +23,14 @@ import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
-import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.IContextScopeHandler;
 import org.polarsys.capella.core.transition.common.handlers.scope.ScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
 import org.polarsys.capella.transition.system2subsystem.constants.ISubSystemConstants;
+import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
-
 
 /**
  * 
@@ -96,27 +95,34 @@ public class FunctionalChainAttachmentHelper implements IHandler {
     IStatus willBeTransformed = TransformationHandlerHelper.getInstance(context_p).isOrWillBeTransformed(involvedElement, context_p);
 
     // First we check the primary scope.
-    boolean inScope =
-        (scope.contains(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, involvedElement, context_p) == false)
-            && ScopeHandlerHelper.getInstance(context_p).isInScope(involvedElement, context_p);
+    boolean inScope;
+
+    if (involvedElement instanceof AbstractFunction) {
+      inScope = ExternalFunctionsScopeRetriever.isPrimaryFunction((AbstractFunction) involvedElement, context_p);
+    } else {
+      inScope =
+          (scope.contains(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, involvedElement, context_p) == false)
+              && ScopeHandlerHelper.getInstance(context_p).isInScope(involvedElement, context_p);
+    }
 
     // If functional exchange is in scope, the next FunctionalChainInvolvement must be scoped.
     if (inScope && (involvedElement instanceof FunctionalExchange) && (element_p.getNextFunctionalChainInvolvements().isEmpty() == false)) {
       FunctionalChainInvolvement nextFCI = element_p.getNextFunctionalChainInvolvements().get(0);
       boolean nextInScope = isValidInvolvement(nextFCI, context_p);
       if (nextInScope == false) {
-        //            System.out.println(((NamedElement)element_p.getInvolver()).getName());
-        //            System.out.println("\t _ " + ((NamedElement)element_p.getInvolved()).getName());
+        // System.out.println(((NamedElement)element_p.getInvolver()).getName());
+        // System.out.println("\t _ " + ((NamedElement)element_p.getInvolved()).getName());
         return false;
       }
     }
 
-    // If not in initial scope, we check the neighbors involvedElements
+    // If not in initial scope, we check the neightbors involvedElements
     if (inScope == false) {
 
       if (involvedElement instanceof AbstractFunction) {
         // The function is secondary scoped if it is concerned by a scoped FunctionalExchange
         inScope = checkDirectScope(element_p, scope, context_p);
+
       } else if (involvedElement instanceof FunctionalExchange) {
         // A Functional Exchange will be scoped only if its functions are secondary scoped
         boolean prevScoped = false;
@@ -151,7 +157,7 @@ public class FunctionalChainAttachmentHelper implements IHandler {
    * @param context_p
    * @return
    */
-  protected boolean checkDirectScope(FunctionalChainInvolvement fci, IContextScopeHandler scope, IContext context_p) {
+  private boolean checkDirectScope(FunctionalChainInvolvement fci, IContextScopeHandler scope, IContext context_p) {
     boolean res = false;
     Collection<FunctionalChainInvolvement> fcis = new ArrayList<FunctionalChainInvolvement>();
 
@@ -160,15 +166,10 @@ public class FunctionalChainAttachmentHelper implements IHandler {
     fcis.addAll(fci.getPreviousFunctionalChainInvolvements());
 
     for (FunctionalChainInvolvement f : fcis) {
-
       FunctionalExchange fe = (FunctionalExchange) f.getInvolved();
-
-      for (FunctionalChain fc : fe.getInvolvingFunctionalChains()) {
-        if (fc.equals(fci.getInvolver())) {
-          if (isPrimaryFE(fe, scope, context_p)) {
-            res = true;
-            break;
-          }
+      if (ExternalFunctionsScopeRetriever.isLinkToPrimaryFunction(fe, context_p)) {
+        if (fe.getInvolvingFunctionalChains().contains(fci.getInvolver())) {
+          return true;
         }
       }
 
@@ -177,32 +178,8 @@ public class FunctionalChainAttachmentHelper implements IHandler {
     return res;
   }
 
-  protected boolean isPrimaryFE(FunctionalExchange fe, IContextScopeHandler scope, IContext context_p) {
-    boolean res = false;
-
-    try {
-      AbstractFunction sFunction = (AbstractFunction) fe.getSource().eContainer();
-      AbstractFunction tFunction = (AbstractFunction) fe.getTarget().eContainer();
-
-      if (scope.contains(ITransitionConstants.SOURCE_SCOPE, sFunction, context_p)
-          && (scope.contains(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, sFunction, context_p) == false)) {
-        res = true;
-      }
-      if (scope.contains(ITransitionConstants.SOURCE_SCOPE, tFunction, context_p)
-          && (scope.contains(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, tFunction, context_p) == false)) {
-        res = true;
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    return res;
-  }
-
   /**
-   * Put in the map true for all valid functional chain involvement (stop browsing the chain after the first invalid
-   * involvement)
+   * Put in the map true for all valid functional chain involvement (stop browsing the chain after the first invalid involvement)
    */
   public void computeChain(FunctionalChain element_p, IContext context_p) {
     for (FunctionalChainInvolvement next : element_p.getFirstFunctionalChainInvolvements()) {
@@ -242,7 +219,7 @@ public class FunctionalChainAttachmentHelper implements IHandler {
     return res;
   }
 
-  protected void getNextValidInternal(FunctionalChainInvolvement fci, IContext context_p, Collection<FunctionalChainInvolvement> res) {
+  private void getNextValidInternal(FunctionalChainInvolvement fci, IContext context_p, Collection<FunctionalChainInvolvement> res) {
     if ((fci.getNextFunctionalChainInvolvements() != null) && (fci.getNextFunctionalChainInvolvements().isEmpty() == false)) {
       for (FunctionalChainInvolvement next : fci.getNextFunctionalChainInvolvements()) {
         if (next != null) {
@@ -264,7 +241,7 @@ public class FunctionalChainAttachmentHelper implements IHandler {
     return res;
   }
 
-  protected void getPreviousValidInternal(FunctionalChainInvolvement fci, IContext context_p, Collection<FunctionalChainInvolvement> res) {
+  private void getPreviousValidInternal(FunctionalChainInvolvement fci, IContext context_p, Collection<FunctionalChainInvolvement> res) {
     if ((fci.getPreviousFunctionalChainInvolvements() != null) && (fci.getPreviousFunctionalChainInvolvements().isEmpty() == false)) {
       for (FunctionalChainInvolvement prev : fci.getPreviousFunctionalChainInvolvements()) {
         if (prev != null) {

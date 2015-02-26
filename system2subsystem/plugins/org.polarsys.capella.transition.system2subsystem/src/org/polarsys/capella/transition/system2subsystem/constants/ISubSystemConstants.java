@@ -23,5 +23,5 @@ public class ISubSystemConstants {
 
   public static final String SCENARIO_ATTACHMENT_HELPER = "Scenario_Attachment"; //$NON-NLS-1$
 
-  public static final String SCOPE_SECONDARY_ELEMENT = "scope secondary element"; //$NON-NLS-1$
+  public static final String SCOPE_SECONDARY_ELEMENT = "scope_secondary_element"; //$NON-NLS-1$
 }

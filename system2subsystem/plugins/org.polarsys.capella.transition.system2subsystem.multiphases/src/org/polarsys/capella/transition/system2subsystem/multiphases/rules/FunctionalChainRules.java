@@ -17,29 +17,21 @@ import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesA
 import org.polarsys.capella.transition.system2subsystem.rules.fa.FunctionalChainRule;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-
-
 public class FunctionalChainRules {
 
-	public static class ToSA extends FunctionalChainRule {
-		@Override
-		public IStatus transformRequired(EObject element_p, IContext context_p) {
-			return new Status(IStatus.WARNING, MultiphasesActivator.PLUGIN_ID, "SKIPPING");
-		}
-	}
-	
-	public static class ToLA extends FunctionalChainRule {
-		@Override
-		public IStatus transformRequired(EObject element_p, IContext context_p) {
-			return new Status(IStatus.WARNING, MultiphasesActivator.PLUGIN_ID, "SKIPPING");
-		}
-	}
-	
-	public static class ToPA extends FunctionalChainRule {
-		@Override
-		public IStatus transformRequired(EObject element_p, IContext context_p) {
-			return new Status(IStatus.WARNING, MultiphasesActivator.PLUGIN_ID, "SKIPPING");
-		}
-	}
-	
+  public static class ToSA extends FunctionalChainRule {
+    // Nothing more
+  }
+
+  public static class ToLA extends FunctionalChainRule {
+    // Nothing more
+  }
+
+  public static class ToPA extends FunctionalChainRule {
+    @Override
+    public IStatus transformRequired(EObject element_p, IContext context_p) {
+      return new Status(IStatus.WARNING, MultiphasesActivator.PLUGIN_ID, "SKIPPING");
+    }
+  }
+
 }
