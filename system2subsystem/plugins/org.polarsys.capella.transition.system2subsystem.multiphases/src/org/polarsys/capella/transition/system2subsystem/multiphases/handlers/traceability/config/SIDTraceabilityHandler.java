@@ -12,24 +12,23 @@ package org.polarsys.capella.transition.system2subsystem.multiphases.handlers.tr
 
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
-import org.polarsys.capella.core.transition.system.handlers.traceability.SIDTraceabilityHandler;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-public class MultiphaseSIDTraceabilityHandler extends SIDTraceabilityHandler {
+public class SIDTraceabilityHandler extends org.polarsys.capella.core.transition.system.handlers.traceability.SIDTraceabilityHandler {
 
-	public MultiphaseSIDTraceabilityHandler(String identifier_p) {
-		super(identifier_p);
-	}
+  public SIDTraceabilityHandler(String identifier_p) {
+    super(identifier_p);
+  }
 
-	 /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void initializeRootMappings(IContext context_p) {
-      super.initializeRootMappings(context_p);
-      EObject source = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_SOURCE_ROOT);
-      EObject target = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_TARGET_ROOT);
-      initializeMappings(source, target, context_p);
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void initializeRootMappings(IContext context_p) {
+    super.initializeRootMappings(context_p);
+    EObject source = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_SOURCE_ROOT);
+    EObject target = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_TARGET_ROOT);
+    initializeMappings(source, target, context_p);
   }
 
 }

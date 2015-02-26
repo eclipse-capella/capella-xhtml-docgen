@@ -51,7 +51,6 @@ import org.polarsys.kitalpha.transposer.rules.handler.api.IRulesHandler;
 import org.polarsys.kitalpha.transposer.rules.handler.exceptions.mappings.purposes.NonExistingPurposeException;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-
 public class HeadlessMultiphasesLauncher {
 
   private final IOptionsHandler optionsHandler;
@@ -98,11 +97,13 @@ public class HeadlessMultiphasesLauncher {
 
         new LostAndFoundPass().attachLostAndFound(context);
         new RealizationLinkPass().createRealizationLinks(context.getTempSystemEngineering(), context);
-        new JustificationLinkPass().createJustificationLinks(context.getTempSystemEngineering(), context.getSelectedPhysicalComponents());
-        new RootComponentNameUpdater().updateRootComponentNames(context.getTempSystemEngineering(), context.getSelectedPhysicalComponents());
 
         ActivityParameters params = createPostTransformationParameters(context);
         new PostTransformationActivity().run(params);
+
+        new JustificationLinkPass().createJustificationLinks(context.getTempSystemEngineering(), context.getSelectedPhysicalComponents());
+        new RootComponentNameUpdater().updateRootComponentNames(context.getTempSystemEngineering(), context.getSelectedPhysicalComponents());
+
         if (merge) {
           new InitializeMultiphasesDiffMergeActivity().run(params);
           new MultiphasesDifferencesComputingActivity().run(params);
@@ -162,7 +163,7 @@ public class HeadlessMultiphasesLauncher {
     return parameter;
   }
 
-  // here we fake a cadence invocation to initialize the transition. 
+  // here we fake a cadence invocation to initialize the transition.
   // TODO refactor to allow to be called outside cadence without the use of generic parameters..
   private IStatus initializeMultiphasesTransition(MultiphasesContext context_p, IOptionsHandler optionsHandler_p) {
 

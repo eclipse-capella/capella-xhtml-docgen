@@ -36,7 +36,6 @@ import org.polarsys.capella.transition.system2subsystem.crossphases.constants.IO
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
 
-
 /**
  * 
  */
@@ -59,6 +58,7 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
 
       // if element is an ancestor of transfoSources, we don't merge them into another component
       if (shouldMerge) {
+        shouldMerge(element, context_p);
         for (Partition partition : element.getRepresentingPartitions()) {
           if (sourceAndAncestors.contains(partition)) {
             shouldMerge = false;
@@ -232,6 +232,7 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
     if (cache == null) {
       cache = source;
     }
+    computeRelatedComponent(source, context_p);
     return cache;
   }
 

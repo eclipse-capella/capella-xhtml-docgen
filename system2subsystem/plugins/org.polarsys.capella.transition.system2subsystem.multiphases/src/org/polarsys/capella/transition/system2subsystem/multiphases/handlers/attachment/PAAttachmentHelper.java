@@ -21,7 +21,6 @@ import org.polarsys.capella.transition.system2subsystem.crossphases.constants.IO
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-
 /**
  *
  */
@@ -30,7 +29,7 @@ public class PAAttachmentHelper extends CrossPhasesAttachmentHelper {
   @Override
   protected boolean shouldMerge(Component element_p, IContext context_p) {
 
-    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p.eContainer(), context_p)) {
+    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p, context_p)) {
       if ((element_p instanceof PhysicalComponent) && (((PhysicalComponent) element_p).getNature() == PhysicalComponentNature.NODE)) {
         return false;
       }
