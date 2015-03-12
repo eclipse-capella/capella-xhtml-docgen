@@ -1,0 +1,98 @@
+<%
+super.method_content(new StringBuffer(), ctx);
+String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
+String elementType = EscapeChars.forHTML(element.eClass().getName());
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<FunctionalExchange> incomingFunctionalExchanges = CapellaFunctionServices.getIncomingFunctionalExchanges((AbstractFunction)element);
+if(incomingFunctionalExchanges.size() > 0) {
+%>
+<h2>Incoming Functional Exchanges</h2>
+
+<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Source</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for (FunctionalExchange functionalExchange : incomingFunctionalExchanges) {   	
+%>
+	<%=CapellaFunctionServices.incomingFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
+	<% 	
+}%>
+</table>
+<%
+}
+Collection<FunctionalExchange> outgoingFunctionalExchanges = CapellaFunctionServices.getOutgoingFunctionalExchanges((AbstractFunction)element);
+if(outgoingFunctionalExchanges.size() > 0) {
+%>
+<h2>Outgoing Functional Exchanges</h2>
+
+
+<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for(FunctionalExchange functionalExchange : outgoingFunctionalExchanges) {%>
+	<%=CapellaFunctionServices.outgoingFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
+<% }%>
+</table>
+  <%
+}
+if(element instanceof AbstractFunction) {
+Collection<FunctionalExchange> incomingInteralFunctionalExchanges = CapellaFunctionServices.getIncomingInteralFunctionalExchanges((AbstractFunction)element);
+if(incomingInteralFunctionalExchanges.size() > 0) {
+%>
+    <h2>Incoming Internal Functional Exchanges</h2>
+    
+    
+   <table>
+	<tr>
+		<th>Exchange</th>
+		<th>Source</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for(FunctionalExchange functionalExchange : incomingInteralFunctionalExchanges) {%>
+	<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
+<% }%>
+</table>
+  <%
+}
+Collection<FunctionalExchange> outgoingInteralFunctionalExchanges = CapellaFunctionServices.getOutgoingInteralFunctionalExchanges((AbstractFunction)element);
+if(outgoingInteralFunctionalExchanges.size() > 0) {
+%>
+ <h2>Outgoing Internal Functional Exchanges</h2>
+
+    <table>
+	<tr>
+		<th>Exchange</th>
+		<th>Source</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for(FunctionalExchange functionalExchange : outgoingInteralFunctionalExchanges) {%>
+	<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
+<% }%>
+</table>
+  <%
+}
+}
+
+Collection<String> availableModeAndState = CapellaFunctionServices.getAvailableModeAndState(projectName,
+			outputFolder, (AbstractFunction)element);
+			
+			if(availableModeAndState.size() > 0) {
+%>
+<h2>Modes and States</h2>
+<%=StringUtil.stringListToBulette(availableModeAndState)%>
+<%
+}
+%>

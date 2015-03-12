@@ -1,0 +1,7 @@
+<% super.method_content(new StringBuffer(), ctx); %>
+
+<%String dataVelue = "Data Values";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,dataVelue:property"%>
+<p><%= StringUtil.stringListToBulette(CapellaDataPkgService.getDataPkgDataValues(element)) %> </p>
+<br/>
+<br/>

@@ -1,0 +1,33 @@
+<% // Realized Elements %>
+
+<%
+String outputFolder = ctx.getValue("outputFolder").toString();
+String projectName = ctx.getValue("projectName").toString();
+Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName, outputFolder);
+if(allocations.size() > 0) {%>
+<h2>Realized Elements</h2>
+
+<%=StringUtil.stringListToBulette(allocations)%>
+
+<%}%>
+
+<% // Realizing Elements %>
+<%
+//String outputFolder = ctx.getValue("outputFolder").toString();
+//String projectName = ctx.getValue("projectName").toString();
+Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName, outputFolder);
+if(allocations2.size() > 0) {%>
+<h2>Realizing Elements </h2>
+
+<%=StringUtil.stringListToBulette(allocations2)%>
+
+<%}%>
+
+<% // Presented in diagrams generation%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
+
+<% // owned diagrams%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.DiagramsGeneration" args="element:element"%>
+
+<% // Presented in diagrams generation%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.PresentedDiagrmsGeneration" args="element:element"%>

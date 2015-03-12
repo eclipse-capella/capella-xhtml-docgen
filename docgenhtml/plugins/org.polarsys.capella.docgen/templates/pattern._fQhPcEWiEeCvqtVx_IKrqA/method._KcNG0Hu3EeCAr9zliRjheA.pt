@@ -1,0 +1,11 @@
+<%
+String visibility = "";
+		if (((DataType) element).getVisibility().getValue() != VisibilityKind.UNSET_VALUE)
+			visibility = "{"
+					+ ((DataType) element).getVisibility().getLiteral()
+							.toLowerCase() + "} ";
+		String type = element.eClass().getName();
+		String elementFullName = CapellaServices.getHyperlinkFromElement(
+				element);
+		documentTitle = "<span class=\"elementMetaClass\">" + visibility + "</span> " + elementFullName;
+%>

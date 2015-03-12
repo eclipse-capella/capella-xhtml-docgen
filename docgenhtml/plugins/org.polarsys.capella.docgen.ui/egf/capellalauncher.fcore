@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+  Thales - initial API and implementation
+-->
+<fcore:FactoryComponent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:domain="http://www.eclipse.org/egf/1.0.0/domain"
+    xmlns:fcore="http://www.eclipse.org/egf/1.0.0/fcore" xmlns:fprod="http://www.eclipse.org/egf/1.0.0/fprod"
+    xmlns:pattern="http://www.eclipse.org/egf/1.0.0/pattern" xmlns:types="http://www.eclipse.org/egf/1.0.0/types"
+    xmi:id="_zup7kAkdEeCBJtEcjZDVOA" name="Capella Launcher">
+  <contractContainer xmi:id="_NXZC8YXmEeCCD-YF_4-xDg">
+    <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_OGBqkIXmEeCCD-YF_4-xDg"
+        name="pattern.substitutions" invocationContracts="#_VGs4AIXmEeCCD-YF_4-xDg">
+      <type xmi:type="pattern:TypePatternSubstitution" xmi:id="_QgHHYIXmEeCCD-YF_4-xDg"/>
+    </contracts>
+    <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_3MveUIXoEeCCD-YF_4-xDg"
+        name="projectName" mandatory="true" invocationContracts="#_1hZEggkdEeCBJtEcjZDVOA">
+      <type xmi:type="types:TypeString" xmi:id="_6fJqQIXoEeCCD-YF_4-xDg"/>
+    </contracts>
+    <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="__XLJIIXoEeCCD-YF_4-xDg"
+        name="outputFolder" mandatory="true" invocationContracts="#_1hZEgwkdEeCBJtEcjZDVOA">
+      <type xmi:type="types:TypeString" xmi:id="_A_MP0IXpEeCCD-YF_4-xDg"/>
+    </contracts>
+  </contractContainer>
+  <viewpointContainer xmi:id="_83YaoAkdEeCBJtEcjZDVOA">
+    <viewpoints xmi:type="domain:DomainViewpoint" xmi:id="_9Rm4gAkdEeCBJtEcjZDVOA">
+      <domains xmi:type="domain:EMFDomain" xmi:id="_99H6sAkdEeCBJtEcjZDVOA" helperImplementation="org.polarsys.kitalpha.doc.gen.business.capella.ui.domain.CapellaDomainHelper"/>
+    </viewpoints>
+  </viewpointContainer>
+  <orchestration xmi:type="fprod:ProductionPlan" xmi:id="_0XCKMAkdEeCBJtEcjZDVOA">
+    <invocations xmi:id="_1hZEgAkdEeCBJtEcjZDVOA" name="Capella HTML Documentation Launch"
+        invokedActivity="fcore:FactoryComponent platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_0NRc8Nz5Ed-Vzvs7Wt1vzQ">
+      <invocationContractContainer xmi:id="_1hZEgQkdEeCBJtEcjZDVOA">
+        <invocationContracts xmi:id="_1hZEggkdEeCBJtEcjZDVOA" factoryComponentContract="#_3MveUIXoEeCCD-YF_4-xDg"
+            invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_60tqgN43Ed-Qav1YnqlO9A"/>
+        <invocationContracts xmi:id="_1hZEgwkdEeCBJtEcjZDVOA" factoryComponentContract="#__XLJIIXoEeCCD-YF_4-xDg"
+            invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_60tqgt43Ed-Qav1YnqlO9A"/>
+        <invocationContracts xmi:id="_1hZEhQkdEeCBJtEcjZDVOA" invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_qVQM8N0PEd-Vzvs7Wt1vzQ">
+          <type xmi:type="domain:TypeDomain" xmi:id="_0E5FIIX_EeCCD-YF_4-xDg" domain="#_99H6sAkdEeCBJtEcjZDVOA"/>
+        </invocationContracts>
+        <invocationContracts xmi:id="_VGs4AIXmEeCCD-YF_4-xDg" factoryComponentContract="#_OGBqkIXmEeCCD-YF_4-xDg"
+            invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_cxneQN0OEd-Vzvs7Wt1vzQ"/>
+      </invocationContractContainer>
+    </invocations>
+  </orchestration>
+</fcore:FactoryComponent>

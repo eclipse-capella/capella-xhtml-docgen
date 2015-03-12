@@ -1,0 +1,22 @@
+<%
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+if(element.getSummary() != null && element.getSummary().length() > 0) {%>
+<em style="margin-top:5px;"><%=element.getSummary()%></em>
+<%}%>
+<p>
+<%if(element.getDescription() != null && element.getDescription().length() > 0) {%>
+
+<%=StringUtil.transformAREFString(element, element.getDescription(), projectName, outputFolder)%>
+<%}
+else {%>
+No description.
+<%}%>
+</p>
+<%
+		//String string = stringBuffer.toString();
+		//String transformAREFString = StringUtil.transformAREFString(element,
+		//		string);
+		//stringBuffer.delete(0, stringBuffer.length());
+		//stringBuffer.append(transformAREFString);
+%>

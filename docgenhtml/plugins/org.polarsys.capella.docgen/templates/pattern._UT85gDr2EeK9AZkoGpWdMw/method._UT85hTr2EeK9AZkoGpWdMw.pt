@@ -1,0 +1,94 @@
+<%EList<AbstractPropertyValue> applayed_list = element.getAppliedPropertyValues();%>
+
+<%EList<AbstractPropertyValue> owned_list = element.getOwnedPropertyValues();%>
+
+<% if ((applayed_list != null && applayed_list.size() > 0)|| (owned_list != null && owned_list.size() > 0)) %>
+<%{%>
+<h2>Properties Value</h2>
+<table max-width=screen.width>
+   <thead> 
+       <tr>
+       	   <th>Relation</th>	
+           <th>Name</th>
+           <th>Value</th>
+           <th>Description</th>
+       </tr>
+   </thead>
+   <tbody>
+
+<% // Handle Owned PropertyValues if not Handled yet %>
+<%for (AbstractPropertyValue propertyValue : owned_list) {%>
+   <% // Variable initialization
+   String relation = "Contained";
+   String name = propertyValue.getName();
+   String value = "";
+   String description = propertyValue.getDescription();
+   description = StringUtil.transformAREFString(propertyValue, description, projectName, outputFolder);
+   
+  if (propertyValue instanceof EnumerationPropertyValue){
+	if (((EnumerationPropertyValue) propertyValue).getValue() != null)
+		value = ((EnumerationPropertyValue) propertyValue).getValue().getName();
+  }
+				
+  if (propertyValue instanceof BooleanPropertyValue)
+	 value = (((BooleanPropertyValue)propertyValue).isValue() ? "True" : "False");
+				
+  if (propertyValue instanceof StringPropertyValue)
+	 value = ((StringPropertyValue)propertyValue).getValue();
+				
+  if (propertyValue instanceof IntegerPropertyValue)
+	 value = Integer.toString(((IntegerPropertyValue)propertyValue).getValue());
+				
+  if (propertyValue instanceof FloatPropertyValue)
+	 value = Float.toString(((FloatPropertyValue)propertyValue).getValue());
+   %>
+   <%if (applayed_list.contains(propertyValue))
+   		relation += " &amp; Applied";
+   	%>
+   	   <tr>
+           <td><i><%=relation%></i></td>
+           <td><%=name%></td>
+           <td><%=value%></td>
+           <td><%=description%></td>
+       </tr>
+
+<%}%>
+
+<% // Handle Applied PropertyValues %>
+<%for (AbstractPropertyValue propertyValue : applayed_list) {%>
+<% if (! owned_list.contains(propertyValue)) {
+  	 // Variable initialization
+   	String relation = "Applied";
+   	String name = propertyValue.getName();
+   	String value = "";
+   	String description = propertyValue.getDescription();
+   	description = StringUtil.transformAREFString(propertyValue, description, projectName, outputFolder);
+   
+  	if (propertyValue instanceof EnumerationPropertyValue){
+		if (((EnumerationPropertyValue) propertyValue).getValue() != null)
+			value = ((EnumerationPropertyValue) propertyValue).getValue().getName();
+  	}
+				
+  	if (propertyValue instanceof BooleanPropertyValue)
+	 	value = (((BooleanPropertyValue)propertyValue).isValue() ? "True" : "False");
+					
+  	if (propertyValue instanceof StringPropertyValue)
+	 	value = ((StringPropertyValue)propertyValue).getValue();
+				
+  	if (propertyValue instanceof IntegerPropertyValue)
+	 	value = Integer.toString(((IntegerPropertyValue)propertyValue).getValue());
+				
+  	if (propertyValue instanceof FloatPropertyValue)
+	 	value = Float.toString(((FloatPropertyValue)propertyValue).getValue());
+   %>
+   	   <tr>
+           <td><i><%=relation%></i></td>
+           <td><%=name%></td>
+           <td><%=value%></td>
+           <td><%=description%></td>
+       </tr>
+<%}%>
+<%}%>
+   </tbody>
+</table>
+<%}%>

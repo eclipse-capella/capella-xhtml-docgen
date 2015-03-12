@@ -1,0 +1,66 @@
+<% super.method_content(new StringBuffer(), ctx); 
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+%>
+
+<% if(CapellaClassServices.getClassFeatures(element).size() >= 1){%>
+<div title="Features">
+<%String features = "Features";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,features:property"%>
+<%= StringUtil.stringListToBulette(CapellaClassServices.getClassFeatures(element)) %>
+</div>
+<%}%>
+
+<% if(CapellaClassServices.getClassRealizeInformation(element).size() >= 1){%>
+<div title="Realisation">
+<%String realisation = "Realisation";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,realisation:property"%>
+<%= StringUtil.stringListToBulette(CapellaClassServices.getClassRealizeInformation(element)) %>
+</div>
+<%}%>
+
+<% 
+Collection<String> propertiesCollection = CapellaClassServices.getClassProperties(element, projectName, outputFolder);
+if(propertiesCollection.size() >= 1){%>
+<div title="Properties">
+<%String properties = "Properties";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,properties:property"%>
+<%= StringUtil.stringListToBulette(propertiesCollection) %>
+</div>
+<%}%>
+ 
+ <% if(CapellaClassServices.getClassOperation(element).size() > 0){%>
+ <div title="Operations">
+<%String operation = "Operations";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,operation:property"%>
+<%= StringUtil.stringListToBulette(CapellaClassServices.getClassOperation(element)) %>
+</div>
+<%}%>
+
+<% 
+Collection<String> dataValuesCollection = CapellaClassServices.getClassDataValues(element, projectName, outputFolder);
+if(dataValuesCollection.size() >= 1){%>
+<div title="Data Values">
+<%String dataValue = "Data Values";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,dataValue:property"%>
+<%= StringUtil.stringListToBulette(dataValuesCollection) %>
+</div>
+<%}%>
+
+<%Collection<String> partofCollection = CapellaClassServices.getPartOf((Class)element, projectName, outputFolder);
+if(partofCollection.size() > 0){%>
+<h2>Part Of</h2>
+<%= StringUtil.stringListToBulette(partofCollection) %>
+<%}
+
+Collection<String> referencedByCollection = CapellaClassServices.getReferencedBy((Class)element, projectName, outputFolder);
+if(referencedByCollection.size() > 0){%>
+<h2>Referenced By</h2>
+<%= StringUtil.stringListToBulette(referencedByCollection) %>
+<%}
+
+Collection<String> parameterOfCollection = CapellaClassServices.getParameterOf((Class)element, projectName, outputFolder);
+if(parameterOfCollection.size() > 0){%>
+<h2>Parameter Of</h2>
+<%= StringUtil.stringListToBulette(parameterOfCollection) %>
+<%}%>

@@ -1,0 +1,1 @@
+return DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parameter);
