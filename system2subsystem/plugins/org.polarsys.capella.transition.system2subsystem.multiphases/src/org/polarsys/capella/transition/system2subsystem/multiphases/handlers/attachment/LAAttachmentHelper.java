@@ -30,7 +30,7 @@ public class LAAttachmentHelper extends CrossPhasesAttachmentHelper {
   @Override
   protected boolean shouldMerge(Component element_p, IContext context_p) {
 
-    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p.eContainer(), context_p)) {
+    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p, context_p)) {
       if ((element_p instanceof PhysicalComponent) && (((PhysicalComponent) element_p).getNature() == PhysicalComponentNature.BEHAVIOR)) {
         return false;
       }

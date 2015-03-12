@@ -10,22 +10,18 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.rules.fa;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
-import org.polarsys.capella.common.data.activity.ActivityEdge;
 import org.polarsys.capella.common.helpers.EObjectExt;
 import org.polarsys.capella.core.data.capellacore.Involvement;
 import org.polarsys.capella.core.data.capellacore.InvolverElement;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
-import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.helpers.fa.services.FunctionExt;
 import org.polarsys.capella.core.data.interaction.AbstractCapability;
 import org.polarsys.capella.core.data.interaction.AbstractFunctionAbstractCapabilityInvolvement;
@@ -41,9 +37,7 @@ import org.polarsys.capella.core.transition.common.handlers.options.OptionsHandl
 import org.polarsys.capella.core.transition.common.handlers.scope.IScopeHandler;
 import org.polarsys.capella.core.transition.common.handlers.scope.ScopeHandlerHelper;
 import org.polarsys.capella.transition.system2subsystem.constants.IOptionsConstants;
-import org.polarsys.capella.transition.system2subsystem.constants.ISubSystemConstants;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
-
 
 /**
  * 
@@ -88,7 +82,7 @@ public class AbstractFunctionRule extends org.polarsys.capella.core.transition.s
 
   @Override
   protected void retrieveContainer(EObject element_p, List<EObject> result_p, IContext context_p) {
-    // According to preference, behavior is different
+    // According to preference, behaviour is different
     String value =
         OptionsHandlerHelper.getInstance(context_p).getStringValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES,
             IOptionsConstants.HIERARCHICAL_EXPORT, IOptionsConstants.HIERARCHICAL_EXPORT_DEFAULT_VALUE);
@@ -112,43 +106,34 @@ public class AbstractFunctionRule extends org.polarsys.capella.core.transition.s
     IContextScopeHandler scope = ContextScopeHandlerHelper.getInstance(context_p);
     AbstractFunction element = (AbstractFunction) source_p;
 
-    boolean isLinkToPrimary = isLinkToPrimaryFunction(element, context_p);
-    boolean isPrimary =
-        scope.contains(ITransitionConstants.SOURCE_SCOPE, element, context_p)
-            && (scope.contains(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, element, context_p) == false);
+    boolean isPrimary = scope.contains(ITransitionConstants.SOURCE_SCOPE, source_p, context_p);
 
-    if (isLinkToPrimary || isPrimary) {
-      result_p.addAll(element.getComponentFunctionalAllocations());
+    result_p.addAll(element.getComponentFunctionalAllocations());
+    if (isPrimary) {
 
-      if (isPrimary) {
-        super.retrieveGoDeep(source_p, result_p, context_p);
+      super.retrieveGoDeep(source_p, result_p, context_p);
 
-        for (Involvement involvement : element.getInvolvingInvolvements()) {
-          InvolverElement fc = involvement.getInvolver();
+      for (Involvement involvement : element.getInvolvingInvolvements()) {
+        InvolverElement fc = involvement.getInvolver();
 
-          // Add all involving FunctionalChains
-          if (involvement instanceof FunctionalChainInvolvement) {
-            if ((fc != null) && (fc instanceof FunctionalChain)) {
-              result_p.add(fc);
-            }
-          }
-
-          // Add all involving Capabilities
-          if (involvement instanceof AbstractFunctionAbstractCapabilityInvolvement) {
-            if ((fc != null) && (fc instanceof AbstractCapability)) {
-              result_p.add(fc);
-            }
+        // Add all involving FunctionalChains
+        if (involvement instanceof FunctionalChainInvolvement) {
+          if ((fc != null) && (fc instanceof FunctionalChain)) {
+            result_p.add(fc);
           }
         }
-
-        if (OptionsHandlerHelper.getInstance(context_p).getBooleanValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES,
-            IOptionsConstants.SCENARIO_EXPORT, IOptionsConstants.SCENARIO_EXPORT_DEFAULT_VALUE)) {
-          // Add all instance roles
-          result_p.addAll(EObjectExt.getReferencers(element, InteractionPackage.Literals.INSTANCE_ROLE__REPRESENTED_INSTANCE));
+        // Add all involving Capabilities
+        if (involvement instanceof AbstractFunctionAbstractCapabilityInvolvement) {
+          if ((fc != null) && (fc instanceof AbstractCapability)) {
+            result_p.add(fc);
+          }
         }
-      } else if (isLinkToPrimary) {
-        scope.add(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, element, context_p);
-        addPotentialsFEToScope(element, context_p, result_p);
+      }
+
+      if (OptionsHandlerHelper.getInstance(context_p).getBooleanValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES,
+          IOptionsConstants.SCENARIO_EXPORT, IOptionsConstants.SCENARIO_EXPORT_DEFAULT_VALUE)) {
+        // Add all instance roles
+        result_p.addAll(EObjectExt.getReferencers(element, InteractionPackage.Literals.INSTANCE_ROLE__REPRESENTED_INSTANCE));
       }
 
       for (Involvement involvement : element.getInvolvingInvolvements()) {
@@ -160,123 +145,4 @@ public class AbstractFunctionRule extends org.polarsys.capella.core.transition.s
     }
   }
 
-  /**
-   * @param function
-   * @param context_p
-   * @return scoped FE linked to this function
-   */
-  protected Collection<FunctionalExchange> getScopedFE(AbstractFunction function, IContext context_p) {
-    IContextScopeHandler scope = ContextScopeHandlerHelper.getInstance(context_p);
-    Collection<FunctionalExchange> res = new ArrayList<FunctionalExchange>();
-
-    Collection<ActivityEdge> edges = new ArrayList<ActivityEdge>();
-    edges.addAll(function.getIncoming());
-    edges.addAll(function.getOutgoing());
-
-    for (ActivityEdge edge : edges) {
-      if (edge instanceof FunctionalExchange) {
-        if (scope.contains(ITransitionConstants.SOURCE_SCOPE, edge, context_p)) {
-          res.add((FunctionalExchange) edge);
-        }
-      }
-    }
-
-    return res;
-  }
-
-  protected boolean isLinkToPrimaryFunction(AbstractFunction function, IContext context_p) {
-    IContextScopeHandler scope = ContextScopeHandlerHelper.getInstance(context_p);
-    Collection<ActivityEdge> edges = new ArrayList<ActivityEdge>();
-    edges.addAll(function.getIncoming());
-    edges.addAll(function.getOutgoing());
-
-    for (ActivityEdge edge : edges) {
-      if (edge instanceof FunctionalExchange) {
-        FunctionalExchange fe = (FunctionalExchange) edge;
-
-        AbstractFunction opposite = null;
-        if (fe.getSource().eContainer().equals(function)) {
-          opposite = (AbstractFunction) fe.getTarget().eContainer();
-        } else {
-          opposite = (AbstractFunction) fe.getSource().eContainer();
-        }
-
-        if (scope.contains(ITransitionConstants.SOURCE_SCOPE, opposite, context_p)
-            && (scope.contains(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, opposite, context_p) == false)) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
-  protected void addPotentialsFEToScope(AbstractFunction function, IContext context_p, List<EObject> result_p) {
-    IContextScopeHandler scope = ContextScopeHandlerHelper.getInstance(context_p);
-
-    Collection<ActivityEdge> edges = new ArrayList<ActivityEdge>();
-    edges.addAll(function.getIncoming());
-    edges.addAll(function.getOutgoing());
-
-    for (ActivityEdge edge : edges) {
-      if (edge instanceof FunctionalExchange) {
-        FunctionalExchange fe = (FunctionalExchange) edge;
-
-        if (scope.contains(ITransitionConstants.SOURCE_SCOPE, fe, context_p) == false) {
-          AbstractFunction opposite = null;
-          if (fe.getSource().eContainer().equals(function)) {
-            opposite = (AbstractFunction) fe.getTarget().eContainer();
-          } else {
-            opposite = (AbstractFunction) fe.getSource().eContainer();
-          }
-
-          if (isLinkToPrimaryFunction(opposite, context_p)) {
-            Collection<FunctionalExchange> srcFes = getScopedFE(function, context_p);
-            Collection<FunctionalExchange> trgFes = getScopedFE(opposite, context_p);
-
-            Collection<FunctionalChain> srcFcs = getFunctionalChains(srcFes);
-            Collection<FunctionalChain> trgFcs = getFunctionalChains(trgFes);
-            Collection<FunctionalChain> feFcs = fe.getInvolvingFunctionalChains();
-
-            Collection<FunctionalChain> retained = new ArrayList<FunctionalChain>();
-            retained.addAll(feFcs);
-            retained.retainAll(srcFcs);
-            retained.retainAll(trgFcs);
-
-            if (retained.isEmpty() == false) {
-              result_p.add(fe.getTarget());
-              result_p.add(fe.getSource());
-              result_p.add(fe);
-
-              if (scope.contains(ITransitionConstants.SOURCE_SCOPE, fe.getTarget(), context_p) == false) {
-                scope.add(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, fe.getTarget(), context_p);
-                scope.add(ITransitionConstants.SOURCE_SCOPE, fe.getTarget(), context_p);
-              }
-
-              if (scope.contains(ITransitionConstants.SOURCE_SCOPE, fe.getSource(), context_p) == false) {
-                scope.add(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, fe.getSource(), context_p);
-                scope.add(ITransitionConstants.SOURCE_SCOPE, fe.getSource(), context_p);
-              }
-
-              if (scope.contains(ITransitionConstants.SOURCE_SCOPE, fe, context_p) == false) {
-                scope.add(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, fe, context_p);
-                scope.add(ITransitionConstants.SOURCE_SCOPE, fe, context_p);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  protected Collection<FunctionalChain> getFunctionalChains(Collection<FunctionalExchange> srcs) {
-    Collection<FunctionalChain> res = new ArrayList<FunctionalChain>();
-
-    for (FunctionalExchange fe : srcs) {
-      res.addAll(fe.getInvolvingFunctionalChains());
-    }
-
-    return res;
-
-  }
 }

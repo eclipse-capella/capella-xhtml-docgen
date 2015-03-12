@@ -1,0 +1,15 @@
+<%
+	String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
+	String elementType = EscapeChars.forHTML(element.eClass().getName());
+	/*NamedElement namedElement = ((NamedElement) element);
+	
+	StringBuffer buffer = new StringBuffer (namedElement.getName());
+	
+	buffer
+		.append (" [")
+		.append (namedElement.eClass().getName())
+		.append ("]");
+	*/	
+	title = "Capella - " + DocGenHtmlUtil.getModelName(element) + " - " + elementType + " " + elementName; 
+
+%>

@@ -1,0 +1,24 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+Collection<String> involvedComponent = CapellaCapabilityHelper.INSTANCE.getInvolvedComponent(projectName,
+			outputFolder,(CapabilityRealization) parameter);
+			
+			if(involvedComponent.size() > 0) {
+%>
+<h2>Involved Components</h2>
+<%=StringUtil.stringListToBulette(involvedComponent)%>
+<%
+}
+
+Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectName,
+			outputFolder,(CapabilityRealization) parameter);
+			
+			if(involvedFunctions.size() > 0) {
+%>
+<h2>Related Functions</h2>
+<%=StringUtil.stringListToBulette(involvedFunctions)%>
+<%
+}
+%>

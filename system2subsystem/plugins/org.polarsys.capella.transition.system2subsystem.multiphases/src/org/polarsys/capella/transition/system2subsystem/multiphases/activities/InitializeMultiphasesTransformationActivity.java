@@ -40,8 +40,8 @@ import org.polarsys.capella.core.transition.common.handlers.traceability.ITracea
 import org.polarsys.capella.core.transition.system.activities.InitializeTransformationActivity;
 import org.polarsys.capella.core.transition.system.handlers.traceability.config.TransformationConfiguration;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
-import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.MultiphaseRecTraceabilityHandler;
-import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.MultiphaseSIDTraceabilityHandler;
+import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.RecTraceabilityHandler;
+import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.SIDTraceabilityHandler;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 
@@ -54,13 +54,13 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
 
       @Override
       protected void initHandlers(IContext fContext_p) {
-        addHandler(fContext_p, new MultiphaseSIDTraceabilityHandler(getIdentifier(fContext_p)));
-        addHandler(fContext_p, new MultiphaseRecTraceabilityHandler());
+        addHandler(fContext_p, new SIDTraceabilityHandler(getIdentifier(fContext_p)));
+        addHandler(fContext_p, new RecTraceabilityHandler());
       }
 
       @Override
       public boolean useHandlerForAttachment(EObject source_p, EObject target_p, ITraceabilityHandler handler_p, IContext context_p) {
-        if (handler_p instanceof MultiphaseRecTraceabilityHandler) {
+        if (handler_p instanceof RecTraceabilityHandler) {
           return false;
         }
         return super.useHandlerForAttachment(source_p, target_p, handler_p, context_p);

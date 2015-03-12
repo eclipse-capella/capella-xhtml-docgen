@@ -1,0 +1,29 @@
+<%
+super.method_content(new StringBuffer(), ctx);
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<String> exchangeItemInterfaces = CapellaExchangeItemHelper.getExchangeItemInterfaces((ExchangeItem) element, projectName,
+						outputFolder);
+						
+						if (exchangeItemInterfaces.size() > 0) {%>
+			<h2>Interfaces</h2>
+			<%=StringUtil.stringListToBulette(exchangeItemInterfaces)%>
+		<%}
+
+Collection<String> exchangeItemElements = CapellaExchangeItemHelper
+				.getExchangeItemElements((ExchangeItem) element, projectName,
+						outputFolder);
+		if (exchangeItemElements.size() > 0) {%>
+			<h2>Exchange Item Elements</h2>
+			<%=StringUtil.stringListToBulette(exchangeItemElements)%>
+		<%}
+		%>
+<%Collection<String> propertiesValueCollection = CapellaElementService.getPropertiesValue(element, projectName, outputFolder);
+if(propertiesValueCollection.size() >= 1){%>
+<div title="Properties Value">
+<%String propertyValue = "Properties Value";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,propertyValue:property"%>
+<%= StringUtil.stringListToBulette(propertiesValueCollection) %>
+</div>
+<%}%>

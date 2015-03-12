@@ -42,6 +42,7 @@ import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyV
 import org.polarsys.capella.transition.system2subsystem.handlers.session.SubSystemSessionHandler;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
+import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 
 
 /**
@@ -86,7 +87,9 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   protected IStatus initializeScopeRetrieverHandlers(IContext context_p, CompoundScopeRetriever handler_p, ActivityParameters activityParams_p) {
     IScopeRetriever retriever = new PropertyValuesScopeRetriever();
     handler_p.addScopeRetriever(retriever, context_p);
-
+    
+    handler_p.addScopeRetriever(new ExternalFunctionsScopeRetriever(), context_p);
+    
     return super.initializeScopeRetrieverHandlers(context_p, handler_p, activityParams_p);
   }
 

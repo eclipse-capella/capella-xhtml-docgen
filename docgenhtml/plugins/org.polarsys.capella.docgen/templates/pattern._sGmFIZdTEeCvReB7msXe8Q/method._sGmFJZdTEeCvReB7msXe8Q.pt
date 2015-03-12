@@ -1,0 +1,1 @@
+return !(parameter instanceof DataType || parameter instanceof org.polarsys.capella.core.data.information.Collection);

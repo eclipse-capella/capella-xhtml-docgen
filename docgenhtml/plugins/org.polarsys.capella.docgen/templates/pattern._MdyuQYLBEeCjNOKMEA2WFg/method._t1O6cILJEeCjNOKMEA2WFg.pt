@@ -1,0 +1,6 @@
+<%
+String mecanism = ((ExchangeItem)element).getExchangeMechanism().getName();
+		String elementName = CapellaServices.getHyperlinkFromElement(element);
+		//String elementType = EscapeChars.forHTML(element.eClass().getName());
+		documentTitle = "<span class=\"elementMetaClass\">" + mecanism + "</span> " + elementName;
+ %>

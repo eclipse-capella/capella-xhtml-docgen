@@ -1,0 +1,12 @@
+<%Collection<DRepresentation> diagramList = CapellaHelper.getDiagramForObject(element);
+if (diagramList.size() >= 1){%>
+<h2>Owned diagrams</h2>
+<%
+	// Diagram generation
+String outputFolder = ctx.getValue("outputFolder").toString();
+String projectName = ctx.getValue("projectName").toString();%>
+<%for (DRepresentation diagram : diagramList){
+if(diagram instanceof DSemanticDiagram) {
+String generatedFolder = fileNameService.getFileName(((DSemanticDiagram)diagram).getTarget());%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.sirius.DiagramGenerator" args="diagram:diagram, outputFolder:outputFolder, projectName:projectName, generatedFolder:generatedFolder, fileNameService:fileNameService, helper:helper"%>
+<%}}}%>
