@@ -1,0 +1,7 @@
+<%
+String elementName = CapellaServices.getHyperlinkFromElement(element);
+/*
+String elementType = EscapeChars.forHTML(element.eClass().getName());
+String projectName= ctx.getValue("projectName").toString();
+*/
+documentTitle = elementName; %>

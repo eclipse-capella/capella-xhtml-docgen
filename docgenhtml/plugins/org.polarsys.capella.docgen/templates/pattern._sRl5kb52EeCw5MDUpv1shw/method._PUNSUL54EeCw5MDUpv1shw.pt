@@ -1,0 +1,23 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<String> availableModeAndState = FunctionalChainHelper.getAvailableModeAndState(projectName, outputFolder,(FunctionalChain) parameter);
+			
+if(availableModeAndState.size() > 0) {
+%>
+<h2>Modes and States</h2>
+<%=StringUtil.stringListToBulette(availableModeAndState)%>
+<%
+}
+
+Collection<String> availableFunctions = FunctionalChainHelper.getAvailableFunctions(projectName, outputFolder,(FunctionalChain) parameter);
+			
+if(availableFunctions.size() > 0) {
+%>
+<h2>Involved functions</h2>
+<%=StringUtil.stringListToBulette(availableFunctions)%>
+<%
+}
+%>

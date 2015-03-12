@@ -1,0 +1,124 @@
+<%
+String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
+String elementType = EscapeChars.forHTML(element.eClass().getName());
+Collection<String> allocatedFunctionsInformations = CapellaComponentServices.getAllocatedFunctionsInformation((Component)element, projectName, outputFolder);
+if(allocatedFunctionsInformations.size() > 0) {
+	if(element instanceof Entity) {
+	%>
+	<h2>Allocated Activites</h2>
+	<%
+	}
+	else {
+	%>
+<h2>Allocated Functions</h2>
+<%
+	}
+%>
+<%=StringUtil.stringListToBulette(allocatedFunctionsInformations)%>
+<%
+}
+Collection<String> implementedInterfaces = CapellaComponentServices.getImplementedInterfaces((Component)element, projectName, outputFolder);
+if(implementedInterfaces.size() > 0) {%>
+<h2>Implemented Interfaces</h2>
+<%=StringUtil.stringListToBulette(implementedInterfaces)%>
+<%
+}
+
+Collection<String> providedInterfaces = CapellaComponentServices.getProvidedInterfaces((Component)element, projectName, outputFolder);
+if(providedInterfaces.size() > 0) {%>
+<h2>Provided Interfaces</h2>
+<%=StringUtil.stringListToBulette(providedInterfaces)%>
+<%
+}
+
+
+Collection<String> usedInterfaces = CapellaComponentServices.getUsedInterfaces((Component)element, projectName, outputFolder);
+if(usedInterfaces.size() > 0) {%>
+<h2>Used Interfaces</h2>
+<%=StringUtil.stringListToBulette(usedInterfaces)%>
+<%
+}
+
+Collection<String> requiredInterfaces = CapellaComponentServices.getRequiredInterfaces((Component)element, projectName, outputFolder);
+if(requiredInterfaces.size() > 0) {%>
+<h2>Required Interfaces</h2>
+<%=StringUtil.stringListToBulette(requiredInterfaces)%>
+<%
+}
+
+Collection<ComponentExchange> incomingComponentExchanges = CapellaComponentServices.getIncomingComponentExchanges((Component)element);
+if(incomingComponentExchanges.size() > 0) {
+%>
+<h2>Incoming Component Exchanges</h2>
+<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Source</th>
+		<th>Description</th>
+		<th>Allocated Functional Exchanges</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+	<% for (ComponentExchange componentExchange : incomingComponentExchanges) {   	
+%>
+	<%=CapellaComponentServices.componentExchangeToTableLine((Component) element, componentExchange, projectName, outputFolder)%>
+	<% 	
+}%>
+</table>
+<%
+}
+Collection<ComponentExchange> outgoingComponentExchanges = CapellaComponentServices.getOutgoingComponentExchanges((Component)element);
+if(outgoingComponentExchanges.size() > 0) {
+%>
+<h2>Outgoing Component Exchanges</h2>
+<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Functional Exchanges</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+	<% for (ComponentExchange componentExchange : outgoingComponentExchanges) {   	
+%>
+	<%=CapellaComponentServices.componentExchangeToTableLine((Component) element, componentExchange, projectName, outputFolder)%>
+	<% 	
+}%>
+</table>
+<%
+}
+
+
+Collection<ComponentExchange> inoutComponentExchanges = CapellaComponentServices.getInOutComponentExchanges((Component)element);
+if(inoutComponentExchanges.size() > 0) {
+%>
+<h2>In/Out Component Exchanges</h2>
+<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Functional Exchanges</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+	<% for (ComponentExchange componentExchange : inoutComponentExchanges) {   	
+%>
+	<%=CapellaComponentServices.componentExchangeToTableLine((Component) element, componentExchange, projectName, outputFolder)%>
+	<% 	
+}%>
+</table>
+<%
+}
+
+Collection<String> ports = CapellaComponentServices.getPorts((Component) element, projectName, outputFolder);
+if(ports.size() > 0) {%>
+<h2>Ports</h2>
+<%=StringUtil.stringListToBulette(ports)%>
+<%}
+
+
+Collection<String> stateMachines = BlockHelper.getStateMachine(projectName, outputFolder, (Component) element);
+if(stateMachines.size() > 0) {%>
+<h2>State Machines</h2>
+<%=StringUtil.stringListToBulette(stateMachines)%>
+<%}
+%>

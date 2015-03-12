@@ -1,0 +1,22 @@
+<% super.method_content(new StringBuffer(), ctx); 
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+%>
+
+<% 
+Collection<String> inheritingFromCollection = GeneralizableElementServices.getClassInheritingFrom(element, projectName, outputFolder);
+if(inheritingFromCollection.size() >= 1){%>
+<h2>Inheriting from</h2>
+<%= StringUtil.stringListToBulette(inheritingFromCollection) %>
+
+<%}%>
+
+<% 
+Collection<String> inheritedByCollection = GeneralizableElementServices.getClassInheritedBy(element, projectName, outputFolder);
+if(inheritedByCollection.size() >= 1){%>
+<div title="Inherited by">
+<%String inheritedBy = "Inherited by";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,inheritedBy:property"%>
+<%= StringUtil.stringListToBulette(inheritedByCollection) %>
+</div>
+<%}%>

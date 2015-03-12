@@ -1,0 +1,3 @@
+<%
+	fileNameService = DocGenHtmlCapellaUtil.SERVICE;
+%>

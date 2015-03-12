@@ -1,0 +1,1 @@
+return (this.parameter instanceof org.polarsys.capella.core.data.information.Collection);

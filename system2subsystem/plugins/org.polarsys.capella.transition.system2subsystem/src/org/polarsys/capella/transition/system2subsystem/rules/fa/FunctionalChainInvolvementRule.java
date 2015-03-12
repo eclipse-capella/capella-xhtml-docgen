@@ -20,6 +20,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
 import org.polarsys.capella.common.data.activity.AbstractAction;
+import org.polarsys.capella.common.data.activity.InputPin;
+import org.polarsys.capella.common.data.activity.OutputPin;
 import org.polarsys.capella.core.data.capellacore.InvolvedElement;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
@@ -37,7 +39,6 @@ import org.polarsys.capella.core.transition.common.handlers.transformation.Trans
 import org.polarsys.capella.transition.system2subsystem.handlers.attachment.FunctionalChainAttachmentHelper;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
-
 
 public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.transition.system.rules.fa.FunctionalChainInvolvementRule {
 
@@ -250,6 +251,7 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
       FunctionalExchange fe, IContext context_p, String idPrefix) {
     String id = String.format("ID_FakeFunctionalChainInvolvement_%s_%s_%s", idPrefix, src.getSid(), trg.getSid());
 
+    FunctionalChain parent = (FunctionalChain) src.eContainer();
     FunctionalChainInvolvement res = null;
 
     for (FunctionalChainInvolvement fci : src.getNextFunctionalChainInvolvements()) {
@@ -273,7 +275,6 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
     res.setInvolved(fe);
     res.setInvolver(src.getInvolver());
 
-    FunctionalChain parent = (FunctionalChain) src.eContainer();
     parent.getOwnedFunctionalChainInvolvements().add(res);
 
     return res;
@@ -282,7 +283,6 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
   private Collection<FunctionalExchange> createFakeFE(FunctionalChainInvolvement srcFci, FunctionalChainInvolvement trgFci, AbstractFunction targetFunction,
       IContext context_p, String description, String idPrefix) {
     Collection<FunctionalExchange> res = new ArrayList<FunctionalExchange>();
-    String id = String.format("ID_FakeFunctionalExchange_%s_%s_%s", idPrefix, srcFci.getSid(), trgFci.getSid());
 
     Collection<AbstractFunction> srcs = new ArrayList<AbstractFunction>();
 
@@ -295,33 +295,42 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
     for (AbstractFunction src : srcs) {
       AbstractFunction trg = targetFunction;
 
-      String srcPortId = String.format("ID_FakeFunctionPort_%s_%s", src.getSid(), id);
-      String trgPortId = String.format("ID_FakeFunctionPort_%s_%s", trg.getSid(), id);
+      String id = String.format("ID_FakeFunctionalExchange_%s_%s_%s", idPrefix, src.getSid(), trg.getSid());
+      String srcPortId = String.format("ID_FakeFunctionPortOut_%s_%s", src.getSid(), id);
+      String trgPortId = String.format("ID_FakeFunctionPortIn_%s_%s", trg.getSid(), id);
 
       EObject container = src.eContainer();
 
-      String feName = String.format("FakeFE_%s_%s", src.getName(), trg.getName());
-      String outPortName = "out_" + feName;
-      String inPortName = "in_" + feName;
-
-      FunctionOutputPort srcPort = (FunctionOutputPort) getOrCreateFakePort(srcPortId, outPortName, src, false, context_p);
-      FunctionInputPort trgPort = (FunctionInputPort) getOrCreateFakePort(trgPortId, inPortName, trg, true, context_p);
-
       FunctionalExchange fe = null;
 
-      fe = FaFactory.eINSTANCE.createFunctionalExchange();
-      fe.setSid(id);
-      fe.setId(id);
+      for (FunctionalExchange existingFE : ((AbstractFunction) container).getOwnedFunctionalExchanges()) {
+        if (existingFE.getSid().equals(id)) {
+          fe = existingFE;
+          break;
+        }
+      }
 
-      fe.setDescription(description);
+      if (fe == null) {
+        String feName = String.format("FakeFE_%s_%s", src.getName(), trg.getName());
+        String outPortName = "out_" + feName;
+        String inPortName = "in_" + feName;
+        FunctionOutputPort srcPort = (FunctionOutputPort) getOrCreateFakePort(srcPortId, outPortName, src, false, context_p);
+        FunctionInputPort trgPort = (FunctionInputPort) getOrCreateFakePort(trgPortId, inPortName, trg, true, context_p);
 
-      fe.setName(feName);
+        fe = FaFactory.eINSTANCE.createFunctionalExchange();
+        fe.setSid(id);
+        fe.setId(id);
 
-      fe.setSource(srcPort);
-      fe.setTarget(trgPort);
+        fe.setDescription(description);
 
-      if (container instanceof AbstractFunction) {
-        ((AbstractFunction) container).getOwnedFunctionalExchanges().add(fe);
+        fe.setName(feName);
+
+        fe.setSource(srcPort);
+        fe.setTarget(trgPort);
+
+        if (container instanceof AbstractFunction) {
+          ((AbstractFunction) container).getOwnedFunctionalExchanges().add(fe);
+        }
       }
       res.add(fe);
     }
@@ -352,11 +361,29 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
 
     if (res == null) {
       if (input) {
-        res = FaFactory.eINSTANCE.createFunctionInputPort();
-        fct.getInputs().add((FunctionInputPort) res);
+        for (InputPin port : fct.getInputs()) {
+          if (port.getId().equals(id)) {
+            res = (FunctionPort) port;
+            break;
+          }
+        }
+
+        if (res == null) {
+          res = FaFactory.eINSTANCE.createFunctionInputPort();
+          fct.getInputs().add((FunctionInputPort) res);
+        }
       } else {
-        res = FaFactory.eINSTANCE.createFunctionOutputPort();
-        fct.getOutputs().add((FunctionOutputPort) res);
+        for (OutputPin port : fct.getOutputs()) {
+          if (port.getId().equals(id)) {
+            res = (FunctionPort) port;
+            break;
+          }
+        }
+
+        if (res == null) {
+          res = FaFactory.eINSTANCE.createFunctionOutputPort();
+          fct.getOutputs().add((FunctionOutputPort) res);
+        }
       }
       res.setSid(id);
       res.setId(id);

@@ -1,0 +1,15 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<String> regions = StateMachineHelper.getRegions(projectName,
+			outputFolder,(StateMachine) element);
+			
+			if(regions.size() > 0) {
+%>
+<h2>Owned Region</h2>
+<%=StringUtil.stringListToBulette(regions)%>
+<%
+}
+%>

@@ -1,0 +1,81 @@
+<%
+super.method_content(new StringBuffer(), ctx);
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<String> providedComponents = CapellaInterfaceHelper.getProvidedBy((Interface) element, projectName, outputFolder);
+ 
+  Collection<String> implementedComponents = CapellaInterfaceHelper.getImplementedBy((Interface) element, projectName, outputFolder);
+ 
+  Collection<String> requiredComponents = CapellaInterfaceHelper.getRequiredBy((Interface) element, projectName, outputFolder);
+ 
+  Collection<String> usedComponents = CapellaInterfaceHelper.getUsedBy((Interface) element, projectName, outputFolder);
+ 
+if(providedComponents.size() > 0 || implementedComponents.size() > 0 || requiredComponents.size() > 0 || usedComponents.size() > 0) {
+%>
+<h2>Usage</h2>
+<% 
+
+ if(providedComponents.size() > 0) {%>
+	 <h3>Provided by</h3>
+ 	<%=StringUtil.stringListToBulette(providedComponents)%>
+ <%}
+ 
+
+ if(implementedComponents.size() > 0) {%>
+	 <h3>Implemented by</h3>
+ 	<%=StringUtil.stringListToBulette(implementedComponents)%>
+ <%}
+		 
+
+ if(requiredComponents.size() > 0) {%>
+ 	<h3>Required by</h3>
+ 	<%=StringUtil.stringListToBulette(requiredComponents)%>
+ <%}
+ 
+ 
+ if(usedComponents.size() > 0) {%>
+	 <h3>Used by</h3>
+ 	<%=StringUtil.stringListToBulette(usedComponents)%>
+ <%}
+ }
+
+Collection<String> operationExchangeItems = CapellaInterfaceHelper.getOperationExchangeItems((Interface) element,
+		 projectName, outputFolder);
+		 if(operationExchangeItems.size() > 0) {
+%>
+<h2>Operations</h2>
+<%=StringUtil.stringListToBulette(operationExchangeItems)%>
+<%}%>
+
+<%Collection<String> sharedFlowExchangeItems = CapellaInterfaceHelper.getFlowExchangeItems((Interface) element,
+		 projectName, outputFolder);
+		 if(sharedFlowExchangeItems .size() > 0) {
+%>
+<h2> Flow </h2>
+<%=StringUtil.stringListToBulette(sharedFlowExchangeItems)%>
+<%}%>
+
+<%Collection<String> sharedDataExchangeItems = CapellaInterfaceHelper.getSharedDataExchangeItems((Interface) element,
+		 projectName, outputFolder);
+		 if(sharedDataExchangeItems.size() > 0) {
+%>
+<h2>Shared Data</h2>
+<%=StringUtil.stringListToBulette(sharedDataExchangeItems)%>
+<%}%>
+
+<%Collection<String> eventExchangeItems = CapellaInterfaceHelper.getEventExchangeItems((Interface) element,
+		 projectName, outputFolder);
+		 if(eventExchangeItems.size() > 0) {
+%>
+<h2>Events</h2>
+<%=StringUtil.stringListToBulette(eventExchangeItems)%>
+<%}%>
+
+<%Collection<String> unsetExchangeItems = CapellaInterfaceHelper.getUnsetExchangeItems((Interface) element,
+		 projectName, outputFolder);
+		 if(unsetExchangeItems.size() > 0) {
+%>
+<h2>Unset Exchange Items</h2>
+<%=StringUtil.stringListToBulette(unsetExchangeItems)%>
+<%}%>

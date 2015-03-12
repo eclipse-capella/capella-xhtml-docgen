@@ -1,0 +1,10 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+Collection<String> content = PackageHelper.getContent((Structure)element, projectName, outputFolder);
+if(content.size() > 0) {
+%>
+<h2>Content</h2>
+<%=StringUtil.stringListToBulette(content)%>
+<%}%>

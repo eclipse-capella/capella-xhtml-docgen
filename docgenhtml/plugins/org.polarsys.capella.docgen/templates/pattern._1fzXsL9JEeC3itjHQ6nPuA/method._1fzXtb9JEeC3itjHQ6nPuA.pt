@@ -1,0 +1,15 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<String> states = RegionHelper.getState(projectName,
+			outputFolder,(Region) element);
+			
+			if(states.size() > 0) {
+%>
+<h2>Modes and States</h2>
+<%=StringUtil.stringListToBulette(states)%>
+<%
+}
+%>

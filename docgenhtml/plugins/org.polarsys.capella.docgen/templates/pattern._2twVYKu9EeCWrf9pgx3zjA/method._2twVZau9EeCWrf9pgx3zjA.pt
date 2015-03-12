@@ -1,0 +1,32 @@
+<%
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+String elementPath = CapellaServices.getElementPath(element);
+String elementName = CapellaServices.getHyperlinkFromElement(element);
+String elementType = EscapeChars.forHTML(element.eClass().getName());
+String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder);
+%>
+<img src="../icon/<%=logo%>" alt="<%=elementType%>" style="float:left; margin-right:10px" /><h1><%=documentTitle%></h1>
+<p style="margin-top:3px; margin-bottom:3px"><span class="elementMetaClass"><%=elementType%></span></p>
+<em class="elementPath"><%=elementPath%></em>
+<%  // Summary and description generation%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
+
+<% // requirements%>
+<%
+Collection<String> requirementsTableLines = CapellaElementService.getRequirementsToLine(element, projectName, outputFolder);
+if(requirementsTableLines.size() > 0) {
+%>
+<h2>Requirements</h2>
+
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+	</tr>
+	<%for(String line : requirementsTableLines) {%>
+	<%=line%>
+	<%}%>
+</table>
+<%}%>

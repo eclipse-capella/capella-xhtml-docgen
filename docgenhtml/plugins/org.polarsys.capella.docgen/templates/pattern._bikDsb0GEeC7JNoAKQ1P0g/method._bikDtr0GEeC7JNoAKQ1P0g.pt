@@ -1,0 +1,90 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+
+
+Collection<String> exploitingMissions = CapellaCapabilityHelper.INSTANCE.getExploitingMissions(projectName,
+			outputFolder,(Capability) parameter);
+			
+			if(exploitingMissions.size() > 0) {
+%>
+
+<h2>Exploiting Missions</h2>
+<%=StringUtil.stringListToBulette(exploitingMissions)%>
+
+<%
+}
+Collection<String> actors = CapellaCapabilityHelper.INSTANCE.getInvolvedActors(projectName,
+			outputFolder,(Capability) parameter);
+			
+			if(actors.size() > 0) {
+%>
+<h2>Involved Actors</h2>
+<%=StringUtil.stringListToBulette(actors)%>
+<%
+}
+
+Collection<String> extendedCapabilities = CapellaCapabilityHelper.INSTANCE.getExtendedCapabilities(projectName,
+			outputFolder,(Capability) parameter);
+Collection<String> includedCapabilities = CapellaCapabilityHelper.INSTANCE.getIncludedCapabilities(projectName,
+			outputFolder,(Capability) parameter);
+Collection<String> superCapabilities = CapellaCapabilityHelper.INSTANCE.getParentCapabilities(projectName,
+			outputFolder,(Capability) parameter);
+			if((extendedCapabilities.size() > 0) && (includedCapabilities.size() > 0) && (superCapabilities.size() > 0)) {
+		%>
+<h2>Relationships with other Capabilities</h2>
+<%	
+}
+				if(extendedCapabilities.size() > 0) {
+%>
+<h3>Extended Capabilities</h3>
+<%=StringUtil.stringListToBulette(extendedCapabilities)%>
+<%
+
+}
+
+
+
+				if(includedCapabilities.size() > 0) {
+%>
+<h3>Included Capabilities</h3>
+<%=StringUtil.stringListToBulette(includedCapabilities)%>
+<%
+
+}
+
+
+
+			
+			if(superCapabilities.size() > 0) {
+%>
+
+<h3>Super</h3>
+<%=StringUtil.stringListToBulette(superCapabilities)%>
+
+<%
+}
+Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectName,
+			outputFolder,(Capability) parameter);
+			
+			if(involvedFunctions.size() > 0) {
+%>
+<h2>Related Functions</h2>
+<%=StringUtil.stringListToBulette(involvedFunctions)%>
+<%
+}
+
+Collection<String> availableModeAndState = CapellaCapabilityHelper.INSTANCE.getAvailableModeAndState(projectName,
+			outputFolder,(Capability) parameter);
+			
+			if(availableModeAndState.size() > 0) {
+%>
+<h2>Modes and States</h2>
+<%=StringUtil.stringListToBulette(availableModeAndState)%>
+<%
+}
+%>
+
+

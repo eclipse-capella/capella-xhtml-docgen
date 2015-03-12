@@ -1,0 +1,41 @@
+<%
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<String> incomingCommunicationMeans = CapellaEntityHelper.getIncomingCommunicationMeansLines((Entity)element, projectName, outputFolder);
+if(incomingCommunicationMeans.size() > 0) {
+%>
+<h2>Incoming Communication Means</h2>
+<table>
+	<tr>
+		<th>Communication Means</th>
+		<th>Source</th>
+		<th>Description</th>
+		<th>Allocated Functional Exchanges</th>
+	</tr>
+	<% for (String communicationMean : incomingCommunicationMeans) {   	
+%>
+	<%=communicationMean%>
+	<% 	
+}%>
+</table>
+<% } 
+
+Collection<String> outgoingCommunicationMeans = CapellaEntityHelper.getOutgoingCommunicationMeansLines((Entity)element, projectName, outputFolder);
+if(outgoingCommunicationMeans.size() > 0) {
+%>
+<h2>Outgoing Communication Means</h2>
+<table>
+	<tr>
+		<th>Communication Means</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Functional Exchanges</th>
+	</tr>
+	<% for (String communicationMean : outgoingCommunicationMeans) {   	
+%>
+	<%=communicationMean%>
+	<% 	
+}%>
+</table>
+<% } %>

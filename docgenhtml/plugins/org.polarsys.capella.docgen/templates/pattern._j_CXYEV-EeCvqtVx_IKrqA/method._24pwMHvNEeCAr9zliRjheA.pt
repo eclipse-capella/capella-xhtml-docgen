@@ -1,0 +1,32 @@
+<%
+String visibility = "";
+String aggregation = "";
+String kind = "";
+String collectionTypeString = "";
+
+		if (((org.polarsys.capella.core.data.information.Collection) element).getVisibility().getValue() != VisibilityKind.UNSET_VALUE)
+			visibility = "{"
+					+ ((org.polarsys.capella.core.data.information.Collection) element).getVisibility().getLiteral()
+							.toLowerCase() + "} ";
+							
+		if (((org.polarsys.capella.core.data.information.Collection) element)
+				.getAggregationKind().getValue() != AggregationKind.UNSET_VALUE)
+			aggregation = "{"
+				+ ((org.polarsys.capella.core.data.information.Collection) element)
+						.getAggregationKind().getLiteral().toLowerCase() + "} ";
+						
+		kind = "{"
+					+ ((org.polarsys.capella.core.data.information.Collection) element)
+							.getKind().getLiteral().toLowerCase()
+					+ "} ";	
+					
+		Type collectionType = ((org.polarsys.capella.core.data.information.Collection) element).getType();
+		if(collectionType != null)
+			collectionTypeString = " of " + CapellaServices.getFullDataPkgHierarchyLink(collectionType);
+							
+		String type = element.eClass().getName();
+		String elementFullName = CapellaServices.getHyperlinkFromElement(
+				element);
+		documentTitle = visibility + aggregation + kind + " "
+				+ elementFullName + collectionTypeString;
+%>

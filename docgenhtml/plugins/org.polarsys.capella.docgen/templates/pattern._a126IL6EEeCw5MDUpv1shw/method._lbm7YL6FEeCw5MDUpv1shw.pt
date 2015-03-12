@@ -1,0 +1,86 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+String doActivity = CapellaStateHelper.getDoActivity(projectName, outputFolder, (State) element);
+if(doActivity != "") {
+%>
+<h2>Properties</h2>
+<p><strong>Do Activity:</strong> <%=doActivity%></p>
+<%
+}
+Collection<String> ownedReferencedStatesModes = CapellaStateHelper.getOwnedReferencedStatesModes(projectName,
+			outputFolder,(State) element);
+Collection<String> referencedStatesModes = CapellaStateHelper.getReferencedStatesModes(projectName,
+			outputFolder,(State) element);
+			
+			if(ownedReferencedStatesModes.size() > 0 || referencedStatesModes.size() > 0) {
+%>
+<h2>Modes and States</h2>
+<%=StringUtil.stringListToBulette(ownedReferencedStatesModes)%>
+<%
+}
+
+			
+			if(referencedStatesModes.size() > 0) {
+%>
+<h3>Referenced</h3>
+<%=StringUtil.stringListToBulette(referencedStatesModes)%>
+<%
+}
+/*
+Collection<String> previousStatesModes = CapellaStateHelper.getPreviousStatesModes(projectName,
+			outputFolder,(State) element);
+			
+			if(previousStatesModes.size() > 0) {
+%>
+<h2>Previous States / Modes</h2>
+<%=StringUtil.stringListToBulette(previousStatesModes)%>
+<%
+}
+
+
+Collection<String> followingStatesModes = CapellaStateHelper.getFollowingStatesModes(projectName,
+			outputFolder,(State) element);
+			
+			if(followingStatesModes.size() > 0) {
+%>
+<h2>Following States / Modes</h2>
+<%=StringUtil.stringListToBulette(followingStatesModes)%>
+<%
+}
+
+*/
+Collection<String> functions = CapellaStateHelper.getFunctions(projectName,
+			outputFolder,(State) element);
+			
+			if(functions.size() > 0) {
+%>
+<h2>Functions</h2>
+<%=StringUtil.stringListToBulette(functions)%>
+<%
+}
+
+
+Collection<String> functionalChain = CapellaStateHelper.getFunctionalChain(projectName,
+			outputFolder,(State) element);
+			
+			if(functionalChain.size() > 0) {
+%>
+<h2>Functional Chains</h2>
+<%=StringUtil.stringListToBulette(functionalChain)%>
+<%
+}
+
+
+Collection<String> capabilities = CapellaStateHelper.getCapabilities(projectName,
+			outputFolder,(State) element);
+			
+			if(capabilities.size() > 0) {
+%>
+<h2>Capabilities</h2>
+<%=StringUtil.stringListToBulette(capabilities)%>
+<%
+}
+%>

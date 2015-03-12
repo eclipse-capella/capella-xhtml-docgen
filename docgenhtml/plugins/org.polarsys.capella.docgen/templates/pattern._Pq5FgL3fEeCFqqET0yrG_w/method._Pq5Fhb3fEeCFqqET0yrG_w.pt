@@ -1,0 +1,26 @@
+<%
+super.method_content(new StringBuffer(), ctx);
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+
+Collection<String> capabilities = CapellaMissionHelper.getCapabilities(projectName,
+			outputFolder,(Mission) element);
+			
+			if(capabilities.size() > 0) {
+%>
+<h2>Capabilities</h2>
+<%=StringUtil.stringListToBulette(capabilities)%>
+<%
+}
+Collection<String> involvedActors = CapellaMissionHelper.getInvolvedActors(projectName,
+			outputFolder,(Mission) element);
+			
+			if(involvedActors.size() > 0) {
+%>
+<h2>Involved Actors</h2>
+<%=StringUtil.stringListToBulette(involvedActors)%>
+<%
+}
+%>
+
