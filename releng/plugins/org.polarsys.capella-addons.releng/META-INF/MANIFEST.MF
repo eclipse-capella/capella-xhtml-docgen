@@ -13,3 +13,4 @@ Require-Bundle: org.eclipse.egf.pattern;visibility:=reexport,
  org.eclipse.ui.ide,
  org.eclipse.pde.ui
 Bundle-Localization: plugin
+Export-Package: org.polarsys.capella.addons.releng
