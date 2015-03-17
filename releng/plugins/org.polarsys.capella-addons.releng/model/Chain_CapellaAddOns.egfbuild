@@ -9,4 +9,6 @@
   </propertyPackages>
   <jobs href="Job_TransitionSystem2SubSystem.egfbuild#_gPxtENokEeGTBMJ29vOuKA"/>
   <jobs href="Job_AddOn_XMLPivot.egfbuild#_Q3G18Cs6EeOgOepTKQGF5A"/>
+  <jobs href="Job_AddOn_DocGen.egfbuild#_Q3G18Cs6EeOgOepTKQGF5A"/>
 </buildcore:Chain>
+
