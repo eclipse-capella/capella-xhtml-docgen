@@ -7,9 +7,9 @@
     <properties xmi:id="_L7cW0Ev-EeG48a7kaF1Bnw" key="buildVersion" value="${CapellaVersion}.${timestamp}"/>
     <properties xmi:id="_TWr84KZMEeShout9m4suYQ" key="hudsonJob" value="https://hudson.polarsys.org/capella/job/capella-${env.GIT_BRANCH}/lastSuccessfulBuild"/>
     <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_Nightly/578/artifact/result/publish/kitalpha/site.p2"/>
-    <properties xmi:id="_KlR7cMzJEeSgCsr7bvb4KA" key="site_Juno" value="http://download.eclipse.org/releases/juno/"/>
+    <properties xmi:id="_KlR7cMzJEeSgCsr7bvb4KA" key="site_EGF" value="https://hudson.eclipse.org/egf/job/buckminster-egf-juno/lastSuccessfulBuild/artifact/result/publish/org.eclipse.egf.sdk/site.p2/"/>
   </propertyPackages>
   <jobs href="Job_TransitionSystem2SubSystem.egfbuild#_gPxtENokEeGTBMJ29vOuKA"/>
   <jobs href="Job_AddOn_XMLPivot.egfbuild#_Q3G18Cs6EeOgOepTKQGF5A"/>
-  <jobs href="Job_AddOn_DocGen.egfbuild#/"/>
+  <jobs href="Job_AddOn_DocGen.egfbuild#_pba9AMV8EeOLTKWt7nPrDw"/>
 </buildcore:Chain>

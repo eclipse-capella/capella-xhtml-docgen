@@ -23,19 +23,6 @@
           <methods xmi:id="_I1KG1rHcEeSzAc1pj8j6oQ" name="footer" patternFilePath="templates/pattern._I1KG0LHcEeSzAc1pj8j6oQ/method._I1KG1rHcEeSzAc1pj8j6oQ.pt"/>
           <orchestration xmi:type="pattern:SuperCall" xmi:id="_I1KG17HcEeSzAc1pj8j6oQ"/>
         </elements>
-        <elements xmi:id="_wsdYwMzHEeSgCsr7bvb4KA" name="rmap local add org.polarsys.capella"
-            superPattern="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_pFGKYZloEd-GKqXx_evxEw"
-            headerMethod="#_wsdYwszHEeSgCsr7bvb4KA" conditionMethod="#_wsdYxMzHEeSgCsr7bvb4KA"
-            initMethod="#_wsdYw8zHEeSgCsr7bvb4KA" footerMethod="#_wsdYxszHEeSgCsr7bvb4KA">
-          <nature xmi:type="jetpattern:JetNature" xmi:id="_wsdYwczHEeSgCsr7bvb4KA"
-              name="JET"/>
-          <methods xmi:id="_wsdYwszHEeSgCsr7bvb4KA" name="header" patternFilePath="templates/pattern._wsdYwMzHEeSgCsr7bvb4KA/method._wsdYwszHEeSgCsr7bvb4KA.pt"/>
-          <methods xmi:id="_wsdYw8zHEeSgCsr7bvb4KA" name="init" patternFilePath="templates/pattern._wsdYwMzHEeSgCsr7bvb4KA/method._wsdYw8zHEeSgCsr7bvb4KA.pt"/>
-          <methods xmi:id="_wsdYxMzHEeSgCsr7bvb4KA" name="preCondition" patternFilePath="templates/pattern._wsdYwMzHEeSgCsr7bvb4KA/method._wsdYxMzHEeSgCsr7bvb4KA.pt"/>
-          <methods xmi:id="_wsdYxczHEeSgCsr7bvb4KA" name="body" patternFilePath="templates/pattern._wsdYwMzHEeSgCsr7bvb4KA/method._wsdYxczHEeSgCsr7bvb4KA.pt"/>
-          <methods xmi:id="_wsdYxszHEeSgCsr7bvb4KA" name="footer" patternFilePath="templates/pattern._wsdYwMzHEeSgCsr7bvb4KA/method._wsdYxszHEeSgCsr7bvb4KA.pt"/>
-          <orchestration xmi:type="pattern:SuperCall" xmi:id="_wsdYx8zHEeSgCsr7bvb4KA"/>
-        </elements>
       </libraries>
     </viewpoints>
   </viewpointContainer>
@@ -53,8 +40,6 @@
           <type xmi:type="pattern:TypePatternSubstitution" xmi:id="_SHM58LHcEeSzAc1pj8j6oQ">
             <substitutions xmi:id="_TSLfULHcEeSzAc1pj8j6oQ" replacedElement="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_WzN4sI6XEd-e7viTqNBNrA"
                 replacement="#_I1KG0LHcEeSzAc1pj8j6oQ"/>
-            <substitutions xmi:id="_v67OIMzHEeSgCsr7bvb4KA" description="" replacedElement="platform:/plugin/org.eclipse.egf.portfolio.eclipse.build/egf/Build.fcore#_pFGKYZloEd-GKqXx_evxEw"
-                replacement="#_wsdYwMzHEeSgCsr7bvb4KA"/>
           </type>
         </invocationContracts>
       </invocationContractContainer>
