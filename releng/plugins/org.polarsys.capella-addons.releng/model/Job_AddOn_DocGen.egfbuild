@@ -22,9 +22,9 @@
   </steps>
   <steps xsi:type="buildcore:StepContainer" xmi:id="_pba9IcV8EeOLTKWt7nPrDw" name="publish Src">
     <steps xsi:type="buildstep:PublishStep" xmi:id="_pba9IsV8EeOLTKWt7nPrDw" component="_pba9G8V8EeOLTKWt7nPrDw" generateDropins="true"/>
-    <steps xsi:type="buildfile:RenameStep" xmi:id="_izjeEM1dEeSrkJQOnQt4GA" name="del-feature-suffix-publish-dir-name" description="Delete feature suffix from publish directory name" sourcePath="${publish}/org.polarsys.capella.docgen.feature" destinationPath="${publish}/org.polarsys.capella.docgen"/>
-    <steps xsi:type="buildfile:RenameStep" xmi:id="_izjeEc1dEeSrkJQOnQt4GA" name="del-feature-suffix-dropins-dir-name" description="Delete feature suffix from dropins directory name" sourcePath="${publish}/org.polarsys.capella.docgen/dropins/org.polarsys.capella.docgen.feature" destinationPath="${publish}/org.polarsys.capella.docgen/dropins/org.polarsys.capella.docgen"/>
-    <steps xsi:type="buildstep:AggregateStep" xmi:id="_pba9I8V8EeOLTKWt7nPrDw" name="EGF" id="org.polarsys.capella.xmlpivot">
+    <steps xsi:type="buildfile:RenameStep" xmi:id="_izjeEM1dEeSrkJQOnQt4GA" name="del-feature-suffix-publish-dir-name" description="Delete feature suffix from publish directory name" sourcePath="${publish}/org.polarsys.capella.docgen.package.feature" destinationPath="${publish}/org.polarsys.capella.docgen"/>
+    <steps xsi:type="buildfile:RenameStep" xmi:id="_izjeEc1dEeSrkJQOnQt4GA" name="del-feature-suffix-dropins-dir-name" description="Delete feature suffix from dropins directory name" sourcePath="${publish}/org.polarsys.capella.docgen/dropins/org.polarsys.capella.docgen.package.feature" destinationPath="${publish}/org.polarsys.capella.docgen/dropins/org.polarsys.capella.docgen"/>
+    <steps xsi:type="buildstep:AggregateStep" xmi:id="_pba9I8V8EeOLTKWt7nPrDw" name="EGF" id="org.polarsys.capella.docgen">
       <updateSiteUrls>${site_EGF}</updateSiteUrls>
     </steps>
     <steps xsi:type="buildfile:ZipStep" xmi:id="_7pLT0M1dEeSrkJQOnQt4GA" name="Archive_addon_UpdSiteSrc" description="Zip update site" baseDir="${publish}/org.polarsys.capella.docgen/site.p2" destinationFilePath="${publish}/org.polarsys.capella.docgen-updateSite-${buildVersion}-incubation.zip"/>
