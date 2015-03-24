@@ -17,24 +17,23 @@ import org.polarsys.capella.core.data.pa.PaPackage;
 import org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionPkgRule;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-
-
 public class PhysicalFunctionPkgRules {
 
-	  public static class ToSystemFunctionPkg extends PhysicalFunctionPkgRule {}
-	  
-	  public static class ToLogicalFunctionPkg extends PhysicalFunctionPkgRule {
-		@Override
-		public EClass getTargetType(EObject element_p, IContext context_p) {
-			return LaPackage.Literals.LOGICAL_FUNCTION_PKG;
-		}
-	  }
-	  
-	  public static class ToPhysicalFunctionPkg extends PhysicalFunctionPkgRule {
-		  @Override
-		  public EClass getTargetType(EObject element_p, IContext context_p) {
-			  return PaPackage.Literals.PHYSICAL_FUNCTION_PKG;
-		  }
-	  }
+  public static class ToSystemFunctionPkg extends PhysicalFunctionPkgRule {
+  }
+
+  public static class ToLogicalFunctionPkg extends PhysicalFunctionPkgRule {
+    @Override
+    public EClass getTargetType(EObject element_p, IContext context_p) {
+      return LaPackage.Literals.LOGICAL_FUNCTION_PKG;
+    }
+  }
+
+  public static class ToPhysicalFunctionPkg extends PhysicalFunctionPkgRule {
+    @Override
+    public EClass getTargetType(EObject element_p, IContext context_p) {
+      return PaPackage.Literals.PHYSICAL_FUNCTION_PKG;
+    }
+  }
 
 }

@@ -16,7 +16,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
 import org.polarsys.capella.core.data.cs.AbstractActor;
@@ -34,7 +33,6 @@ import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.att
 import org.polarsys.capella.transition.system2subsystem.rules.cs.ComponentRule;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
-
 
 public class Component2SARule extends ComponentRule {
 
@@ -84,7 +82,7 @@ public class Component2SARule extends ComponentRule {
       }
     }
 
-    //super.transformDirectElement is broken, we should not call it ! call super.super.transformDirectElement
+    // super.transformDirectElement is broken, we should not call it ! call super.super.transformDirectElement
     EObject result = null;
     EClass clazz = getTargetType(element_p, context_p);
 
@@ -93,7 +91,7 @@ public class Component2SARule extends ComponentRule {
       result = pkg.getEFactoryInstance().create(clazz);
     }
 
-    //Theorically, this should not be performed here, but log message requires a valid name
+    // Theorically, this should not be performed here, but log message requires a valid name
     if ((element_p instanceof AbstractNamedElement) && (result instanceof AbstractNamedElement)) {
       ((AbstractNamedElement) result).setName(((AbstractNamedElement) element_p).getName());
     }
@@ -115,23 +113,19 @@ public class Component2SARule extends ComponentRule {
   }
 
   @Override
-  protected EStructuralFeature getTargetContainementFeature(EObject element_p, EObject result_p, EObject container_p, IContext context_p) {
-
-    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p, context_p)) {
-      return CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_SYSTEM;
-    }
-
-    return CtxPackage.Literals.ACTOR_PKG__OWNED_ACTORS;
-  }
-
-  @Override
   protected EObject getDefaultContainer(EObject element_p, EObject result_p, IContext context_p) {
+
     EObject root = TransformationHandlerHelper.getInstance(context_p).getLevelElement(element_p, context_p);
     BlockArchitecture target =
         (BlockArchitecture) TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(root, context_p, CsPackage.Literals.BLOCK_ARCHITECTURE,
             element_p, result_p);
 
-    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p, context_p)) {
+    if (root.equals(element_p.eContainer())) {
+      return target;
+    }
+
+    EClass targetType = getTargetType(element_p, context_p);
+    if (CtxPackage.Literals.SYSTEM.isSuperTypeOf(targetType)) {
       return target;
     }
 

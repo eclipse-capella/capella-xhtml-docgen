@@ -29,7 +29,6 @@ import org.polarsys.kitalpha.transposer.TransposerCorePlugin;
 import org.polarsys.kitalpha.transposer.api.ITransposerWorkflow;
 import org.polarsys.kitalpha.transposer.rules.handler.exceptions.mappings.purposes.NonExistingPurposeException;
 
-
 class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
 
   private final MultiphasesContext context;
@@ -114,10 +113,6 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
         }
       }
     };
-  }
-
-  protected final boolean isMerge() {
-    return isMerge;
   }
 
   @Override
