@@ -17,7 +17,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.capellacore.Involvement;
-import org.polarsys.capella.core.data.cs.AbstractActor;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.PhysicalLink;
@@ -27,8 +26,11 @@ import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.attachment.AttachmentHelper;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
+import org.polarsys.capella.core.transition.common.handlers.selection.ISelectionContext;
+import org.polarsys.capella.core.transition.common.handlers.selection.SelectionContextHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
 import org.polarsys.capella.core.transition.system.rules.AbstractCapellaElementRule;
+import org.polarsys.capella.transition.system2subsystem.handlers.selection.ExceptEClassSelectionContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
 
@@ -50,10 +52,17 @@ public class PhysicalLinkRule extends AbstractCapellaElementRule {
 
   @Override
   protected EObject getBestContainer(EObject element_p, EObject result_p, IContext context_p) {
-    if (result_p instanceof AbstractActor) {
-      return null;
+    EObject bestContainer = null;
+    EObject container = getSourceContainer(element_p, result_p, context_p);
+
+    if (container != null) {
+      ISelectionContext sContext =
+          SelectionContextHandlerHelper.getHandler(context_p).getSelectionContext(context_p, ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element_p,
+              result_p);
+      sContext = new ExceptEClassSelectionContext(sContext, CsPackage.Literals.ABSTRACT_ACTOR);
+      bestContainer = TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(container, context_p, sContext);
     }
-    return super.getBestContainer(element_p, result_p, context_p);
+    return bestContainer;
   }
 
   @Override

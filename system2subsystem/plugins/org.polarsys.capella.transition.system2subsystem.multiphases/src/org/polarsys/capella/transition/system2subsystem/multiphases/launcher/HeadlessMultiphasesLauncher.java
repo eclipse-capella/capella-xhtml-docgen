@@ -43,7 +43,6 @@ import org.polarsys.capella.transition.system2subsystem.multiphases.activities.R
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.attachment.LAAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.attachment.PAAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.attachment.SAAttachmentHelper;
-import org.polarsys.capella.transition.system2subsystem.ui.handlers.SubSystemFilteringUIHandler;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 import org.polarsys.kitalpha.transposer.api.ITransposerWorkflow;
@@ -141,18 +140,16 @@ public class HeadlessMultiphasesLauncher {
     }
   }
 
-  private ActivityParameters createPostTransformationParameters(MultiphasesContext context_p) {
+  protected ActivityParameters createPostTransformationParameters(MultiphasesContext context_p) {
     ActivityParameters params = new ActivityParameters();
     params.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context_p, null));
-    params.addParameter(new GenericParameter<IHandler>(ITransitionConstants.FILTERING_DIFFERENCES_HANDLER, new SubSystemFilteringUIHandler(),
-        "Transposer Options handler"));
     for (GenericParameter<?> paramHeadless : headlessParameters) {
       params.addParameter(paramHeadless);
     }
     return params;
   }
 
-  private ActivityParameters createPreTransformationParameters(MultiphasesContext context_p, IOptionsHandler optionsHandler_p) {
+  protected ActivityParameters createPreTransformationParameters(MultiphasesContext context_p, IOptionsHandler optionsHandler_p) {
     ActivityParameters parameter = new ActivityParameters();
     parameter.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context_p, null));
     parameter.addParameter(new GenericParameter<IRulesHandler>(InitializeTransitionActivity.PARAMETER_RULE_HANDLER, null, null));
