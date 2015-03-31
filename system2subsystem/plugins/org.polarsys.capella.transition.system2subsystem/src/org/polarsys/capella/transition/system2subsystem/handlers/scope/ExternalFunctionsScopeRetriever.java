@@ -135,7 +135,6 @@ public class ExternalFunctionsScopeRetriever implements IScopeRetriever {
       scope.add(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, function, context_p);
 
       for (FunctionalExchange exchange : getFE(function, context_p)) {
-
         if (!scope.contains(ITransitionConstants.SOURCE_SCOPE, exchange, context_p)) {
 
           AbstractFunction source = (AbstractFunction) exchange.getSource().eContainer();
@@ -232,7 +231,7 @@ public class ExternalFunctionsScopeRetriever implements IScopeRetriever {
     return result;
   }
 
-  private boolean isLinkToPrimaryFunction(AbstractFunction function, IContext context_p) {
+  public static boolean isLinkToPrimaryFunction(AbstractFunction function, IContext context_p) {
     Collection<ActivityEdge> edges = new ArrayList<ActivityEdge>();
     edges.addAll(function.getIncoming());
     edges.addAll(function.getOutgoing());
