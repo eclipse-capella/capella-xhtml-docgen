@@ -121,7 +121,7 @@ public class FunctionalChainAttachmentHelper implements IHandler {
 
       if (involvedElement instanceof AbstractFunction) {
         // The function is secondary scoped if it is concerned by a scoped FunctionalExchange
-        inScope = checkDirectScope(element_p, scope, context_p);
+        inScope = ExternalFunctionsScopeRetriever.isLinkToPrimaryFunction((AbstractFunction) involvedElement, context_p);
 
       } else if (involvedElement instanceof FunctionalExchange) {
         // A Functional Exchange will be scoped only if its functions are secondary scoped
@@ -129,13 +129,13 @@ public class FunctionalChainAttachmentHelper implements IHandler {
         boolean nextScoped = false;
 
         for (FunctionalChainInvolvement n : element_p.getNextFunctionalChainInvolvements()) {
-          if (checkDirectScope(n, scope, context_p)) {
+          if (ExternalFunctionsScopeRetriever.isLinkToPrimaryFunction((AbstractFunction) n.getInvolved(), context_p)) {
             nextScoped = true;
             break;
           }
         }
         for (FunctionalChainInvolvement p : element_p.getPreviousFunctionalChainInvolvements()) {
-          if (checkDirectScope(p, scope, context_p)) {
+          if (ExternalFunctionsScopeRetriever.isLinkToPrimaryFunction((AbstractFunction) p.getInvolved(), context_p)) {
             prevScoped = true;
             break;
           }
@@ -149,33 +149,6 @@ public class FunctionalChainAttachmentHelper implements IHandler {
     }
 
     return inScope && willBeTransformed.isOK();
-  }
-
-  /**
-   * @param fci An AbstractFunction FunctionalChainInvolvement.
-   * @param scope
-   * @param context_p
-   * @return
-   */
-  private boolean checkDirectScope(FunctionalChainInvolvement fci, IContextScopeHandler scope, IContext context_p) {
-    boolean res = false;
-    Collection<FunctionalChainInvolvement> fcis = new ArrayList<FunctionalChainInvolvement>();
-
-    // Listing all FunctionalExchange FunctionalChainInvolvement.
-    fcis.addAll(fci.getNextFunctionalChainInvolvements());
-    fcis.addAll(fci.getPreviousFunctionalChainInvolvements());
-
-    for (FunctionalChainInvolvement f : fcis) {
-      FunctionalExchange fe = (FunctionalExchange) f.getInvolved();
-      if (ExternalFunctionsScopeRetriever.isLinkToPrimaryFunction(fe, context_p)) {
-        if (fe.getInvolvingFunctionalChains().contains(fci.getInvolver())) {
-          return true;
-        }
-      }
-
-    }
-
-    return res;
   }
 
   /**
