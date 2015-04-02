@@ -52,7 +52,7 @@ public class InitializeCapellaDocGenBrandingData implements ITaskProduction {
 			Object currentLogoPath = documentationBrandingData.getData("logoPath");
 			if (currentLogoPath.equals(defaultLogo))
 			{
-				documentationBrandingData.addData(LOGO_PATH_KEY, "platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella.ui/icons/intro-capella.png");
+				documentationBrandingData.addData(LOGO_PATH_KEY, "platform:/plugin/org.polarsys.capella.docgen.ui/icons/intro-capella.png");
 			}
 		}
 		

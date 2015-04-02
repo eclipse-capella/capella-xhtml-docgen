@@ -29,7 +29,7 @@ Contributors:
   </contractContainer>
   <viewpointContainer xmi:id="_83YaoAkdEeCBJtEcjZDVOA">
     <viewpoints xmi:type="domain:DomainViewpoint" xmi:id="_9Rm4gAkdEeCBJtEcjZDVOA">
-      <domains xmi:type="domain:EMFDomain" xmi:id="_99H6sAkdEeCBJtEcjZDVOA" helperImplementation="org.polarsys.kitalpha.doc.gen.business.capella.ui.domain.CapellaDomainHelper"/>
+      <domains xmi:type="domain:EMFDomain" xmi:id="_99H6sAkdEeCBJtEcjZDVOA" helperImplementation="org.polarsys.capella.docgen.ui.domain.CapellaDomainHelper"/>
     </viewpoints>
   </viewpointContainer>
   <orchestration xmi:type="fprod:ProductionPlan" xmi:id="_0XCKMAkdEeCBJtEcjZDVOA">

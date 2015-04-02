@@ -29,7 +29,7 @@ import org.polarsys.kitalpha.doc.gen.business.core.ui.wizards.HTMLDocumentationG
 
 public class HTMLDocumentationGenerationAction extends BaseSelectionListenerAction {
 	private static final URI CAPELLA_LAUNCHER_URI = URI
-			.createURI("platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA");
+			.createURI("platform:/plugin/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA");
 
 	/**
 	 * Constructor.
@@ -57,7 +57,7 @@ public class HTMLDocumentationGenerationAction extends BaseSelectionListenerActi
 			protected Map<String, URI> getLaunchersURI() {
 				Map<String, URI> map = new HashMap<String, URI>();
 				map.put(HTMLDocumentationGenerationWizard.DEFAULT_LAUNCHER_LABEL, CAPELLA_LAUNCHER_URI);
-				IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor("org.polarsys.kitalpha.doc.gen.business.capella.ui.launcher");
+				IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor("org.polarsys.capella.docgen.ui.launcher");
 				for (IConfigurationElement configurationElement : config) {
 					if (configurationElement.getName().equals("launcher")) {
 						String nameString = configurationElement.getAttribute("name");
