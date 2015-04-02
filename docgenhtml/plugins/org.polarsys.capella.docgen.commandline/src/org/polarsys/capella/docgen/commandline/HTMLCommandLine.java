@@ -47,7 +47,7 @@ import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelpe
  */
 public class HTMLCommandLine extends AbstractCommandLine {
 
-	private static final String FCORE_URI = "/org.polarsys.kitalpha.doc.gen.business.capella.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA";
+	private static final String FCORE_URI = "/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA";
 	private static final URI CAPELLA_LAUNCHER_URI = URI.createURI("platform:/plugin" + FCORE_URI); //$NON-NLS-1$
 
 	/**
