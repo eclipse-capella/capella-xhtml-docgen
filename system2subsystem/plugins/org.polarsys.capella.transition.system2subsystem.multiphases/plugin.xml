@@ -141,7 +141,7 @@
                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.ExchangeCategoryRules$ToSA"
                      enabled="true"
                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.ExchangeCategoryRules$ToSA"
-                     name="FunctionalChain">
+                     name="ExchangeCategory">
                </defaultMappingPossibility>
             </mappingElement>
             
@@ -311,7 +311,28 @@
                       name="ComponentExchangeCategory">
                 </defaultMappingPossibility>
              </mappingElement>
-             
+             <mappingElement
+                   domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceUse"
+                   reuseExtendedElementDefaultPossibility="true"
+                   reuseExtendedElementPossibilities="true">
+                <defaultMappingPossibility
+                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceUseRules$ToSA"
+                      enabled="true"
+                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceUseRules$ToSA"
+                      name="InterfaceUse">
+                </defaultMappingPossibility>
+             </mappingElement>
+              <mappingElement
+                   domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceImplementation"
+                   reuseExtendedElementDefaultPossibility="true"
+                   reuseExtendedElementPossibilities="true">
+                <defaultMappingPossibility
+                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceImplementationRules$ToSA"
+                      enabled="true"
+                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceImplementationRules$ToSA"
+                      name="InterfaceImplementation">
+                </defaultMappingPossibility>
+             </mappingElement>            
          </mappingPackage>
       </mapping>
 </extension>
@@ -380,7 +401,7 @@
                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.ExchangeCategoryRules$ToLA"
                      enabled="true"
                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.ExchangeCategoryRules$ToLA"
-                     name="FunctionalChain">
+                     name="ExchangeCategory">
                </defaultMappingPossibility>
             </mappingElement>
             
@@ -562,6 +583,28 @@
                       name="ComponentExchangeCategory">
                 </defaultMappingPossibility>
              </mappingElement>
+             <mappingElement
+                   domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceUse"
+                   reuseExtendedElementDefaultPossibility="true"
+                   reuseExtendedElementPossibilities="true">
+                <defaultMappingPossibility
+                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceUseRules$ToLA"
+                      enabled="true"
+                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceUseRules$ToLA"
+                      name="InterfaceUse">
+                </defaultMappingPossibility>
+             </mappingElement>
+             <mappingElement
+                   domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceImplementation"
+                   reuseExtendedElementDefaultPossibility="true"
+                   reuseExtendedElementPossibilities="true">
+                <defaultMappingPossibility
+                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceImplementationRules$ToLA"
+                      enabled="true"
+                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceImplementationRules$ToLA"
+                      name="InterfaceImplementation">
+                </defaultMappingPossibility>
+             </mappingElement>
          </mappingPackage>
       </mapping>
 </extension>
@@ -632,7 +675,7 @@
                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.ExchangeCategoryRules$ToPA"
                      enabled="true"
                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.ExchangeCategoryRules$ToPA"
-                     name="FunctionalChain">
+                     name="ExchangeCategory">
                </defaultMappingPossibility>
             </mappingElement>
             
@@ -812,6 +855,28 @@
                       incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.ComponentExchangeCategoryRules$ToPA"
                       enabled="true"
                       name="ComponentExchangeCategory">
+                </defaultMappingPossibility>
+             </mappingElement>
+             <mappingElement
+                   domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceUse"
+                   reuseExtendedElementDefaultPossibility="true"
+                   reuseExtendedElementPossibilities="true">
+                <defaultMappingPossibility
+                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceUseRules$ToPA"
+                      enabled="true"
+                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceUseRules$ToPA"
+                      name="InterfaceUse">
+                </defaultMappingPossibility>
+             </mappingElement>
+             <mappingElement
+                   domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceImplementation"
+                   reuseExtendedElementDefaultPossibility="true"
+                   reuseExtendedElementPossibilities="true">
+                <defaultMappingPossibility
+                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceImplementationRules$ToPA"
+                      enabled="true"
+                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceImplementationRules$ToPA"
+                      name="InterfaceImplementation">
                 </defaultMappingPossibility>
              </mappingElement>
          </mappingPackage>
