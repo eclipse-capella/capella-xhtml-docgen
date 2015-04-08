@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <buildcore:Job xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:buildcore="http://www.eclipse.org/egf/1.0.1/buildcore" xmlns:buildfile="http://www.eclipse.org/egf/1.0.0/buildfile" xmlns:buildscm="http://www.eclipse.org/egf/1.0.0/buildscm" xmlns:buildstep="http://www.eclipse.org/egf/1.0.2/buildstep" xmi:id="_gPxtENokEeGTBMJ29vOuKA" name="TransitionSystemSubSystem">
+  <properties xmi:id="_mvdmIN3IEeSJQud5hJsl_Q" key="buildVersion" value="${extracted.version}.${timestamp}" type="INLINED"/>
   <properties xmi:id="_j4PokNokEeGTBMJ29vOuKA" key="usedTP" value="${publish}/transitionSystem2SubSystem" type="INLINED"/>
   <properties xmi:id="_N_t1QN3QEeSJQud5hJsl_Q" key="feature.name" value="org.polarsys.capella.transition.system2subsystem.feature" type="INLINED"/>
   <steps xsi:type="buildstep:CleanStep" xmi:id="_34NbYJMKEeKKWIqJCUuOog" name="Clean Result" type="Result"/>
@@ -18,7 +19,6 @@
     <reusedStep xsi:type="buildcore:StepContainer" href="Chain_CapellaAddOns.egfbuild#_smKPkN3PEeSJQud5hJsl_Q"/>
   </steps>
   <steps xsi:type="buildcore:StepContainer" xmi:id="_zm94gN3SEeSJQud5hJsl_Q" name="archive">
-    <properties xmi:id="_mvdmIN3IEeSJQud5hJsl_Q" key="buildVersion" value="${extracted.version}.${timestamp}" type="INLINED"/>
     <steps xsi:type="buildfile:RenameStep" xmi:id="_MDoB4Hr9EeSbZo1mpYCKSA" name="del-feature-suffix-publish-dir-name" description="Delete feature suffix from publish directory name" sourcePath="${publish}/${feature.name}" destinationPath="${publish}/SubsystemTransition"/>
     <steps xsi:type="buildfile:RenameStep" xmi:id="_SMDYULLaEeS2IoNthQrPLg" name="del-feature-suffix-dropins-dir-name" description="Delete feature suffix from dropins directory name" sourcePath="${publish}/SubsystemTransition/dropins/${feature.name}" destinationPath="${publish}/SubsystemTransition/dropins/SubsystemTransition"/>
     <steps xsi:type="buildfile:ZipStep" xmi:id="_NclF8HsKEeSbZo1mpYCKSA" name="Archive_addon_UpdSiteSrc" description="Zip update site" baseDir="${publish}/SubsystemTransition/site.p2" destinationFilePath="${publish}/SubsystemTransition-updateSite-${buildVersion}-incubation.zip"/>
