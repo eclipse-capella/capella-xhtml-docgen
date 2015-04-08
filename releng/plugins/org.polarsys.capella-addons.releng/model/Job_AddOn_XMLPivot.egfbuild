@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <buildcore:Job xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:buildcore="http://www.eclipse.org/egf/1.0.1/buildcore" xmlns:buildfile="http://www.eclipse.org/egf/1.0.0/buildfile" xmlns:buildscm="http://www.eclipse.org/egf/1.0.0/buildscm" xmlns:buildstep="http://www.eclipse.org/egf/1.0.2/buildstep" xmi:id="_Q3G18Cs6EeOgOepTKQGF5A" name="AddOn_XMLPivot">
   <properties xmi:id="_l4RioCs6EeOgOepTKQGF5A" key="usedTP" value="${publish}/XMLPivot" type="INLINED"/>
+  <properties xmi:id="_ygRTMN3zEeSzS6EjHlJjGw" key="buildVersion" value="${CapellaVersion}.${timestamp}"/>
   <steps xsi:type="buildstep:CleanStep" xmi:id="_qHIaoLa6EeS25PpBEr5qcw" name="Clean Result" type="Result"/>
   <steps xsi:type="buildfile:DeleteStep" xmi:id="_qHIaoba6EeS25PpBEr5qcw" name="delete TP" description="">
     <additionalParameters xmi:id="_qHIaora6EeS25PpBEr5qcw" key="dir" value="${usedTP}"/>
