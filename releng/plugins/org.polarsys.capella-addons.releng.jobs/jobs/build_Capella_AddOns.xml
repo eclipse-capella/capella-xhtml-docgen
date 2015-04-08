@@ -1,8 +1,5 @@
 <project name="Capella_AddOns">
 
-	<echo message="Running Job CommonAddon in Capella_AddOns_CommonAddon/releng"/>
-	<ant dir="Capella_AddOns_CommonAddon/releng"/>
-
 	<echo message="Running Job TransitionSystemSubSystem in Capella_AddOns_TransitionSystemSubSystem/releng"/>
 	<ant dir="Capella_AddOns_TransitionSystemSubSystem/releng"/>
 
