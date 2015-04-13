@@ -9,6 +9,7 @@ http://www.eclipse.org/legal/epl-v10.html
 Contributors:
   Thales - initial API and implementation
 -->
+
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:domain="http://www.eclipse.org/egf/1.0.0/domain"
     xmlns:fcore="http://www.eclipse.org/egf/1.0.0/fcore" xmlns:fprod="http://www.eclipse.org/egf/1.0.0/fprod"
     xmlns:ftask="http://www.eclipse.org/egf/1.0.0/ftask" xmlns:jetpattern="http://www.eclipse.org/egf/1.0.0/jetpattern"
@@ -691,7 +692,7 @@ Contributors:
     </orchestration>
   </fcore:FactoryComponent>
   <ftask:Task xmi:id="_MtkCwUsFEeSfyeTEy5zUcw" name="Initialize.Documentation.Branding.Data"
-      kind="java" implementation="org.polarsys.kitalpha.doc.gen.business.capella.task.InitializeCapellaDocGenBrandingData">
+      kind="java" implementation="org.polarsys.capella.docgen.task.InitializeCapellaDocGenBrandingData">
     <contractContainer xmi:id="_Q1dsQEsFEeSfyeTEy5zUcw">
       <contracts xmi:id="_RfL-sEsFEeSfyeTEy5zUcw" name="copyright">
         <type xmi:type="types:TypeString" xmi:id="_R3Ln8EsFEeSfyeTEy5zUcw"/>
@@ -705,7 +706,7 @@ Contributors:
     </contractContainer>
   </ftask:Task>
   <ftask:Task xmi:id="_vboOcW8OEeSjPIMKP6Xr0g" name="Merge.Pattern.Substitution" kind="java"
-      implementation="org.polarsys.kitalpha.doc.gen.business.capella.task.MergePatternSubstitutionTask">
+      implementation="org.polarsys.capella.docgen.task.MergePatternSubstitutionTask">
     <contractContainer xmi:id="_zniOMG8OEeSjPIMKP6Xr0g">
       <contracts xmi:id="_0AHtUG8OEeSjPIMKP6Xr0g" name="base">
         <type xmi:type="pattern:TypePatternSubstitution" xmi:id="_1_OeUG8OEeSjPIMKP6Xr0g"/>
@@ -719,7 +720,7 @@ Contributors:
     </contractContainer>
   </ftask:Task>
   <ftask:Task xmi:id="__iSI8G8OEeSjPIMKP6Xr0g" name="Merge.Pattern.List" kind="java"
-      implementation="org.polarsys.kitalpha.doc.gen.business.capella.task.MergePatternListTask">
+      implementation="org.polarsys.capella.docgen.task.MergePatternListTask">
     <contractContainer xmi:id="_EXdvMG8PEeSjPIMKP6Xr0g">
       <contracts xmi:id="_FDa2QG8PEeSjPIMKP6Xr0g" name="base">
         <type xmi:type="pattern:TypePatternList" xmi:id="_Kvu40G8PEeSjPIMKP6Xr0g"/>
