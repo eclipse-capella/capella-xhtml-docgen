@@ -149,7 +149,7 @@ public class CapellaElementDocGen
 			final PatternContext ctx) throws Exception {
 
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.CapellaElementContentDocGen" args="element:element, documentTitle:documentTitle"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementContentDocGen" args="element:element, documentTitle:documentTitle"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null,
@@ -161,7 +161,7 @@ public class CapellaElementDocGen
 			callParameters.put("documentTitle", documentTitle);
 			CallHelper
 					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_2twVYKu9EeCWrf9pgx3zjA",
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_2twVYKu9EeCWrf9pgx3zjA",
 							new ExecutionContext((InternalPatternContext) ctx),
 							callParameters);
 			stringBuffer.setLength(0);
@@ -186,7 +186,7 @@ public class CapellaElementDocGen
 			final PatternContext ctx) throws Exception {
 
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.CapellaElementEndContentDocGen" args="element:element"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="element:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null,
@@ -197,7 +197,7 @@ public class CapellaElementDocGen
 			callParameters.put("element", element);
 			CallHelper
 					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_H6iekavLEeCas-LHcur3rg",
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_H6iekavLEeCas-LHcur3rg",
 							new ExecutionContext((InternalPatternContext) ctx),
 							callParameters);
 			stringBuffer.setLength(0);

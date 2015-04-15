@@ -24,10 +24,10 @@ if(allocations2.size() > 0) {%>
 <%}%>
 
 <% // Presented in diagrams generation%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
 
 <% // owned diagrams%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.DiagramsGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
 <% // Presented in diagrams generation%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.PresentedDiagrmsGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PresentedDiagrmsGeneration" args="element:element"%>

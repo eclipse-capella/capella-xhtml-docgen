@@ -14,24 +14,24 @@ String documentTitle = elementName; %>
 %><%=CapellaServices.getHyperlinkFromElement(type)%><%} else {%>No type specified<%}%></em></p>
 
 <%  // Summary and description generation%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
 
 <% // owned diagrams and Contained in diagrams generation%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.DiagramsGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
 
 <%// type 
 
 if(type != null) {%>
 	
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.CapellaElementContentDocGen" args="type:element, documentTitle:documentTitle"%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.content.ComponentContentDocGen" args="type:element, projectName:projectName, outputFolder:outputFolder"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementContentDocGen" args="type:element, documentTitle:documentTitle"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.ComponentContentDocGen" args="type:element, projectName:projectName, outputFolder:outputFolder"%>
 <%
 if(type instanceof Entity) {%>
-	<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.content.EntityContentDocGen" args="type:element"%>
+	<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.EntityContentDocGen" args="type:element"%>
 <%
 	}%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.CapellaElementEndContentDocGen" args="type:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="type:element"%>
 <%
 }
 %>

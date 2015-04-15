@@ -10,7 +10,7 @@ String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder
 <p style="margin-top:3px; margin-bottom:3px"><span class="elementMetaClass"><%=elementType%></span></p>
 <em class="elementPath"><%=elementPath%></em>
 <%  // Summary and description generation%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
 
 <% // requirements%>
 <%

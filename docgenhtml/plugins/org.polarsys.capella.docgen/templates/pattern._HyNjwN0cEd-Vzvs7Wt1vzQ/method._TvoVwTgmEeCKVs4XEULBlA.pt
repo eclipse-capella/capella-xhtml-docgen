@@ -3,4 +3,4 @@ super.method_content(new StringBuffer(), ctx);
 String projectName= ctx.getValue("projectName").toString();
 String outputFolder = ctx.getValue("outputFolder").toString();
 %>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.content.ComponentContentDocGen" args="element:element, projectName:projectName, outputFolder:outputFolder"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.ComponentContentDocGen" args="element:element, projectName:projectName, outputFolder:outputFolder"%>

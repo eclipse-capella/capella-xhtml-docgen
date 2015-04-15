@@ -113,7 +113,7 @@ public class LogicalComponentDocGen extends
 
 		stringBuffer.append(TEXT_1);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.content.ComponentContentDocGen" args="element:element, projectName:projectName, outputFolder:outputFolder"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.ComponentContentDocGen" args="element:element, projectName:projectName, outputFolder:outputFolder"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null,
@@ -126,7 +126,7 @@ public class LogicalComponentDocGen extends
 			callParameters.put("outputFolder", outputFolder);
 			CallHelper
 					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_bbMz4auhEeCWrf9pgx3zjA",
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_bbMz4auhEeCWrf9pgx3zjA",
 							new ExecutionContext((InternalPatternContext) ctx),
 							callParameters);
 			stringBuffer.setLength(0);

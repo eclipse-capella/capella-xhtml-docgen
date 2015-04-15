@@ -23,7 +23,7 @@ if(allocations2.size() > 0) {%>
 <%}%>
 
 <% // owned diagrams%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.DiagramsGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
 <%if (parameter.getOwnedTransitions() != null && parameter.getOwnedTransitions().size() > 0){%>
 <h2>Owned Transitions</h2>

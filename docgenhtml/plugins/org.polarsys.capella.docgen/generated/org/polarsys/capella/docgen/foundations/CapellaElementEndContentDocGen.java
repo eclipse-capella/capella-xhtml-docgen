@@ -142,7 +142,7 @@ public class CapellaElementEndContentDocGen {
 		// Presented in diagrams generation
 		stringBuffer.append(TEXT_10);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null,
@@ -155,7 +155,7 @@ public class CapellaElementEndContentDocGen {
 			callParameters.put("projectName", projectName);
 			CallHelper
 					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_UT85gDr2EeK9AZkoGpWdMw",
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_UT85gDr2EeK9AZkoGpWdMw",
 							new ExecutionContext((InternalPatternContext) ctx),
 							callParameters);
 			stringBuffer.setLength(0);
@@ -165,7 +165,7 @@ public class CapellaElementEndContentDocGen {
 		// owned diagrams
 		stringBuffer.append(TEXT_12);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.DiagramsGeneration" args="element:element"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null,
@@ -176,7 +176,7 @@ public class CapellaElementEndContentDocGen {
 			callParameters.put("element", element);
 			CallHelper
 					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
 							new ExecutionContext((InternalPatternContext) ctx),
 							callParameters);
 			stringBuffer.setLength(0);
@@ -186,7 +186,7 @@ public class CapellaElementEndContentDocGen {
 		// Presented in diagrams generation
 		stringBuffer.append(TEXT_14);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.PresentedDiagrmsGeneration" args="element:element"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PresentedDiagrmsGeneration" args="element:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null,
@@ -197,7 +197,7 @@ public class CapellaElementEndContentDocGen {
 			callParameters.put("element", element);
 			CallHelper
 					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_wWwgkErlEeCvqtVx_IKrqA",
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_wWwgkErlEeCvqtVx_IKrqA",
 							new ExecutionContext((InternalPatternContext) ctx),
 							callParameters);
 			stringBuffer.setLength(0);

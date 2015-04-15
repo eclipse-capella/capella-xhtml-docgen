@@ -155,7 +155,7 @@ public class CapellaElementContentDocGen {
 		// Summary and description generation
 		stringBuffer.append(TEXT_7);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.capella.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null,
@@ -166,7 +166,7 @@ public class CapellaElementContentDocGen {
 			callParameters.put("element", element);
 			CallHelper
 					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.capella/egf/HTMLDocGenCapella.fcore#_fiM9sOZdEd-YVt45ZEg4_w",
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_fiM9sOZdEd-YVt45ZEg4_w",
 							new ExecutionContext((InternalPatternContext) ctx),
 							callParameters);
 			stringBuffer.setLength(0);
