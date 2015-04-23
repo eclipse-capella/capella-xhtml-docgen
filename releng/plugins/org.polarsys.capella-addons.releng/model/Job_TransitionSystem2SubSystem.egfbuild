@@ -2,7 +2,7 @@
 <buildcore:Job xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:buildcore="http://www.eclipse.org/egf/1.0.1/buildcore" xmlns:buildfile="http://www.eclipse.org/egf/1.0.0/buildfile" xmlns:buildscm="http://www.eclipse.org/egf/1.0.0/buildscm" xmlns:buildstep="http://www.eclipse.org/egf/1.0.2/buildstep" xmi:id="_gPxtENokEeGTBMJ29vOuKA" name="TransitionSystemSubSystem">
   <properties xmi:id="_j4PokNokEeGTBMJ29vOuKA" key="usedTP" value="${publish}/transitionSystem2SubSystem" type="INLINED"/>
   <properties xmi:id="_N_t1QN3QEeSJQud5hJsl_Q" key="feature.name" value="org.polarsys.capella.transition.system2subsystem.feature" type="INLINED"/>
-  <properties xmi:id="_sojZQN3wEeSzS6EjHlJjGw" key="buildVersion" value="${CapellaVersion}.${timestamp}"/>
+  <properties xmi:id="_sojZQN3wEeSzS6EjHlJjGw" key="buildVersion" value="0.8.1.${timestamp}"/>
   <steps xsi:type="buildstep:CleanStep" xmi:id="_34NbYJMKEeKKWIqJCUuOog" name="Clean Result" type="Result"/>
   <steps xsi:type="buildfile:DeleteStep" xmi:id="_34NbYZMKEeKKWIqJCUuOog" name="delete TP" description="">
     <additionalParameters xmi:id="_34NbYpMKEeKKWIqJCUuOog" key="dir" value="${usedTP}"/>
