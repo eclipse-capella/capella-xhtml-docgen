@@ -30,6 +30,7 @@ import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.EnumerationReference;
 import org.polarsys.capella.core.data.information.datavalue.NumericReference;
 import org.polarsys.capella.core.data.information.datavalue.StringReference;
+import org.polarsys.capella.core.data.information.datavalue.ValuePart;
 import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
 import org.polarsys.capella.core.data.capellacore.EnumerationPropertyValue;
 
@@ -51,6 +52,24 @@ public class CapellaPropertyServices {
 		buffer.append(CapellaServices.BOLD_END);
 		buffer.append(CapellaServices.VALUE_EQUAL);
 		buffer.append(getValueFromPropertyValue(prop_p));
+		return buffer.toString();
+	}
+	
+	/**
+	 * Generate HTML part for documentation of a {@link ValuePart}.
+	 * @param valuepart_p the {@link ValuePart} to generate
+	 * @param projectName name of the project wherein documentation is generated
+	 * @param outputFolder name of the folder wherein documentation is generated
+	 * @return
+	 */
+	public static String getValuePartInformation(ValuePart valuepart_p, String projectName, String outputFolder) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(CapellaServices.getImageLinkFromElement(valuepart_p, projectName, outputFolder));
+		buffer.append(CapellaServices.SPACE);
+		buffer.append(CapellaServices.BOLD_BEGIN);
+		buffer.append(LabelProviderHelper.getText(valuepart_p));
+		buffer.append(CapellaServices.BOLD_END);
+		buffer.append(CapellaServices.VALUE_EQUAL);
 		return buffer.toString();
 	}
 
