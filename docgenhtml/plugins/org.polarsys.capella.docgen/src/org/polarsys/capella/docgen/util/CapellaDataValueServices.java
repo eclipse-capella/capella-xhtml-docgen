@@ -17,12 +17,14 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EObject;
 
 import org.polarsys.capella.core.data.information.datavalue.BinaryExpression;
+import org.polarsys.capella.core.data.information.datavalue.ComplexValue;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralBooleanValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralNumericValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralStringValue;
 import org.polarsys.capella.core.data.information.datavalue.NumericValue;
 import org.polarsys.capella.core.data.information.datavalue.UnaryExpression;
+import org.polarsys.capella.core.data.information.datavalue.ValuePart;
 import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.common.data.modellingcore.AbstractType;
@@ -91,8 +93,29 @@ public class CapellaDataValueServices {
 			buffer.append(StringUtil.transformAREFString(dataValue_p, dataValue_p.getDescription(), projectName, outputFolder));
 			buffer.append("</p>");
 		}
+		
+		// Add ComplexValue ValueParts
+		if (dataValue_p instanceof ComplexValue)
+		{
+			Collection<String> valuesPart = new ArrayList<String>();
+			ComplexValue complexValue = (ComplexValue) dataValue_p;
+			for (ValuePart currentValuePart : complexValue.getOwnedParts()) {
+				valuesPart.add(CapellaPropertyServices.getValuePartInformation(currentValuePart, projectName, outputFolder));
+			}
+			if (valuesPart.size() > 0) 
+			{
+				buffer.append(CapellaServices.UL_OPEN);
+				buffer.append(CapellaServices.LI_OPEN);
+				buffer.append("Value-Parts");
+				buffer.append(StringUtil.stringListToBulette(valuesPart));
+				buffer.append(CapellaServices.LI_CLOSE);
+				buffer.append(CapellaServices.UL_CLOSE);
+			}
+		}
+		
+		
+		// Add DataValue Properties
 		Collection<String> propertiesValues = new ArrayList<String>();
-
 		for (AbstractPropertyValue currentAbstractPropertyValue : dataValue_p.getOwnedPropertyValues()) {
 			propertiesValues.add(CapellaPropertyServices.getPropertyValueInformation(currentAbstractPropertyValue, projectName, outputFolder));
 		}

@@ -7,7 +7,7 @@ which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
  
 Contributors:
-  Thales - initial API and implementation
+   Thales - initial API and implementation
 -->
 
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:domain="http://www.eclipse.org/egf/1.0.0/domain"
@@ -561,6 +561,19 @@ Contributors:
             <parameters xmi:id="_W_zVgDlmEeKfl43CFVnoFw" name="parameter" type="http://www.polarsys.org/capella/core/interaction/0.8.0#//Scenario"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_TIBLpzlmEeKfl43CFVnoFw"/>
           </elements>
+          <elements xmi:id="_WnyP8OzGEeSAVbCPYCI8cQ" name="DataValueContainerPkg"
+              superPattern="#_sGmFIZdTEeCvReB7msXe8Q" headerMethod="#_WnyP8uzGEeSAVbCPYCI8cQ"
+              conditionMethod="#_WnyP9OzGEeSAVbCPYCI8cQ" initMethod="#_WnyP8-zGEeSAVbCPYCI8cQ"
+              footerMethod="#_WnyP9uzGEeSAVbCPYCI8cQ">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_WnyP8ezGEeSAVbCPYCI8cQ"
+                name="JET"/>
+            <methods xmi:id="_WnyP8uzGEeSAVbCPYCI8cQ" name="header" patternFilePath="templates/pattern._WnyP8OzGEeSAVbCPYCI8cQ/method._WnyP8uzGEeSAVbCPYCI8cQ.pt"/>
+            <methods xmi:id="_WnyP8-zGEeSAVbCPYCI8cQ" name="init" patternFilePath="templates/pattern._WnyP8OzGEeSAVbCPYCI8cQ/method._WnyP8-zGEeSAVbCPYCI8cQ.pt"/>
+            <methods xmi:id="_WnyP9OzGEeSAVbCPYCI8cQ" name="preCondition" patternFilePath="templates/pattern._WnyP8OzGEeSAVbCPYCI8cQ/method._WnyP9OzGEeSAVbCPYCI8cQ.pt"/>
+            <methods xmi:id="_WnyP9uzGEeSAVbCPYCI8cQ" name="footer" patternFilePath="templates/pattern._WnyP8OzGEeSAVbCPYCI8cQ/method._WnyP9uzGEeSAVbCPYCI8cQ.pt"/>
+            <methods xmi:id="_Zl0LsOzkEeSAVbCPYCI8cQ" name="content" patternFilePath="templates/pattern._WnyP8OzGEeSAVbCPYCI8cQ/method._Zl0LsOzkEeSAVbCPYCI8cQ.pt"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_WnyP9-zGEeSAVbCPYCI8cQ"/>
+          </elements>
         </libraries>
         <libraries xmi:id="_iEWbsN6ZEd-ZSZ6AN4Dlrg" name="org.polarsys.capella.docgen.sidebar">
           <elements xmi:id="_sJuJMN6ZEd-ZSZ6AN4Dlrg" name="AnyNamedElementSideBar"
@@ -647,7 +660,7 @@ Contributors:
         <invocationContractContainer xmi:id="_xHdBoW8PEeSjPIMKP6Xr0g">
           <invocationContracts xmi:id="_xHdBom8PEeSjPIMKP6Xr0g" invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g">
             <type xmi:type="pattern:TypePatternList" xmi:id="_oacDMN4ZEd-Qav1YnqlO9A"
-                elements="#_x_LwcGwiEeCUvpJOFjr3FQ #_hW854N47Ed-Qav1YnqlO9A #_nJ840Ds5EeCgH6PBi_KPBw #_j_CXYEV-EeCvqtVx_IKrqA #_fQhPcEWiEeCvqtVx_IKrqA #_HyNjwN0cEd-Vzvs7Wt1vzQ #_6RU6oXGlEeC8GrKepiiiTw #_Axl3MH1uEeCIgcTVWxVnzQ #_WWJkYYBZEeCN8Jbz-bJe6w #_MdyuQYLBEeCjNOKMEA2WFg #_sGmFIZdTEeCvReB7msXe8Q #_6uVm4JwPEeCWeuBXIFCRXA #_bikDsb0GEeC7JNoAKQ1P0g #_qz8z8b3TEeCFqqET0yrG_w #_Pq5FgL3fEeCFqqET0yrG_w #_sRl5kb52EeCw5MDUpv1shw #_a126IL6EEeCw5MDUpv1shw #_ZXf8Ib88EeC3itjHQ6nPuA #_1fzXsL9JEeC3itjHQ6nPuA #_TIBLoDlmEeKfl43CFVnoFw"/>
+                elements="#_x_LwcGwiEeCUvpJOFjr3FQ #_hW854N47Ed-Qav1YnqlO9A #_nJ840Ds5EeCgH6PBi_KPBw #_j_CXYEV-EeCvqtVx_IKrqA #_fQhPcEWiEeCvqtVx_IKrqA #_HyNjwN0cEd-Vzvs7Wt1vzQ #_6RU6oXGlEeC8GrKepiiiTw #_Axl3MH1uEeCIgcTVWxVnzQ #_WWJkYYBZEeCN8Jbz-bJe6w #_MdyuQYLBEeCjNOKMEA2WFg #_sGmFIZdTEeCvReB7msXe8Q #_6uVm4JwPEeCWeuBXIFCRXA #_bikDsb0GEeC7JNoAKQ1P0g #_qz8z8b3TEeCFqqET0yrG_w #_Pq5FgL3fEeCFqqET0yrG_w #_sRl5kb52EeCw5MDUpv1shw #_a126IL6EEeCw5MDUpv1shw #_ZXf8Ib88EeC3itjHQ6nPuA #_1fzXsL9JEeC3itjHQ6nPuA #_TIBLoDlmEeKfl43CFVnoFw #_WnyP8OzGEeSAVbCPYCI8cQ"/>
           </invocationContracts>
           <invocationContracts xmi:id="_xHdBo28PEeSjPIMKP6Xr0g" factoryComponentContract="#_gCg58G8PEeSjPIMKP6Xr0g"
               invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>
