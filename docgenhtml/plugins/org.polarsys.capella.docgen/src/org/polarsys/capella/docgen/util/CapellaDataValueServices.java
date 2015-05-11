@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.polarsys.capella.core.data.information.CollectionValue;
 import org.polarsys.capella.core.data.information.datavalue.BinaryExpression;
 import org.polarsys.capella.core.data.information.datavalue.ComplexValue;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
@@ -27,6 +28,7 @@ import org.polarsys.capella.core.data.information.datavalue.UnaryExpression;
 import org.polarsys.capella.core.data.information.datavalue.ValuePart;
 import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
+import org.polarsys.capella.core.data.capellacore.Type;
 import org.polarsys.capella.common.data.modellingcore.AbstractType;
 
 public class CapellaDataValueServices {
@@ -155,27 +157,64 @@ public class CapellaDataValueServices {
 
 	private static String getValueOfDataValue(DataValue dataValue_p, boolean simple) {
 		// Test the type of the Data Value
-		if (dataValue_p instanceof LiteralNumericValue) {
+		if (dataValue_p instanceof LiteralNumericValue) 
+		{
 			// Return the value
 			return (((LiteralNumericValue) dataValue_p).getValue());
-		} else if (dataValue_p instanceof BinaryExpression) {
-			return (((BinaryExpression) dataValue_p).getExpression());
-		} else if (dataValue_p instanceof UnaryExpression) {
-			return (((UnaryExpression) dataValue_p).getExpression());
-		} else if (dataValue_p instanceof LiteralBooleanValue) {
-			return (String.valueOf(((LiteralBooleanValue) dataValue_p).isValue()));
-		} else if (dataValue_p instanceof LiteralStringValue) {
-			return (((LiteralStringValue) dataValue_p).getValue());
+		} 
+		else 
+		{
+			if (dataValue_p instanceof BinaryExpression) 
+			{
+				return (((BinaryExpression) dataValue_p).getExpression());
+			} 
+			else 
+				if (dataValue_p instanceof UnaryExpression) 
+				{
+					return (((UnaryExpression) dataValue_p).getExpression());
+				} 
+				else 
+					if (dataValue_p instanceof LiteralBooleanValue) 
+					{
+						return (String.valueOf(((LiteralBooleanValue) dataValue_p).isValue()));
+					} 
+					else 
+						if (dataValue_p instanceof LiteralStringValue) 
+						{
+							return (((LiteralStringValue) dataValue_p).getValue());
+						}
+						else
+							if (dataValue_p instanceof CollectionValue) 
+							{
+								CollectionValue collectionValue = (CollectionValue) dataValue_p;
+								String result = collectionValue.getName();
+								if (result.isEmpty())
+								{
+									result += "No name";
+								}
+								Type type = collectionValue.getType();
+								if (type != null)
+								{
+									result += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
+								}
+								return result;
+							}
 		}
+		
 		EObject referencedValue = getReferencedValue(dataValue_p);
-		if (referencedValue instanceof NamedElement) {
-			if (simple) {
+		if (referencedValue instanceof NamedElement) 
+		{
+			if (simple) 
+			{
 				String name = ((NamedElement) referencedValue).getName();
-				if (name != null && name.length() > 0) {
+				if (name != null && name.length() > 0) 
+				{
 					return CapellaServices.getHyperlinkFromElement(referencedValue, name);
 				}
+				
 				return CapellaServices.getHyperlinkFromElement(referencedValue);
-			} else
+			} 
+			else
 				return CapellaServices.getFullDataPkgHierarchyLink(referencedValue);
 		}
 		// Return empty if there is no value or if the type is not defined
