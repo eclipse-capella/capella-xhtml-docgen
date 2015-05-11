@@ -67,9 +67,14 @@ public class CapellaPropertyServices {
 		buffer.append(CapellaServices.getImageLinkFromElement(valuepart_p, projectName, outputFolder));
 		buffer.append(CapellaServices.SPACE);
 		buffer.append(CapellaServices.BOLD_BEGIN);
-		buffer.append(LabelProviderHelper.getText(valuepart_p));
+		Property referencedProperty = valuepart_p.getReferencedProperty();
+		String referencedPropertyLink = CapellaServices.CHEV_OPEN + CapellaServices.UNDEFINED + CapellaServices.CHEV_CLOSE;
+		if (referencedProperty != null)
+		{
+			referencedPropertyLink = CapellaServices.getHyperlinkFromElement(referencedProperty);
+		}
+		buffer.append("Value for " +  referencedPropertyLink);
 		buffer.append(CapellaServices.BOLD_END);
-		buffer.append(CapellaServices.VALUE_EQUAL);
 		return buffer.toString();
 	}
 

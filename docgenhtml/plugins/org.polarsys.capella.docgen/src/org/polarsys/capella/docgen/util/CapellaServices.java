@@ -85,12 +85,17 @@ public class CapellaServices {
 	public static final String MAX = "MAX  ";
 	public static final String DEFAULT = "DEFAULT  ";
 	public static final String NULL = "NULL  ";
+	
+	public static final String UNDEFINED = "undefined";
 
 	public static final String PAR_OPEN = "(  ";
 	public static final String PAR_CLOSE = " )";
 	public static final String CRO_OPEN = "[";
 	public static final String CRO_CLOSE = "]";
 	public static final String COMMA = ", ";
+	
+	public static final String CHEV_OPEN = "&lt";
+	public static final String CHEV_CLOSE = "&gt";
 
 	protected final static String HYPERLINK_OPEN = "<a href=\"";
 	protected final static String HYPERLINK_SEPARATOR = "/";
