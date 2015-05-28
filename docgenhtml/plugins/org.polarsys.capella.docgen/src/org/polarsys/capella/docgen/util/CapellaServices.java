@@ -34,6 +34,9 @@ public class CapellaServices {
 	public static final String BOLD_END = "</b>";
 	public static final String ITALIC_BEGIN = "<i>";
 	public static final String ITALIC_END = "</i>";
+	
+	public static final String SPAN_BEGIN_LABEL = "<span class=\"label\">";
+	public static final String SPAN_END = "</span>";
 
 	public static final String NEW_LINE = "<br/>";
 
@@ -41,9 +44,12 @@ public class CapellaServices {
 	public static final String LI_CLOSE = "</li>";
 
 	public static final String UL_OPEN = "<ul class=\"generatedList\">";
+	public static final String UL_OPEN_WITH_BORDER = "<ul class=\"generatedListWithBorder\">";
 	public static final String UL_CLOSE = "</ul>";
 
 	public static final String NONE = "None";
+	
+	public static final String NO_NAME = "<i>[No Name]</i>";
 
 	public static final String SPACE = " ";
 
