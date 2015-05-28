@@ -14,12 +14,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import org.polarsys.capella.core.data.information.CollectionValue;
 import org.polarsys.capella.core.data.information.datavalue.BinaryExpression;
 import org.polarsys.capella.core.data.information.datavalue.ComplexValue;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
+import org.polarsys.capella.core.data.information.datavalue.EnumerationLiteral;
 import org.polarsys.capella.core.data.information.datavalue.LiteralBooleanValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralNumericValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralStringValue;
@@ -53,7 +55,7 @@ public class CapellaDataValueServices {
 
 		// Add the name of data value to the buffer
 		buffer.append(CapellaServices.BOLD_BEGIN);
-		buffer.append(dataValue_p.getName());
+		buffer.append(dataValue_p.getName().isEmpty() == false ? dataValue_p.getName() : CapellaServices.NO_NAME);
 		buffer.append(CapellaServices.BOLD_END);
 
 		// Test if the type of the data value is defined
@@ -86,7 +88,6 @@ public class CapellaDataValueServices {
 		if (null != dataValue_p.getSummary()) {
 			buffer.append(" - ");
 			// Add the summary of the data Value
-
 			buffer.append(dataValue_p.getSummary());
 		}
 		// Add the Description of the Data Value
@@ -101,14 +102,39 @@ public class CapellaDataValueServices {
 		{
 			Collection<String> valuesPart = new ArrayList<String>();
 			ComplexValue complexValue = (ComplexValue) dataValue_p;
-			for (ValuePart currentValuePart : complexValue.getOwnedParts()) {
-				valuesPart.add(CapellaPropertyServices.getValuePartInformation(currentValuePart, projectName, outputFolder));
+			for (ValuePart currentValuePart : complexValue.getOwnedParts()) 
+			{
+				String valuePartInformation = CapellaPropertyServices.getValuePartInformation(currentValuePart, projectName, outputFolder);
+				DataValue ownedValue = currentValuePart.getOwnedValue();
+				if (ownedValue != null)
+				{
+					String dataValueInformation = getDataValueInformation(ownedValue, projectName, outputFolder);
+					if (false == dataValueInformation.isEmpty())
+					{
+						valuePartInformation += CapellaServices.NEW_LINE; 
+						valuePartInformation += CapellaServices.UL_OPEN_WITH_BORDER; 
+						valuePartInformation += CapellaServices.LI_OPEN;
+						valuePartInformation += CapellaServices.SPAN_BEGIN_LABEL;
+						valuePartInformation += "Owned value";
+						valuePartInformation += CapellaServices.SPAN_END;
+						valuePartInformation += CapellaServices.UL_OPEN; 
+						valuePartInformation += CapellaServices.LI_OPEN;
+						valuePartInformation += dataValueInformation;
+						valuePartInformation += CapellaServices.LI_CLOSE;
+						valuePartInformation += CapellaServices.UL_CLOSE;
+						valuePartInformation += CapellaServices.LI_CLOSE;
+						valuePartInformation += CapellaServices.UL_CLOSE;
+					}
+				}
+				valuesPart.add(valuePartInformation);
 			}
 			if (valuesPart.size() > 0) 
 			{
-				buffer.append(CapellaServices.UL_OPEN);
+				buffer.append(CapellaServices.UL_OPEN_WITH_BORDER);
 				buffer.append(CapellaServices.LI_OPEN);
-				buffer.append("Value-Parts");
+				buffer.append(CapellaServices.SPAN_BEGIN_LABEL);
+				buffer.append("Value Parts");
+				buffer.append(CapellaServices.SPAN_END);
 				buffer.append(StringUtil.stringListToBulette(valuesPart));
 				buffer.append(CapellaServices.LI_CLOSE);
 				buffer.append(CapellaServices.UL_CLOSE);
@@ -130,8 +156,169 @@ public class CapellaDataValueServices {
 			buffer.append(CapellaServices.UL_CLOSE);
 		}
 
+		// Add sub-DataValues
+		String ownedDataValueInformation = getOwnedDataValueInformation(dataValue_p, projectName, outputFolder, displayType);
+		buffer.append(ownedDataValueInformation);
+		
+		buffer.append("<br>");
 		buffer.append("</div>");
 		// Return the buffer
+		return buffer.toString();
+	}
+	
+	private static String getOwnedDataValueInformation(DataValue dataValue_p, String projectName, String outputFolder, boolean displayType){
+		// Initialize the buffer
+		StringBuffer buffer = new StringBuffer();
+		
+		if (dataValue_p instanceof UnaryExpression)
+		{
+			UnaryExpression ue_dataValue_p = (UnaryExpression) dataValue_p;
+			// Owned operand
+			DataValue ownedOperand = ue_dataValue_p.getOwnedOperand();
+			if (ownedOperand != null)
+			{
+				String subDataValueInformation = getSubDataValueInformation(ownedOperand, projectName, outputFolder, displayType);
+				if (false == subDataValueInformation.isEmpty())
+					buffer.append(subDataValueInformation);
+			}
+		}
+		
+		if (dataValue_p instanceof BinaryExpression)
+		{
+			BinaryExpression ue_dataValue_p = (BinaryExpression) dataValue_p;
+			// Left operand
+			DataValue leftOperand = ue_dataValue_p.getOwnedLeftOperand();
+			if (leftOperand != null)
+			{
+				String subDataValueInformation = getSubDataValueInformation(leftOperand, projectName, outputFolder, displayType);
+				if (false == subDataValueInformation.isEmpty())
+					buffer.append(subDataValueInformation);
+			}
+			
+			// Right operand
+			DataValue rightOperand = ue_dataValue_p.getOwnedRightOperand();
+			if (rightOperand != null)
+			{
+				String subDataValueInformation = getSubDataValueInformation(rightOperand, projectName, outputFolder, displayType);
+				if (false == subDataValueInformation.isEmpty())
+					buffer.append(subDataValueInformation);
+			}
+		}
+		
+		if (dataValue_p instanceof EnumerationLiteral)
+		{
+			EnumerationLiteral el_dataValue_p = (EnumerationLiteral) dataValue_p;
+			// Owned Default Element
+			DataValue domainValue = el_dataValue_p.getDomainValue();
+			if (domainValue != null)
+			{
+				String subDataValueInformation = getSubDataValueInformation("Domain value", domainValue, projectName, outputFolder, displayType);
+				if (false == subDataValueInformation.isEmpty())
+					buffer.append(subDataValueInformation);
+			}
+		}
+		
+		if (dataValue_p instanceof CollectionValue)
+		{
+			CollectionValue cv_dataValue_p = (CollectionValue) dataValue_p;
+			// Owned Default Element
+			DataValue ownedDefaultElement = cv_dataValue_p.getOwnedDefaultElement();
+			if (ownedDefaultElement != null)
+			{
+				String subDataValueInformation = getSubDataValueInformation("Defaut Element", ownedDefaultElement, projectName, outputFolder, displayType);
+				if (false == subDataValueInformation.isEmpty())
+					buffer.append(subDataValueInformation);
+			}
+			
+			// Owned Element
+			EList<DataValue> ownedElements = cv_dataValue_p.getOwnedElements();
+			if (ownedElements.isEmpty() == false)
+			{
+				String subDataValueInformation = getSubDataValueInformation("Owned Elements", ownedElements, projectName, outputFolder, displayType);
+				if (false == subDataValueInformation.isEmpty())
+					buffer.append(subDataValueInformation);
+			}
+		}
+		
+		String result = buffer.toString();
+		if (false == result.trim().isEmpty())
+		{
+			result = CapellaServices.UL_OPEN_WITH_BORDER + result + CapellaServices.UL_CLOSE;
+		}
+		return result;
+	}
+	
+	/**
+	 * Generate Sub data value documentation without adding a section
+	 * @param dataValue_p The {@link DataValue} under generation
+	 * @param projectName the eclipse project wherein the documentation is generated
+	 * @param outputFolder the eclipse folder wherein the documentation is generated
+	 * @param displayType 
+	 * @return the HTML generated documentation for the data value
+	 */
+	private static String getSubDataValueInformation(DataValue dataValue_p, String projectName, String outputFolder, boolean displayType){
+		return getSubDataValueInformation(null, dataValue_p, projectName, outputFolder, displayType);
+	}
+	
+	/**
+	 * Generate Sub data value documentation in a section
+	 * @param sectionName the name of the section wherein the DataValue will be generated
+	 * @param dataValue_p The {@link DataValue} under generation
+	 * @param projectName the eclipse project wherein the documentation is generated
+	 * @param outputFolder the eclipse folder wherein the documentation is generated
+	 * @param displayType 
+	 * @return the HTML generated documentation for the data value
+	 */
+	private static String getSubDataValueInformation(String sectionName, DataValue dataValue_p, 
+													 String projectName, String outputFolder, boolean displayType){
+		StringBuffer buffer = new StringBuffer();
+		
+		if (sectionName != null && false == sectionName.trim().isEmpty())
+		{
+			buffer.append(CapellaServices.LI_OPEN);
+			buffer.append(CapellaServices.SPAN_BEGIN_LABEL);
+			buffer.append(sectionName + ": ");
+			buffer.append(CapellaServices.SPAN_END);
+			buffer.append(CapellaServices.UL_OPEN);
+		}
+		buffer.append(CapellaServices.LI_OPEN);
+		String ownedDefaultElementHtml = getDataValueInformation(dataValue_p, projectName, outputFolder, displayType);
+		buffer.append(ownedDefaultElementHtml);
+		buffer.append(CapellaServices.LI_CLOSE);
+		if (sectionName != null && false == sectionName.trim().isEmpty())
+		{
+			buffer.append(CapellaServices.UL_CLOSE);
+			buffer.append(CapellaServices.LI_CLOSE);
+		}
+		return buffer.toString();
+	}
+	
+	/**
+	 * Generate Sub data value documentation in a section
+	 * @param sectionName the name of the section wherein the DataValue will be generated
+	 * @param dataValue_p The {@link DataValue} under generation
+	 * @param projectName the eclipse project wherein the documentation is generated
+	 * @param outputFolder the eclipse folder wherein the documentation is generated
+	 * @param displayType 
+	 * @return the HTML generated documentation for the data value
+	 */
+	private static String getSubDataValueInformation(String sectionName, EList<DataValue> dataValues_p, 
+													 String projectName, String outputFolder, boolean displayType){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(CapellaServices.LI_OPEN);
+		buffer.append(CapellaServices.SPAN_BEGIN_LABEL);
+		buffer.append(sectionName + ": ");
+		buffer.append(CapellaServices.SPAN_END);
+		buffer.append(CapellaServices.UL_OPEN);
+		for (DataValue dataValue : dataValues_p) 
+		{
+			String ownedElementHtml = getDataValueInformation(dataValue, projectName, outputFolder, displayType);
+			buffer.append(CapellaServices.LI_OPEN);
+			buffer.append(ownedElementHtml);
+			buffer.append(CapellaServices.LI_CLOSE);
+		}
+		buffer.append(CapellaServices.UL_CLOSE);
+		buffer.append(CapellaServices.LI_CLOSE);
 		return buffer.toString();
 	}
 
@@ -190,7 +377,7 @@ public class CapellaDataValueServices {
 								String result = collectionValue.getName();
 								if (result.isEmpty())
 								{
-									result += "No name";
+									result += CapellaServices.NO_NAME;
 								}
 								Type type = collectionValue.getType();
 								if (type != null)
