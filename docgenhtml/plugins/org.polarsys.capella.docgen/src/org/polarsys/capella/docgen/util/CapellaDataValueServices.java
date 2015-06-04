@@ -55,7 +55,7 @@ public class CapellaDataValueServices {
 
 		// Add the name of data value to the buffer
 		buffer.append(CapellaServices.BOLD_BEGIN);
-		buffer.append(dataValue_p.getName().isEmpty() == false ? dataValue_p.getName() : CapellaServices.NO_NAME);
+		buffer.append(dataValue_p.getName() != null && dataValue_p.getName().trim().isEmpty() == false ? dataValue_p.getName() : CapellaServices.NO_NAME);
 		buffer.append(CapellaServices.BOLD_END);
 
 		// Test if the type of the data value is defined
