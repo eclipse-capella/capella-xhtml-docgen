@@ -368,7 +368,19 @@ public class CapellaDataValueServices {
 					else 
 						if (dataValue_p instanceof LiteralStringValue) 
 						{
-							return (((LiteralStringValue) dataValue_p).getValue());
+							String value = ((LiteralStringValue) dataValue_p).getValue();
+							if (null == value)
+							{
+								value = CapellaServices.UNDEFINED_CHEVRON;
+							}
+							else
+							{
+								if (value.trim().isEmpty())
+								{
+									value = "\"" + value + "\"";
+								}
+							}
+							return (value);
 						}
 						else
 							if (dataValue_p instanceof CollectionValue) 
