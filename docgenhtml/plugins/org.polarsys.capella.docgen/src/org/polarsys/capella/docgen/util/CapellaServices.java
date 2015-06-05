@@ -93,6 +93,7 @@ public class CapellaServices {
 	public static final String NULL = "NULL  ";
 	
 	public static final String UNDEFINED = "undefined";
+	public static final String UNDEFINED_CHEVRON = "&lt;undefined&gt;";
 
 	public static final String PAR_OPEN = "(  ";
 	public static final String PAR_CLOSE = " )";
