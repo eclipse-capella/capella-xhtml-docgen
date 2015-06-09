@@ -17,19 +17,49 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.polarsys.capella.core.data.information.Collection;
 import org.polarsys.capella.core.data.information.datatype.DataType;
+import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.NumericValue;
 
 public class CapellaCollectionService {
+	
 	/**
 	 * <b>Get the state of features of a collection</b>
 	 * <p>
 	 * Get the state of features isAbstract, isPrimitive, isOrdered, isUnique,
 	 * min, max, default and null of a class
-	 * 
-	 * @param eObject_p
-	 * @return
+	 * </p>
+	 * @param eObject_p a {@link Collection} object
+	 * @return HTML documentation of a {@link Collection}
 	 */
 	public static List<String> getCollectionFeatures(EObject eObject_p) {
+		return getCollectionFeatures(eObject_p, null, null);
+	}
+
+	/**
+	 * <b>Get the state of features of a collection</b>
+	 * <p>
+	 * Like {@link #getCollectionFeatures(EObject)}, this method get the state of 
+	 * features isAbstract, isPrimitive, isOrdered, isUnique, min, max, default 
+	 * and null of a class.
+	 * </p>
+	 * <p>
+	 * But it export the DataValues and their contents with links to the corresponding HTML pages .
+	 * </p>
+	 * @param eObject_p a {@link Collection} object
+	 * @param projectName the project wherein the HTML documentation will be generated
+	 * @param outputFolder the folder wherein the HTML documentation will be generated
+	 * @return HTML documentation of a {@link Collection}
+	 */
+	public static List<String> getCollectionFeatures(EObject eObject_p, String projectName, String outputFolder) {
+		boolean simple = false;
+		if (projectName == null || (projectName != null && projectName.trim().isEmpty()))
+		{
+			simple = true;
+		}
+		if (outputFolder == null || (outputFolder != null && outputFolder.trim().isEmpty()))
+		{
+			simple = true;
+		}
 		// Create the list to return
 		List<String> ret = new ArrayList<String>();
 
@@ -42,16 +72,74 @@ public class CapellaCollectionService {
 			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.PROP_UNIQUE + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END + eCollection.isUnique());
 
 			// Add the no boolean Features information if their are not null
-			if (null != eCollection.getOwnedMaxValue())
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.MIN + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END + eCollection.getOwnedMaxValue());
-			if (null != eCollection.getOwnedMinValue())
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAX + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END + eCollection.getOwnedMinValue());
-			if (null != eCollection.getOwnedDefaultValue())
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
-						+ CapellaDataValueServices.getValueOfDataValue(eCollection.getOwnedDefaultValue()));
-			if (null != eCollection.getOwnedNullValue())
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.NULL_FEATURE + CapellaServices.BOLD_END
-						+ CapellaDataValueServices.getValueOfDataValue(eCollection.getOwnedNullValue()));
+			// Export max-value DataValue
+			DataValue maxValue = eCollection.getOwnedMaxValue();
+			if (null != maxValue)
+			{
+				String s_maxValue = (simple ? 
+										CapellaDataValueServices.getSimpleValueOfDataValue(maxValue) : 
+										CapellaServices.DIV_WITH_PADDING 
+										+ CapellaDataValueServices.getDataValueInformation(maxValue, projectName, outputFolder))
+										+ CapellaServices.DIV_END;
+				
+				ret.add(CapellaServices.BOLD_BEGIN + 
+						CapellaServices.MIN + 
+						CapellaServices.VALUE_PRESENTER + 
+						CapellaServices.BOLD_END + 
+						s_maxValue);
+//						maxValue);
+			}
+			
+			// Export min-value DataValue
+			DataValue minValue = eCollection.getOwnedMinValue();
+			if (null != minValue)
+			{
+				String s_minValue = (simple ? 
+										CapellaDataValueServices.getSimpleValueOfDataValue(minValue) : 
+										CapellaServices.DIV_WITH_PADDING 
+										+ CapellaDataValueServices.getDataValueInformation(minValue, projectName, outputFolder))
+										+ CapellaServices.DIV_END;
+				
+				ret.add(CapellaServices.BOLD_BEGIN + 
+						CapellaServices.MAX + 
+						CapellaServices.VALUE_PRESENTER + 
+						CapellaServices.BOLD_END + 
+						s_minValue);
+//						minValue);
+			}
+			
+			// Export default value DataValue
+			DataValue defaultValue = eCollection.getOwnedDefaultValue();
+			if (null != defaultValue)
+			{
+				String s_defaultValue = (simple ? 
+											CapellaDataValueServices.getSimpleValueOfDataValue(defaultValue) : 
+											CapellaServices.DIV_WITH_PADDING 
+											+ CapellaDataValueServices.getDataValueInformation(defaultValue, projectName, outputFolder))
+											+ CapellaServices.DIV_END;
+				
+				ret.add(CapellaServices.BOLD_BEGIN + 
+						CapellaServices.DEFAULT_FEATURE + 
+						CapellaServices.BOLD_END + 
+						s_defaultValue);
+//						CapellaDataValueServices.getValueOfDataValue(defaultValue));
+			}
+			
+			// Export null value DataValue
+			DataValue nullValue = eCollection.getOwnedNullValue();
+			if (null != nullValue)
+			{
+				String s_nullValue = (simple ? 
+											CapellaDataValueServices.getSimpleValueOfDataValue(nullValue) : 
+											CapellaServices.DIV_WITH_PADDING 
+											+ CapellaDataValueServices.getDataValueInformation(nullValue, projectName, outputFolder))
+											+ CapellaServices.DIV_END;
+				ret.add(CapellaServices.BOLD_BEGIN + 
+						CapellaServices.NULL_FEATURE + 
+						CapellaServices.BOLD_END + 
+						s_nullValue);
+//						CapellaDataValueServices.getValueOfDataValue(nullValue));
+			}
 		}
 		return ret;
 	}

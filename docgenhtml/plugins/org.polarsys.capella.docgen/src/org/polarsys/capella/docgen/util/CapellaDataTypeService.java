@@ -25,56 +25,137 @@ import org.polarsys.capella.core.data.information.datatype.BooleanType;
 import org.polarsys.capella.core.data.information.datatype.DataType;
 import org.polarsys.capella.core.data.information.datatype.Enumeration;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
-import org.polarsys.capella.core.data.information.datavalue.NumericValue;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.TypedElement;
 
 public class CapellaDataTypeService {
-
+	
 	public static List<String> getFeatures(EObject eObj_p) {
+		return getFeatures(eObj_p, null, null);
+	}
+	
+	public static List<String> getFeatures(EObject eObj_p, String projectName, String outputFolder) {
+		boolean simple = false;
+		if (projectName == null || (projectName != null && projectName.trim().isEmpty()))
+		{
+			simple = true;
+		}
+		if (outputFolder == null || (outputFolder != null && outputFolder.trim().isEmpty()))
+		{
+			simple = true;
+		}
+		
 		List<String> ret = new ArrayList<String>();
-		if (eObj_p instanceof DataType) {
+		if (eObj_p instanceof DataType) 
+		{
 			DataType dataType = (DataType) eObj_p;
 			// Add boolean Features information
 			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ABSTRACT + CapellaServices.BOLD_END + dataType.isAbstract());
 			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_DISCRETE + CapellaServices.BOLD_END + dataType.isDiscrete());
 
+			// MinValue DataValue
 			DataValue minValue = getMinValue(dataType);
-			if (minValue != null) {
+			if (minValue != null) 
+			{
+				String s_minValue = (simple ? 
+										CapellaDataValueServices.getSimpleValueOfDataValue(minValue) : 
+										CapellaServices.DIV_WITH_PADDING 
+										+ CapellaDataValueServices.getDataValueInformation(minValue, projectName, outputFolder)) 
+										+ CapellaServices.DIV_WITH_PADDING;
+				
 				ret.add(CapellaServices.BOLD_BEGIN
 						+ "Min Value: "
 						+ CapellaServices.BOLD_END
-						+ CapellaDataValueServices.getSimpleValueOfDataValue(minValue)
-						+ ((minValue instanceof NumericValue && null != ((NumericValue) minValue).getUnit()) ? CapellaServices.SPACE
-								+ CapellaDataValueServices.getUnitOfNumericValue((NumericValue) minValue) : CapellaServices.EMPTY));
+						+ s_minValue);
+						//+ ((minValue instanceof NumericValue && null != ((NumericValue) minValue).getUnit()) ? CapellaServices.SPACE
+						//		+ CapellaDataValueServices.getUnitOfNumericValue((NumericValue) minValue) : CapellaServices.EMPTY));
 			}
 
+			// MinLength DataValue
 			DataValue minLength = getMinLength(dataType);
-			if (minLength != null) {
-				ret.add(CapellaServices.BOLD_BEGIN + "Min Length: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(minLength));
+			if (minLength != null) 
+			{
+				String s_minLength = (simple ? 
+										CapellaDataValueServices.getSimpleValueOfDataValue(minLength) : 
+										CapellaServices.DIV_WITH_PADDING 
+										+ CapellaDataValueServices.getDataValueInformation(minLength, projectName, outputFolder))
+										+ CapellaServices.DIV_WITH_PADDING;
+				
+				ret.add(CapellaServices.BOLD_BEGIN 
+						+ "Min Length: " 
+						+ CapellaServices.BOLD_END 
+						+ s_minLength);
+				//ret.add(CapellaServices.BOLD_BEGIN + "Min Length: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(minLength));
 			}
 
+			// MaxValue DataValue
 			DataValue maxValue = getMaxValue(dataType);
-			if (maxValue != null) {
+			if (maxValue != null) 
+			{
+				String s_maxValue = (simple ? 
+										CapellaDataValueServices.getSimpleValueOfDataValue(maxValue) : 
+										CapellaServices.DIV_WITH_PADDING 
+										+ CapellaDataValueServices.getDataValueInformation(maxValue, projectName, outputFolder))
+										+ CapellaServices.DIV_WITH_PADDING;
+				
 				ret.add(CapellaServices.BOLD_BEGIN
 						+ "Max Value: "
 						+ CapellaServices.BOLD_END
-						+ CapellaDataValueServices.getSimpleValueOfDataValue(maxValue)
-						+ ((maxValue instanceof NumericValue && null != ((NumericValue) maxValue).getUnit()) ? CapellaServices.SPACE
-								+ CapellaDataValueServices.getUnitOfNumericValue((NumericValue) maxValue) : CapellaServices.EMPTY));
+						+ s_maxValue);
+				//+ CapellaDataValueServices.getSimpleValueOfDataValue(maxValue)
+				//		+ ((maxValue instanceof NumericValue && null != ((NumericValue) maxValue).getUnit()) ? CapellaServices.SPACE
+				//				+ CapellaDataValueServices.getUnitOfNumericValue((NumericValue) maxValue) : CapellaServices.EMPTY));
 			}
 
+			// MaxLength DataValue
 			DataValue maxLength = getMaxLength(dataType);
-			if (maxLength != null) {
-				ret.add(CapellaServices.BOLD_BEGIN + "Max Length: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(maxLength));
+			if (maxLength != null) 
+			{
+				String s_maxLength = (simple ? 
+										CapellaDataValueServices.getSimpleValueOfDataValue(maxLength) : 
+										CapellaServices.DIV_WITH_PADDING 
+										+ CapellaDataValueServices.getDataValueInformation(maxLength, projectName, outputFolder))
+										+ CapellaServices.DIV_WITH_PADDING;
+				
+				ret.add(CapellaServices.BOLD_BEGIN 
+						+ "Max Length: "  
+						+ CapellaServices.BOLD_END  
+						+ s_maxLength);
+				//ret.add(CapellaServices.BOLD_BEGIN + "Max Length: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(maxLength));
 			}
-			if (dataType.getDefaultValue() != null) {
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
-						+ CapellaDataValueServices.getValueOfDataValue(dataType.getDefaultValue()));
+			
+			// Default DataValue
+			DataValue defaultValue = dataType.getDefaultValue();
+			if (defaultValue != null) 
+			{
+				String s_defaultValue = (simple ? 
+										CapellaDataValueServices.getSimpleValueOfDataValue(defaultValue) : 
+										CapellaServices.DIV_WITH_PADDING 
+										+ CapellaDataValueServices.getDataValueInformation(defaultValue, projectName, outputFolder))
+										+ CapellaServices.DIV_WITH_PADDING;
+				
+				ret.add(CapellaServices.BOLD_BEGIN 
+						+ CapellaServices.DEFAULT_FEATURE 
+						+ CapellaServices.BOLD_END
+						+ s_defaultValue);
+						//+ CapellaDataValueServices.getValueOfDataValue(defaultValue));
 			}
+			
+			// NullValue DataValue
 			DataValue nullValue = getNullValue(dataType);
-			if (nullValue != null) {
-				ret.add(CapellaServices.BOLD_BEGIN + "Null Value: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(nullValue));
+			if (nullValue != null) 
+			{
+				String s_nullValue = (simple ? 
+											CapellaDataValueServices.getSimpleValueOfDataValue(nullValue) : 
+											CapellaServices.DIV_WITH_PADDING 
+											+ CapellaDataValueServices.getDataValueInformation(nullValue, projectName, outputFolder))
+											+ CapellaServices.DIV_WITH_PADDING;
+				
+				ret.add(CapellaServices.BOLD_BEGIN 
+						+ "Null Value: " 
+						+ CapellaServices.BOLD_END 
+						+ s_nullValue);
+				//ret.add(CapellaServices.BOLD_BEGIN + "Null Value: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(nullValue));
 			}
 
 			// Add the no boolean Features information if is not null

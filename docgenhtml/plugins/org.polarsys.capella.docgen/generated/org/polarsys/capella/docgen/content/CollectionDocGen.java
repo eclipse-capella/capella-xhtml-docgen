@@ -1,4 +1,14 @@
-//Generated with EGF 1.2.0.v20140805-0858
+/*******************************************************************************
+ * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *  
+ * Contributors:
+ *   Thales - initial API and implementation
+ ******************************************************************************/
+//Generated with EGF 1.2.0.v20150211-1405
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -210,7 +220,8 @@ public class CollectionDocGen extends
 			stringBuffer.append(TEXT_12);
 			stringBuffer.append(StringUtil
 					.stringListToBulette(CapellaCollectionService
-							.getCollectionFeatures(element)));
+							.getCollectionFeatures(element, projectName,
+									outputFolder)));
 			stringBuffer.append(TEXT_13);
 		}
 

@@ -1,4 +1,15 @@
-//Generated with EGF 1.2.0.v20140805-0858
+/*******************************************************************************
+ * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *  
+ * Contributors:
+ *   Thales - initial API and implementation
+ ******************************************************************************/
+//Generated with EGF 1.2.0.v20150211-1405
+
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -115,7 +126,7 @@ public class DataTypeDocGen extends
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
 		Collection<String> featuresCollection = CapellaDataTypeService
-				.getFeatures(element);
+				.getFeatures(element, projectName, outputFolder);
 		if (featuresCollection.size() >= 1) {
 			stringBuffer.append(TEXT_1);
 			String features = "Features";

@@ -24,7 +24,7 @@ if(CapellaCollectionService.getCollectionFeatures(element).size() >= 1){%>
 <div title="Features">
 <%String features = "Features";%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,features:property"%>
-<%= StringUtil.stringListToBulette(CapellaCollectionService.getCollectionFeatures(element)) %>
+<%= StringUtil.stringListToBulette(CapellaCollectionService.getCollectionFeatures(element, projectName, outputFolder)) %>
 </div>
 <%}
 

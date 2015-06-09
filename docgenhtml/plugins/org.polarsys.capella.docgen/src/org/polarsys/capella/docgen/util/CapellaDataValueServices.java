@@ -55,6 +55,9 @@ public class CapellaDataValueServices {
 
 		// Add the name of data value to the buffer
 		buffer.append(CapellaServices.BOLD_BEGIN);
+		if (dataValue_p.isAbstract())
+			buffer.append(CapellaServices.PROP_CRO_ABSTRACT + CapellaServices.SPACE);
+		
 		buffer.append(dataValue_p.getName() != null && dataValue_p.getName().trim().isEmpty() == false ? dataValue_p.getName() : CapellaServices.NO_NAME);
 		buffer.append(CapellaServices.BOLD_END);
 

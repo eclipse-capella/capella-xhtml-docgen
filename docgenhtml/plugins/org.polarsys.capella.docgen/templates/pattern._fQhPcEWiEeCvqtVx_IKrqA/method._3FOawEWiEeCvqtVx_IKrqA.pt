@@ -2,7 +2,7 @@
 String projectName= ctx.getValue("projectName").toString();
 String outputFolder = ctx.getValue("outputFolder").toString();
 
-Collection<String> featuresCollection = CapellaDataTypeService.getFeatures(element);
+Collection<String> featuresCollection = CapellaDataTypeService.getFeatures(element, projectName, outputFolder);
 if(featuresCollection.size() >= 1){%>
 <div title="Features">
 <%String features = "Features";%>

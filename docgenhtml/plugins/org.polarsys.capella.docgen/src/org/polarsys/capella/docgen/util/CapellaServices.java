@@ -37,6 +37,9 @@ public class CapellaServices {
 	
 	public static final String SPAN_BEGIN_LABEL = "<span class=\"label\">";
 	public static final String SPAN_END = "</span>";
+	
+	public static final String DIV_WITH_PADDING = "<div style=\"padding-left:20px\">";
+	public static final String DIV_END = "</div>";
 
 	public static final String NEW_LINE = "<br/>";
 
