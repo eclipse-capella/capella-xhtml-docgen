@@ -386,17 +386,17 @@ public class CapellaDataValueServices {
 							if (dataValue_p instanceof CollectionValue) 
 							{
 								CollectionValue collectionValue = (CollectionValue) dataValue_p;
-								String result = collectionValue.getName();
-								if (result.isEmpty())
+								String collectionName = collectionValue.getName();
+								if (collectionName == null || (collectionName!= null && collectionName.isEmpty()))
 								{
-									result += CapellaServices.NO_NAME;
+									collectionName += CapellaServices.NO_NAME;
 								}
 								Type type = collectionValue.getType();
 								if (type != null)
 								{
-									result += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
+									collectionName += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
 								}
-								return result;
+								return collectionName;
 							}
 		}
 		
