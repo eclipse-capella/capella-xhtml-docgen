@@ -239,10 +239,7 @@ public class ExportHandler extends AbstractHandler implements IHandler {
 
     URI selectionURI = selectedObjects.iterator().next().eResource().getURI();
     if (selectionURI.isPlatformResource()) {
-      String segment = selectionURI.segments()[1];
-      if (segment.contains("%20")) {
-    	  segment = segment.replace("%20", " ");
-      }
+      String segment = URI.decode(selectionURI.segment(1));
 	  IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(segment);
       dialog.setFilterPath(project.getLocation().toOSString());
     }

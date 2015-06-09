@@ -368,23 +368,35 @@ public class CapellaDataValueServices {
 					else 
 						if (dataValue_p instanceof LiteralStringValue) 
 						{
-							return (((LiteralStringValue) dataValue_p).getValue());
+							String value = ((LiteralStringValue) dataValue_p).getValue();
+							if (null == value)
+							{
+								value = CapellaServices.UNDEFINED_CHEVRON;
+							}
+							else
+							{
+								if (value.trim().isEmpty())
+								{
+									value = "\"" + value + "\"";
+								}
+							}
+							return (value);
 						}
 						else
 							if (dataValue_p instanceof CollectionValue) 
 							{
 								CollectionValue collectionValue = (CollectionValue) dataValue_p;
-								String result = collectionValue.getName();
-								if (result.isEmpty())
+								String collectionName = collectionValue.getName();
+								if (collectionName == null || (collectionName!= null && collectionName.isEmpty()))
 								{
-									result += CapellaServices.NO_NAME;
+									collectionName += CapellaServices.NO_NAME;
 								}
 								Type type = collectionValue.getType();
 								if (type != null)
 								{
-									result += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
+									collectionName += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
 								}
-								return result;
+								return collectionName;
 							}
 		}
 		
