@@ -34,9 +34,11 @@ public class CapellaExchangeItemElementHelper {
 		buffer.append(exItemElt.getName());
 
 		buffer.append(CapellaServices.CRO_OPEN);
-		buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(exItemElt.getOwnedMaxCard()));
-		buffer.append(",");
 		buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(exItemElt.getOwnedMinCard()));
+		buffer.append(",");
+		buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(exItemElt.getOwnedMaxCard()));
+		
+		
 		buffer.append(CapellaServices.CRO_CLOSE);
 
 		buffer.append(CapellaServices.BOLD_END);
