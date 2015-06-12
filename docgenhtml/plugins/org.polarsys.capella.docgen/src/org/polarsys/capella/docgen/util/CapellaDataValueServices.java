@@ -72,12 +72,18 @@ public class CapellaDataValueServices {
 			// Add the Hyper link of type of the value to the buffer
 			buffer.append(CapellaServices.getHyperlinkFromElement(abstractType) + CapellaServices.SPACE);
 		}
-		String valueString = getValueOfDataValue(dataValue_p);
-		if (valueString != "") {
-			buffer.append(CapellaServices.VALUE_EQUAL);
-			// Add the value of data value to the buffer
-			buffer.append(valueString);
+		
+		buffer.append(CapellaServices.VALUE_EQUAL);
+		if (false == dataValue_p instanceof CollectionValue)
+		{
+			String valueString = getValueOfDataValue(dataValue_p);
+			if (valueString != "") 
+			{
+				// Add the value of data value to the buffer
+				buffer.append(valueString);
+			}
 		}
+		
 		if (dataValue_p instanceof NumericValue) {
 			if (null != ((NumericValue) dataValue_p).getUnit()) {
 				String unitString = getUnitOfNumericValue((NumericValue) dataValue_p);
@@ -394,11 +400,11 @@ public class CapellaDataValueServices {
 								{
 									collectionName += CapellaServices.NO_NAME;
 								}
-								Type type = collectionValue.getType();
-								if (type != null)
-								{
-									collectionName += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
-								}
+//								Type type = collectionValue.getType();
+//								if (type != null)
+//								{
+//									collectionName += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
+//								}
 								return collectionName;
 							}
 		}

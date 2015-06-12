@@ -29,6 +29,7 @@ import org.polarsys.capella.core.data.information.datavalue.ComplexValueReferenc
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.EnumerationReference;
 import org.polarsys.capella.core.data.information.datavalue.NumericReference;
+import org.polarsys.capella.core.data.information.datavalue.NumericValue;
 import org.polarsys.capella.core.data.information.datavalue.StringReference;
 import org.polarsys.capella.core.data.information.datavalue.ValuePart;
 import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
@@ -180,55 +181,91 @@ public class CapellaPropertyServices {
 			buffer.append(CapellaServices.getFullDataPkgHierarchyLink(prop_p.getType()));
 
 		// Display UnionProperties Qualifiers
-		if (prop_p instanceof UnionProperty) {
+		if (prop_p instanceof UnionProperty) 
+		{
 			String qualifier = computeUnionPropertyLabelWithQualifier((UnionProperty) prop_p);
 			buffer.append(qualifier);
 		}
 
-		if (null != prop_p.getDescription()) {
+		if (null != prop_p.getDescription()) 
+		{
 			buffer.append("<p>");
 			buffer.append(StringUtil.transformAREFString(prop_p, prop_p.getDescription(), projectName, outputFolder));
 			buffer.append("</p>");
 		}
-		// features and property-values
 
-		// features
+		// Features
 		Collection<String> features = new ArrayList<String>();
+		
+		//  DefaultValue DataValue
+		final DataValue defaultValue = prop_p.getOwnedDefaultValue();
+		if (defaultValue != null) 
+		{
+			String s_dataValue = exportDataValue(defaultValue, CapellaServices.DEFAULT_FEATURE, projectName, outputFolder);
+			features.add(s_dataValue);
+		}
+		
+		//  MinValue DataValue
+		final DataValue minValue = prop_p.getOwnedMinValue();
+		if (minValue != null) 
+		{
+			String s_dataValue = exportDataValue(minValue, CapellaServices.MIN_FEATURE, projectName, outputFolder);
+			features.add(s_dataValue);
+		}
 
-		if (prop_p.getOwnedMinValue() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MIN_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedMinValue()));
+		//  MaxValue DataValue
+		final DataValue maxValue = prop_p.getOwnedMaxValue();
+		if (maxValue != null) 
+		{
+			String s_dataValue = exportDataValue(maxValue, CapellaServices.MAX_FEATURE, projectName, outputFolder);
+			features.add(s_dataValue);
+		}
+		
+		//  NullValue DataValue
+		final DataValue nullValue = prop_p.getOwnedNullValue();
+		if (nullValue != null) 
+		{
+			String s_dataValue = exportDataValue(nullValue, CapellaServices.NULL_FEATURE, projectName, outputFolder);
+			features.add(s_dataValue);
+		}
+		
+		//  MinLength DataValue
+		final NumericValue minLength = prop_p.getOwnedMinLength();
+		if (minLength != null) 
+		{
+			String s_dataValue = exportDataValue(minLength, CapellaServices.MINLENGTH_FEATURE, projectName, outputFolder);
+			features.add(s_dataValue);
+		}
 
-		if (prop_p.getOwnedMaxValue() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAX_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedMaxValue()));
-
-		if (prop_p.getOwnedMinLength() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MINLENGTH_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedMinLength()));
-
-		if (prop_p.getOwnedMaxLength() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAXLENGTH_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedMaxLength()));
-
-		if (prop_p.getOwnedDefaultValue() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedDefaultValue()));
-		if (prop_p.getOwnedNullValue() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.NULL_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedNullValue()));
+		//  MaxLength DataValue
+		final NumericValue maxLength = prop_p.getOwnedMaxLength();
+		if (maxLength != null) 
+		{
+			String s_dataValue = exportDataValue(maxLength, CapellaServices.MAXLENGTH_FEATURE, projectName, outputFolder);
+			features.add(s_dataValue);
+		}
 
 		buffer.append(CapellaServices.UL_OPEN);
 
 		for (String featureString : features)
+		{
 			buffer.append(CapellaServices.LI_OPEN + featureString + CapellaServices.LI_CLOSE);
+		}
 
+		// Property-values
 		String propertyValues = getPropertyValues(prop_p.getOwnedPropertyValues(), projectName, outputFolder);
 		if (propertyValues != null && propertyValues.length() > 0)
+		{
 			buffer.append(propertyValues);
-
+		}
+		
 		buffer.append(CapellaServices.UL_CLOSE);
 		return buffer.toString();
+	}
+	
+	private static String exportDataValue(DataValue dataValue, String label, String projectName, String outputFolder){
+		final String valueOfDataValue = CapellaDataValueServices.getDataValueInformation(dataValue, projectName, outputFolder);
+		return CapellaServices.BOLD_BEGIN + label + CapellaServices.BOLD_END + valueOfDataValue;
 	}
 
 	/**
