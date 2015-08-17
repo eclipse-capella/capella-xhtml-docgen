@@ -30,13 +30,21 @@ import org.polarsys.capella.core.data.capellacore.NamedElement;
 public class CapellaDiagramHelper implements IDiagramHelper {
 
 	public boolean select(EObject eObject) {
-		if (eObject instanceof NamedElement) {
-			return CapellaServices.isElementLinkable(eObject);
-		} else {
-			if (eObject instanceof SequenceMessage) {
+		if (eObject instanceof NamedElement) 
+		{
+			return CapellaServices.isLinkableWithoutScope(eObject) >= 0;
+//			return CapellaServices.isElementLinkable(eObject);
+		} 
+		else 
+		{
+			if (eObject instanceof SequenceMessage) 
+			{
 				AbstractEventOperation eventOperation = ((SequenceMessage) eObject).getInvokedOperation();
 				if (eventOperation != null)
-					return CapellaServices.isElementLinkable(eventOperation);
+				{
+					return CapellaServices.isLinkableWithoutScope(eventOperation) >= 0;
+//					return CapellaServices.isElementLinkable(eventOperation);
+				}
 			}
 		}
 

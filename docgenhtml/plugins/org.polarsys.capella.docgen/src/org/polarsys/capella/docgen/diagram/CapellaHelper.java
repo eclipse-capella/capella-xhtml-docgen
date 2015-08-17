@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.polarsys.capella.docgen.diagram;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,31 +22,39 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
-
+import org.eclipse.sirius.business.api.dialect.DialectManager;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.common.tools.api.editing.EditingDomainFactoryService;
+import org.eclipse.sirius.diagram.DDiagramElement;
+import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.viewpoint.DRepresentation;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.StateFragment;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-
-import org.eclipse.sirius.common.tools.api.editing.EditingDomainFactoryService;
-import org.eclipse.sirius.diagram.DDiagramElement;
-import org.eclipse.sirius.viewpoint.DRepresentation;
-import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.eclipse.sirius.business.api.dialect.DialectManager;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeReferencesStrategy;
+import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 
 public class CapellaHelper {
 	private static final String AIRD = ".aird";
 	private static final String MELODYMODELLER = ".melodymodeller";
 
-	public static Collection<DRepresentation> getDiagramForObject(
-			CapellaElement element) {
-		Collection<DRepresentation> representations = DialectManager.INSTANCE
-				.getRepresentations(element, DiagramSessionHelper
-						.getCurrentSession());
-
+	public static Collection<DRepresentation> getDiagramForObject(CapellaElement element) {
+		Collection<DRepresentation> representations = new ArrayList<DRepresentation>();
+		final Session currentSession = DiagramSessionHelper.getCurrentSession();
+		final ScopeReferencesStrategy referencesStrategy = GenerationGlobalScope.getInstance().getReferencesStrategy();
+		if (referencesStrategy.equals(ScopeReferencesStrategy.DONT_EXPORT))
+		{
+			final EObject originalModelElement = GenerationGlobalScope.getInstance().getOriginalModelElement(element);
+			representations = DialectManager.INSTANCE.getRepresentations(originalModelElement, currentSession);
+		}
+		else
+		{
+			representations = DialectManager.INSTANCE.getRepresentations(element, currentSession);
+		}
+		
 		return representations;
-
 	}
 
 	public static Resource getAIRDResource(CapellaElement element) {

@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
@@ -167,6 +168,29 @@ public class CapellaServices {
 	 * @return 0 if element has page, 1 if parent element has page, otherwise -1
 	 */
 	public static int isLinkable(EObject element) {
+		if ((! GenerationGlobalScope.getInstance().inScope(element, true)))
+			return -1;
+		
+		if (element instanceof CapellaElement) {
+			if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
+				return 0;
+			else {
+				EObject parent = element.eContainer();
+				if (parent instanceof CapellaElement) {
+					if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
+						return 1;
+					}
+				}
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * @param element
+	 * @return 0 if element has page, 1 if parent element has page, otherwise -1
+	 */
+	public static int isLinkableWithoutScope(EObject element) {
 		if (element instanceof CapellaElement) {
 			if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
 				return 0;

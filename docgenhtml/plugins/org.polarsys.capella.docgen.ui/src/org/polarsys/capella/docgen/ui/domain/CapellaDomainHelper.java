@@ -10,7 +10,6 @@
  ******************************************************************************/
 
 package org.polarsys.capella.docgen.ui.domain;
-
 import java.util.Iterator;
 
 import org.eclipse.egf.domain.Activator;
@@ -19,11 +18,16 @@ import org.eclipse.egf.domain.LoadableDomainHelper;
 import org.eclipse.egf.domain.Messages;
 import org.eclipse.egf.model.domain.EMFDomain;
 import org.eclipse.egf.model.domain.LoadableDomain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.polarsys.capella.common.ef.ExecutionManagerRegistry;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeException;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeReferencesStrategy;
 
 public class CapellaDomainHelper extends LoadableDomainHelper {
 
@@ -49,24 +53,39 @@ public class CapellaDomainHelper extends LoadableDomainHelper {
 
 			myDomain.setLoaded(true);
 
-			final URI uri = myDomain.getUri();
-			if (uri == null || "".equals(uri.toString())) {
-				Activator.getDefault().logWarning(Messages.bind(Messages.Load_EMFDomain_error1, domain.getName()));
-				return true;
+			final GenerationGlobalScope globalScope = GenerationGlobalScope.getInstance();
+			if (globalScope.getReferencesStrategy().equals(ScopeReferencesStrategy.DONT_EXPORT))
+			{
+				try {
+					final EList<EObject> generationScope = globalScope.getScopedResource().getContents();
+					myDomain.getContent().addAll(generationScope);
+				} catch (ScopeException e) {
+					throw new DomainException(e);
+				}
 			}
+			else
+			{
+				final URI uri = myDomain.getUri();
+				if (uri == null || "".equals(uri.toString())) {
+					Activator.getDefault().logWarning(Messages.bind(Messages.Load_EMFDomain_error1, domain.getName()));
+					return true;
+				}
 
-			ResourceSet set = getResourcesSet(myDomain.getUri());
-			Resource domainResource = null;
-			try {
-				domainResource = set.getResource(uri, true);
-			} catch (Exception e) {
-				throw new DomainException(e);
+				ResourceSet set = getResourcesSet(myDomain.getUri());
+				Resource domainResource = null;
+				try {
+					domainResource = set.getResource(uri, true);
+				} catch (Exception e) {
+					throw new DomainException(e);
+				}
+
+				if (!myDomain.getContent().isEmpty())
+					throw new DomainException(Messages.bind(Messages.Load_Domain_error1, domain.eClass().getName(), domain.getName()));
+				
+				final EList<EObject> contents = domainResource.getContents();
+				myDomain.getContent().addAll(contents);
 			}
-
-			if (!myDomain.getContent().isEmpty())
-				throw new DomainException(Messages.bind(Messages.Load_Domain_error1, domain.eClass().getName(), domain.getName()));
-
-			myDomain.getContent().addAll(domainResource.getContents());
+			
 			return true;
 		}
 		return false;

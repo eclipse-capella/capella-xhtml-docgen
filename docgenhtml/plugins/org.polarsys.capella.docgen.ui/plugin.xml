@@ -20,16 +20,35 @@ Contributors:
             class="org.polarsys.capella.docgen.ui.actions.HTMLDocumentationGenerationActionProvider"
             id="capella.project.explorer.actions.htmlGendoc">
          <enablement>
-               <and>
-                  <instanceof
-                        value="org.eclipse.core.resources.IFile">
-                  </instanceof>
-                  <test
-                        forcePluginActivation="true"
-                        property="org.eclipse.core.resources.extension"
-                        value="aird">
-                  </test>
-               </and>
+               <or>
+                  <and>
+                     <instanceof
+                           value="org.eclipse.core.resources.IFile">
+                     </instanceof>
+                     <test
+                           forcePluginActivation="true"
+                           property="org.eclipse.core.resources.extension"
+                           value="aird">
+                     </test>
+                  </and>
+                  <and>
+                     <instanceof
+                           value="org.polarsys.capella.core.data.capellacore.NamedElement">
+                     </instanceof>
+                     <not>
+                        <and>
+                           <instanceof
+                                 value="org.eclipse.core.resources.IFile">
+                           </instanceof>
+                           <test
+                                 forcePluginActivation="true"
+                                 property="org.eclipse.core.resources.extension"
+                                 value="aird">
+                           </test>
+                        </and>
+                     </not>
+                  </and>
+               </or>
             </enablement>
       </actionProvider>
    </extension>
