@@ -68,12 +68,19 @@ public class CapellaHelper {
 
 	public static Set<DSemanticDiagram> getDiagramContainingObject(CapellaElement element) {
 		Set<DSemanticDiagram> diagrams = new HashSet<DSemanticDiagram>();
+		if (GenerationGlobalScope.getInstance().getReferencesStrategy().equals(ScopeReferencesStrategy.DONT_EXPORT))
+			element = (CapellaElement) GenerationGlobalScope.getInstance().getOriginalModelElement(element);
+		
 		for (DRepresentation representation : DiagramSessionHelper.getSessionDRepresentation()) 
 		{
 			if (representation instanceof DSemanticDiagram) 
 			{
 				DSemanticDiagram dSemanticDiagram = (DSemanticDiagram) representation;
 				EObject semanticTarget = ((DSemanticDiagram) representation).getTarget();
+				final boolean copyInScope = GenerationGlobalScope.getInstance().isCopyInScope(semanticTarget);
+				if (copyInScope == false)
+					continue;
+				
 				for (DDiagramElement diagramElement : dSemanticDiagram.getDiagramElements()) 
 				{
 					EObject repTarget = diagramElement.getTarget();
