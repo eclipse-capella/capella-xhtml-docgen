@@ -11,7 +11,9 @@
 package org.polarsys.capella.docgen.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +32,8 @@ import org.eclipse.sirius.business.api.session.resource.AirdResource;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.polarsys.capella.core.data.capellamodeller.util.CapellamodellerResourceImpl;
 import org.polarsys.capella.docgen.Activator;
+import org.polarsys.capella.shared.id.handler.IScope;
+import org.polarsys.capella.shared.id.handler.IdManager;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlConstants;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 
@@ -227,40 +231,38 @@ public class StringUtil {
 		Pattern pattern = Pattern.compile(ELEMENT_LINK_REGEX);
 		Matcher matcher = pattern.matcher(group);
 		StringBuffer buffer = new StringBuffer();
-		if (matcher.find() && matcher.groupCount() == 1) {
+		if (matcher.find() && matcher.groupCount() == 1) 
+		{
 			String id = matcher.group(1);
 			if (id != null && id.trim().length() > 0 && id.contains("/"))
 				id = id.substring(0, id.length() - 1);
 
 			EObject eObject = resource.getEObject(id);
+			
 			// If the object is not found in the current resource, we look for
 			// it in all loaded resources of the ResourceSet
-			if (eObject == null) {
-				ResourceSet rs = resource.getResourceSet();
-				for (Resource iResource : rs.getResources()) {
-					// Case of model element
-					if (iResource instanceof CapellamodellerResourceImpl) {
-						eObject = iResource.getEObject(id);
-						if (eObject != null)
-							break;
+			if (eObject == null) 
+			{
+				final ResourceSet rs = resource.getResourceSet();
+				eObject = IdManager.getInstance().getEObject(id, new IScope() {
+					@Override
+					public List<Resource> getResources() {
+						return rs.getResources();
 					}
-
-					// Case of diagram element
-					if (iResource instanceof AirdResource) {
-						eObject = iResource.getEObject(id);
-						if (eObject != null)
-							break;
-					}
-				}
+				});
 			}
 
-			if (eObject != null) {
-				if (eObject instanceof DSemanticDiagram) {
+			if (eObject != null) 
+			{
+				if (eObject instanceof DSemanticDiagram) 
+				{
 					buffer.append(CapellaServices.getPathFromElement(((DSemanticDiagram) eObject).getTarget()));
 					buffer.append("#");
 					buffer.append(CapellaServices.getDiagramId((DSemanticDiagram) eObject));
 					return buffer.toString();
-				} else {
+				} 
+				else 
+				{
 					buffer.append(CapellaServices.getPathFromElement(eObject));
 					return buffer.toString();
 				}
