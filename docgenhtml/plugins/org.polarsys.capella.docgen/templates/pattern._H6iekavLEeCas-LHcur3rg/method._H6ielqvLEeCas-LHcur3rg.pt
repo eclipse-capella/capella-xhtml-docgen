@@ -23,6 +23,10 @@ if(allocations2.size() > 0) {%>
 
 <%}%>
 
+<%if (element.getOwnedConstraints().isEmpty() == false){%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="element:parameter"%>
+<%}%>
+
 <% // Presented in diagrams generation%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
 
