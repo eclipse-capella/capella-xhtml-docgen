@@ -241,6 +241,28 @@ public class StringUtil {
 			
 			// If the object is not found in the current resource, we look for
 			// it in all loaded resources of the ResourceSet
+			
+			if (eObject == null) 
+			{
+				ResourceSet rs = resource.getResourceSet();
+				for (Resource iResource : rs.getResources()) {
+					// Case of model element
+					if (iResource instanceof CapellamodellerResourceImpl) {
+						eObject = iResource.getEObject(id);
+						if (eObject != null)
+							break;
+					}
+
+					// Case of diagram element
+					if (iResource instanceof AirdResource) {
+						eObject = iResource.getEObject(id);
+						if (eObject != null)
+							break;
+					}
+				}
+			}
+			
+			// If the object is still not found, so we use the Capella API.
 			if (eObject == null) 
 			{
 				final ResourceSet rs = resource.getResourceSet();
