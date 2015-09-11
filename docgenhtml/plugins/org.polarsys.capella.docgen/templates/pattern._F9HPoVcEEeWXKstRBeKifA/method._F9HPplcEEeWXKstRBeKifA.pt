@@ -1,0 +1,36 @@
+<%String constraintTitle = "Constraints";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="parameter:eObject,constraintTitle:property"%>
+
+<table style="width: 100%" border="1">
+	<tbody>
+        <tr>
+			<td style="font-weight: bold; text-align: center; width: 20%"> Name and Description</td>
+			<td style="font-weight: bold; text-align: center; width: 60%"> Owned specification</td>
+			<td style="font-weight: bold; text-align: center; width: 20%"> Constrained elements<br></td>
+        </tr>
+<%String projectName = (String) ctx.getValue("projectName");
+String outputFolder = (String) ctx.getValue("outputFolder");%>
+
+<%  List<AbstractConstraint> ownedConstraints = parameter.getOwnedConstraints();
+	for (AbstractConstraint abstractConstraint: ownedConstraints)
+	{
+		Constraint constraint = (Constraint) abstractConstraint;
+		String constraintName = constraint.getName();
+		if (constraintName == null || (constraintName != null && constraintName.isEmpty()))
+			constraintName = CapellaServices.NO_NAME;%>  
+        <tr>
+			<td>
+<b><%=constraintName%> </b>
+<%  // Summary and description generation%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="constraint:element"%>
+			</td>
+			<td> 
+<%=ConstraintsService.getValueSpecification(constraint.getOwnedSpecification(), projectName, outputFolder)%>				
+			</td>
+			<td>  
+<%=ConstraintsService.getConstrainedElement(constraint, projectName, outputFolder)%>			
+			</td>
+        </tr>
+<%	}%>
+	</tbody>
+</table>

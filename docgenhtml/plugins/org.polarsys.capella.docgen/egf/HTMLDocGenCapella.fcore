@@ -222,6 +222,21 @@ Contributors:
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_wzzG0DsNEeKas6f-rR5zEA"
                 called="#_UT85hTr2EeK9AZkoGpWdMw"/>
           </elements>
+          <elements xmi:id="_F9HPoVcEEeWXKstRBeKifA" name="ConstraintsDocGen" headerMethod="#_F9HPo1cEEeWXKstRBeKifA"
+              conditionMethod="#_F9HPpVcEEeWXKstRBeKifA" initMethod="#_F9HPpFcEEeWXKstRBeKifA"
+              footerMethod="#_F9HPp1cEEeWXKstRBeKifA">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_F9HPolcEEeWXKstRBeKifA"
+                name="JET"/>
+            <methods xmi:id="_F9HPo1cEEeWXKstRBeKifA" name="header" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPo1cEEeWXKstRBeKifA.pt"/>
+            <methods xmi:id="_F9HPpFcEEeWXKstRBeKifA" name="init" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPpFcEEeWXKstRBeKifA.pt"/>
+            <methods xmi:id="_F9HPpVcEEeWXKstRBeKifA" name="preCondition" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPpVcEEeWXKstRBeKifA.pt"/>
+            <methods xmi:id="_F9HPplcEEeWXKstRBeKifA" name="genConstraints" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPplcEEeWXKstRBeKifA.pt"/>
+            <methods xmi:id="_F9HPp1cEEeWXKstRBeKifA" name="footer" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPp1cEEeWXKstRBeKifA.pt"/>
+            <parameters xmi:id="_KfYg8FcEEeWXKstRBeKifA" name="parameter" type="http://www.polarsys.org/capella/core/core/0.8.0#//NamedElement"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_F9HPqFcEEeWXKstRBeKifA"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_fqM44FcEEeWXKstRBeKifA"
+                called="#_F9HPplcEEeWXKstRBeKifA"/>
+          </elements>
         </libraries>
         <libraries xmi:id="_OnutENz7Ed-Vzvs7Wt1vzQ" name="org.polarsys.capella.docgen.content">
           <elements xmi:id="_hW854N47Ed-Qav1YnqlO9A" name="AnyNamedElementDocGen"

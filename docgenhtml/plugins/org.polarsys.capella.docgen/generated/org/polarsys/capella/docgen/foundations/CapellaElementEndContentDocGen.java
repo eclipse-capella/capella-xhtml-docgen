@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.2.0.v20150211-1405
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -39,6 +39,8 @@ public class CapellaElementEndContentDocGen {
 	protected final String TEXT_14 = NL;
 	protected final String TEXT_15 = NL;
 	protected final String TEXT_16 = NL;
+	protected final String TEXT_17 = NL;
+	protected final String TEXT_18 = NL;
 
 	public CapellaElementEndContentDocGen() {
 		//Here is the constructor
@@ -75,8 +77,8 @@ public class CapellaElementEndContentDocGen {
 					OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_15);
-		stringBuffer.append(TEXT_16);
+		stringBuffer.append(TEXT_17);
+		stringBuffer.append(TEXT_18);
 		return stringBuffer.toString();
 	}
 
@@ -139,8 +141,31 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.append(TEXT_8);
 		}
 		stringBuffer.append(TEXT_9);
+		if (element.getOwnedConstraints().isEmpty() == false) {
+			stringBuffer.append(TEXT_10);
+			{
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="element:parameter"%>
+
+				InternalPatternContext ictx = (InternalPatternContext) ctx;
+				new Node.DataLeaf(ictx.getNode(), getClass(), null,
+						stringBuffer.toString());
+				stringBuffer.setLength(0);
+
+				final Map<String, Object> callParameters = new HashMap<String, Object>();
+				callParameters.put("parameter", element);
+				CallHelper
+						.executeWithParameterInjection(
+								"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_F9HPoVcEEeWXKstRBeKifA",
+								new ExecutionContext(
+										(InternalPatternContext) ctx),
+								callParameters);
+				stringBuffer.setLength(0);
+			}
+
+		}
+		stringBuffer.append(TEXT_11);
 		// Presented in diagrams generation
-		stringBuffer.append(TEXT_10);
+		stringBuffer.append(TEXT_12);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
 
@@ -161,9 +186,9 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_11);
+		stringBuffer.append(TEXT_13);
 		// owned diagrams
-		stringBuffer.append(TEXT_12);
+		stringBuffer.append(TEXT_14);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
@@ -182,9 +207,9 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_13);
+		stringBuffer.append(TEXT_15);
 		// Presented in diagrams generation
-		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_16);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PresentedDiagrmsGeneration" args="element:element"%>
 
