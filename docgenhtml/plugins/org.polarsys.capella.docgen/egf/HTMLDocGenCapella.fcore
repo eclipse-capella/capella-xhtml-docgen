@@ -232,7 +232,7 @@ Contributors:
             <methods xmi:id="_F9HPpVcEEeWXKstRBeKifA" name="preCondition" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPpVcEEeWXKstRBeKifA.pt"/>
             <methods xmi:id="_F9HPplcEEeWXKstRBeKifA" name="genConstraints" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPplcEEeWXKstRBeKifA.pt"/>
             <methods xmi:id="_F9HPp1cEEeWXKstRBeKifA" name="footer" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPp1cEEeWXKstRBeKifA.pt"/>
-            <parameters xmi:id="_KfYg8FcEEeWXKstRBeKifA" name="parameter" type="http://www.polarsys.org/capella/core/core/0.8.0#//NamedElement"/>
+            <parameters xmi:id="_KfYg8FcEEeWXKstRBeKifA" name="parameter" type="http://www.polarsys.org/capella/core/core/1.0.0#//NamedElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_F9HPqFcEEeWXKstRBeKifA"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_fqM44FcEEeWXKstRBeKifA"
                 called="#_F9HPplcEEeWXKstRBeKifA"/>
