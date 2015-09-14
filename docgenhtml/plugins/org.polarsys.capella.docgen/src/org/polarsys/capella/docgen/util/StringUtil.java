@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -32,6 +33,9 @@ import org.polarsys.capella.core.data.capellamodeller.util.CapellamodellerResour
 import org.polarsys.capella.docgen.Activator;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlConstants;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
+
+import org.polarsys.capella.shared.id.handler.IdManager;
+import org.polarsys.capella.shared.id.handler.IScope;
 
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
@@ -252,6 +256,18 @@ public class StringUtil {
 							break;
 					}
 				}
+			}
+			
+			// If the object is still not found, so we use the Capella API.
+			if (eObject == null) 
+			{
+				final ResourceSet rs = resource.getResourceSet();
+				eObject = IdManager.getInstance().getEObject(id, new IScope() {
+					@Override
+					public List<Resource> getResources() {
+						return rs.getResources();
+					}
+				});
 			}
 
 			if (eObject != null) {
