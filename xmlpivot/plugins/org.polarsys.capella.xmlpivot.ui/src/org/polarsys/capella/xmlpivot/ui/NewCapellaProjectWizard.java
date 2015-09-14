@@ -66,7 +66,7 @@ public class NewCapellaProjectWizard extends NewProjectWizard {
    */
   @Override
   protected SessionCreationHelper createSessionCreationHelper() {
-    return new PivotSessionCreationHelper(getShell(), _modelPage.isEpbsSelected(), _modelPage.isOpaSelected(), getProjectApproach(), page.getURI());
+    return new PivotSessionCreationHelper(getShell(), modelPage.isEpbsSelected(), modelPage.isOpaSelected(), getProjectApproach(), page.getURI());
   }
 
   private class ImportSpecPage extends WizardPage {
