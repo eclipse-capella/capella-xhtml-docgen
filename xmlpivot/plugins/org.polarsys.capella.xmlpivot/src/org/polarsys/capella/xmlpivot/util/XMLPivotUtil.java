@@ -11,23 +11,118 @@
 package org.polarsys.capella.xmlpivot.util;
 
 import org.eclipse.emf.ecore.EObject;
-
-import org.polarsys.capella.core.data.cs.*;
-import org.polarsys.capella.core.data.ctx.*;
-import org.polarsys.capella.core.data.epbs.*;
-import org.polarsys.capella.core.data.fa.*;
-import org.polarsys.capella.core.data.information.*;
-import org.polarsys.capella.core.data.information.communication.*;
-import org.polarsys.capella.core.data.interaction.*;
-import org.polarsys.capella.core.data.la.*;
-import org.polarsys.capella.core.data.capellacommon.*;
-import org.polarsys.capella.core.data.capellacore.*;
-import org.polarsys.capella.core.data.capellamodeller.*;
-import org.polarsys.capella.core.data.oa.*;
-import org.polarsys.capella.core.data.pa.*;
-import org.polarsys.capella.core.data.pa.deployment.*;
+import org.polarsys.capella.common.data.modellingcore.AbstractTrace;
+import org.polarsys.capella.core.data.capellacommon.AbstractStateRealization;
+import org.polarsys.capella.core.data.capellacommon.StateTransitionRealization;
+import org.polarsys.capella.core.data.capellacommon.TransfoLink;
+import org.polarsys.capella.core.data.capellacore.Generalization;
+import org.polarsys.capella.core.data.capellacore.Involvement;
+import org.polarsys.capella.core.data.capellacore.ReuseLink;
+import org.polarsys.capella.core.data.capellamodeller.Folder;
+import org.polarsys.capella.core.data.capellamodeller.Library;
+import org.polarsys.capella.core.data.capellamodeller.SystemEngineeringPkg;
+import org.polarsys.capella.core.data.cs.AbstractDeploymentLink;
+import org.polarsys.capella.core.data.cs.ActorCapabilityRealizationInvolvement;
+import org.polarsys.capella.core.data.cs.InterfaceImplementation;
+import org.polarsys.capella.core.data.cs.InterfaceUse;
+import org.polarsys.capella.core.data.cs.PhysicalLinkRealization;
+import org.polarsys.capella.core.data.cs.PhysicalPathRealization;
+import org.polarsys.capella.core.data.cs.PhysicalPortRealization;
+import org.polarsys.capella.core.data.cs.SystemComponentCapabilityRealizationInvolvement;
+import org.polarsys.capella.core.data.ctx.ActorCapabilityInvolvement;
+import org.polarsys.capella.core.data.ctx.ActorMissionInvolvement;
+import org.polarsys.capella.core.data.ctx.CapabilityExploitation;
+import org.polarsys.capella.core.data.ctx.OperationalActorRealization;
+import org.polarsys.capella.core.data.ctx.OperationalAnalysisRealization;
+import org.polarsys.capella.core.data.ctx.OperationalEntityRealization;
+import org.polarsys.capella.core.data.ctx.SystemCapabilityInvolvement;
+import org.polarsys.capella.core.data.ctx.SystemCommunication;
+import org.polarsys.capella.core.data.ctx.SystemCommunicationHook;
+import org.polarsys.capella.core.data.ctx.SystemMissionInvolvement;
+import org.polarsys.capella.core.data.epbs.EPBSArchitecturePkg;
+import org.polarsys.capella.core.data.epbs.PhysicalArchitectureRealization;
+import org.polarsys.capella.core.data.epbs.PhysicalArtifactRealization;
+import org.polarsys.capella.core.data.fa.ComponentExchangeAllocation;
+import org.polarsys.capella.core.data.fa.ComponentExchangeFunctionalExchangeAllocation;
+import org.polarsys.capella.core.data.fa.ComponentExchangeRealization;
+import org.polarsys.capella.core.data.fa.ComponentFunctionalAllocation;
+import org.polarsys.capella.core.data.fa.ComponentPortAllocation;
+import org.polarsys.capella.core.data.fa.ComponentPortAllocationEnd;
+import org.polarsys.capella.core.data.fa.ExchangeContainment;
+import org.polarsys.capella.core.data.fa.ExchangeLink;
+import org.polarsys.capella.core.data.fa.FunctionRealization;
+import org.polarsys.capella.core.data.fa.FunctionSpecification;
+import org.polarsys.capella.core.data.fa.FunctionalChainRealization;
+import org.polarsys.capella.core.data.fa.FunctionalExchangeRealization;
+import org.polarsys.capella.core.data.fa.FunctionalExchangeSpecification;
+import org.polarsys.capella.core.data.information.DomainElement;
+import org.polarsys.capella.core.data.information.ExchangeItemRealization;
+import org.polarsys.capella.core.data.information.InformationRealization;
+import org.polarsys.capella.core.data.information.OperationAllocation;
+import org.polarsys.capella.core.data.information.PortAllocation;
+import org.polarsys.capella.core.data.information.PortRealization;
+import org.polarsys.capella.core.data.information.communication.MessageReference;
+import org.polarsys.capella.core.data.information.communication.SignalInstance;
+import org.polarsys.capella.core.data.interaction.AbstractCapabilityExtend;
+import org.polarsys.capella.core.data.interaction.AbstractCapabilityExtensionPoint;
+import org.polarsys.capella.core.data.interaction.AbstractCapabilityGeneralization;
+import org.polarsys.capella.core.data.interaction.AbstractCapabilityInclude;
+import org.polarsys.capella.core.data.interaction.AbstractCapabilityRealization;
+import org.polarsys.capella.core.data.interaction.AbstractFunctionAbstractCapabilityInvolvement;
+import org.polarsys.capella.core.data.interaction.ArmTimerEvent;
+import org.polarsys.capella.core.data.interaction.CancelTimerEvent;
+import org.polarsys.capella.core.data.interaction.ConstraintDuration;
+import org.polarsys.capella.core.data.interaction.CreationEvent;
+import org.polarsys.capella.core.data.interaction.DestructionEvent;
+import org.polarsys.capella.core.data.interaction.EventReceiptOperation;
+import org.polarsys.capella.core.data.interaction.EventSentOperation;
+import org.polarsys.capella.core.data.interaction.Execution;
+import org.polarsys.capella.core.data.interaction.ExecutionEnd;
+import org.polarsys.capella.core.data.interaction.ExecutionEvent;
+import org.polarsys.capella.core.data.interaction.FragmentEnd;
+import org.polarsys.capella.core.data.interaction.FunctionalChainAbstractCapabilityInvolvement;
+import org.polarsys.capella.core.data.interaction.Gate;
+import org.polarsys.capella.core.data.interaction.InstanceRole;
+import org.polarsys.capella.core.data.interaction.InteractionState;
+import org.polarsys.capella.core.data.interaction.InteractionUse;
+import org.polarsys.capella.core.data.interaction.MergeLink;
+import org.polarsys.capella.core.data.interaction.MessageEnd;
+import org.polarsys.capella.core.data.interaction.RefinementLink;
+import org.polarsys.capella.core.data.interaction.ScenarioRealization;
+import org.polarsys.capella.core.data.interaction.StateFragment;
+import org.polarsys.capella.core.data.la.ContextInterfaceRealization;
+import org.polarsys.capella.core.data.la.LogicalArchitecturePkg;
+import org.polarsys.capella.core.data.la.SystemActorRealization;
+import org.polarsys.capella.core.data.la.SystemAnalysisRealization;
+import org.polarsys.capella.core.data.la.SystemRealization;
+import org.polarsys.capella.core.data.oa.ActivityAllocation;
+import org.polarsys.capella.core.data.oa.CapabilityConfiguration;
+import org.polarsys.capella.core.data.oa.CommunityOfInterest;
+import org.polarsys.capella.core.data.oa.CommunityOfInterestComposition;
+import org.polarsys.capella.core.data.oa.Concept;
+import org.polarsys.capella.core.data.oa.ConceptCompliance;
+import org.polarsys.capella.core.data.oa.ConceptPkg;
+import org.polarsys.capella.core.data.oa.EntityOperationalCapabilityInvolvement;
+import org.polarsys.capella.core.data.oa.ItemInConcept;
+import org.polarsys.capella.core.data.oa.OrganisationalUnit;
+import org.polarsys.capella.core.data.oa.OrganisationalUnitComposition;
+import org.polarsys.capella.core.data.oa.RoleAllocation;
+import org.polarsys.capella.core.data.oa.RoleAssemblyUsage;
+import org.polarsys.capella.core.data.oa.Swimlane;
+import org.polarsys.capella.core.data.pa.LogicalActorRealization;
+import org.polarsys.capella.core.data.pa.LogicalArchitectureRealization;
+import org.polarsys.capella.core.data.pa.LogicalComponentRealization;
+import org.polarsys.capella.core.data.pa.LogicalInterfaceRealization;
+import org.polarsys.capella.core.data.pa.PhysicalArchitecturePkg;
+import org.polarsys.capella.core.data.pa.deployment.ComponentInstance;
+import org.polarsys.capella.core.data.pa.deployment.ConnectionInstance;
+import org.polarsys.capella.core.data.pa.deployment.DeploymentAspect;
+import org.polarsys.capella.core.data.pa.deployment.DeploymentConfiguration;
+import org.polarsys.capella.core.data.pa.deployment.InstanceDeploymentLink;
+import org.polarsys.capella.core.data.pa.deployment.PartDeploymentLink;
+import org.polarsys.capella.core.data.pa.deployment.PortInstance;
+import org.polarsys.capella.core.data.pa.deployment.TypeDeploymentLink;
 import org.polarsys.capella.core.data.sharedmodel.GenericPkg;
-import org.polarsys.capella.common.data.modellingcore.*;
 
 /**
  * Utility class for the XMLPivot export/import functionality
@@ -80,8 +175,7 @@ public class XMLPivotUtil {
 	 */
 	public static boolean isTechnical(EObject object_p){
 		//communication package
-		if(object_p instanceof CommunicationLinkAllocation ||
-			object_p instanceof MessageReference ||
+		if(object_p instanceof MessageReference ||
 			object_p instanceof SignalInstance ||
 		//cs package
 			object_p instanceof ActorCapabilityRealizationInvolvement ||
