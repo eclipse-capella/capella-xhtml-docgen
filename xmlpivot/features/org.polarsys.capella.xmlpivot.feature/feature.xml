@@ -12,11 +12,11 @@
 <feature
       id="org.polarsys.capella.xmlpivot.feature"
       label="%featureName"
-      version="0.8.1.qualifier"
+      version="1.0.0.qualifier"
       provider-name="%providerName">
 
    <description>
-      Capella XMLPivot Feature (Incubation)
+      Capella XMLPivot Feature
    </description>
 
    <copyright>
