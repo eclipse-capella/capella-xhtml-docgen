@@ -9,5 +9,14 @@
 	<echo message="Running Job Gendocxhtml in Capella_AddOns_Gendocxhtml/releng"/>
 	<ant dir="Capella_AddOns_Gendocxhtml/releng"/>
 
+	<echo message="Running Job MassVP in Capella_AddOns_MassVP/releng"/>
+	<ant dir="Capella_AddOns_MassVP/releng"/>
+
+	<echo message="Running Job PerfoVP in Capella_AddOns_PerfoVP/releng"/>
+	<ant dir="Capella_AddOns_PerfoVP/releng"/>
+
+	<echo message="Running Job PriceVP in Capella_AddOns_PriceVP/releng"/>
+	<ant dir="Capella_AddOns_PriceVP/releng"/>
+
 
 </project>
