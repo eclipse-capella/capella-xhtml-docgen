@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<buildcore:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:buildcore="http://www.eclipse.org/egf/1.0.1/buildcore" xmi:id="_4-dhIEHFEeGR0qHofFpKtQ" name="Capella_AddOns">
+<buildcore:Chain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:buildcore="http://www.eclipse.org/egf/1.0.1/buildcore" xmi:id="_4-dhIEHFEeGR0qHofFpKtQ" name="Capella_Addons">
   <propertyPackages xmi:id="_fpDlcGOuEeGSqYRIJfl_UQ" name="Misc">
     <properties xmi:id="_KgmDIGErEeGOvKnARBvzFg" key="site.pack200" value="false"/>
     <properties xmi:id="_JAvf4G3iEeGehoHCqtPcvA" key="qualifier.replacement.*" value="${timestamp}"/>
@@ -8,7 +8,7 @@
     <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_Nightly/lastSuccessfulBuild/artifact/result/publish/kitalpha/site.p2/"/>
     <properties xmi:id="_KlR7cMzJEeSgCsr7bvb4KA" key="site_EGF" value="https://hudson.eclipse.org/egf/job/buckminster-egf-juno/lastSuccessfulBuild/artifact/result/publish/org.eclipse.egf.sdk/site.p2/"/>
   </propertyPackages>
-  <jobs href="Job_TransitionSystem2SubSystem.egfbuild#_gPxtENokEeGTBMJ29vOuKA"/>
-  <jobs href="Job_AddOn_XMLPivot.egfbuild#_Q3G18Cs6EeOgOepTKQGF5A"/>
-  <jobs href="Job_AddOn_DocGen.egfbuild#_pba9AMV8EeOLTKWt7nPrDw"/>
+  <jobs href="Job_SubsystemTransition.egfbuild#_gPxtENokEeGTBMJ29vOuKA"/>
+  <jobs href="Job_XMLPivot.egfbuild#_Q3G18Cs6EeOgOepTKQGF5A"/>
+  <jobs href="Job_XHTMLDocGen.egfbuild#_pba9AMV8EeOLTKWt7nPrDw"/>
 </buildcore:Chain>
