@@ -9,8 +9,8 @@
   </steps>
   <steps xsi:type="buildstep:AntStep" xmi:id="_Yxg5AG3dEeW8Or0zSwVlzA" name="Download CapellaTP" targetName="DownloadCapellaTP" xml="&lt;target name=&quot;DownloadCapellaTP&quot;>&#xD;&#xA;&#x9; &lt;dirname property=&quot;dir&quot; file=&quot;${usedTP}.ts&quot;/>&#xD;&#xA;&#x9; &lt;mkdir dir=&quot;${dir}&quot; />&#xD;&#xA;&#xD;&#xA;&#x9;&lt;get &#xD;&#xA;&#x9;&#x9;src=&quot;${hudsonJob}/buildTimestamp?format=yyyy-MM-dd_HH-mm-ss&quot; &#xD;&#xA;&#x9;&#x9;dest=&quot;${usedTP}.ts&quot;/>&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;&lt;loadfile srcfile=&quot;${usedTP}.ts&quot; property=&quot;ts&quot;/>&#xD;&#xA;&#x9;&lt;echo>${usedTP} timestamp: ${ts}&lt;/echo>&#xD;&#xA;&#xD;&#xA;&#x9;&lt;get &#xD;&#xA;&#x9;&#x9;src=&quot;${hudsonJob}/artifact/result/publish/capella-${CapellaVersion}.${ts}-linux-gtk-x86_64-juno-incubation.tar.gz&quot; &#xD;&#xA;&#x9;&#x9;dest=&quot;${usedTP}.tar.gz&quot;/>&#x9;&#xD;&#xA;&#xD;&#xA;&#x9;&lt;gunzip src=&quot;${usedTP}.tar.gz&quot;/>&#xD;&#xA;&#x9;&lt;untar src=&quot;${usedTP}.tar&quot; dest=&quot;${usedTP}&quot;/>&#xD;&#xA;&lt;/target>"/>
   <steps xsi:type="buildstep:BuildStep" xmi:id="_nsviMG3dEeW8Or0zSwVlzA" name="Import All Perfo VP Plugins">
-    <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_qRhzIG3dEeW8Or0zSwVlzA" suffix="" gitLocation="_tnbX8G3dEeW8Or0zSwVlzA" folderName="perfovp/features"/>
-    <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_LHKzcG3eEeW8Or0zSwVlzA" gitLocation="_tnbX8G3dEeW8Or0zSwVlzA" folderName="perfovp/plugins"/>
+    <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_qRhzIG3dEeW8Or0zSwVlzA" suffix="" gitLocation="_tnbX8G3dEeW8Or0zSwVlzA" folderName="perfoviewpoint/features"/>
+    <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_LHKzcG3eEeW8Or0zSwVlzA" gitLocation="_tnbX8G3dEeW8Or0zSwVlzA" folderName="perfoviewpoint/plugins"/>
     <buildLocations xsi:type="buildstep:TargetPlatformBuildLocation" xmi:id="_O5Zu8G3eEeW8Or0zSwVlzA" path="${usedTP}/capella/eclipse"/>
     <components xsi:type="buildstep:Feature" xmi:id="_QaegIG3eEeW8Or0zSwVlzA" id="org.polarsys.capella.vp.perfo.feature"/>
   </steps>
