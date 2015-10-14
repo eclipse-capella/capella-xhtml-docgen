@@ -1,5 +1,5 @@
 //Generated with EGF 1.3.0.v20150507-0831
-package default_package;
+package org.polarsys.capella.addons.releng;
 
 import org.eclipse.egf.common.helper.*;
 import java.util.*;
