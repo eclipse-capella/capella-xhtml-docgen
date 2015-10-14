@@ -1,5 +1,5 @@
-//Generated with EGF 1.2.0.v20150211-1405
-package org.polarsys.capella.addons.releng;
+//Generated with EGF 1.3.0.v20150507-0831
+package default_package;
 
 import org.eclipse.egf.common.helper.*;
 import java.util.*;
@@ -8,14 +8,13 @@ import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 
-public class install_buckminster_customisation extends
+public class buildxml extends
 		org.eclipse.egf.portfolio.eclipse.build.buckminster.buildxml {
 	protected static String nl;
 
-	public static synchronized install_buckminster_customisation create(
-			String lineSeparator) {
+	public static synchronized buildxml create(String lineSeparator) {
 		nl = lineSeparator;
-		install_buckminster_customisation result = new install_buckminster_customisation();
+		buildxml result = new buildxml();
 		nl = null;
 		return result;
 	}
@@ -74,7 +73,7 @@ public class install_buckminster_customisation extends
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL;
 
-	public install_buckminster_customisation() {
+	public buildxml() {
 		//Here is the constructor
 		StringBuffer stringBuffer = new StringBuffer();
 
