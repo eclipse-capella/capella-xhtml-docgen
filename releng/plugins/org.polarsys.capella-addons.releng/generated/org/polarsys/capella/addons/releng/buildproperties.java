@@ -91,7 +91,7 @@ public class buildproperties extends
 			+ ""
 			+ NL
 			+ "#buckminster : do not generate version range in manifest.mf and content.jar"
-			+ NL + "pde.bundle.range.generation=false" + NL;
+			+ NL + "pde.bundle.range.generation=false";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL;
 
