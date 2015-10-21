@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:org.polarsys.capella.core.data.capellamodeller="http://www.polarsys.org/capella/core/modeller/0.8.0" xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/0.8.0" xmlns:org.polarsys.capella.core.data.pa="http://www.polarsys.org/capella/core/pa/0.8.0" xmlns:table="http://www.eclipse.org/sirius/table/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/table/description/1.1.0 http://www.eclipse.org/sirius/table/1.1.0#//description" xmi:id="_9dMYIEF4EeOThvnrLCXGUQ" selectedViews="_9s3L0EF4EeOThvnrLCXGUQ _9s4Z8EF4EeOThvnrLCXGUQ _9tEAIEF4EeOThvnrLCXGUQ _9tFOQEF4EeOThvnrLCXGUQ _9tNKEEF4EeOThvnrLCXGUQ _9tQ0cEF4EeOThvnrLCXGUQ _9tYwQEF4EeOThvnrLCXGUQ" version="6.9.0.201309101020">
-  <models xmi:type="org.polarsys.capella.core.data.capellamodeller:Project" href="LogicalInterfaceRealizationTest.melodymodeller#ba01dc22-5ed5-43ea-b62d-10deeb43b077"/>
-  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9s3L0EF4EeOThvnrLCXGUQ" initialized="true">
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/1.0.0" xmlns:org.polarsys.capella.core.data.pa="http://www.polarsys.org/capella/core/pa/1.0.0" xmlns:table="http://www.eclipse.org/sirius/table/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/table/description/1.1.0 http://www.eclipse.org/sirius/table/1.1.0#//description" xmi:id="_9dMYIEF4EeOThvnrLCXGUQ" selectedViews="_9s3L0EF4EeOThvnrLCXGUQ _9s4Z8EF4EeOThvnrLCXGUQ _9tEAIEF4EeOThvnrLCXGUQ _9tFOQEF4EeOThvnrLCXGUQ _9tNKEEF4EeOThvnrLCXGUQ _9tQ0cEF4EeOThvnrLCXGUQ _9tYwQEF4EeOThvnrLCXGUQ" version="10.1.0.201509162000">
+  <semanticResources>LogicalInterfaceRealizationTest.melodymodeller</semanticResources>
+  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9s3L0EF4EeOThvnrLCXGUQ">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.kitalpha.ad.integration.sirius/description/ad.odesign#//@ownedViewpoints[name='ad']"/>
   </ownedViews>
-  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9s4Z8EF4EeOThvnrLCXGUQ" initialized="true">
+  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9s4Z8EF4EeOThvnrLCXGUQ">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']"/>
   </ownedViews>
-  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tEAIEF4EeOThvnrLCXGUQ" initialized="true">
+  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tEAIEF4EeOThvnrLCXGUQ">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/EPBS.odesign#//@ownedViewpoints[name='EPBS%20architecture']"/>
   </ownedViews>
-  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tFOQEF4EeOThvnrLCXGUQ" initialized="true">
+  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tFOQEF4EeOThvnrLCXGUQ">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/oa.odesign#//@ownedViewpoints[name='Operational%20Analysis']"/>
   </ownedViews>
-  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tNKEEF4EeOThvnrLCXGUQ" initialized="true">
+  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tNKEEF4EeOThvnrLCXGUQ">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']"/>
   </ownedViews>
-  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tQ0cEF4EeOThvnrLCXGUQ" initialized="true">
+  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tQ0cEF4EeOThvnrLCXGUQ">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']"/>
   </ownedViews>
-  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tYwQEF4EeOThvnrLCXGUQ" initialized="true">
+  <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_9tYwQEF4EeOThvnrLCXGUQ">
     <ownedRepresentations xmi:type="table:DTable" xmi:id="_1XffgEF8EeOThvnrLCXGUQ" name="New Physical Interfaces - Logical Interfaces" headerColumnWidth="99">
       <target xmi:type="org.polarsys.capella.core.data.pa:PhysicalArchitecture" href="LogicalInterfaceRealizationTest.melodymodeller#02ba2e76-5015-4d4f-b6bc-76daf5d2ac0e"/>
       <lines xmi:type="table:DLine" xmi:id="_1XffgUF8EeOThvnrLCXGUQ" label="Interface 3">

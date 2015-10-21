@@ -32,7 +32,7 @@ public class XMLPivotExtractorCmd extends AbstractCommandLine {
     builder.modelPluginClass = "org.polarsys.capella.core.semantic.data.capellamodeller.CapellaModellerPlugin"; //$NON-NLS-1$
     builder.editPluginClass = "org.polarsys.capella.core.semantic.data.capellamodeller.provider.CapellamodellerEditPlugin"; //$NON-NLS-1$
     builder.editorPluginClass = "org.polarsys.capella.core.semantic.data.capellamodeller.presentation.CapellamodellerEditorPlugin"; //$NON-NLS-1$
-    builder.pluginVersion = "0.8.0.qualifier"; //$NON-NLS-1$
+    builder.pluginVersion = "1.0.0.qualifier"; //$NON-NLS-1$
     builder.sourcePackages = CapellaPackageRegistry.getAllCapellaPackages();
     builder.bootstrap = true;
 
