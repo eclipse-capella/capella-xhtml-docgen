@@ -65,7 +65,7 @@ public class XMLPivotExtractor {
 		public String modelPluginClass = "org.polarsys.capella.semantic.data.capellamodeller.CapellaModellerPlugin";
 		public String editPluginClass = "org.polarsys.capella.semantic.data.capellamodeller.provider.CapellamodellerEditPlugin";
 		public String editorPluginClass = "org.polarsys.capella.semantic.data.capellamodeller.presentation.CapellamodellerEditorPlugin";
-		public String pluginVersion = "0.8.0"; // TODO maybe derive this from source package version or the plugin that is providing it..
+		public String pluginVersion = "1.0.0"; // TODO maybe derive this from source package version or the plugin that is providing it..
 		public Collection<EPackage> sourcePackages = CapellaPackageRegistry.getAllCapellaPackages();
 		public boolean bootstrap = false;
 		public XMLPivotExtractor build(){

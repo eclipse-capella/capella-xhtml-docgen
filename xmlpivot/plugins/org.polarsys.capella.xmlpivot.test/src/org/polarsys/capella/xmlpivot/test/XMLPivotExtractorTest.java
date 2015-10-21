@@ -32,7 +32,7 @@ public class XMLPivotExtractorTest extends TestCase {
 		extractor.modelPluginClass = "corg.polarsys.capella.semantic.data.capellamodeller.CapellaModellerPlugin";
 		extractor.editPluginClass = "org.polarsys.capella.semantic.data.capellamodeller.provider.CapellaymodellerEditPlugin";
 		extractor.editorPluginClass = "org.polarsys.capella.semantic.data.capellamodeller.presentation.CapellamodellerEditorPlugin";
-		extractor.pluginVersion = "0.8.0"; // TODO maybe derive this from source package version or the plugin that is providing it..
+		extractor.pluginVersion = "1.0.0"; // TODO maybe derive this from source package version or the plugin that is providing it..
 		extractor.sourcePackages = CapellaPackageRegistry.getAllCapellaPackages();
 		extractor.bootstrap = true;
 		extractor.build().extract();
