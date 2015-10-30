@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.junit.After;
 import org.polarsys.capella.common.ef.ExecutionManager;
 import org.polarsys.capella.common.ef.ExecutionManagerRegistry;
+import org.polarsys.capella.common.ef.command.AbstractReadWriteCommand;
 
 /**
  */
@@ -79,6 +80,16 @@ public abstract class XMLPivotRoundTripTest extends XMLPivotTest {
     }
     exportResult = exporter(inputElements);
     importResult = importer(exportResult);
+    // Imported objects need a resource in order to be able to resolve inverse references using EObjectExt
+    final Resource importedResource = manager.getEditingDomain().getResourceSet().createResource(URI.createURI("importedResult.melodymodeller")); 
+    AbstractReadWriteCommand cmd = new AbstractReadWriteCommand() {
+		
+		@Override
+		public void run() {
+			importedResource.getContents().addAll(importResult);
+		}
+	};
+	manager.execute(cmd);
     util = new XMLPivotTestUtil(uri, inputElements, importResult);
   }
 
