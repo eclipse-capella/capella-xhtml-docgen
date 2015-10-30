@@ -5,15 +5,15 @@ Bundle-SymbolicName: org.polarsys.capella.xmlpivot.common
 Bundle-Version: 0.8.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: com.google.guava,
- org.eclipse.emf.ecore,
+Require-Bundle: com.google.guava;bundle-version="[11.0.0,13.0.0]";visibility:=reexport,
  org.apache.log4j,
- org.polarsys.capella.core.model.semantic,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.emf.converter,
+ org.polarsys.capella.core.model.semantic;visibility:=reexport,
  org.polarsys.capella.core.data.gen,
  org.polarsys.capella.core.model.helpers,
  org.polarsys.capella.core.model.skeleton,
- org.eclipse.emf.codegen.ecore,
- org.eclipse.emf.converter,
  org.polarsys.capella.core.model.handler
 Export-Package: org.polarsys.capella.xmlpivot.common,
  org.polarsys.capella.xmlpivot.common.functions,
