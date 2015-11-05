@@ -10,6 +10,7 @@
   <steps xsi:type="buildstep:BuildStep" xmi:id="_qHIapLa6EeS25PpBEr5qcw" name="Import All XMLPivot Plugins">
     <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_qHIapba6EeS25PpBEr5qcw" gitLocation="_qHIasba6EeS25PpBEr5qcw" folderName="xmlpivot/features"/>
     <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_qHIapra6EeS25PpBEr5qcw" gitLocation="_qHIasba6EeS25PpBEr5qcw" folderName="xmlpivot/plugins"/>
+    <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_xi9DQYPfEeWF14yZKChGTQ" gitLocation="_qHIasba6EeS25PpBEr5qcw" folderName="xmlpivot/docs"/>
     <buildLocations xsi:type="buildstep:TargetPlatformBuildLocation" xmi:id="_qHIap7a6EeS25PpBEr5qcw" path="${usedTP}/capella/eclipse"/>
     <components xsi:type="buildstep:Feature" xmi:id="_qHIaqLa6EeS25PpBEr5qcw" id="org.polarsys.capella.xmlpivot.feature"/>
   </steps>
