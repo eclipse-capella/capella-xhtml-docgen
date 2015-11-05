@@ -58,9 +58,8 @@ public class FunctionalChain_TimeCapacity_Service {
 	 */
 	public boolean performanceOverhead(EObject eObject, EObject view,
 			EObject container) {
-		// TODO Auto-generated method stub
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return (((timeCapacity) eObject).getValue() < performanceService
+				.checkPerformance(eObject, container));
 	}
 
 }

@@ -13,6 +13,7 @@
 package org.polarsys.capella.vp.mass.design.service.tools;
 
 import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.vp.mass.helpers.MassCreationToolHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,8 +34,9 @@ public class OpenActionService {
 	 * @generated
 	 */
 	public boolean createPC_Mass(EObject element, EObject newSemanticContainer) {
-		// TODO Auto-generated method stub
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		MassCreationToolHelper massCreationToolHelper = new MassCreationToolHelper();
+		massCreationToolHelper.createMass(element, 1);
+
+		return true;
 	}
 }
