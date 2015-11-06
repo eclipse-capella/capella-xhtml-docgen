@@ -56,7 +56,7 @@ eclipse.exe -consoleLog -application org.polarsys.capella.core.commandline.core 
 
 Note that the export also creates an additional project “Simplified Capella Metamodel” in the workspace. This project will contain .ecore (Similar to XML Schema) definitions of the simplified Capella Metamodel. This project should not be deleted, as it is required to open the exported model in the basic editor, or any other EMF based tool that has to load the exported model. To share your exported model with others, always share the “Simplified Capella Metamodel” project too.
 
-== Import as New Project == 
+== New Capella Project From XML Pivot == 
 
 It is possible to initialize a new Capella project from a simplified Capella model: Open the Capella Project explorer context menu and select “New -> Capella Project from XML Pivot”. This will open the Capella Project Wizard with an additional step that allows selecting the source .xml file:
 
@@ -66,7 +66,7 @@ It is possible to initialize a new Capella project from a simplified Capella mod
 
 After filling out the remaining steps of the Capella Project Wizard click “Finish” to create the project.
 
-== Merge ==
+== Merge With Existing Capella Project ==
 
 It is possible to import a simplified Capella model and merge it directly into an existing Capella project. To merge such a model, select its .xml file in the Capella Project Explorer and select “Pivot XML -> Merge with existing Capella Project”. These commands will import the source .xml file and open the interactive Capella Diff/Merge editor.
 

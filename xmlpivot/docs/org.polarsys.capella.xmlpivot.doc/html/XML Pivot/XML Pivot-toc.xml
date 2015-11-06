@@ -14,8 +14,8 @@
 		<topic href="html/XML Pivot/XML Pivot.html#Export" label="Export"></topic>
 		<topic href="html/XML Pivot/XML Pivot.html#Command-line_Export" label="Command-line Export"></topic>
 		<topic href="html/XML Pivot/XML Pivot.html#The_Simplified_Capella_Metamodel_Project" label="The Simplified Capella Metamodel Project"></topic>
-		<topic href="html/XML Pivot/XML Pivot.html#Import_as_New_Project" label="Import as New Project"></topic>
-		<topic href="html/XML Pivot/XML Pivot.html#Merge" label="Merge"></topic>
+		<topic href="html/XML Pivot/XML Pivot.html#Import_as_New_Project" label="New Capella Project From XML Pivot"></topic>
+		<topic href="html/XML Pivot/XML Pivot.html#Merge" label="Merge With Existing Capella Project"></topic>
 		<topic href="html/XML Pivot/XML Pivot.html#Viewpoint_Addon_Support" label="Viewpoint Addon Support"></topic>
 	</topic>
 </toc>
