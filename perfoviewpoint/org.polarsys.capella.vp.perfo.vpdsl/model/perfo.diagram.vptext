@@ -234,6 +234,8 @@ Diagrams perfo.diagram {
 		
 		Actions {
 			
+			Create createActionName { label: "Create tool example" action-for:  Performance_LAB.Performance_LAB_FunctionalChain_Label}
+			
 			OpenAction CreateLABFunctionTimeConsumption {
 				label: "Function Time Consumption"
 				icon: "LogicalFunction.gif"

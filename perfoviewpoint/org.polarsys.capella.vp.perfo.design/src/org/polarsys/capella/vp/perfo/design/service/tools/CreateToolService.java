@@ -10,7 +10,11 @@
  ******************************************************************************/
 package org.polarsys.capella.vp.perfo.design.service.tools;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.sirius.diagram.DDiagram;
+import org.eclipse.sirius.diagram.DDiagramElement;
 
 /**
  * <!-- begin-user-doc -->

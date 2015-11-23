@@ -10,7 +10,11 @@
  ******************************************************************************/
 package org.polarsys.capella.vp.perfo.design.service.nodes;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.sirius.diagram.DDiagram;
+import org.eclipse.sirius.diagram.DDiagramElement;
 import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
 import org.polarsys.capella.vp.perfo.services.PerformanceServices;
 
@@ -54,7 +58,7 @@ public class FunctionalChain_TimeCapacity_Service {
 	 * @param eObject : the current semantic object
 	 * @param view : the current view
 	 * @param container : the semantic container of the current object
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean performanceOverhead(EObject eObject, EObject view,
 			EObject container) {
