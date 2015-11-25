@@ -39,7 +39,8 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
-	private static final String REGEX = "<[\\s]*a[\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>[\\s]*(.+?)[\\s]*<[\\s]*/[\\s]*a[\\s]*>";
+//	private static final String REGEX = "<[\\s]*a[\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>[\\s]*(.+?)[\\s]*<[\\s]*/[\\s]*a[\\s]*>";
+	private static final String REGEX = "<[\\s]*a[\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>(.*?)<[\\s]*/[\\s]*a[\\s]*>";
 	private static final String REGEX_IMG = "<[\\s]*img[\\s]+src[\\s]*=[\\s]*\"([^>]+)\"[\\s]*/[\\s]*>";
 	private static final String REGEX_RelativeFilePATH_OpenTag = "<a[\\s]+href=\"local://(.+?)\">";
 	private static final String ERROR_CPY = "Error during project relative image copy";
