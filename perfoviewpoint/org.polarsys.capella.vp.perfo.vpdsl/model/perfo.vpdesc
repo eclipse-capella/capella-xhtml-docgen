@@ -251,6 +251,7 @@
         </diagram_Elements>
       </the_MappingSet>
       <the_ActionSet>
+        <actions xsi:type="vpdiagram:Create" name="createActionName" tool_For="//@VP_Aspects.2/@diagrams.0/@the_MappingSet/@diagram_Elements.4" label="Create tool example"/>
         <openActions name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" icon="LogicalFunction.gif"/>
         <openActions name="createFunctionalCapacity" label="Functional Chain Consumption" icon="FunctionalChain.gif"/>
       </the_ActionSet>
