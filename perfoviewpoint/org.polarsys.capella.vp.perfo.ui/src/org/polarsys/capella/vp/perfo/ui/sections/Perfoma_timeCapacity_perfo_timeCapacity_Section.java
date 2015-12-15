@@ -15,25 +15,18 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.layout.*;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-import org.polarsys.capella.core.ui.properties.controllers.*;
-import org.polarsys.capella.common.mdsofa.common.constant.ICommonConstants;
-import org.polarsys.kitalpha.ad.services.manager.ViewpointManager;
-import org.polarsys.capella.core.ui.properties.fields.*;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.ui.properties.fields.AbstractSemanticField;
 import org.polarsys.capella.core.ui.properties.fields.TextValueGroup;
 import org.polarsys.capella.core.ui.properties.sections.AbstractSection;
 import org.polarsys.capella.vp.perfo.perfo.PerfoPackage;
-import org.polarsys.capella.vp.perfo.perfo.PerformanceCriteria;
-import org.polarsys.capella.vp.perfo.perfo.UnityElement;
+import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
 import org.polarsys.capella.vp.perfo.ui.fields.MeasurementUnitField_semanticKindGroup;
 
 /**
@@ -80,13 +73,12 @@ public class Perfoma_timeCapacity_perfo_timeCapacity_Section extends
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param eObject: current object
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean select(Object eObject) {
 		EObject eObjectToTest = super.selection(eObject);
 
-		if (eObjectToTest instanceof PerformanceCriteria
-				|| eObjectToTest instanceof UnityElement)
+		if (eObjectToTest instanceof timeCapacity)
 			return true;
 
 		return false;
