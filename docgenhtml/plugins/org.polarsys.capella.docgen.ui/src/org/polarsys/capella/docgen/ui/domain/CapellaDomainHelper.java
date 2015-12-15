@@ -25,7 +25,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.polarsys.capella.common.ef.ExecutionManagerRegistry;
-import org.polarsys.capella.core.data.capellamodeller.util.CapellamodellerResourceImpl;
+import org.polarsys.capella.core.data.capellamodeller.ModelRoot;
+import org.polarsys.capella.core.data.capellamodeller.Project;
+
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeException;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeReferencesStrategy;
@@ -38,10 +40,19 @@ public class CapellaDomainHelper extends LoadableDomainHelper {
 		while (iterator.hasNext()) {
 			TransactionalEditingDomain transactionalEditingDomain = (TransactionalEditingDomain) iterator.next();
 			Resource resource = transactionalEditingDomain.getResourceSet().getResource(resourceURI, false);
-			if (resource != null && resource instanceof CapellamodellerResourceImpl) {
-				return transactionalEditingDomain.getResourceSet();
+			if (resource != null && !(resource.getContents().isEmpty()))
+			{
+				EObject modelRoot = resource.getContents().get(0);
+				if (modelRoot != null && modelRoot instanceof Project)
+				{
+					Project project = (Project) modelRoot;
+					EList<ModelRoot> ownedModelRoots = project.getOwnedModelRoots();
+					if (ownedModelRoots != null && ownedModelRoots.isEmpty() == false)
+						return transactionalEditingDomain.getResourceSet();
+				}
 			}
 		}
+
 		return null;
 	}
 
