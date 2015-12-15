@@ -28,24 +28,24 @@
    </license>
 
    <plugin
-         id="org.polarsys.capella.vp.perfo.sbrowser"
-         download-size="0"
-         install-size="0"
-         version="0.8.3.qualifier"
-         unpack="false"/>
-
-   <plugin
          id="org.polarsys.capella.vp.perfo.ui"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.polarsys.capella.vp.perfo.design"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.polarsys.capella.vp.perfo.sbrowser"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

@@ -31,35 +31,35 @@
          id="org.polarsys.capella.vp.perfo.rules.analysis"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.polarsys.capella.vp.perfo.rules.validation"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.polarsys.capella.vp.perfo.rules.transformation"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.polarsys.capella.vp.perfo.rules.generation"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.polarsys.capella.vp.perfo.rules.computation"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
