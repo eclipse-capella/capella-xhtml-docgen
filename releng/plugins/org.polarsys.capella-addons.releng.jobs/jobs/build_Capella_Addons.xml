@@ -9,5 +9,14 @@
 	<echo message="Running Job XHTMLDocGen in Capella_Addons_XHTMLDocGen/releng"/>
 	<ant dir="Capella_Addons_XHTMLDocGen/releng"/>
 
+	<echo message="Running Job MassVP in Capella_Addons_MassVP/releng"/>
+	<ant dir="Capella_Addons_MassVP/releng"/>
+
+	<echo message="Running Job PriceVP in Capella_Addons_PriceVP/releng"/>
+	<ant dir="Capella_Addons_PriceVP/releng"/>
+
+	<echo message="Running Job PerfoVP in Capella_Addons_PerfoVP/releng"/>
+	<ant dir="Capella_Addons_PerfoVP/releng"/>
+
 
 </project>
