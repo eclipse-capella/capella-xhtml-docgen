@@ -14,19 +14,24 @@
       label="%featureName"
       version="1.0.0.qualifier"
       provider-name="%providerName">
+
    <description url="%descriptionURL">
       %description
    </description>
+
    <copyright url="%copyrightURL">
       %copyright
    </copyright>
+
    <license url="%licenseURL">
       %license
    </license>
+
    <plugin
          id="org.polarsys.capella.vp.price.af"
          download-size="0"
          install-size="0"
-         version="0.0.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
+
 </feature>
