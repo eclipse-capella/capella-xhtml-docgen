@@ -771,11 +771,11 @@ public interface PerfoPackage extends EPackage {
 	int PERFORMANCE_CAPACITY_FEATURE_COUNT = PERFORMANCE_CRITERIA_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.timeConsumptionImpl <em>time Consumption</em>}' class.
+	 * The meta object id for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.TimeConsumptionImpl <em>Time Consumption</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.polarsys.capella.vp.perfo.perfo.impl.timeConsumptionImpl
-	 * @see org.polarsys.capella.vp.perfo.perfo.impl.PerfoPackageImpl#gettimeConsumption()
+	 * @see org.polarsys.capella.vp.perfo.perfo.impl.TimeConsumptionImpl
+	 * @see org.polarsys.capella.vp.perfo.perfo.impl.PerfoPackageImpl#getTimeConsumption()
 	 * @generated
 	 */
 	int TIME_CONSUMPTION = 3;
@@ -1006,7 +1006,7 @@ public interface PerfoPackage extends EPackage {
 	int TIME_CONSUMPTION__MEASUREMENT_UNIT = PERFORMANCE_CONSUMPTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>time Consumption</em>' class.
+	 * The number of structural features of the '<em>Time Consumption</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1015,11 +1015,11 @@ public interface PerfoPackage extends EPackage {
 	int TIME_CONSUMPTION_FEATURE_COUNT = PERFORMANCE_CONSUMPTION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.timeCapacityImpl <em>time Capacity</em>}' class.
+	 * The meta object id for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.TimeCapacityImpl <em>Time Capacity</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.polarsys.capella.vp.perfo.perfo.impl.timeCapacityImpl
-	 * @see org.polarsys.capella.vp.perfo.perfo.impl.PerfoPackageImpl#gettimeCapacity()
+	 * @see org.polarsys.capella.vp.perfo.perfo.impl.TimeCapacityImpl
+	 * @see org.polarsys.capella.vp.perfo.perfo.impl.PerfoPackageImpl#getTimeCapacity()
 	 * @generated
 	 */
 	int TIME_CAPACITY = 4;
@@ -1259,7 +1259,7 @@ public interface PerfoPackage extends EPackage {
 	int TIME_CAPACITY__CURRENT_EXECUTION_TIME = PERFORMANCE_CAPACITY_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>time Capacity</em>' class.
+	 * The number of structural features of the '<em>Time Capacity</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1558,35 +1558,35 @@ public interface PerfoPackage extends EPackage {
 	EClass getPerformanceCapacity();
 
 	/**
-	 * Returns the meta object for class '{@link org.polarsys.capella.vp.perfo.perfo.timeConsumption <em>time Consumption</em>}'.
+	 * Returns the meta object for class '{@link org.polarsys.capella.vp.perfo.perfo.TimeConsumption <em>Time Consumption</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>time Consumption</em>'.
-	 * @see org.polarsys.capella.vp.perfo.perfo.timeConsumption
+	 * @return the meta object for class '<em>Time Consumption</em>'.
+	 * @see org.polarsys.capella.vp.perfo.perfo.TimeConsumption
 	 * @generated
 	 */
-	EClass gettimeConsumption();
+	EClass getTimeConsumption();
 
 	/**
-	 * Returns the meta object for class '{@link org.polarsys.capella.vp.perfo.perfo.timeCapacity <em>time Capacity</em>}'.
+	 * Returns the meta object for class '{@link org.polarsys.capella.vp.perfo.perfo.TimeCapacity <em>Time Capacity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>time Capacity</em>'.
-	 * @see org.polarsys.capella.vp.perfo.perfo.timeCapacity
+	 * @return the meta object for class '<em>Time Capacity</em>'.
+	 * @see org.polarsys.capella.vp.perfo.perfo.TimeCapacity
 	 * @generated
 	 */
-	EClass gettimeCapacity();
+	EClass getTimeCapacity();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.polarsys.capella.vp.perfo.perfo.timeCapacity#getCurrentExecutionTime <em>Current Execution Time</em>}'.
+	 * Returns the meta object for the attribute '{@link org.polarsys.capella.vp.perfo.perfo.TimeCapacity#getCurrentExecutionTime <em>Current Execution Time</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Current Execution Time</em>'.
-	 * @see org.polarsys.capella.vp.perfo.perfo.timeCapacity#getCurrentExecutionTime()
-	 * @see #gettimeCapacity()
+	 * @see org.polarsys.capella.vp.perfo.perfo.TimeCapacity#getCurrentExecutionTime()
+	 * @see #getTimeCapacity()
 	 * @generated
 	 */
-	EAttribute gettimeCapacity_CurrentExecutionTime();
+	EAttribute getTimeCapacity_CurrentExecutionTime();
 
 	/**
 	 * Returns the meta object for class '{@link org.polarsys.capella.vp.perfo.perfo.UnityElement <em>Unity Element</em>}'.
@@ -1696,24 +1696,24 @@ public interface PerfoPackage extends EPackage {
 		EClass PERFORMANCE_CAPACITY = eINSTANCE.getPerformanceCapacity();
 
 		/**
-		 * The meta object literal for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.timeConsumptionImpl <em>time Consumption</em>}' class.
+		 * The meta object literal for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.TimeConsumptionImpl <em>Time Consumption</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.polarsys.capella.vp.perfo.perfo.impl.timeConsumptionImpl
-		 * @see org.polarsys.capella.vp.perfo.perfo.impl.PerfoPackageImpl#gettimeConsumption()
+		 * @see org.polarsys.capella.vp.perfo.perfo.impl.TimeConsumptionImpl
+		 * @see org.polarsys.capella.vp.perfo.perfo.impl.PerfoPackageImpl#getTimeConsumption()
 		 * @generated
 		 */
-		EClass TIME_CONSUMPTION = eINSTANCE.gettimeConsumption();
+		EClass TIME_CONSUMPTION = eINSTANCE.getTimeConsumption();
 
 		/**
-		 * The meta object literal for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.timeCapacityImpl <em>time Capacity</em>}' class.
+		 * The meta object literal for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.TimeCapacityImpl <em>Time Capacity</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.polarsys.capella.vp.perfo.perfo.impl.timeCapacityImpl
-		 * @see org.polarsys.capella.vp.perfo.perfo.impl.PerfoPackageImpl#gettimeCapacity()
+		 * @see org.polarsys.capella.vp.perfo.perfo.impl.TimeCapacityImpl
+		 * @see org.polarsys.capella.vp.perfo.perfo.impl.PerfoPackageImpl#getTimeCapacity()
 		 * @generated
 		 */
-		EClass TIME_CAPACITY = eINSTANCE.gettimeCapacity();
+		EClass TIME_CAPACITY = eINSTANCE.getTimeCapacity();
 
 		/**
 		 * The meta object literal for the '<em><b>Current Execution Time</b></em>' attribute feature.
@@ -1721,7 +1721,7 @@ public interface PerfoPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TIME_CAPACITY__CURRENT_EXECUTION_TIME = eINSTANCE.gettimeCapacity_CurrentExecutionTime();
+		EAttribute TIME_CAPACITY__CURRENT_EXECUTION_TIME = eINSTANCE.getTimeCapacity_CurrentExecutionTime();
 
 		/**
 		 * The meta object literal for the '{@link org.polarsys.capella.vp.perfo.perfo.impl.UnityElementImpl <em>Unity Element</em>}' class.

@@ -24,14 +24,14 @@
     <VP_Classes name="PerformanceCapacity">
       <Inheritences xsi:type="vpdesc:LocalSuperClass" superClass="//@VP_Data/@VP_Classes.0"/>
     </VP_Classes>
-    <VP_Classes name="timeConsumption" icon="timeConsumption.gif">
+    <VP_Classes name="TimeConsumption" icon="timeConsumption.gif">
       <extends href="../../../plugin/org.polarsys.capella.core.data.gen/model/FunctionalAnalysis.ecore#//FunctionalExchange"/>
       <extends href="../../../plugin/org.polarsys.capella.core.data.gen/model/PhysicalArchitecture.ecore#//PhysicalFunction"/>
       <extends href="../../../plugin/org.polarsys.capella.core.data.gen/model/LogicalArchitecture.ecore#//LogicalFunction"/>
       <Inheritences xsi:type="vpdesc:LocalSuperClass" superClass="//@VP_Data/@VP_Classes.1"/>
       <Inheritences xsi:type="vpdesc:LocalSuperClass" superClass="//@VP_Data/@VP_Classes.5"/>
     </VP_Classes>
-    <VP_Classes name="timeCapacity" icon="timeCapacity.gif">
+    <VP_Classes name="TimeCapacity" icon="timeCapacity.gif">
       <VP_Class_Attributes name="currentExecutionTime">
         <owned_type xsi:type="vpdesc:ExternalAttributeType">
           <type href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
@@ -164,7 +164,6 @@
         </diagram_Elements>
       </the_MappingSet>
       <the_ActionSet>
-        <actions xsi:type="vpdiagram:Create" name="createActionName" tool_For="//@VP_Aspects.2/@diagrams.0/@the_MappingSet/@diagram_Elements.3" label="Create tool example"/>
         <openActions name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" icon="LogicalFunction.gif"/>
         <openActions name="createFunctionalCapacity" label="Functional Chain Capacity"/>
       </the_ActionSet>
@@ -251,7 +250,6 @@
         </diagram_Elements>
       </the_MappingSet>
       <the_ActionSet>
-        <actions xsi:type="vpdiagram:Create" name="createActionName" tool_For="//@VP_Aspects.2/@diagrams.0/@the_MappingSet/@diagram_Elements.4" label="Create tool example"/>
         <openActions name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" icon="LogicalFunction.gif"/>
         <openActions name="createFunctionalCapacity" label="Functional Chain Consumption" icon="FunctionalChain.gif"/>
       </the_ActionSet>

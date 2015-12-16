@@ -17,11 +17,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.polarsys.capella.common.model.helpers.IHelper;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceCapacity;
+import org.polarsys.capella.vp.perfo.perfo.TimeConsumption;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceConsumption;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceCriteria;
 import org.polarsys.capella.vp.perfo.perfo.UnityElement;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
-import org.polarsys.capella.vp.perfo.perfo.timeConsumption;
 
 /**
  * @generated 
@@ -43,11 +43,11 @@ public class PerfoPackageHelper implements IHelper {
 		if (ret == null && object instanceof PerformanceCapacity) {
 			ret = PerformanceCapacityHelper.getInstance().doSwitch((PerformanceCapacity) object, feature);
 		}
-		if (ret == null && object instanceof timeConsumption) {
-			ret = TimeConsumptionHelper.getInstance().doSwitch((timeConsumption) object, feature);
+		if (ret == null && object instanceof TimeConsumption) {
+			ret = TimeConsumptionHelper.getInstance().doSwitch((TimeConsumption) object, feature);
 		}
-		if (ret == null && object instanceof timeCapacity) {
-			ret = TimeCapacityHelper.getInstance().doSwitch((timeCapacity) object, feature);
+		if (ret == null && object instanceof TimeCapacity) {
+			ret = TimeCapacityHelper.getInstance().doSwitch((TimeCapacity) object, feature);
 		}
 		if (ret == null && object instanceof UnityElement) {
 			ret = UnityElementHelper.getInstance().doSwitch((UnityElement) object, feature);

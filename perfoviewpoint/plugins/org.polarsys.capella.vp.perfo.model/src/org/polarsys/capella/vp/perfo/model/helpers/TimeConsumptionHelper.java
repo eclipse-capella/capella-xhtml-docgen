@@ -12,7 +12,7 @@ package org.polarsys.capella.vp.perfo.model.helpers;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.polarsys.capella.common.model.helpers.HelperNotFoundException;
-import org.polarsys.capella.vp.perfo.perfo.timeConsumption;
+import org.polarsys.capella.vp.perfo.perfo.TimeConsumption;
 
 /**
  * @generated
@@ -29,9 +29,9 @@ public class TimeConsumptionHelper {
 	}
 
 	/**
-	 * @generated
-	 */
-	public Object doSwitch(timeConsumption object, EStructuralFeature feature) {
+	* @generated
+	*/
+	public Object doSwitch(TimeConsumption object, EStructuralFeature feature) {
 		// handle derivated feature
 
 		// delegate to parent helper

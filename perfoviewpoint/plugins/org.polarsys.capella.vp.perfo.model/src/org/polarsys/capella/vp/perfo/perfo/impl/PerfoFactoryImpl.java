@@ -71,9 +71,9 @@ public class PerfoFactoryImpl extends EFactoryImpl implements PerfoFactory {
 		case PerfoPackage.PERFORMANCE_CAPACITY:
 			return createPerformanceCapacity();
 		case PerfoPackage.TIME_CONSUMPTION:
-			return createtimeConsumption();
+			return createTimeConsumption();
 		case PerfoPackage.TIME_CAPACITY:
-			return createtimeCapacity();
+			return createTimeCapacity();
 		case PerfoPackage.UNITY_ELEMENT:
 			return createUnityElement();
 		default:
@@ -146,8 +146,8 @@ public class PerfoFactoryImpl extends EFactoryImpl implements PerfoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public timeConsumption createtimeConsumption() {
-		timeConsumptionImpl timeConsumption = new timeConsumptionImpl();
+	public TimeConsumption createTimeConsumption() {
+		TimeConsumptionImpl timeConsumption = new TimeConsumptionImpl();
 		return timeConsumption;
 	}
 
@@ -156,8 +156,8 @@ public class PerfoFactoryImpl extends EFactoryImpl implements PerfoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public timeCapacity createtimeCapacity() {
-		timeCapacityImpl timeCapacity = new timeCapacityImpl();
+	public TimeCapacity createTimeCapacity() {
+		TimeCapacityImpl timeCapacity = new TimeCapacityImpl();
 		return timeCapacity;
 	}
 

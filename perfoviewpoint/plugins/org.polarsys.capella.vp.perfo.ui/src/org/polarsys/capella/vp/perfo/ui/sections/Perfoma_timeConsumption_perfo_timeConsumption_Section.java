@@ -15,8 +15,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.layout.*;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -33,7 +31,7 @@ import org.polarsys.capella.core.ui.properties.fields.TextValueGroup;
 import org.polarsys.capella.core.ui.properties.sections.AbstractSection;
 import org.polarsys.capella.vp.perfo.perfo.PerfoPackage;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceCriteria;
-import org.polarsys.capella.vp.perfo.perfo.timeConsumption;
+import org.polarsys.capella.vp.perfo.perfo.TimeConsumption;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,10 +57,10 @@ public class Perfoma_timeConsumption_perfo_timeConsumption_Section extends Abstr
 	/**
 	* <!-- begin-model-doc -->
 	* <!-- end-model-doc -->
-	* <!-- begin-user-doc -->
+		* <!-- begin-user-doc -->
 	* <!-- end-user-doc -->
-	* @generated
-	*/
+		* @generated
+		*/
 	private Group perfo_timeConsumption_AttributeGroup;
 
 	/**
@@ -74,7 +72,7 @@ public class Perfoma_timeConsumption_perfo_timeConsumption_Section extends Abstr
 	public boolean select(Object eObject) {
 		EObject eObjectToTest = super.selection(eObject);
 
-		if (eObjectToTest instanceof timeConsumption)
+		if (eObjectToTest instanceof TimeConsumption)
 			return true;
 
 		return false;

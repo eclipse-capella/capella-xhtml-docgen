@@ -8,6 +8,7 @@
  *   Contributors:
  *      Thales - initial API and implementation
  ******************************************************************************/
+
 package org.polarsys.capella.vp.perfo.perfo.impl;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -17,27 +18,26 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.polarsys.capella.vp.perfo.perfo.PerfoPackage;
+import org.polarsys.capella.vp.perfo.perfo.TimeConsumption;
 import org.polarsys.capella.vp.perfo.perfo.UnityElement;
 import org.polarsys.capella.vp.perfo.perfo.measurementUnit_Type;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
 
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>time Capacity</b></em>'.
+ * An implementation of the model object '<em><b>Time Consumption</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.polarsys.capella.vp.perfo.perfo.impl.timeCapacityImpl#getMeasurementUnit <em>Measurement Unit</em>}</li>
- *   <li>{@link org.polarsys.capella.vp.perfo.perfo.impl.timeCapacityImpl#getCurrentExecutionTime <em>Current Execution Time</em>}</li>
+ *   <li>{@link org.polarsys.capella.vp.perfo.perfo.impl.TimeConsumptionImpl#getMeasurementUnit <em>Measurement Unit</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCapacity {
+public class TimeConsumptionImpl extends PerformanceConsumptionImpl implements TimeConsumption {
 
 	/**
 	 * The default value of the '{@link #getMeasurementUnit() <em>Measurement Unit</em>}' attribute.
@@ -60,31 +60,11 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 	protected measurementUnit_Type measurementUnit = MEASUREMENT_UNIT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getCurrentExecutionTime() <em>Current Execution Time</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCurrentExecutionTime()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int CURRENT_EXECUTION_TIME_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getCurrentExecutionTime() <em>Current Execution Time</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCurrentExecutionTime()
-	 * @generated
-	 * @ordered
-	 */
-	protected int currentExecutionTime = CURRENT_EXECUTION_TIME_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected timeCapacityImpl() {
+	protected TimeConsumptionImpl() {
 
 		super();
 
@@ -97,7 +77,7 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return PerfoPackage.Literals.TIME_CAPACITY;
+		return PerfoPackage.Literals.TIME_CONSUMPTION;
 	}
 
 	/**
@@ -122,35 +102,8 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 		measurementUnit_Type oldMeasurementUnit = measurementUnit;
 		measurementUnit = newMeasurementUnit == null ? MEASUREMENT_UNIT_EDEFAULT : newMeasurementUnit;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PerfoPackage.TIME_CAPACITY__MEASUREMENT_UNIT,
+			eNotify(new ENotificationImpl(this, Notification.SET, PerfoPackage.TIME_CONSUMPTION__MEASUREMENT_UNIT,
 					oldMeasurementUnit, measurementUnit));
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-
-	public int getCurrentExecutionTime() {
-
-		return currentExecutionTime;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-
-	public void setCurrentExecutionTime(int newCurrentExecutionTime) {
-
-		int oldCurrentExecutionTime = currentExecutionTime;
-		currentExecutionTime = newCurrentExecutionTime;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PerfoPackage.TIME_CAPACITY__CURRENT_EXECUTION_TIME,
-					oldCurrentExecutionTime, currentExecutionTime));
 
 	}
 
@@ -162,10 +115,8 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case PerfoPackage.TIME_CAPACITY__MEASUREMENT_UNIT:
+		case PerfoPackage.TIME_CONSUMPTION__MEASUREMENT_UNIT:
 			return getMeasurementUnit();
-		case PerfoPackage.TIME_CAPACITY__CURRENT_EXECUTION_TIME:
-			return getCurrentExecutionTime();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -178,11 +129,8 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case PerfoPackage.TIME_CAPACITY__MEASUREMENT_UNIT:
+		case PerfoPackage.TIME_CONSUMPTION__MEASUREMENT_UNIT:
 			setMeasurementUnit((measurementUnit_Type) newValue);
-			return;
-		case PerfoPackage.TIME_CAPACITY__CURRENT_EXECUTION_TIME:
-			setCurrentExecutionTime((Integer) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,11 +144,8 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case PerfoPackage.TIME_CAPACITY__MEASUREMENT_UNIT:
+		case PerfoPackage.TIME_CONSUMPTION__MEASUREMENT_UNIT:
 			setMeasurementUnit(MEASUREMENT_UNIT_EDEFAULT);
-			return;
-		case PerfoPackage.TIME_CAPACITY__CURRENT_EXECUTION_TIME:
-			setCurrentExecutionTime(CURRENT_EXECUTION_TIME_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -214,10 +159,8 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case PerfoPackage.TIME_CAPACITY__MEASUREMENT_UNIT:
+		case PerfoPackage.TIME_CONSUMPTION__MEASUREMENT_UNIT:
 			return measurementUnit != MEASUREMENT_UNIT_EDEFAULT;
-		case PerfoPackage.TIME_CAPACITY__CURRENT_EXECUTION_TIME:
-			return currentExecutionTime != CURRENT_EXECUTION_TIME_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -231,7 +174,7 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == UnityElement.class) {
 			switch (derivedFeatureID) {
-			case PerfoPackage.TIME_CAPACITY__MEASUREMENT_UNIT:
+			case PerfoPackage.TIME_CONSUMPTION__MEASUREMENT_UNIT:
 				return PerfoPackage.UNITY_ELEMENT__MEASUREMENT_UNIT;
 			default:
 				return -1;
@@ -256,7 +199,7 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 		if (baseClass == UnityElement.class) {
 			switch (baseFeatureID) {
 			case PerfoPackage.UNITY_ELEMENT__MEASUREMENT_UNIT:
-				return PerfoPackage.TIME_CAPACITY__MEASUREMENT_UNIT;
+				return PerfoPackage.TIME_CONSUMPTION__MEASUREMENT_UNIT;
 			default:
 				return -1;
 			}
@@ -283,10 +226,8 @@ public class timeCapacityImpl extends PerformanceCapacityImpl implements timeCap
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (measurementUnit: "); //$NON-NLS-1$
 		result.append(measurementUnit);
-		result.append(", currentExecutionTime: "); //$NON-NLS-1$
-		result.append(currentExecutionTime);
 		result.append(')');
 		return result.toString();
 	}
 
-} //timeCapacityImpl
+} //TimeConsumptionImpl

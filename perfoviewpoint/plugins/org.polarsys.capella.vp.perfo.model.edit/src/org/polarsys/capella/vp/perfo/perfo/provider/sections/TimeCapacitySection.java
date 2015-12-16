@@ -8,20 +8,21 @@
  *   Contributors:
  *      Thales - initial API and implementation
  ******************************************************************************/
+
 package org.polarsys.capella.vp.perfo.perfo.provider.sections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.core.properties.sections.NamedElementSection;
 import org.polarsys.capella.core.model.handler.helpers.CapellaAdapterHelper;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
 
 /**
- * This is the item provider adapter for a {@link timeCapacitySection} object.
+ * This is the item provider adapter for a {@link TimeCapacitySection} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class timeCapacitySection extends NamedElementSection {
+public class TimeCapacitySection extends NamedElementSection {
 	/**
 	 * @generated
 	 */
@@ -30,6 +31,6 @@ public class timeCapacitySection extends NamedElementSection {
 		EObject obj = CapellaAdapterHelper.resolveSemanticObject(toTest);
 
 		return obj != null
-				&& obj.eClass().equals(org.polarsys.capella.vp.perfo.perfo.PerfoPackage.eINSTANCE.gettimeCapacity());
+				&& obj.eClass().equals(org.polarsys.capella.vp.perfo.perfo.PerfoPackage.eINSTANCE.getTimeCapacity());
 	}
 }

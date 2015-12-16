@@ -8,29 +8,30 @@
  *   Contributors:
  *      Thales - initial API and implementation
  ******************************************************************************/
+
 package org.polarsys.capella.vp.perfo.perfo;
 
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>time Capacity</b></em>'.
+ * A representation of the model object '<em><b>Time Capacity</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.polarsys.capella.vp.perfo.perfo.timeCapacity#getCurrentExecutionTime <em>Current Execution Time</em>}</li>
+ *   <li>{@link org.polarsys.capella.vp.perfo.perfo.TimeCapacity#getCurrentExecutionTime <em>Current Execution Time</em>}</li>
  * </ul>
  *
- * @see org.polarsys.capella.vp.perfo.perfo.PerfoPackage#gettimeCapacity()
+ * @see org.polarsys.capella.vp.perfo.perfo.PerfoPackage#getTimeCapacity()
  * @model annotation="http://www.polarsys.org/kitalpha/emde/1.0.0/constraint ExtendedElement=' http://www.polarsys.org/capella/core/fa/1.0.0#//FunctionalChain'"
  *        annotation="http://www.polarsys.org/kitalpha/emde/1.0.0/constraintMapping Mapping=' platform:/plugin/org.polarsys.capella.core.data.gen/model/FunctionalAnalysis.ecore#//FunctionalChain'"
  * @generated
  */
 
-public interface timeCapacity extends PerformanceCapacity, UnityElement, ElementExtension {
+public interface TimeCapacity extends PerformanceCapacity, UnityElement, ElementExtension {
 
 	/**
 	 * Returns the value of the '<em><b>Current Execution Time</b></em>' attribute.
@@ -43,7 +44,7 @@ public interface timeCapacity extends PerformanceCapacity, UnityElement, Element
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Current Execution Time</em>' attribute.
 	 * @see #setCurrentExecutionTime(int)
-	 * @see org.polarsys.capella.vp.perfo.perfo.PerfoPackage#gettimeCapacity_CurrentExecutionTime()
+	 * @see org.polarsys.capella.vp.perfo.perfo.PerfoPackage#getTimeCapacity_CurrentExecutionTime()
 	 * @model
 	 * @generated
 	 */
@@ -51,7 +52,7 @@ public interface timeCapacity extends PerformanceCapacity, UnityElement, Element
 	int getCurrentExecutionTime();
 
 	/**
-	 * Sets the value of the '{@link org.polarsys.capella.vp.perfo.perfo.timeCapacity#getCurrentExecutionTime <em>Current Execution Time</em>}' attribute.
+	 * Sets the value of the '{@link org.polarsys.capella.vp.perfo.perfo.TimeCapacity#getCurrentExecutionTime <em>Current Execution Time</em>}' attribute.
 	
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,4 +63,4 @@ public interface timeCapacity extends PerformanceCapacity, UnityElement, Element
 
 	void setCurrentExecutionTime(int value);
 
-} // timeCapacity
+} // TimeCapacity

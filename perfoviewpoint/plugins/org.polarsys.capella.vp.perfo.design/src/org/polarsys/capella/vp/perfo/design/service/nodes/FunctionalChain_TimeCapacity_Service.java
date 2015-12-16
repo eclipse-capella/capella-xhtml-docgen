@@ -15,7 +15,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
 import org.polarsys.capella.vp.perfo.services.PerformanceServices;
 
 /**
@@ -46,8 +46,8 @@ public class FunctionalChain_TimeCapacity_Service {
 	 * @generated NOT
 	 */
 	public boolean performanceSaturated(EObject eObject, EObject view, EObject container) {
-		return ((timeCapacity) eObject).getValue() != 0
-				&& (((timeCapacity) eObject).getValue() == performanceService.checkPerformance(eObject, container));
+		return ((TimeCapacity) eObject).getValue() != 0
+				&& (((TimeCapacity) eObject).getValue() == performanceService.checkPerformance(eObject, container));
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class FunctionalChain_TimeCapacity_Service {
 	 * @generated NOT
 	 */
 	public boolean performanceOverhead(EObject eObject, EObject view, EObject container) {
-		return (((timeCapacity) eObject).getValue() < performanceService.checkPerformance(eObject, container));
+		return (((TimeCapacity) eObject).getValue() < performanceService.checkPerformance(eObject, container));
 	}
 
 }

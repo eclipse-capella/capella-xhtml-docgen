@@ -57,22 +57,22 @@ public interface PerfoFactory extends EFactory {
 	PerformanceCapacity createPerformanceCapacity();
 
 	/**
-	 * Returns a new object of class '<em>time Consumption</em>'.
+	 * Returns a new object of class '<em>Time Consumption</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>time Consumption</em>'.
+	 * @return a new object of class '<em>Time Consumption</em>'.
 	 * @generated
 	 */
-	timeConsumption createtimeConsumption();
+	TimeConsumption createTimeConsumption();
 
 	/**
-	 * Returns a new object of class '<em>time Capacity</em>'.
+	 * Returns a new object of class '<em>Time Capacity</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>time Capacity</em>'.
+	 * @return a new object of class '<em>Time Capacity</em>'.
 	 * @generated
 	 */
-	timeCapacity createtimeCapacity();
+	TimeCapacity createTimeCapacity();
 
 	/**
 	 * Returns a new object of class '<em>Unity Element</em>'.

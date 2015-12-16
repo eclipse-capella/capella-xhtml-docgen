@@ -160,8 +160,8 @@ public class PerfoSwitch<T> extends Switch<T> {
 			return result;
 		}
 		case PerfoPackage.TIME_CONSUMPTION: {
-			timeConsumption timeConsumption = (timeConsumption) theEObject;
-			T result = casetimeConsumption(timeConsumption);
+			TimeConsumption timeConsumption = (TimeConsumption) theEObject;
+			T result = caseTimeConsumption(timeConsumption);
 			if (result == null)
 				result = casePerformanceConsumption(timeConsumption);
 			if (result == null)
@@ -191,8 +191,8 @@ public class PerfoSwitch<T> extends Switch<T> {
 			return result;
 		}
 		case PerfoPackage.TIME_CAPACITY: {
-			timeCapacity timeCapacity = (timeCapacity) theEObject;
-			T result = casetimeCapacity(timeCapacity);
+			TimeCapacity timeCapacity = (TimeCapacity) theEObject;
+			T result = caseTimeCapacity(timeCapacity);
 			if (result == null)
 				result = casePerformanceCapacity(timeCapacity);
 			if (result == null)
@@ -295,32 +295,32 @@ public class PerfoSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>time Consumption</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Time Consumption</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>time Consumption</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Time Consumption</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casetimeConsumption(timeConsumption object) {
+	public T caseTimeConsumption(TimeConsumption object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>time Capacity</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Time Capacity</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>time Capacity</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Time Capacity</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casetimeCapacity(timeCapacity object) {
+	public T caseTimeCapacity(TimeCapacity object) {
 		return null;
 	}
 

@@ -8,6 +8,7 @@
  *   Contributors:
  *      Thales - initial API and implementation
  ******************************************************************************/
+
 package org.polarsys.capella.vp.perfo.perfo.provider;
 
 import java.util.Collection;
@@ -27,24 +28,23 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.polarsys.capella.vp.perfo.perfo.PerfoPackage;
-import org.polarsys.capella.vp.perfo.perfo.timeConsumption;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
 
 /**
- * This is the item provider adapter for a {@link org.polarsys.capella.vp.perfo.perfo.timeConsumption} object.
+ * This is the item provider adapter for a {@link org.polarsys.capella.vp.perfo.perfo.TimeCapacity} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class timeConsumptionItemProvider extends PerformanceConsumptionItemProvider
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class TimeCapacityItemProvider extends PerformanceCapacityItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public timeConsumptionItemProvider(AdapterFactory adapterFactory) {
+	public TimeCapacityItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -60,6 +60,7 @@ public class timeConsumptionItemProvider extends PerformanceConsumptionItemProvi
 			super.getPropertyDescriptors(object);
 
 			addMeasurementUnitPropertyDescriptor(object);
+			addCurrentExecutionTimePropertyDescriptor(object);
 		}
 		// begin-extension-code
 		checkChildCreationExtender(object);
@@ -90,14 +91,36 @@ public class timeConsumptionItemProvider extends PerformanceConsumptionItemProvi
 	}
 
 	/**
-	 * This returns timeConsumption.gif.
+	 * This adds a property descriptor for the Current Execution Time feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCurrentExecutionTimePropertyDescriptor(Object object) {
+
+		// begin-extension-code
+		itemPropertyDescriptors.add(createItemPropertyDescriptor
+				// end-extension-code
+				(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+						getString("_UI_TimeCapacity_currentExecutionTime_feature"), //$NON-NLS-1$
+						getString("_UI_PropertyDescriptor_description", "_UI_TimeCapacity_currentExecutionTime_feature", //$NON-NLS-1$//$NON-NLS-2$
+								"_UI_TimeCapacity_type"), //$NON-NLS-1$
+						PerfoPackage.Literals.TIME_CAPACITY__CURRENT_EXECUTION_TIME, true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null,
+						// begin-extension-code
+						null));
+		// end-extension-code
+	}
+
+	/**
+	 * This returns TimeCapacity.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/timeConsumption")); //$NON-NLS-1$
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TimeCapacity")); //$NON-NLS-1$
 	}
 
 	/**
@@ -109,9 +132,9 @@ public class timeConsumptionItemProvider extends PerformanceConsumptionItemProvi
 	@Override
 	public String getText(Object object) {
 
-		String label = ((timeConsumption) object).getName();
+		String label = ((TimeCapacity) object).getName();
 		// begin-extension-code
-		return label == null || label.length() == 0 ? "[" + getString("_UI_timeConsumption_type") + "]" : label; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return label == null || label.length() == 0 ? "[" + getString("_UI_TimeCapacity_type") + "]" : label; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		// end-extension-code
 	}
 
@@ -126,8 +149,9 @@ public class timeConsumptionItemProvider extends PerformanceConsumptionItemProvi
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(timeConsumption.class)) {
-		case PerfoPackage.TIME_CONSUMPTION__MEASUREMENT_UNIT:
+		switch (notification.getFeatureID(TimeCapacity.class)) {
+		case PerfoPackage.TIME_CAPACITY__MEASUREMENT_UNIT:
+		case PerfoPackage.TIME_CAPACITY__CURRENT_EXECUTION_TIME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

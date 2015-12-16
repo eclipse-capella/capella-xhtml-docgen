@@ -21,8 +21,8 @@ import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.vp.perfo.perfo.PerfoFactory;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
-import org.polarsys.capella.vp.perfo.perfo.timeConsumption;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
+import org.polarsys.capella.vp.perfo.perfo.TimeConsumption;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 
 /**
@@ -47,7 +47,7 @@ public class OpenActionService {
 		if (element instanceof AbstractFunction
 				&& checktimeConsumptionUnicity(((AbstractFunction) element).getOwnedExtensions())) {
 			AbstractFunction functionalExchange = (AbstractFunction) element;
-			timeConsumption timeConsumption = PerfoFactory.eINSTANCE.createtimeConsumption();
+			TimeConsumption timeConsumption = PerfoFactory.eINSTANCE.createTimeConsumption();
 			timeConsumption.setId(EcoreUtil.generateUUID());
 			timeConsumption.setValue(0);
 			functionalExchange.getOwnedExtensions().add(timeConsumption);
@@ -57,7 +57,7 @@ public class OpenActionService {
 		if (element instanceof FunctionalExchange
 				&& checktimeConsumptionUnicity(((FunctionalExchange) element).getOwnedExtensions())) {
 			FunctionalExchange functionalExchange = (FunctionalExchange) element;
-			timeConsumption timeConsumption = PerfoFactory.eINSTANCE.createtimeConsumption();
+			TimeConsumption timeConsumption = PerfoFactory.eINSTANCE.createTimeConsumption();
 			timeConsumption.setId(EcoreUtil.generateUUID());
 			timeConsumption.setValue(0);
 			functionalExchange.getOwnedExtensions().add(timeConsumption);
@@ -78,7 +78,7 @@ public class OpenActionService {
 		if (element instanceof FunctionalChain
 				&& checktimeCapacityUnicity(((FunctionalChain) element).getOwnedExtensions())) {
 			FunctionalChain functionalChain = (FunctionalChain) element;
-			timeCapacity timeCapacity = PerfoFactory.eINSTANCE.createtimeCapacity();
+			TimeCapacity timeCapacity = PerfoFactory.eINSTANCE.createTimeCapacity();
 			timeCapacity.setId(EcoreUtil.generateUUID());
 			timeCapacity.setValue(0);
 			functionalChain.getOwnedExtensions().add(timeCapacity);
@@ -90,7 +90,7 @@ public class OpenActionService {
 	private boolean checktimeConsumptionUnicity(EList<ElementExtension> extensions) {
 
 		for (ElementExtension elementExtension : extensions) {
-			if (elementExtension instanceof timeConsumption)
+			if (elementExtension instanceof TimeConsumption)
 				return false;
 		}
 		return true;
@@ -99,7 +99,7 @@ public class OpenActionService {
 	private boolean checktimeCapacityUnicity(EList<ElementExtension> extensions) {
 
 		for (ElementExtension elementExtension : extensions) {
-			if (elementExtension instanceof timeCapacity)
+			if (elementExtension instanceof TimeCapacity)
 				return false;
 		}
 		return true;

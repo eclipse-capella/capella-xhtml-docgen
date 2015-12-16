@@ -19,8 +19,8 @@ import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.vp.perfo.generic.GenericPerformanceService;
 import org.polarsys.capella.vp.perfo.generic.IPerformanceBrowser;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceCriteria;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
-import org.polarsys.capella.vp.perfo.perfo.timeConsumption;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
+import org.polarsys.capella.vp.perfo.perfo.TimeConsumption;
 
 
 public class PerformanceServices extends GenericPerformanceService implements IPerformanceBrowser{
@@ -38,7 +38,7 @@ public class PerformanceServices extends GenericPerformanceService implements IP
 		
 		int current = super.checkPerformance(container);
 			
-		((timeCapacity)perfoCriteriaObject).setCurrentExecutionTime(current);
+		((TimeCapacity)perfoCriteriaObject).setCurrentExecutionTime(current);
 		
 		return current;
 	}
@@ -97,14 +97,14 @@ public class PerformanceServices extends GenericPerformanceService implements IP
 		EObject o = getPerformanceCriteriaObject(container);
 		switch (PerformanceCriteriaKind) {
 		case PerformanceCapacityObject :
-			if (o instanceof timeCapacity){
+			if (o instanceof TimeCapacity){
 				return o;
 			}else{
 				return null;
 			}
 
 		case PerformanceConsumptionObject :
-			if (o instanceof timeConsumption){
+			if (o instanceof TimeConsumption){
 				return o;
 			}else{
 				return null;

@@ -166,7 +166,7 @@ public class UnityElementItemProvider extends NamedElementItemProvider implement
 		{
 			CommandParameter commandParameter = createChildParameter(
 					EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS,
-					PerfoFactory.eINSTANCE.createtimeConsumption());
+					PerfoFactory.eINSTANCE.createTimeConsumption());
 			if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
 				newChildDescriptors.add(commandParameter);
 			}
@@ -177,7 +177,7 @@ public class UnityElementItemProvider extends NamedElementItemProvider implement
 		{
 			CommandParameter commandParameter = createChildParameter(
 					EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS,
-					PerfoFactory.eINSTANCE.createtimeCapacity());
+					PerfoFactory.eINSTANCE.createTimeCapacity());
 			if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
 				newChildDescriptors.add(commandParameter);
 			}
