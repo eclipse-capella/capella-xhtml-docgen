@@ -24,7 +24,7 @@
 <!--@generated-->
   <extension point="org.eclipse.emf.edit.childCreationExtenders">
       <extender class="org.polarsys.capella.vp.mass.mass.provider.MassItemProviderAdapterFactory$EmdeChildCreationExtender" uri="http://www.polarsys.org/kitalpha/emde/1.0.0"/>
-      <extender class="org.polarsys.capella.vp.mass.mass.provider.MassItemProviderAdapterFactory$SharedmodelChildCreationExtender" uri="http://www.polarsys.org/capella/core/sharedmodel/0.8.0"/>
+      <extender class="org.polarsys.capella.vp.mass.mass.provider.MassItemProviderAdapterFactory$SharedmodelChildCreationExtender" uri="http://www.polarsys.org/capella/core/sharedmodel/1.0.0"/>
    </extension>
 
 

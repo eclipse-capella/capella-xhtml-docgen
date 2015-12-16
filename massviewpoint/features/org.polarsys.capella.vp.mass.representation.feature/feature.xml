@@ -31,21 +31,21 @@
          id="org.polarsys.capella.vp.mass.sbrowser"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.polarsys.capella.vp.mass.ui"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.polarsys.capella.vp.mass.design"
          download-size="0"
          install-size="0"
-         version="0.8.3.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
