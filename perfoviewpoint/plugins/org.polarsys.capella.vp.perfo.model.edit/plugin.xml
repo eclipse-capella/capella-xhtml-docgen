@@ -23,8 +23,8 @@
    
 <!--@generated-->
   <extension point="org.eclipse.emf.edit.childCreationExtenders">
+      <extender class="org.polarsys.capella.vp.perfo.perfo.provider.PerfoItemProviderAdapterFactory$SharedmodelChildCreationExtender" uri="http://www.polarsys.org/capella/core/sharedmodel/1.0.0"/>
       <extender class="org.polarsys.capella.vp.perfo.perfo.provider.PerfoItemProviderAdapterFactory$EmdeChildCreationExtender" uri="http://www.polarsys.org/kitalpha/emde/1.0.0"/>
-      <extender class="org.polarsys.capella.vp.perfo.perfo.provider.PerfoItemProviderAdapterFactory$SharedmodelChildCreationExtender" uri="http://www.polarsys.org/capella/core/sharedmodel/0.8.0"/>
    </extension>
 
 
@@ -44,11 +44,11 @@
         <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.PerformanceCapacitySection" id="org.polarsys.capella.vp.perfo.perfo.provider.contributions.PerformanceCapacityItemContribution.section" tab="Base">
             <input type="org.polarsys.capella.vp.perfo.perfo.PerformanceCapacity"/>
         </propertySection>
-        <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.timeConsumptionSection" id="org.polarsys.capella.vp.perfo.perfo.provider.contributions.timeConsumptionItemContribution.section" tab="Base">
-            <input type="org.polarsys.capella.vp.perfo.perfo.timeConsumption"/>
+        <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.TimeConsumptionSection" id="org.polarsys.capella.vp.perfo.perfo.provider.contributions.TimeConsumptionItemContribution.section" tab="Base">
+            <input type="org.polarsys.capella.vp.perfo.perfo.TimeConsumption"/>
         </propertySection>
-        <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.timeCapacitySection" id="org.polarsys.capella.vp.perfo.perfo.provider.contributions.timeCapacityItemContribution.section" tab="Base">
-            <input type="org.polarsys.capella.vp.perfo.perfo.timeCapacity"/>
+        <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.TimeCapacitySection" id="org.polarsys.capella.vp.perfo.perfo.provider.contributions.TimeCapacityItemContribution.section" tab="Base">
+            <input type="org.polarsys.capella.vp.perfo.perfo.TimeCapacity"/>
         </propertySection>
         <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.UnityElementSection" id="org.polarsys.capella.vp.perfo.perfo.provider.contributions.UnityElementItemContribution.section" tab="Base">
             <input type="org.polarsys.capella.vp.perfo.perfo.UnityElement"/>
@@ -65,9 +65,9 @@
         </propertySection>
         <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.PerformanceCapacitySection" id="org.polarsys.capella.vp.perfo.perfo.provider.sections.PerformanceCapacitySection.section" tab="Base">
         </propertySection>
-        <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.timeConsumptionSection" id="org.polarsys.capella.vp.perfo.perfo.provider.sections.timeConsumptionSection.section" tab="Base">
+        <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.TimeConsumptionSection" id="org.polarsys.capella.vp.perfo.perfo.provider.sections.TimeConsumptionSection.section" tab="Base">
         </propertySection>
-        <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.timeCapacitySection" id="org.polarsys.capella.vp.perfo.perfo.provider.sections.timeCapacitySection.section" tab="Base">
+        <propertySection class="org.polarsys.capella.core.data.core.properties.sections.DefaultNamedElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.TimeCapacitySection" id="org.polarsys.capella.vp.perfo.perfo.provider.sections.TimeCapacitySection.section" tab="Base">
         </propertySection>
         <propertySection class="org.polarsys.capella.vp.perfo.perfo.provider.sections.UnityElementSection" filter="org.polarsys.capella.vp.perfo.perfo.provider.sections.UnityElementSection" id="org.polarsys.capella.vp.perfo.perfo.provider.sections.UnityElementSection.section" tab="Base">
         </propertySection>
