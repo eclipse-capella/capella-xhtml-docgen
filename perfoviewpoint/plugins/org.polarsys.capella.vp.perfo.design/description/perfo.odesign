@@ -2,7 +2,7 @@
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="perfo" version="10.1.0.201507271600">
   <ownedViewpoints name="Perfo_ID" label="Perfo" modelFileExtension="perfo melodymodeller">
     <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="Performance_LAB" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Logical Architecture" representationName="Logical Architecture Blank">
-      <layers name="perfo">
+      <layers name="perfo" label="Basic Performance">
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="Performance_LAB_LogicalFunction_Import_Imported_NM" label="Performance_LAB_LogicalFunction_Import" semanticCandidatesExpression="">
           <detailDescriptions xsi:type="tool:DiagramCreationDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Function%20Breakdown']/@defaultLayer/@toolSections.0/@ownedTools[name='Logical%20Function%20Breakdown']"/>
           <detailDescriptions xsi:type="tool:DiagramCreationDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@toolSections.0/@ownedTools[name='Logical%20Data%20Flow%20Blank']"/>
@@ -119,7 +119,7 @@
           <importedMapping href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='Logical%20Actors']"/>
         </containerMappings>
         <toolSections name="perfo" label="perfo">
-          <ownedTools xsi:type="tool_1:ToolDescription" name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" iconPath="/org.polarsys.capella.vp.perfo.design/icons/LogicalFunction.gif">
+          <ownedTools xsi:type="tool_1:ToolDescription" name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" forceRefresh="true" iconPath="/org.polarsys.capella.vp.perfo.design/icons/LogicalFunction.gif">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
@@ -128,7 +128,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool_1:ToolDescription" name="createFunctionalCapacity" label="Functional Chain Capacity">
+          <ownedTools xsi:type="tool_1:ToolDescription" name="createFunctionalCapacity" label="Functional Chain Capacity" forceRefresh="true">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
@@ -141,7 +141,7 @@
       </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="Performance_PAB" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Physical Architecture" representationName="Physical Architecture Blank">
-      <layers name="perfo">
+      <layers name="perfo" label="Basic Performance">
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="Performance_PAB_PhysicalFunction_Import_Imported_NM" label="Performance_PAB_PhysicalFunction_Import" semanticCandidatesExpression="">
           <detailDescriptions xsi:type="tool:DiagramCreationDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Data%20Flow%20Blank']/@defaultLayer/@toolSections.0/@ownedTools[name='Physical%20Data%20Flow%20Blank']"/>
           <detailDescriptions xsi:type="tool:DiagramCreationDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Function%20Breakdown']/@defaultLayer/@toolSections.0/@ownedTools[name='Physical%20Function%20Breakdown']"/>
@@ -285,7 +285,7 @@
           <importedMapping href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='PAB_Deployment']"/>
         </containerMappings>
         <toolSections name="perfo" label="perfo">
-          <ownedTools xsi:type="tool_1:ToolDescription" name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" iconPath="/org.polarsys.capella.vp.perfo.design/icons/LogicalFunction.gif">
+          <ownedTools xsi:type="tool_1:ToolDescription" name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" forceRefresh="true" iconPath="/org.polarsys.capella.vp.perfo.design/icons/LogicalFunction.gif">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
@@ -294,7 +294,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool_1:ToolDescription" name="createFunctionalCapacity" label="Functional Chain Consumption" iconPath="/org.polarsys.capella.vp.perfo.design/icons/FunctionalChain.gif">
+          <ownedTools xsi:type="tool_1:ToolDescription" name="createFunctionalCapacity" label="Functional Chain Consumption" forceRefresh="true" iconPath="/org.polarsys.capella.vp.perfo.design/icons/FunctionalChain.gif">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
