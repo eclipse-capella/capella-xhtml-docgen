@@ -27,7 +27,7 @@
 	        domain="AF"
 	        id="org.polarsys.capella.vp.mass"
 	        tags="vp"
-	        name="mass"
+	        name="Basic Mass"
 	        path="/org.polarsys.capella.vp.mass.af/model/mass.vp#_Z-IWIEcaEeW1r_C8yGdaRg"/>
 	</extension>
 	<extension 
