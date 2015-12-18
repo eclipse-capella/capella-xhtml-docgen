@@ -27,7 +27,7 @@
 	        domain="AF"
 	        id="org.polarsys.capella.vp.price"
 	        tags="vp"
-	        name="price"
+	        name="Basic Price"
 	        path="/org.polarsys.capella.vp.price.af/model/price.vp#_m5weQEdKEeWR7Jf9qee-NA"/>
 	</extension>
 	<extension 
