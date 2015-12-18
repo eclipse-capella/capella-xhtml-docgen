@@ -25,13 +25,13 @@ Data perfo.data {
 	}
 		
 	Class TimeConsumption {
-		icon:"timeConsumption.gif"
+		icon:"TimeConsumption.gif"
 		extends fa.FunctionalExchange, pa.PhysicalFunction, la.LogicalFunction
 		superClass PerformanceConsumption, UnityElement
 	}
 	
 	Class TimeCapacity {
-		icon: "timeCapacity.gif"
+		icon: "TimeCapacity.gif"
 		extends fa.FunctionalChain
 		superClass PerformanceCapacity, UnityElement
 		Attributes:
