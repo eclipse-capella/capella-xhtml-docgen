@@ -26,8 +26,8 @@ import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
-import org.polarsys.capella.vp.perfo.perfo.timeConsumption;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
+import org.polarsys.capella.vp.perfo.perfo.TimeConsumption;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 import org.polarsys.kitalpha.emde.model.ExtensibleElement;
 
@@ -84,7 +84,7 @@ public class PerfoOpenJavaService {
 			ExtensibleElement logicalFunction = (ExtensibleElement) eO;
 			EList<ElementExtension> extensions = logicalFunction.getOwnedExtensions();
 			for (ElementExtension elementExtension : extensions) {
-				if (elementExtension instanceof timeConsumption) {
+				if (elementExtension instanceof TimeConsumption) {
 					return elementExtension;
 				}
 
@@ -128,7 +128,7 @@ public class PerfoOpenJavaService {
 			ExtensibleElement functionalChain = (ExtensibleElement) eObject;
 			EList<ElementExtension> extensions = functionalChain.getOwnedExtensions();
 			for (ElementExtension elementExtension : extensions) {
-				if (elementExtension instanceof timeCapacity) {
+				if (elementExtension instanceof TimeCapacity) {
 					return elementExtension;
 				}
 

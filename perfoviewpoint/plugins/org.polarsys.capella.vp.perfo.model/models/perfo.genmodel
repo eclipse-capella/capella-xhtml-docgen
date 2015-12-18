@@ -19,9 +19,9 @@
     </genClasses>
     <genClasses ecoreClass="../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//PerformanceConsumption"/>
     <genClasses ecoreClass="../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//PerformanceCapacity"/>
-    <genClasses ecoreClass="../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//timeConsumption"/>
-    <genClasses ecoreClass="../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//timeCapacity">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//timeCapacity/currentExecutionTime"/>
+    <genClasses ecoreClass="../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//TimeConsumption"/>
+    <genClasses ecoreClass="../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//TimeCapacity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//TimeCapacity/currentExecutionTime"/>
     </genClasses>
     <genClasses ecoreClass="../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//UnityElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.polarsys.capella.vp.perfo/models/perfo.ecore#//UnityElement/measurementUnit"/>

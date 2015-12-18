@@ -102,13 +102,13 @@ public class PerfoAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter casetimeConsumption(timeConsumption object) {
-			return createtimeConsumptionAdapter();
+		public Adapter caseTimeConsumption(TimeConsumption object) {
+			return createTimeConsumptionAdapter();
 		}
 
 		@Override
-		public Adapter casetimeCapacity(timeCapacity object) {
-			return createtimeCapacityAdapter();
+		public Adapter caseTimeCapacity(TimeCapacity object) {
+			return createTimeCapacityAdapter();
 		}
 
 		@Override
@@ -223,30 +223,30 @@ public class PerfoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.polarsys.capella.vp.perfo.perfo.timeConsumption <em>time Consumption</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.polarsys.capella.vp.perfo.perfo.TimeConsumption <em>Time Consumption</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.polarsys.capella.vp.perfo.perfo.timeConsumption
+	 * @see org.polarsys.capella.vp.perfo.perfo.TimeConsumption
 	 * @generated
 	 */
-	public Adapter createtimeConsumptionAdapter() {
+	public Adapter createTimeConsumptionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.polarsys.capella.vp.perfo.perfo.timeCapacity <em>time Capacity</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.polarsys.capella.vp.perfo.perfo.TimeCapacity <em>Time Capacity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.polarsys.capella.vp.perfo.perfo.timeCapacity
+	 * @see org.polarsys.capella.vp.perfo.perfo.TimeCapacity
 	 * @generated
 	 */
-	public Adapter createtimeCapacityAdapter() {
+	public Adapter createTimeCapacityAdapter() {
 		return null;
 	}
 

@@ -34,7 +34,7 @@ import org.polarsys.capella.core.ui.properties.sections.AbstractSection;
 import org.polarsys.capella.vp.perfo.perfo.PerfoPackage;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceCriteria;
 import org.polarsys.capella.vp.perfo.perfo.UnityElement;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
 import org.polarsys.capella.vp.perfo.ui.fields.MeasurementUnitField_semanticKindGroup;
 
 /**
@@ -70,10 +70,10 @@ public class Perfoma_timeCapacity_perfo_timeCapacity_Section extends AbstractSec
 	/**
 	* <!-- begin-model-doc -->
 	* <!-- end-model-doc -->
-	* <!-- begin-user-doc -->
+		* <!-- begin-user-doc -->
 	* <!-- end-user-doc -->
-	* @generated
-	*/
+		* @generated
+		*/
 	private Group perfo_timeCapacity_AttributeGroup;
 
 	/**
@@ -85,7 +85,7 @@ public class Perfoma_timeCapacity_perfo_timeCapacity_Section extends AbstractSec
 	public boolean select(Object eObject) {
 		EObject eObjectToTest = super.selection(eObject);
 
-		if (eObjectToTest instanceof timeCapacity)
+		if (eObjectToTest instanceof TimeCapacity)
 			return true;
 
 		return false;

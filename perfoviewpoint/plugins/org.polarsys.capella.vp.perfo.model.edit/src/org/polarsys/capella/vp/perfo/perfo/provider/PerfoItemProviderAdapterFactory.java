@@ -190,46 +190,46 @@ public class PerfoItemProviderAdapterFactory extends PerfoAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.perfo.perfo.timeConsumption} instances.
+	 * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.perfo.perfo.TimeConsumption} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected timeConsumptionItemProvider timeConsumptionItemProvider;
+	protected TimeConsumptionItemProvider timeConsumptionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.polarsys.capella.vp.perfo.perfo.timeConsumption}.
+	 * This creates an adapter for a {@link org.polarsys.capella.vp.perfo.perfo.TimeConsumption}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createtimeConsumptionAdapter() {
+	public Adapter createTimeConsumptionAdapter() {
 		if (timeConsumptionItemProvider == null) {
-			timeConsumptionItemProvider = new timeConsumptionItemProvider(this);
+			timeConsumptionItemProvider = new TimeConsumptionItemProvider(this);
 		}
 
 		return timeConsumptionItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.perfo.perfo.timeCapacity} instances.
+	 * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.perfo.perfo.TimeCapacity} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected timeCapacityItemProvider timeCapacityItemProvider;
+	protected TimeCapacityItemProvider timeCapacityItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.polarsys.capella.vp.perfo.perfo.timeCapacity}.
+	 * This creates an adapter for a {@link org.polarsys.capella.vp.perfo.perfo.TimeCapacity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createtimeCapacityAdapter() {
+	public Adapter createTimeCapacityAdapter() {
 		if (timeCapacityItemProvider == null) {
-			timeCapacityItemProvider = new timeCapacityItemProvider(this);
+			timeCapacityItemProvider = new TimeCapacityItemProvider(this);
 		}
 
 		return timeCapacityItemProvider;
@@ -457,7 +457,7 @@ public class PerfoItemProviderAdapterFactory extends PerfoAdapterFactory
 				{
 					CommandParameter commandParameter = createChildParameter(
 							EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS,
-							PerfoFactory.eINSTANCE.createtimeConsumption());
+							PerfoFactory.eINSTANCE.createTimeConsumption());
 					if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
 						newChildDescriptors.add(commandParameter);
 					}
@@ -468,7 +468,7 @@ public class PerfoItemProviderAdapterFactory extends PerfoAdapterFactory
 				{
 					CommandParameter commandParameter = createChildParameter(
 							EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS,
-							PerfoFactory.eINSTANCE.createtimeCapacity());
+							PerfoFactory.eINSTANCE.createTimeCapacity());
 					if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
 						newChildDescriptors.add(commandParameter);
 					}
@@ -602,7 +602,7 @@ public class PerfoItemProviderAdapterFactory extends PerfoAdapterFactory
 				{
 					CommandParameter commandParameter = createChildParameter(
 							SharedmodelPackage.Literals.GENERIC_PKG__CAPELLA_ELEMENTS,
-							PerfoFactory.eINSTANCE.createtimeConsumption());
+							PerfoFactory.eINSTANCE.createTimeConsumption());
 					if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
 						newChildDescriptors.add(commandParameter);
 					}
@@ -613,7 +613,7 @@ public class PerfoItemProviderAdapterFactory extends PerfoAdapterFactory
 				{
 					CommandParameter commandParameter = createChildParameter(
 							SharedmodelPackage.Literals.GENERIC_PKG__CAPELLA_ELEMENTS,
-							PerfoFactory.eINSTANCE.createtimeCapacity());
+							PerfoFactory.eINSTANCE.createTimeCapacity());
 					if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
 						newChildDescriptors.add(commandParameter);
 					}

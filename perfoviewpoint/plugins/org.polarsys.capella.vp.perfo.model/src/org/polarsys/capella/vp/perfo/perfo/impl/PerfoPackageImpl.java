@@ -51,11 +51,10 @@ import org.polarsys.capella.vp.perfo.perfo.PerfoPackage;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceCapacity;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceConsumption;
 import org.polarsys.capella.vp.perfo.perfo.PerformanceCriteria;
+import org.polarsys.capella.vp.perfo.perfo.TimeCapacity;
+import org.polarsys.capella.vp.perfo.perfo.TimeConsumption;
 import org.polarsys.capella.vp.perfo.perfo.UnityElement;
 import org.polarsys.capella.vp.perfo.perfo.measurementUnit_Type;
-import org.polarsys.capella.vp.perfo.perfo.timeCapacity;
-import org.polarsys.capella.vp.perfo.perfo.timeConsumption;
-
 import org.polarsys.kitalpha.emde.model.EmdePackage;
 
 /**
@@ -253,7 +252,7 @@ public class PerfoPackageImpl extends EPackageImpl implements PerfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass gettimeConsumption() {
+	public EClass getTimeConsumption() {
 		return timeConsumptionEClass;
 	}
 
@@ -262,7 +261,7 @@ public class PerfoPackageImpl extends EPackageImpl implements PerfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass gettimeCapacity() {
+	public EClass getTimeCapacity() {
 		return timeCapacityEClass;
 	}
 
@@ -271,7 +270,7 @@ public class PerfoPackageImpl extends EPackageImpl implements PerfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute gettimeCapacity_CurrentExecutionTime() {
+	public EAttribute getTimeCapacity_CurrentExecutionTime() {
 		return (EAttribute) timeCapacityEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -417,13 +416,13 @@ public class PerfoPackageImpl extends EPackageImpl implements PerfoPackage {
 		initEClass(performanceCapacityEClass, PerformanceCapacity.class, "PerformanceCapacity", !IS_ABSTRACT, //$NON-NLS-1$
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(timeConsumptionEClass, timeConsumption.class, "timeConsumption", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+		initEClass(timeConsumptionEClass, TimeConsumption.class, "TimeConsumption", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(timeCapacityEClass, timeCapacity.class, "timeCapacity", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+		initEClass(timeCapacityEClass, TimeCapacity.class, "TimeCapacity", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(gettimeCapacity_CurrentExecutionTime(), theEcorePackage.getEInt(), "currentExecutionTime", null, //$NON-NLS-1$
-				0, 1, timeCapacity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+		initEAttribute(getTimeCapacity_CurrentExecutionTime(), theEcorePackage.getEInt(), "currentExecutionTime", null, //$NON-NLS-1$
+				0, 1, TimeCapacity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(unityElementEClass, UnityElement.class, "UnityElement", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$

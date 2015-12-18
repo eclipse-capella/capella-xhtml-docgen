@@ -21,7 +21,7 @@ Diagrams perfo.diagram {
 			
 			
 			Node Performance_LAB_LogicalFunction_Label {
-				domain-context: perfo.data.timeConsumption
+				domain-context: perfo.data.TimeConsumption
 				provided-by query "<%getTimeConsumptionObject($diagram)%>"
 				
 				Representation {
@@ -64,11 +64,11 @@ Diagrams perfo.diagram {
 				import: LAB_FunctionalChainEnd
 				Contains {
 					BorderedNode FunctionalChain_TimeCapacity {
-						domain-context: perfo.data.timeCapacity
+						domain-context: perfo.data.TimeCapacity
 						provided-by association external emde.ExtensibleElement.ownedExtensions
 						Representation {
 							Label {
-								content: "Current: " + perfo.data.timeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
+								content: "Current: " + perfo.data.TimeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
 								position: node
 							}
 							Style {
@@ -82,7 +82,7 @@ Diagrams perfo.diagram {
 						Representation {
 							condition: Java performanceSaturated
 							Label {
-								content: "Current: " + perfo.data.timeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
+								content: "Current: " + perfo.data.TimeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
 								position: node
 							}
 							Style {
@@ -96,7 +96,7 @@ Diagrams perfo.diagram {
 						Representation {
 							condition: Java performanceOverhead
 							Label {
-								content: "Current: " + perfo.data.timeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
+								content: "Current: " + perfo.data.TimeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
 								position: node
 							}
 							Style {
@@ -113,11 +113,6 @@ Diagrams perfo.diagram {
 		}
 		
 		Actions {
-			
-			
-			Create createActionName { label: "Create tool example" action-for:  LinkPerformance_LAB_FunctionalExchange }
-			
-			
 			OpenAction CreateLABFunctionTimeConsumption {
 				label: "Function Time Consumption"
 				icon: "LogicalFunction.gif"
@@ -141,7 +136,7 @@ Diagrams perfo.diagram {
 			
 			
 			Node Performance_PAB_PhysicalFunction_Label {
-				domain-context: perfo.data.timeConsumption
+				domain-context: perfo.data.TimeConsumption
 				provided-by query "<%getTimeConsumptionObject($diagram)%>"
 				
 				Representation {
@@ -183,11 +178,11 @@ Diagrams perfo.diagram {
 				import: PAB_FunctionalChainEnd
 				Contains {
 					BorderedNode FunctionalChain_TimeCapacity {
-						domain-context: perfo.data.timeCapacity
+						domain-context: perfo.data.TimeCapacity
 						provided-by association external emde.ExtensibleElement.ownedExtensions
 						Representation {
 							Label {
-								content: "Current: " + perfo.data.timeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
+								content: "Current: " + perfo.data.TimeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
 								position: node
 							}
 							Style {
@@ -201,7 +196,7 @@ Diagrams perfo.diagram {
 						Representation {
 							condition: Java performanceSaturated
 							Label {
-								content: "Current: " + perfo.data.timeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
+								content: "Current: " + perfo.data.TimeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
 								position: node
 							}
 							Style {
@@ -215,7 +210,7 @@ Diagrams perfo.diagram {
 						Representation {
 							condition: Java performanceOverhead
 							Label {
-								content: "Current: " + perfo.data.timeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
+								content: "Current: " + perfo.data.TimeCapacity.currentExecutionTime + " - Max: " + perfo.data.PerformanceCriteria.value
 								position: node
 							}
 							Style {
@@ -233,9 +228,6 @@ Diagrams perfo.diagram {
 		}
 		
 		Actions {
-			
-			Create createActionName { label: "Create tool example" action-for:  Performance_LAB.Performance_LAB_FunctionalChain_Label}
-			
 			OpenAction CreateLABFunctionTimeConsumption {
 				label: "Function Time Consumption"
 				icon: "LogicalFunction.gif"
