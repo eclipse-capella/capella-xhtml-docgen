@@ -13,7 +13,7 @@ package org.polarsys.capella.xmlpivot.extraction;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.polarsys.capella.core.commandline.core.AbstractCommandLine;
 import org.polarsys.capella.core.commandline.core.CommandLineException;
-import org.polarsys.capella.xmlpivot.common.CapellaPackageRegistry;
+import org.polarsys.capella.core.model.helpers.registry.CapellaPackageRegistry;
 import org.polarsys.capella.xmlpivot.extraction.XMLPivotExtractor.Builder;
 
 

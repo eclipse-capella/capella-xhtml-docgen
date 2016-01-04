@@ -46,7 +46,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.importer.ecore.EcoreImporter;
-import org.polarsys.capella.xmlpivot.common.CapellaPackageRegistry;
+import org.polarsys.capella.core.model.helpers.registry.CapellaPackageRegistry;
 import org.polarsys.capella.xmlpivot.report.RClass;
 import org.polarsys.capella.xmlpivot.report.RStructuralFeature;
 import org.polarsys.capella.xmlpivot.report.Report;

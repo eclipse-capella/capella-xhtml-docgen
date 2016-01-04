@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.osgi.framework.BundleContext;
-import org.polarsys.capella.xmlpivot.common.CapellaPackageRegistry;
+import org.polarsys.capella.core.model.helpers.registry.CapellaPackageRegistry;
 import org.polarsys.capella.xmlpivot.extraction.ConceptualMapping;
 import org.polarsys.capella.xmlpivot.extraction.DynamicConceptualMapping;
 
