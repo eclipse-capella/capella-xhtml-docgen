@@ -24,14 +24,14 @@
     <VP_Classes name="PerformanceCapacity">
       <Inheritences xsi:type="vpdesc:LocalSuperClass" superClass="//@VP_Data/@VP_Classes.0"/>
     </VP_Classes>
-    <VP_Classes name="TimeConsumption" icon="timeConsumption.gif">
+    <VP_Classes name="TimeConsumption" icon="TimeConsumption.gif">
       <extends href="../../../plugin/org.polarsys.capella.core.data.gen/model/FunctionalAnalysis.ecore#//FunctionalExchange"/>
       <extends href="../../../plugin/org.polarsys.capella.core.data.gen/model/PhysicalArchitecture.ecore#//PhysicalFunction"/>
       <extends href="../../../plugin/org.polarsys.capella.core.data.gen/model/LogicalArchitecture.ecore#//LogicalFunction"/>
       <Inheritences xsi:type="vpdesc:LocalSuperClass" superClass="//@VP_Data/@VP_Classes.1"/>
       <Inheritences xsi:type="vpdesc:LocalSuperClass" superClass="//@VP_Data/@VP_Classes.5"/>
     </VP_Classes>
-    <VP_Classes name="TimeCapacity" icon="timeCapacity.gif">
+    <VP_Classes name="TimeCapacity" icon="TimeCapacity.gif">
       <VP_Class_Attributes name="currentExecutionTime">
         <owned_type xsi:type="vpdesc:ExternalAttributeType">
           <type href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
