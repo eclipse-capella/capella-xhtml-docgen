@@ -22,7 +22,7 @@
     <steps xsi:type="buildfile:DeleteStep" xmi:id="_Xy3qAG3eEeW8Or0zSwVlzA" name="clean-unused-gen-src-artifacts" description="Clear unused generated src artifacts org.polarsys.*">
       <filePaths>${publish}/BasicMass/dropins/BasicMass/org.polarsys.*</filePaths>
     </steps>
-    <steps xsi:type="buildfile:ZipStep" xmi:id="_YcvGYG3eEeW8Or0zSwVlzA" name="Archive_addon_DropinsSrc" description="Zip dropins" baseDir="${publish}/massVP/dropins/" destinationFilePath="${publish}/BasicMass-${buildVersion}_Capella-${CapellaVersion}-dropins.zip"/>
+    <steps xsi:type="buildfile:ZipStep" xmi:id="_YcvGYG3eEeW8Or0zSwVlzA" name="Archive_addon_DropinsSrc" description="Zip dropins" baseDir="${publish}/BasicMass/dropins/" destinationFilePath="${publish}/BasicMass-${buildVersion}_Capella-${CapellaVersion}-dropins.zip"/>
     <steps xsi:type="buildstep:AntStep" xmi:id="_ZBpKQG3eEeW8Or0zSwVlzA" name="clean-p2-container" description="Clean p2 container directory" targetName="clean-p2-container-dir" xml="&lt;target name=&quot;clean-p2-container-dir&quot;>&#xD;&#xA;&#x9;&lt;delete includeemptydirs=&quot;true&quot;>&#xD;&#xA;   &#x9; &#x9;&lt;fileset dir=&quot;${publish}/BasicMass&quot;>&#xD;&#xA;        &#x9;&#x9;&lt;include name=&quot;*/&quot;/>&#xD;&#xA;    &#x9;&#x9;&#x9;&lt;exclude name=&quot;site.p2/&quot;/>&#xD;&#xA;    &#x9;&#x9;&lt;/fileset>&#xD;&#xA;&#x9;&lt;/delete>&#xD;&#xA;&lt;/target>"/>
   </steps>
   <scms xsi:type="buildscm:GIT" xmi:id="_tQWUsG3dEeW8Or0zSwVlzA">
