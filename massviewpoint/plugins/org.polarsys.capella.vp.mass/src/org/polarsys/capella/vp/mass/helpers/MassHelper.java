@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 Thales Global Services
+ * Copyright (c) 2006, 2016 Thales Global Services
  *   All rights reserved. This program and the accompanying materials
  *   are made available under the terms of the Eclipse Public License v1.0
  *   which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.vp.mass.mass.Mass;
 
@@ -22,6 +23,15 @@ import org.polarsys.capella.vp.mass.mass.Mass;
 public class MassHelper {
 	
 	private static final int Mass = 2;
+	
+	/**
+	 * Check if a given model element is the Physical system.
+	 * @param eObject a model element
+	 * @return <code> True </code> if the element is the Physical System, <code> False </code> otherwise.
+	 */
+	public static final boolean isPhysicalSystem(EObject eObject){
+		return eObject instanceof PhysicalComponent && eObject.eContainer() instanceof PhysicalArchitecture;
+	}
 	
 	public EList<EObject> getRootMassObjects(EObject eO){
 		EList<EObject> list = new BasicEList<EObject>();
@@ -63,7 +73,7 @@ public class MassHelper {
 			if (container instanceof PhysicalComponent){
 				PhysicalComponent pc = (PhysicalComponent)container;
 				
-				if (pc.getName().equals("Physical System")){
+				if (isPhysicalSystem(pc)){
 					return pc.getAbstractTypedElements().get(0);
 				}else{
 					if (pc.getOwnedPartitions() != null &&
