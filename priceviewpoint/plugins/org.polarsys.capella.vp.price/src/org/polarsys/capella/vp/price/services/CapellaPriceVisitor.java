@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 Thales Global Services
+ * Copyright (c) 2006, 2016 Thales Global Services
  *   All rights reserved. This program and the accompanying materials
  *   are made available under the terms of the Eclipse Public License v1.0
  *   which accompanies this distribution, and is available at
@@ -21,6 +21,7 @@ import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.model.handler.helpers.CapellaProjectHelper;
 import org.polarsys.capella.core.model.handler.helpers.CapellaProjectHelper.TriStateBoolean;
 import org.polarsys.capella.vp.price.generic.IPriceVisitor;
+import org.polarsys.capella.vp.price.helpers.PriceHelper;
 import org.polarsys.capella.vp.price.price.Price;
 
 
@@ -50,7 +51,7 @@ public class CapellaPriceVisitor implements IPriceVisitor {
 			return (Part)container;
 		}else if (container instanceof PhysicalComponent){
 			PhysicalComponent pc = (PhysicalComponent) container;
-			if (pc.getName().equals("Physical System") ||
+			if (PriceHelper.isPhysicalSystem(pc) ||
 					CapellaProjectHelper.isReusableComponentsDriven(pc) == TriStateBoolean.False){
 				return (Part)pc.getAbstractTypedElements().get(0);
 			}
@@ -129,17 +130,6 @@ public class CapellaPriceVisitor implements IPriceVisitor {
 					EObject type2 = part.getType();
 					if (type2 instanceof PhysicalComponent)
 					{
-//						prod00104650 : we have to take into account Node of type Behavior.
-//						this section is replaced by the code bellow
-//						PhysicalComponent compo = (PhysicalComponent) type2;
-//						if (pc.getName().equals("Physical System"))
-//						{
-//							if (! PhysicalComponentNature.BEHAVIOR.equals(compo.getNature()))
-//								list.add(part);
-//						}
-//						else
-//							list.add(part);
-						
 						EList<Part> deploying = part.getDeployingParts();
 						if (deploying == null || deploying.size() == 0)
 							list.add(part);
@@ -148,13 +138,6 @@ public class CapellaPriceVisitor implements IPriceVisitor {
 			}
 		}
 		
-	
-//		
-//		if (((Component) type).getName().equals("Physical System"))
-//		{
-//			return list;
-//		}
-			
 		// Traitement des Deployements
 		if (deployedLinkList != null && deployedLinkList.size() > 0)
 		{
