@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 Thales Global Services
+ * Copyright (c) 2006, 2016 Thales Global Services
  *   All rights reserved. This program and the accompanying materials
  *   are made available under the terms of the Eclipse Public License v1.0
  *   which accompanies this distribution, and is available at
@@ -35,7 +35,7 @@ public class MassCreationToolHelper {
 		EObject correctPart = eObject;
 		
 		if (eObject instanceof PhysicalComponent){
-			if (((PhysicalComponent)eObject).getName().equals("Physical System")){
+			if (MassHelper.isPhysicalSystem(eObject)){
 				correctPart = ((PhysicalComponent)eObject).getAbstractTypedElements().get(0);
 			}
 		}
@@ -62,7 +62,7 @@ public class MassCreationToolHelper {
 			
 			if (eObject instanceof PhysicalComponent){
 				PhysicalComponent pc = (PhysicalComponent)eObject;
-				if (pc.getName().equals("Physical System")){
+				if (MassHelper.isPhysicalSystem(pc)){
 					eObject = (Part)pc.getAbstractTypedElements().get(0);
 				}else{
 					return false;
