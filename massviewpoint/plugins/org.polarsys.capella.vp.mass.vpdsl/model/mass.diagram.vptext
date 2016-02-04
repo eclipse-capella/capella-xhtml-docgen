@@ -111,7 +111,7 @@ Diagrams mass.diagram {
 				
 			Node PC_Mass_Label {
 					domain-context: mass.data.PartMass
-					provided-by query "<%eAllContents()%>"
+					provided-by query "<%getMassObjects($diagram)%>"
 					Representation {
 						Label  {
 							content: "Current: <%currentMass%> - Max: <%maxValue%>" 

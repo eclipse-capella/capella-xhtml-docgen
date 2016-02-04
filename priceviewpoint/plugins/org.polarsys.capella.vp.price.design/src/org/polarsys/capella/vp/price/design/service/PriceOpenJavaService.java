@@ -15,6 +15,9 @@ package org.polarsys.capella.vp.price.design.service;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.sirius.diagram.DNode;
+import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.vp.price.helpers.PriceHelper;
 
 /**
@@ -35,6 +38,27 @@ public class PriceOpenJavaService {
 	*/
 	public PriceOpenJavaService() {
 		// TODO Auto-generated method stub
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<EObject> getPriceObjects(EObject eObject, DSemanticDiagram diagram) {
+		EList<EObject> result = new BasicEList<EObject>();
+
+        for (DNode node : diagram.getNodes()) {
+               final EObject target = node.getTarget();
+               if (target instanceof AbstractFunction) {
+                     EList<EObject> priceElement = getPriceObjects(target);
+                     if (priceElement != null && !! priceElement.isEmpty() ) {
+                            result.addAll(priceElement);
+                     }
+               }
+        }
+
+        return result;
 	}
 
 	/**

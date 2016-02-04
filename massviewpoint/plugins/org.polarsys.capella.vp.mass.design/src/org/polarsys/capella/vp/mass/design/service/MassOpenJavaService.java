@@ -19,6 +19,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
+import org.eclipse.sirius.diagram.DNode;
+import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.vp.mass.helpers.MassHelper;
 
 /**
@@ -39,6 +42,27 @@ public class MassOpenJavaService {
 	*/
 	public MassOpenJavaService() {
 		// TODO Auto-generated method stub
+	} 
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<EObject> getMassObjects(EObject eObject, DSemanticDiagram diagram) {
+		EList<EObject> result = new BasicEList<EObject>();
+
+        for (DNode node : diagram.getNodes()) {
+               final EObject target = node.getTarget();
+               if (target instanceof AbstractFunction) {
+                     EList<EObject> massElement = getMassObjects(target);
+                     if (massElement != null && !! massElement.isEmpty() ) {
+                            result.addAll(massElement);
+                     }
+               }
+        }
+
+        return result;
 	}
 
 	/**
