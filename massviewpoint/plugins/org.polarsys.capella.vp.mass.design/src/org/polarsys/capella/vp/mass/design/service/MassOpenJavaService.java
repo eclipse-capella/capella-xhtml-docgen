@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 Thales Global Services
+ * Copyright (c) 2006, 2016 Thales Global Services
  *   All rights reserved. This program and the accompanying materials
  *   are made available under the terms of the Eclipse Public License v1.0
  *   which accompanies this distribution, and is available at
@@ -42,19 +42,19 @@ public class MassOpenJavaService {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
-	public EList<EObject> getMassObjects(EObject eObject,
-			DSemanticDiagram diagram) {
+	public EList<EObject> getMassObjects(EObject eObject, DSemanticDiagram diagram) {
 		EList<EObject> result = new BasicEList<EObject>();
 
 		for (DNode node : diagram.getNodes()) {
 			final EObject target = node.getTarget();
 			if (target instanceof Part) {
 				EList<EObject> massElement = getMassObjects(target);
-				if (massElement != null && !!massElement.isEmpty()) {
+				if (massElement != null && ! massElement.isEmpty()) {
 					result.addAll(massElement);
 				}
 			}
@@ -64,7 +64,8 @@ public class MassOpenJavaService {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
