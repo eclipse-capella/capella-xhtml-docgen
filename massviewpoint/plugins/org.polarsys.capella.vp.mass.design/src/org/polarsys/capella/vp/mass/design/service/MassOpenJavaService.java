@@ -12,62 +12,60 @@
 
 package org.polarsys.capella.vp.mass.design.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.sirius.diagram.DDiagram;
-import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DNode;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.polarsys.capella.core.data.fa.AbstractFunction;
+import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.vp.mass.helpers.MassHelper;
 
 /**
- * <!-- begin-user-doc -->
- * This class is an implementation of the DoReMi JavaExtension '<em><b>[org.polarsys.capella.vp.mass.design.service.MassOpenJavaService]</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> This class is an implementation of the DoReMi
+ * JavaExtension '
+ * <em><b>[org.polarsys.capella.vp.mass.design.service.MassOpenJavaService]</b></em>
+ * '. <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 
 public class MassOpenJavaService {
 	/**
-	* <!-- begin-user-doc -->
-	* <!-- end-user-doc -->
-	* @generated
-	*/
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public MassOpenJavaService() {
 		// TODO Auto-generated method stub
-	} 
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList<EObject> getMassObjects(EObject eObject, DSemanticDiagram diagram) {
-		EList<EObject> result = new BasicEList<EObject>();
-
-        for (DNode node : diagram.getNodes()) {
-               final EObject target = node.getTarget();
-               if (target instanceof AbstractFunction) {
-                     EList<EObject> massElement = getMassObjects(target);
-                     if (massElement != null && !! massElement.isEmpty() ) {
-                            result.addAll(massElement);
-                     }
-               }
-        }
-
-        return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public EList<EObject> getMassObjects(EObject eObject,
+			DSemanticDiagram diagram) {
+		EList<EObject> result = new BasicEList<EObject>();
+
+		for (DNode node : diagram.getNodes()) {
+			final EObject target = node.getTarget();
+			if (target instanceof Part) {
+				EList<EObject> massElement = getMassObjects(target);
+				if (massElement != null && !!massElement.isEmpty()) {
+					result.addAll(massElement);
+				}
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public EList<EObject> getMassObjects(EObject eObject) {

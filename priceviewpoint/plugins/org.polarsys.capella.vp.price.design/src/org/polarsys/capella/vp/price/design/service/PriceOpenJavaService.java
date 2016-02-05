@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.DNode;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.polarsys.capella.core.data.fa.AbstractFunction;
+import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.vp.price.helpers.PriceHelper;
 
 /**
@@ -50,7 +50,7 @@ public class PriceOpenJavaService {
 
         for (DNode node : diagram.getNodes()) {
                final EObject target = node.getTarget();
-               if (target instanceof AbstractFunction) {
+               if (target instanceof Part) {
                      EList<EObject> priceElement = getPriceObjects(target);
                      if (priceElement != null && !! priceElement.isEmpty() ) {
                             result.addAll(priceElement);
