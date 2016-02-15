@@ -18,7 +18,7 @@
         <acceleoCompiler 
             sourceFolder="${target.folder}"
             outputFolder="${target.folder}"
-            dependencies="${target.folder}/../../org.polarsys.capella.vp.price.model;${target.folder}/../../org.polarsys.capella.common.data.activity.gen;${target.folder}/../../org.polarsys.capella.vp.price;"
+            dependencies="${target.folder}/../../org.polarsys.capella.vp.price.model;${target.folder}/../../org.polarsys.capella.vp.price;"
             binaryResource="false"
             packagesToRegister="">
         </acceleoCompiler>

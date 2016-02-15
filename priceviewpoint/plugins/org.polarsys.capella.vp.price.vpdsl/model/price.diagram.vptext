@@ -86,7 +86,7 @@ Diagrams price.diagram {
 				
 			Node PC_Price_Label {
 					domain-context: price.data.PartPrice
-					provided-by query "<%eAllContents()%>"
+					provided-by query "<%getPriceObjects($diagram)%>"
 					Representation {
 						Label  {
 							content: "Current: <%currentPrice%> - Max: <%maxValue%>" 

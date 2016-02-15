@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 Thales Global Services
+ * Copyright (c) 2006, 2016 Thales Global Services
  *   All rights reserved. This program and the accompanying materials
  *   are made available under the terms of the Eclipse Public License v1.0
  *   which accompanies this distribution, and is available at
@@ -21,8 +21,6 @@ import org.polarsys.capella.vp.price.price.Price;
 import org.polarsys.capella.vp.price.price.impl.PriceFactoryImpl;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 
-
-
 public class PriceCreationToolHelper {
 	
 	public boolean createPrice(EObject eObject, int cls){
@@ -34,7 +32,7 @@ public class PriceCreationToolHelper {
 		EObject correctPart = eObject;
 
 		if (eObject instanceof PhysicalComponent){
-			if (((PhysicalComponent)eObject).getName().equals("Physical System")){
+			if (PriceHelper.isPhysicalSystem(eObject)){
 				correctPart = ((PhysicalComponent)eObject).getAbstractTypedElements().get(0);
 			}
 		}
@@ -59,7 +57,7 @@ public class PriceCreationToolHelper {
 			
 			if (eObject instanceof PhysicalComponent){
 				PhysicalComponent pc = (PhysicalComponent)eObject;
-				if (pc.getName().equals("Physical System")){
+				if (PriceHelper.isPhysicalSystem(pc)){
 					eObject = (Part)pc.getAbstractTypedElements().get(0);
 				}else{
 					return false;

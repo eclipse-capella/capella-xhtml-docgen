@@ -120,7 +120,7 @@
           <imports href="../../../plugin/org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='PAB_Deployment']"/>
         </diagram_Elements>
         <diagram_Elements xsi:type="vpdiagram:Node" name="PC_Mass_Label">
-          <the_domain query="&lt;%eAllContents()%>">
+          <the_domain query="&lt;%getMassObjects($diagram)%>">
             <domain_Class xsi:type="commondata:LocalClass" class="//@VP_Data/@VP_Classes.1"/>
           </the_domain>
           <style label_position="node">
