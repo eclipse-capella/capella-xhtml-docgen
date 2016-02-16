@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="perfo" version="10.1.0.201507271600">
-  <ownedViewpoints name="Perfo_ID" label="Perfo" modelFileExtension="perfo melodymodeller">
+  <ownedViewpoints name="Perfo_ID" label="Basic Performance" modelFileExtension="perfo melodymodeller">
     <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="Performance_LAB" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Logical Architecture" representationName="Logical Architecture Blank">
       <layers name="perfo" label="Basic Performance">
         <nodeMappings xsi:type="description_1:NodeMappingImport" name="Performance_LAB_LogicalFunction_Import_Imported_NM" label="Performance_LAB_LogicalFunction_Import" semanticCandidatesExpression="">
@@ -118,7 +118,7 @@
           <reusedNodeMappings href="#//@ownedViewpoints[name='Perfo_ID']/@ownedRepresentationExtensions[name='Performance_LAB']/@layers[name='perfo']/@nodeMappings[name='Performance_LAB_LogicalFunction_Import_Imported_NM']"/>
           <importedMapping href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='Logical%20Actors']"/>
         </containerMappings>
-        <toolSections name="perfo" label="perfo">
+        <toolSections name="perfo" label="Basic Performance">
           <ownedTools xsi:type="tool_1:ToolDescription" name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" forceRefresh="true" iconPath="/org.polarsys.capella.vp.perfo.design/icons/LogicalFunction.gif">
             <element name="element"/>
             <elementView name="elementView"/>
@@ -284,7 +284,7 @@
           <reusedNodeMappings href="#//@ownedViewpoints[name='Perfo_ID']/@ownedRepresentationExtensions[name='Performance_PAB']/@layers[name='perfo']/@nodeMappings[name='Performance_PAB_PhysicalFunction_Import_Imported_NM']"/>
           <importedMapping href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='PAB_Deployment']"/>
         </containerMappings>
-        <toolSections name="perfo" label="perfo">
+        <toolSections name="perfo" label="Basic Performance">
           <ownedTools xsi:type="tool_1:ToolDescription" name="CreateLABFunctionTimeConsumption" label="Function Time Consumption" forceRefresh="true" iconPath="/org.polarsys.capella.vp.perfo.design/icons/LogicalFunction.gif">
             <element name="element"/>
             <elementView name="elementView"/>
