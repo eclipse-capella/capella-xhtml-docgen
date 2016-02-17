@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -25,17 +25,29 @@ public class MergePatternListTask extends AbstractPatternListMergeTask {
 
 	public void doExecute(ITaskProductionContext productionContext, IProgressMonitor monitor) throws InvocationException {
 		// Get original and additional substitution
-		TypePatternList baseSubstitution = getBase(productionContext, TypePatternList.class);
-		TypePatternList additionSubstitution = getAddition(productionContext, TypePatternList.class);
+		TypePatternList basePatternList =  getBase(productionContext, TypePatternList.class);
+		TypePatternList additionPatternList = getAddition(productionContext, TypePatternList.class);
 		
-		if (additionSubstitution == null)
+		if (additionPatternList == null && basePatternList != null)
 		{
-			setMergeResult(productionContext, baseSubstitution);
+			setMergeResult(productionContext, basePatternList);
+			return;
+		}
+		
+		if (additionPatternList != null && basePatternList == null)
+		{
+			setMergeResult(productionContext, additionPatternList);
+			return;
+		}
+		
+		if (additionPatternList == null && basePatternList == null)
+		{
+			setMergeResult(productionContext, null);
 			return;
 		}
 		
 		// Merge initial and additional substitution 
-		EList<PatternElement> mergedSubstitution = merge(baseSubstitution.getElements(), additionSubstitution.getElements(), false);
+		EList<PatternElement> mergedSubstitution = merge(basePatternList.getElements(), additionPatternList.getElements(), false);
 		
 		// If the merged list is not empty, so return it.
 		if (! mergedSubstitution.isEmpty())
@@ -47,7 +59,7 @@ public class MergePatternListTask extends AbstractPatternListMergeTask {
 		// Return the initial substitution list if the result is empty
 		else
 		{
-			setMergeResult(productionContext, baseSubstitution);
+			setMergeResult(productionContext, basePatternList);
 		}
 	}
 }
