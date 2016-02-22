@@ -642,15 +642,14 @@ Contributors:
       </viewpoints>
     </viewpointContainer>
     <orchestration xmi:type="fprod:ProductionPlan" xmi:id="_BcMYgNz-Ed-Vzvs7Wt1vzQ">
-      <invocations xmi:id="_cfRA8EsFEeSfyeTEy5zUcw" name="Initialize branding data"
-          invokedActivity="#_MtkCwUsFEeSfyeTEy5zUcw">
+      <invocations xmi:id="_cfRA8EsFEeSfyeTEy5zUcw" name="Update branding data" invokedActivity="#_MtkCwUsFEeSfyeTEy5zUcw">
         <invocationContractContainer xmi:id="_cfRA8UsFEeSfyeTEy5zUcw">
           <invocationContracts xmi:id="_cfRA8ksFEeSfyeTEy5zUcw" factoryComponentContract="#_--ofgEsCEeSwTsYi0RQ-Ig"
-              invokedContract="#_RfL-sEsFEeSfyeTEy5zUcw"/>
+              targetInvocationContract="#_z4gt8Nb4EeWvH7cKIyh8WQ" invokedContract="#_RfL-sEsFEeSfyeTEy5zUcw"/>
           <invocationContracts xmi:id="_cfRA80sFEeSfyeTEy5zUcw" factoryComponentContract="#_6djhAEsCEeSwTsYi0RQ-Ig"
-              invokedContract="#_TE9psEsFEeSfyeTEy5zUcw"/>
+              targetInvocationContract="#_4fQ2oNb4EeWvH7cKIyh8WQ" invokedContract="#_TE9psEsFEeSfyeTEy5zUcw"/>
           <invocationContracts xmi:id="_cfRA9EsFEeSfyeTEy5zUcw" factoryComponentContract="#_9QN14EsCEeSwTsYi0RQ-Ig"
-              invokedContract="#_TT3oYEsFEeSfyeTEy5zUcw"/>
+              targetInvocationContract="#_2rUz0Nb4EeWvH7cKIyh8WQ" invokedContract="#_TT3oYEsFEeSfyeTEy5zUcw"/>
         </invocationContractContainer>
       </invocations>
       <invocations xmi:id="_YejZQG8PEeSjPIMKP6Xr0g" name="Merge pattern substitution"
@@ -716,7 +715,7 @@ Contributors:
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_67_oxN3rEd-Qav1YnqlO9A"/>
           <invocationContracts xmi:id="_m70JEN4ZEd-Qav1YnqlO9A" sourceInvocationContract="#_xHdBpG8PEeSjPIMKP6Xr0g"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_fGFi8N4ZEd-Qav1YnqlO9A"/>
-          <invocationContracts xmi:id="_kIXh4N6ZEd-ZSZ6AN4Dlrg" sourceInvocationContract="#_jxFv1dV2EeW9p5oksEzglA"
+          <invocationContracts xmi:id="_kIXh4N6ZEd-ZSZ6AN4Dlrg" sourceInvocationContract="#_DL3pVG8QEeSjPIMKP6Xr0g"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_jEMzUN6SEd-ZSZ6AN4Dlrg"/>
           <invocationContracts xmi:id="_JKBjMN44Ed-Qav1YnqlO9A" factoryComponentContract="#_60tqgN43Ed-Qav1YnqlO9A"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_pShHcN4pEd-Qav1YnqlO9A"/>
@@ -728,20 +727,26 @@ Contributors:
           </invocationContracts>
           <invocationContracts xmi:id="_Tr0WAIVEEeCEYZYvBxvVlA" sourceInvocationContract="#_YejZRG8PEeSjPIMKP6Xr0g"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_67_owt3rEd-Qav1YnqlO9A"/>
+          <invocationContracts xmi:id="_z4gt8Nb4EeWvH7cKIyh8WQ" sourceInvocationContract="#_cfRA8ksFEeSfyeTEy5zUcw"
+              invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_WRnzgNb2EeWvH7cKIyh8WQ"/>
+          <invocationContracts xmi:id="_2rUz0Nb4EeWvH7cKIyh8WQ" sourceInvocationContract="#_cfRA9EsFEeSfyeTEy5zUcw"
+              invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_WEqVkNb2EeWvH7cKIyh8WQ"/>
+          <invocationContracts xmi:id="_4fQ2oNb4EeWvH7cKIyh8WQ" sourceInvocationContract="#_cfRA80sFEeSfyeTEy5zUcw"
+              invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_WBOnENb2EeWvH7cKIyh8WQ"/>
         </invocationContractContainer>
       </invocations>
     </orchestration>
   </fcore:FactoryComponent>
-  <ftask:Task xmi:id="_MtkCwUsFEeSfyeTEy5zUcw" name="Initialize.Documentation.Branding.Data"
-      kind="java" implementation="org.polarsys.capella.docgen.task.InitializeCapellaDocGenBrandingData">
+  <ftask:Task xmi:id="_MtkCwUsFEeSfyeTEy5zUcw" name="Update.Documentation.Branding.Data"
+      kind="java" implementation="org.polarsys.capella.docgen.task.UpdateCapellaDocGenBrandingData">
     <contractContainer xmi:id="_Q1dsQEsFEeSfyeTEy5zUcw">
-      <contracts xmi:id="_RfL-sEsFEeSfyeTEy5zUcw" name="copyright">
+      <contracts xmi:id="_RfL-sEsFEeSfyeTEy5zUcw" name="copyright" mode="In_Out">
         <type xmi:type="types:TypeString" xmi:id="_R3Ln8EsFEeSfyeTEy5zUcw"/>
       </contracts>
-      <contracts xmi:id="_TE9psEsFEeSfyeTEy5zUcw" name="logo.path">
+      <contracts xmi:id="_TE9psEsFEeSfyeTEy5zUcw" name="logo.path" mode="In_Out">
         <type xmi:type="types:TypeString" xmi:id="_TE9psUsFEeSfyeTEy5zUcw"/>
       </contracts>
-      <contracts xmi:id="_TT3oYEsFEeSfyeTEy5zUcw" name="logo.alt">
+      <contracts xmi:id="_TT3oYEsFEeSfyeTEy5zUcw" name="logo.alt" mode="In_Out">
         <type xmi:type="types:TypeString" xmi:id="_TT3oYUsFEeSfyeTEy5zUcw"/>
       </contracts>
     </contractContainer>

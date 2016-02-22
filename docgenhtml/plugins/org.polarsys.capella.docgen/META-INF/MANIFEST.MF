@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.polarsys.capella.docgen;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: org.polarsys.capella.docgen.Activator
 Bundle-Vendor: %providerName
 Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core;visibility:=reexport,
@@ -17,7 +17,8 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core;visibility:=reexport
  org.eclipse.egf.model.ftask;visibility:=reexport,
  org.polarsys.capella.core.linkedtext.ui,
  org.polarsys.capella.common.linkedtext.ui,
- org.eclipse.jface.text
+ org.eclipse.jface.text,
+ org.polarsys.kitalpha.doc.gen.business.core.preference
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin

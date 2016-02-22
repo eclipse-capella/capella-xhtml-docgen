@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -26,6 +26,18 @@ Contributors:
         name="outputFolder" mandatory="true" invocationContracts="#_1hZEgwkdEeCBJtEcjZDVOA">
       <type xmi:type="types:TypeString" xmi:id="_A_MP0IXpEeCCD-YF_4-xDg"/>
     </contracts>
+    <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_BypKsNbyEeWvH7cKIyh8WQ"
+        name="logo.path" invocationContracts="#_GHgSINbyEeWvH7cKIyh8WQ">
+      <type xmi:type="types:TypeString" xmi:id="_BypKsdbyEeWvH7cKIyh8WQ"/>
+    </contracts>
+    <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_BypKstbyEeWvH7cKIyh8WQ"
+        name="logo.alt" invocationContracts="#_EecpoNbyEeWvH7cKIyh8WQ">
+      <type xmi:type="types:TypeString" xmi:id="_BypKs9byEeWvH7cKIyh8WQ"/>
+    </contracts>
+    <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_BypKtNbyEeWvH7cKIyh8WQ"
+        name="copyright" invocationContracts="#_CyuHoNbyEeWvH7cKIyh8WQ">
+      <type xmi:type="types:TypeString" xmi:id="_BypKtdbyEeWvH7cKIyh8WQ"/>
+    </contracts>
   </contractContainer>
   <viewpointContainer xmi:id="_83YaoAkdEeCBJtEcjZDVOA">
     <viewpoints xmi:type="domain:DomainViewpoint" xmi:id="_9Rm4gAkdEeCBJtEcjZDVOA">
@@ -45,6 +57,12 @@ Contributors:
         </invocationContracts>
         <invocationContracts xmi:id="_VGs4AIXmEeCCD-YF_4-xDg" factoryComponentContract="#_OGBqkIXmEeCCD-YF_4-xDg"
             invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_cxneQN0OEd-Vzvs7Wt1vzQ"/>
+        <invocationContracts xmi:id="_CyuHoNbyEeWvH7cKIyh8WQ" factoryComponentContract="#_BypKtNbyEeWvH7cKIyh8WQ"
+            invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_--ofgEsCEeSwTsYi0RQ-Ig"/>
+        <invocationContracts xmi:id="_EecpoNbyEeWvH7cKIyh8WQ" factoryComponentContract="#_BypKstbyEeWvH7cKIyh8WQ"
+            invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_9QN14EsCEeSwTsYi0RQ-Ig"/>
+        <invocationContracts xmi:id="_GHgSINbyEeWvH7cKIyh8WQ" factoryComponentContract="#_BypKsNbyEeWvH7cKIyh8WQ"
+            invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_6djhAEsCEeSwTsYi0RQ-Ig"/>
       </invocationContractContainer>
     </invocations>
   </orchestration>
