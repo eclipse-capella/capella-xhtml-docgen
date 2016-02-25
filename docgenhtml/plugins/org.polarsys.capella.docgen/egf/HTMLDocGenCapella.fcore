@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -683,16 +683,29 @@ Contributors:
               invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
         </invocationContractContainer>
       </invocations>
-      <invocations xmi:id="_DL3pUG8QEeSjPIMKP6Xr0g" name="Merge Sidebar Patterns"
+      <invocations xmi:id="_DL3pUG8QEeSjPIMKP6Xr0g" name="Merge Sidebar Patterns (1/2) Merging all without the ElementSideBarFooter"
           invokedActivity="#__iSI8G8OEeSjPIMKP6Xr0g">
         <invocationContractContainer xmi:id="_DL3pUW8QEeSjPIMKP6Xr0g">
           <invocationContracts xmi:id="_DL3pUm8QEeSjPIMKP6Xr0g" invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g">
             <type xmi:type="pattern:TypePatternList" xmi:id="_m10moN6ZEd-ZSZ6AN4Dlrg"
-                elements="pattern:Pattern platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_zflfEPepEd-vRuaiXg4Fzg #_sJuJMN6ZEd-ZSZ6AN4Dlrg pattern:Pattern platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_Mt0CEPeqEd-vRuaiXg4Fzg"/>
+                elements="pattern:Pattern platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_zflfEPepEd-vRuaiXg4Fzg #_sJuJMN6ZEd-ZSZ6AN4Dlrg"/>
           </invocationContracts>
           <invocationContracts xmi:id="_DL3pU28QEeSjPIMKP6Xr0g" factoryComponentContract="#_dZZioG8PEeSjPIMKP6Xr0g"
               invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>
-          <invocationContracts xmi:id="_DL3pVG8QEeSjPIMKP6Xr0g" targetInvocationContract="#_kIXh4N6ZEd-ZSZ6AN4Dlrg"
+          <invocationContracts xmi:id="_DL3pVG8QEeSjPIMKP6Xr0g" targetInvocationContract="#_0fskMtuiEeWkaeMsefzt_Q"
+              invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_0fskMNuiEeWkaeMsefzt_Q" name="Merge Sidebar Patterns (2/2) Merging the footer pattern at the end"
+          invokedActivity="#__iSI8G8OEeSjPIMKP6Xr0g">
+        <invocationContractContainer xmi:id="_0fskMduiEeWkaeMsefzt_Q">
+          <invocationContracts xmi:id="_0fskMtuiEeWkaeMsefzt_Q" sourceInvocationContract="#_DL3pVG8QEeSjPIMKP6Xr0g"
+              invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g"/>
+          <invocationContracts xmi:id="_0fskNNuiEeWkaeMsefzt_Q" invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g">
+            <type xmi:type="pattern:TypePatternList" xmi:id="_0fskM9uiEeWkaeMsefzt_Q"
+                elements="pattern:Pattern platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_Mt0CEPeqEd-vRuaiXg4Fzg"/>
+          </invocationContracts>
+          <invocationContracts xmi:id="_0fskNduiEeWkaeMsefzt_Q" targetInvocationContract="#_kIXh4N6ZEd-ZSZ6AN4Dlrg"
               invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
         </invocationContractContainer>
       </invocations>
@@ -703,7 +716,7 @@ Contributors:
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_67_oxN3rEd-Qav1YnqlO9A"/>
           <invocationContracts xmi:id="_m70JEN4ZEd-Qav1YnqlO9A" sourceInvocationContract="#_xHdBpG8PEeSjPIMKP6Xr0g"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_fGFi8N4ZEd-Qav1YnqlO9A"/>
-          <invocationContracts xmi:id="_kIXh4N6ZEd-ZSZ6AN4Dlrg" sourceInvocationContract="#_DL3pVG8QEeSjPIMKP6Xr0g"
+          <invocationContracts xmi:id="_kIXh4N6ZEd-ZSZ6AN4Dlrg" sourceInvocationContract="#_0fskNduiEeWkaeMsefzt_Q"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_jEMzUN6SEd-ZSZ6AN4Dlrg"/>
           <invocationContracts xmi:id="_JKBjMN44Ed-Qav1YnqlO9A" factoryComponentContract="#_60tqgN43Ed-Qav1YnqlO9A"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_pShHcN4pEd-Qav1YnqlO9A"/>
