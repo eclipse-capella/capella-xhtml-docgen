@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.polarsys.capella.vp.mass.vpdsl;singleton:=true
-Bundle-Name: %pluginName
-Bundle-Vendor: %providerName
-Bundle-Version: 1.0.0.qualifier
-Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.polarsys.kitalpha.resourcereuse
