@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<toc label="14.3. System to Subsystem-Traceability" link_to="PLUGINS_ROOT/org.polarsys.capella.transition.system2subsystem.doc/SubsystemTransition-toc.xml#contribution" topic="html/14. System to Subsystem-Software Transition/14.3. System to Subsystem-Traceability.html">
-	<topic href="html/14. System to Subsystem-Software Transition/14.3. System to Subsystem-Traceability.html" label="System to Subsystem Traceability">
-		<topic href="html/14. System to Subsystem-Software Transition/14.3. System to Subsystem-Traceability.html#System_Model_.28Source.29" label="System Model (Source)"></topic>
-		<topic href="html/14. System to Subsystem-Software Transition/14.3. System to Subsystem-Traceability.html#Sub-System_Model" label="Sub-System Model"></topic>
-	</topic>
-</toc>

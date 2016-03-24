@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <feature url="features/org.polarsys.capella.transition.system2subsystem_0.8.0.qualifier.jar" id="org.polarsys.capella.transition.system2subsystem" version="0.8.0.qualifier">
-      <category name="Capella Transition"/>
-   </feature>
-   <category-def name="Capella Transition" label="Capella Transition"/>
-</site>
