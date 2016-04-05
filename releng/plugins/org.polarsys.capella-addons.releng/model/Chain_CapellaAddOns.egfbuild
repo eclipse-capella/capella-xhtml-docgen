@@ -5,13 +5,8 @@
     <properties xmi:id="_JAvf4G3iEeGehoHCqtPcvA" key="qualifier.replacement.*" value="${timestamp}"/>
     <properties xmi:id="_VPrWUFZGEeGR2_cB4MDfaQ" key="CapellaVersion" value="1.0.0"/>
     <properties xmi:id="_TWr84KZMEeShout9m4suYQ" key="hudsonJob" value="https://hudson.polarsys.org/capella/job/capella-${env.GIT_BRANCH}/38"/>
-    <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_SDK-v1.0.x/17/artifact/result/publish/kitalpha_sdk/site.p2/"/>
+    <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_runtime-v1.0.x/26/artifact/result/publish/kitalpha_runtime/site.p2/"/>
     <properties xmi:id="_KlR7cMzJEeSgCsr7bvb4KA" key="site_EGF" value="https://hudson.eclipse.org/egf/job/buckminster-egf-juno/lastSuccessfulBuild/artifact/result/publish/org.eclipse.egf.sdk/site.p2/"/>
   </propertyPackages>
-  <jobs href="Job_SubsystemTransition.egfbuild#_gPxtENokEeGTBMJ29vOuKA"/>
-  <jobs href="Job_XMLPivot.egfbuild#_Q3G18Cs6EeOgOepTKQGF5A"/>
   <jobs href="Job_XHTMLDocGen.egfbuild#_pba9AMV8EeOLTKWt7nPrDw"/>
-  <jobs href="Job_VP_Mass.egfbuild#_3ZkUYG0BEeWZLqZa10vhXw"/>
-  <jobs href="Job_VP_Price.egfbuild#_PHUjIG0CEeWZLqZa10vhXw"/>
-  <jobs href="Job_VP_Perfo.egfbuild#_BtQKsG0CEeWZLqZa10vhXw"/>
 </buildcore:Chain>
