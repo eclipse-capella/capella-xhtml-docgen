@@ -16,7 +16,7 @@
     <steps xsi:type="buildstep:BuildStep" xmi:id="_pba9FsV8EeOLTKWt7nPrDw" name="Import All DocGen HTML Plugins">
       <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_2Ws5IM1TEeSrkJQOnQt4GA" gitLocation="_90gO0M1QEeSrkJQOnQt4GA" folderName="docgenhtml/features"/>
       <buildLocations xsi:type="buildscm:GITBuildLocation" xmi:id="_25hSUM1TEeSrkJQOnQt4GA" gitLocation="_90gO0M1QEeSrkJQOnQt4GA" folderName="docgenhtml/plugins"/>
-      <buildLocations xsi:type="buildstep:TargetPlatformBuildLocation" xmi:id="_pba9GcV8EeOLTKWt7nPrDw" path="${usedTP}/capella/eclipse"/>
+      <buildLocations xsi:type="buildstep:TargetPlatformBuildLocation" xmi:id="_pba9GcV8EeOLTKWt7nPrDw" path="${usedTP}"/>
       <buildLocations xsi:type="buildstep:UpdateSiteBuildLocation" xmi:id="_28c38MKGEeSmKrtLhNokCA" url="${site_Kitalpha}"/>
       <buildLocations xsi:type="buildstep:UpdateSiteBuildLocation" xmi:id="_GvuvwLH6EeSw4sNwqXzhvg" url="${site_EGF}"/>
       <components xsi:type="buildstep:Feature" xmi:id="_pba9G8V8EeOLTKWt7nPrDw" id="org.polarsys.capella.docgen.package.feature"/>
