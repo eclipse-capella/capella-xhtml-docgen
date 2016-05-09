@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.eclipse.core.internal.utils.FileUtil;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -42,6 +46,7 @@ public class ImageHelper {
 	public static ImageHelper INSTANCE = new ImageHelper();
 	private static final String ICON_FOLDER_NAME = "icon";
 	private static final String FILE_NOT_FOUND = "Image source file doesn't exist";
+	private static final String FOLDER_HIERARCHY_CREATION_ERROR = "Cannot Create Target Folder Hierarchy";
 	private static final NullProgressMonitor MONITOR = new NullProgressMonitor();
 	private static final String PNG = "png";
 
@@ -50,13 +55,27 @@ public class ImageHelper {
 	}
 
 	public void copyProjectImageToSystemLocation(String srcFile, String targetFile) throws IOException {
+		
 		File inputFile = new File(srcFile);
 		File outputFile = new File(targetFile);
+		
+		createFoldersHierarchy(outputFile);
+		
 		if (inputFile.exists())
 			copyFile(inputFile, outputFile);
 		else
 			org.polarsys.capella.docgen.Activator.getDefault().getLog()
 					.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, FILE_NOT_FOUND + ": \"" + inputFile.getAbsolutePath() + "\""));
+	}
+
+	private void createFoldersHierarchy(File outputFile) {
+		File parentFile = outputFile.getParentFile();
+		if (!parentFile.exists()){
+			if (!parentFile.mkdirs()){
+				org.polarsys.capella.docgen.Activator.getDefault().getLog()
+					.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, FOLDER_HIERARCHY_CREATION_ERROR + ": \"" + outputFile.getAbsolutePath() + "\""));
+			}
+		}
 	}
 
 	private void copyFile(File sourceFile, File destFile) throws IOException {
@@ -108,7 +127,8 @@ public class ImageHelper {
 				FileHelper.createContainers(MONITOR, iconFolder);
 				iconFolder.create(true, true, MONITOR);
 			} catch (CoreException e) {
-				e.printStackTrace();
+				org.polarsys.capella.docgen.Activator.getDefault().getLog()
+					.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, folderName + " can not be created. This can lead to some gaps in the generated documentation. See the exception stack for more details", e));
 			}
 		}
 		return iconFolder;
@@ -125,7 +145,8 @@ public class ImageHelper {
 				fileName = fileName + PNG;
 				loader.save(fileName, SWT.IMAGE_PNG);
 			} catch (Exception e) {
-				e.printStackTrace();
+				org.polarsys.capella.docgen.Activator.getDefault().getLog()
+					.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, fileName + " can not be saved. This can lead to some gaps in the generated documentation. See the exception stack for more details", e));
 			}
 			return ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(fileName));
 		}
