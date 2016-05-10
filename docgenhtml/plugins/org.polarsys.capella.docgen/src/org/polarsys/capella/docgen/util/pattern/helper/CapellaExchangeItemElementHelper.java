@@ -13,11 +13,11 @@ package org.polarsys.capella.docgen.util.pattern.helper;
 import org.eclipse.emf.common.util.EList;
 import org.polarsys.capella.core.data.information.ExchangeItemElement;
 import org.polarsys.capella.core.data.information.ParameterDirection;
+import org.polarsys.capella.core.data.information.Property;
 import org.polarsys.capella.docgen.util.CapellaDataValueServices;
 import org.polarsys.capella.docgen.util.CapellaPropertyServices;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.capella.docgen.util.StringUtil;
-import org.polarsys.capella.core.data.information.Property;
 
 public class CapellaExchangeItemElementHelper {
 
@@ -39,17 +39,19 @@ public class CapellaExchangeItemElementHelper {
 		buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(exItemElt.getOwnedMinCard()));
 		buffer.append(",");
 		buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(exItemElt.getOwnedMaxCard()));
-		
 		buffer.append(CapellaServices.CRO_CLOSE);
+
+		buffer.append(CapellaServices.BOLD_END);
+		
+		buffer.append(CapellaServices.VALUE_PRESENTER);
+		if (exItemElt.getAbstractType() != null) {
+			buffer.append(CapellaServices.getFullDataPkgHierarchyLink(exItemElt.getAbstractType()));
+		}
+		
 		String referencedProperties = generateReferencedProperties(exItemElt, projectName, outputFolder);
 		if (! referencedProperties.isEmpty())
 		{
 			buffer.append(referencedProperties);
-		}
-		buffer.append(CapellaServices.BOLD_END);
-		buffer.append(CapellaServices.VALUE_PRESENTER);
-		if (exItemElt.getAbstractType() != null) {
-			buffer.append(CapellaServices.getFullDataPkgHierarchyLink(exItemElt.getAbstractType()));
 		}
 
 		// description and summary
@@ -75,10 +77,17 @@ public class CapellaExchangeItemElementHelper {
 	
 	private static String generateReferencedProperties(ExchangeItemElement exItemElt, String projectName, String outputFolder){
 		StringBuffer buffer = new StringBuffer();
+		
+		
+		
 		EList<Property> referencedProperties = exItemElt.getReferencedProperties();
 		if (! referencedProperties.isEmpty())
 		{
+			buffer.append(CapellaServices.NEW_LINE);
+			buffer.append(CapellaServices.BOLD_BEGIN);
+			buffer.append("Referenced Properties").append(CapellaServices.VALUE_PRESENTER);
 			buffer.append("{");
+			
 			for (Property property : referencedProperties) 
 			{
 				String propertyName = property.getName();
@@ -89,8 +98,11 @@ public class CapellaExchangeItemElementHelper {
 					buffer.append(", ");
 				}
 			}
+			
 			buffer.append("}");
+			buffer.append(CapellaServices.BOLD_END);
 		}
+		
 		
 		return buffer.toString();
 	}
