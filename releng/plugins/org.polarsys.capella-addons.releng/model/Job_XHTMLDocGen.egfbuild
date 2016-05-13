@@ -33,6 +33,6 @@
     <steps xsi:type="buildstep:AntStep" xmi:id="_7pLT081dEeSrkJQOnQt4GA" name="clean-p2-container" description="Clean p2 container directory" targetName="clean-p2-container-dir" xml="&lt;target name=&quot;clean-p2-container-dir&quot;>&#xD;&#xA;&#x9;&lt;delete includeemptydirs=&quot;true&quot;>&#xD;&#xA;   &#x9; &#x9;&lt;fileset dir=&quot;${publish}/CapellaXHTMLDocGen&quot;>&#xD;&#xA;        &#x9;&#x9;&lt;include name=&quot;*/&quot;/>&#xD;&#xA;    &#x9;&#x9;&#x9;&lt;exclude name=&quot;site.p2/&quot;/>&#xD;&#xA;    &#x9;&#x9;&lt;/fileset>&#xD;&#xA;&#x9;&lt;/delete>&#xD;&#xA;&lt;/target>"/>
   </steps>
   <scms xsi:type="buildscm:GIT" xmi:id="_9XVxsM1QEeSrkJQOnQt4GA">
-    <locations xmi:id="_90gO0M1QEeSrkJQOnQt4GA" protocol="https://" url="www.polarsys.org/r/capella/capella-addons" localPath=""/>
+    <locations xmi:id="_90gO0M1QEeSrkJQOnQt4GA" protocol="https://" url="www.polarsys.org/r/capella/capella-addons" localPath="" branch="v1.0.x"/>
   </scms>
 </buildcore:Job>
