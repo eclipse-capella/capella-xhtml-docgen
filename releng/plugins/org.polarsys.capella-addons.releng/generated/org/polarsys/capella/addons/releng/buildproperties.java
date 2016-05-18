@@ -1,4 +1,4 @@
-//Generated with EGF 1.3.0.v20160125-0623
+//Generated with EGF 1.3.0.v20150924-1035
 package org.polarsys.capella.addons.releng;
 
 import org.eclipse.egf.common.helper.*;
@@ -37,7 +37,7 @@ public class buildproperties extends org.eclipse.egf.portfolio.eclipse.build.buc
 			+ "signing.type=eclipse.local" + NL + "eclipse.staging.area=${result}/signing" + NL + "site.pack200=true"
 			+ NL + "site.retain.unpacked=true" + NL + "" + NL
 			+ "#buckminster : do not generate version range in manifest.mf and content.jar" + NL
-			+ "pde.bundle.range.generation=false";
+			+ "pde.bundle.range.generation=false" + NL;
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL;
 
