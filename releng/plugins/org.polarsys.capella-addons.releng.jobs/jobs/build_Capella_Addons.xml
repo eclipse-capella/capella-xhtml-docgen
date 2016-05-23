@@ -1,22 +1,7 @@
 <project name="Capella_Addons">
 
-	<echo message="Running Job SubsystemTransition in Capella_Addons_SubsystemTransition/releng"/>
-	<ant dir="Capella_Addons_SubsystemTransition/releng"/>
-
-	<echo message="Running Job XMLPivot in Capella_Addons_XMLPivot/releng"/>
-	<ant dir="Capella_Addons_XMLPivot/releng"/>
-
 	<echo message="Running Job XHTMLDocGen in Capella_Addons_XHTMLDocGen/releng"/>
 	<ant dir="Capella_Addons_XHTMLDocGen/releng"/>
-
-	<echo message="Running Job BasicMass in Capella_Addons_BasicMass/releng"/>
-	<ant dir="Capella_Addons_BasicMass/releng"/>
-
-	<echo message="Running Job BasicPrice in Capella_Addons_BasicPrice/releng"/>
-	<ant dir="Capella_Addons_BasicPrice/releng"/>
-
-	<echo message="Running Job BasicPerformance in Capella_Addons_BasicPerformance/releng"/>
-	<ant dir="Capella_Addons_BasicPerformance/releng"/>
 
 
 </project>
