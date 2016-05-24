@@ -5,7 +5,8 @@
     <properties xmi:id="_JAvf4G3iEeGehoHCqtPcvA" key="qualifier.replacement.*" value="${timestamp}"/>
     <properties xmi:id="_VPrWUFZGEeGR2_cB4MDfaQ" key="CapellaVersion" value="1.1.0"/>
     <properties xmi:id="_TWr84KZMEeShout9m4suYQ" key="hudsonJob" value="https://hudson.polarsys.org/capella/job/capella-${env.GIT_BRANCH}/lastSuccessfulBuild"/>
-    <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_SDK/lastSuccessfulBuild/artifact/result/publish/kitalpha_sdk/site.p2/"/>
+    <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha_SDK" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_SDK/lastSuccessfulBuild/artifact/result/publish/kitalpha_sdk/site.p2/"/>
+    <properties xmi:id="_VQ9c4CGWEeauBvYip70veA" key="site_Kitalpha_Runtime" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_runtime/lastSuccessfulBuild/artifact/result/publish/kitalpha_runtime/site.p2/"/>
     <properties xmi:id="_KlR7cMzJEeSgCsr7bvb4KA" key="site_EGF" value="https://hudson.eclipse.org/egf/job/buckminster-egf-juno/lastSuccessfulBuild/artifact/result/publish/org.eclipse.egf.sdk/site.p2/"/>
   </propertyPackages>
   <jobs href="Job_XHTMLDocGen.egfbuild#_pba9AMV8EeOLTKWt7nPrDw"/>
