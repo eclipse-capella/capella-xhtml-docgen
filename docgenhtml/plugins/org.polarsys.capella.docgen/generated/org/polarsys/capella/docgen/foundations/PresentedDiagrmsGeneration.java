@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -20,16 +20,14 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 public class PresentedDiagrmsGeneration {
 	protected static String nl;
 
-	public static synchronized PresentedDiagrmsGeneration create(
-			String lineSeparator) {
+	public static synchronized PresentedDiagrmsGeneration create(String lineSeparator) {
 		nl = lineSeparator;
 		PresentedDiagrmsGeneration result = new PresentedDiagrmsGeneration();
 		nl = null;
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Diagrams displaying \"";
 	protected final String TEXT_2 = "\"</h2>" + NL + "<ul>";
 	protected final String TEXT_3 = NL + "<li>";
@@ -72,8 +70,7 @@ public class PresentedDiagrmsGeneration {
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_9);
@@ -93,30 +90,26 @@ public class PresentedDiagrmsGeneration {
 			parameterValues.put("element", this.element);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
 
-	public void set_fileNameService(
-			org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
+	public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
 		this.fileNameService = object;
 	}
 
 	protected org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper helper = null;
 
-	public void set_helper(
-			org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper object) {
+	public void set_helper(org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper object) {
 		this.helper = object;
 	}
 
 	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-	public void set_element(
-			org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
 		this.element = object;
 	}
 
@@ -126,22 +119,18 @@ public class PresentedDiagrmsGeneration {
 		return parameters;
 	}
 
-	protected void method_setContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		fileNameService = DocGenHtmlCapellaUtil.SERVICE;
 		helper = new CapellaDiagramHelper();
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
 	}
 
-	protected void method_body(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		Set<DSemanticDiagram> diagramSet = CapellaHelper
-				.getDiagramContainingObject(element);
+		Set<DSemanticDiagram> diagramSet = CapellaHelper.getDiagramContainingObject(element);
 		if (diagramSet.size() >= 1) {
 			stringBuffer.append(TEXT_1);
 			stringBuffer.append(LabelProviderHelper.getText(element));
@@ -151,11 +140,9 @@ public class PresentedDiagrmsGeneration {
 				String generatedFolder = fileNameService.getFileName(eObject);
 				stringBuffer.append(TEXT_3);
 				if (eObject instanceof NamedElement
-						&& DocGenHtmlCapellaControl
-								.isPageCandidate((CapellaElement) eObject)) {
+						&& DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) eObject)) {
 					stringBuffer.append(TEXT_4);
-					stringBuffer.append(CapellaServices
-							.getHyperlinkFromElement(diagram));
+					stringBuffer.append(CapellaServices.getHyperlinkFromElement(diagram));
 					stringBuffer.append(TEXT_5);
 				} else {
 					stringBuffer.append(TEXT_6);
@@ -167,8 +154,7 @@ public class PresentedDiagrmsGeneration {
 			stringBuffer.append(TEXT_8);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -12,16 +12,14 @@ import org.polarsys.capella.docgen.util.StringUtil;
 public class SummaryAndDescriptionGeneration {
 	protected static String nl;
 
-	public static synchronized SummaryAndDescriptionGeneration create(
-			String lineSeparator) {
+	public static synchronized SummaryAndDescriptionGeneration create(String lineSeparator) {
 		nl = lineSeparator;
 		SummaryAndDescriptionGeneration result = new SummaryAndDescriptionGeneration();
 		nl = null;
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<em style=\"margin-top:5px;\">";
 	protected final String TEXT_2 = "</em>";
 	protected final String TEXT_3 = NL + "<p>";
@@ -63,8 +61,7 @@ public class SummaryAndDescriptionGeneration {
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_8);
@@ -82,16 +79,14 @@ public class SummaryAndDescriptionGeneration {
 			parameterValues.put("element", this.element);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-	public void set_element(
-			org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
 		this.element = object;
 	}
 
@@ -101,8 +96,7 @@ public class SummaryAndDescriptionGeneration {
 		return parameters;
 	}
 
-	protected void method_body(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
@@ -112,12 +106,11 @@ public class SummaryAndDescriptionGeneration {
 			stringBuffer.append(TEXT_2);
 		}
 		stringBuffer.append(TEXT_3);
-		if (element.getDescription() != null
-				&& element.getDescription().length() > 0) {
+		if (element.getDescription() != null && element.getDescription().length() > 0) {
 			stringBuffer.append(TEXT_4);
 			stringBuffer.append(TEXT_5);
-			stringBuffer.append(StringUtil.transformAREFString(element,
-					element.getDescription(), projectName, outputFolder));
+			stringBuffer.append(
+					StringUtil.transformAREFString(element, element.getDescription(), projectName, outputFolder));
 		} else {
 			stringBuffer.append(TEXT_6);
 		}
@@ -130,8 +123,7 @@ public class SummaryAndDescriptionGeneration {
 		//stringBuffer.append(transformAREFString);
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

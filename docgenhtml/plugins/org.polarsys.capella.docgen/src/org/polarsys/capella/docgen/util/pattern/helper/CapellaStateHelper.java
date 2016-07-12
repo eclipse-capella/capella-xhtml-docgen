@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import org.polarsys.capella.core.data.ctx.Capability;
@@ -35,16 +36,21 @@ import org.polarsys.capella.docgen.util.StringUtil;
 public class CapellaStateHelper {
 
 	public static String getDoActivity(String projectName, String outputFolder, State state) {
-		String ret = "";
-		AbstractEvent event = state.getDoActivity();
-		if (event != null) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(event, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(event));
-			ret = buffer.toString();
+		StringBuffer ret = new StringBuffer();
+		EList<AbstractEvent> abstractEvents = state.getDoActivity();
+		for (AbstractEvent event : abstractEvents) 
+		{
+			if (event != null) {
+				StringBuffer buffer = new StringBuffer();
+				buffer.append(CapellaServices.getImageLinkFromElement(event, projectName, outputFolder));
+				buffer.append(" ");
+				buffer.append(CapellaServices.getHyperlinkFromElement(event));
+				ret.append(CapellaServices.NEW_LINE) ;
+				ret.append(buffer) ;
+			}
 		}
-		return ret;
+		
+		return ret.toString();
 	}
 
 	public static Collection<String> getOwnedReferencedStatesModes(String projectName, String outputFolder, State state) {

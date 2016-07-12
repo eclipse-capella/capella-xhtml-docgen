@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -13,8 +13,7 @@ import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.CapellaExchangeItemHelper;
 
-public class ExchangeItemDocGen extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class ExchangeItemDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
 	public static synchronized ExchangeItemDocGen create(String lineSeparator) {
@@ -24,12 +23,10 @@ public class ExchangeItemDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "\t\t\t<h2>Interfaces</h2>" + NL + "\t\t\t";
 	protected final String TEXT_2 = NL + "\t\t";
-	protected final String TEXT_3 = NL
-			+ "\t\t\t<h2>Exchange Item Elements</h2>" + NL + "\t\t\t";
+	protected final String TEXT_3 = NL + "\t\t\t<h2>Exchange Item Elements</h2>" + NL + "\t\t\t";
 	protected final String TEXT_4 = NL + "\t\t";
 	protected final String TEXT_5 = NL + "<div title=\"Properties Value\">";
 	protected final String TEXT_6 = NL;
@@ -69,8 +66,7 @@ public class ExchangeItemDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_9);
@@ -88,16 +84,14 @@ public class ExchangeItemDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.information.ExchangeItem parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.information.ExchangeItem object) {
+	public void set_parameter(org.polarsys.capella.core.data.information.ExchangeItem object) {
 		this.parameter = object;
 	}
 
@@ -107,46 +101,40 @@ public class ExchangeItemDocGen extends
 		return parameters;
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
 		Collection<String> exchangeItemInterfaces = CapellaExchangeItemHelper
-				.getExchangeItemInterfaces((ExchangeItem) element, projectName,
-						outputFolder);
+				.getExchangeItemInterfaces((ExchangeItem) element, projectName, outputFolder);
 
 		if (exchangeItemInterfaces.size() > 0) {
 			stringBuffer.append(TEXT_1);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(exchangeItemInterfaces));
+			stringBuffer.append(StringUtil.stringListToBulette(exchangeItemInterfaces));
 			stringBuffer.append(TEXT_2);
 		}
 
 		Collection<String> exchangeItemElements = CapellaExchangeItemHelper
-				.getExchangeItemElements((ExchangeItem) element, projectName,
-						outputFolder);
+				.getExchangeItemElements((ExchangeItem) element, projectName, outputFolder);
 		if (exchangeItemElements.size() > 0) {
 			stringBuffer.append(TEXT_3);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(exchangeItemElements));
+			stringBuffer.append(StringUtil.stringListToBulette(exchangeItemElements));
 			stringBuffer.append(TEXT_4);
 		}
 
-		Collection<String> propertiesValueCollection = CapellaElementService
-				.getPropertiesValue(element, projectName, outputFolder);
+		Collection<String> propertiesValueCollection = CapellaElementService.getPropertiesValue(element, projectName,
+				outputFolder);
 		if (propertiesValueCollection.size() >= 1) {
 			stringBuffer.append(TEXT_5);
 			String propertyValue = "Properties Value";
@@ -155,44 +143,34 @@ public class ExchangeItemDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,propertyValue:property"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("eObject", element);
 				callParameters.put("property", propertyValue);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
 			stringBuffer.append(TEXT_7);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(propertiesValueCollection));
+			stringBuffer.append(StringUtil.stringListToBulette(propertiesValueCollection));
 			stringBuffer.append(TEXT_8);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
-	protected void method_setTitle(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setTitle(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		String mecanism = ((ExchangeItem) element).getExchangeMechanism()
-				.getName();
+		String mecanism = ((ExchangeItem) element).getExchangeMechanism().getName();
 		String elementName = CapellaServices.getHyperlinkFromElement(element);
 		//String elementType = EscapeChars.forHTML(element.eClass().getName());
-		documentTitle = "<span class=\"elementMetaClass\">" + mecanism
-				+ "</span> " + elementName;
+		documentTitle = "<span class=\"elementMetaClass\">" + mecanism + "</span> " + elementName;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle", stringBuffer.toString());
 	}
 }

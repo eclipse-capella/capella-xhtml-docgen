@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -10,8 +10,7 @@ import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaControl;
 
-public class AnyNamedElementDocGen extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class AnyNamedElementDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
 	public static synchronized AnyNamedElementDocGen create(String lineSeparator) {
@@ -21,8 +20,7 @@ public class AnyNamedElementDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
 
@@ -57,8 +55,7 @@ public class AnyNamedElementDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_1);
@@ -76,16 +73,14 @@ public class AnyNamedElementDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacore.NamedElement parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.capellacore.NamedElement object) {
+	public void set_parameter(org.polarsys.capella.core.data.capellacore.NamedElement object) {
 		this.parameter = object;
 	}
 
@@ -95,18 +90,16 @@ public class AnyNamedElementDocGen extends
 		return parameters;
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return DocGenHtmlCapellaControl
-				.isPageCandidateForAnyElement((CapellaElement) parameter);
+		return DocGenHtmlCapellaControl.isPageCandidateForAnyElement((CapellaElement) parameter);
 	}
 }

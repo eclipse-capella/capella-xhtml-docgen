@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -13,8 +13,7 @@ import org.polarsys.capella.docgen.util.ImageHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 
-public class PartDocGen extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
 	public static synchronized PartDocGen create(String lineSeparator) {
@@ -24,16 +23,13 @@ public class PartDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<img src=\"../icon/";
 	protected final String TEXT_2 = "\" alt=\"";
 	protected final String TEXT_3 = "\" style=\"float:left; margin-right:10px\" /><h1>";
-	protected final String TEXT_4 = "</h1>"
-			+ NL
+	protected final String TEXT_4 = "</h1>" + NL
 			+ "<p style=\"margin-top:3px; margin-bottom:3px\"><span class=\"elementMetaClass\">";
-	protected final String TEXT_5 = "</span></p>" + NL
-			+ "<em class=\"elementPath\">";
+	protected final String TEXT_5 = "</span></p>" + NL + "<em class=\"elementPath\">";
 	protected final String TEXT_6 = "</em>" + NL + "<p><em>Type : ";
 	protected final String TEXT_7 = "No type specified";
 	protected final String TEXT_8 = "</em></p>" + NL;
@@ -82,8 +78,7 @@ public class PartDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_20);
@@ -101,8 +96,7 @@ public class PartDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
@@ -119,28 +113,24 @@ public class PartDocGen extends
 		return parameters;
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
-		String elementName = CapellaServices.getHyperlinkFromElement(element,
-				((Part) element).getName());
-		String elementType = "<span class=\"elementMetaClass\">"
-				+ EscapeChars.forHTML(element.eClass().getName()) + "</span>";
+		String elementName = CapellaServices.getHyperlinkFromElement(element, ((Part) element).getName());
+		String elementType = "<span class=\"elementMetaClass\">" + EscapeChars.forHTML(element.eClass().getName())
+				+ "</span>";
 		EObject type = ((Part) element).getType();
-		String logo = ImageHelper.INSTANCE.getTypePng(element, projectName,
-				outputFolder);
+		String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder);
 		String documentTitle = elementName;
 		stringBuffer.append(TEXT_1);
 		stringBuffer.append(logo);
@@ -166,17 +156,14 @@ public class PartDocGen extends
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
-			new Node.DataLeaf(ictx.getNode(), getClass(), null,
-					stringBuffer.toString());
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
 			callParameters.put("element", element);
-			CallHelper
-					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_fiM9sOZdEd-YVt45ZEg4_w",
-							new ExecutionContext((InternalPatternContext) ctx),
-							callParameters);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_fiM9sOZdEd-YVt45ZEg4_w",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
 			stringBuffer.setLength(0);
 		}
 
@@ -187,17 +174,14 @@ public class PartDocGen extends
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
-			new Node.DataLeaf(ictx.getNode(), getClass(), null,
-					stringBuffer.toString());
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
 			callParameters.put("element", element);
-			CallHelper
-					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
-							new ExecutionContext((InternalPatternContext) ctx),
-							callParameters);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
 			stringBuffer.setLength(0);
 		}
 
@@ -211,19 +195,15 @@ public class PartDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementContentDocGen" args="type:element, documentTitle:documentTitle"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("element", type);
 				callParameters.put("documentTitle", documentTitle);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_2twVYKu9EeCWrf9pgx3zjA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_2twVYKu9EeCWrf9pgx3zjA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
@@ -232,20 +212,16 @@ public class PartDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.ComponentContentDocGen" args="type:element, projectName:projectName, outputFolder:outputFolder"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("element", type);
 				callParameters.put("projectName", projectName);
 				callParameters.put("outputFolder", outputFolder);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_bbMz4auhEeCWrf9pgx3zjA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_bbMz4auhEeCWrf9pgx3zjA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
@@ -255,18 +231,14 @@ public class PartDocGen extends
 					//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.EntityContentDocGen" args="type:element"%>
 
 					InternalPatternContext ictx = (InternalPatternContext) ctx;
-					new Node.DataLeaf(ictx.getNode(), getClass(), null,
-							stringBuffer.toString());
+					new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 					stringBuffer.setLength(0);
 
 					final Map<String, Object> callParameters = new HashMap<String, Object>();
 					callParameters.put("element", type);
-					CallHelper
-							.executeWithParameterInjection(
-									"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_XX5iAaxbEeCYVYqpiRcXMA",
-									new ExecutionContext(
-											(InternalPatternContext) ctx),
-									callParameters);
+					CallHelper.executeWithParameterInjection(
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_XX5iAaxbEeCYVYqpiRcXMA",
+							new ExecutionContext((InternalPatternContext) ctx), callParameters);
 					stringBuffer.setLength(0);
 				}
 
@@ -276,18 +248,14 @@ public class PartDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="type:element"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("element", type);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_H6iekavLEeCas-LHcur3rg",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_H6iekavLEeCas-LHcur3rg",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
@@ -295,16 +263,13 @@ public class PartDocGen extends
 
 		stringBuffer.append(TEXT_18);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
-	protected void method_endContent(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		stringBuffer.append(TEXT_19);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
 	}
 }

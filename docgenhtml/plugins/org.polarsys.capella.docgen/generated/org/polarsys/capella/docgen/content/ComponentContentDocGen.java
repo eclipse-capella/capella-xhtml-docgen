@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -19,18 +19,15 @@ import org.polarsys.capella.core.data.oa.Entity;
 public class ComponentContentDocGen {
 	protected static String nl;
 
-	public static synchronized ComponentContentDocGen create(
-			String lineSeparator) {
+	public static synchronized ComponentContentDocGen create(String lineSeparator) {
 		nl = lineSeparator;
 		ComponentContentDocGen result = new ComponentContentDocGen();
 		nl = null;
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "\t<h2>Allocated Activites</h2>" + NL
-			+ "\t";
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "\t<h2>Allocated Activites</h2>" + NL + "\t";
 	protected final String TEXT_2 = NL + "<h2>Allocated Functions</h2>";
 	protected final String TEXT_3 = NL;
 	protected final String TEXT_4 = NL + "<h2>Implemented Interfaces</h2>";
@@ -41,32 +38,24 @@ public class ComponentContentDocGen {
 	protected final String TEXT_9 = NL;
 	protected final String TEXT_10 = NL + "<h2>Required Interfaces</h2>";
 	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL
-			+ "<h2>Incoming Component Exchanges</h2>" + NL + "<table>" + NL
-			+ "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL
-			+ "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL
-			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>" + NL
-			+ "\t";
+	protected final String TEXT_12 = NL + "<h2>Incoming Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
+			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
+			+ "\t</tr>" + NL + "\t";
 	protected final String TEXT_13 = NL + "\t";
 	protected final String TEXT_14 = NL + "\t";
 	protected final String TEXT_15 = NL + "</table>";
-	protected final String TEXT_16 = NL
-			+ "<h2>Outgoing Component Exchanges</h2>" + NL + "<table>" + NL
-			+ "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL
-			+ "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL
-			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>" + NL
-			+ "\t";
+	protected final String TEXT_16 = NL + "<h2>Outgoing Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
+			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
+			+ "\t</tr>" + NL + "\t";
 	protected final String TEXT_17 = NL + "\t";
 	protected final String TEXT_18 = NL + "\t";
 	protected final String TEXT_19 = NL + "</table>";
-	protected final String TEXT_20 = NL + "<h2>In/Out Component Exchanges</h2>"
-			+ NL + "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>"
-			+ NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL
-			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>" + NL
-			+ "\t";
+	protected final String TEXT_20 = NL + "<h2>In/Out Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
+			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
+			+ "\t</tr>" + NL + "\t";
 	protected final String TEXT_21 = NL + "\t";
 	protected final String TEXT_22 = NL + "\t";
 	protected final String TEXT_23 = NL + "</table>";
@@ -119,8 +108,7 @@ public class ComponentContentDocGen {
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_29);
@@ -140,16 +128,14 @@ public class ComponentContentDocGen {
 			parameterValues.put("outputFolder", this.outputFolder);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-	public void set_element(
-			org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
 		this.element = object;
 	}
 
@@ -173,15 +159,12 @@ public class ComponentContentDocGen {
 		return parameters;
 	}
 
-	protected void method_body(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		String elementName = EscapeChars.forHTML(LabelProviderHelper
-				.getText(element));
+		String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
 		String elementType = EscapeChars.forHTML(element.eClass().getName());
 		Collection<String> allocatedFunctionsInformations = CapellaComponentServices
-				.getAllocatedFunctionsInformation((Component) element,
-						projectName, outputFolder);
+				.getAllocatedFunctionsInformation((Component) element, projectName, outputFolder);
 		if (allocatedFunctionsInformations.size() > 0) {
 			if (element instanceof Entity) {
 
@@ -194,35 +177,29 @@ public class ComponentContentDocGen {
 			}
 
 			stringBuffer.append(TEXT_3);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(allocatedFunctionsInformations));
+			stringBuffer.append(StringUtil.stringListToBulette(allocatedFunctionsInformations));
 
 		}
 		Collection<String> implementedInterfaces = CapellaComponentServices
-				.getImplementedInterfaces((Component) element, projectName,
-						outputFolder);
+				.getImplementedInterfaces((Component) element, projectName, outputFolder);
 		if (implementedInterfaces.size() > 0) {
 			stringBuffer.append(TEXT_4);
 			stringBuffer.append(TEXT_5);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(implementedInterfaces));
+			stringBuffer.append(StringUtil.stringListToBulette(implementedInterfaces));
 
 		}
 
-		Collection<String> providedInterfaces = CapellaComponentServices
-				.getProvidedInterfaces((Component) element, projectName,
-						outputFolder);
+		Collection<String> providedInterfaces = CapellaComponentServices.getProvidedInterfaces((Component) element,
+				projectName, outputFolder);
 		if (providedInterfaces.size() > 0) {
 			stringBuffer.append(TEXT_6);
 			stringBuffer.append(TEXT_7);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(providedInterfaces));
+			stringBuffer.append(StringUtil.stringListToBulette(providedInterfaces));
 
 		}
 
-		Collection<String> usedInterfaces = CapellaComponentServices
-				.getUsedInterfaces((Component) element, projectName,
-						outputFolder);
+		Collection<String> usedInterfaces = CapellaComponentServices.getUsedInterfaces((Component) element, projectName,
+				outputFolder);
 		if (usedInterfaces.size() > 0) {
 			stringBuffer.append(TEXT_8);
 			stringBuffer.append(TEXT_9);
@@ -230,14 +207,12 @@ public class ComponentContentDocGen {
 
 		}
 
-		Collection<String> requiredInterfaces = CapellaComponentServices
-				.getRequiredInterfaces((Component) element, projectName,
-						outputFolder);
+		Collection<String> requiredInterfaces = CapellaComponentServices.getRequiredInterfaces((Component) element,
+				projectName, outputFolder);
 		if (requiredInterfaces.size() > 0) {
 			stringBuffer.append(TEXT_10);
 			stringBuffer.append(TEXT_11);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(requiredInterfaces));
+			stringBuffer.append(StringUtil.stringListToBulette(requiredInterfaces));
 
 		}
 
@@ -249,9 +224,8 @@ public class ComponentContentDocGen {
 			for (ComponentExchange componentExchange : incomingComponentExchanges) {
 
 				stringBuffer.append(TEXT_13);
-				stringBuffer.append(CapellaComponentServices
-						.componentExchangeToTableLine((Component) element,
-								componentExchange, projectName, outputFolder));
+				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
+						componentExchange, projectName, outputFolder));
 				stringBuffer.append(TEXT_14);
 
 			}
@@ -266,9 +240,8 @@ public class ComponentContentDocGen {
 			for (ComponentExchange componentExchange : outgoingComponentExchanges) {
 
 				stringBuffer.append(TEXT_17);
-				stringBuffer.append(CapellaComponentServices
-						.componentExchangeToTableLine((Component) element,
-								componentExchange, projectName, outputFolder));
+				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
+						componentExchange, projectName, outputFolder));
 				stringBuffer.append(TEXT_18);
 
 			}
@@ -284,9 +257,8 @@ public class ComponentContentDocGen {
 			for (ComponentExchange componentExchange : inoutComponentExchanges) {
 
 				stringBuffer.append(TEXT_21);
-				stringBuffer.append(CapellaComponentServices
-						.componentExchangeToTableLine((Component) element,
-								componentExchange, projectName, outputFolder));
+				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
+						componentExchange, projectName, outputFolder));
 				stringBuffer.append(TEXT_22);
 
 			}
@@ -294,16 +266,14 @@ public class ComponentContentDocGen {
 
 		}
 
-		Collection<String> ports = CapellaComponentServices.getPorts(
-				(Component) element, projectName, outputFolder);
+		Collection<String> ports = CapellaComponentServices.getPorts((Component) element, projectName, outputFolder);
 		if (ports.size() > 0) {
 			stringBuffer.append(TEXT_24);
 			stringBuffer.append(TEXT_25);
 			stringBuffer.append(StringUtil.stringListToBulette(ports));
 		}
 
-		Collection<String> stateMachines = BlockHelper.getStateMachine(
-				projectName, outputFolder, (Component) element);
+		Collection<String> stateMachines = BlockHelper.getStateMachine(projectName, outputFolder, (Component) element);
 		if (stateMachines.size() > 0) {
 			stringBuffer.append(TEXT_26);
 			stringBuffer.append(TEXT_27);
@@ -312,8 +282,7 @@ public class ComponentContentDocGen {
 
 		stringBuffer.append(TEXT_28);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

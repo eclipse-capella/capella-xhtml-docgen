@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.sidebar;
 
 import org.eclipse.egf.common.helper.*;
@@ -9,25 +9,20 @@ import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaControl;
-import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
-
-;
+import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;;
 
 public class AnyNamedElementSideBar
-		extends
-		org.polarsys.kitalpha.doc.gen.business.core.doccontent.ElementSideBarContent {
+		extends org.polarsys.kitalpha.doc.gen.business.core.doccontent.ElementSideBarContent {
 	protected static String nl;
 
-	public static synchronized AnyNamedElementSideBar create(
-			String lineSeparator) {
+	public static synchronized AnyNamedElementSideBar create(String lineSeparator) {
 		nl = lineSeparator;
 		AnyNamedElementSideBar result = new AnyNamedElementSideBar();
 		nl = null;
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
 
@@ -62,8 +57,7 @@ public class AnyNamedElementSideBar
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_1);
@@ -81,16 +75,14 @@ public class AnyNamedElementSideBar
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacore.CapellaElement parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+	public void set_parameter(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
 		this.parameter = object;
 	}
 
@@ -100,27 +92,23 @@ public class AnyNamedElementSideBar
 		return parameters;
 	}
 
-	protected void method_setCurrentObject(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCurrentObject(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		currentObject = parameter;
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCurrentObject",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCurrentObject", stringBuffer.toString());
 	}
 
-	protected void method_setFileNameService(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setFileNameService(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		fileNameService = DocGenHtmlCapellaUtil.SERVICE;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileNameService",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileNameService", stringBuffer.toString());
 	}
 
-	protected void method_startSidebarSubElement(
-			final StringBuffer stringBuffer, final PatternContext ctx)
+	protected void method_startSidebarSubElement(final StringBuffer stringBuffer, final PatternContext ctx)
 			throws Exception {
 
 		if (DocGenHtmlCapellaUtil.hasChildren(parameter)) {
@@ -128,24 +116,21 @@ public class AnyNamedElementSideBar
 
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "startSidebarSubElement",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "startSidebarSubElement", stringBuffer.toString());
 	}
 
-	protected void method_endSidebarSubElement(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_endSidebarSubElement(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		if (DocGenHtmlCapellaUtil.hasChildren(parameter)) {
 			super.method_endSidebarSubElement(new StringBuffer(), ctx);
 
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "endSidebarSubElement",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "endSidebarSubElement", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return DocGenHtmlCapellaControl
-				.isPageCandidate((CapellaElement) parameter);
+		return DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parameter);
 	}
 }

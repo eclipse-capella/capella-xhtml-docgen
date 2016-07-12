@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.search;
 
 import org.eclipse.egf.common.helper.*;
@@ -8,8 +8,7 @@ import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 
-public class searchIndexExtension extends
-		org.polarsys.kitalpha.doc.gen.business.core.searchIndex.SearchIndex {
+public class searchIndexExtension extends org.polarsys.kitalpha.doc.gen.business.core.searchIndex.SearchIndex {
 	protected static String nl;
 
 	public static synchronized searchIndexExtension create(String lineSeparator) {
@@ -19,8 +18,7 @@ public class searchIndexExtension extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
 
@@ -47,8 +45,7 @@ public class searchIndexExtension extends
 
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_1);
@@ -69,13 +66,12 @@ public class searchIndexExtension extends
 		return parameters;
 	}
 
-	protected void method_setFileNameService(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setFileNameService(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		fileNameService = org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil.SERVICE;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileNameService",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileNameService", stringBuffer.toString());
 	}
 }

@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -11,8 +11,7 @@ import org.polarsys.capella.core.data.capellacommon.State;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.CapellaStateHelper;
 
-public class StateDocGen extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
 	public static synchronized StateDocGen create(String lineSeparator) {
@@ -22,10 +21,8 @@ public class StateDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Properties</h2>" + NL
-			+ "<p><strong>Do Activity:</strong> ";
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "<h2>Properties</h2>" + NL + "<p><strong>Do Activity:</strong> ";
 	protected final String TEXT_2 = "</p>";
 	protected final String TEXT_3 = NL + "<h2>Modes and States</h2>";
 	protected final String TEXT_4 = NL;
@@ -75,8 +72,7 @@ public class StateDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_17);
@@ -94,16 +90,14 @@ public class StateDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacommon.State parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.capellacommon.State object) {
+	public void set_parameter(org.polarsys.capella.core.data.capellacommon.State object) {
 		this.parameter = object;
 	}
 
@@ -113,15 +107,13 @@ public class StateDocGen extends
 		return parameters;
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
-		String doActivity = CapellaStateHelper.getDoActivity(projectName,
-				outputFolder, (State) element);
+		String doActivity = CapellaStateHelper.getDoActivity(projectName, outputFolder, (State) element);
 		if (doActivity != "") {
 
 			stringBuffer.append(TEXT_1);
@@ -129,20 +121,16 @@ public class StateDocGen extends
 			stringBuffer.append(TEXT_2);
 
 		}
-		Collection<String> ownedReferencedStatesModes = CapellaStateHelper
-				.getOwnedReferencedStatesModes(projectName, outputFolder,
-						(State) element);
-		Collection<String> referencedStatesModes = CapellaStateHelper
-				.getReferencedStatesModes(projectName, outputFolder,
-						(State) element);
+		Collection<String> ownedReferencedStatesModes = CapellaStateHelper.getOwnedReferencedStatesModes(projectName,
+				outputFolder, (State) element);
+		Collection<String> referencedStatesModes = CapellaStateHelper.getReferencedStatesModes(projectName,
+				outputFolder, (State) element);
 
-		if (ownedReferencedStatesModes.size() > 0
-				|| referencedStatesModes.size() > 0) {
+		if (ownedReferencedStatesModes.size() > 0 || referencedStatesModes.size() > 0) {
 
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(ownedReferencedStatesModes));
+			stringBuffer.append(StringUtil.stringListToBulette(ownedReferencedStatesModes));
 
 		}
 
@@ -150,37 +138,35 @@ public class StateDocGen extends
 
 			stringBuffer.append(TEXT_5);
 			stringBuffer.append(TEXT_6);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(referencedStatesModes));
+			stringBuffer.append(StringUtil.stringListToBulette(referencedStatesModes));
 
 		}
 		/*
-		 Collection<String> previousStatesModes = CapellaStateHelper.getPreviousStatesModes(projectName,
-		 outputFolder,(State) element);
+		Collection<String> previousStatesModes = CapellaStateHelper.getPreviousStatesModes(projectName,
+					outputFolder,(State) element);
+					
+					if(previousStatesModes.size() > 0) {
 		
-		 if(previousStatesModes.size() > 0) {
-
-		 stringBuffer.append(TEXT_7);
-		 stringBuffer.append(TEXT_8);
-		 stringBuffer.append(StringUtil.stringListToBulette(previousStatesModes));
+		    stringBuffer.append(TEXT_7);
+		    stringBuffer.append(TEXT_8);
+		    stringBuffer.append(StringUtil.stringListToBulette(previousStatesModes));
+		    
+		}
 		
-		 }
-
-
-		 Collection<String> followingStatesModes = CapellaStateHelper.getFollowingStatesModes(projectName,
-		 outputFolder,(State) element);
 		
-		 if(followingStatesModes.size() > 0) {
-
-		 stringBuffer.append(TEXT_9);
-		 stringBuffer.append(TEXT_10);
-		 stringBuffer.append(StringUtil.stringListToBulette(followingStatesModes));
+		Collection<String> followingStatesModes = CapellaStateHelper.getFollowingStatesModes(projectName,
+					outputFolder,(State) element);
+					
+					if(followingStatesModes.size() > 0) {
 		
-		 }
-
-		 */
-		Collection<String> functions = CapellaStateHelper.getFunctions(
-				projectName, outputFolder, (State) element);
+		    stringBuffer.append(TEXT_9);
+		    stringBuffer.append(TEXT_10);
+		    stringBuffer.append(StringUtil.stringListToBulette(followingStatesModes));
+		    
+		}
+		
+		*/
+		Collection<String> functions = CapellaStateHelper.getFunctions(projectName, outputFolder, (State) element);
 
 		if (functions.size() > 0) {
 
@@ -190,20 +176,19 @@ public class StateDocGen extends
 
 		}
 
-		Collection<String> functionalChain = CapellaStateHelper
-				.getFunctionalChain(projectName, outputFolder, (State) element);
+		Collection<String> functionalChain = CapellaStateHelper.getFunctionalChain(projectName, outputFolder,
+				(State) element);
 
 		if (functionalChain.size() > 0) {
 
 			stringBuffer.append(TEXT_13);
 			stringBuffer.append(TEXT_14);
-			stringBuffer
-					.append(StringUtil.stringListToBulette(functionalChain));
+			stringBuffer.append(StringUtil.stringListToBulette(functionalChain));
 
 		}
 
-		Collection<String> capabilities = CapellaStateHelper.getCapabilities(
-				projectName, outputFolder, (State) element);
+		Collection<String> capabilities = CapellaStateHelper.getCapabilities(projectName, outputFolder,
+				(State) element);
 
 		if (capabilities.size() > 0) {
 
@@ -214,17 +199,15 @@ public class StateDocGen extends
 		}
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 }

@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -14,49 +14,38 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
-public class AbstractFunctionDocGen extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class AbstractFunctionDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
-	public static synchronized AbstractFunctionDocGen create(
-			String lineSeparator) {
+	public static synchronized AbstractFunctionDocGen create(String lineSeparator) {
 		nl = lineSeparator;
 		AbstractFunctionDocGen result = new AbstractFunctionDocGen();
 		nl = null;
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Incoming Functional Exchanges</h2>"
-			+ NL + "" + NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL
-			+ "\t\t<th>Description</th>" + NL
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "<h2>Incoming Functional Exchanges</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>"
+			+ NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
 	protected final String TEXT_2 = NL + "\t";
 	protected final String TEXT_3 = NL + "\t";
 	protected final String TEXT_4 = NL + "</table>";
-	protected final String TEXT_5 = NL
-			+ "<h2>Outgoing Functional Exchanges</h2>" + NL + "" + NL + "" + NL
-			+ "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL
-			+ "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
+	protected final String TEXT_5 = NL + "<h2>Outgoing Functional Exchanges</h2>" + NL + "" + NL + "" + NL + "<table>"
+			+ NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL
+			+ "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
 	protected final String TEXT_6 = NL + "\t";
 	protected final String TEXT_7 = NL + "</table>";
-	protected final String TEXT_8 = NL
-			+ "    <h2>Incoming Internal Functional Exchanges</h2>" + NL
-			+ "    " + NL + "    " + NL + "   <table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL
-			+ "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
+	protected final String TEXT_8 = NL + "    <h2>Incoming Internal Functional Exchanges</h2>" + NL + "    " + NL
+			+ "    " + NL + "   <table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>"
+			+ NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
 	protected final String TEXT_9 = NL + "\t";
 	protected final String TEXT_10 = NL + "</table>";
-	protected final String TEXT_11 = NL
-			+ " <h2>Outgoing Internal Functional Exchanges</h2>" + NL + "" + NL
-			+ "    <table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL
-			+ "\t\t<th>Source</th>" + NL + "\t\t<th>Target</th>" + NL
-			+ "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
+	protected final String TEXT_11 = NL + " <h2>Outgoing Internal Functional Exchanges</h2>" + NL + "" + NL
+			+ "    <table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL
+			+ "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Exchange Items</th>"
+			+ NL + "\t</tr>";
 	protected final String TEXT_12 = NL + "\t";
 	protected final String TEXT_13 = NL + "</table>";
 	protected final String TEXT_14 = NL + "<h2>Modes and States</h2>";
@@ -95,8 +84,7 @@ public class AbstractFunctionDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_16);
@@ -114,16 +102,14 @@ public class AbstractFunctionDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.fa.AbstractFunction parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.fa.AbstractFunction object) {
+	public void set_parameter(org.polarsys.capella.core.data.fa.AbstractFunction object) {
 		this.parameter = object;
 	}
 
@@ -133,22 +119,19 @@ public class AbstractFunctionDocGen extends
 		return parameters;
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
-		String elementName = EscapeChars.forHTML(LabelProviderHelper
-				.getText(element));
+		String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
 		String elementType = EscapeChars.forHTML(element.eClass().getName());
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
@@ -161,9 +144,8 @@ public class AbstractFunctionDocGen extends
 			for (FunctionalExchange functionalExchange : incomingFunctionalExchanges) {
 
 				stringBuffer.append(TEXT_2);
-				stringBuffer.append(CapellaFunctionServices
-						.incomingFunctionalExchangeToTableLine(
-								functionalExchange, projectName, outputFolder));
+				stringBuffer.append(CapellaFunctionServices.incomingFunctionalExchangeToTableLine(functionalExchange,
+						projectName, outputFolder));
 				stringBuffer.append(TEXT_3);
 
 			}
@@ -177,9 +159,8 @@ public class AbstractFunctionDocGen extends
 			stringBuffer.append(TEXT_5);
 			for (FunctionalExchange functionalExchange : outgoingFunctionalExchanges) {
 				stringBuffer.append(TEXT_6);
-				stringBuffer.append(CapellaFunctionServices
-						.outgoingFunctionalExchangeToTableLine(
-								functionalExchange, projectName, outputFolder));
+				stringBuffer.append(CapellaFunctionServices.outgoingFunctionalExchangeToTableLine(functionalExchange,
+						projectName, outputFolder));
 			}
 			stringBuffer.append(TEXT_7);
 
@@ -193,9 +174,7 @@ public class AbstractFunctionDocGen extends
 				for (FunctionalExchange functionalExchange : incomingInteralFunctionalExchanges) {
 					stringBuffer.append(TEXT_9);
 					stringBuffer.append(CapellaFunctionServices
-							.externalFunctionalExchangeToTableLine(
-									functionalExchange, projectName,
-									outputFolder));
+							.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder));
 				}
 				stringBuffer.append(TEXT_10);
 
@@ -208,30 +187,25 @@ public class AbstractFunctionDocGen extends
 				for (FunctionalExchange functionalExchange : outgoingInteralFunctionalExchanges) {
 					stringBuffer.append(TEXT_12);
 					stringBuffer.append(CapellaFunctionServices
-							.externalFunctionalExchangeToTableLine(
-									functionalExchange, projectName,
-									outputFolder));
+							.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder));
 				}
 				stringBuffer.append(TEXT_13);
 
 			}
 		}
 
-		Collection<String> availableModeAndState = CapellaFunctionServices
-				.getAvailableModeAndState(projectName, outputFolder,
-						(AbstractFunction) element);
+		Collection<String> availableModeAndState = CapellaFunctionServices.getAvailableModeAndState(projectName,
+				outputFolder, (AbstractFunction) element);
 
 		if (availableModeAndState.size() > 0) {
 
 			stringBuffer.append(TEXT_14);
 			stringBuffer.append(TEXT_15);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(availableModeAndState));
+			stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
 
 		}
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 }

@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.index;
 
 import org.eclipse.egf.common.helper.*;
@@ -11,8 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
 import org.polarsys.capella.core.data.capellamodeller.ModelRoot;
 
-public class indexBuilder extends
-		org.polarsys.kitalpha.doc.gen.business.core.index.IndexBuilder {
+public class indexBuilder extends org.polarsys.kitalpha.doc.gen.business.core.index.IndexBuilder {
 	protected static String nl;
 
 	public static synchronized indexBuilder create(String lineSeparator) {
@@ -22,36 +21,20 @@ public class indexBuilder extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "  <script type=\"text/javascript\">"
-			+ NL
-			+ "document.write('<frameset rows=\"63,*,40\" frameborder=\"0\" framespacing=\"0\" border=\"0\">');"
-			+ NL
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "  <script type=\"text/javascript\">" + NL
+			+ "document.write('<frameset rows=\"63,*,40\" frameborder=\"0\" framespacing=\"0\" border=\"0\">');" + NL
 			+ "document.write('<frame src=\"header.html\" name=\"header\" marginheight=\"0\" marginwidth=\"0\" scrolling=\"no\" noresize=\"0\"/>');"
-			+ NL
-			+ "document.write('<frameset cols=\"22%,*\" border=\"5\" frameborder=\"1\" framespacing=\"1\">');"
-			+ NL
-			+ "document.write('<frame src=\"sidebar.html\" name=\"sideBar\"/>');"
-			+ NL
+			+ NL + "document.write('<frameset cols=\"22%,*\" border=\"5\" frameborder=\"1\" framespacing=\"1\">');" + NL
+			+ "document.write('<frame src=\"sidebar.html\" name=\"sideBar\"/>');" + NL
 			+ "var locationText = (location.search ? location.search.substring(1):\"";
-	protected final String TEXT_2 = "\");"
-			+ NL
-			+ "document.write('<frame src=\"'+ locationText +'.html\" name=\"content\"\\/>');"
-			+ NL
-			+ "document.write('<noframes>');"
-			+ NL
-			+ "document.write('Your browser cannot display this page !');"
-			+ NL
-			+ "  document.write('</noframes>');"
-			+ NL
-			+ "document.write('</frameset>');"
-			+ NL
+	protected final String TEXT_2 = "\");" + NL
+			+ "document.write('<frame src=\"'+ locationText +'.html\" name=\"content\"\\/>');" + NL
+			+ "document.write('<noframes>');" + NL + "document.write('Your browser cannot display this page !');" + NL
+			+ "  document.write('</noframes>');" + NL + "document.write('</frameset>');" + NL
 			+ "document.write('<frame src=\"footer.html\" name=\"footer\" scrolling=\"no\" frameborder=\"0\" noresize=\"noresize\"/>');"
-			+ NL + "document.write('<noframes>');" + NL
-			+ "document.write('Your browser cannot display this page !');" + NL
-			+ "document.write('</noframes>');" + NL
-			+ "document.write('</frameset>');" + NL + "</script>";
+			+ NL + "document.write('<noframes>');" + NL + "document.write('Your browser cannot display this page !');"
+			+ NL + "document.write('</noframes>');" + NL + "document.write('</frameset>');" + NL + "</script>";
 	protected final String TEXT_3 = NL;
 	protected final String TEXT_4 = NL;
 
@@ -78,8 +61,7 @@ public class indexBuilder extends
 
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_3);
@@ -100,19 +82,16 @@ public class indexBuilder extends
 		return parameters;
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		List<Object> model = (List<Object>) ctx
-				.getValue(PatternContext.DOMAIN_OBJECTS);
+		List<Object> model = (List<Object>) ctx.getValue(PatternContext.DOMAIN_OBJECTS);
 		String fileName = "";
 		for (Object currentObject : model) {
 			if (currentObject instanceof org.polarsys.capella.core.data.capellamodeller.Project) {
 				EList<ModelRoot> children = ((org.polarsys.capella.core.data.capellamodeller.Project) currentObject)
 						.getOwnedModelRoots();
 				if (children.get(0) instanceof org.polarsys.capella.core.data.capellamodeller.SystemEngineering) {
-					fileName = DocGenHtmlCapellaUtil.SERVICE
-							.getFileName(children.get(0));
+					fileName = DocGenHtmlCapellaUtil.SERVICE.getFileName(children.get(0));
 					break;
 				}
 			}
@@ -122,7 +101,6 @@ public class indexBuilder extends
 		stringBuffer.append(fileName);
 		stringBuffer.append(TEXT_2);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 }

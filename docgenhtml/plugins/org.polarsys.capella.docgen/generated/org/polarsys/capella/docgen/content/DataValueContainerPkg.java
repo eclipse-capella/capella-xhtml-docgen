@@ -1,15 +1,4 @@
-/*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
- * 
- * Contributors: 
- *   Thales - initial API and implementation
- ******************************************************************************/
-
-//Generated with EGF 1.2.0.v20150211-1405
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -21,8 +10,7 @@ import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.DataValuePkgService;
 
-public class DataValueContainerPkg extends
-		org.polarsys.capella.docgen.content.packageDocGen {
+public class DataValueContainerPkg extends org.polarsys.capella.docgen.content.packageDocGen {
 	protected static String nl;
 
 	public static synchronized DataValueContainerPkg create(String lineSeparator) {
@@ -32,8 +20,7 @@ public class DataValueContainerPkg extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL + "<div title=\"Data Values\">";
 	protected final String TEXT_3 = NL;
@@ -73,8 +60,7 @@ public class DataValueContainerPkg extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_6);
@@ -92,8 +78,7 @@ public class DataValueContainerPkg extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
@@ -104,8 +89,7 @@ public class DataValueContainerPkg extends
 		return parameters;
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		stringBuffer.append(TEXT_1);
@@ -113,8 +97,7 @@ public class DataValueContainerPkg extends
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
-		if (DataValuePkgService.getDataValues(element, projectName,
-				outputFolder).size() >= 1) {
+		if (DataValuePkgService.getDataValues(element, projectName, outputFolder).size() >= 1) {
 			stringBuffer.append(TEXT_2);
 			String dataValue = "Data Values";
 			stringBuffer.append(TEXT_3);
@@ -122,31 +105,25 @@ public class DataValueContainerPkg extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,dataValue:property"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("eObject", element);
 				callParameters.put("property", dataValue);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
 			stringBuffer.append(TEXT_4);
 			stringBuffer.append(StringUtil
-					.stringListToBulette(DataValuePkgService.getDataValues(
-							element, projectName, outputFolder)));
+					.stringListToBulette(DataValuePkgService.getDataValues(element, projectName, outputFolder)));
 			stringBuffer.append(TEXT_5);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -12,8 +12,7 @@ import org.polarsys.capella.core.data.interaction.SequenceMessage;
 import org.polarsys.capella.docgen.util.CapellaElementService;
 import org.polarsys.capella.docgen.util.StringUtil;
 
-public class CapellaScenarioDocGen extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
 	public static synchronized CapellaScenarioDocGen create(String lineSeparator) {
@@ -23,8 +22,7 @@ public class CapellaScenarioDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Realized Elements</h2>" + NL;
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL;
@@ -36,24 +34,10 @@ public class CapellaScenarioDocGen extends
 	protected final String TEXT_9 = NL;
 	protected final String TEXT_10 = NL;
 	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL
-			+ NL
-			+ "<h2>Sequence Messages</h2>"
-			+ NL
-			+ ""
-			+ NL
-			+ "<table max-width=screen.width>"
-			+ NL
-			+ "   <thead> "
-			+ NL
-			+ "       <tr>"
-			+ NL
-			+ "           <th>Invoked Exchange</th>"
-			+ NL
-			+ "           <th>Source element of the Exchange</th>"
-			+ NL
-			+ "           <th>Target element of the Exchange</th>"
-			+ NL
+	protected final String TEXT_12 = NL + NL + "<h2>Sequence Messages</h2>" + NL + "" + NL
+			+ "<table max-width=screen.width>" + NL + "   <thead> " + NL + "       <tr>" + NL
+			+ "           <th>Invoked Exchange</th>" + NL + "           <th>Source element of the Exchange</th>" + NL
+			+ "           <th>Target element of the Exchange</th>" + NL
 			+ "           <th>Description of the Sequence Message <br> <i>(and not the one of the invoked exchange)<i></th>"
 			+ NL + "       </tr>" + NL + "   </thead>" + NL + "   <tbody>" + NL;
 	protected final String TEXT_13 = NL + "\t\t<tr>" + NL + "           <td>";
@@ -97,8 +81,7 @@ public class CapellaScenarioDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_20);
@@ -116,16 +99,14 @@ public class CapellaScenarioDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.interaction.Scenario parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.interaction.Scenario object) {
+	public void set_parameter(org.polarsys.capella.core.data.interaction.Scenario object) {
 		this.parameter = object;
 	}
 
@@ -135,24 +116,22 @@ public class CapellaScenarioDocGen extends
 		return parameters;
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 
-	protected void method_endContent(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		// Realized Elements 
 
 		String outputFolder = ctx.getValue("outputFolder").toString();
 		String projectName = ctx.getValue("projectName").toString();
-		Collection<String> allocations = CapellaElementService
-				.getOutGoingAllocation(element, projectName, outputFolder);
+		Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName,
+				outputFolder);
 		if (allocations.size() > 0) {
 			stringBuffer.append(TEXT_1);
 			stringBuffer.append(TEXT_2);
@@ -164,8 +143,8 @@ public class CapellaScenarioDocGen extends
 
 		//String outputFolder = ctx.getValue("outputFolder").toString();
 		//String projectName = ctx.getValue("projectName").toString();
-		Collection<String> allocations2 = CapellaElementService
-				.getIncomingAllocation(element, projectName, outputFolder);
+		Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName,
+				outputFolder);
 		if (allocations2.size() > 0) {
 			stringBuffer.append(TEXT_5);
 			stringBuffer.append(TEXT_6);
@@ -179,24 +158,20 @@ public class CapellaScenarioDocGen extends
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
-			new Node.DataLeaf(ictx.getNode(), getClass(), null,
-					stringBuffer.toString());
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
 			callParameters.put("element", element);
-			CallHelper
-					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
-							new ExecutionContext((InternalPatternContext) ctx),
-							callParameters);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
 			stringBuffer.setLength(0);
 		}
 
 		stringBuffer.append(TEXT_10);
 		// Trier les messages
-		List<SequenceMessage> orderedMessagesList = ((Scenario) parameter)
-				.getOwnedMessages();
+		List<SequenceMessage> orderedMessagesList = ((Scenario) parameter).getOwnedMessages();
 
 		stringBuffer.append(TEXT_11);
 		if (orderedMessagesList.size() > 0) {
@@ -206,24 +181,17 @@ public class CapellaScenarioDocGen extends
 				String source = "";
 				String target = "";
 
-				if (sMessage.getSendingEnd() != null
-						&& sMessage.getSendingEnd().getCovered() != null
-						&& sMessage.getSendingEnd().getCovered()
-								.getRepresentedInstance() != null)
-					source = sMessage.getSendingEnd().getCovered()
-							.getRepresentedInstance().getName();
+				if (sMessage.getSendingEnd() != null && sMessage.getSendingEnd().getCovered() != null
+						&& sMessage.getSendingEnd().getCovered().getRepresentedInstance() != null)
+					source = sMessage.getSendingEnd().getCovered().getRepresentedInstance().getName();
 
-				if (sMessage.getReceivingEnd() != null
-						&& sMessage.getReceivingEnd().getCovered() != null
-						&& sMessage.getReceivingEnd().getCovered()
-								.getRepresentedInstance() != null)
-					target = sMessage.getReceivingEnd().getCovered()
-							.getRepresentedInstance().getName();
+				if (sMessage.getReceivingEnd() != null && sMessage.getReceivingEnd().getCovered() != null
+						&& sMessage.getReceivingEnd().getCovered().getRepresentedInstance() != null)
+					target = sMessage.getReceivingEnd().getCovered().getRepresentedInstance().getName();
 
 				String name = sMessage.getName();
 				String description = sMessage.getDescription();
-				description = StringUtil.transformAREFString(sMessage,
-						description, projectName, outputFolder);
+				description = StringUtil.transformAREFString(sMessage, description, projectName, outputFolder);
 				if (description == null || description.trim().length() == 0)
 					description = "No description";
 				stringBuffer.append(TEXT_13);
@@ -240,7 +208,6 @@ public class CapellaScenarioDocGen extends
 		}
 		stringBuffer.append(TEXT_19);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
 	}
 }

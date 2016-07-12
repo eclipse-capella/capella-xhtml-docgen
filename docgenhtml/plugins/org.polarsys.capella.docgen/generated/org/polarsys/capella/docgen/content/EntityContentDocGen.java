@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -20,23 +20,16 @@ public class EntityContentDocGen {
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Incoming Communication Means</h2>"
-			+ NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Source</th>"
-			+ NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>"
-			+ NL + "\t";
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "<h2>Incoming Communication Means</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+			+ "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
+			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
 	protected final String TEXT_2 = NL + "\t";
 	protected final String TEXT_3 = NL + "\t";
 	protected final String TEXT_4 = NL + "</table>";
-	protected final String TEXT_5 = NL
-			+ "<h2>Outgoing Communication Means</h2>" + NL + "<table>" + NL
-			+ "\t<tr>" + NL + "\t\t<th>Communication Means</th>" + NL
-			+ "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>"
-			+ NL + "\t";
+	protected final String TEXT_5 = NL + "<h2>Outgoing Communication Means</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+			+ "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
+			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
 	protected final String TEXT_6 = NL + "\t";
 	protected final String TEXT_7 = NL + "\t";
 	protected final String TEXT_8 = NL + "</table>";
@@ -74,8 +67,7 @@ public class EntityContentDocGen {
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_9);
@@ -93,8 +85,7 @@ public class EntityContentDocGen {
 			parameterValues.put("element", this.element);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
@@ -111,15 +102,13 @@ public class EntityContentDocGen {
 		return parameters;
 	}
 
-	protected void method_body(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
 		Collection<String> incomingCommunicationMeans = CapellaEntityHelper
-				.getIncomingCommunicationMeansLines((Entity) element,
-						projectName, outputFolder);
+				.getIncomingCommunicationMeansLines((Entity) element, projectName, outputFolder);
 		if (incomingCommunicationMeans.size() > 0) {
 
 			stringBuffer.append(TEXT_1);
@@ -134,8 +123,7 @@ public class EntityContentDocGen {
 		}
 
 		Collection<String> outgoingCommunicationMeans = CapellaEntityHelper
-				.getOutgoingCommunicationMeansLines((Entity) element,
-						projectName, outputFolder);
+				.getOutgoingCommunicationMeansLines((Entity) element, projectName, outputFolder);
 		if (outgoingCommunicationMeans.size() > 0) {
 
 			stringBuffer.append(TEXT_5);
@@ -149,8 +137,7 @@ public class EntityContentDocGen {
 			stringBuffer.append(TEXT_8);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

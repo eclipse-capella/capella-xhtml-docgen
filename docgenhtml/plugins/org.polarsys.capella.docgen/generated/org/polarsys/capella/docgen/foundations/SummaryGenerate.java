@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -8,9 +8,7 @@ import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 
-public class SummaryGenerate
-		extends
-		org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty {
+public class SummaryGenerate extends org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty {
 	protected static String nl;
 
 	public static synchronized SummaryGenerate create(String lineSeparator) {
@@ -20,8 +18,7 @@ public class SummaryGenerate
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<em>";
 	protected final String TEXT_2 = "</em>";
 	protected final String TEXT_3 = NL;
@@ -63,8 +60,7 @@ public class SummaryGenerate
 						this.eObject = (org.eclipse.emf.ecore.EObject) eObjectParameter;
 
 						if (preCondition(ctx)) {
-							ctx.setNode(new Node.Container(currentNode,
-									getClass()));
+							ctx.setNode(new Node.Container(currentNode, getClass()));
 							orchestration(ctx);
 						}
 
@@ -74,8 +70,7 @@ public class SummaryGenerate
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_3);
@@ -96,16 +91,14 @@ public class SummaryGenerate
 			parameterValues.put("eObject", this.eObject);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-	public void set_element(
-			org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
 		this.element = object;
 	}
 
@@ -118,21 +111,17 @@ public class SummaryGenerate
 		return parameters;
 	}
 
-	protected void method_openDescription(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_openDescription(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		stringBuffer.append(TEXT_1);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "openDescription",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "openDescription", stringBuffer.toString());
 	}
 
-	protected void method_closeDescription(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_closeDescription(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		stringBuffer.append(TEXT_2);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "closeDescription",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "closeDescription", stringBuffer.toString());
 	}
 }

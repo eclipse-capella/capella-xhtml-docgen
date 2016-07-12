@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -13,8 +13,7 @@ import org.polarsys.capella.core.data.information.datatype.DataType;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.PackageHelper;
 
-public class packageDocGen extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class packageDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
 	public static synchronized packageDocGen create(String lineSeparator) {
@@ -24,8 +23,7 @@ public class packageDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Content</h2>";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL;
@@ -62,8 +60,7 @@ public class packageDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_3);
@@ -81,16 +78,14 @@ public class packageDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacore.Structure parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.capellacore.Structure object) {
+	public void set_parameter(org.polarsys.capella.core.data.capellacore.Structure object) {
 		this.parameter = object;
 	}
 
@@ -100,24 +95,21 @@ public class packageDocGen extends
 		return parameters;
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
-		Collection<String> content = PackageHelper.getContent(
-				(Structure) element, projectName, outputFolder);
+		Collection<String> content = PackageHelper.getContent((Structure) element, projectName, outputFolder);
 		if (content.size() > 0) {
 
 			stringBuffer.append(TEXT_1);
@@ -125,11 +117,11 @@ public class packageDocGen extends
 			stringBuffer.append(StringUtil.stringListToBulette(content));
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return !(parameter instanceof DataType || parameter instanceof org.polarsys.capella.core.data.information.Collection);
+		return !(parameter instanceof DataType
+				|| parameter instanceof org.polarsys.capella.core.data.information.Collection);
 	}
 }

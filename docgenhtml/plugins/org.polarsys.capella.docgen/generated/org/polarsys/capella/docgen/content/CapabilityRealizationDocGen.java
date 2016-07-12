@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -11,20 +11,17 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.CapellaCapabilityHelper;
 import org.polarsys.capella.core.data.la.CapabilityRealization;
 
-public class CapabilityRealizationDocGen extends
-		org.polarsys.capella.docgen.content.packageDocGen {
+public class CapabilityRealizationDocGen extends org.polarsys.capella.docgen.content.packageDocGen {
 	protected static String nl;
 
-	public static synchronized CapabilityRealizationDocGen create(
-			String lineSeparator) {
+	public static synchronized CapabilityRealizationDocGen create(String lineSeparator) {
 		nl = lineSeparator;
 		CapabilityRealizationDocGen result = new CapabilityRealizationDocGen();
 		nl = null;
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Involved Components</h2>";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL + "<h2>Related Functions</h2>";
@@ -63,8 +60,7 @@ public class CapabilityRealizationDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_5);
@@ -82,8 +78,7 @@ public class CapabilityRealizationDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
@@ -94,41 +89,35 @@ public class CapabilityRealizationDocGen extends
 		return parameters;
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
-		Collection<String> involvedComponent = CapellaCapabilityHelper.INSTANCE
-				.getInvolvedComponent(projectName, outputFolder,
-						(CapabilityRealization) parameter);
+		Collection<String> involvedComponent = CapellaCapabilityHelper.INSTANCE.getInvolvedComponent(projectName,
+				outputFolder, (CapabilityRealization) parameter);
 
 		if (involvedComponent.size() > 0) {
 
 			stringBuffer.append(TEXT_1);
 			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(involvedComponent));
+			stringBuffer.append(StringUtil.stringListToBulette(involvedComponent));
 
 		}
 
-		Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE
-				.getInvolvedFunctions(projectName, outputFolder,
-						(CapabilityRealization) parameter);
+		Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectName,
+				outputFolder, (CapabilityRealization) parameter);
 
 		if (involvedFunctions.size() > 0) {
 
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(involvedFunctions));
+			stringBuffer.append(StringUtil.stringListToBulette(involvedFunctions));
 
 		}
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

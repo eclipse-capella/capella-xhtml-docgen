@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -11,8 +11,7 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.CapellaCapabilityHelper;
 import org.polarsys.capella.core.data.ctx.Capability;
 
-public class CapabilityDocGen extends
-		org.polarsys.capella.docgen.content.packageDocGen {
+public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packageDocGen {
 	protected static String nl;
 
 	public static synchronized CapabilityDocGen create(String lineSeparator) {
@@ -22,15 +21,13 @@ public class CapabilityDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = NL + "<h2>Exploiting Missions</h2>";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL;
 	protected final String TEXT_4 = NL + "<h2>Involved Actors</h2>";
 	protected final String TEXT_5 = NL;
-	protected final String TEXT_6 = NL
-			+ "<h2>Relationships with other Capabilities</h2>";
+	protected final String TEXT_6 = NL + "<h2>Relationships with other Capabilities</h2>";
 	protected final String TEXT_7 = NL + "<h3>Extended Capabilities</h3>";
 	protected final String TEXT_8 = NL;
 	protected final String TEXT_9 = NL + "<h3>Included Capabilities</h3>";
@@ -77,8 +74,7 @@ public class CapabilityDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_19);
@@ -96,8 +92,7 @@ public class CapabilityDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
@@ -108,29 +103,25 @@ public class CapabilityDocGen extends
 		return parameters;
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
-		Collection<String> exploitingMissions = CapellaCapabilityHelper.INSTANCE
-				.getExploitingMissions(projectName, outputFolder,
-						(Capability) parameter);
+		Collection<String> exploitingMissions = CapellaCapabilityHelper.INSTANCE.getExploitingMissions(projectName,
+				outputFolder, (Capability) parameter);
 
 		if (exploitingMissions.size() > 0) {
 
 			stringBuffer.append(TEXT_1);
 			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(exploitingMissions));
+			stringBuffer.append(StringUtil.stringListToBulette(exploitingMissions));
 			stringBuffer.append(TEXT_3);
 
 		}
-		Collection<String> actors = CapellaCapabilityHelper.INSTANCE
-				.getInvolvedActors(projectName, outputFolder,
-						(Capability) parameter);
+		Collection<String> actors = CapellaCapabilityHelper.INSTANCE.getInvolvedActors(projectName, outputFolder,
+				(Capability) parameter);
 
 		if (actors.size() > 0) {
 
@@ -140,18 +131,13 @@ public class CapabilityDocGen extends
 
 		}
 
-		Collection<String> extendedCapabilities = CapellaCapabilityHelper.INSTANCE
-				.getExtendedCapabilities(projectName, outputFolder,
-						(Capability) parameter);
-		Collection<String> includedCapabilities = CapellaCapabilityHelper.INSTANCE
-				.getIncludedCapabilities(projectName, outputFolder,
-						(Capability) parameter);
-		Collection<String> superCapabilities = CapellaCapabilityHelper.INSTANCE
-				.getParentCapabilities(projectName, outputFolder,
-						(Capability) parameter);
-		if ((extendedCapabilities.size() > 0)
-				&& (includedCapabilities.size() > 0)
-				&& (superCapabilities.size() > 0)) {
+		Collection<String> extendedCapabilities = CapellaCapabilityHelper.INSTANCE.getExtendedCapabilities(projectName,
+				outputFolder, (Capability) parameter);
+		Collection<String> includedCapabilities = CapellaCapabilityHelper.INSTANCE.getIncludedCapabilities(projectName,
+				outputFolder, (Capability) parameter);
+		Collection<String> superCapabilities = CapellaCapabilityHelper.INSTANCE.getParentCapabilities(projectName,
+				outputFolder, (Capability) parameter);
+		if ((extendedCapabilities.size() > 0) && (includedCapabilities.size() > 0) && (superCapabilities.size() > 0)) {
 
 			stringBuffer.append(TEXT_6);
 
@@ -160,8 +146,7 @@ public class CapabilityDocGen extends
 
 			stringBuffer.append(TEXT_7);
 			stringBuffer.append(TEXT_8);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(extendedCapabilities));
+			stringBuffer.append(StringUtil.stringListToBulette(extendedCapabilities));
 
 		}
 
@@ -169,8 +154,7 @@ public class CapabilityDocGen extends
 
 			stringBuffer.append(TEXT_9);
 			stringBuffer.append(TEXT_10);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(includedCapabilities));
+			stringBuffer.append(StringUtil.stringListToBulette(includedCapabilities));
 
 		}
 
@@ -178,41 +162,35 @@ public class CapabilityDocGen extends
 
 			stringBuffer.append(TEXT_11);
 			stringBuffer.append(TEXT_12);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(superCapabilities));
+			stringBuffer.append(StringUtil.stringListToBulette(superCapabilities));
 			stringBuffer.append(TEXT_13);
 
 		}
-		Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE
-				.getInvolvedFunctions(projectName, outputFolder,
-						(Capability) parameter);
+		Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectName,
+				outputFolder, (Capability) parameter);
 
 		if (involvedFunctions.size() > 0) {
 
 			stringBuffer.append(TEXT_14);
 			stringBuffer.append(TEXT_15);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(involvedFunctions));
+			stringBuffer.append(StringUtil.stringListToBulette(involvedFunctions));
 
 		}
 
 		Collection<String> availableModeAndState = CapellaCapabilityHelper.INSTANCE
-				.getAvailableModeAndState(projectName, outputFolder,
-						(Capability) parameter);
+				.getAvailableModeAndState(projectName, outputFolder, (Capability) parameter);
 
 		if (availableModeAndState.size() > 0) {
 
 			stringBuffer.append(TEXT_16);
 			stringBuffer.append(TEXT_17);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(availableModeAndState));
+			stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
 
 		}
 
 		stringBuffer.append(TEXT_18);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

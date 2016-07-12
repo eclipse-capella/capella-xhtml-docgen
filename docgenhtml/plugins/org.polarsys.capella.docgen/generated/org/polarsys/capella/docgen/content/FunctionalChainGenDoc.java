@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -11,8 +11,7 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.FunctionalChainHelper;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 
-public class FunctionalChainGenDoc extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
 	public static synchronized FunctionalChainGenDoc create(String lineSeparator) {
@@ -22,8 +21,7 @@ public class FunctionalChainGenDoc extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Modes and States</h2>";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL + "<h2>Involved functions</h2>";
@@ -62,8 +60,7 @@ public class FunctionalChainGenDoc extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_5);
@@ -81,16 +78,14 @@ public class FunctionalChainGenDoc extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.fa.FunctionalChain parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.fa.FunctionalChain object) {
+	public void set_parameter(org.polarsys.capella.core.data.fa.FunctionalChain object) {
 		this.parameter = object;
 	}
 
@@ -100,51 +95,44 @@ public class FunctionalChainGenDoc extends
 		return parameters;
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
-		Collection<String> availableModeAndState = FunctionalChainHelper
-				.getAvailableModeAndState(projectName, outputFolder,
-						(FunctionalChain) parameter);
+		Collection<String> availableModeAndState = FunctionalChainHelper.getAvailableModeAndState(projectName,
+				outputFolder, (FunctionalChain) parameter);
 
 		if (availableModeAndState.size() > 0) {
 
 			stringBuffer.append(TEXT_1);
 			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(availableModeAndState));
+			stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
 
 		}
 
-		Collection<String> availableFunctions = FunctionalChainHelper
-				.getAvailableFunctions(projectName, outputFolder,
-						(FunctionalChain) parameter);
+		Collection<String> availableFunctions = FunctionalChainHelper.getAvailableFunctions(projectName, outputFolder,
+				(FunctionalChain) parameter);
 
 		if (availableFunctions.size() > 0) {
 
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(availableFunctions));
+			stringBuffer.append(StringUtil.stringListToBulette(availableFunctions));
 
 		}
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 }

@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20150211-1405
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -12,8 +12,7 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 
-public class NamedElementDocGen extends
-		org.polarsys.capella.docgen.foundations.CapellaElementDocGen {
+public class NamedElementDocGen extends org.polarsys.capella.docgen.foundations.CapellaElementDocGen {
 	protected static String nl;
 
 	public static synchronized NamedElementDocGen create(String lineSeparator) {
@@ -23,8 +22,7 @@ public class NamedElementDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = NL;
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL;
@@ -52,8 +50,7 @@ public class NamedElementDocGen extends
 
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_2);
@@ -74,11 +71,9 @@ public class NamedElementDocGen extends
 		return parameters;
 	}
 
-	protected void method_setContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		String elementName = EscapeChars.forHTML(LabelProviderHelper
-				.getText(element));
+		String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
 		String elementType = EscapeChars.forHTML(element.eClass().getName());
 		/*NamedElement namedElement = ((NamedElement) element);
 		
@@ -88,32 +83,26 @@ public class NamedElementDocGen extends
 			.append (" [")
 			.append (namedElement.eClass().getName())
 			.append ("]");
-		 */
-		title = "Capella - " + DocGenHtmlUtil.getModelName(element) + " - "
-				+ elementType + " " + elementName;
+		*/
+		title = "Capella - " + DocGenHtmlUtil.getModelName(element) + " - " + elementType + " " + elementName;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
 	}
 
-	protected void method_setFileName(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setFileName(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		fileName = DocGenHtmlCapellaUtil.getNamedElementRootFileName(element);
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileName",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileName", stringBuffer.toString());
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		stringBuffer.append(TEXT_1);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 }

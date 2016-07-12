@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -13,8 +13,7 @@ import org.polarsys.capella.docgen.util.pattern.helper.CapellaInterfaceHelper;
 import org.polarsys.capella.core.data.capellacore.VisibilityKind;
 import org.polarsys.capella.core.data.cs.Interface;
 
-public class InterfaceDocGen extends
-		org.polarsys.capella.docgen.content.ClassifierDocGen {
+public class InterfaceDocGen extends org.polarsys.capella.docgen.content.ClassifierDocGen {
 	protected static String nl;
 
 	public static synchronized InterfaceDocGen create(String lineSeparator) {
@@ -24,12 +23,10 @@ public class InterfaceDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Usage</h2>";
 	protected final String TEXT_2 = NL + "\t <h3>Provided by</h3>" + NL + " \t";
-	protected final String TEXT_3 = NL + "\t <h3>Implemented by</h3>" + NL
-			+ " \t";
+	protected final String TEXT_3 = NL + "\t <h3>Implemented by</h3>" + NL + " \t";
 	protected final String TEXT_4 = NL + " \t<h3>Required by</h3>" + NL + " \t";
 	protected final String TEXT_5 = NL + "\t <h3>Used by</h3>" + NL + " \t";
 	protected final String TEXT_6 = NL + "<h2>Operations</h2>";
@@ -80,8 +77,7 @@ public class InterfaceDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_20);
@@ -99,8 +95,7 @@ public class InterfaceDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
@@ -111,132 +106,109 @@ public class InterfaceDocGen extends
 		return parameters;
 	}
 
-	protected void method_setTitle(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setTitle(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		String visibility = "";
 		if (((Interface) element).getVisibility().getValue() != VisibilityKind.UNSET_VALUE)
-			visibility = "{"
-					+ ((Interface) element).getVisibility().getLiteral()
-							.toLowerCase() + "} ";
+			visibility = "{" + ((Interface) element).getVisibility().getLiteral().toLowerCase() + "} ";
 		String type = element.eClass().getName();
-		String elementFullName = CapellaServices
-				.getFullDataPkgHierarchyLink(element);
-		documentTitle = "<span class=\"elementMetaClass\">" + visibility
-				+ "</span> " + elementFullName;
+		String elementFullName = CapellaServices.getFullDataPkgHierarchyLink(element);
+		documentTitle = "<span class=\"elementMetaClass\">" + visibility + "</span> " + elementFullName;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle", stringBuffer.toString());
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
-		Collection<String> providedComponents = CapellaInterfaceHelper
-				.getProvidedBy((Interface) element, projectName, outputFolder);
+		Collection<String> providedComponents = CapellaInterfaceHelper.getProvidedBy((Interface) element, projectName,
+				outputFolder);
 
-		Collection<String> implementedComponents = CapellaInterfaceHelper
-				.getImplementedBy((Interface) element, projectName,
-						outputFolder);
+		Collection<String> implementedComponents = CapellaInterfaceHelper.getImplementedBy((Interface) element,
+				projectName, outputFolder);
 
-		Collection<String> requiredComponents = CapellaInterfaceHelper
-				.getRequiredBy((Interface) element, projectName, outputFolder);
+		Collection<String> requiredComponents = CapellaInterfaceHelper.getRequiredBy((Interface) element, projectName,
+				outputFolder);
 
-		Collection<String> usedComponents = CapellaInterfaceHelper.getUsedBy(
-				(Interface) element, projectName, outputFolder);
+		Collection<String> usedComponents = CapellaInterfaceHelper.getUsedBy((Interface) element, projectName,
+				outputFolder);
 
-		if (providedComponents.size() > 0 || implementedComponents.size() > 0
-				|| requiredComponents.size() > 0 || usedComponents.size() > 0) {
+		if (providedComponents.size() > 0 || implementedComponents.size() > 0 || requiredComponents.size() > 0
+				|| usedComponents.size() > 0) {
 
 			stringBuffer.append(TEXT_1);
 
 			if (providedComponents.size() > 0) {
 				stringBuffer.append(TEXT_2);
-				stringBuffer.append(StringUtil
-						.stringListToBulette(providedComponents));
+				stringBuffer.append(StringUtil.stringListToBulette(providedComponents));
 			}
 
 			if (implementedComponents.size() > 0) {
 				stringBuffer.append(TEXT_3);
-				stringBuffer.append(StringUtil
-						.stringListToBulette(implementedComponents));
+				stringBuffer.append(StringUtil.stringListToBulette(implementedComponents));
 			}
 
 			if (requiredComponents.size() > 0) {
 				stringBuffer.append(TEXT_4);
-				stringBuffer.append(StringUtil
-						.stringListToBulette(requiredComponents));
+				stringBuffer.append(StringUtil.stringListToBulette(requiredComponents));
 			}
 
 			if (usedComponents.size() > 0) {
 				stringBuffer.append(TEXT_5);
-				stringBuffer.append(StringUtil
-						.stringListToBulette(usedComponents));
+				stringBuffer.append(StringUtil.stringListToBulette(usedComponents));
 			}
 		}
 
 		Collection<String> operationExchangeItems = CapellaInterfaceHelper
-				.getOperationExchangeItems((Interface) element, projectName,
-						outputFolder);
+				.getOperationExchangeItems((Interface) element, projectName, outputFolder);
 		if (operationExchangeItems.size() > 0) {
 
 			stringBuffer.append(TEXT_6);
 			stringBuffer.append(TEXT_7);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(operationExchangeItems));
+			stringBuffer.append(StringUtil.stringListToBulette(operationExchangeItems));
 		}
 		stringBuffer.append(TEXT_8);
-		Collection<String> sharedFlowExchangeItems = CapellaInterfaceHelper
-				.getFlowExchangeItems((Interface) element, projectName,
-						outputFolder);
+		Collection<String> sharedFlowExchangeItems = CapellaInterfaceHelper.getFlowExchangeItems((Interface) element,
+				projectName, outputFolder);
 		if (sharedFlowExchangeItems.size() > 0) {
 
 			stringBuffer.append(TEXT_9);
 			stringBuffer.append(TEXT_10);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(sharedFlowExchangeItems));
+			stringBuffer.append(StringUtil.stringListToBulette(sharedFlowExchangeItems));
 		}
 		stringBuffer.append(TEXT_11);
 		Collection<String> sharedDataExchangeItems = CapellaInterfaceHelper
-				.getSharedDataExchangeItems((Interface) element, projectName,
-						outputFolder);
+				.getSharedDataExchangeItems((Interface) element, projectName, outputFolder);
 		if (sharedDataExchangeItems.size() > 0) {
 
 			stringBuffer.append(TEXT_12);
 			stringBuffer.append(TEXT_13);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(sharedDataExchangeItems));
+			stringBuffer.append(StringUtil.stringListToBulette(sharedDataExchangeItems));
 		}
 		stringBuffer.append(TEXT_14);
-		Collection<String> eventExchangeItems = CapellaInterfaceHelper
-				.getEventExchangeItems((Interface) element, projectName,
-						outputFolder);
+		Collection<String> eventExchangeItems = CapellaInterfaceHelper.getEventExchangeItems((Interface) element,
+				projectName, outputFolder);
 		if (eventExchangeItems.size() > 0) {
 
 			stringBuffer.append(TEXT_15);
 			stringBuffer.append(TEXT_16);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(eventExchangeItems));
+			stringBuffer.append(StringUtil.stringListToBulette(eventExchangeItems));
 		}
 		stringBuffer.append(TEXT_17);
-		Collection<String> unsetExchangeItems = CapellaInterfaceHelper
-				.getUnsetExchangeItems((Interface) element, projectName,
-						outputFolder);
+		Collection<String> unsetExchangeItems = CapellaInterfaceHelper.getUnsetExchangeItems((Interface) element,
+				projectName, outputFolder);
 		if (unsetExchangeItems.size() > 0) {
 
 			stringBuffer.append(TEXT_18);
 			stringBuffer.append(TEXT_19);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(unsetExchangeItems));
+			stringBuffer.append(StringUtil.stringListToBulette(unsetExchangeItems));
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

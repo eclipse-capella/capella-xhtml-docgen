@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
@@ -15,8 +15,7 @@ import org.polarsys.capella.docgen.util.pattern.helper.RegionHelper;
 import org.polarsys.capella.common.data.behavior.AbstractEvent;
 import org.eclipse.emf.common.util.EList;
 
-public class RegionDocGen extends
-		org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class RegionDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
 	public static synchronized RegionDocGen create(String lineSeparator) {
@@ -26,8 +25,7 @@ public class RegionDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Modes and States</h2>";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL + "<h2>Realized Elements</h2>" + NL;
@@ -40,13 +38,10 @@ public class RegionDocGen extends
 	protected final String TEXT_10 = NL;
 	protected final String TEXT_11 = NL;
 	protected final String TEXT_12 = NL;
-	protected final String TEXT_13 = NL + "<h2>Owned Transitions</h2>" + NL
-			+ "<table max-width=screen.width>" + NL + "   <thead> " + NL
-			+ "       <tr>" + NL + "           <th>Transition</th>" + NL
-			+ "           <th>Source</th>" + NL + "           <th>Target</th>"
-			+ NL + "           <th>Tigger</th>" + NL
-			+ "           <th>Effect</th>" + NL
-			+ "           <th>Description</th>" + NL + "       </tr>" + NL
+	protected final String TEXT_13 = NL + "<h2>Owned Transitions</h2>" + NL + "<table max-width=screen.width>" + NL
+			+ "   <thead> " + NL + "       <tr>" + NL + "           <th>Transition</th>" + NL
+			+ "           <th>Source</th>" + NL + "           <th>Target</th>" + NL + "           <th>Tigger</th>" + NL
+			+ "           <th>Effect</th>" + NL + "           <th>Description</th>" + NL + "       </tr>" + NL
 			+ "   </thead>" + NL + "   <tbody>";
 	protected final String TEXT_14 = NL + "\t   <tr>" + NL + "           <td>";
 	protected final String TEXT_15 = "</td>" + NL + "           <td>";
@@ -54,8 +49,7 @@ public class RegionDocGen extends
 	protected final String TEXT_17 = "</td>" + NL + "           <td>";
 	protected final String TEXT_18 = "</td>" + NL + "           <td>";
 	protected final String TEXT_19 = "</td>" + NL + "           <td>";
-	protected final String TEXT_20 = "</td>" + NL + "       </tr>" + NL
-			+ "\t\t";
+	protected final String TEXT_20 = "</td>" + NL + "       </tr>" + NL + "\t\t";
 	protected final String TEXT_21 = NL + NL + "</div>";
 	protected final String TEXT_22 = NL;
 	protected final String TEXT_23 = NL;
@@ -91,8 +85,7 @@ public class RegionDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_22);
@@ -110,16 +103,14 @@ public class RegionDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacommon.Region parameter = null;
 
-	public void set_parameter(
-			org.polarsys.capella.core.data.capellacommon.Region object) {
+	public void set_parameter(org.polarsys.capella.core.data.capellacommon.Region object) {
 		this.parameter = object;
 	}
 
@@ -129,15 +120,13 @@ public class RegionDocGen extends
 		return parameters;
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
-		Collection<String> states = RegionHelper.getState(projectName,
-				outputFolder, (Region) element);
+		Collection<String> states = RegionHelper.getState(projectName, outputFolder, (Region) element);
 
 		if (states.size() > 0) {
 
@@ -148,29 +137,26 @@ public class RegionDocGen extends
 		}
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		element = parameter;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 
-	protected void method_endContent(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		// Realized Elements 
 
 		String outputFolder = ctx.getValue("outputFolder").toString();
 		String projectName = ctx.getValue("projectName").toString();
-		Collection<String> allocations = CapellaElementService
-				.getOutGoingAllocation(element, projectName, outputFolder);
+		Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName,
+				outputFolder);
 		if (allocations.size() > 0) {
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(TEXT_4);
@@ -182,8 +168,8 @@ public class RegionDocGen extends
 
 		//String outputFolder = ctx.getValue("outputFolder").toString();
 		//String projectName = ctx.getValue("projectName").toString();
-		Collection<String> allocations2 = CapellaElementService
-				.getIncomingAllocation(element, projectName, outputFolder);
+		Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName,
+				outputFolder);
 		if (allocations2.size() > 0) {
 			stringBuffer.append(TEXT_7);
 			stringBuffer.append(TEXT_8);
@@ -197,23 +183,19 @@ public class RegionDocGen extends
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
-			new Node.DataLeaf(ictx.getNode(), getClass(), null,
-					stringBuffer.toString());
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
 			callParameters.put("element", element);
-			CallHelper
-					.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
-							new ExecutionContext((InternalPatternContext) ctx),
-							callParameters);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
 			stringBuffer.setLength(0);
 		}
 
 		stringBuffer.append(TEXT_12);
-		if (parameter.getOwnedTransitions() != null
-				&& parameter.getOwnedTransitions().size() > 0) {
+		if (parameter.getOwnedTransitions() != null && parameter.getOwnedTransitions().size() > 0) {
 			stringBuffer.append(TEXT_13);
 			for (StateTransition transition : parameter.getOwnedTransitions()) {
 				String triggerName = "";
@@ -232,34 +214,26 @@ public class RegionDocGen extends
 				// New code
 				Constraint constraint = transition.getGuard();
 				if (constraint != null && constraint.getName() != null) {
-					String guardName = CapellaEmbeddedLinkedTextEditorInput
-							.getDefaultText(constraint);
+					String guardName = CapellaEmbeddedLinkedTextEditorInput.getDefaultText(constraint);
 					guard = guardName != null ? "[" + guardName + "]" : "";
 				}
 
-				String trans_effect = (transition.getEffect() != null ? transition
-						.getEffect().getName() : "");
+				String trans_effect = (transition.getEffect() != null ? transition.getEffect().getName() : "");
 
 				String trans_label = (triggerName.trim().length() > 0 ? triggerName
-						: transition.getTriggerDescription())
-						+ " "
-						+ guard
-						+ (trans_effect.trim().length() > 0 ? " / "
-								+ trans_effect : "");
+						: transition.getTriggerDescription()) + " " + guard
+						+ (trans_effect.trim().length() > 0 ? " / " + trans_effect : "");
 
-				String trans_source = (transition.getSource() != null ? transition
-						.getSource().getName() : "");
+				String trans_source = (transition.getSource() != null ? transition.getSource().getName() : "");
 
-				String trans_target = (transition.getTarget() != null ? transition
-						.getTarget().getName() : "");
+				String trans_target = (transition.getTarget() != null ? transition.getTarget().getName() : "");
 
 				String trans_description = "";
 
 				if (transition instanceof StateTransition) {
 					StateTransition tt = (StateTransition) transition;
 					trans_description = tt.getDescription();
-					trans_description = StringUtil.transformAREFString(
-							transition, trans_description, projectName,
+					trans_description = StringUtil.transformAREFString(transition, trans_description, projectName,
 							outputFolder);
 				}
 				stringBuffer.append(TEXT_14);
@@ -279,7 +253,6 @@ public class RegionDocGen extends
 		}
 		stringBuffer.append(TEXT_21);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
 	}
 }

@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -26,25 +26,20 @@ public class PropertyValueGen {
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "<h2>Properties Value</h2>" + NL
-			+ "<table max-width=screen.width>" + NL + "   <thead> " + NL
-			+ "       <tr>" + NL + "       \t   <th>Relation</th>\t" + NL
-			+ "           <th>Name</th>" + NL + "           <th>Value</th>"
-			+ NL + "           <th>Description</th>" + NL + "       </tr>" + NL
-			+ "   </thead>" + NL + "   <tbody>" + NL;
-	protected final String TEXT_4 = NL + "   \t   <tr>" + NL
-			+ "           <td><i>";
+	protected final String TEXT_3 = NL + "<h2>Properties Value</h2>" + NL + "<table max-width=screen.width>" + NL
+			+ "   <thead> " + NL + "       <tr>" + NL + "       \t   <th>Relation</th>\t" + NL
+			+ "           <th>Name</th>" + NL + "           <th>Value</th>" + NL + "           <th>Description</th>"
+			+ NL + "       </tr>" + NL + "   </thead>" + NL + "   <tbody>" + NL;
+	protected final String TEXT_4 = NL + "   \t   <tr>" + NL + "           <td><i>";
 	protected final String TEXT_5 = "</i></td>" + NL + "           <td>";
 	protected final String TEXT_6 = "</td>" + NL + "           <td>";
 	protected final String TEXT_7 = "</td>" + NL + "           <td>";
 	protected final String TEXT_8 = "</td>" + NL + "       </tr>" + NL;
 	protected final String TEXT_9 = NL;
-	protected final String TEXT_10 = NL + "   \t   <tr>" + NL
-			+ "           <td><i>";
+	protected final String TEXT_10 = NL + "   \t   <tr>" + NL + "           <td><i>";
 	protected final String TEXT_11 = "</i></td>" + NL + "           <td>";
 	protected final String TEXT_12 = "</td>" + NL + "           <td>";
 	protected final String TEXT_13 = "</td>" + NL + "           <td>";
@@ -94,8 +89,7 @@ public class PropertyValueGen {
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_16);
@@ -115,16 +109,14 @@ public class PropertyValueGen {
 			parameterValues.put("projectName", this.projectName);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
 
 	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-	public void set_element(
-			org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
 		this.element = object;
 	}
 
@@ -148,17 +140,13 @@ public class PropertyValueGen {
 		return parameters;
 	}
 
-	protected void method_body(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		EList<AbstractPropertyValue> applayed_list = element
-				.getAppliedPropertyValues();
+		EList<AbstractPropertyValue> applayed_list = element.getAppliedPropertyValues();
 		stringBuffer.append(TEXT_1);
-		EList<AbstractPropertyValue> owned_list = element
-				.getOwnedPropertyValues();
+		EList<AbstractPropertyValue> owned_list = element.getOwnedPropertyValues();
 		stringBuffer.append(TEXT_2);
-		if ((applayed_list != null && applayed_list.size() > 0)
-				|| (owned_list != null && owned_list.size() > 0)) {
+		if ((applayed_list != null && applayed_list.size() > 0) || (owned_list != null && owned_list.size() > 0)) {
 			stringBuffer.append(TEXT_3);
 			// Handle Owned PropertyValues if not Handled yet 
 			for (AbstractPropertyValue propertyValue : owned_list) {
@@ -167,30 +155,24 @@ public class PropertyValueGen {
 				String name = propertyValue.getName();
 				String value = "";
 				String description = propertyValue.getDescription();
-				description = StringUtil.transformAREFString(propertyValue,
-						description, projectName, outputFolder);
+				description = StringUtil.transformAREFString(propertyValue, description, projectName, outputFolder);
 
 				if (propertyValue instanceof EnumerationPropertyValue) {
 					if (((EnumerationPropertyValue) propertyValue).getValue() != null)
-						value = ((EnumerationPropertyValue) propertyValue)
-								.getValue().getName();
+						value = ((EnumerationPropertyValue) propertyValue).getValue().getName();
 				}
 
 				if (propertyValue instanceof BooleanPropertyValue)
-					value = (((BooleanPropertyValue) propertyValue).isValue() ? "True"
-							: "False");
+					value = (((BooleanPropertyValue) propertyValue).isValue() ? "True" : "False");
 
 				if (propertyValue instanceof StringPropertyValue)
 					value = ((StringPropertyValue) propertyValue).getValue();
 
 				if (propertyValue instanceof IntegerPropertyValue)
-					value = Integer
-							.toString(((IntegerPropertyValue) propertyValue)
-									.getValue());
+					value = Integer.toString(((IntegerPropertyValue) propertyValue).getValue());
 
 				if (propertyValue instanceof FloatPropertyValue)
-					value = Float.toString(((FloatPropertyValue) propertyValue)
-							.getValue());
+					value = Float.toString(((FloatPropertyValue) propertyValue).getValue());
 
 				if (applayed_list.contains(propertyValue))
 					relation += " &amp; Applied";
@@ -214,33 +196,24 @@ public class PropertyValueGen {
 					String name = propertyValue.getName();
 					String value = "";
 					String description = propertyValue.getDescription();
-					description = StringUtil.transformAREFString(propertyValue,
-							description, projectName, outputFolder);
+					description = StringUtil.transformAREFString(propertyValue, description, projectName, outputFolder);
 
 					if (propertyValue instanceof EnumerationPropertyValue) {
-						if (((EnumerationPropertyValue) propertyValue)
-								.getValue() != null)
-							value = ((EnumerationPropertyValue) propertyValue)
-									.getValue().getName();
+						if (((EnumerationPropertyValue) propertyValue).getValue() != null)
+							value = ((EnumerationPropertyValue) propertyValue).getValue().getName();
 					}
 
 					if (propertyValue instanceof BooleanPropertyValue)
-						value = (((BooleanPropertyValue) propertyValue)
-								.isValue() ? "True" : "False");
+						value = (((BooleanPropertyValue) propertyValue).isValue() ? "True" : "False");
 
 					if (propertyValue instanceof StringPropertyValue)
-						value = ((StringPropertyValue) propertyValue)
-								.getValue();
+						value = ((StringPropertyValue) propertyValue).getValue();
 
 					if (propertyValue instanceof IntegerPropertyValue)
-						value = Integer
-								.toString(((IntegerPropertyValue) propertyValue)
-										.getValue());
+						value = Integer.toString(((IntegerPropertyValue) propertyValue).getValue());
 
 					if (propertyValue instanceof FloatPropertyValue)
-						value = Float
-								.toString(((FloatPropertyValue) propertyValue)
-										.getValue());
+						value = Float.toString(((FloatPropertyValue) propertyValue).getValue());
 
 					stringBuffer.append(TEXT_10);
 					stringBuffer.append(relation);
@@ -256,8 +229,7 @@ public class PropertyValueGen {
 			stringBuffer.append(TEXT_15);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {

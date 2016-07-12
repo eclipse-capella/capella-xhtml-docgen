@@ -1,4 +1,4 @@
-//Generated with EGF 1.2.0.v20140805-0858
+//Generated with EGF 1.4.0.v20160519-0641
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -14,8 +14,7 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.core.data.capellacore.VisibilityKind;
 import org.polarsys.capella.core.data.information.Class;
 
-public class ClassDocGen extends
-		org.polarsys.capella.docgen.content.ClassifierDocGen {
+public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierDocGen {
 	protected static String nl;
 
 	public static synchronized ClassDocGen create(String lineSeparator) {
@@ -25,8 +24,7 @@ public class ClassDocGen extends
 		return result;
 	}
 
-	public final String NL = nl == null ? (System.getProperties()
-			.getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL + "<div title=\"Features\">";
 	protected final String TEXT_3 = NL;
@@ -93,8 +91,7 @@ public class ClassDocGen extends
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(
-					OutputManager.computeExecutionOutput(ctx), ctx);
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
 		stringBuffer.append(TEXT_33);
@@ -112,8 +109,7 @@ public class ClassDocGen extends
 			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx,
-					parameterValues);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
 		}
 		return null;
 	}
@@ -124,8 +120,7 @@ public class ClassDocGen extends
 		return parameters;
 	}
 
-	protected void method_content(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
@@ -140,26 +135,20 @@ public class ClassDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,features:property"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("eObject", element);
 				callParameters.put("property", features);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
 			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(CapellaClassServices
-							.getClassFeatures(element)));
+			stringBuffer.append(StringUtil.stringListToBulette(CapellaClassServices.getClassFeatures(element)));
 			stringBuffer.append(TEXT_5);
 		}
 		stringBuffer.append(TEXT_6);
@@ -171,32 +160,27 @@ public class ClassDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,realisation:property"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("eObject", element);
 				callParameters.put("property", realisation);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
 			stringBuffer.append(TEXT_9);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(CapellaClassServices
-							.getClassRealizeInformation(element)));
+			stringBuffer
+					.append(StringUtil.stringListToBulette(CapellaClassServices.getClassRealizeInformation(element)));
 			stringBuffer.append(TEXT_10);
 		}
 		stringBuffer.append(TEXT_11);
 
-		Collection<String> propertiesCollection = CapellaClassServices
-				.getClassProperties(element, projectName, outputFolder);
+		Collection<String> propertiesCollection = CapellaClassServices.getClassProperties(element, projectName,
+				outputFolder);
 		if (propertiesCollection.size() >= 1) {
 			stringBuffer.append(TEXT_12);
 			String properties = "Properties";
@@ -205,25 +189,20 @@ public class ClassDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,properties:property"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("eObject", element);
 				callParameters.put("property", properties);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
 			stringBuffer.append(TEXT_14);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(propertiesCollection));
+			stringBuffer.append(StringUtil.stringListToBulette(propertiesCollection));
 			stringBuffer.append(TEXT_15);
 		}
 		stringBuffer.append(TEXT_16);
@@ -235,32 +214,26 @@ public class ClassDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,operation:property"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("eObject", element);
 				callParameters.put("property", operation);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
 			stringBuffer.append(TEXT_19);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(CapellaClassServices
-							.getClassOperation(element)));
+			stringBuffer.append(StringUtil.stringListToBulette(CapellaClassServices.getClassOperation(element)));
 			stringBuffer.append(TEXT_20);
 		}
 		stringBuffer.append(TEXT_21);
 
-		Collection<String> dataValuesCollection = CapellaClassServices
-				.getClassDataValues(element, projectName, outputFolder);
+		Collection<String> dataValuesCollection = CapellaClassServices.getClassDataValues(element, projectName,
+				outputFolder);
 		if (dataValuesCollection.size() >= 1) {
 			stringBuffer.append(TEXT_22);
 			String dataValue = "Data Values";
@@ -269,76 +242,61 @@ public class ClassDocGen extends
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,dataValue:property"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
-				new Node.DataLeaf(ictx.getNode(), getClass(), null,
-						stringBuffer.toString());
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
 				callParameters.put("eObject", element);
 				callParameters.put("property", dataValue);
-				CallHelper
-						.executeWithParameterInjection(
-								"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
-								new ExecutionContext(
-										(InternalPatternContext) ctx),
-								callParameters);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
 				stringBuffer.setLength(0);
 			}
 
 			stringBuffer.append(TEXT_24);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(dataValuesCollection));
+			stringBuffer.append(StringUtil.stringListToBulette(dataValuesCollection));
 			stringBuffer.append(TEXT_25);
 		}
 		stringBuffer.append(TEXT_26);
-		Collection<String> partofCollection = CapellaClassServices.getPartOf(
-				(Class) element, projectName, outputFolder);
+		Collection<String> partofCollection = CapellaClassServices.getPartOf((Class) element, projectName,
+				outputFolder);
 		if (partofCollection.size() > 0) {
 			stringBuffer.append(TEXT_27);
 			stringBuffer.append(TEXT_28);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(partofCollection));
+			stringBuffer.append(StringUtil.stringListToBulette(partofCollection));
 		}
 
-		Collection<String> referencedByCollection = CapellaClassServices
-				.getReferencedBy((Class) element, projectName, outputFolder);
+		Collection<String> referencedByCollection = CapellaClassServices.getReferencedBy((Class) element, projectName,
+				outputFolder);
 		if (referencedByCollection.size() > 0) {
 			stringBuffer.append(TEXT_29);
 			stringBuffer.append(TEXT_30);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(referencedByCollection));
+			stringBuffer.append(StringUtil.stringListToBulette(referencedByCollection));
 		}
 
-		Collection<String> parameterOfCollection = CapellaClassServices
-				.getParameterOf((Class) element, projectName, outputFolder);
+		Collection<String> parameterOfCollection = CapellaClassServices.getParameterOf((Class) element, projectName,
+				outputFolder);
 		if (parameterOfCollection.size() > 0) {
 			stringBuffer.append(TEXT_31);
 			stringBuffer.append(TEXT_32);
-			stringBuffer.append(StringUtil
-					.stringListToBulette(parameterOfCollection));
+			stringBuffer.append(StringUtil.stringListToBulette(parameterOfCollection));
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
-	protected void method_setTitle(final StringBuffer stringBuffer,
-			final PatternContext ctx) throws Exception {
+	protected void method_setTitle(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		String visibility = "";
 		if (((Class) element).getVisibility().getValue() != VisibilityKind.UNSET_VALUE)
-			visibility = "{"
-					+ ((Class) element).getVisibility().getLiteral()
-							.toLowerCase() + "} ";
+			visibility = "{" + ((Class) element).getVisibility().getLiteral().toLowerCase() + "} ";
 		String type = element.eClass().getName();
-		String elementFullName = CapellaServices
-				.getHyperlinkFromElement(element);
-		documentTitle = "<span class=\"elementMetaClass\">" + visibility
-				+ "</span> " + elementFullName;
+		String elementFullName = CapellaServices.getHyperlinkFromElement(element);
+		documentTitle = "<span class=\"elementMetaClass\">" + visibility + "</span> " + elementFullName;
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle",
-				stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
