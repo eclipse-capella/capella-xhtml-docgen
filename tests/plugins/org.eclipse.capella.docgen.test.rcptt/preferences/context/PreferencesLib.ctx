@@ -1,0 +1,35 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.ecl
+Element-Name: PreferencesLib
+Element-Type: context
+Element-Version: 2.0
+Id: _JVqTUE9bEeaFT_vaLCN56A
+Runtime-Version: 2.0.2.201511100828
+Save-Time: 7/21/16 6:11 PM
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+Entry-Name: .ecl.context
+
+proc checkPreferenceValues [val copyright] [val logoPath] [val logoAltText] {
+	get-preferences-menu | click
+	with [get-window Preferences] {
+	    get-editbox -after [get-label Copyright] | get-property text | equals $copyright | verify-true
+	    with [get-group "Logo settings"] {
+	        get-editbox -after [get-label "Logo Path"] | get-property text | equals $logoPath | verify-true
+	        get-editbox -after [get-label "Logo alternate text"] | get-property text | equals $logoAltText | verify-true
+	    }
+	    get-button OK | click
+	}
+}
+
+proc restorDefaultBrandingPreferencesValues {
+	get-preferences-menu | click
+	with [get-window Preferences] {
+	    get-tree | select "Kitalpha/Core Technology Kit/Docgen branding"
+	    get-button "Restore Defaults" | click
+	    get-button OK | click
+	}
+}
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--
