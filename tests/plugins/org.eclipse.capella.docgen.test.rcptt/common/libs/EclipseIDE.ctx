@@ -1,0 +1,50 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.ecl
+Element-Name: EclipseIDE
+Element-Type: context
+Element-Version: 2.0
+Id: _rbjIoE9dEeaFT_vaLCN56A
+Runtime-Version: 2.0.2.201511100828
+Save-Time: 7/22/16 11:21 AM
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+Entry-Name: .ecl.context
+
+proc activateDevelopementCapability {
+	get-preferences-menu | click
+	with [get-window Preferences] {
+	    get-tree | select "General/Capabilities"
+	    get-table | get-item Development | check
+	    get-button Apply | click
+	    get-button OK | click
+	}
+}
+
+
+proc openPerspective [val name]{
+	activateDevelopementCapability
+	get-button "Open Perspective" | click
+	with [get-window "Open Perspective"] {
+	    get-table | select $name
+	    get-button OK | click
+	}
+}
+
+proc findTextInFile [ val parentFolder ] [ val fileName ] [ val text ]{
+	get-view "Package Explorer" | get-tree | select [ concat $parentFolder "/" $fileName ] 
+	    | get-menu "Open With/Text Editor" | click
+	
+	get-editor $fileName | get-text-viewer | key-type "M1+f"
+	
+	with [get-window "Find/Replace"] {
+	    get-combo -after [get-label "Find:"] | set-text $text
+	    get-button Find | click
+	    get-button Close | click
+	}
+	
+	get-editor $fileName | get-text-viewer | get-property "getSelectionText()" | equals $text | verify-true
+}
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--

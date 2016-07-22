@@ -1,0 +1,23 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.parameters
+Element-Name: BrandingDataValues
+Element-Type: context
+Element-Version: 2.0
+Id: _cuSAwE9OEeaFT_vaLCN56A
+Runtime-Version: 2.0.2.201511100828
+Save-Time: 7/21/16 6:12 PM
+
+------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee
+Content-Type: text/properties
+Entry-Name: .parameters.context
+
+#Thu Jul 21 18:12:49 CEST 2016
+CustomLogoPath=
+DefaultLogoPath=Default
+DefaultLogoAltText=[Default logo]
+EclipseCopyright=Copyright &copy; 2014 The Eclipse Foundation. All Rights Reserved.
+CustomLogoAltText=Thalesgroup logo alt text
+CustomCopyright=Copyright &copy; 2016 Thalesgroup. All Rights Reserved.
+
+------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee--
