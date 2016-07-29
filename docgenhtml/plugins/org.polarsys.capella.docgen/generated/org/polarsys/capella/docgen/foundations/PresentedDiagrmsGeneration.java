@@ -16,6 +16,7 @@ import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
 import org.polarsys.capella.docgen.util.CapellaDiagramHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 
 public class PresentedDiagrmsGeneration {
 	protected static String nl;
@@ -158,6 +159,6 @@ public class PresentedDiagrmsGeneration {
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return true;
+		return DocgenDiagramPreferencesHelper.getExportDiagram();
 	}
 }
