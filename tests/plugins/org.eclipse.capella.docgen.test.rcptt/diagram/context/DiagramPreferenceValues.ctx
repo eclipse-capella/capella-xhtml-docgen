@@ -1,0 +1,18 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.parameters
+Element-Name: DiagramPreferenceValues
+Element-Type: context
+Element-Version: 2.0
+Id: _cuW-8FfCEeaK7Od8MoArMQ
+Runtime-Version: 2.0.2.201511100828
+Save-Time: 8/1/16 10:33 AM
+
+------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee
+Content-Type: text/properties
+Entry-Name: .parameters.context
+
+#Mon Aug 01 10:33:27 CEST 2016
+DiagramPreferencePath=Kitalpha/Core Technology Kit/Docgen/Diagrams
+
+------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee--

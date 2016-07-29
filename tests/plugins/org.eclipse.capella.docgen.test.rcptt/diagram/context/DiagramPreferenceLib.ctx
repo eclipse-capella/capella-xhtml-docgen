@@ -1,0 +1,32 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.ecl
+Element-Name: DiagramPreferenceLib
+Element-Type: context
+Element-Version: 2.0
+Id: _42WdAFfFEeaK7Od8MoArMQ
+Runtime-Version: 2.0.2.201511100828
+Save-Time: 8/1/16 10:59 AM
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+Entry-Name: .ecl.context
+
+proc setExportDiagramValue [ val pagePath ] [val value ] {
+	get-preferences-menu | click
+	with [get-window Preferences] {
+	 	get-tree | select $pagePath
+	  
+	  	if [bool $value]
+	  	{
+	  		get-group Diagrams | get-button "Export Diagrams" | check
+	  	}
+	  	-else
+	  	{
+	  		get-group Diagrams | get-button "Export Diagrams" | uncheck
+	  	}
+	  
+	    get-button OK | click
+	}
+}
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--

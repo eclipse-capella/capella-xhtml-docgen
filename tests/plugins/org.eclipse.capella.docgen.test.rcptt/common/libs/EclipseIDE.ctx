@@ -6,17 +6,26 @@ Element-Type: context
 Element-Version: 2.0
 Id: _rbjIoE9dEeaFT_vaLCN56A
 Runtime-Version: 2.0.2.201511100828
-Save-Time: 7/22/16 11:21 AM
+Save-Time: 8/1/16 10:51 AM
 
 ------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
 Content-Type: text/ecl
 Entry-Name: .ecl.context
 
-proc activateDevelopementCapability {
+proc restorDefaultPreferencesValues [ val pagePath ]{
+	get-preferences-menu | click
+	with [get-window Preferences] {
+	    get-tree | select $pagePath
+	    get-button "Restore Defaults" | click
+	    get-button OK | click
+	}
+}
+
+proc activateCapability [ val name ]{
 	get-preferences-menu | click
 	with [get-window Preferences] {
 	    get-tree | select "General/Capabilities"
-	    get-table | get-item Development | check
+	    get-table | get-item $name | check
 	    get-button Apply | click
 	    get-button OK | click
 	}
@@ -24,7 +33,7 @@ proc activateDevelopementCapability {
 
 
 proc openPerspective [val name]{
-	activateDevelopementCapability
+	activateCapability -name "Development"
 	get-button "Open Perspective" | click
 	with [get-window "Open Perspective"] {
 	    get-table | select $name
@@ -32,7 +41,7 @@ proc openPerspective [val name]{
 	}
 }
 
-proc findTextInFile [ val parentFolder ] [ val fileName ] [ val text ]{
+proc findTextInFile [ val parentFolder ] [ val fileName ] [ val text ] [ val exists true] {
 	get-view "Package Explorer" | get-tree | select [ concat $parentFolder "/" $fileName ] 
 	    | get-menu "Open With/Text Editor" | click
 	
@@ -44,7 +53,15 @@ proc findTextInFile [ val parentFolder ] [ val fileName ] [ val text ]{
 	    get-button Close | click
 	}
 	
-	get-editor $fileName | get-text-viewer | get-property "getSelectionText()" | equals $text | verify-true
+	if [ bool $exists ]
+	{
+		get-editor $fileName | get-text-viewer | get-property "getSelectionText()" | equals $text | verify-true
+	}
+	-else
+	{
+		get-editor $fileName | get-text-viewer | get-property "getSelectionText()" | equals "" | verify-true
+	}
+	
 }
 
 ------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--

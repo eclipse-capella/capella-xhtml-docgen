@@ -7,17 +7,17 @@ Element-Version: 3.0
 External-Reference: 
 Id: _lg4L4E9bEeaFT_vaLCN56A
 Runtime-Version: 2.0.2.201511100828
-Save-Time: 7/22/16 11:23 AM
+Save-Time: 8/1/16 10:54 AM
 Testcase-Type: ecl
 
 ------=_.content-0a7243a0-75d3-3d5f-9791-539de0e5b7ac
 Content-Type: text/ecl
 Entry-Name: .content
 
-restorDefaultBrandingPreferencesValues
+restorDefaultPreferencesValues -pagePath $BrandingPreferencePath
 
 // Checking the initial branding data preferences values
-checkPreferenceValues -copyright $EclipseCopyright -logoPath $DefaultLogoPath -logoAltText $DefaultLogoAltText
+checkPreferenceValues -pagePath $BrandingPreferencePath -copyright $EclipseCopyright -logoPath $DefaultLogoPath -logoAltText $DefaultLogoAltText
 
 with [get-view "Capella Project Explorer" | get-tree] {
     select "docgen.test/docgen.test.aird" | double-click
@@ -51,7 +51,7 @@ with [get-window -class WizardDialog] {
 
 get-window "Branding data" | get-button No | click
 
-checkPreferenceValues -copyright $EclipseCopyright -logoPath $DefaultLogoPath -logoAltText $DefaultLogoAltText
+checkPreferenceValues -pagePath $BrandingPreferencePath -copyright $EclipseCopyright -logoPath $DefaultLogoPath -logoAltText $DefaultLogoAltText
 
 openPerspective -name "Plug-in Development"
 
