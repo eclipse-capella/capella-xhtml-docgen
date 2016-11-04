@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.4.1.v20161010-1511
 package org.polarsys.capella.docgen.content;
 
 import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
@@ -218,7 +218,20 @@ public class RegionDocGen extends org.polarsys.capella.docgen.foundations.NamedE
 					guard = guardName != null ? "[" + guardName + "]" : "";
 				}
 
-				String trans_effect = (transition.getEffect() != null ? transition.getEffect().getName() : "");
+				EList<AbstractEvent> effects = transition.getEffect();
+				String trans_effect = "";
+				for (AbstractEvent abstractEvent : effects) {
+					trans_effect += abstractEvent.getName();
+					if (effects.indexOf(abstractEvent) != effects.size()) {
+						trans_effect += ", ";
+					}
+				}
+
+				if (!trans_effect.isEmpty() && effects.size() > 1) {
+					trans_effect = "(" + trans_effect + ")";
+				}
+
+				// String trans_effect = (transition.getEffect() != null ? transition.getEffect().getName() : "");
 
 				String trans_label = (triggerName.trim().length() > 0 ? triggerName
 						: transition.getTriggerDescription()) + " " + guard
