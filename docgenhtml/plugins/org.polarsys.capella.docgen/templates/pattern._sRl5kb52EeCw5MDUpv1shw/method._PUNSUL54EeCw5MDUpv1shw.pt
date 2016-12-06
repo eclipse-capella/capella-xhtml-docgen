@@ -12,12 +12,12 @@ if(availableModeAndState.size() > 0) {
 <%
 }
 
-Collection<String> availableFunctions = FunctionalChainHelper.getAvailableFunctions(projectName, outputFolder,(FunctionalChain) parameter);
-			
-if(availableFunctions.size() > 0) {
+Map<String, String> functionAndDesc = FunctionalChainHelper.getAvailableFunctionWithInvolvementDescription(projectName, outputFolder,(FunctionalChain) parameter);
+
+if(functionAndDesc.size() > 0) {
 %>
 <h2>Involved functions</h2>
-<%=StringUtil.stringListToBulette(availableFunctions)%>
+<%=StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description")%>
 <%
 }
 %>

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -328,5 +330,59 @@ public class StringUtil {
 		}
 		// Return the buffer
 		return buffer.toString();
+	}
+	
+	/**
+	 * Build a 2 columns html table. The first table contains the keys of the map and the second
+	 * contains the values of the map
+	 * @param map data of the table
+	 * @param firstColTitle the title of the first column
+	 * @param secondColTitle the title of the second column
+	 * @return html table string
+	 */
+	public static String mapToHTMLTable(Map<String, String> map, 
+			String firstColTitle, String secondColTitle){
+		
+		//To generate header one of the first or second title must be set
+		boolean generateTableHeader = (firstColTitle != null && !firstColTitle.isEmpty()) || (secondColTitle != null && !secondColTitle.isEmpty());
+		
+		firstColTitle = firstColTitle== null ? "" : firstColTitle;
+		secondColTitle = secondColTitle== null ? "" : secondColTitle;
+		
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<table>"); //$NON-NLS-1$
+		if (generateTableHeader){
+			buffer.append("<tr>").append("<th>"); //$NON-NLS-1$ //$NON-NLS-2$
+			buffer.append(firstColTitle).append("</th>"); //End first col //$NON-NLS-1$
+			
+			buffer.append("<th>"); //$NON-NLS-1$
+			buffer.append(secondColTitle);
+			buffer.append("</th></tr>"); //End second col and the first row //$NON-NLS-1$
+		}
+		
+		//Generate the table content
+		for(Entry<String, String> e: map.entrySet()){
+			buffer.append("<tr>"); //$NON-NLS-1$
+			buffer.append("<td>").append(e.getKey()).append("</td><td>").append(e.getValue()).append("</td>"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			buffer.append("</tr>"); //$NON-NLS-1$
+		}
+		buffer.append("</table>"); //$NON-NLS-1$
+		
+		return buffer.toString();
+	}
+	
+	/**
+	 * @param stringSet must be not null
+	 * @return true if the stringSet contains a not empty or null value string, otherwise false
+	 */
+	public static boolean containsNotEmptyString(Collection<String> stringSet){
+		
+		for (String string : stringSet) {
+			if (string != null && !string.isEmpty()){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.4.1.v20161010-1511
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -112,14 +112,14 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 
 		}
 
-		Collection<String> availableFunctions = FunctionalChainHelper.getAvailableFunctions(projectName, outputFolder,
-				(FunctionalChain) parameter);
+		Map<String, String> functionAndDesc = FunctionalChainHelper
+				.getAvailableFunctionWithInvolvementDescription(projectName, outputFolder, (FunctionalChain) parameter);
 
-		if (availableFunctions.size() > 0) {
+		if (functionAndDesc.size() > 0) {
 
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil.stringListToBulette(availableFunctions));
+			stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description"));
 
 		}
 
