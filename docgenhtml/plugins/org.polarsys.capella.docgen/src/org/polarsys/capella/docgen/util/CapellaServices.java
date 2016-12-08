@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,6 +26,8 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 import org.polarsys.capella.core.data.capellacore.AbstractDependenciesPkg;
 import org.polarsys.capella.core.data.capellacore.Classifier;
+import org.polarsys.capella.core.data.interaction.CombinedFragment;
+import org.polarsys.capella.core.data.interaction.InteractionOperand;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 
 import org.eclipse.sirius.diagram.DSemanticDiagram;
@@ -191,6 +193,10 @@ public class CapellaServices {
 	 * @return 0 if element has page, 1 if parent element has page, otherwise -1
 	 */
 	public static int isLinkableWithoutScope(EObject element) {
+		if (element instanceof CombinedFragment || element instanceof  InteractionOperand) {
+			return -1;
+		}
+		
 		if (element instanceof CapellaElement) {
 			if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
 				return 0;
