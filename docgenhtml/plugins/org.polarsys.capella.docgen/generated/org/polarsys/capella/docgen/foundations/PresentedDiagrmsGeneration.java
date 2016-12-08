@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.4.1.v20161010-1511
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -138,6 +138,10 @@ public class PresentedDiagrmsGeneration {
 			stringBuffer.append(TEXT_2);
 			for (DSemanticDiagram diagram : diagramSet) {
 				EObject eObject = diagram.getTarget();
+				if (eObject == null) {
+					//The diagram could not be exported
+					continue;
+				}
 				String generatedFolder = fileNameService.getFileName(eObject);
 				stringBuffer.append(TEXT_3);
 				if (eObject instanceof NamedElement
