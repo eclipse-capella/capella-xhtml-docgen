@@ -5,7 +5,7 @@ Element-Type: testsuite
 Element-Version: 2.0
 Id: _19AAEE9bEeaFT_vaLCN56A
 Runtime-Version: 2.0.2.201511100828
-Save-Time: 8/1/16 11:06 AM
+Save-Time: 12/9/16 10:24 AM
 
 ------=_testcase-items-62c497da-4241-31f4-811a-6b453a3ecff8
 Content-Type: text/testcase
@@ -13,5 +13,6 @@ Entry-Name: testcase-items
 
 _u2eAEE9MEeaFT_vaLCN56A	// kind: 'suite' name: 'PreferenceTestsuite' path: 'preferences/testsuite/PreferenceTestsuite.suite'
 _QH-7AFfHEeaK7Od8MoArMQ	// kind: 'suite' name: 'DiagramTestsuite' path: 'diagram/testsuite/DiagramTestsuite.suite'
+_LOQ0oL3xEea0zt5X8HTEVw	// kind: 'suite' name: 'FunctionalChainTestsuite' path: 'functionalChain/testsuite/FunctionalChainTestsuite.suite'
 
 ------=_testcase-items-62c497da-4241-31f4-811a-6b453a3ecff8--
