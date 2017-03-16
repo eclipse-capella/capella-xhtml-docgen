@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2017 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,8 +10,6 @@
  ******************************************************************************/
 
 package org.polarsys.capella.docgen.commandline;
-
-import java.util.Collection;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -39,6 +37,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.polarsys.capella.core.commandline.core.AbstractCommandLine;
 import org.polarsys.capella.core.commandline.core.CommandLineException;
+import org.polarsys.capella.core.data.capellamodeller.Project;
+import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelper;
 
@@ -47,7 +47,7 @@ import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelpe
  */
 public class HTMLCommandLine extends AbstractCommandLine {
 
-	private static final String FCORE_URI = "/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA";
+	private static final String FCORE_URI = "/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA"; //$NON-NLS-1$
 	private static final URI CAPELLA_LAUNCHER_URI = URI.createURI("platform:/plugin" + FCORE_URI); //$NON-NLS-1$
 
 	/**
@@ -93,12 +93,12 @@ public class HTMLCommandLine extends AbstractCommandLine {
 			DiagramSessionHelper.setAirdUri(uri);
 			Session session = DiagramSessionHelper.initSession();
 
-			Collection<Resource> resources = session.getSemanticResources();
-
 			session.open(new NullProgressMonitor());
 
-			if (!resources.isEmpty()) {
-				Resource semanticResource = resources.iterator().next();
+			Project rootSemanticElement = SessionHelper.getCapellaProject(session);
+			if (rootSemanticElement != null) {
+				// Get the .melodymodeller resource (and not the .afm resource)
+				Resource semanticResource = rootSemanticElement.eResource();
 				semanticResourceURI = semanticResource.getURI();
 
 				boolean status = executeEGFActivity(htmlGenerator, argHelper.getOutputFolder(), semanticResourceURI);
@@ -106,6 +106,8 @@ public class HTMLCommandLine extends AbstractCommandLine {
 				if (status) {
 					logInfo(Messages.generation_done + argHelper.getOutputFolder());
 				}
+			} else {
+				logError(Messages.no_root_semantic_element);	
 			}
 		} else {
 			logError(Messages.filepath_point_to_aird);
@@ -150,7 +152,7 @@ public class HTMLCommandLine extends AbstractCommandLine {
 
 		// create output folder in the project
 		IPath path = new Path(outputFolder);
-		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(path.append("output"));
+		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(path.append("output")); //$NON-NLS-1$
 		if (!folder.exists()) {
 			try {
 				folder.create(true, true, new NullProgressMonitor());
@@ -167,7 +169,7 @@ public class HTMLCommandLine extends AbstractCommandLine {
 
 			final FactoryComponent factoryComponent = (FactoryComponent) capellaLauncher;
 			setContract(factoryComponent, "projectName", projectName); //$NON-NLS-1$
-			setContract(factoryComponent, "outputFolder", relativeFilePath + "/output"); //$NON-NLS-1$
+			setContract(factoryComponent, "outputFolder", relativeFilePath + "/output"); //$NON-NLS-1$ //$NON-NLS-2$
 			setDomain(factoryComponent, uri);
 
 			// run the activity

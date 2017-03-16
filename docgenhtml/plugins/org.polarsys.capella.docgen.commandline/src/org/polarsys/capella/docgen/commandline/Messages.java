@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2017 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,6 +26,7 @@ public class Messages extends NLS {
 	public static String exec_pb;
 	public static String filepath_point_to_aird;
 	public static String generation_done;
+	public static String no_root_semantic_element;
 	public static String representation_mandatory;
 	public static String resource_prefix;
 	static {
