@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.polarsys.capella.docgen.commandline;singleton:=true
-Bundle-Version: 0.8.0.qualifier
+Bundle-Version: 1.1.1.qualifier
 Bundle-Vendor: %providerName
 Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core.ui,
  org.eclipse.ui,
@@ -11,7 +11,8 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core.ui,
  org.eclipse.sirius,
  org.polarsys.capella.core.commandline.core,
  org.eclipse.egf.core.producer,
- org.eclipse.egf.model
+ org.eclipse.egf.model,
+ org.polarsys.capella.core.sirius.ui
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
