@@ -1,7 +1,0 @@
-<project name="Capella_Addons">
-
-	<echo message="Running Job XHTMLDocGen in Capella_Addons_XHTMLDocGen/releng"/>
-	<ant dir="Capella_Addons_XHTMLDocGen/releng"/>
-
-
-</project>

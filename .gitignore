@@ -15,6 +15,10 @@ tmp/
 #.settings/
 .loadpath
 
+# Maven
+target/
+.polyglot.build.properties
+
 # External tool builders
 .externalToolBuilders/
 

@@ -1,0 +1,27 @@
+/*******************************************************************************
+ * Copyright (c)  2017 THALES GLOBAL SERVICES.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Thales - initial API and implementation
+ *******************************************************************************/
+target "CapellaXHTMLDocGenAddon"
+
+include "http://git.polarsys.org/c/capella/capella.git/plain/releng/plugins/org.polarsys.capella.rcp.target/full/capella.target-definition.targetplatform?h=master"
+
+with source, requirements
+
+location capella-master "https://hudson.polarsys.org/capella/job/capella-master/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.capella.rcp.site/target/repository" {
+	org.polarsys.capella.rcp.feature.feature.group
+}
+
+location egf-master "https://hudson.eclipse.org/egf/job/buckminster-egf-neon/lastSuccessfulBuild/artifact/result/publish/org.eclipse.egf.sdk/site.p2" {
+	org.eclipse.egf.feature.group
+}
+
+location kitalpha-runtime-master-latest "https://hudson.polarsys.org/kitalpha/job/Kitalpha_master/lastSuccessfulBuild/artifact/result/publish/kitalpha_runtime/site.p2" {
+	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group
+}
