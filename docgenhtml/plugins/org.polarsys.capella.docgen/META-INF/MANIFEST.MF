@@ -18,7 +18,8 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core;visibility:=reexport
  org.polarsys.capella.core.linkedtext.ui,
  org.polarsys.capella.common.linkedtext.ui,
  org.eclipse.jface.text,
- org.polarsys.kitalpha.doc.gen.business.core.preference
+ org.polarsys.kitalpha.doc.gen.business.core.preference,
+ org.polarsys.capella.shared.id.handler
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
