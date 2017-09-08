@@ -20,4 +20,15 @@ if(functionAndDesc.size() > 0) {
 <%=StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description")%>
 <%
 }
+
+
+Map<String, String> functionalExchangesAndDesc = FunctionalChainHelper.getInvolvedFunctionalExchanges(projectName, outputFolder, (FunctionalChain) parameter);
+
+if(functionalExchangesAndDesc.size() > 0) {
+%>
+<h2>Involved functional exchanges</h2>
+<%=StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange", "Involvement Description")%>
+<%
+}
+
 %>

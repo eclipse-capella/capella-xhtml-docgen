@@ -1,0 +1,51 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<FunctionalExchange> incomingFunctionalExchanges = CapellaFunctionPortServices.getIncomingFunctionalExchanges((FunctionPort) element);
+if(incomingFunctionalExchanges.size() > 0) {
+%>
+<h2>Incoming Functional Exchanges</h2>
+
+<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Involving Functional Chains</th>
+		<th>Allocating Component Exchanges</th>
+		<th>Source Port</th>
+		<th>Source Function</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for (FunctionalExchange functionalExchange : incomingFunctionalExchanges) {   	
+%>
+	<%=CapellaFunctionServices.incomingFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
+	<% 	
+}%>
+</table>
+<%
+}
+
+Collection<FunctionalExchange> outgoingFunctionalExchanges = CapellaFunctionPortServices.getOutgoingFunctionalExchanges((FunctionPort) element);
+if(outgoingFunctionalExchanges.size() > 0) {
+%>
+ <h2>Outgoing Functional Exchanges</h2>
+
+    <table>
+	<tr>
+		<th>Exchange</th>
+		<th>Involving Functional Chains</th>
+		<th>Allocating Component Exchanges</th>
+		<th>Target Port</th>
+		<th>Target Function</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for(FunctionalExchange functionalExchange : outgoingFunctionalExchanges) {%>
+	<%=CapellaFunctionServices.outgoingFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
+<% }%>
+</table>
+<%
+}
+%>

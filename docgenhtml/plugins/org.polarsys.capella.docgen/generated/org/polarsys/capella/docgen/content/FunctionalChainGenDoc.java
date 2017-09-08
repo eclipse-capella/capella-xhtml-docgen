@@ -26,8 +26,10 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL + "<h2>Involved functions</h2>";
 	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL;
+	protected final String TEXT_5 = NL + "<h2>Involved functional exchanges</h2>";
 	protected final String TEXT_6 = NL;
+	protected final String TEXT_7 = NL;
+	protected final String TEXT_8 = NL;
 
 	public FunctionalChainGenDoc() {
 		//Here is the constructor
@@ -63,8 +65,8 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_5);
-		stringBuffer.append(TEXT_6);
+		stringBuffer.append(TEXT_7);
+		stringBuffer.append(TEXT_8);
 		return stringBuffer.toString();
 	}
 
@@ -120,6 +122,18 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(TEXT_4);
 			stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description"));
+
+		}
+
+		Map<String, String> functionalExchangesAndDesc = FunctionalChainHelper
+				.getInvolvedFunctionalExchanges(projectName, outputFolder, (FunctionalChain) parameter);
+
+		if (functionalExchangesAndDesc.size() > 0) {
+
+			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_6);
+			stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange",
+					"Involvement Description"));
 
 		}
 

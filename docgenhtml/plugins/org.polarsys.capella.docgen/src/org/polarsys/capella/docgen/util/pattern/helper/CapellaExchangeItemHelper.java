@@ -13,8 +13,16 @@ package org.polarsys.capella.docgen.util.pattern.helper;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.polarsys.capella.core.data.capellacore.Involvement;
 import org.polarsys.capella.core.data.cs.ExchangeItemAllocation;
 import org.polarsys.capella.core.data.cs.Interface;
+import org.polarsys.capella.core.data.fa.FunctionalChain;
+import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
+import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.helpers.information.services.ExchangeItemExt;
 import org.polarsys.capella.core.data.information.ExchangeItem;
 import org.polarsys.capella.core.data.information.ExchangeItemElement;
@@ -51,4 +59,52 @@ public class CapellaExchangeItemHelper {
 		}
 		return ret;
 	}
+	
+	public static Collection<String> getReferencingFunctionalExchanges(ExchangeItem exchangeItem, String projectName,
+		    String outputFolder) {
+			Collection<String> referencingFunctionalExchanges = new ArrayList<String>();
+			EObject root = EcoreUtil.getRootContainer(exchangeItem);
+			TreeIterator<EObject> it = root.eAllContents();
+			while (it.hasNext()) {
+				EObject object = it.next();
+				if (object instanceof FunctionalExchange) {
+					FunctionalExchange exchange = (FunctionalExchange) object;
+					EList<ExchangeItem> referencedItems = exchange.getExchangedItems();
+					if (referencedItems.contains(exchangeItem)) {
+						referencingFunctionalExchanges
+						    .add(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, exchange));
+					}
+				}
+			}
+
+			return referencingFunctionalExchanges;
+		}
+
+
+	public static Collection<String> getInvolvingFunctionalChains(ExchangeItem exchangeItem, String projectName,
+		    String outputFolder) {
+			Collection<FunctionalChain> referencingFunctionalChains = new ArrayList<FunctionalChain>();
+			Collection<String> referencingFunctionalChainsStrings = new ArrayList<String>();
+
+			EObject root = EcoreUtil.getRootContainer(exchangeItem);
+			TreeIterator<EObject> it = root.eAllContents();
+			while (it.hasNext()) {
+				EObject object = it.next();
+				if (object instanceof FunctionalChain) {
+					FunctionalChain functionalChain = (FunctionalChain) object;
+					for (Involvement involvment : functionalChain.getInvolvedInvolvements()) {
+						if (involvment instanceof FunctionalChainInvolvement) {
+							EList<ExchangeItem> referencedItems = ((FunctionalChainInvolvement) involvment).getExchangedItems();
+							if (referencedItems.contains(exchangeItem) && !referencingFunctionalChains.contains(functionalChain)) {
+								referencingFunctionalChainsStrings
+								    .add(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, functionalChain));
+								referencingFunctionalChains.add(functionalChain);
+							}
+						}
+					}
+				}
+			}
+
+			return referencingFunctionalChainsStrings;
+		}
 }

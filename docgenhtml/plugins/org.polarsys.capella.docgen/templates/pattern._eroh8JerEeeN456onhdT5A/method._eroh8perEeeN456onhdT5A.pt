@@ -1,0 +1,1 @@
+<%@ jet package="PACKAGE" class="CLASS" imports="java.util.* org.eclipse.egf.model.pattern.* org.eclipse.egf.pattern.execution.* org.eclipse.egf.pattern.query.* org.eclipse.emf.common.util.* org.polarsys.capella.core.data.fa.FunctionalExchange org.polarsys.capella.docgen.util.StringUtil org.polarsys.capella.core.data.fa.FunctionalChain"   %>

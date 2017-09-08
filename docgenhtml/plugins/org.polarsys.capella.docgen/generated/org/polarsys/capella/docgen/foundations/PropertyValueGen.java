@@ -1,4 +1,4 @@
-//Generated with EGF 1.5.0.v20170111-0853
+//Generated with EGF 1.4.1.v20161010-1511
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -41,6 +41,7 @@ public class PropertyValueGen {
 	protected final String TEXT_6 = NL + "\t</tbody>" + NL + "\t</table>" + NL + "\t";
 	protected final String TEXT_7 = NL;
 	protected final String TEXT_8 = NL;
+	protected final String TEXT_9 = NL;
 
 	public PropertyValueGen() {
 		//Here is the constructor
@@ -86,8 +87,8 @@ public class PropertyValueGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_7);
 		stringBuffer.append(TEXT_8);
+		stringBuffer.append(TEXT_9);
 		return stringBuffer.toString();
 	}
 
@@ -169,6 +170,7 @@ public class PropertyValueGen {
 
 		}
 
+		stringBuffer.append(TEXT_7);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}

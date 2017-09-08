@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2017 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -350,6 +350,22 @@ public class CapellaServices {
 		list.clear();
 		list.addAll(set);
 		return list;
+	}
+
+	public static String buildHyperlinkWithIcon(String projectName, String outputFolder, EObject object) {
+		StringBuffer hyperLinkBuffer = new StringBuffer();
+		hyperLinkBuffer.append(getImageLinkFromElement(object, projectName, outputFolder));
+		hyperLinkBuffer.append(" "); //$NON-NLS-1$
+		hyperLinkBuffer.append(getHyperlinkFromElement(object));
+		return hyperLinkBuffer.toString();
+	}
+
+	public static String buildNameWithIcon(String projectName, String outputFolder, CapellaElement object) {
+		StringBuffer hyperLinkBuffer = new StringBuffer();
+		hyperLinkBuffer.append(getImageLinkFromElement(object, projectName, outputFolder));
+		hyperLinkBuffer.append(" "); //$NON-NLS-1$
+		hyperLinkBuffer.append(((CapellaElement) object).getLabel());
+		return hyperLinkBuffer.toString();
 	}
 
 }

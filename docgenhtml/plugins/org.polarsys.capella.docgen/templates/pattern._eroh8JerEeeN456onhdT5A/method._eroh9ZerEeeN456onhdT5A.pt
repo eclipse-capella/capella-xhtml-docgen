@@ -1,0 +1,14 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+EList<FunctionalChain> involvingFunctionalChains = ((FunctionalExchange) element).getInvolvingFunctionalChains();
+if(involvingFunctionalChains.size() > 0 ) {
+%>
+<h2>Involving Functional Chains</h2>
+
+<%=StringUtil.stringListToBulette(involvingFunctionalChains, projectName, outputFolder)%>
+<%
+}
+%>

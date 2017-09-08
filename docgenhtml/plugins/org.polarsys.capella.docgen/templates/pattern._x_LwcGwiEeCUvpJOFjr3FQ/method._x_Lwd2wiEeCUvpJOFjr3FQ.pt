@@ -5,45 +5,42 @@ String elementType = EscapeChars.forHTML(element.eClass().getName());
 String projectName= ctx.getValue("projectName").toString();
 String outputFolder = ctx.getValue("outputFolder").toString();
 
-Collection<FunctionalExchange> incomingFunctionalExchanges = CapellaFunctionServices.getIncomingFunctionalExchanges((AbstractFunction)element);
-if(incomingFunctionalExchanges.size() > 0) {
+Collection<String> involvingFunctionalChains = FunctionHelper.getInvolvingFunctionalChains(projectName, outputFolder, (AbstractFunction)element);
+if(involvingFunctionalChains.size() > 0 ) {
 %>
-<h2>Incoming Functional Exchanges</h2>
+<h2>Involving Functional Chains</h2>
 
-<table>
-	<tr>
-		<th>Exchange</th>
-		<th>Source</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-	</tr>
-<% for (FunctionalExchange functionalExchange : incomingFunctionalExchanges) {   	
-%>
-	<%=CapellaFunctionServices.incomingFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
-	<% 	
-}%>
-</table>
+<%=StringUtil.stringListToBulette(involvingFunctionalChains)%>
 <%
 }
-Collection<FunctionalExchange> outgoingFunctionalExchanges = CapellaFunctionServices.getOutgoingFunctionalExchanges((AbstractFunction)element);
-if(outgoingFunctionalExchanges.size() > 0) {
+
+Collection<String> allocatingComponents = FunctionHelper.getAllocatingComponents(projectName, outputFolder, (AbstractFunction)element);
+if(allocatingComponents.size() > 0 ) {
 %>
-<h2>Outgoing Functional Exchanges</h2>
+<h2>Allocating Component</h2>
 
-
-<table>
-	<tr>
-		<th>Exchange</th>
-		<th>Target</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-	</tr>
-<% for(FunctionalExchange functionalExchange : outgoingFunctionalExchanges) {%>
-	<%=CapellaFunctionServices.outgoingFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
-<% }%>
-</table>
-  <%
+<%=StringUtil.stringListToBulette(allocatingComponents)%>
+<%
 }
+
+EList<InputPin> incomingPorts = ((AbstractFunction) element).getInputs();
+if(incomingPorts.size() > 0) {
+%>
+<h2>Incoming Functional Ports</h2>
+<%=StringUtil.stringListToBulette(incomingPorts, projectName, outputFolder)%>
+
+<%
+}
+
+EList<OutputPin> outgoingPorts = ((AbstractFunction) element).getOutputs();
+if(outgoingPorts.size() > 0) {
+%>
+<h2>Outgoing Functional Ports</h2>
+<%=StringUtil.stringListToBulette(outgoingPorts, projectName, outputFolder)%>
+
+<%
+}
+
 if(element instanceof AbstractFunction) {
 Collection<FunctionalExchange> incomingInteralFunctionalExchanges = CapellaFunctionServices.getIncomingInteralFunctionalExchanges((AbstractFunction)element);
 if(incomingInteralFunctionalExchanges.size() > 0) {
