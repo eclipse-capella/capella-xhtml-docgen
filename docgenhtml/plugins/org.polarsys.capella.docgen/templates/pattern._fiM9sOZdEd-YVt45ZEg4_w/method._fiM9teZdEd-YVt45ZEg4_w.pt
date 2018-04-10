@@ -13,10 +13,3 @@ else {%>
 No description.
 <%}%>
 </p>
-<%
-		//String string = stringBuffer.toString();
-		//String transformAREFString = StringUtil.transformAREFString(element,
-		//		string);
-		//stringBuffer.delete(0, stringBuffer.length());
-		//stringBuffer.append(transformAREFString);
-%>

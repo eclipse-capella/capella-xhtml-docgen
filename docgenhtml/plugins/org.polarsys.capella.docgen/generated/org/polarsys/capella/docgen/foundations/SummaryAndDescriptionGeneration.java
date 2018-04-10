@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.5.0.v20180105-1651
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -115,13 +115,6 @@ public class SummaryAndDescriptionGeneration {
 			stringBuffer.append(TEXT_6);
 		}
 		stringBuffer.append(TEXT_7);
-
-		//String string = stringBuffer.toString();
-		//String transformAREFString = StringUtil.transformAREFString(element,
-		//		string);
-		//stringBuffer.delete(0, stringBuffer.length());
-		//stringBuffer.append(transformAREFString);
-
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}

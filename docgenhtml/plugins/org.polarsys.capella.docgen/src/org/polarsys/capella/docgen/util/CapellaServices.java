@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -255,9 +255,29 @@ public class CapellaServices {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param diagram
+	 * @return
+	 * 
+	 * @deprecated use getDiagramUid(DSemanticDiagram) instead
+	 */
+	@Deprecated
 	public static String getDiagramId(DSemanticDiagram diagram) {
-		return diagram.eResource().getURIFragment(diagram);
+		return getDiagramUid(diagram);
 	}
+	
+	/**
+	 * 
+	 * @param diagram
+	 * @return
+	 * 
+	 * @since 1.2.1
+	 */
+	public static String getDiagramUid(DSemanticDiagram diagram) {
+		return diagram.getUid();
+	}
+	
 
 	public static String getImageLinkFromElement(EObject element, String projectName, String outputFolder) {
 		String imageFileName = LabelProviderHelper.getImageFileName(element, projectName, outputFolder);

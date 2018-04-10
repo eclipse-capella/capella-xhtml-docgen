@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,11 +12,11 @@ package org.polarsys.capella.docgen.util;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -33,11 +33,10 @@ import org.eclipse.sirius.business.api.session.resource.AirdResource;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.polarsys.capella.core.data.capellamodeller.util.CapellamodellerResourceImpl;
 import org.polarsys.capella.docgen.Activator;
+import org.polarsys.capella.shared.id.handler.IScope;
+import org.polarsys.capella.shared.id.handler.IdManager;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlConstants;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
-
-import org.polarsys.capella.shared.id.handler.IdManager;
-import org.polarsys.capella.shared.id.handler.IScope;
 
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
@@ -236,8 +235,9 @@ public class StringUtil {
 		StringBuffer buffer = new StringBuffer();
 		if (matcher.find() && matcher.groupCount() == 1) {
 			String id = matcher.group(1);
-			if (id != null && id.trim().length() > 0 && id.contains("/"))
+			if (id != null && id.trim().length() > 0 && id.contains("/")) {
 				id = id.substring(0, id.length() - 1);
+			}
 
 			EObject eObject = resource.getEObject(id);
 			// If the object is not found in the current resource, we look for
@@ -248,15 +248,17 @@ public class StringUtil {
 					// Case of model element
 					if (iResource instanceof CapellamodellerResourceImpl) {
 						eObject = iResource.getEObject(id);
-						if (eObject != null)
+						if (eObject != null) {
 							break;
+						}
 					}
 
 					// Case of diagram element
 					if (iResource instanceof AirdResource) {
 						eObject = iResource.getEObject(id);
-						if (eObject != null)
+						if (eObject != null) {
 							break;
+						}
 					}
 				}
 			}
