@@ -19,7 +19,8 @@ location capella-master "http://download.polarsys.org/capella/core/updates/night
 }
 
 location egf-master "https://ci.eclipse.org/egf/job/tycho-egf-oxygen/lastSuccessfulBuild/artifact/releng/org.eclipse.egf.core.updatesite/target/repository" {
-	org.eclipse.egf.feature.group 
+	org.eclipse.egf.feature.feature.group
+	org.eclipse.egf.feature.source.feature.group
 }
 
 location kitalpha-runtime-master-latest "http://download.polarsys.org/kitalpha/updates/nightly/runtime/latest/" {
