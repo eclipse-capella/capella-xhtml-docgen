@@ -18,7 +18,7 @@ location capella-master "http://download.polarsys.org/capella/core/updates/night
 	org.polarsys.capella.rcp.feature.feature.group 
 }
 
-location egf-master "https://hudson.eclipse.org/egf/job/buckminster-egf-neon/lastSuccessfulBuild/artifact/result/publish/org.eclipse.egf.sdk/site.p2" {
+location egf-master "https://ci.eclipse.org/egf/job/tycho-egf-oxygen/lastSuccessfulBuild/artifact/releng/org.eclipse.egf.core.updatesite/target/repository" {
 	org.eclipse.egf.feature.group 
 }
 
