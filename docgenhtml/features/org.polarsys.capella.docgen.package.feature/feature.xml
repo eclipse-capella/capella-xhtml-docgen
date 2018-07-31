@@ -36,7 +36,7 @@ Contributors:
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.egf"
+         id="org.eclipse.egf.feature"
          version="0.0.0"/>
 
 </feature>
