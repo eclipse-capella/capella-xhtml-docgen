@@ -160,7 +160,7 @@ public class CapellaDataValueServices {
 		String ownedDataValueInformation = getOwnedDataValueInformation(dataValue_p, projectName, outputFolder, displayType);
 		buffer.append(ownedDataValueInformation);
 		
-		buffer.append("<br>");
+		buffer.append("<br />");
 		buffer.append("</div>");
 		// Return the buffer
 		return buffer.toString();

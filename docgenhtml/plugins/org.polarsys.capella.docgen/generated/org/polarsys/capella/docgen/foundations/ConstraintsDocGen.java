@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -28,7 +28,7 @@ public class ConstraintsDocGen {
 			+ "        <tr>" + NL
 			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 20%\"> Name and Description</td>" + NL
 			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 60%\"> Owned specification</td>" + NL
-			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 20%\"> Constrained elements<br></td>"
+			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 20%\"> Constrained elements<br /></td>"
 			+ NL + "        </tr>";
 	protected final String TEXT_3 = NL;
 	protected final String TEXT_4 = "  " + NL + "        <tr>" + NL + "\t\t\t<td>" + NL + "<b>";

@@ -5,7 +5,7 @@
 <% if ((applayed_list != null && applayed_list.size() > 0)|| (owned_list != null && owned_list.size() > 0)) %>
 <%{%>
 <h2>Properties Value</h2>
-<table max-width=screen.width>
+<table max-width="screen.width">
    <thead> 
        <tr>
        	   <th>Relation</th>	

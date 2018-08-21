@@ -27,7 +27,7 @@ if(allocations2.size() > 0) {%>
 
 <%if (parameter.getOwnedTransitions() != null && parameter.getOwnedTransitions().size() > 0){%>
 <h2>Owned Transitions</h2>
-<table max-width=screen.width>
+<table max-width="screen.width">
    <thead> 
        <tr>
            <th>Transition</th>

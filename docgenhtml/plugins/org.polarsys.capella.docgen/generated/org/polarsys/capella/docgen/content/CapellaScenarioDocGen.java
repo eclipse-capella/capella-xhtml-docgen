@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -35,10 +35,10 @@ public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundatio
 	protected final String TEXT_10 = NL;
 	protected final String TEXT_11 = NL;
 	protected final String TEXT_12 = NL + NL + "<h2>Sequence Messages</h2>" + NL + "" + NL
-			+ "<table max-width=screen.width>" + NL + "   <thead> " + NL + "       <tr>" + NL
+			+ "<table max-width=\"screen.width\">" + NL + "   <thead> " + NL + "       <tr>" + NL
 			+ "           <th>Invoked Exchange</th>" + NL + "           <th>Source element of the Exchange</th>" + NL
 			+ "           <th>Target element of the Exchange</th>" + NL
-			+ "           <th>Description of the Sequence Message <br> <i>(and not the one of the invoked exchange)<i></th>"
+			+ "           <th>Description of the Sequence Message <br /> <i>(and not the one of the invoked exchange)</i></th>"
 			+ NL + "       </tr>" + NL + "   </thead>" + NL + "   <tbody>" + NL;
 	protected final String TEXT_13 = NL + "\t\t<tr>" + NL + "           <td>";
 	protected final String TEXT_14 = "</td>" + NL + "           <td>";
