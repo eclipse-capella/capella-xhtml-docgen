@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.1.v20161010-1511
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.content;
 
 import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
@@ -38,7 +38,7 @@ public class RegionDocGen extends org.polarsys.capella.docgen.foundations.NamedE
 	protected final String TEXT_10 = NL;
 	protected final String TEXT_11 = NL;
 	protected final String TEXT_12 = NL;
-	protected final String TEXT_13 = NL + "<h2>Owned Transitions</h2>" + NL + "<table max-width=screen.width>" + NL
+	protected final String TEXT_13 = NL + "<h2>Owned Transitions</h2>" + NL + "<table max-width=\"screen.width\">" + NL
 			+ "   <thead> " + NL + "       <tr>" + NL + "           <th>Transition</th>" + NL
 			+ "           <th>Source</th>" + NL + "           <th>Target</th>" + NL + "           <th>Tigger</th>" + NL
 			+ "           <th>Effect</th>" + NL + "           <th>Description</th>" + NL + "       </tr>" + NL

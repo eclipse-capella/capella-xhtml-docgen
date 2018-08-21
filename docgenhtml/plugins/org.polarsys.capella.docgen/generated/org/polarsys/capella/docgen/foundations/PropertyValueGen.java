@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -29,7 +29,7 @@ public class PropertyValueGen {
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "<h2>Properties Value</h2>" + NL + "<table max-width=screen.width>" + NL
+	protected final String TEXT_3 = NL + "<h2>Properties Value</h2>" + NL + "<table max-width=\"screen.width\">" + NL
 			+ "   <thead> " + NL + "       <tr>" + NL + "       \t   <th>Relation</th>\t" + NL
 			+ "           <th>Name</th>" + NL + "           <th>Value</th>" + NL + "           <th>Description</th>"
 			+ NL + "       </tr>" + NL + "   </thead>" + NL + "   <tbody>" + NL;

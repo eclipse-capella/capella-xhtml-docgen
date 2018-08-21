@@ -6,7 +6,7 @@
         <tr>
 			<td style="font-weight: bold; text-align: center; width: 20%"> Name and Description</td>
 			<td style="font-weight: bold; text-align: center; width: 60%"> Owned specification</td>
-			<td style="font-weight: bold; text-align: center; width: 20%"> Constrained elements<br></td>
+			<td style="font-weight: bold; text-align: center; width: 20%"> Constrained elements<br /></td>
         </tr>
 <%String projectName = (String) ctx.getValue("projectName");
 String outputFolder = (String) ctx.getValue("outputFolder");%>

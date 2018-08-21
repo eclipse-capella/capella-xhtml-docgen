@@ -33,13 +33,13 @@ List<SequenceMessage> orderedMessagesList = ((Scenario)parameter).getOwnedMessag
 
 <h2>Sequence Messages</h2>
 
-<table max-width=screen.width>
+<table max-width="screen.width">
    <thead> 
        <tr>
            <th>Invoked Exchange</th>
            <th>Source element of the Exchange</th>
            <th>Target element of the Exchange</th>
-           <th>Description of the Sequence Message <br> <i>(and not the one of the invoked exchange)<i></th>
+           <th>Description of the Sequence Message <br /> <i>(and not the one of the invoked exchange)</i></th>
        </tr>
    </thead>
    <tbody>
