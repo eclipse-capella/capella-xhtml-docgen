@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1531484927">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1535027323">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sdk.feature.group" version="4.6.3.v20170301-0400"/>
@@ -33,7 +33,7 @@
       <unit id="org.eclipse.acceleo.query.source.feature.group" version="6.0.2.201708211328"/>
       <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group" version="5.1.2.201805181609"/>
       <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.source.feature.group" version="5.1.2.201805181609"/>
-      <repository id="sirius-5.1.x" location="http://download.eclipse.org/sirius/updates/stable/5.1.2-S20180518-120822/neon"/>
+      <repository id="sirius-5.1.x" location="http://download.eclipse.org/sirius/updates/releases/5.1.2/neon"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.polarsys.kitalpha.ad.runtime.feature.feature.group" version="1.2.1.201805300816"/>
@@ -124,7 +124,7 @@
       <repository id="egf-1.5.1" location="http://download.eclipse.org/egf/updates/1.5.1/neon/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="1.2.1.201807110941"/>
+      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="1.2.1.201808221553"/>
       <repository id="kitalpha-runtime-1.2.x-latest" location="https://ci.polarsys.org/kitalpha/job/Kitalpha-v1.2.x/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.kitalpha.releng.runtime.updatesite/target/repository/"/>
     </location>
   </locations>
