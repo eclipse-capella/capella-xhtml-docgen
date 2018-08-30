@@ -124,8 +124,8 @@
       <repository id="egf-1.5.1" location="http://download.eclipse.org/egf/updates/1.5.1/neon/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="1.2.1.201808221553"/>
-      <repository id="kitalpha-runtime-1.2.x-latest" location="https://ci.polarsys.org/kitalpha/job/Kitalpha-v1.2.x/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.kitalpha.releng.runtime.updatesite/target/repository/"/>
+      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
+      <repository id="kitalpha-runtime-1.2.x" location="http://download.polarsys.org/kitalpha/updates/release/runtime/1.2.1/"/>
     </location>
   </locations>
 </target>
