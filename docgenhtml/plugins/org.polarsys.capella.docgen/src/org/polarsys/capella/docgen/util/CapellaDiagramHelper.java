@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,9 +12,9 @@ package org.polarsys.capella.docgen.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.DDiagramElement;
-import org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper;
-
+import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.cs.ExchangeItemAllocation;
+import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
 import org.polarsys.capella.core.data.information.AbstractEventOperation;
 import org.polarsys.capella.core.data.interaction.Execution;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
@@ -22,7 +22,7 @@ import org.polarsys.capella.core.data.interaction.InteractionState;
 import org.polarsys.capella.core.data.interaction.InteractionUse;
 import org.polarsys.capella.core.data.interaction.SequenceMessage;
 import org.polarsys.capella.core.data.interaction.StateFragment;
-import org.polarsys.capella.core.data.capellacore.NamedElement;
+import org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper;
 
 /**
  * 
@@ -55,27 +55,27 @@ public class CapellaDiagramHelper implements IDiagramHelper {
 		EObject target = element.getTarget();
 		if (target instanceof SequenceMessage) {
 			return ((SequenceMessage) target).getInvokedOperation();
-		} else {
-			if (target instanceof InstanceRole) {
-				return ((InstanceRole) target).getRepresentedInstance();
-			} else {
-				if (target instanceof InteractionState) {
-					if (((InteractionState) target).getRelatedAbstractFunction() != null)
-						return ((InteractionState) target).getRelatedAbstractFunction();
-
-					return ((InteractionState) target).getRelatedAbstractState();
-				} else {
-					if (target instanceof InteractionUse) {
-						return ((InteractionUse) target).getReferencedScenario();
-					} else {
-						if (target instanceof Execution)
-							return null;
-
-						if (target instanceof StateFragment)
-							return ((StateFragment) target).getRelatedAbstractFunction();
-					}
-				}
+		} 
+		if (target instanceof InstanceRole) {
+			return ((InstanceRole) target).getRepresentedInstance();
+		}
+		if (target instanceof InteractionState) {
+			if (((InteractionState) target).getRelatedAbstractFunction() != null) {
+				return ((InteractionState) target).getRelatedAbstractFunction();
 			}
+			return ((InteractionState) target).getRelatedAbstractState();
+		} 
+		if (target instanceof InteractionUse) {
+			return ((InteractionUse) target).getReferencedScenario();
+		}
+		if (target instanceof Execution) {
+			return null;
+		}
+		if (target instanceof StateFragment) {
+			return ((StateFragment) target).getRelatedAbstractFunction();
+		}
+		if (target instanceof FunctionalChainInvolvement) {
+			return ((FunctionalChainInvolvement) target).getInvolvedElement();
 		}
 		return target;
 	}
