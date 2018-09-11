@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,7 +22,9 @@ import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.information.ExchangeItem;
+import org.polarsys.capella.docgen.util.pattern.helper.FunctionHelper;
 import org.polarsys.capella.core.data.capellacommon.State;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.common.data.activity.ActivityEdge;
 import org.polarsys.capella.common.data.activity.ActivityNode;
 import org.polarsys.capella.common.data.activity.InputPin;
@@ -254,56 +256,78 @@ public class CapellaFunctionServices {
 
 	private static String functionalExchangeToTableLine(FunctionalExchange functionalExchange, boolean external, boolean incoming, String projectName, String outputFolder) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("<tr>");
-		buffer.append("<td id=\"" + CapellaServices.getAnchorId(functionalExchange) + "\">");
-		buffer.append(CapellaServices.getImageLinkFromElement(functionalExchange, projectName, outputFolder));
-		buffer.append(" ");
-		buffer.append(functionalExchange.getName());
-		buffer.append("</td>");
-		buffer.append("<td>");
-		Collection<ActivityNode> activityNodes;
-		if (incoming)
-			activityNodes = getSourceFunctions(functionalExchange);
-		else
-			activityNodes = getTargetFunctions(functionalExchange);
-		for (ActivityNode currentFunction : activityNodes) {
-			buffer.append(CapellaServices.getImageLinkFromElement(currentFunction, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(currentFunction));
-		}
-		buffer.append("</td>");
-		if (external) {
+		CapellaElement distantPort = incoming ? functionalExchange.getSourceFunctionOutputPort() : functionalExchange.getTargetFunctionInputPort();
+
+		if (distantPort != null) {
+			buffer.append("<tr>");
+			
+			buffer.append("<td id=\"" + CapellaServices.getAnchorId(functionalExchange) + "\">");
+			buffer.append(CapellaServices.getImageLinkFromElement(functionalExchange, projectName, outputFolder));
+			buffer.append(CapellaServices.SPACE);
+			buffer.append(CapellaServices.getHyperlinkFromElement(functionalExchange));
+			buffer.append("</td>");
+
+			// Involving functional chains
 			buffer.append("<td>");
-			Collection<ActivityNode> activityNodesExternal;
-			if (!incoming)
-				activityNodesExternal = getSourceFunctions(functionalExchange);
+			buffer.append(FunctionHelper.getInvolvingFunctionalChains(projectName, outputFolder, functionalExchange));
+			buffer.append("</td>");
+
+			// Allocating component Exchanges
+			buffer.append("<td>");
+			buffer.append(FunctionHelper.getAllocatingComponentExchangess(projectName, outputFolder, functionalExchange));
+			buffer.append("</td>");
+
+			buffer.append("<td>");
+			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, distantPort));
+			buffer.append("</td>");
+
+			buffer.append("<td>");
+			Collection<ActivityNode> activityNodes;
+			if (incoming)
+				activityNodes = getSourceFunctions(functionalExchange);
 			else
-				activityNodesExternal = getTargetFunctions(functionalExchange);
-			for (ActivityNode currentFunction : activityNodesExternal) {
+				activityNodes = getTargetFunctions(functionalExchange);
+			for (ActivityNode currentFunction : activityNodes) {
 				buffer.append(CapellaServices.getImageLinkFromElement(currentFunction, projectName, outputFolder));
-				buffer.append(" ");
+				buffer.append(CapellaServices.SPACE);
 				buffer.append(CapellaServices.getHyperlinkFromElement(currentFunction));
 			}
 			buffer.append("</td>");
-		}
-		buffer.append("<td>");
-		buffer.append(getDescription(functionalExchange, projectName, outputFolder));
-		buffer.append("</td>");
-		buffer.append("<td>");
-		EList<ExchangeItem> abstractExchangeItems = functionalExchange.getExchangedItems();
-		if (abstractExchangeItems.size() > 0) {
-			buffer.append(CapellaServices.UL_OPEN);
-			for (AbstractExchangeItem currentItem : abstractExchangeItems) {
-				buffer.append("<li>");
-				buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
-				buffer.append(" ");
-				buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
-				buffer.append("</li>");
+			if (external) {
+				buffer.append("<td>");
+				Collection<ActivityNode> activityNodesExternal;
+				if (!incoming) {
+					activityNodesExternal = getSourceFunctions(functionalExchange);
+				} else {
+					activityNodesExternal = getTargetFunctions(functionalExchange);
+				}
+				for (ActivityNode currentFunction : activityNodesExternal) {
+					buffer.append(CapellaServices.getImageLinkFromElement(currentFunction, projectName, outputFolder));
+					buffer.append(CapellaServices.SPACE);
+					buffer.append(CapellaServices.getHyperlinkFromElement(currentFunction));
+				}
+				buffer.append("</td>");
 			}
-			buffer.append(CapellaServices.UL_CLOSE);
+			buffer.append("<td>");
+			buffer.append(getDescription(functionalExchange, projectName, outputFolder));
+			buffer.append("</td>");
+			buffer.append("<td>");
+			EList<ExchangeItem> abstractExchangeItems = functionalExchange.getExchangedItems();
+			if (abstractExchangeItems.size() > 0) {
+				buffer.append(CapellaServices.UL_OPEN);
+				for (AbstractExchangeItem currentItem : abstractExchangeItems) {
+					buffer.append("<li>");
+					buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
+					buffer.append(" ");
+					buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
+					buffer.append("</li>");
+				}
+				buffer.append(CapellaServices.UL_CLOSE);
+			}
+			buffer.append("</td>");
+			
+			buffer.append("</tr>");
 		}
-		buffer.append("</td>");
-		buffer.append("</tr>");
 
 		return buffer.toString();
 	}

@@ -3,6 +3,12 @@ super.method_content(new StringBuffer(), ctx);
 String projectName= ctx.getValue("projectName").toString();
 String outputFolder = ctx.getValue("outputFolder").toString();
 
+Collection<String> involvingFunctionalChains = CapellaExchangeItemHelper.getInvolvingFunctionalChains((ExchangeItem) element, projectName, outputFolder);
+if (involvingFunctionalChains.size() > 0) {%>
+<h2>Involving Functional Chains</h2>
+<%=StringUtil.stringListToBulette(involvingFunctionalChains)%>
+<%}
+
 Collection<String> exchangeItemInterfaces = CapellaExchangeItemHelper.getExchangeItemInterfaces((ExchangeItem) element, projectName,
 						outputFolder);
 						
@@ -18,8 +24,14 @@ Collection<String> exchangeItemElements = CapellaExchangeItemHelper
 			<h2>Exchange Item Elements</h2>
 			<%=StringUtil.stringListToBulette(exchangeItemElements)%>
 		<%}
-		%>
-<%Collection<String> propertiesValueCollection = CapellaElementService.getPropertiesValue(element, projectName, outputFolder);
+
+Collection<String> referencingExchanges = CapellaExchangeItemHelper.getReferencingFunctionalExchanges((ExchangeItem) element, projectName, outputFolder);
+if (referencingExchanges.size() > 0) {%>
+	<h2>Functional Exchanges</h2>
+	<%=StringUtil.stringListToBulette(referencingExchanges)%>
+<%}
+		
+Collection<String> propertiesValueCollection = CapellaElementService.getPropertiesValue(element, projectName, outputFolder);
 if(propertiesValueCollection.size() >= 1){%>
 <div title="Properties Value">
 <%String propertyValue = "Properties Value";%>

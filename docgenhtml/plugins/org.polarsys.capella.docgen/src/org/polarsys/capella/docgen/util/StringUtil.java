@@ -26,11 +26,13 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.sirius.business.api.session.resource.AirdResource;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.core.data.capellamodeller.util.CapellamodellerResourceImpl;
 import org.polarsys.capella.docgen.Activator;
 import org.polarsys.capella.shared.id.handler.IScope;
@@ -321,19 +323,46 @@ public class StringUtil {
 			buffer.append(CapellaServices.UL_OPEN);
 			// For each element of the list
 			for (String str : list_p) {
-				// Add the open bullet tag to the buffer
-				buffer.append(CapellaServices.LI_OPEN);
-				// Add the content of the bullet to the buffer
-				buffer.append(str);
-				// Add the close bullet tag to the buffer
-				buffer.append(CapellaServices.LI_CLOSE);
+				buletteItem(buffer, str);
 			}
 			buffer.append(CapellaServices.UL_CLOSE);
 		}
 		// Return the buffer
 		return buffer.toString();
 	}
-	
+
+	public static String stringListToBulette(EList<? extends AbstractNamedElement> list_elts, String projectName, String outputFolder) {
+		// Buffer declaration
+		StringBuffer buffer = new StringBuffer();
+		if (list_elts.size() < 1) {
+			buffer.append(CapellaServices.NONE);
+		} else {
+			buffer.append(CapellaServices.UL_OPEN);
+			// For each element of the list
+			for (AbstractNamedElement elt : list_elts) {
+				// Add the open bullet tag to the buffer
+				buffer.append(CapellaServices.LI_OPEN);
+				// Add the content of the bullet to the buffer
+				buffer.append(CapellaServices.getImageLinkFromElement(elt, projectName, outputFolder));
+				buffer.append(CapellaServices.SPACE);
+				buffer.append(CapellaServices.getHyperlinkFromElement(elt));
+				// Add the close bullet tag to the buffer
+				buffer.append(CapellaServices.LI_CLOSE);			}
+			buffer.append(CapellaServices.UL_CLOSE);
+		}
+		// Return the buffer
+		return buffer.toString();
+	}
+
+	private static void buletteItem(StringBuffer buffer, String str) {
+		// Add the open bullet tag to the buffer
+		buffer.append(CapellaServices.LI_OPEN);
+		// Add the content of the bullet to the buffer
+		buffer.append(str);
+		// Add the close bullet tag to the buffer
+		buffer.append(CapellaServices.LI_CLOSE);
+	}
+
 	/**
 	 * Build a 2 columns html table. The first table contains the keys of the map and the second
 	 * contains the values of the map
@@ -387,4 +416,5 @@ public class StringUtil {
 		
 		return false;
 	}
+
 }

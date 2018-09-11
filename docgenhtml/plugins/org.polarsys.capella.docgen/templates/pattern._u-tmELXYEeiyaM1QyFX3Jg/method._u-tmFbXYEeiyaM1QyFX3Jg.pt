@@ -1,0 +1,59 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+%>
+
+<%
+Map<String,String> providedInterfaces = CapellaComponentPortHelper.getProvidedInterfaces(parameter, projectName, outputFolder);
+if(providedInterfaces.size() > 0) {
+%>
+<h2>Provided Interfaces</h2>
+<%=StringUtil.mapToHTMLTable(providedInterfaces, "Interface", "Exchange Items")%>
+<%
+}
+Map<String,String> requiredInterfaces = CapellaComponentPortHelper.getRequiredInterfaces(parameter, projectName, outputFolder);
+if(requiredInterfaces.size() > 0) {%>
+<h2>Required Interfaces</h2>
+<%=StringUtil.mapToHTMLTable(requiredInterfaces, "Interface", "Exchange Items")%>
+<%
+}
+Collection<ComponentExchange> componentExchanges = CapellaComponentPortHelper.getComponentPortExchanges(parameter, projectName, outputFolder);
+if(componentExchanges.size() > 0) {
+%>
+<h2>Component Exchanges</h2>
+
+<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Opposite Port</th>
+		<th>Opposite Component</th>
+		<th>Description</th>
+	</tr>
+	<% for (ComponentExchange componentExchange : componentExchanges) {%>
+	<%=CapellaComponentPortHelper.componentExchangeToTableLine(parameter, componentExchange, projectName, outputFolder)%>
+	<% 	
+	}%>
+</table>
+<%
+}
+Collection<ComponentExchange> componentDelegations = CapellaComponentPortHelper.getComponentPortDelegations(parameter, projectName, outputFolder);
+if(componentDelegations.size() > 0) {
+%>
+<h2>Component Delegations</h2>
+
+<table>
+	<tr>
+		<th>Delegation</th>
+		<th>Opposite Port</th>
+		<th>Opposite Component</th>
+		<th>Description</th>
+	</tr>
+	<% for (ComponentExchange componentDelegation : componentDelegations) {%>
+	<%=CapellaComponentPortHelper.componentExchangeToTableLine(parameter, componentDelegation, projectName, outputFolder)%>
+	<% 	
+	}%>
+</table>
+<%
+}
+%>
