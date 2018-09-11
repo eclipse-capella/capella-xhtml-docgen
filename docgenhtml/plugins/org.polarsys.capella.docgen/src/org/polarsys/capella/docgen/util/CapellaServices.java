@@ -372,4 +372,20 @@ public class CapellaServices {
 		return list;
 	}
 
+	public static String buildHyperlinkWithIcon(String projectName, String outputFolder, EObject object) {
+		StringBuffer hyperLinkBuffer = new StringBuffer();
+		hyperLinkBuffer.append(getImageLinkFromElement(object, projectName, outputFolder));
+		hyperLinkBuffer.append(" "); //$NON-NLS-1$
+		hyperLinkBuffer.append(getHyperlinkFromElement(object));
+		return hyperLinkBuffer.toString();
+	}
+
+	public static String buildNameWithIcon(String projectName, String outputFolder, CapellaElement object) {
+		StringBuffer hyperLinkBuffer = new StringBuffer();
+		hyperLinkBuffer.append(getImageLinkFromElement(object, projectName, outputFolder));
+		hyperLinkBuffer.append(" "); //$NON-NLS-1$
+		hyperLinkBuffer.append(((CapellaElement) object).getLabel());
+		return hyperLinkBuffer.toString();
+	}
+
 }

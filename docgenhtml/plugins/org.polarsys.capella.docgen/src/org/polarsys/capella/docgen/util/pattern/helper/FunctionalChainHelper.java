@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,11 +15,14 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.polarsys.capella.core.data.fa.AbstractFunction;
-import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.eclipse.emf.common.util.EList;
 import org.polarsys.capella.core.data.capellacommon.State;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.capellacore.InvolvedElement;
 import org.polarsys.capella.core.data.capellacore.Involvement;
+import org.polarsys.capella.core.data.fa.AbstractFunction;
+import org.polarsys.capella.core.data.fa.FunctionalChain;
+import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.docgen.util.CapellaServices;
 
 public class FunctionalChainHelper {
@@ -73,7 +76,7 @@ public class FunctionalChainHelper {
 	 * @param functionalChain
 	 */
 	private static void addHyperLinkAndInvolvementFunction(String projectName, String outputFolder,
-			Map<String, String> result, AbstractFunction function, FunctionalChain functionalChain) {
+			Map<String, String> result, InvolvedElement function, CapellaElement functionalChain) {
 		StringBuffer hyperLinkBuffer = new StringBuffer();
 		StringBuffer involvementDescriptionBuffer = new StringBuffer();
 		
@@ -97,5 +100,15 @@ public class FunctionalChainHelper {
 		}
 		
 		result.put(hyperLinkBuffer.toString(), involvementDescriptionBuffer.toString());
+	}
+	
+	
+	public static Map<String, String> getInvolvedFunctionalExchanges(String projectName, String outputFolder, FunctionalChain functionalChain) {
+
+		Map<String, String> ret = new LinkedHashMap<String, String>();
+		for (FunctionalExchange functionalExchange : functionalChain.getInvolvedFunctionalExchanges()) {
+			addHyperLinkAndInvolvementFunction(projectName, outputFolder, ret, functionalExchange, functionalChain);
+		}
+		return ret;
 	}
 }

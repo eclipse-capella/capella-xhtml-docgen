@@ -11,12 +11,12 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.FunctionalChainHelper;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 
-public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
 
-	public static synchronized FunctionalChainGenDoc create(String lineSeparator) {
+	public static synchronized FunctionalExchangeDocGen create(String lineSeparator) {
 		nl = lineSeparator;
-		FunctionalChainGenDoc result = new FunctionalChainGenDoc();
+		FunctionalExchangeDocGen result = new FunctionalExchangeDocGen();
 		nl = null;
 		return result;
 	}
@@ -31,7 +31,7 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 	protected final String TEXT_7 = NL;
 	protected final String TEXT_8 = NL;
 
-	public FunctionalChainGenDoc() {
+	public FunctionalExchangeDocGen() {
 		//Here is the constructor
 		StringBuffer stringBuffer = new StringBuffer();
 
@@ -52,7 +52,7 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 
 		for (Object parameterParameter : parameterList) {
 
-			this.parameter = (org.polarsys.capella.core.data.fa.FunctionalChain) parameterParameter;
+			this.parameter = (org.polarsys.capella.core.data.fa.FunctionalExchange) parameterParameter;
 
 			if (preCondition(ctx)) {
 				ctx.setNode(new Node.Container(currentNode, getClass()));
@@ -85,9 +85,9 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 		return null;
 	}
 
-	protected org.polarsys.capella.core.data.fa.FunctionalChain parameter = null;
+	protected org.polarsys.capella.core.data.fa.FunctionalExchange parameter = null;
 
-	public void set_parameter(org.polarsys.capella.core.data.fa.FunctionalChain object) {
+	public void set_parameter(org.polarsys.capella.core.data.fa.FunctionalExchange object) {
 		this.parameter = object;
 	}
 

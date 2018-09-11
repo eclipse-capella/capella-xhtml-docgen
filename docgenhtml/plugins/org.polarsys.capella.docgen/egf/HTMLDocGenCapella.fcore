@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
- 
-Contributors:
-   Thales - initial API and implementation
--->
-
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:domain="http://www.eclipse.org/egf/1.0.0/domain"
     xmlns:fcore="http://www.eclipse.org/egf/1.0.0/fcore" xmlns:fprod="http://www.eclipse.org/egf/1.0.0/fprod"
     xmlns:ftask="http://www.eclipse.org/egf/1.0.0/ftask" xmlns:jetpattern="http://www.eclipse.org/egf/1.0.0/jetpattern"
@@ -589,6 +578,49 @@ Contributors:
             <methods xmi:id="_Zl0LsOzkEeSAVbCPYCI8cQ" name="content" patternFilePath="templates/pattern._WnyP8OzGEeSAVbCPYCI8cQ/method._Zl0LsOzkEeSAVbCPYCI8cQ.pt"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_WnyP9-zGEeSAVbCPYCI8cQ"/>
           </elements>
+          <elements xmi:id="_u-tmELXYEeiyaM1QyFX3Jg" name="ComponentPortDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
+              headerMethod="#_u-tmErXYEeiyaM1QyFX3Jg" conditionMethod="#_u-tmFLXYEeiyaM1QyFX3Jg"
+              initMethod="#_u-tmE7XYEeiyaM1QyFX3Jg" footerMethod="#_u-tmFrXYEeiyaM1QyFX3Jg">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_u-tmEbXYEeiyaM1QyFX3Jg"
+                name="JET"/>
+            <methods xmi:id="_u-tmErXYEeiyaM1QyFX3Jg" name="header" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._u-tmErXYEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_u-tmE7XYEeiyaM1QyFX3Jg" name="init" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._u-tmE7XYEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_u-tmFLXYEeiyaM1QyFX3Jg" name="preCondition" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._u-tmFLXYEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_u-tmFbXYEeiyaM1QyFX3Jg" name="content" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._u-tmFbXYEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_u-tmFrXYEeiyaM1QyFX3Jg" name="footer" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._u-tmFrXYEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_291YwLXYEeiyaM1QyFX3Jg" name="setCapellaContext" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._291YwLXYEeiyaM1QyFX3Jg.pt"/>
+            <parameters xmi:id="_xcq2QLXYEeiyaM1QyFX3Jg" name="parameter" type="org.polarsys.capella.core.data.fa.ComponentPort"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_u-tmF7XYEeiyaM1QyFX3Jg"/>
+          </elements>
+          <elements xmi:id="_a6_HILXaEeiyaM1QyFX3Jg" name="FunctionPortDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
+              headerMethod="#_a6_HIrXaEeiyaM1QyFX3Jg" conditionMethod="#_a6_HJLXaEeiyaM1QyFX3Jg"
+              initMethod="#_a6_HI7XaEeiyaM1QyFX3Jg" footerMethod="#_a6_HJrXaEeiyaM1QyFX3Jg">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_a6_HIbXaEeiyaM1QyFX3Jg"
+                name="JET"/>
+            <methods xmi:id="_a6_HIrXaEeiyaM1QyFX3Jg" name="header" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._a6_HIrXaEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_a6_HI7XaEeiyaM1QyFX3Jg" name="init" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._a6_HI7XaEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_a6_HJLXaEeiyaM1QyFX3Jg" name="preCondition" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._a6_HJLXaEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_a6_HJbXaEeiyaM1QyFX3Jg" name="content" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._a6_HJbXaEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_a6_HJrXaEeiyaM1QyFX3Jg" name="footer" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._a6_HJrXaEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_h2T6gLXaEeiyaM1QyFX3Jg" name="setCapellaContext" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._h2T6gLXaEeiyaM1QyFX3Jg.pt"/>
+            <variables xmi:id="_jAOI4LXaEeiyaM1QyFX3Jg" name="parameter" type="org.polarsys.capella.core.data.fa.FunctionPort"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_a6_HJ7XaEeiyaM1QyFX3Jg"/>
+          </elements>
+          <elements xmi:id="_EC31ALXcEeiyaM1QyFX3Jg" name="FunctionalExchangeDocGen"
+              superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ" headerMethod="#_EC31ArXcEeiyaM1QyFX3Jg"
+              conditionMethod="#_EC31BLXcEeiyaM1QyFX3Jg" initMethod="#_EC31A7XcEeiyaM1QyFX3Jg"
+              footerMethod="#_EC31BrXcEeiyaM1QyFX3Jg">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_EC31AbXcEeiyaM1QyFX3Jg"
+                name="JET"/>
+            <methods xmi:id="_EC31ArXcEeiyaM1QyFX3Jg" name="header" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._EC31ArXcEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_EC31A7XcEeiyaM1QyFX3Jg" name="init" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._EC31A7XcEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_EC31BLXcEeiyaM1QyFX3Jg" name="preCondition" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._EC31BLXcEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_EC31BbXcEeiyaM1QyFX3Jg" name="content" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._EC31BbXcEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_EC31BrXcEeiyaM1QyFX3Jg" name="footer" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._EC31BrXcEeiyaM1QyFX3Jg.pt"/>
+            <methods xmi:id="_fvV8ELXcEeiyaM1QyFX3Jg" name="setCapellaContext" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._fvV8ELXcEeiyaM1QyFX3Jg.pt"/>
+            <parameters xmi:id="_aY5b0LXcEeiyaM1QyFX3Jg" name="parameter" type="org.polarsys.capella.core.data.fa.FunctionalExchange"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_EC31B7XcEeiyaM1QyFX3Jg"/>
+          </elements>
         </libraries>
         <libraries xmi:id="_iEWbsN6ZEd-ZSZ6AN4Dlrg" name="org.polarsys.capella.docgen.sidebar">
           <elements xmi:id="_sJuJMN6ZEd-ZSZ6AN4Dlrg" name="AnyNamedElementSideBar"
@@ -715,7 +747,7 @@ Contributors:
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_67_oxN3rEd-Qav1YnqlO9A"/>
           <invocationContracts xmi:id="_m70JEN4ZEd-Qav1YnqlO9A" sourceInvocationContract="#_xHdBpG8PEeSjPIMKP6Xr0g"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_fGFi8N4ZEd-Qav1YnqlO9A"/>
-          <invocationContracts xmi:id="_kIXh4N6ZEd-ZSZ6AN4Dlrg" sourceInvocationContract="#_DL3pVG8QEeSjPIMKP6Xr0g"
+          <invocationContracts xmi:id="_kIXh4N6ZEd-ZSZ6AN4Dlrg" sourceInvocationContract="#_jxFv1dV2EeW9p5oksEzglA"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_jEMzUN6SEd-ZSZ6AN4Dlrg"/>
           <invocationContracts xmi:id="_JKBjMN44Ed-Qav1YnqlO9A" factoryComponentContract="#_60tqgN43Ed-Qav1YnqlO9A"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_pShHcN4pEd-Qav1YnqlO9A"/>

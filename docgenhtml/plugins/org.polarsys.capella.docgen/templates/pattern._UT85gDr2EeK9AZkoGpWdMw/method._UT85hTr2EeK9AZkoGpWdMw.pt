@@ -1,94 +1,53 @@
-<%EList<AbstractPropertyValue> applayed_list = element.getAppliedPropertyValues();%>
+<%
+// We get the list of applied and owned PV
+EList<AbstractPropertyValue> applied_list = element.getAppliedPropertyValues();
+EList<AbstractPropertyValue> owned_list = element.getOwnedPropertyValues();
 
-<%EList<AbstractPropertyValue> owned_list = element.getOwnedPropertyValues();%>
+if ((applied_list != null && applied_list.size() > 0) || (owned_list != null && owned_list.size() > 0)) {
+	%>
+	<h2>Property Values</h2>
+	<table max-width=screen.width>
+	   <thead> 
+	       <tr>
+	       	   <th>Relation</th>	
+	           <th>Name</th>
+	           <th>Value</th>
+	           <th>Description</th>
+	       </tr>
+	   </thead>
+	   <tbody>
+	<%
+	String table = PropertyValueHelper.getPVTable(element, 0, projectName, outputFolder);
+	%>
+	<%=table%>
+	</tbody>
+	</table>
+	<%
+}
 
-<% if ((applayed_list != null && applayed_list.size() > 0)|| (owned_list != null && owned_list.size() > 0)) %>
-<%{%>
-<h2>Properties Value</h2>
-<table max-width="screen.width">
-   <thead> 
-       <tr>
-       	   <th>Relation</th>	
-           <th>Name</th>
-           <th>Value</th>
-           <th>Description</th>
-       </tr>
-   </thead>
-   <tbody>
+// We get the list of applied and owned PVG
+EList<PropertyValueGroup> appliedgroup_list = element.getAppliedPropertyValueGroups();
+EList<PropertyValueGroup> ownedgroup_list = element.getOwnedPropertyValueGroups();
 
-<% // Handle Owned PropertyValues if not Handled yet %>
-<%for (AbstractPropertyValue propertyValue : owned_list) {%>
-   <% // Variable initialization
-   String relation = "Contained";
-   String name = propertyValue.getName();
-   String value = "";
-   String description = propertyValue.getDescription();
-   description = StringUtil.transformAREFString(propertyValue, description, projectName, outputFolder);
-   
-  if (propertyValue instanceof EnumerationPropertyValue){
-	if (((EnumerationPropertyValue) propertyValue).getValue() != null)
-		value = ((EnumerationPropertyValue) propertyValue).getValue().getName();
-  }
-				
-  if (propertyValue instanceof BooleanPropertyValue)
-	 value = (((BooleanPropertyValue)propertyValue).isValue() ? "True" : "False");
-				
-  if (propertyValue instanceof StringPropertyValue)
-	 value = ((StringPropertyValue)propertyValue).getValue();
-				
-  if (propertyValue instanceof IntegerPropertyValue)
-	 value = Integer.toString(((IntegerPropertyValue)propertyValue).getValue());
-				
-  if (propertyValue instanceof FloatPropertyValue)
-	 value = Float.toString(((FloatPropertyValue)propertyValue).getValue());
-   %>
-   <%if (applayed_list.contains(propertyValue))
-   		relation += " &amp; Applied";
-   	%>
-   	   <tr>
-           <td><i><%=relation%></i></td>
-           <td><%=name%></td>
-           <td><%=value%></td>
-           <td><%=description%></td>
-       </tr>
-
-<%}%>
-
-<% // Handle Applied PropertyValues %>
-<%for (AbstractPropertyValue propertyValue : applayed_list) {%>
-<% if (! owned_list.contains(propertyValue)) {
-  	 // Variable initialization
-   	String relation = "Applied";
-   	String name = propertyValue.getName();
-   	String value = "";
-   	String description = propertyValue.getDescription();
-   	description = StringUtil.transformAREFString(propertyValue, description, projectName, outputFolder);
-   
-  	if (propertyValue instanceof EnumerationPropertyValue){
-		if (((EnumerationPropertyValue) propertyValue).getValue() != null)
-			value = ((EnumerationPropertyValue) propertyValue).getValue().getName();
-  	}
-				
-  	if (propertyValue instanceof BooleanPropertyValue)
-	 	value = (((BooleanPropertyValue)propertyValue).isValue() ? "True" : "False");
-					
-  	if (propertyValue instanceof StringPropertyValue)
-	 	value = ((StringPropertyValue)propertyValue).getValue();
-				
-  	if (propertyValue instanceof IntegerPropertyValue)
-	 	value = Integer.toString(((IntegerPropertyValue)propertyValue).getValue());
-				
-  	if (propertyValue instanceof FloatPropertyValue)
-	 	value = Float.toString(((FloatPropertyValue)propertyValue).getValue());
-   %>
-   	   <tr>
-           <td><i><%=relation%></i></td>
-           <td><%=name%></td>
-           <td><%=value%></td>
-           <td><%=description%></td>
-       </tr>
-<%}%>
-<%}%>
-   </tbody>
-</table>
-<%}%>
+if ((appliedgroup_list != null && appliedgroup_list.size() > 0) || (ownedgroup_list != null && ownedgroup_list.size() > 0)) {
+	%>
+	<h2>Property Value Groups</h2>
+	<table max-width=screen.width>
+	   <thead> 
+	       <tr>
+	       	   <th>Relation</th>	
+	           <th>Name</th>
+	           <th>Value</th>
+	           <th>Description</th>
+	       </tr>
+	   </thead>
+	   <tbody>
+	<%
+	String table = PropertyValueHelper.getPVGTable(element, 0, projectName, outputFolder);
+	%>
+	<%=table%>
+	</tbody>
+	</table>
+	<%
+}
+%>
