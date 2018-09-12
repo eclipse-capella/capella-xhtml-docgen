@@ -3,32 +3,12 @@ super.method_content(new StringBuffer(), ctx);
 String projectName = ctx.getValue("projectName").toString();
 String outputFolder = ctx.getValue("outputFolder").toString();
 
-Collection<String> availableModeAndState = FunctionalChainHelper.getAvailableModeAndState(projectName, outputFolder,(FunctionalChain) parameter);
-			
-if(availableModeAndState.size() > 0) {
+EList<FunctionalChain> involvingFunctionalChains = ((FunctionalExchange) element).getInvolvingFunctionalChains();
+if(involvingFunctionalChains.size() > 0 ) {
 %>
-<h2>Modes and States</h2>
-<%=StringUtil.stringListToBulette(availableModeAndState)%>
+<h2>Involving Functional Chains</h2>
+
+<%=StringUtil.stringListToBulette(involvingFunctionalChains, projectName, outputFolder)%>
 <%
 }
-
-Map<String, String> functionAndDesc = FunctionalChainHelper.getAvailableFunctionWithInvolvementDescription(projectName, outputFolder,(FunctionalChain) parameter);
-
-if(functionAndDesc.size() > 0) {
-%>
-<h2>Involved functions</h2>
-<%=StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description")%>
-<%
-}
-
-
-Map<String, String> functionalExchangesAndDesc = FunctionalChainHelper.getInvolvedFunctionalExchanges(projectName, outputFolder, (FunctionalChain) parameter);
-
-if(functionalExchangesAndDesc.size() > 0) {
-%>
-<h2>Involved functional exchanges</h2>
-<%=StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange", "Involvement Description")%>
-<%
-}
-
 %>
