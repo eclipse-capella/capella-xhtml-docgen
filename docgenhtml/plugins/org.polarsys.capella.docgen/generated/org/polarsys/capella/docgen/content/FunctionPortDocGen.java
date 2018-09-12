@@ -57,11 +57,19 @@ public class FunctionPortDocGen extends org.polarsys.capella.docgen.foundations.
 		IQuery.ParameterDescription paramDesc = null;
 		Node.Container currentNode = ctx.getNode();
 
-		if (preCondition(ctx)) {
-			ctx.setNode(new Node.Container(currentNode, getClass()));
-			orchestration(ctx);
-		}
+		List<Object> parameterList = null;
+		//this pattern can only be called by another (i.e. it's not an entry point in execution)
 
+		for (Object parameterParameter : parameterList) {
+
+			this.parameter = (org.polarsys.capella.core.data.fa.FunctionPort) parameterParameter;
+
+			if (preCondition(ctx)) {
+				ctx.setNode(new Node.Container(currentNode, getClass()));
+				orchestration(ctx);
+			}
+
+		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
@@ -77,6 +85,13 @@ public class FunctionPortDocGen extends org.polarsys.capella.docgen.foundations.
 
 		super.orchestration(new SuperOrchestrationContext(ictx));
 
+		if (ictx.useReporter()) {
+			Map<String, Object> parameterValues = new HashMap<String, Object>();
+			parameterValues.put("parameter", this.parameter);
+			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+		}
 		return null;
 	}
 
@@ -88,6 +103,7 @@ public class FunctionPortDocGen extends org.polarsys.capella.docgen.foundations.
 
 	public Map<String, Object> getParameters() {
 		final Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("parameter", this.parameter);
 		return parameters;
 	}
 

@@ -3,6 +3,8 @@ package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
 import java.util.*;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
@@ -10,6 +12,7 @@ import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.FunctionalChainHelper;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
+import org.polarsys.capella.core.data.fa.FunctionalExchange;
 
 public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
@@ -22,14 +25,11 @@ public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.founda
 	}
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Modes and States</h2>";
+	protected final String TEXT_1 = "<h2>Involving Functional Chains</h2>" + NL;
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "<h2>Involved functions</h2>";
+	protected final String TEXT_3 = NL;
 	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL + "<h2>Involved functional exchanges</h2>";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL;
+	protected final String TEXT_5 = NL;
 
 	public FunctionalExchangeDocGen() {
 		//Here is the constructor
@@ -65,8 +65,8 @@ public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.founda
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_7);
-		stringBuffer.append(TEXT_8);
+		stringBuffer.append(TEXT_4);
+		stringBuffer.append(TEXT_5);
 		return stringBuffer.toString();
 	}
 
@@ -103,40 +103,17 @@ public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.founda
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
 
-		Collection<String> availableModeAndState = FunctionalChainHelper.getAvailableModeAndState(projectName,
-				outputFolder, (FunctionalChain) parameter);
-
-		if (availableModeAndState.size() > 0) {
+		EList<FunctionalChain> involvingFunctionalChains = ((FunctionalExchange) element)
+				.getInvolvingFunctionalChains();
+		if (involvingFunctionalChains.size() > 0) {
 
 			stringBuffer.append(TEXT_1);
 			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
+			stringBuffer.append(StringUtil.stringListToBulette(involvingFunctionalChains, projectName, outputFolder));
 
 		}
 
-		Map<String, String> functionAndDesc = FunctionalChainHelper
-				.getAvailableFunctionWithInvolvementDescription(projectName, outputFolder, (FunctionalChain) parameter);
-
-		if (functionAndDesc.size() > 0) {
-
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description"));
-
-		}
-
-		Map<String, String> functionalExchangesAndDesc = FunctionalChainHelper
-				.getInvolvedFunctionalExchanges(projectName, outputFolder, (FunctionalChain) parameter);
-
-		if (functionalExchangesAndDesc.size() > 0) {
-
-			stringBuffer.append(TEXT_5);
-			stringBuffer.append(TEXT_6);
-			stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange",
-					"Involvement Description"));
-
-		}
-
+		stringBuffer.append(TEXT_3);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
