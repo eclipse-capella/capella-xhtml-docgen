@@ -1,10 +1,9 @@
 //Generated with EGF 1.6.0.201805040915
 package org.polarsys.capella.docgen.content;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.egf.common.helper.*;
 import java.util.*;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
@@ -25,11 +24,12 @@ public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.founda
 	}
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Involving Functional Chains</h2>" + NL;
-	protected final String TEXT_2 = NL;
+	protected final String TEXT_1 = "";
+	protected final String TEXT_2 = NL + "<h2>Involving Functional Chains</h2>" + NL;
 	protected final String TEXT_3 = NL;
 	protected final String TEXT_4 = NL;
 	protected final String TEXT_5 = NL;
+	protected final String TEXT_6 = NL;
 
 	public FunctionalExchangeDocGen() {
 		//Here is the constructor
@@ -41,6 +41,7 @@ public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.founda
 
 	public String generate(Object argument) throws Exception {
 		final StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append(TEXT_1);
 
 		InternalPatternContext ctx = (InternalPatternContext) argument;
 		Map<String, String> queryCtx = null;
@@ -65,8 +66,8 @@ public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.founda
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_4);
 		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_6);
 		return stringBuffer.toString();
 	}
 
@@ -107,13 +108,13 @@ public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.founda
 				.getInvolvingFunctionalChains();
 		if (involvingFunctionalChains.size() > 0) {
 
-			stringBuffer.append(TEXT_1);
 			stringBuffer.append(TEXT_2);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(involvingFunctionalChains, projectName, outputFolder));
 
 		}
 
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_4);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
