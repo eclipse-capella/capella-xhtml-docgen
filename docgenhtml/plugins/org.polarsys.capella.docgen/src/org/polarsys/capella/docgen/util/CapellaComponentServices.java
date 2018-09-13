@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -128,6 +128,32 @@ public class CapellaComponentServices {
 			}
 			buffer.append(CapellaServices.UL_CLOSE);
 		}
+		buffer.append("</td>");
+		
+		EList<ComponentExchange> realizedComponentExchanges = componentExchange.getRealizedComponentExchanges();
+		buffer.append("<td>");
+		buffer.append(CapellaServices.UL_OPEN);
+		for (ComponentExchange realizedComponentExchange : realizedComponentExchanges) {
+			buffer.append("<li>");
+			buffer.append(CapellaServices.getImageLinkFromElement(realizedComponentExchange, projectName, outputFolder));
+			buffer.append(" ");
+			buffer.append(CapellaServices.getHyperlinkFromElement(realizedComponentExchange));
+			buffer.append("</li>");
+		}
+		buffer.append(CapellaServices.UL_CLOSE);
+		buffer.append("</td>");
+		buffer.append("<td>");
+		
+		EList<ComponentExchange> realizingComponentExchanges = componentExchange.getRealizingComponentExchanges();
+		buffer.append(CapellaServices.UL_OPEN);
+		for (ComponentExchange realizingComponentExchange : realizingComponentExchanges) {
+			buffer.append("<li>");
+			buffer.append(CapellaServices.getImageLinkFromElement(realizingComponentExchange, projectName, outputFolder));
+			buffer.append(" ");
+			buffer.append(CapellaServices.getHyperlinkFromElement(realizingComponentExchange));
+			buffer.append("</li>");
+		}
+		buffer.append(CapellaServices.UL_CLOSE);
 		buffer.append("</td>");
 		buffer.append("</tr>");
 
