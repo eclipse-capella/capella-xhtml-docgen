@@ -57,6 +57,8 @@ if(incomingComponentExchanges.size() > 0) {
 		<th>Description</th>
 		<th>Allocated Functional Exchanges</th>
 		<th>Allocated Exchange Items</th>
+		<th>Realized Component Exchanges</th>
+		<th>Realizing Component Exchanges</th>
 	</tr>
 	<% for (ComponentExchange componentExchange : incomingComponentExchanges) {   	
 %>
@@ -77,6 +79,8 @@ if(outgoingComponentExchanges.size() > 0) {
 		<th>Description</th>
 		<th>Allocated Functional Exchanges</th>
 		<th>Allocated Exchange Items</th>
+		<th>Realized Component Exchanges</th>
+		<th>Realizing Component Exchanges</th>
 	</tr>
 	<% for (ComponentExchange componentExchange : outgoingComponentExchanges) {   	
 %>
@@ -99,6 +103,8 @@ if(inoutComponentExchanges.size() > 0) {
 		<th>Description</th>
 		<th>Allocated Functional Exchanges</th>
 		<th>Allocated Exchange Items</th>
+		<th>Realized Component Exchanges</th>
+		<th>Realizing Component Exchanges</th>
 	</tr>
 	<% for (ComponentExchange componentExchange : inoutComponentExchanges) {   	
 %>

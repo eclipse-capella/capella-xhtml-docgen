@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.0.201805040915
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -41,6 +41,7 @@ public class ComponentContentDocGen {
 	protected final String TEXT_12 = NL + "<h2>Incoming Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
+			+ "\t\t<th>Realized Component Exchanges</th>" + NL + "\t\t<th>Realizing Component Exchanges</th>" + NL
 			+ "\t</tr>" + NL + "\t";
 	protected final String TEXT_13 = NL + "\t";
 	protected final String TEXT_14 = NL + "\t";
@@ -48,6 +49,7 @@ public class ComponentContentDocGen {
 	protected final String TEXT_16 = NL + "<h2>Outgoing Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
+			+ "\t\t<th>Realized Component Exchanges</th>" + NL + "\t\t<th>Realizing Component Exchanges</th>" + NL
 			+ "\t</tr>" + NL + "\t";
 	protected final String TEXT_17 = NL + "\t";
 	protected final String TEXT_18 = NL + "\t";
@@ -55,6 +57,7 @@ public class ComponentContentDocGen {
 	protected final String TEXT_20 = NL + "<h2>In/Out Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
+			+ "\t\t<th>Realized Component Exchanges</th>" + NL + "\t\t<th>Realizing Component Exchanges</th>" + NL
 			+ "\t</tr>" + NL + "\t";
 	protected final String TEXT_21 = NL + "\t";
 	protected final String TEXT_22 = NL + "\t";
