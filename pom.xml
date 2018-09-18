@@ -39,6 +39,7 @@
 		<platform-name>neon</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
+		<capellaVersion>1.2.1</capellaVersion>
 
 		<!-- for sonar -->
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
@@ -264,7 +265,7 @@
 											includes="**/META-INF/**" />
 									</delete>
 									<zip
-										destfile="${project.build.directory}/${packagedAddonName}-dropins-${unqualifiedVersion}.${buildQualifier}.zip">
+										destfile="${project.build.directory}/${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersio}-dropins.zip">
 										<fileset dir="${project.build.directory}">
 											<include name="${packagedAddonName}/**" />
 										</fileset>
@@ -287,7 +288,7 @@
 								<goal>archive-repository</goal>
 							</goals>
 							<configuration>
-								<finalName>${packagedAddonName}-updateSite-${unqualifiedVersion}.${buildQualifier}</finalName>
+								<finalName>${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersio}-updateSite</finalName>
 							</configuration>
 						</execution>
 					</executions>
