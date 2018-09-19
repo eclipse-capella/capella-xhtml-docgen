@@ -265,7 +265,7 @@
 											includes="**/META-INF/**" />
 									</delete>
 									<zip
-										destfile="${project.build.directory}/${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersio}-dropins.zip">
+										destfile="${project.build.directory}/${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersion}-dropins.zip">
 										<fileset dir="${project.build.directory}">
 											<include name="${packagedAddonName}/**" />
 										</fileset>
@@ -288,7 +288,7 @@
 								<goal>archive-repository</goal>
 							</goals>
 							<configuration>
-								<finalName>${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersio}-updateSite</finalName>
+								<finalName>${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersion}-updateSite</finalName>
 							</configuration>
 						</execution>
 					</executions>
