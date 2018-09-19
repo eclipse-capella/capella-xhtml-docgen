@@ -326,6 +326,38 @@ public class CapellaFunctionServices {
 			}
 			buffer.append("</td>");
 			
+			//Realized functional Exchange
+			buffer.append("<td>");
+			EList<FunctionalExchange> realizedFunctionalExchanges = functionalExchange.getRealizedFunctionalExchanges();
+			if (!realizedFunctionalExchanges.isEmpty()) {
+				buffer.append(CapellaServices.UL_OPEN);
+				for (FunctionalExchange exchange : realizedFunctionalExchanges) {
+					buffer.append("<li>");
+					buffer.append(CapellaServices.getImageLinkFromElement(exchange, projectName, outputFolder));
+					buffer.append(" ");
+					buffer.append(CapellaServices.getHyperlinkFromElement(exchange));
+					buffer.append("</li>");
+				}
+				buffer.append(CapellaServices.UL_CLOSE);
+			}
+			buffer.append("</td>");
+			
+			//Realizing functional Exchange
+			buffer.append("<td>");
+			EList<FunctionalExchange> realizingFunctionalExchanges = functionalExchange.getRealizingFunctionalExchanges();
+			if (!realizingFunctionalExchanges.isEmpty()) {
+				buffer.append(CapellaServices.UL_OPEN);
+				for (FunctionalExchange exchange : realizingFunctionalExchanges) {
+					buffer.append("<li>");
+					buffer.append(CapellaServices.getImageLinkFromElement(exchange, projectName, outputFolder));
+					buffer.append(" ");
+					buffer.append(CapellaServices.getHyperlinkFromElement(exchange));
+					buffer.append("</li>");
+				}
+				buffer.append(CapellaServices.UL_CLOSE);
+			}
+			
+			buffer.append("</td>");
 			buffer.append("</tr>");
 		}
 
