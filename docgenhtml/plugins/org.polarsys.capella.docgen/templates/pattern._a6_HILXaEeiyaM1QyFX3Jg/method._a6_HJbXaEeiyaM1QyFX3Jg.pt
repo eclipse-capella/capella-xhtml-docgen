@@ -17,6 +17,8 @@ if(incomingFunctionalExchanges.size() > 0) {
 		<th>Source Function</th>
 		<th>Description</th>
 		<th>Allocated Exchange Items</th>
+		<th>Realized Functional Exchanges</th>
+		<th>Realizing Functional Exchanges</th>
 	</tr>
 <% for (FunctionalExchange functionalExchange : incomingFunctionalExchanges) {   	
 %>
@@ -41,6 +43,8 @@ if(outgoingFunctionalExchanges.size() > 0) {
 		<th>Target Function</th>
 		<th>Description</th>
 		<th>Allocated Exchange Items</th>
+		<th>Realized Functional Exchanges</th>
+		<th>Realizing Functional Exchanges</th>
 	</tr>
 <% for(FunctionalExchange functionalExchange : outgoingFunctionalExchanges) {%>
 	<%=CapellaFunctionServices.outgoingFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>

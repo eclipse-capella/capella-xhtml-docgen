@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.0.201805040915
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -27,7 +27,8 @@ public class FunctionPortDocGen extends org.polarsys.capella.docgen.foundations.
 			+ NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Involving Functional Chains</th>" + NL
 			+ "\t\t<th>Allocating Component Exchanges</th>" + NL + "\t\t<th>Source Port</th>" + NL
 			+ "\t\t<th>Source Function</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
+			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t\t<th>Realized Functional Exchanges</th>" + NL
+			+ "\t\t<th>Realizing Functional Exchanges</th>" + NL + "\t</tr>";
 	protected final String TEXT_2 = NL + "\t";
 	protected final String TEXT_3 = NL + "\t";
 	protected final String TEXT_4 = NL + "</table>";
@@ -35,7 +36,8 @@ public class FunctionPortDocGen extends org.polarsys.capella.docgen.foundations.
 			+ "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Involving Functional Chains</th>" + NL
 			+ "\t\t<th>Allocating Component Exchanges</th>" + NL + "\t\t<th>Target Port</th>" + NL
 			+ "\t\t<th>Target Function</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
+			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t\t<th>Realized Functional Exchanges</th>" + NL
+			+ "\t\t<th>Realizing Functional Exchanges</th>" + NL + "\t</tr>";
 	protected final String TEXT_6 = NL + "\t";
 	protected final String TEXT_7 = NL + "</table>";
 	protected final String TEXT_8 = NL;
