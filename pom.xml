@@ -38,7 +38,7 @@
 		<!-- for packaging -->
 		<platform-name>neon</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
-		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
+		<packagedAddonName>XHTMLDocGen</packagedAddonName>
 		<capellaVersion>1.2.1</capellaVersion>
 
 		<!-- for sonar -->
