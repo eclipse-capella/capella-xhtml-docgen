@@ -64,7 +64,7 @@
             <methods xmi:id="_51oEsN46Ed-Qav1YnqlO9A" name="content" patternFilePath="templates/pattern._ixj0MN0eEd-Vzvs7Wt1vzQ/method._51oEsN46Ed-Qav1YnqlO9A.pt"/>
             <methods xmi:id="_TM8hYPbpEd-RH7MH9LLQsg" name="setFileNameService" patternFilePath="templates/pattern._ixj0MN0eEd-Vzvs7Wt1vzQ/method._TM8hYPbpEd-RH7MH9LLQsg.pt"/>
             <methods xmi:id="_5jqVAErlEeCvqtVx_IKrqA" name="endContent" patternFilePath="templates/pattern._ixj0MN0eEd-Vzvs7Wt1vzQ/method._5jqVAErlEeCvqtVx_IKrqA.pt"/>
-            <variables xmi:id="_8ZnqQN4gEd-Qav1YnqlO9A" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <variables xmi:id="_8ZnqQN4gEd-Qav1YnqlO9A" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <variables xmi:id="_dqbzEHuzEeCAr9zliRjheA" name="documentTitle" type="java.lang.String"/>
             <variables xmi:id="_yKihsIwoEeCksqA-SB02WQ" name="elementPath" type="java.lang.String"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_Pru0IN4hEd-Qav1YnqlO9A"
@@ -101,7 +101,7 @@
             <methods xmi:id="_fiM9tOZdEd-YVt45ZEg4_w" name="preCondition" patternFilePath="templates/pattern._fiM9sOZdEd-YVt45ZEg4_w/method._fiM9tOZdEd-YVt45ZEg4_w.pt"/>
             <methods xmi:id="_fiM9teZdEd-YVt45ZEg4_w" name="body" patternFilePath="templates/pattern._fiM9sOZdEd-YVt45ZEg4_w/method._fiM9teZdEd-YVt45ZEg4_w.pt"/>
             <methods xmi:id="_fiM9tuZdEd-YVt45ZEg4_w" name="footer" patternFilePath="templates/pattern._fiM9sOZdEd-YVt45ZEg4_w/method._fiM9tuZdEd-YVt45ZEg4_w.pt"/>
-            <parameters xmi:id="_rvn80OZdEd-YVt45ZEg4_w" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_rvn80OZdEd-YVt45ZEg4_w" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_fiM9t-ZdEd-YVt45ZEg4_w"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_YChJ8OZmEd-YVt45ZEg4_w"
                 called="#_fiM9teZdEd-YVt45ZEg4_w"/>
@@ -117,7 +117,7 @@
             <methods xmi:id="_C915BwahEeCbnKVq3TjTtg" name="footer" patternFilePath="templates/pattern._C915AQahEeCbnKVq3TjTtg/method._C915BwahEeCbnKVq3TjTtg.pt"/>
             <methods xmi:id="_dIGmcAahEeCbnKVq3TjTtg" name="openDescription" patternFilePath="templates/pattern._C915AQahEeCbnKVq3TjTtg/method._dIGmcAahEeCbnKVq3TjTtg.pt"/>
             <methods xmi:id="_dmkEEAahEeCbnKVq3TjTtg" name="closeDescription" patternFilePath="templates/pattern._C915AQahEeCbnKVq3TjTtg/method._dmkEEAahEeCbnKVq3TjTtg.pt"/>
-            <parameters xmi:id="_P5P_gAahEeCbnKVq3TjTtg" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_P5P_gAahEeCbnKVq3TjTtg" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_C915CAahEeCbnKVq3TjTtg"/>
           </elements>
           <elements xmi:id="_PVePETXrEeCNvtb1bUM2fQ" name="DiagramsGeneration" headerMethod="#_PVePEzXrEeCNvtb1bUM2fQ"
@@ -131,7 +131,7 @@
             <methods xmi:id="_8qnCsDX7EeCNvtb1bUM2fQ" name="setContext" patternFilePath="templates/pattern._PVePETXrEeCNvtb1bUM2fQ/method._8qnCsDX7EeCNvtb1bUM2fQ.pt"/>
             <methods xmi:id="_PVePFjXrEeCNvtb1bUM2fQ" name="body" patternFilePath="templates/pattern._PVePETXrEeCNvtb1bUM2fQ/method._PVePFjXrEeCNvtb1bUM2fQ.pt"/>
             <methods xmi:id="_PVePFzXrEeCNvtb1bUM2fQ" name="footer" patternFilePath="templates/pattern._PVePETXrEeCNvtb1bUM2fQ/method._PVePFzXrEeCNvtb1bUM2fQ.pt"/>
-            <parameters xmi:id="_mnIPUDX5EeCNvtb1bUM2fQ" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_mnIPUDX5EeCNvtb1bUM2fQ" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <variables xmi:id="_bGTKEDXxEeCNvtb1bUM2fQ" name="fileNameService" type="org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService"/>
             <variables xmi:id="_tuyCkGQcEeCbC_q4r97G6A" name="helper" type="org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_PVePGDXrEeCNvtb1bUM2fQ"/>
@@ -151,7 +151,7 @@
             <methods xmi:id="_wWwglUrlEeCvqtVx_IKrqA" name="setContext" patternFilePath="templates/pattern._wWwgkErlEeCvqtVx_IKrqA/method._wWwglUrlEeCvqtVx_IKrqA.pt"/>
             <methods xmi:id="_wWwglkrlEeCvqtVx_IKrqA" name="body" patternFilePath="templates/pattern._wWwgkErlEeCvqtVx_IKrqA/method._wWwglkrlEeCvqtVx_IKrqA.pt"/>
             <methods xmi:id="_wWwgl0rlEeCvqtVx_IKrqA" name="footer" patternFilePath="templates/pattern._wWwgkErlEeCvqtVx_IKrqA/method._wWwgl0rlEeCvqtVx_IKrqA.pt"/>
-            <parameters xmi:id="_wWwgmErlEeCvqtVx_IKrqA" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_wWwgmErlEeCvqtVx_IKrqA" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <variables xmi:id="_wWwgmUrlEeCvqtVx_IKrqA" name="fileNameService" type="org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService"/>
             <variables xmi:id="_t3bZcWdXEeCnw5T_1So9cQ" name="helper" type="org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_wWwgmkrlEeCvqtVx_IKrqA"/>
@@ -171,7 +171,7 @@
             <methods xmi:id="_2twVZau9EeCWrf9pgx3zjA" name="body" patternFilePath="templates/pattern._2twVYKu9EeCWrf9pgx3zjA/method._2twVZau9EeCWrf9pgx3zjA.pt"/>
             <methods xmi:id="_2twVZqu9EeCWrf9pgx3zjA" name="footer" patternFilePath="templates/pattern._2twVYKu9EeCWrf9pgx3zjA/method._2twVZqu9EeCWrf9pgx3zjA.pt"/>
             <methods xmi:id="_L0QUwLFLEeG5gNhMvEeYpg" name="postBody" patternFilePath="templates/pattern._2twVYKu9EeCWrf9pgx3zjA/method._L0QUwLFLEeG5gNhMvEeYpg.pt"/>
-            <parameters xmi:id="_NSfRIKu_EeCWrf9pgx3zjA" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_NSfRIKu_EeCWrf9pgx3zjA" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <parameters xmi:id="_hcmjwL0HEeC7JNoAKQ1P0g" name="documentTitle" type="java.lang.String"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_2twVZ6u9EeCWrf9pgx3zjA"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_aLqYcKu-EeCWrf9pgx3zjA"
@@ -189,7 +189,7 @@
             <methods xmi:id="_H6ielavLEeCas-LHcur3rg" name="preCondition" patternFilePath="templates/pattern._H6iekavLEeCas-LHcur3rg/method._H6ielavLEeCas-LHcur3rg.pt"/>
             <methods xmi:id="_H6ielqvLEeCas-LHcur3rg" name="body" patternFilePath="templates/pattern._H6iekavLEeCas-LHcur3rg/method._H6ielqvLEeCas-LHcur3rg.pt"/>
             <methods xmi:id="_H6iel6vLEeCas-LHcur3rg" name="footer" patternFilePath="templates/pattern._H6iekavLEeCas-LHcur3rg/method._H6iel6vLEeCas-LHcur3rg.pt"/>
-            <parameters xmi:id="_ViPmMKvSEeCas-LHcur3rg" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_ViPmMKvSEeCas-LHcur3rg" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_H6iemKvLEeCas-LHcur3rg"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_vSiRQKvOEeCas-LHcur3rg"
                 called="#_H6ielqvLEeCas-LHcur3rg"/>
@@ -204,7 +204,7 @@
             <methods xmi:id="_UT85hDr2EeK9AZkoGpWdMw" name="preCondition" patternFilePath="templates/pattern._UT85gDr2EeK9AZkoGpWdMw/method._UT85hDr2EeK9AZkoGpWdMw.pt"/>
             <methods xmi:id="_UT85hTr2EeK9AZkoGpWdMw" name="body" patternFilePath="templates/pattern._UT85gDr2EeK9AZkoGpWdMw/method._UT85hTr2EeK9AZkoGpWdMw.pt"/>
             <methods xmi:id="_UT85hjr2EeK9AZkoGpWdMw" name="footer" patternFilePath="templates/pattern._UT85gDr2EeK9AZkoGpWdMw/method._UT85hjr2EeK9AZkoGpWdMw.pt"/>
-            <parameters xmi:id="_cFBpIDr2EeK9AZkoGpWdMw" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_cFBpIDr2EeK9AZkoGpWdMw" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <parameters xmi:id="_W2690Dr8EeK9AZkoGpWdMw" name="outputFolder" type="java.lang.String"/>
             <parameters xmi:id="_ZAJ7MDr8EeK9AZkoGpWdMw" name="projectName" type="java.lang.String"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_UT85hzr2EeK9AZkoGpWdMw"/>
@@ -221,7 +221,7 @@
             <methods xmi:id="_F9HPpVcEEeWXKstRBeKifA" name="preCondition" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPpVcEEeWXKstRBeKifA.pt"/>
             <methods xmi:id="_F9HPplcEEeWXKstRBeKifA" name="genConstraints" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPplcEEeWXKstRBeKifA.pt"/>
             <methods xmi:id="_F9HPp1cEEeWXKstRBeKifA" name="footer" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPp1cEEeWXKstRBeKifA.pt"/>
-            <parameters xmi:id="_KfYg8FcEEeWXKstRBeKifA" name="parameter" type="http://www.polarsys.org/capella/core/core/1.2.0#//NamedElement"/>
+            <parameters xmi:id="_KfYg8FcEEeWXKstRBeKifA" name="parameter" type="http://www.polarsys.org/capella/core/core/1.3.0#//NamedElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_F9HPqFcEEeWXKstRBeKifA"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_fqM44FcEEeWXKstRBeKifA"
                 called="#_F9HPplcEEeWXKstRBeKifA"/>
@@ -239,7 +239,7 @@
             <methods xmi:id="_hW855N47Ed-Qav1YnqlO9A" name="preCondition" patternFilePath="templates/pattern._hW854N47Ed-Qav1YnqlO9A/method._hW855N47Ed-Qav1YnqlO9A.pt"/>
             <methods xmi:id="_hW855t47Ed-Qav1YnqlO9A" name="footer" patternFilePath="templates/pattern._hW854N47Ed-Qav1YnqlO9A/method._hW855t47Ed-Qav1YnqlO9A.pt"/>
             <methods xmi:id="_3HKd4N47Ed-Qav1YnqlO9A" name="setCapellaContext" patternFilePath="templates/pattern._hW854N47Ed-Qav1YnqlO9A/method._3HKd4N47Ed-Qav1YnqlO9A.pt"/>
-            <parameters xmi:id="_u1IWQN47Ed-Qav1YnqlO9A" name="parameter" type="http://www.polarsys.org/capella/core/core/1.2.0#//NamedElement"/>
+            <parameters xmi:id="_u1IWQN47Ed-Qav1YnqlO9A" name="parameter" type="http://www.polarsys.org/capella/core/core/1.3.0#//NamedElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_hW855947Ed-Qav1YnqlO9A"/>
           </elements>
           <elements xmi:id="_HyNjwN0cEd-Vzvs7Wt1vzQ" name="LogicalComponentDocGen"
@@ -254,7 +254,7 @@
             <methods xmi:id="_HyNjxt0cEd-Vzvs7Wt1vzQ" name="footer" patternFilePath="templates/pattern._HyNjwN0cEd-Vzvs7Wt1vzQ/method._HyNjxt0cEd-Vzvs7Wt1vzQ.pt"/>
             <methods xmi:id="_bjmvIN4jEd-Qav1YnqlO9A" name="setCapellaContext" patternFilePath="templates/pattern._HyNjwN0cEd-Vzvs7Wt1vzQ/method._bjmvIN4jEd-Qav1YnqlO9A.pt"/>
             <methods xmi:id="_TvoVwTgmEeCKVs4XEULBlA" name="content" patternFilePath="templates/pattern._HyNjwN0cEd-Vzvs7Wt1vzQ/method._TvoVwTgmEeCKVs4XEULBlA.pt"/>
-            <parameters xmi:id="_Nc7D0N0cEd-Vzvs7Wt1vzQ" name="parameter" type="http://www.polarsys.org/capella/core/cs/1.2.0#//Component"/>
+            <parameters xmi:id="_Nc7D0N0cEd-Vzvs7Wt1vzQ" name="parameter" type="http://www.polarsys.org/capella/core/cs/1.3.0#//Component"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_HyNjx90cEd-Vzvs7Wt1vzQ"/>
           </elements>
           <elements xmi:id="_4rYdkTqcEeCgH6PBi_KPBw" description="" name="GeneralizableElementDocGen"
@@ -269,7 +269,7 @@
             <methods xmi:id="_6Dak0EWPEeCvqtVx_IKrqA" name="setCapellaContext" patternFilePath="templates/pattern._4rYdkTqcEeCgH6PBi_KPBw/method._6Dak0EWPEeCvqtVx_IKrqA.pt"/>
             <methods xmi:id="_4rYdljqcEeCgH6PBi_KPBw" name="content" patternFilePath="templates/pattern._4rYdkTqcEeCgH6PBi_KPBw/method._4rYdljqcEeCgH6PBi_KPBw.pt"/>
             <methods xmi:id="_4rYdlzqcEeCgH6PBi_KPBw" name="footer" patternFilePath="templates/pattern._4rYdkTqcEeCgH6PBi_KPBw/method._4rYdlzqcEeCgH6PBi_KPBw.pt"/>
-            <parameters xmi:id="_kPdJQEWPEeCvqtVx_IKrqA" name="parameter" type="http://www.polarsys.org/capella/core/core/1.2.0#//GeneralizableElement"/>
+            <parameters xmi:id="_kPdJQEWPEeCvqtVx_IKrqA" name="parameter" type="http://www.polarsys.org/capella/core/core/1.3.0#//GeneralizableElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_4rYdmDqcEeCgH6PBi_KPBw"/>
           </elements>
           <elements xmi:id="_JPU-gDtBEeCgH6PBi_KPBw" name="ClassifierDocGen" superPattern="#_4rYdkTqcEeCgH6PBi_KPBw"
@@ -335,7 +335,7 @@
             <methods xmi:id="_x_LwdWwiEeCUvpJOFjr3FQ" name="footer" patternFilePath="templates/pattern._x_LwcGwiEeCUvpJOFjr3FQ/method._x_LwdWwiEeCUvpJOFjr3FQ.pt"/>
             <methods xmi:id="_x_LwdmwiEeCUvpJOFjr3FQ" name="setCapellaContext" patternFilePath="templates/pattern._x_LwcGwiEeCUvpJOFjr3FQ/method._x_LwdmwiEeCUvpJOFjr3FQ.pt"/>
             <methods xmi:id="_x_Lwd2wiEeCUvpJOFjr3FQ" name="content" patternFilePath="templates/pattern._x_LwcGwiEeCUvpJOFjr3FQ/method._x_Lwd2wiEeCUvpJOFjr3FQ.pt"/>
-            <parameters xmi:id="_x_LweGwiEeCUvpJOFjr3FQ" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.2.0#//AbstractFunction"/>
+            <parameters xmi:id="_x_LweGwiEeCUvpJOFjr3FQ" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.3.0#//AbstractFunction"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_x_LweWwiEeCUvpJOFjr3FQ"/>
           </elements>
           <elements xmi:id="_6RU6oXGlEeC8GrKepiiiTw" name="PartDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
@@ -350,7 +350,7 @@
             <methods xmi:id="_LYnywHGmEeC8GrKepiiiTw" name="setCapellaContext" patternFilePath="templates/pattern._6RU6oXGlEeC8GrKepiiiTw/method._LYnywHGmEeC8GrKepiiiTw.pt"/>
             <methods xmi:id="_MXRzYHGmEeC8GrKepiiiTw" name="content" patternFilePath="templates/pattern._6RU6oXGlEeC8GrKepiiiTw/method._MXRzYHGmEeC8GrKepiiiTw.pt"/>
             <methods xmi:id="_znK3QZwMEeCWeuBXIFCRXA" name="endContent" patternFilePath="templates/pattern._6RU6oXGlEeC8GrKepiiiTw/method._znK3QZwMEeCWeuBXIFCRXA.pt"/>
-            <parameters xmi:id="_BFHioHGmEeC8GrKepiiiTw" name="parameter" type="http://www.polarsys.org/capella/core/cs/1.2.0#//Part"/>
+            <parameters xmi:id="_BFHioHGmEeC8GrKepiiiTw" name="parameter" type="http://www.polarsys.org/capella/core/cs/1.3.0#//Part"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_6RU6qHGlEeC8GrKepiiiTw"/>
           </elements>
           <elements xmi:id="_Axl3MH1uEeCIgcTVWxVnzQ" name="RequirementDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
@@ -364,7 +364,7 @@
             <methods xmi:id="_Axl3NX1uEeCIgcTVWxVnzQ" name="footer" patternFilePath="templates/pattern._Axl3MH1uEeCIgcTVWxVnzQ/method._Axl3NX1uEeCIgcTVWxVnzQ.pt"/>
             <methods xmi:id="_Axl3Nn1uEeCIgcTVWxVnzQ" name="setCapellaContext" patternFilePath="templates/pattern._Axl3MH1uEeCIgcTVWxVnzQ/method._Axl3Nn1uEeCIgcTVWxVnzQ.pt"/>
             <methods xmi:id="_Axl3N31uEeCIgcTVWxVnzQ" name="content" patternFilePath="templates/pattern._Axl3MH1uEeCIgcTVWxVnzQ/method._Axl3N31uEeCIgcTVWxVnzQ.pt"/>
-            <parameters xmi:id="_Axl3OH1uEeCIgcTVWxVnzQ" name="parameter" type="http://www.polarsys.org/capella/core/requirement/1.2.0#//Requirement"/>
+            <parameters xmi:id="_Axl3OH1uEeCIgcTVWxVnzQ" name="parameter" type="http://www.polarsys.org/capella/core/requirement/1.3.0#//Requirement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_Axl3OX1uEeCIgcTVWxVnzQ"/>
           </elements>
           <elements xmi:id="_WWJkYYBZEeCN8Jbz-bJe6w" name="InterfaceDocGen" superPattern="#_JPU-gDtBEeCgH6PBi_KPBw"
@@ -392,7 +392,7 @@
             <methods xmi:id="__fahYILCEeCjNOKMEA2WFg" name="setCapellaContext" patternFilePath="templates/pattern._MdyuQYLBEeCjNOKMEA2WFg/method.__fahYILCEeCjNOKMEA2WFg.pt"/>
             <methods xmi:id="_lt-ZEILBEeCjNOKMEA2WFg" name="content" patternFilePath="templates/pattern._MdyuQYLBEeCjNOKMEA2WFg/method._lt-ZEILBEeCjNOKMEA2WFg.pt"/>
             <methods xmi:id="_t1O6cILJEeCjNOKMEA2WFg" name="setTitle" patternFilePath="templates/pattern._MdyuQYLBEeCjNOKMEA2WFg/method._t1O6cILJEeCjNOKMEA2WFg.pt"/>
-            <parameters xmi:id="_Qrp10ILBEeCjNOKMEA2WFg" name="parameter" type="http://www.polarsys.org/capella/core/information/1.2.0#//ExchangeItem"/>
+            <parameters xmi:id="_Qrp10ILBEeCjNOKMEA2WFg" name="parameter" type="http://www.polarsys.org/capella/core/information/1.3.0#//ExchangeItem"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_MdyuSILBEeCjNOKMEA2WFg"/>
           </elements>
           <elements xmi:id="_sGmFIZdTEeCvReB7msXe8Q" name="packageDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
@@ -406,7 +406,7 @@
             <methods xmi:id="_vGHikJdZEeCvReB7msXe8Q" name="setCapellaContext" patternFilePath="templates/pattern._sGmFIZdTEeCvReB7msXe8Q/method._vGHikJdZEeCvReB7msXe8Q.pt"/>
             <methods xmi:id="_sGmFJpdTEeCvReB7msXe8Q" name="content" patternFilePath="templates/pattern._sGmFIZdTEeCvReB7msXe8Q/method._sGmFJpdTEeCvReB7msXe8Q.pt"/>
             <methods xmi:id="_sGmFJ5dTEeCvReB7msXe8Q" name="footer" patternFilePath="templates/pattern._sGmFIZdTEeCvReB7msXe8Q/method._sGmFJ5dTEeCvReB7msXe8Q.pt"/>
-            <parameters xmi:id="_P2q2QJdUEeCvReB7msXe8Q" name="parameter" type="http://www.polarsys.org/capella/core/core/1.2.0#//Structure"/>
+            <parameters xmi:id="_P2q2QJdUEeCvReB7msXe8Q" name="parameter" type="http://www.polarsys.org/capella/core/core/1.3.0#//Structure"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_sGmFKJdTEeCvReB7msXe8Q"/>
           </elements>
           <elements xmi:id="_6uVm4JwPEeCWeuBXIFCRXA" name="EntityDocGen" superPattern="#_HyNjwN0cEd-Vzvs7Wt1vzQ"
@@ -431,7 +431,7 @@
             <methods xmi:id="_bbMz5auhEeCWrf9pgx3zjA" name="preCondition" patternFilePath="templates/pattern._bbMz4auhEeCWrf9pgx3zjA/method._bbMz5auhEeCWrf9pgx3zjA.pt"/>
             <methods xmi:id="_bbMz5quhEeCWrf9pgx3zjA" name="body" patternFilePath="templates/pattern._bbMz4auhEeCWrf9pgx3zjA/method._bbMz5quhEeCWrf9pgx3zjA.pt"/>
             <methods xmi:id="_bbMz56uhEeCWrf9pgx3zjA" name="footer" patternFilePath="templates/pattern._bbMz4auhEeCWrf9pgx3zjA/method._bbMz56uhEeCWrf9pgx3zjA.pt"/>
-            <parameters xmi:id="_1uoSIKumEeCWrf9pgx3zjA" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_1uoSIKumEeCWrf9pgx3zjA" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <parameters xmi:id="_A8vJUKunEeCWrf9pgx3zjA" name="projectName" type="java.lang.String"/>
             <parameters xmi:id="_CaxNkKunEeCWrf9pgx3zjA" name="outputFolder" type="java.lang.String"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_bbMz6KuhEeCWrf9pgx3zjA"/>
@@ -448,7 +448,7 @@
             <methods xmi:id="_XX5iBaxbEeCYVYqpiRcXMA" name="preCondition" patternFilePath="templates/pattern._XX5iAaxbEeCYVYqpiRcXMA/method._XX5iBaxbEeCYVYqpiRcXMA.pt"/>
             <methods xmi:id="_XX5iBqxbEeCYVYqpiRcXMA" name="body" patternFilePath="templates/pattern._XX5iAaxbEeCYVYqpiRcXMA/method._XX5iBqxbEeCYVYqpiRcXMA.pt"/>
             <methods xmi:id="_XX5iB6xbEeCYVYqpiRcXMA" name="footer" patternFilePath="templates/pattern._XX5iAaxbEeCYVYqpiRcXMA/method._XX5iB6xbEeCYVYqpiRcXMA.pt"/>
-            <parameters xmi:id="_TiDVAKxfEeCYVYqpiRcXMA" name="element" type="http://www.polarsys.org/capella/core/oa/1.2.0#//Entity"/>
+            <parameters xmi:id="_TiDVAKxfEeCYVYqpiRcXMA" name="element" type="http://www.polarsys.org/capella/core/oa/1.3.0#//Entity"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_XX5iCKxbEeCYVYqpiRcXMA"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_awUPUKxbEeCYVYqpiRcXMA"
                 called="#_XX5iBqxbEeCYVYqpiRcXMA"/>
@@ -489,7 +489,7 @@
             <methods xmi:id="_Pq5Fhb3fEeCFqqET0yrG_w" name="content" patternFilePath="templates/pattern._Pq5FgL3fEeCFqqET0yrG_w/method._Pq5Fhb3fEeCFqqET0yrG_w.pt"/>
             <methods xmi:id="_Pq5Fhr3fEeCFqqET0yrG_w" name="footer" patternFilePath="templates/pattern._Pq5FgL3fEeCFqqET0yrG_w/method._Pq5Fhr3fEeCFqqET0yrG_w.pt"/>
             <methods xmi:id="__I8gsL3fEeCFqqET0yrG_w" name="setCapellaContext" patternFilePath="templates/pattern._Pq5FgL3fEeCFqqET0yrG_w/method.__I8gsL3fEeCFqqET0yrG_w.pt"/>
-            <parameters xmi:id="_SZFxIL3fEeCFqqET0yrG_w" name="parameter" type="http://www.polarsys.org/capella/core/ctx/1.2.0#//Mission"/>
+            <parameters xmi:id="_SZFxIL3fEeCFqqET0yrG_w" name="parameter" type="http://www.polarsys.org/capella/core/ctx/1.3.0#//Mission"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_Pq5Fh73fEeCFqqET0yrG_w"/>
           </elements>
           <elements xmi:id="_sRl5kb52EeCw5MDUpv1shw" name="FunctionalChainGenDoc"
@@ -504,7 +504,7 @@
             <methods xmi:id="_sRl5l752EeCw5MDUpv1shw" name="footer" patternFilePath="templates/pattern._sRl5kb52EeCw5MDUpv1shw/method._sRl5l752EeCw5MDUpv1shw.pt"/>
             <methods xmi:id="_PUNSUL54EeCw5MDUpv1shw" name="content" patternFilePath="templates/pattern._sRl5kb52EeCw5MDUpv1shw/method._PUNSUL54EeCw5MDUpv1shw.pt"/>
             <methods xmi:id="_QSITIL54EeCw5MDUpv1shw" name="setCapellaContext" patternFilePath="templates/pattern._sRl5kb52EeCw5MDUpv1shw/method._QSITIL54EeCw5MDUpv1shw.pt"/>
-            <parameters xmi:id="_Bc1IQL53EeCw5MDUpv1shw" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.2.0#//FunctionalChain"/>
+            <parameters xmi:id="_Bc1IQL53EeCw5MDUpv1shw" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.3.0#//FunctionalChain"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_sRl5mL52EeCw5MDUpv1shw"/>
           </elements>
           <elements xmi:id="_a126IL6EEeCw5MDUpv1shw" name="StateDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
@@ -518,7 +518,7 @@
             <methods xmi:id="_a126Jr6EEeCw5MDUpv1shw" name="footer" patternFilePath="templates/pattern._a126IL6EEeCw5MDUpv1shw/method._a126Jr6EEeCw5MDUpv1shw.pt"/>
             <methods xmi:id="_lbm7YL6FEeCw5MDUpv1shw" name="content" patternFilePath="templates/pattern._a126IL6EEeCw5MDUpv1shw/method._lbm7YL6FEeCw5MDUpv1shw.pt"/>
             <methods xmi:id="_BkxeIL6JEeCw5MDUpv1shw" name="setCapellaContext" patternFilePath="templates/pattern._a126IL6EEeCw5MDUpv1shw/method._BkxeIL6JEeCw5MDUpv1shw.pt"/>
-            <parameters xmi:id="_e5WIQL6FEeCw5MDUpv1shw" name="parameter" type="http://www.polarsys.org/capella/core/common/1.2.0#//State"/>
+            <parameters xmi:id="_e5WIQL6FEeCw5MDUpv1shw" name="parameter" type="http://www.polarsys.org/capella/core/common/1.3.0#//State"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_a126J76EEeCw5MDUpv1shw"/>
           </elements>
           <elements xmi:id="_ZXf8Ib88EeC3itjHQ6nPuA" name="StateMachineDocGen" superPattern="#_ixj0MN0eEd-Vzvs7Wt1vzQ"
@@ -532,7 +532,7 @@
             <methods xmi:id="_ZXf8Jr88EeC3itjHQ6nPuA" name="content" patternFilePath="templates/pattern._ZXf8Ib88EeC3itjHQ6nPuA/method._ZXf8Jr88EeC3itjHQ6nPuA.pt"/>
             <methods xmi:id="_ZXf8J788EeC3itjHQ6nPuA" name="footer" patternFilePath="templates/pattern._ZXf8Ib88EeC3itjHQ6nPuA/method._ZXf8J788EeC3itjHQ6nPuA.pt"/>
             <methods xmi:id="_sJ_f4L8-EeC3itjHQ6nPuA" name="setCapellaContext" patternFilePath="templates/pattern._ZXf8Ib88EeC3itjHQ6nPuA/method._sJ_f4L8-EeC3itjHQ6nPuA.pt"/>
-            <parameters xmi:id="_CQFpwL8-EeC3itjHQ6nPuA" name="parameter" type="http://www.polarsys.org/capella/core/common/1.2.0#//StateMachine"/>
+            <parameters xmi:id="_CQFpwL8-EeC3itjHQ6nPuA" name="parameter" type="http://www.polarsys.org/capella/core/common/1.3.0#//StateMachine"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_ZXf8KL88EeC3itjHQ6nPuA"/>
           </elements>
           <elements xmi:id="_1fzXsL9JEeC3itjHQ6nPuA" name="RegionDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
@@ -547,7 +547,7 @@
             <methods xmi:id="_1fzXtr9JEeC3itjHQ6nPuA" name="footer" patternFilePath="templates/pattern._1fzXsL9JEeC3itjHQ6nPuA/method._1fzXtr9JEeC3itjHQ6nPuA.pt"/>
             <methods xmi:id="_MshV8L9KEeC3itjHQ6nPuA" name="setCapellaContext" patternFilePath="templates/pattern._1fzXsL9JEeC3itjHQ6nPuA/method._MshV8L9KEeC3itjHQ6nPuA.pt"/>
             <methods xmi:id="_A5FHED4pEeKDPO8mQtK38g" name="endContent" patternFilePath="templates/pattern._1fzXsL9JEeC3itjHQ6nPuA/method._A5FHED4pEeKDPO8mQtK38g.pt"/>
-            <parameters xmi:id="_IJU3kL9KEeC3itjHQ6nPuA" name="parameter" type="http://www.polarsys.org/capella/core/common/1.2.0#//Region"/>
+            <parameters xmi:id="_IJU3kL9KEeC3itjHQ6nPuA" name="parameter" type="http://www.polarsys.org/capella/core/common/1.3.0#//Region"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_1fzXt79JEeC3itjHQ6nPuA"/>
           </elements>
           <elements xmi:id="_TIBLoDlmEeKfl43CFVnoFw" name="CapellaScenarioDocGen"
@@ -562,7 +562,7 @@
             <methods xmi:id="_TIBLpTlmEeKfl43CFVnoFw" name="setCapellaContext" patternFilePath="templates/pattern._TIBLoDlmEeKfl43CFVnoFw/method._TIBLpTlmEeKfl43CFVnoFw.pt"/>
             <methods xmi:id="_TIBLpjlmEeKfl43CFVnoFw" name="footer" patternFilePath="templates/pattern._TIBLoDlmEeKfl43CFVnoFw/method._TIBLpjlmEeKfl43CFVnoFw.pt"/>
             <methods xmi:id="_m0-ecDlmEeKfl43CFVnoFw" name="endContent" patternFilePath="templates/pattern._TIBLoDlmEeKfl43CFVnoFw/method._m0-ecDlmEeKfl43CFVnoFw.pt"/>
-            <parameters xmi:id="_W_zVgDlmEeKfl43CFVnoFw" name="parameter" type="http://www.polarsys.org/capella/core/interaction/1.2.0#//Scenario"/>
+            <parameters xmi:id="_W_zVgDlmEeKfl43CFVnoFw" name="parameter" type="http://www.polarsys.org/capella/core/interaction/1.3.0#//Scenario"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_TIBLpzlmEeKfl43CFVnoFw"/>
           </elements>
           <elements xmi:id="_WnyP8OzGEeSAVbCPYCI8cQ" name="DataValueContainerPkg"
@@ -589,7 +589,7 @@
             <methods xmi:id="_u-tmFbXYEeiyaM1QyFX3Jg" name="content" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._u-tmFbXYEeiyaM1QyFX3Jg.pt"/>
             <methods xmi:id="_u-tmFrXYEeiyaM1QyFX3Jg" name="footer" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._u-tmFrXYEeiyaM1QyFX3Jg.pt"/>
             <methods xmi:id="_291YwLXYEeiyaM1QyFX3Jg" name="setCapellaContext" patternFilePath="templates/pattern._u-tmELXYEeiyaM1QyFX3Jg/method._291YwLXYEeiyaM1QyFX3Jg.pt"/>
-            <parameters xmi:id="_xcq2QLXYEeiyaM1QyFX3Jg" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.2.0#//ComponentPort"/>
+            <parameters xmi:id="_xcq2QLXYEeiyaM1QyFX3Jg" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.3.0#//ComponentPort"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_u-tmF7XYEeiyaM1QyFX3Jg"/>
           </elements>
           <elements xmi:id="_a6_HILXaEeiyaM1QyFX3Jg" name="FunctionPortDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
@@ -603,7 +603,7 @@
             <methods xmi:id="_a6_HJbXaEeiyaM1QyFX3Jg" name="content" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._a6_HJbXaEeiyaM1QyFX3Jg.pt"/>
             <methods xmi:id="_a6_HJrXaEeiyaM1QyFX3Jg" name="footer" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._a6_HJrXaEeiyaM1QyFX3Jg.pt"/>
             <methods xmi:id="_h2T6gLXaEeiyaM1QyFX3Jg" name="setCapellaContext" patternFilePath="templates/pattern._a6_HILXaEeiyaM1QyFX3Jg/method._h2T6gLXaEeiyaM1QyFX3Jg.pt"/>
-            <parameters xmi:id="_l7zfELZwEeiyaM1QyFX3Jg" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.2.0#//FunctionPort"/>
+            <parameters xmi:id="_l7zfELZwEeiyaM1QyFX3Jg" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.3.0#//FunctionPort"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_a6_HJ7XaEeiyaM1QyFX3Jg"/>
           </elements>
           <elements xmi:id="_EC31ALXcEeiyaM1QyFX3Jg" name="FunctionalExchangeDocGen"
@@ -618,7 +618,7 @@
             <methods xmi:id="_EC31BbXcEeiyaM1QyFX3Jg" name="content" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._EC31BbXcEeiyaM1QyFX3Jg.pt"/>
             <methods xmi:id="_EC31BrXcEeiyaM1QyFX3Jg" name="footer" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._EC31BrXcEeiyaM1QyFX3Jg.pt"/>
             <methods xmi:id="_fvV8ELXcEeiyaM1QyFX3Jg" name="setCapellaContext" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._fvV8ELXcEeiyaM1QyFX3Jg.pt"/>
-            <parameters xmi:id="_aY5b0LXcEeiyaM1QyFX3Jg" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.2.0#//FunctionalExchange"/>
+            <parameters xmi:id="_aY5b0LXcEeiyaM1QyFX3Jg" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.3.0#//FunctionalExchange"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_EC31B7XcEeiyaM1QyFX3Jg"/>
           </elements>
         </libraries>
@@ -639,7 +639,7 @@
                 patternFilePath="templates/pattern._sJuJMN6ZEd-ZSZ6AN4Dlrg/method._DOFR8D2rEeCyXpZNg4b_aA.pt"/>
             <methods xmi:id="_yAqHMD2rEeCyXpZNg4b_aA" name="endSidebarSubElement"
                 patternFilePath="templates/pattern._sJuJMN6ZEd-ZSZ6AN4Dlrg/method._yAqHMD2rEeCyXpZNg4b_aA.pt"/>
-            <parameters xmi:id="_sJuJN96ZEd-ZSZ6AN4Dlrg" name="parameter" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_sJuJN96ZEd-ZSZ6AN4Dlrg" name="parameter" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_sJuJON6ZEd-ZSZ6AN4Dlrg"/>
           </elements>
         </libraries>
