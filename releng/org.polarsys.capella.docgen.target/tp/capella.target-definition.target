@@ -125,7 +125,7 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
-      <repository id="kitalpha-runtime-1.2.x" location="https://ci.polarsys.org/kitalpha/job/Kitalpha-v1.2.x/75/artifact/releng/plugins/org.polarsys.kitalpha.releng.runtime.updatesite/target/repository/"/>
+      <repository id="kitalpha-runtime-1.2.x" location="https://ci.polarsys.org/kitalpha/job/Kitalpha-v1.2.x/77/artifact/releng/plugins/org.polarsys.kitalpha.releng.runtime.updatesite/target/repository/"/>
     </location>
   </locations>
 </target>
