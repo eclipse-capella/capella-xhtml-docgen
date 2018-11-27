@@ -43,9 +43,9 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
 //	private static final String REGEX = "<[\\s]*a[\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>[\\s]*(.+?)[\\s]*<[\\s]*/[\\s]*a[\\s]*>";
-	private static final String REGEX = "<[\\s]*a[\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>(.*?)<[\\s]*/[\\s]*a[\\s]*>";
-	private static final String REGEX_IMG = "<[\\s]*img[\\s]+src[\\s]*=[\\s]*\"([^>]+)\"[\\s]*/[\\s]*>";
-	private static final String REGEX_RelativeFilePATH_OpenTag = "<a[\\s]+href=\"local://(.+?)\">";
+	private static final String REGEX = "<[\\s]*[aA][\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>(.*?)<[\\s]*/[\\s]*[aA][\\s]*>";
+	private static final String REGEX_IMG = "<[\\s]*img[^>]*?src[\\s]*=[\\s]*\"([^>\"]+?)\"[^>]*?/[\\s]*>";
+	private static final String REGEX_FilePATH = "<[aA][\\s]+href=\"(.+?)\">";
 	private static final String ERROR_CPY = "Error during project relative image copy";
 
 	/**
@@ -75,13 +75,13 @@ public class StringUtil {
 			 * Manage Links to relative image path. Image is copied in a sub
 			 * folder of output folder and link copy is used
 			 **/
-			input = manageRelativeImages(eObject, input, projectName, outputFolder);
+			input = manageImages(eObject, input, projectName, outputFolder);
 
 			/**
 			 * Manage links to relative files path Relative path will be
 			 * translated to absolute path.
 			 */
-			input = manageRelativeFileLinks(eObject, input, projectName, outputFolder);
+			input = manageFileLinks(eObject, input, projectName, outputFolder);
 
 			return input;
 		}
@@ -128,34 +128,47 @@ public class StringUtil {
 	 * @return model element description (<code>input</code>) with file relative
 	 *         paths transformed to file absolute paths
 	 */
-	private static String manageRelativeFileLinks(EObject eObject, String input, String projectName, String outputFolder) {
-		if (input.trim().length() == 0)
+	private static String manageFileLinks(EObject eObject, String input, String projectName, String outputFolder) {
+		if (input.trim().length() == 0) {
 			return input;
+		}
 
-		Pattern pattern = Pattern.compile(REGEX_RelativeFilePATH_OpenTag, Pattern.DOTALL);
+		Pattern pattern = Pattern.compile(REGEX_FilePATH, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(input);
 		final IPath parentSrcFolder = new Path(eObject.eResource().getURI().segment(1));
 		final IPath parentTargetFolderPath = new Path(projectName).append(outputFolder);
 		while (matcher.find()) {
-			String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
-			id = id.replace("-", "");
-			IPath patha = new Path(matcher.group(1));
-			String iconName = id + "/" + patha.lastSegment();
-			String iconSourcePath = "";
+			// we check that we really have a link to a file (absolute or relative) and not a link to URL, model element, diagram...
+			if (matcher.group(1).startsWith("file://") || matcher.group(1).startsWith("local://")) {
+				// in the following, replaceAll("%20", " ") is used to fix spaces in file path
+				String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
+				id = id.replace("-", "");
+				IPath patha = new Path(matcher.group(1).replaceAll("%20", " "));
+				String iconName = id + "/" + patha.lastSegment();
+				StringBuilder iconSourcePath = new StringBuilder();
 
-			IPath path = parentSrcFolder.append(matcher.group(1));
-			IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-			iconSourcePath = iconFile.getLocationURI().getPath();
+				// if absolute path
+				if (matcher.group(1).startsWith("file://")) {
+					for (String segment : patha.segments()) {
+						iconSourcePath.append("/").append(segment);
+					}
+				} else {
+					// relative path. We need to remove "local://" from matcher.group(1) => we starts with character n°8
+					IPath path = parentSrcFolder.append(matcher.group(1).substring(8, matcher.group(1).length()).replaceAll("%20", " "));
+					IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+					iconSourcePath.append(iconFile.getLocationURI().getPath());
+				}
 
-			IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
-			input = input.replace(matcher.group(0), "<a href=\"./files/" + iconName + "\">");
-			final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
-			try {
-				ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath, parentTargetFolder.getLocationURI().getPath() + "/files/" + iconName);
-			} catch (IOException e) {
-				loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
-			} catch (Exception e) {
-				loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
+				IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
+				input = input.replace(matcher.group(1), "./files/" + iconName + "\"");
+				final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
+				try {
+					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath.toString(), parentTargetFolder.getLocationURI().getPath() + "/files/" + iconName);
+				} catch (IOException e) {
+					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
+				} catch (Exception e) {
+					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
+				}
 			}
 		}
 
@@ -177,9 +190,10 @@ public class StringUtil {
 	 * @return model element description (<code>input</code>) with image
 	 *         relative paths transformed to local copy absolute paths
 	 */
-	private static String manageRelativeImages(EObject eObject, String input, String projectName, String outputFolder) {
-		if (input.trim().isEmpty())
+	private static String manageImages(EObject eObject, String input, String projectName, String outputFolder) {
+		if (input.trim().isEmpty()) {
 			return input;
+		}
 
 		Pattern pattern = Pattern.compile(REGEX_IMG, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(input);
@@ -187,9 +201,10 @@ public class StringUtil {
 		final IPath parentTargetFolderPath = new Path(projectName).append(outputFolder);
 		while (matcher.find()) {
 			if (matcher.groupCount() == 1) {
+				// in the following, replaceAll("%20", " ") is used to fix spaces in image path
 				String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
 				id = id.replace("-", "");
-				IPath patha = new Path(matcher.group(1));
+				IPath patha = new Path(matcher.group(1).replaceAll("%20", " "));
 				String iconName = id + "/" + patha.lastSegment();
 				String iconSourcePath = "";
 
@@ -198,13 +213,13 @@ public class StringUtil {
 						iconSourcePath += "/" + segment;
 					}
 				} else {
-					IPath path = parentSrcFolder.append(matcher.group(1));
+					IPath path = parentSrcFolder.append(matcher.group(1).replaceAll("%20", " "));
 					IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 					iconSourcePath = iconFile.getLocationURI().getPath();
 				}
 
 				IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
-				input = input.replace(matcher.group(0), "<img src=\"./images/" + iconName + "\">");
+				input = input.replace(matcher.group(1), "./images/" + iconName + "\"");
 				final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
 				try {
 					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath, parentTargetFolder.getLocationURI().getPath() + "/images/" + iconName);
@@ -281,12 +296,11 @@ public class StringUtil {
 				if (eObject instanceof DSemanticDiagram) {
 					buffer.append(CapellaServices.getPathFromElement(((DSemanticDiagram) eObject).getTarget()));
 					buffer.append("#");
-					buffer.append(CapellaServices.getDiagramId((DSemanticDiagram) eObject));
-					return buffer.toString();
+					buffer.append(CapellaServices.getDiagramUid((DSemanticDiagram) eObject));
 				} else {
 					buffer.append(CapellaServices.getPathFromElement(eObject));
-					return buffer.toString();
 				}
+				return buffer.toString();
 			}
 		}
 
@@ -413,8 +427,6 @@ public class StringUtil {
 				return true;
 			}
 		}
-		
 		return false;
 	}
-
 }
