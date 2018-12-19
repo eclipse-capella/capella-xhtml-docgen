@@ -19,18 +19,17 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
-import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
-import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
-
+import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.polarsys.capella.core.data.capellacore.AbstractDependenciesPkg;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.Classifier;
 import org.polarsys.capella.core.data.interaction.CombinedFragment;
 import org.polarsys.capella.core.data.interaction.InteractionOperand;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-
-import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
+import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
+import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
+import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 public class CapellaServices {
 	public static final String BOLD_BEGIN = "<b>";
@@ -288,6 +287,35 @@ public class CapellaServices {
 		buffer.append(element.eClass().getName());
 		buffer.append("\" />");
 		return buffer.toString();
+	}
+	
+	/**
+	 * Build linkable img HTML tag for exported diagram in generated folder
+	 * @param generatedFolder where the diagram file is generated
+	 * @param diagram to display
+	 * @return valid img HTML tag
+	 */
+	public static String getImageLinkForDiagram(String generatedFolder, DSemanticDiagram diagram) {
+		StringBuilder builder = new StringBuilder();
+		
+		String fileName = DocGenHtmlCapellaUtil.getCapellaElementFileName((CapellaElement)diagram.getTarget());
+		
+		builder.append("<a href=\""); //$NON-NLS-1$
+		builder.append(fileName);
+		builder.append("#"); //$NON-NLS-1$
+		builder.append(DiagramSessionHelper.getID(diagram));
+		builder.append("\">"); //$NON-NLS-1$
+		builder.append("<img id=\""); //$NON-NLS-1$
+		builder.append(diagram.hashCode());
+		builder.append("\" src=\""); //$NON-NLS-1$
+		builder.append(generatedFolder);
+		builder.append("/"); //$NON-NLS-1$
+		String validFileName = DocGenHtmlUtil.getValidFileName(diagram.getName());
+		builder.append(validFileName);
+		builder.append(".jpg\" alt=\"").append(validFileName).append("\"/>"); //$NON-NLS-1$
+		builder.append("</a>"); //$NON-NLS-1$
+		
+		return builder.toString();
 	}
 
 	/**

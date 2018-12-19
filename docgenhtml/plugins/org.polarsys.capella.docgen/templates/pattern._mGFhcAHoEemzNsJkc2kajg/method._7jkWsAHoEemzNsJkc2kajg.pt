@@ -1,0 +1,21 @@
+<% Collection<DDiagram> interestedDiagrams = CapellaHelper.getAllInterestedRepresentationsFor(element); %>
+
+<% List<DSemanticDiagram> exportableDiagrams = interestedDiagrams.parallelStream()
+			.filter(diagram -> diagram instanceof DSemanticDiagram).map(diagram -> (DSemanticDiagram)diagram)
+			.filter(diagram -> GenerationGlobalScope.getInstance().isCopyInScope(diagram.getTarget())).collect(Collectors.toList()); %>
+
+<% if (!exportableDiagrams.isEmpty()) { %>
+	<h2>Diagrams interesting for "<%=LabelProviderHelper.getText(element)%>"</h2>
+	<% exportableDiagrams.forEach(diagram -> { %>
+		<div>
+			<% String id = DiagramSessionHelper.getID(diagram); %>
+			<p class="diagram-name" id="<%=id%>"><%= EscapeChars.forHTML(diagram.getName())%></p>
+			<p class="diagram">
+				<% String generatedFolder = fileNameService.getFileName(diagram.getTarget()); %>
+				<%= CapellaServices.getImageLinkForDiagram(generatedFolder, diagram) %>
+				<br/>
+				<br/>
+			</p>
+		</div>
+	<%});%>
+<%}%>

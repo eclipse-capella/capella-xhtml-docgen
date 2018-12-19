@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,7 +13,9 @@ package org.polarsys.capella.docgen.diagram;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -23,15 +25,21 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
+import org.eclipse.sirius.business.api.query.EObjectQuery;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.common.tools.api.editing.EditingDomainFactoryService;
+import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.viewpoint.DRepresentation;
+import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
+import org.eclipse.sirius.viewpoint.description.DAnnotation;
+import org.eclipse.sirius.viewpoint.description.DescriptionPackage;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.StateFragment;
+import org.polarsys.capella.core.diagram.helpers.naming.DAnnotationSourceConstants;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeReferencesStrategy;
@@ -133,5 +141,29 @@ public class CapellaHelper {
 			objects.addAll(resolveReferencedElements(((StateFragment) repTarget).getRelatedAbstractFunction()));
 		}
 		return objects;
+	}
+	
+	/**
+	 * Scrutinize all EOI (element of interest: See {@link org.polarsys.capella.core.diagram.helpers.naming.DAnnotationSourceConstants.CAPELLA_ELEMENT_OF_INTEREST}) 
+	 * annotation of all representation descriptors to find all
+	 * representations which are interested by the semantic element
+	 * 
+	 * @param semanticElement to find all representation interested by it
+	 * @return a collection of representations interested by semantic element. If there are no representation, empty collection is returned
+	 */
+	public static Collection<DDiagram> getAllInterestedRepresentationsFor(EObject semanticElement) {
+		Collection<EObject> descriptors = new LinkedHashSet<>();
+		
+		Collection<EObject> inverseReferences = new EObjectQuery(semanticElement).getInverseReferences(DescriptionPackage.Literals.DANNOTATION__REFERENCES);
+		inverseReferences.forEach(eObject -> {
+			DAnnotation annotation = (DAnnotation) eObject;
+			if (DAnnotationSourceConstants.CAPELLA_ELEMENT_OF_INTEREST.equals(annotation.getSource())) {
+				descriptors.add(annotation.eContainer());
+			}
+		});
+		
+		return descriptors.parallelStream().map(eObject -> (DRepresentationDescriptor)eObject)
+			.map(desc -> DiagramSessionHelper.getDDiagram(desc))
+			.collect(Collectors.toList());
 	}
 }
