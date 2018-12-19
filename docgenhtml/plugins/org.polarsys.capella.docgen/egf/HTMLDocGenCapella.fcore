@@ -226,6 +226,26 @@
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_fqM44FcEEeWXKstRBeKifA"
                 called="#_F9HPplcEEeWXKstRBeKifA"/>
           </elements>
+          <elements xmi:id="_mGFhcAHoEemzNsJkc2kajg" name="InterestedDiagrmsGeneration"
+              headerMethod="#_mGFhcgHoEemzNsJkc2kajg" conditionMethod="#_mGFhdAHoEemzNsJkc2kajg"
+              initMethod="#_mGFhcwHoEemzNsJkc2kajg" footerMethod="#_mGFhdgHoEemzNsJkc2kajg">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_mGFhcQHoEemzNsJkc2kajg"
+                name="JET"/>
+            <methods xmi:id="_mGFhcgHoEemzNsJkc2kajg" name="header" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._mGFhcgHoEemzNsJkc2kajg.pt"/>
+            <methods xmi:id="_mGFhcwHoEemzNsJkc2kajg" name="init" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._mGFhcwHoEemzNsJkc2kajg.pt"/>
+            <methods xmi:id="_mGFhdAHoEemzNsJkc2kajg" name="preCondition" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._mGFhdAHoEemzNsJkc2kajg.pt"/>
+            <methods xmi:id="_mGFhdQHoEemzNsJkc2kajg" name="setContext" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._mGFhdQHoEemzNsJkc2kajg.pt"/>
+            <methods xmi:id="_mGFhdgHoEemzNsJkc2kajg" name="footer" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._mGFhdgHoEemzNsJkc2kajg.pt"/>
+            <methods xmi:id="_7jkWsAHoEemzNsJkc2kajg" name="body" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._7jkWsAHoEemzNsJkc2kajg.pt"/>
+            <parameters xmi:id="_rx_UUAHoEemzNsJkc2kajg" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <variables xmi:id="_QNgPIAHpEemzNsJkc2kajg" name="fileNameService" type="org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService"/>
+            <variables xmi:id="_UB6U4AHpEemzNsJkc2kajg" name="helper" type="org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_mGFhdwHoEemzNsJkc2kajg"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_6DwJwAHoEemzNsJkc2kajg"
+                called="#_mGFhdQHoEemzNsJkc2kajg"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_70tKAAHoEemzNsJkc2kajg"
+                called="#_7jkWsAHoEemzNsJkc2kajg"/>
+          </elements>
         </libraries>
         <libraries xmi:id="_OnutENz7Ed-Vzvs7Wt1vzQ" name="org.polarsys.capella.docgen.content">
           <elements xmi:id="_hW854N47Ed-Qav1YnqlO9A" name="AnyNamedElementDocGen"

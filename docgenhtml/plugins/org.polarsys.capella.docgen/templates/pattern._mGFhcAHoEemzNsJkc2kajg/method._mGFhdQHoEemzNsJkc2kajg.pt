@@ -1,0 +1,4 @@
+<%
+	fileNameService = DocGenHtmlCapellaUtil.SERVICE;
+	helper = new CapellaDiagramHelper();
+%>
