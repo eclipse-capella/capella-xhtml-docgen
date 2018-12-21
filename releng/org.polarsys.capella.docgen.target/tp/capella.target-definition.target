@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1540288137">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1545406973">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sdk.feature.group" version="4.6.3.v20170301-0400"/>
@@ -15,56 +15,56 @@
       <repository id="eclipse-releases-neon" location="http://download.eclipse.org/releases/neon/201705151400"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.sirius.doc.feature.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.doc.feature.source.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.runtime.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.runtime.source.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.runtime.aql.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.runtime.aql.source.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.runtime.ide.ui.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.runtime.ide.ui.source.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.interpreter.feature.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.interpreter.feature.source.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.acceleo.ui.interpreter.feature.group" version="3.7.2.201708211328"/>
-      <unit id="org.eclipse.acceleo.ui.interpreter.source.feature.group" version="3.7.2.201708211328"/>
-      <unit id="org.eclipse.sirius.aql.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.aql.source.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.acceleo.query.feature.group" version="6.0.2.201708211328"/>
-      <unit id="org.eclipse.acceleo.query.source.feature.group" version="6.0.2.201708211328"/>
-      <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group" version="5.1.2.201805181609"/>
-      <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.source.feature.group" version="5.1.2.201805181609"/>
-      <repository id="sirius-5.1.x" location="http://download.eclipse.org/sirius/updates/releases/5.1.2/neon"/>
+      <unit id="org.eclipse.sirius.doc.feature.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.doc.feature.source.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.runtime.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.runtime.source.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.runtime.aql.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.runtime.aql.source.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.runtime.ide.ui.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.runtime.ide.ui.source.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.interpreter.feature.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.interpreter.feature.source.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.acceleo.ui.interpreter.feature.group" version="3.7.4.201807201001"/>
+      <unit id="org.eclipse.acceleo.ui.interpreter.source.feature.group" version="3.7.4.201807201001"/>
+      <unit id="org.eclipse.sirius.aql.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.aql.source.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.acceleo.query.feature.group" version="6.0.4.201807201001"/>
+      <unit id="org.eclipse.acceleo.query.source.feature.group" version="6.0.4.201807201001"/>
+      <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group" version="5.1.4.201811301634"/>
+      <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.source.feature.group" version="5.1.4.201811301634"/>
+      <repository id="sirius-5.1.x" location="http://download.eclipse.org/sirius/updates/stable/5.1.4-S20181130-113030/neon"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.ad.runtime.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.cadence.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.common.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.emde.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.emde.ui.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.model.common.commands.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.model.common.scrutiny.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.model.common.share.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.model.detachment.contrib.viewpoints.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.model.detachment.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.model.detachment.ui.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.patterns.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.report.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.report.ui.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.transposer.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.richtext.widget.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.richtext.widget.feature.source.feature.group" version="1.2.1.201809070845"/>
-      <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.source.feature.group" version="1.2.1.201809070845"/>
-      <repository id="kitalpha-runtime-core-master" location="https://ci.polarsys.org/kitalpha/job/Kitalpha-v1.2.x/72/artifact/releng/plugins/org.polarsys.kitalpha.releng.runtime.core.updatesite/target/repository/"/>
+      <unit id="org.polarsys.kitalpha.ad.runtime.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.cadence.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.common.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.emde.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.emde.ui.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.model.common.commands.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.model.common.scrutiny.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.model.common.share.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.model.detachment.contrib.viewpoints.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.model.detachment.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.model.detachment.ui.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.patterns.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.report.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.report.ui.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.transposer.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.feature.source.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.source.feature.group" version="1.2.2.201812041251"/>
+      <repository id="kitalpha-runtime-core-master" location="https://ci.polarsys.org/kitalpha/job/kitalpha-v1.2.x/88/artifact/releng/plugins/org.polarsys.kitalpha.releng.runtime.core.updatesite/target/repository/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.richtext.widget.doc.feature.feature.group" version="1.2.1.201805300816"/>
-      <repository id="kitalpha-runtime-master" location="https://ci.polarsys.org/kitalpha/job/Kitalpha-v1.2.x/63/artifact/releng/plugins/org.polarsys.kitalpha.releng.runtime.updatesite/target/repository/"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.doc.feature.feature.group" version="1.2.2.201812041251"/>
+      <repository id="kitalpha-runtime-master" location="https://ci.polarsys.org/kitalpha/job/kitalpha-v1.2.x/88/artifact/releng/plugins/org.polarsys.kitalpha.releng.runtime.updatesite/target/repository/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.emde.sdk.feature.feature.group" version="1.2.1.201805300816"/>
-      <unit id="org.polarsys.kitalpha.doc.feature.feature.group" version="1.2.1.201805300816"/>
-      <repository id="kitalpha-sdk-master" location="https://ci.polarsys.org/kitalpha/job/Kitalpha-v1.2.x/63/artifact/releng/plugins/org.polarsys.kitalpha.releng.sdk.updatesite/target/repository/"/>
+      <unit id="org.polarsys.kitalpha.emde.sdk.feature.feature.group" version="1.2.2.201812041251"/>
+      <unit id="org.polarsys.kitalpha.doc.feature.feature.group" version="1.2.2.201812041251"/>
+      <repository id="kitalpha-sdk-master" location="https://ci.polarsys.org/kitalpha/job/kitalpha-v1.2.x/88/artifact/releng/plugins/org.polarsys.kitalpha.releng.sdk.updatesite/target/repository/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.diffmerge.feature.feature.group" version="0.9.0.201710271456"/>
@@ -83,9 +83,9 @@
       <repository id="diffmerge-patterns-master" location="http://download.eclipse.org/diffmerge/releases/0.9.0/edm-patterns-site"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.amalgam.explorer.activity.feature.group" version="1.9.0.201805281539"/>
-      <unit id="org.eclipse.amalgam.explorer.activity.source.feature.group" version="1.9.0.201805281539"/>
-      <repository id="amalgam-1.9.0" location="http://download.eclipse.org/modeling/amalgam/updates/stable/1.9.0-S20180528/capella"/>
+      <unit id="org.eclipse.amalgam.explorer.activity.feature.group" version="1.9.2.201811191434"/>
+      <unit id="org.eclipse.amalgam.explorer.activity.source.feature.group" version="1.9.2.201811191434"/>
+      <repository id="amalgam-1.9.0" location="http://download.eclipse.org/modeling/amalgam/updates/stable/1.9.2-S20181119/capella"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sirius.query.legacy.feature.feature.group" version="1.1.0.201504271341"/>
