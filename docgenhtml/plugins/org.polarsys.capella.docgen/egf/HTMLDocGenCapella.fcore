@@ -237,7 +237,7 @@
             <methods xmi:id="_mGFhdQHoEemzNsJkc2kajg" name="setContext" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._mGFhdQHoEemzNsJkc2kajg.pt"/>
             <methods xmi:id="_mGFhdgHoEemzNsJkc2kajg" name="footer" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._mGFhdgHoEemzNsJkc2kajg.pt"/>
             <methods xmi:id="_7jkWsAHoEemzNsJkc2kajg" name="body" patternFilePath="templates/pattern._mGFhcAHoEemzNsJkc2kajg/method._7jkWsAHoEemzNsJkc2kajg.pt"/>
-            <parameters xmi:id="_rx_UUAHoEemzNsJkc2kajg" name="element" type="http://www.polarsys.org/capella/core/core/1.2.0#//CapellaElement"/>
+            <parameters xmi:id="_rx_UUAHoEemzNsJkc2kajg" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <variables xmi:id="_QNgPIAHpEemzNsJkc2kajg" name="fileNameService" type="org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService"/>
             <variables xmi:id="_UB6U4AHpEemzNsJkc2kajg" name="helper" type="org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_mGFhdwHoEemzNsJkc2kajg"/>
