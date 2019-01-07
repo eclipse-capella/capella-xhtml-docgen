@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (c) 2017 THALES GLOBAL SERVICES.
+  Copyright (c) 2017, 2019 THALES GLOBAL SERVICES.
   All rights reserved. This program and the accompanying materials
   are made available under the terms of the Eclipse Public License v1.0
   which accompanies this distribution, and is available at
@@ -20,7 +20,7 @@
 	<name>Capella XHTML DocGen Add-on</name>
 	<groupId>org.polarsys</groupId>
 	<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -89,7 +89,7 @@
 						<artifact>
 							<groupId>org.polarsys</groupId>
 							<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-							<version>1.2.0-SNAPSHOT</version>
+							<version>1.3.0-SNAPSHOT</version>
 							<classifier>releng/org.polarsys.capella.docgen.target/tp/capella.target-definition</classifier>
 						</artifact>
 					</target>
@@ -264,7 +264,7 @@
 											includes="**/META-INF/**" />
 									</delete>
 									<zip
-										destfile="${project.build.directory}/${packagedAddonName}-dropins-${unqualifiedVersion}.${buildQualifier}.zip">
+										destfile="${project.build.directory}/${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersion}-dropins.zip">
 										<fileset dir="${project.build.directory}">
 											<include name="${packagedAddonName}/**" />
 										</fileset>
@@ -287,7 +287,7 @@
 								<goal>archive-repository</goal>
 							</goals>
 							<configuration>
-								<finalName>${packagedAddonName}-updateSite-${unqualifiedVersion}.${buildQualifier}</finalName>
+								<finalName>${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersion}-updateSite</finalName>
 							</configuration>
 						</execution>
 					</executions>
