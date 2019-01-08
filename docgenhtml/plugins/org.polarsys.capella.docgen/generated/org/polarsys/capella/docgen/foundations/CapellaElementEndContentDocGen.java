@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.0.201805040915
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -39,6 +39,8 @@ public class CapellaElementEndContentDocGen {
 	protected final String TEXT_16 = NL;
 	protected final String TEXT_17 = NL;
 	protected final String TEXT_18 = NL;
+	protected final String TEXT_19 = NL;
+	protected final String TEXT_20 = NL;
 
 	public CapellaElementEndContentDocGen() {
 		//Here is the constructor
@@ -74,8 +76,8 @@ public class CapellaElementEndContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_17);
-		stringBuffer.append(TEXT_18);
+		stringBuffer.append(TEXT_19);
+		stringBuffer.append(TEXT_20);
 		return stringBuffer.toString();
 	}
 
@@ -205,6 +207,24 @@ public class CapellaElementEndContentDocGen {
 			callParameters.put("element", element);
 			CallHelper.executeWithParameterInjection(
 					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_wWwgkErlEeCvqtVx_IKrqA",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
+		}
+
+		stringBuffer.append(TEXT_17);
+		// Interested diagram in this model element 
+		stringBuffer.append(TEXT_18);
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.InterestedDiagrmsGeneration" args="element:element"%>
+
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
+
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("element", element);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_mGFhcAHoEemzNsJkc2kajg",
 					new ExecutionContext((InternalPatternContext) ctx), callParameters);
 			stringBuffer.setLength(0);
 		}
