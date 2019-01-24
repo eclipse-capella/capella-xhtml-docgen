@@ -16,10 +16,9 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.polarsys.kitalpha.doc.gen.business.core.util.EObjectLabelProviderHelper;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
-
 import org.polarsys.capella.common.mdsofa.common.constant.ICommonConstants;
+import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
+import org.polarsys.capella.core.data.capellacore.EnumerationPropertyValue;
 import org.polarsys.capella.core.data.information.AggregationKind;
 import org.polarsys.capella.core.data.information.CollectionValueReference;
 import org.polarsys.capella.core.data.information.Property;
@@ -31,8 +30,8 @@ import org.polarsys.capella.core.data.information.datavalue.EnumerationReference
 import org.polarsys.capella.core.data.information.datavalue.NumericReference;
 import org.polarsys.capella.core.data.information.datavalue.StringReference;
 import org.polarsys.capella.core.data.information.datavalue.ValuePart;
-import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
-import org.polarsys.capella.core.data.capellacore.EnumerationPropertyValue;
+import org.polarsys.kitalpha.doc.gen.business.core.util.EObjectLabelProviderHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 public class CapellaPropertyServices {
 	/**

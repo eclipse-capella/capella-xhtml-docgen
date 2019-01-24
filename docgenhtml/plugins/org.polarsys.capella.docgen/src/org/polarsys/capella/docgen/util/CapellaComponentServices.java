@@ -19,7 +19,10 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-
+import org.polarsys.capella.common.data.modellingcore.AbstractExchangeItem;
+import org.polarsys.capella.common.data.modellingcore.InformationsExchanger;
+import org.polarsys.capella.common.data.modellingcore.ModelElement;
+import org.polarsys.capella.core.data.capellacore.Feature;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Interface;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
@@ -30,12 +33,8 @@ import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.fa.OrientationPortKind;
 import org.polarsys.capella.core.data.information.Port;
-import org.polarsys.capella.core.data.capellacore.Feature;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.model.helpers.InterfaceExt;
-import org.polarsys.capella.common.data.modellingcore.AbstractExchangeItem;
-import org.polarsys.capella.common.data.modellingcore.InformationsExchanger;
-import org.polarsys.capella.common.data.modellingcore.ModelElement;
 
 public class CapellaComponentServices {
 

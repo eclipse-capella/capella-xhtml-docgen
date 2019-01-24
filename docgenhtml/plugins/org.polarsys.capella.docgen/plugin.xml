@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -24,6 +24,20 @@ Contributors:
       <fcore
             id="egf/HTMLDocGenCapella.fcore">
       </fcore>
+      <fcore
+            id="extensions/indexExtensions.fcore">
+      </fcore>
+   </extension>
+   <extension
+         point="org.polarsys.kitalpha.doc.gen.business.core.contentExtension">
+      <contentExtension
+            name="Build Capella Index"
+            priority="0"
+            topic="POST_CONTENT_EXTENSION">
+         <fcores
+               patternURI="platform:/plugin/org.polarsys.capella.docgen/extensions/indexExtensions.fcore#_E1cGIB7yEemlca6iW58mwA">
+         </fcores>
+      </contentExtension>
    </extension>
 
 </plugin>

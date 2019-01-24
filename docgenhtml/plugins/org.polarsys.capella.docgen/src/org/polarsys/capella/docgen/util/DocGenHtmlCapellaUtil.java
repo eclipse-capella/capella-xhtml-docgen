@@ -11,18 +11,17 @@
 package org.polarsys.capella.docgen.util;
 
 import org.eclipse.emf.ecore.EObject;
-import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlConstants;
-import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
-import org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService;
-
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.cs.ExchangeItemAllocation;
 import org.polarsys.capella.core.data.fa.ComponentExchange;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.helpers.fa.services.FunctionExt;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.oa.CommunicationMean;
 import org.polarsys.capella.core.model.helpers.ComponentExchangeExt;
+import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlConstants;
+import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
+import org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService;
 
 public class DocGenHtmlCapellaUtil {
 

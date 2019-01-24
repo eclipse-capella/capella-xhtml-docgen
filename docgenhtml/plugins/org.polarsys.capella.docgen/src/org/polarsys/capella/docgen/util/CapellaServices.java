@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -146,6 +146,42 @@ public class CapellaServices {
 		// return the buffer
 		return buffer.toString();
 	}
+	/**
+	 * 
+	 * @param element
+	 * @param label
+	 * @return the hyperlink to element page from index
+	 */
+	public static String getIndexHyperlinkFromElement(EObject element, String label) {
+		int linked = isLinkable(element);
+		// Get the representation name
+		String text = label;
+		// Format representation name with html rules
+		text = EscapeChars.forHTML(text);
+		// Initialize Buffer
+		StringBuffer buffer = new StringBuffer();
+		if (linked != -1) {
+			// Add the opening href tag to the buffer
+			buffer.append(HYPERLINK_OPEN);
+			// Add the preoject root ressource to the buffer
+			if (linked == 1) {
+				buffer.append(getIndexPathFromElement(element.eContainer()));
+				buffer.append("#");
+				buffer.append(getAnchorId(element));
+			} else
+				buffer.append(getIndexPathFromElement(element));
+			// Add the href tag completion to the buffer
+			buffer.append(HYPERLINK_COMPLETE);
+		}
+		// Add the name to present to the buffer
+		buffer.append(text);
+		if (linked != -1) {
+			// Add the close href tag to the buffer
+			buffer.append(HYPERLINK_CLOSE);
+		}
+		// return the buffer
+		return buffer.toString();
+	}
 
 	/**
 	 * <b>Create a html hyper link from an element</b>
@@ -157,6 +193,10 @@ public class CapellaServices {
 	 */
 	public static String getHyperlinkFromElement(EObject element) {
 		return getHyperlinkFromElement(element, LabelProviderHelper.getText(element));
+	}
+	
+	public static String getIndexHyperlinkFromElement(EObject element) {
+		return getIndexHyperlinkFromElement(element, LabelProviderHelper.getText(element));
 	}
 
 	public static boolean isElementLinkable(EObject element) {
@@ -224,6 +264,25 @@ public class CapellaServices {
 		buffer.append(PATH_COMPLETE);
 		return buffer.toString();
 	}
+	
+	/**
+	 * 
+	 * @param element
+	 * @return the path of the element to be reachable from the index
+	 */
+	public static String getIndexPathFromElement(EObject element) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(PATH_OPEN).append(PATH_OPEN); //Index is located one level deeper
+		// Add the project root resource to the buffer
+		buffer.append(DocGenHtmlUtil.getModelName(element));
+		// Add the Separator to the buffer
+		buffer.append(HYPERLINK_SEPARATOR);
+		// Add the file name to the buffer
+		buffer.append(DocGenHtmlCapellaUtil.SERVICE.getFileName(element));
+		// Add the href tag completion to the buffer
+		buffer.append(PATH_COMPLETE);
+		return buffer.toString();
+	}
 
 	private static String getHyperlinkFromDiagram(DSemanticDiagram diagram) {
 		// Get the representation name
@@ -281,7 +340,24 @@ public class CapellaServices {
 	public static String getImageLinkFromElement(EObject element, String projectName, String outputFolder) {
 		String imageFileName = LabelProviderHelper.getImageFileName(element, projectName, outputFolder);
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("<img src=\"../icon/");
+		return appendRelativePath(element, imageFileName, buffer, "../icon/");
+	}
+	
+	/**
+	 * 
+	 * @param element
+	 * @param projectName
+	 * @param outputFolder
+	 * @return image tag to be reachable from the index
+	 */
+	public static String getIndexImageLinkFromElement(EObject element, String projectName, String outputFolder) {
+		String imageFileName = LabelProviderHelper.getImageFileName(element, projectName, outputFolder);
+		StringBuffer buffer = new StringBuffer();
+		return appendRelativePath(element, imageFileName, buffer, "../../icon/");
+	}
+	private static String appendRelativePath(EObject element, String imageFileName, StringBuffer buffer, String relativePath) {
+		buffer.append("<img src=\"");
+		buffer.append(relativePath);
 		buffer.append(imageFileName);
 		buffer.append("\" alt=\"");
 		buffer.append(element.eClass().getName());

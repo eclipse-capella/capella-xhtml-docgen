@@ -17,7 +17,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-
+import org.polarsys.capella.core.data.capellacore.TypedElement;
 import org.polarsys.capella.core.data.information.AggregationKind;
 import org.polarsys.capella.core.data.information.Class;
 import org.polarsys.capella.core.data.information.ExchangeItem;
@@ -28,7 +28,6 @@ import org.polarsys.capella.core.data.information.Parameter;
 import org.polarsys.capella.core.data.information.Property;
 import org.polarsys.capella.core.data.information.Union;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
-import org.polarsys.capella.core.data.capellacore.TypedElement;
 
 /**
  * 
