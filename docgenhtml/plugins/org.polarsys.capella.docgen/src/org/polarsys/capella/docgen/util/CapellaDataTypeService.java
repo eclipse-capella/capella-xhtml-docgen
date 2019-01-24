@@ -16,7 +16,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.capellacore.TypedElement;
 import org.polarsys.capella.core.data.information.Class;
 import org.polarsys.capella.core.data.information.ExchangeItem;
 import org.polarsys.capella.core.data.information.ExchangeItemElement;
@@ -26,8 +27,6 @@ import org.polarsys.capella.core.data.information.datatype.DataType;
 import org.polarsys.capella.core.data.information.datatype.Enumeration;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.NumericValue;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.core.data.capellacore.TypedElement;
 
 public class CapellaDataTypeService {
 

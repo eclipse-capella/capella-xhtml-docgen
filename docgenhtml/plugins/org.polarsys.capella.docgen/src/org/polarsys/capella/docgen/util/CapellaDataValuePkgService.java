@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.DataValueContainer;
 

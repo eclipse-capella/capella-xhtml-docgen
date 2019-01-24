@@ -16,7 +16,10 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-
+import org.polarsys.capella.common.data.modellingcore.AbstractType;
+import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
+import org.polarsys.capella.core.data.capellacore.NamedElement;
+import org.polarsys.capella.core.data.capellacore.Type;
 import org.polarsys.capella.core.data.information.CollectionValue;
 import org.polarsys.capella.core.data.information.datavalue.BinaryExpression;
 import org.polarsys.capella.core.data.information.datavalue.ComplexValue;
@@ -28,10 +31,6 @@ import org.polarsys.capella.core.data.information.datavalue.LiteralStringValue;
 import org.polarsys.capella.core.data.information.datavalue.NumericValue;
 import org.polarsys.capella.core.data.information.datavalue.UnaryExpression;
 import org.polarsys.capella.core.data.information.datavalue.ValuePart;
-import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
-import org.polarsys.capella.core.data.capellacore.NamedElement;
-import org.polarsys.capella.core.data.capellacore.Type;
-import org.polarsys.capella.common.data.modellingcore.AbstractType;
 
 public class CapellaDataValueServices {
 	/**
