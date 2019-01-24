@@ -1,0 +1,20 @@
+<% 
+List<IConceptsHelper> conceptsHelperList = ExtensionService.INSTANCE.getConceptsHelpersList();
+
+
+String projectName = (String) ctx.getValue("projectName");
+String outputFolder =  (String) ctx.getValue("outputFolder");
+
+for (IConceptsHelper iConceptsHelper : conceptsHelperList) {
+	if (iConceptsHelper.accept(parameter)) {
+		String conceptLabel = iConceptsHelper.getConceptLabel(parameter);
+		String linkTagTowardPageElement = CapellaServices.getIndexHyperlinkFromElement(parameter);
+		String iconTagOfElement = CapellaServices.getIndexImageLinkFromElement(parameter, projectName, outputFolder);
+		String fileName = DocGenHtmlCapellaUtil.SERVICE.getFileName(parameter);
+		IndexItem item = new IndexItem(conceptLabel, parameter.eClass().getName(), 
+						iconTagOfElement, linkTagTowardPageElement, fileName);
+		IndexerService.INSTANCE.getElementsToIndexItems().put(fileName, item);
+		break;
+	}
+}
+%>

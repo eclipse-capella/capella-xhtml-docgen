@@ -10,6 +10,13 @@
  ******************************************************************************/
 package org.polarsys.capella.docgen.util;
 
+import org.polarsys.capella.core.data.capellacommon.AbstractState;
+import org.polarsys.capella.core.data.capellacommon.InitialPseudoState;
+import org.polarsys.capella.core.data.capellacommon.Region;
+import org.polarsys.capella.core.data.capellacommon.StateMachine;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.capellacore.GeneralClass;
+import org.polarsys.capella.core.data.capellacore.Structure;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Interface;
 import org.polarsys.capella.core.data.cs.Part;
@@ -28,13 +35,6 @@ import org.polarsys.capella.core.data.information.Unit;
 import org.polarsys.capella.core.data.information.datatype.DataType;
 import org.polarsys.capella.core.data.interaction.AbstractCapability;
 import org.polarsys.capella.core.data.interaction.Scenario;
-import org.polarsys.capella.core.data.capellacommon.AbstractState;
-import org.polarsys.capella.core.data.capellacommon.InitialPseudoState;
-import org.polarsys.capella.core.data.capellacommon.Region;
-import org.polarsys.capella.core.data.capellacommon.StateMachine;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.core.data.capellacore.GeneralClass;
-import org.polarsys.capella.core.data.capellacore.Structure;
 import org.polarsys.capella.core.data.oa.Entity;
 import org.polarsys.capella.core.data.oa.Role;
 import org.polarsys.capella.core.data.requirement.Requirement;

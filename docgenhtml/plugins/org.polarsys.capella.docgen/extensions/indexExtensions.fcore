@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fcore:FactoryComponent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fcore="http://www.eclipse.org/egf/1.0.0/fcore"
+    xmlns:jetpattern="http://www.eclipse.org/egf/1.0.0/jetpattern" xmlns:pattern="http://www.eclipse.org/egf/1.0.0/pattern"
+    xmi:id="_cqkaIB7wEemlca6iW58mwA" name="indexExtensions">
+  <viewpointContainer xmi:id="_eH9lMB7wEemlca6iW58mwA">
+    <viewpoints xmi:type="pattern:PatternViewpoint" xmi:id="_EHieUB7yEemlca6iW58mwA">
+      <libraries xmi:id="_E1cGIB7yEemlca6iW58mwA" name="org.polarsys.capella.docgen.index.items.builder">
+        <elements xmi:id="_gzIgEB7yEemlca6iW58mwA" name="CollectCapellaItems" headerMethod="#_gzIgEh7yEemlca6iW58mwA"
+            conditionMethod="#_gzIgFB7yEemlca6iW58mwA" initMethod="#_gzIgEx7yEemlca6iW58mwA"
+            footerMethod="#_gzIgFh7yEemlca6iW58mwA">
+          <nature xmi:type="jetpattern:JetNature" xmi:id="_gzIgER7yEemlca6iW58mwA"
+              name="JET"/>
+          <methods xmi:id="_gzIgEh7yEemlca6iW58mwA" name="header" patternFilePath="templates/pattern._gzIgEB7yEemlca6iW58mwA/method._gzIgEh7yEemlca6iW58mwA.pt"/>
+          <methods xmi:id="_gzIgEx7yEemlca6iW58mwA" name="init" patternFilePath="templates/pattern._gzIgEB7yEemlca6iW58mwA/method._gzIgEx7yEemlca6iW58mwA.pt"/>
+          <methods xmi:id="_gzIgFB7yEemlca6iW58mwA" name="preCondition" patternFilePath="templates/pattern._gzIgEB7yEemlca6iW58mwA/method._gzIgFB7yEemlca6iW58mwA.pt"/>
+          <methods xmi:id="_YGI98B72Eemlca6iW58mwA" name="setContext" patternFilePath="templates/pattern._gzIgEB7yEemlca6iW58mwA/method._YGI98B72Eemlca6iW58mwA.pt"/>
+          <methods xmi:id="_gzIgFR7yEemlca6iW58mwA" name="body" patternFilePath="templates/pattern._gzIgEB7yEemlca6iW58mwA/method._gzIgFR7yEemlca6iW58mwA.pt"/>
+          <methods xmi:id="_gzIgFh7yEemlca6iW58mwA" name="footer" patternFilePath="templates/pattern._gzIgEB7yEemlca6iW58mwA/method._gzIgFh7yEemlca6iW58mwA.pt"/>
+          <parameters xmi:id="_YAJLAB7zEemlca6iW58mwA" name="parameter" type="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+          <variables xmi:id="_Uyc_oB72Eemlca6iW58mwA" name="fileNameService" type="org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService"/>
+          <orchestration xmi:type="pattern:SuperCall" xmi:id="_gzIgFx7yEemlca6iW58mwA"/>
+          <orchestration xmi:type="pattern:MethodCall" xmi:id="_YpKLcB72Eemlca6iW58mwA"
+              called="#_YGI98B72Eemlca6iW58mwA"/>
+          <orchestration xmi:type="pattern:MethodCall" xmi:id="_n2DJMB7yEemlca6iW58mwA"
+              called="#_gzIgFR7yEemlca6iW58mwA"/>
+        </elements>
+      </libraries>
+    </viewpoints>
+  </viewpointContainer>
+</fcore:FactoryComponent>

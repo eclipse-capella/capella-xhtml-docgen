@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.polarsys.capella.core.data.capellacore.GeneralizableElement;
 import org.polarsys.capella.core.data.capellacore.impl.GeneralizableElementImpl;
 

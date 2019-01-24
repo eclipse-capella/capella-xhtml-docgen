@@ -16,20 +16,19 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
+import org.polarsys.capella.common.data.activity.ActivityEdge;
+import org.polarsys.capella.common.data.activity.ActivityNode;
+import org.polarsys.capella.common.data.activity.InputPin;
+import org.polarsys.capella.common.data.activity.OutputPin;
+import org.polarsys.capella.common.data.modellingcore.AbstractExchangeItem;
+import org.polarsys.capella.core.data.capellacommon.State;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.information.ExchangeItem;
 import org.polarsys.capella.docgen.util.pattern.helper.FunctionHelper;
-import org.polarsys.capella.core.data.capellacommon.State;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.common.data.activity.ActivityEdge;
-import org.polarsys.capella.common.data.activity.ActivityNode;
-import org.polarsys.capella.common.data.activity.InputPin;
-import org.polarsys.capella.common.data.activity.OutputPin;
-import org.polarsys.capella.common.data.modellingcore.AbstractExchangeItem;
 
 /**
  * Function template services.
