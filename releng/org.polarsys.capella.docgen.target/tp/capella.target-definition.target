@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1548431540">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1548432685">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sdk.feature.group" version="4.6.3.v20170301-0400"/>
@@ -116,8 +116,8 @@
       <repository id="orbit-R20140525021250" location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.capella.rcp.feature.feature.group" version="1.2.1.201806011020"/>
-      <repository id="capella-1.2.x" location="https://ci.polarsys.org/capella/view/Capella-v1.2.x/job/capella-v1.2.x/266/artifact/releng/plugins/org.polarsys.capella.rcp.site/target/repository/"/>
+      <unit id="org.polarsys.capella.rcp.feature.feature.group" version="1.2.2.201901241810"/>
+      <repository id="capella-1.2.x" location="https://ci.polarsys.org/capella/view/Capella-v1.2.x/job/capella-v1.2.x/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.capella.rcp.site/target/repository/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.egf.feature.group" version="1.5.1.v20180423-0901"/>
