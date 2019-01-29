@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+  Thales - initial API and implementation
+  Obeo - add support for generation configuration files
+-->
+
+<?eclipse version="3.2"?>
+<plugin>
+
+<extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <actionProvider
+            class="org.polarsys.capella.docgen.configuration.ui.actions.HTMLDocumentationConfigurationGenerationActionProvider"
+            id="capella.project.explorer.actions.htmlGendocConfiguration">
+         <enablement>
+               <or>
+                  <and>
+                     <instanceof
+                           value="org.eclipse.core.resources.IFile">
+                     </instanceof>
+                     <test
+                           forcePluginActivation="true"
+                           property="org.eclipse.core.resources.extension"
+                           value="aird">
+                     </test>
+                  </and>
+                  <and>
+                     <instanceof
+                           value="org.polarsys.capella.core.data.capellacore.NamedElement">
+                     </instanceof>
+                     <not>
+                        <and>
+                           <instanceof
+                                 value="org.eclipse.core.resources.IFile">
+                           </instanceof>
+                           <test
+                                 forcePluginActivation="true"
+                                 property="org.eclipse.core.resources.extension"
+                                 value="aird">
+                           </test>
+                        </and>
+                     </not>
+                  </and>
+               </or>
+            </enablement>
+      </actionProvider>
+   </extension>
+  
+</plugin>

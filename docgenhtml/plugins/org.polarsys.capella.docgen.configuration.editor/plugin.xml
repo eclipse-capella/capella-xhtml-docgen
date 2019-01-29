@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+  Thales - initial API and implementation
+  Obeo - add support for generation configuration files
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated configuration -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.polarsys.capella.configuration.presentation.ConfigurationModelWizardID"
+            name="%_UI_ConfigurationModelWizard_label"
+            class="org.polarsys.capella.configuration.presentation.ConfigurationModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ConfigurationModelFile.gif">
+         <description>%_UI_ConfigurationModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated configuration -->
+      <editor
+            id="org.polarsys.capella.configuration.presentation.ConfigurationEditorID"
+            name="%_UI_ConfigurationEditor_label"
+            icon="icons/full/obj16/ConfigurationModelFile.gif"
+            extensions="configuration"
+            class="org.polarsys.capella.configuration.presentation.ConfigurationEditor"
+            contributorClass="org.polarsys.capella.configuration.presentation.ConfigurationActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
