@@ -39,4 +39,8 @@ Contributors:
          id="org.eclipse.egf"
          version="0.0.0"/>
 
+   <includes
+         id="org.polarsys.capella.docgen.configuration.feature"
+         version="0.0.0"/>
+
 </feature>

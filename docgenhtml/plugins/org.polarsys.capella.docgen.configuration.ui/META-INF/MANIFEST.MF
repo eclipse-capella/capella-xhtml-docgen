@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.3
+Created-By: 1.7.0_80-b15 (Oracle Corporation)
+Export-Package: org.polarsys.capella.docgen.configuration.ui,
+ org.polarsys.capella.docgen.configuration.ui.actions,
+ org.polarsys.capella.docgen.configuration.ui.utils,
+ org.polarsys.capella.docgen.configuration.ui.viewer,
+ org.polarsys.capella.docgen.configuration.ui.viewer.providers,
+ org.polarsys.capella.docgen.configuration.ui.wizard
+Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core.ui,
+ org.polarsys.capella.docgen,
+ org.eclipse.ui.workbench,
+ org.polarsys.capella.core.platform.sirius.ui.navigator,
+ org.eclipse.sirius.diagram,
+ org.polarsys.capella.core.ui.toolkit,
+ org.polarsys.capella.core.sirius.ui,
+ org.polarsys.capella.common.ui.toolkit.browser,
+ org.eclipse.sirius.ext.base,
+ org.polarsys.capella.docgen.configuration,
+ org.eclipse.sirius.table
+Bundle-Vendor: %providerName
+Bundle-ActivationPolicy: lazy
+Bundle-Version: 1.2.2.qualifier
+Bundle-Localization: plugin
+Bundle-Name: %pluginName
+Bundle-Activator: org.polarsys.capella.docgen.configuration.ui.Activator
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.polarsys.capella.docgen.configuration.ui;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
