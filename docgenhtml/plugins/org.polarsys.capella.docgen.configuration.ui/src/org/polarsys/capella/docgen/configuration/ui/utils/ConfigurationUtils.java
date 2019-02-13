@@ -29,6 +29,8 @@ import org.eclipse.sirius.tools.api.command.semantic.AddSemanticResourceCommand;
 import org.eclipse.sirius.tools.api.command.semantic.RemoveSemanticResourceCommand;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
+import org.eclipse.sirius.viewpoint.DRepresentationElement;
+import org.eclipse.sirius.viewpoint.description.DModelElement;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.EObjectWrapper;
@@ -199,7 +201,7 @@ public class ConfigurationUtils {
 		if (eObject instanceof CapellaElement) {
 			return canGenerateHtmlDocumentationFor((CapellaElement) eObject);
 		} else {
-			return eObject instanceof DRepresentationDescriptor || eObject instanceof DRepresentation;
+			return eObject instanceof DModelElement || eObject instanceof DRepresentationElement;
 		}
 	}
 
