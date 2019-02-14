@@ -36,6 +36,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.sirius.business.api.session.Session;
@@ -59,7 +60,13 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.misc.StringMatcher;
+import org.eclipse.ui.navigator.CommonNavigator;
+import org.eclipse.ui.navigator.CommonViewer;
 import org.polarsys.capella.common.ui.toolkit.browser.category.ICategory;
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.BrowserElementWrapper;
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.CategoryWrapper;
@@ -336,6 +343,25 @@ public class SelectElementsWizardPage extends WizardPage {
 
 	private void createSelectElementsViewers(Group grpSelectElements) {
 		leftTreeViewer = (GenerationContainerCheckedTreeViewer) createFilteredCheckBoxTreeViewer(grpSelectElements);
+
+		// Apply the exact same filters as those used in the Capella Project
+		// Explorer view.
+		IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		if (workbenchWindow != null) {
+			IWorkbenchPage activePage = workbenchWindow.getActivePage();
+			if (activePage != null) {
+				IViewPart viewPart = activePage.findView("capella.project.explorer");
+				if (viewPart instanceof CommonNavigator) {
+					CommonViewer viewer = ((CommonNavigator) viewPart).getCommonViewer();
+					if (viewer != null) {
+						ViewerFilter[] filters = viewer.getFilters();
+						leftTreeViewer.setFilters(filters);
+					}
+				}
+
+			}
+		}
+
 		leftTreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
