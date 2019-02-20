@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,17 +14,26 @@ import org.eclipse.emf.ecore.EObject;
 import org.polarsys.kitalpha.doc.gen.business.core.helper.IConceptsHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.docgen.util.DocGenHtmlCapellaControl;
-
 public class CapellaConceptsHelper implements IConceptsHelper {
 
 	public boolean accept(Object modelElement) {
-		if (modelElement instanceof CapellaElement) {
-			return DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) modelElement);
-		} else {
-			return false;
-		}
+		/*
+		 * Original code
+		 */
+//		if (modelElement instanceof CapellaElement) {
+//			return DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) modelElement);
+//		} else {
+//			return false;
+//		}
+		
+		/*
+		 * FIXME: A workaround for avoiding computing index by the core index
+		 * rather than the extension.
+		 * 
+		 * See: org.polarsys.kitalpha.doc.gen.business.core.visitor.DocgenCommonSubClassEmfModelVisitor#indexElement(Object)
+		 * 
+		 */
+		return false;
 	}
 
 	public String getConceptLabel(Object modelElement) {
