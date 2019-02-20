@@ -1,6 +1,8 @@
 //Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.index.items.builder;
 
+import org.polarsys.capella.docgen.helper.CapellaConceptsHelper;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.kitalpha.doc.gen.business.core.services.IndexItem;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
@@ -118,7 +120,7 @@ public class CollectCapellaItems {
 		String outputFolder = (String) ctx.getValue("outputFolder");
 
 		for (IConceptsHelper iConceptsHelper : conceptsHelperList) {
-			if (iConceptsHelper.accept(parameter)) {
+			if (iConceptsHelper instanceof CapellaConceptsHelper) {
 				String conceptLabel = iConceptsHelper.getConceptLabel(parameter);
 				String linkTagTowardPageElement = CapellaServices.getIndexHyperlinkFromElement(parameter);
 				String iconTagOfElement = CapellaServices.getIndexImageLinkFromElement(parameter, projectName,
@@ -136,6 +138,6 @@ public class CollectCapellaItems {
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return true;
+		return parameter instanceof CapellaElement;
 	}
 }

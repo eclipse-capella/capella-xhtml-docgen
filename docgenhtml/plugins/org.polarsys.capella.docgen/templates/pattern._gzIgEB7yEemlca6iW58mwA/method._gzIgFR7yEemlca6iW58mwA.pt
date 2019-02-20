@@ -6,7 +6,7 @@ String projectName = (String) ctx.getValue("projectName");
 String outputFolder =  (String) ctx.getValue("outputFolder");
 
 for (IConceptsHelper iConceptsHelper : conceptsHelperList) {
-	if (iConceptsHelper.accept(parameter)) {
+	if (iConceptsHelper instanceof CapellaConceptsHelper) {
 		String conceptLabel = iConceptsHelper.getConceptLabel(parameter);
 		String linkTagTowardPageElement = CapellaServices.getIndexHyperlinkFromElement(parameter);
 		String iconTagOfElement = CapellaServices.getIndexImageLinkFromElement(parameter, projectName, outputFolder);
