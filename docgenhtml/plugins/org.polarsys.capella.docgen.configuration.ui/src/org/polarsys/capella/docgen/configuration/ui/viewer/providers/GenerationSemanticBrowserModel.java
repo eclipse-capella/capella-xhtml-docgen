@@ -128,4 +128,16 @@ public class GenerationSemanticBrowserModel implements ISemanticBrowserModel {
 	public boolean containsExpandedHistory(String browserID) {
 		return false;
 	}
+
+	@Override
+	public void setListeningToPageSelectionEvents(boolean value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isListeningToPageSelectionEvents() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
