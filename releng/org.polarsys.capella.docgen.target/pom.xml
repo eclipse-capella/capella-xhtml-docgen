@@ -70,8 +70,7 @@
 							<artifactId>org.eclipse.equinox.p2.sdk</artifactId>
 							<type>eclipse-feature</type>
 						</dependency>
-					</dependencies
-					<executionEnvironment>JavaSE-1.8</executionEnvironment>
+					</dependencies>
 				</configuration>
 				<executions>
 					<execution>
