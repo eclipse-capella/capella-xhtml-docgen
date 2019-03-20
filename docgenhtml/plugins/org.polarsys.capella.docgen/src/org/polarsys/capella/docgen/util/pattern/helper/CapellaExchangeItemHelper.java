@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,6 +22,7 @@ import org.polarsys.capella.core.data.cs.ExchangeItemAllocation;
 import org.polarsys.capella.core.data.cs.Interface;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
+import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementLink;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.helpers.information.services.ExchangeItemExt;
 import org.polarsys.capella.core.data.information.ExchangeItem;
@@ -93,8 +94,8 @@ public class CapellaExchangeItemHelper {
 				if (object instanceof FunctionalChain) {
 					FunctionalChain functionalChain = (FunctionalChain) object;
 					for (Involvement involvment : functionalChain.getInvolvedInvolvements()) {
-						if (involvment instanceof FunctionalChainInvolvement) {
-							EList<ExchangeItem> referencedItems = ((FunctionalChainInvolvement) involvment).getExchangedItems();
+						if (involvment instanceof FunctionalChainInvolvementLink) {
+							EList<ExchangeItem> referencedItems = ((FunctionalChainInvolvementLink) involvment).getExchangedItems();
 							if (referencedItems.contains(exchangeItem) && !referencingFunctionalChains.contains(functionalChain)) {
 								referencingFunctionalChainsStrings
 								    .add(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, functionalChain));
