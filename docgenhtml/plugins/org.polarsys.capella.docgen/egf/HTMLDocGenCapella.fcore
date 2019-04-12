@@ -652,7 +652,7 @@
             <methods xmi:id="_5f3gIFxqEemRLucKv8z86A" name="setCapellaContext" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._5f3gIFxqEemRLucKv8z86A.pt"/>
             <methods xmi:id="_B0Sp5VxqEemRLucKv8z86A" name="content" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._B0Sp5VxqEemRLucKv8z86A.pt"/>
             <methods xmi:id="_B0Sp5lxqEemRLucKv8z86A" name="footer" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._B0Sp5lxqEemRLucKv8z86A.pt"/>
-            <parameters xmi:id="_QHqo4FxqEemRLucKv8z86A" name="parameter" type="http://www.polarsys.org/capella/core/core/1.2.0#//NamedElement"/>
+            <parameters xmi:id="_QHqo4FxqEemRLucKv8z86A" name="parameter" type="http://www.polarsys.org/capella/core/core/1.3.0#//NamedElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_B0Sp51xqEemRLucKv8z86A"/>
           </elements>
         </libraries>
