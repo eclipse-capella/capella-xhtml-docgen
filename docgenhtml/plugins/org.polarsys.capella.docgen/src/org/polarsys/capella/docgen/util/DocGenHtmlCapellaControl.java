@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,9 +20,11 @@ import org.polarsys.capella.core.data.capellacore.Structure;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Interface;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.data.cs.PhysicalLinkCategory;
 import org.polarsys.capella.core.data.cs.PhysicalPath;
 import org.polarsys.capella.core.data.ctx.Mission;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
+import org.polarsys.capella.core.data.fa.ComponentExchangeCategory;
 import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.fa.ExchangeCategory;
 import org.polarsys.capella.core.data.fa.FunctionPort;
@@ -49,9 +51,8 @@ public class DocGenHtmlCapellaControl {
 	 */
 	public static boolean isPageCandidate(CapellaElement element) {
 
-		// Include this elements
-
-		if (element instanceof AbstractState 
+		// Include these elements
+		return (element instanceof AbstractState 
 				|| element instanceof StateMachine
 				|| element instanceof Structure
 				|| element instanceof AbstractFunction
@@ -74,10 +75,9 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof DataType 
 				|| element instanceof Unit
 				|| element instanceof Requirement 
-				|| element instanceof Region)
-			return true;
-		
-		return false;
+				|| element instanceof Region
+				|| element instanceof ComponentExchangeCategory
+				|| element instanceof PhysicalLinkCategory);
 	}
 
 	/**
@@ -104,6 +104,8 @@ public class DocGenHtmlCapellaControl {
 				|| (element instanceof AbstractState && element instanceof InitialPseudoState == false)
 				|| element instanceof Region
 				|| element instanceof ExchangeItemElement
+				|| element instanceof ComponentExchangeCategory
+				|| element instanceof PhysicalLinkCategory
 		));
 	}
 
