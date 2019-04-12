@@ -1,0 +1,1 @@
+return element instanceof ExchangeCategory || element instanceof ComponentExchangeCategory || element instanceof PhysicalLinkCategory;

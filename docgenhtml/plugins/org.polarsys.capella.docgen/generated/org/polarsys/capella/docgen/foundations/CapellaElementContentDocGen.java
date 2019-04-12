@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -32,14 +32,16 @@ public class CapellaElementContentDocGen {
 	protected final String TEXT_6 = "</em>";
 	protected final String TEXT_7 = NL;
 	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL + "<h2>Requirements</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>" + NL
+	protected final String TEXT_9 = NL;
+	protected final String TEXT_10 = NL;
+	protected final String TEXT_11 = NL + "<h2>Requirements</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>ID</th>" + NL + "\t\t<th>Name</th>" + NL + "\t\t<th>Description</th>" + NL + "\t</tr>" + NL
 			+ "\t";
-	protected final String TEXT_10 = NL + "\t";
-	protected final String TEXT_11 = NL + "\t";
-	protected final String TEXT_12 = NL + "</table>";
-	protected final String TEXT_13 = NL;
-	protected final String TEXT_14 = NL;
+	protected final String TEXT_12 = NL + "\t";
+	protected final String TEXT_13 = NL + "\t";
+	protected final String TEXT_14 = NL + "</table>";
+	protected final String TEXT_15 = NL;
+	protected final String TEXT_16 = NL;
 
 	public CapellaElementContentDocGen() {
 		//Here is the constructor
@@ -80,8 +82,8 @@ public class CapellaElementContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_13);
-		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_15);
+		stringBuffer.append(TEXT_16);
 		return stringBuffer.toString();
 	}
 
@@ -160,19 +162,37 @@ public class CapellaElementContentDocGen {
 		}
 
 		stringBuffer.append(TEXT_8);
+		// Generating status and review information 
+		stringBuffer.append(TEXT_9);
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.StatusAndReviewGeneration" args="element:element"%>
+
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
+
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("element", element);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_2sAHwHWMEemiHtSfRhpXIQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
+		}
+
+		stringBuffer.append(TEXT_10);
 		// requirements
 
 		Collection<String> requirementsTableLines = CapellaElementService.getRequirementsToLine(element, projectName,
 				outputFolder);
 		if (requirementsTableLines.size() > 0) {
 
-			stringBuffer.append(TEXT_9);
+			stringBuffer.append(TEXT_11);
 			for (String line : requirementsTableLines) {
-				stringBuffer.append(TEXT_10);
+				stringBuffer.append(TEXT_12);
 				stringBuffer.append(line);
-				stringBuffer.append(TEXT_11);
+				stringBuffer.append(TEXT_13);
 			}
-			stringBuffer.append(TEXT_12);
+			stringBuffer.append(TEXT_14);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());

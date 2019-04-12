@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -83,7 +83,7 @@ public class CapellaComponentServices {
 		buffer.append("<td id=\"" + CapellaServices.getAnchorId(componentExchange) + "\">");
 		buffer.append(CapellaServices.getImageLinkFromElement(componentExchange, projectName, outputFolder));
 		buffer.append(" ");
-		buffer.append(componentExchange.getName());
+		buffer.append(CapellaServices.getHyperlinkFromElement(componentExchange));
 		buffer.append("</td>");
 
 		ModelElement sourceTargetComponent;
@@ -110,7 +110,7 @@ public class CapellaComponentServices {
 				buffer.append("<li>");
 				buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
 				buffer.append(" ");
-				buffer.append(currentItem.getName());
+				buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
 				buffer.append("</li>");
 			}
 			buffer.append(CapellaServices.UL_CLOSE);

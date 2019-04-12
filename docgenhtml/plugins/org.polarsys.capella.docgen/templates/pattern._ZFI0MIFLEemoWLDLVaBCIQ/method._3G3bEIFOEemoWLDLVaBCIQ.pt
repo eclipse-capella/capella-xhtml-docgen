@@ -1,0 +1,35 @@
+<% super.method_content(new StringBuffer(), ctx); %>
+<% String projectName= ctx.getValue("projectName").toString(); %>
+<% String outputFolder = ctx.getValue("outputFolder").toString(); %>
+
+<h2> Source </h2>
+<%=ExchangesServices.getSource(element, projectName, outputFolder)%>
+
+<h2> Target </h2>
+<%=ExchangesServices.getTarget(element, projectName, outputFolder)%>
+
+<%if (ExchangesServices.genAllocatedFunctionExchanges(element)){ %>
+<%if (element instanceof ComponentExchange) {%>
+	<h2> Allocated Function Exchanges </h2>
+	<%=ExchangesServices.getAllocatedFunctionExchanges((ComponentExchange) element, projectName, outputFolder)%>
+<%}%>
+<%}%>
+
+<%if (ExchangesServices.genAllocatedComponentExchanges(element)){ %>
+<%if (element instanceof PhysicalLink) {%>
+	<h2> Allocated Function Exchanges </h2>
+	<%=ExchangesServices.getAllocatedComponentExchanges((PhysicalLink) element, projectName, outputFolder)%>
+<%}%>
+<%}%>
+
+<%if (ExchangesServices.genAllocatedExchangeItems(element)){ %>
+<%	if (element instanceof ComponentExchange || element instanceof FunctionalExchange) {%>
+		<h2> Allocated Exchanges Items </h2>
+		<%=ExchangesServices.getAllocatedExchangeItems(element, projectName, outputFolder)%>
+<%	}%>
+<%}%>
+
+<%if (ExchangesServices.genCategories(element)){ %>
+	<h2> Categories </h2>
+	<%=ExchangesServices.getCategories(element, projectName, outputFolder)%>
+<%}%>

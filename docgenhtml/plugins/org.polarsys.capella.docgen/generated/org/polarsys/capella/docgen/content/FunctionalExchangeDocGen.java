@@ -1,20 +1,17 @@
-//Generated with EGF 1.6.0.201805040915
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.content;
 
-import org.eclipse.egf.common.helper.*;
 import java.util.*;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
-import org.polarsys.capella.docgen.util.StringUtil;
-import org.polarsys.capella.docgen.util.pattern.helper.FunctionalChainHelper;
-import org.polarsys.capella.core.data.fa.FunctionalChain;
+import org.eclipse.emf.common.util.*;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
+import org.polarsys.capella.docgen.util.StringUtil;
+import org.polarsys.capella.core.data.fa.FunctionalChain;
+import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 
-public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.foundations.AbstractExchangeDocGen {
 	protected static String nl;
 
 	public static synchronized FunctionalExchangeDocGen create(String lineSeparator) {
@@ -125,5 +122,9 @@ public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.founda
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
+	}
+
+	public boolean preCondition(PatternContext ctx) throws Exception {
+		return CapellaDocgenPreferenceHelper.isExportFunctionalExchange();
 	}
 }

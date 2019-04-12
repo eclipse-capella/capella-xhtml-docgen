@@ -7,12 +7,12 @@
     <contractContainer xmi:id="_2HmpYNz-Ed-Vzvs7Wt1vzQ">
       <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_60tqgN43Ed-Qav1YnqlO9A"
           description="Project where the result of the emf document generation is located"
-          name="projectName" mandatory="true" invocationContracts="#_JKBjMN44Ed-Qav1YnqlO9A">
+          name="projectName" mandatory="true" invocationContracts="#_JKBjMN44Ed-Qav1YnqlO9A #_7NJt0nf0EemiHtSfRhpXIQ">
         <type xmi:type="types:TypeString" xmi:id="_60tqgd43Ed-Qav1YnqlO9A" value="org.polarsys.capella.doc"/>
       </contracts>
       <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_60tqgt43Ed-Qav1YnqlO9A"
           description="Project folder where the result of the emf document generation is located"
-          name="outputFolder" invocationContracts="#_M9Ng8N44Ed-Qav1YnqlO9A">
+          name="outputFolder" invocationContracts="#_M9Ng8N44Ed-Qav1YnqlO9A #_7NJt03f0EemiHtSfRhpXIQ">
         <type xmi:type="types:TypeString" xmi:id="_60tqg943Ed-Qav1YnqlO9A" value="output/Capella"/>
       </contracts>
       <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_cxneQN0OEd-Vzvs7Wt1vzQ"
@@ -105,6 +105,24 @@
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_fiM9t-ZdEd-YVt45ZEg4_w"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_YChJ8OZmEd-YVt45ZEg4_w"
                 called="#_fiM9teZdEd-YVt45ZEg4_w"/>
+          </elements>
+          <elements xmi:id="_2sAHwHWMEemiHtSfRhpXIQ" name="StatusAndReviewGeneration"
+              headerMethod="#_2sAHwnWMEemiHtSfRhpXIQ" conditionMethod="#_2sAHxHWMEemiHtSfRhpXIQ"
+              initMethod="#_2sAHw3WMEemiHtSfRhpXIQ" footerMethod="#_2sAHxnWMEemiHtSfRhpXIQ">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_2sAHwXWMEemiHtSfRhpXIQ"
+                name="JET"/>
+            <methods xmi:id="_2sAHwnWMEemiHtSfRhpXIQ" name="header" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHwnWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHw3WMEemiHtSfRhpXIQ" name="init" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHw3WMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHxHWMEemiHtSfRhpXIQ" name="preCondition" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxHWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHxXWMEemiHtSfRhpXIQ" name="genStatusAndReview" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxXWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHxnWMEemiHtSfRhpXIQ" name="footer" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxnWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="__KGxkHeyEemiHtSfRhpXIQ" name="genProgressOverview" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method.__KGxkHeyEemiHtSfRhpXIQ.pt"/>
+            <parameters xmi:id="_6aa6QHWMEemiHtSfRhpXIQ" name="element" type="org.polarsys.capella.core.data.capellacore.CapellaElement"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_2sAHx3WMEemiHtSfRhpXIQ"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_8656AHWMEemiHtSfRhpXIQ"
+                called="#_2sAHxXWMEemiHtSfRhpXIQ"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_Vmhe0He0EemiHtSfRhpXIQ"
+                called="#__KGxkHeyEemiHtSfRhpXIQ"/>
           </elements>
           <elements xmi:id="_C915AQahEeCbnKVq3TjTtg" name="SummaryGenerate" superPattern="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA"
               headerMethod="#_C915AwahEeCbnKVq3TjTtg" conditionMethod="#_C915BQahEeCbnKVq3TjTtg"
@@ -225,6 +243,21 @@
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_F9HPqFcEEeWXKstRBeKifA"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_fqM44FcEEeWXKstRBeKifA"
                 called="#_F9HPplcEEeWXKstRBeKifA"/>
+          </elements>
+          <elements xmi:id="_ZFI0MIFLEemoWLDLVaBCIQ" name="AbstractExchangeDocGen"
+              superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ" headerMethod="#_ZFI0MoFLEemoWLDLVaBCIQ"
+              conditionMethod="#_ZFI0NIFLEemoWLDLVaBCIQ" initMethod="#_ZFI0M4FLEemoWLDLVaBCIQ"
+              footerMethod="#_ZFI0NoFLEemoWLDLVaBCIQ">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_ZFI0MYFLEemoWLDLVaBCIQ"
+                name="JET"/>
+            <methods xmi:id="_ZFI0MoFLEemoWLDLVaBCIQ" name="header" patternFilePath="templates/pattern._ZFI0MIFLEemoWLDLVaBCIQ/method._ZFI0MoFLEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_ZFI0M4FLEemoWLDLVaBCIQ" name="init" patternFilePath="templates/pattern._ZFI0MIFLEemoWLDLVaBCIQ/method._ZFI0M4FLEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_ZFI0NIFLEemoWLDLVaBCIQ" name="preCondition" patternFilePath="templates/pattern._ZFI0MIFLEemoWLDLVaBCIQ/method._ZFI0NIFLEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_ZFI0NoFLEemoWLDLVaBCIQ" name="footer" patternFilePath="templates/pattern._ZFI0MIFLEemoWLDLVaBCIQ/method._ZFI0NoFLEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_3G3bEIFOEemoWLDLVaBCIQ" name="content" patternFilePath="templates/pattern._ZFI0MIFLEemoWLDLVaBCIQ/method._3G3bEIFOEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_EWKusIHjEemoWLDLVaBCIQ" name="docHeader" patternFilePath="templates/pattern._ZFI0MIFLEemoWLDLVaBCIQ/method._EWKusIHjEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_GVSGwIHjEemoWLDLVaBCIQ" name="docFooter" patternFilePath="templates/pattern._ZFI0MIFLEemoWLDLVaBCIQ/method._GVSGwIHjEemoWLDLVaBCIQ.pt"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_ZFI0N4FLEemoWLDLVaBCIQ"/>
           </elements>
         </libraries>
         <libraries xmi:id="_OnutENz7Ed-Vzvs7Wt1vzQ" name="org.polarsys.capella.docgen.content">
@@ -606,8 +639,22 @@
             <parameters xmi:id="_l7zfELZwEeiyaM1QyFX3Jg" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.2.0#//FunctionPort"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_a6_HJ7XaEeiyaM1QyFX3Jg"/>
           </elements>
+          <elements xmi:id="_B0Sp4FxqEemRLucKv8z86A" name="CategoriesDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
+              headerMethod="#_B0Sp4lxqEemRLucKv8z86A" conditionMethod="#_B0Sp5FxqEemRLucKv8z86A"
+              initMethod="#_B0Sp41xqEemRLucKv8z86A" footerMethod="#_B0Sp5lxqEemRLucKv8z86A">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_B0Sp4VxqEemRLucKv8z86A"
+                name="JET"/>
+            <methods xmi:id="_B0Sp4lxqEemRLucKv8z86A" name="header" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._B0Sp4lxqEemRLucKv8z86A.pt"/>
+            <methods xmi:id="_B0Sp41xqEemRLucKv8z86A" name="init" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._B0Sp41xqEemRLucKv8z86A.pt"/>
+            <methods xmi:id="_B0Sp5FxqEemRLucKv8z86A" name="preCondition" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._B0Sp5FxqEemRLucKv8z86A.pt"/>
+            <methods xmi:id="_5f3gIFxqEemRLucKv8z86A" name="setCapellaContext" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._5f3gIFxqEemRLucKv8z86A.pt"/>
+            <methods xmi:id="_B0Sp5VxqEemRLucKv8z86A" name="content" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._B0Sp5VxqEemRLucKv8z86A.pt"/>
+            <methods xmi:id="_B0Sp5lxqEemRLucKv8z86A" name="footer" patternFilePath="templates/pattern._B0Sp4FxqEemRLucKv8z86A/method._B0Sp5lxqEemRLucKv8z86A.pt"/>
+            <parameters xmi:id="_QHqo4FxqEemRLucKv8z86A" name="parameter" type="http://www.polarsys.org/capella/core/core/1.2.0#//NamedElement"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_B0Sp51xqEemRLucKv8z86A"/>
+          </elements>
           <elements xmi:id="_EC31ALXcEeiyaM1QyFX3Jg" name="FunctionalExchangeDocGen"
-              superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ" headerMethod="#_EC31ArXcEeiyaM1QyFX3Jg"
+              superPattern="#_ZFI0MIFLEemoWLDLVaBCIQ" headerMethod="#_EC31ArXcEeiyaM1QyFX3Jg"
               conditionMethod="#_EC31BLXcEeiyaM1QyFX3Jg" initMethod="#_EC31A7XcEeiyaM1QyFX3Jg"
               footerMethod="#_EC31BrXcEeiyaM1QyFX3Jg">
             <nature xmi:type="jetpattern:JetNature" xmi:id="_EC31AbXcEeiyaM1QyFX3Jg"
@@ -620,6 +667,34 @@
             <methods xmi:id="_fvV8ELXcEeiyaM1QyFX3Jg" name="setCapellaContext" patternFilePath="templates/pattern._EC31ALXcEeiyaM1QyFX3Jg/method._fvV8ELXcEeiyaM1QyFX3Jg.pt"/>
             <parameters xmi:id="_aY5b0LXcEeiyaM1QyFX3Jg" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.2.0#//FunctionalExchange"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_EC31B7XcEeiyaM1QyFX3Jg"/>
+          </elements>
+          <elements xmi:id="_QKJzAIFHEemoWLDLVaBCIQ" description="Generation of HTML page for ComponentExchange."
+              name="ComponentExchangeDocGen" superPattern="#_ZFI0MIFLEemoWLDLVaBCIQ"
+              headerMethod="#_QKJzAoFHEemoWLDLVaBCIQ" conditionMethod="#_QKJzBIFHEemoWLDLVaBCIQ"
+              initMethod="#_QKJzA4FHEemoWLDLVaBCIQ" footerMethod="#_QKJzBoFHEemoWLDLVaBCIQ">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_QKJzAYFHEemoWLDLVaBCIQ"
+                name="JET"/>
+            <methods xmi:id="_QKJzAoFHEemoWLDLVaBCIQ" name="header" patternFilePath="templates/pattern._QKJzAIFHEemoWLDLVaBCIQ/method._QKJzAoFHEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_QKJzA4FHEemoWLDLVaBCIQ" name="init" patternFilePath="templates/pattern._QKJzAIFHEemoWLDLVaBCIQ/method._QKJzA4FHEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_QKJzBIFHEemoWLDLVaBCIQ" name="preCondition" patternFilePath="templates/pattern._QKJzAIFHEemoWLDLVaBCIQ/method._QKJzBIFHEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_QKJzBYFHEemoWLDLVaBCIQ" name="setCapellaContext" patternFilePath="templates/pattern._QKJzAIFHEemoWLDLVaBCIQ/method._QKJzBYFHEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_QKJzBoFHEemoWLDLVaBCIQ" name="footer" patternFilePath="templates/pattern._QKJzAIFHEemoWLDLVaBCIQ/method._QKJzBoFHEemoWLDLVaBCIQ.pt"/>
+            <parameters xmi:id="_g1HUcIFHEemoWLDLVaBCIQ" name="parameter" type="http://www.polarsys.org/capella/core/fa/1.2.0#//ComponentExchange"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_QKJzB4FHEemoWLDLVaBCIQ"/>
+          </elements>
+          <elements xmi:id="_x6M3kIuDEemoWLDLVaBCIQ" description="Generation of HTML page for PhysicalLink."
+              name="PhysicalLinkDocGen" superPattern="#_ZFI0MIFLEemoWLDLVaBCIQ" headerMethod="#_x6M3kouDEemoWLDLVaBCIQ"
+              conditionMethod="#_x6M3lIuDEemoWLDLVaBCIQ" initMethod="#_x6M3k4uDEemoWLDLVaBCIQ"
+              footerMethod="#_x6M3louDEemoWLDLVaBCIQ">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_x6M3kYuDEemoWLDLVaBCIQ"
+                name="JET"/>
+            <methods xmi:id="_x6M3kouDEemoWLDLVaBCIQ" name="header" patternFilePath="templates/pattern._x6M3kIuDEemoWLDLVaBCIQ/method._x6M3kouDEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_x6M3k4uDEemoWLDLVaBCIQ" name="init" patternFilePath="templates/pattern._x6M3kIuDEemoWLDLVaBCIQ/method._x6M3k4uDEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_x6M3lIuDEemoWLDLVaBCIQ" name="preCondition" patternFilePath="templates/pattern._x6M3kIuDEemoWLDLVaBCIQ/method._x6M3lIuDEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_x6M3lYuDEemoWLDLVaBCIQ" name="setCapellaContext" patternFilePath="templates/pattern._x6M3kIuDEemoWLDLVaBCIQ/method._x6M3lYuDEemoWLDLVaBCIQ.pt"/>
+            <methods xmi:id="_x6M3louDEemoWLDLVaBCIQ" name="footer" patternFilePath="templates/pattern._x6M3kIuDEemoWLDLVaBCIQ/method._x6M3louDEemoWLDLVaBCIQ.pt"/>
+            <parameters xmi:id="_58mAsIuDEemoWLDLVaBCIQ" name="parameter" type="http://www.polarsys.org/capella/core/cs/1.2.0#//PhysicalLink"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_x6M3l4uDEemoWLDLVaBCIQ"/>
           </elements>
         </libraries>
         <libraries xmi:id="_iEWbsN6ZEd-ZSZ6AN4Dlrg" name="org.polarsys.capella.docgen.sidebar">
@@ -706,7 +781,7 @@
         <invocationContractContainer xmi:id="_xHdBoW8PEeSjPIMKP6Xr0g">
           <invocationContracts xmi:id="_xHdBom8PEeSjPIMKP6Xr0g" invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g">
             <type xmi:type="pattern:TypePatternList" xmi:id="_oacDMN4ZEd-Qav1YnqlO9A"
-                elements="#_x_LwcGwiEeCUvpJOFjr3FQ #_hW854N47Ed-Qav1YnqlO9A #_nJ840Ds5EeCgH6PBi_KPBw #_j_CXYEV-EeCvqtVx_IKrqA #_fQhPcEWiEeCvqtVx_IKrqA #_HyNjwN0cEd-Vzvs7Wt1vzQ #_6RU6oXGlEeC8GrKepiiiTw #_Axl3MH1uEeCIgcTVWxVnzQ #_WWJkYYBZEeCN8Jbz-bJe6w #_MdyuQYLBEeCjNOKMEA2WFg #_sGmFIZdTEeCvReB7msXe8Q #_6uVm4JwPEeCWeuBXIFCRXA #_bikDsb0GEeC7JNoAKQ1P0g #_qz8z8b3TEeCFqqET0yrG_w #_Pq5FgL3fEeCFqqET0yrG_w #_sRl5kb52EeCw5MDUpv1shw #_a126IL6EEeCw5MDUpv1shw #_ZXf8Ib88EeC3itjHQ6nPuA #_1fzXsL9JEeC3itjHQ6nPuA #_TIBLoDlmEeKfl43CFVnoFw #_WnyP8OzGEeSAVbCPYCI8cQ #_u-tmELXYEeiyaM1QyFX3Jg #_EC31ALXcEeiyaM1QyFX3Jg #_a6_HILXaEeiyaM1QyFX3Jg"/>
+                elements="#_x_LwcGwiEeCUvpJOFjr3FQ #_hW854N47Ed-Qav1YnqlO9A #_nJ840Ds5EeCgH6PBi_KPBw #_j_CXYEV-EeCvqtVx_IKrqA #_fQhPcEWiEeCvqtVx_IKrqA #_HyNjwN0cEd-Vzvs7Wt1vzQ #_6RU6oXGlEeC8GrKepiiiTw #_Axl3MH1uEeCIgcTVWxVnzQ #_WWJkYYBZEeCN8Jbz-bJe6w #_MdyuQYLBEeCjNOKMEA2WFg #_sGmFIZdTEeCvReB7msXe8Q #_6uVm4JwPEeCWeuBXIFCRXA #_bikDsb0GEeC7JNoAKQ1P0g #_qz8z8b3TEeCFqqET0yrG_w #_Pq5FgL3fEeCFqqET0yrG_w #_sRl5kb52EeCw5MDUpv1shw #_a126IL6EEeCw5MDUpv1shw #_ZXf8Ib88EeC3itjHQ6nPuA #_1fzXsL9JEeC3itjHQ6nPuA #_TIBLoDlmEeKfl43CFVnoFw #_WnyP8OzGEeSAVbCPYCI8cQ #_u-tmELXYEeiyaM1QyFX3Jg #_EC31ALXcEeiyaM1QyFX3Jg #_a6_HILXaEeiyaM1QyFX3Jg #_B0Sp4FxqEemRLucKv8z86A #_QKJzAIFHEemoWLDLVaBCIQ #_x6M3kIuDEemoWLDLVaBCIQ"/>
           </invocationContracts>
           <invocationContracts xmi:id="_xHdBo28PEeSjPIMKP6Xr0g" factoryComponentContract="#_gCg58G8PEeSjPIMKP6Xr0g"
               invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>
@@ -738,6 +813,17 @@
           </invocationContracts>
           <invocationContracts xmi:id="_jxFv1dV2EeW9p5oksEzglA" targetInvocationContract="#_kIXh4N6ZEd-ZSZ6AN4Dlrg"
               invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_7NJt0Hf0EemiHtSfRhpXIQ" name="Unzip treetable" invokedActivity="ftask:Task platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_O5eeweJpEd-grZ8S-iQR-w">
+        <invocationContractContainer xmi:id="_7NJt0Xf0EemiHtSfRhpXIQ">
+          <invocationContracts xmi:id="_7NJt0nf0EemiHtSfRhpXIQ" factoryComponentContract="#_60tqgN43Ed-Qav1YnqlO9A"
+              invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_V4qecOJpEd-grZ8S-iQR-w"/>
+          <invocationContracts xmi:id="_7NJt03f0EemiHtSfRhpXIQ" factoryComponentContract="#_60tqgt43Ed-Qav1YnqlO9A"
+              invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_V4qecuJpEd-grZ8S-iQR-w"/>
+          <invocationContracts xmi:id="_7NJt1Hf0EemiHtSfRhpXIQ" invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_XQudkOJpEd-grZ8S-iQR-w">
+            <type xmi:type="types:TypeURI" xmi:id="_B3VG0Hf1EemiHtSfRhpXIQ" value="platform:/plugin/org.polarsys.capella.docgen/file/misc.zip"/>
+          </invocationContracts>
         </invocationContractContainer>
       </invocations>
       <invocations xmi:id="_DpAlwN34Ed-Qav1YnqlO9A" name="Generate documentation"
