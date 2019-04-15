@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,6 +16,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -45,6 +47,7 @@ public class ImageHelper {
 	private static final String FOLDER_HIERARCHY_CREATION_ERROR = "Cannot Create Target Folder Hierarchy";
 	private static final NullProgressMonitor MONITOR = new NullProgressMonitor();
 	private static final String PNG = "png";
+	private static final String FILES_SUFFIX = "_files";
 
 	private ImageHelper() {
 
@@ -57,11 +60,38 @@ public class ImageHelper {
 		
 		createFoldersHierarchy(outputFile);
 		
-		if (inputFile.exists())
+		if (inputFile.exists()) {
 			copyFile(inputFile, outputFile);
-		else
+			manageSpecialFiles(inputFile.getAbsolutePath(), outputFile.getAbsolutePath(), ".html", ".htm"); //$NON-NLS-1$ //$NON-NLS-2$
+		} else {
 			org.polarsys.capella.docgen.Activator.getDefault().getLog()
 					.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, FILE_NOT_FOUND + ": \"" + inputFile.getAbsolutePath() + "\""));
+		}
+	}
+	
+	private void manageSpecialFiles(String srcFile, String targetFile, String... extensions) throws IOException {
+		List<String> extensionList = Arrays.asList(extensions);
+		String srcExtension = srcFile.substring(srcFile.lastIndexOf('.'));
+		if (srcExtension != null && extensionList.contains(srcExtension.toLowerCase())) {
+			String companionFolderPath = srcFile.substring(0, srcFile.lastIndexOf('.'));
+			File companionFolder = new File(companionFolderPath);
+			if (companionFolder.exists()) {
+				doCopy(targetFile, companionFolder, "");
+			} else {
+				//Handle html companion folder
+				companionFolderPath = companionFolderPath + FILES_SUFFIX; //$NON-NLS-1$
+				companionFolder = new File(companionFolderPath);
+				if (companionFolder.exists()) {
+					companionFolder = new File(companionFolderPath);
+					doCopy(targetFile, companionFolder, FILES_SUFFIX);
+				}
+			}
+		}
+	}
+
+	private void doCopy(String targetFile, File companionFolder, String suffix) throws IOException {
+		File destFolder = new File(targetFile.substring(0, targetFile.lastIndexOf('.')) + suffix);
+		doCopy(companionFolder, destFolder);
 	}
 
 	private void createFoldersHierarchy(File outputFile) {
@@ -88,6 +118,31 @@ public class ImageHelper {
 		} finally {
 			inputStr.close();
 			outputStr.close();
+		}
+	}
+	
+	/**
+	 * Do copy file(s) from src to dest folder
+	 * 
+	 * @param src maybe a file or directory
+	 * @param dest destination folder. It is created if the folder does not exists
+	 * @throws IOException
+	 */
+	public void doCopy(File src, File dest) throws IOException {
+		if (src.isDirectory()) {
+			if(!dest.exists()) {
+				dest.mkdir();
+			}
+			String files[] = src.list();
+			for (String file : files) {
+	 		   //construct the src and dest file structure
+	 		   File srcFile = new File(src, file);
+	 		   File destFile = new File(dest, file);
+	 		   //recursive copy
+	 		   doCopy(srcFile,destFile);
+	 		}
+		} else {
+			copyFile(src, dest);
 		}
 	}
 
