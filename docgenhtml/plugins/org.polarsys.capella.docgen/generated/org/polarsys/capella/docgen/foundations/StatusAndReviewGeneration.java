@@ -1,4 +1,4 @@
-//Generated with EGF 1.5.1.v20180423-0901
+//Generated with EGF 1.6.0.201805040915
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -7,30 +7,30 @@ import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
-import org.polarsys.capella.docgen.util.StringUtil;
+import org.polarsys.capella.core.data.capellacore.EnumerationPropertyLiteral;
 
-public class SummaryAndDescriptionGeneration {
+public class StatusAndReviewGeneration {
 	protected static String nl;
 
-	public static synchronized SummaryAndDescriptionGeneration create(String lineSeparator) {
+	public static synchronized StatusAndReviewGeneration create(String lineSeparator) {
 		nl = lineSeparator;
-		SummaryAndDescriptionGeneration result = new SummaryAndDescriptionGeneration();
+		StatusAndReviewGeneration result = new StatusAndReviewGeneration();
 		nl = null;
 		return result;
 	}
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<em style=\"margin-top:5px;\">";
-	protected final String TEXT_2 = "</em>";
-	protected final String TEXT_3 = NL + "<p>";
-	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL;
-	protected final String TEXT_6 = NL + "No description.";
-	protected final String TEXT_7 = NL + "</p>";
+	protected final String TEXT_1 = "\t<h2> Status and Review</h2>" + NL + "\t";
+	protected final String TEXT_2 = NL + "\t\t<p><b>Status:</b> ";
+	protected final String TEXT_3 = "</p>" + NL + "\t";
+	protected final String TEXT_4 = NL + "\t\t<p><b>Review:</b> </p>" + NL + "\t\t";
+	protected final String TEXT_5 = NL + "\t\t<p>";
+	protected final String TEXT_6 = "</p>" + NL + "\t";
+	protected final String TEXT_7 = NL;
 	protected final String TEXT_8 = NL;
 	protected final String TEXT_9 = NL;
 
-	public SummaryAndDescriptionGeneration() {
+	public StatusAndReviewGeneration() {
 		//Here is the constructor
 		StringBuffer stringBuffer = new StringBuffer();
 
@@ -98,22 +98,25 @@ public class SummaryAndDescriptionGeneration {
 
 	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
-		if (element.getSummary() != null && element.getSummary().length() > 0) {
+		EnumerationPropertyLiteral status = element.getStatus();
+		String review = element.getReview();
+		if (status != null || (review != null && !review.isEmpty())) {
 			stringBuffer.append(TEXT_1);
-			stringBuffer.append(element.getSummary());
-			stringBuffer.append(TEXT_2);
+			if (status != null) {
+				String name = status.getName();
+				stringBuffer.append(TEXT_2);
+				stringBuffer.append(name);
+				stringBuffer.append(TEXT_3);
+			}
+			if (review != null && !review.isEmpty()) {
+				stringBuffer.append(TEXT_4);
+				review = review.replace("\n", "").replace("\r", "</br>");
+				stringBuffer.append(TEXT_5);
+				stringBuffer.append(review);
+				stringBuffer.append(TEXT_6);
+			}
 		}
-		stringBuffer.append(TEXT_3);
-		if (element.getDescription() != null && element.getDescription().length() > 0) {
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(TEXT_5);
-			stringBuffer.append(
-					StringUtil.transformAREFString(element, element.getDescription(), projectName, outputFolder));
-		} else {
-			stringBuffer.append(TEXT_6);
-		}
+
 		stringBuffer.append(TEXT_7);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
