@@ -12,6 +12,9 @@ String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder
 <%  // Summary and description generation%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
 
+<%// Generating status and review information %>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.StatusAndReviewGeneration" args="element:element"%>
+
 <% // requirements%>
 <%
 Collection<String> requirementsTableLines = CapellaElementService.getRequirementsToLine(element, projectName, outputFolder);

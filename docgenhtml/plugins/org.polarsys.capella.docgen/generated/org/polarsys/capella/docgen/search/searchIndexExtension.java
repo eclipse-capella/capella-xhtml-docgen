@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.search;
 
 import org.eclipse.egf.common.helper.*;

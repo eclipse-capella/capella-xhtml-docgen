@@ -106,6 +106,21 @@
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_YChJ8OZmEd-YVt45ZEg4_w"
                 called="#_fiM9teZdEd-YVt45ZEg4_w"/>
           </elements>
+          <elements xmi:id="_2sAHwHWMEemiHtSfRhpXIQ" name="StatusAndReviewGeneration"
+              headerMethod="#_2sAHwnWMEemiHtSfRhpXIQ" conditionMethod="#_2sAHxHWMEemiHtSfRhpXIQ"
+              initMethod="#_2sAHw3WMEemiHtSfRhpXIQ" footerMethod="#_2sAHxnWMEemiHtSfRhpXIQ">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_2sAHwXWMEemiHtSfRhpXIQ"
+                name="JET"/>
+            <methods xmi:id="_2sAHwnWMEemiHtSfRhpXIQ" name="header" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHwnWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHw3WMEemiHtSfRhpXIQ" name="init" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHw3WMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHxHWMEemiHtSfRhpXIQ" name="preCondition" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxHWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHxXWMEemiHtSfRhpXIQ" name="body" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxXWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHxnWMEemiHtSfRhpXIQ" name="footer" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxnWMEemiHtSfRhpXIQ.pt"/>
+            <parameters xmi:id="_6aa6QHWMEemiHtSfRhpXIQ" name="element" type="org.polarsys.capella.core.data.capellacore.CapellaElement"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_2sAHx3WMEemiHtSfRhpXIQ"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_8656AHWMEemiHtSfRhpXIQ"
+                called="#_2sAHxXWMEemiHtSfRhpXIQ"/>
+          </elements>
           <elements xmi:id="_C915AQahEeCbnKVq3TjTtg" name="SummaryGenerate" superPattern="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA"
               headerMethod="#_C915AwahEeCbnKVq3TjTtg" conditionMethod="#_C915BQahEeCbnKVq3TjTtg"
               initMethod="#_C915BAahEeCbnKVq3TjTtg" footerMethod="#_C915BwahEeCbnKVq3TjTtg">
