@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.0.201805040915
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import java.util.*;
@@ -23,9 +23,7 @@ public class DiagramNavigationTree {
 	protected final String TEXT_1 = "\t<h2>Diagrams</h2>" + NL + "\t";
 	protected final String TEXT_2 = NL + "\t<br>" + NL + "\t" + NL + "\t";
 	protected final String TEXT_3 = NL + "\t";
-	protected final String TEXT_4 = NL + "\t";
-	protected final String TEXT_5 = NL;
-	protected final String TEXT_6 = NL;
+	protected final String TEXT_4 = NL;
 
 	public DiagramNavigationTree() {
 		//Here is the constructor
@@ -71,8 +69,8 @@ public class DiagramNavigationTree {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_5);
-		stringBuffer.append(TEXT_6);
+		stringBuffer.append(TEXT_4);
+		stringBuffer.append(TEXT_4);
 		return stringBuffer.toString();
 	}
 
@@ -166,7 +164,7 @@ public class DiagramNavigationTree {
 					stringBuffer.setLength(0);
 				}
 
-				stringBuffer.append(TEXT_4);
+				stringBuffer.append(TEXT_3);
 
 			}
 		}

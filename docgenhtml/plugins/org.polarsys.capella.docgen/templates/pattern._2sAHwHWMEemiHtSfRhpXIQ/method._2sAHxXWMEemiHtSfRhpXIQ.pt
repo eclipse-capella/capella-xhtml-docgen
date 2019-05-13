@@ -1,0 +1,16 @@
+<%
+EnumerationPropertyLiteral status = element.getStatus();
+String review = element.getReview();
+if (status != null || (review != null && !review.isEmpty())) {%>
+	<h2> Status and Review</h2>
+	<%if (status != null ) {
+		String name = status.getName();%>
+		<p><b>Status:</b> <%=name%></p>
+	<%}
+	if (review != null && !review.isEmpty()) {%>
+		<p><b>Review:</b> </p>
+		<%review = review.replace("\n", "").replace("\r", "</br>");%>
+		<p><%=review%></p>
+	<%}
+	}
+%>
