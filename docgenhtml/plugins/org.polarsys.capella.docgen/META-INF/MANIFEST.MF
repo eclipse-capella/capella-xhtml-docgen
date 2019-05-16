@@ -20,7 +20,8 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core;visibility:=reexport
  org.eclipse.jface.text,
  org.polarsys.kitalpha.doc.gen.business.core.preference,
  org.polarsys.capella.shared.id.handler,
- org.polarsys.capella.core.diagram.helpers
+ org.polarsys.capella.core.diagram.helpers,
+ org.eclipse.sirius.table
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
@@ -37,3 +38,6 @@ Export-Package: org.polarsys.capella.docgen,
  org.polarsys.capella.docgen.util,
  org.polarsys.capella.docgen.util.pattern.helper,
  org.polarsys.capella.docgen.visitor
+Import-Package: org.polarsys.capella.core.ui.metric.dialog,
+ org.polarsys.capella.core.ui.metric.utils,
+ org.polarsys.capella.core.ui.properties.annotations

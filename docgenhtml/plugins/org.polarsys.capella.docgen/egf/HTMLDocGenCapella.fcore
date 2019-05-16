@@ -114,12 +114,15 @@
             <methods xmi:id="_2sAHwnWMEemiHtSfRhpXIQ" name="header" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHwnWMEemiHtSfRhpXIQ.pt"/>
             <methods xmi:id="_2sAHw3WMEemiHtSfRhpXIQ" name="init" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHw3WMEemiHtSfRhpXIQ.pt"/>
             <methods xmi:id="_2sAHxHWMEemiHtSfRhpXIQ" name="preCondition" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxHWMEemiHtSfRhpXIQ.pt"/>
-            <methods xmi:id="_2sAHxXWMEemiHtSfRhpXIQ" name="body" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxXWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="_2sAHxXWMEemiHtSfRhpXIQ" name="genStatusAndReview" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxXWMEemiHtSfRhpXIQ.pt"/>
             <methods xmi:id="_2sAHxnWMEemiHtSfRhpXIQ" name="footer" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method._2sAHxnWMEemiHtSfRhpXIQ.pt"/>
+            <methods xmi:id="__KGxkHeyEemiHtSfRhpXIQ" name="genProgressOverview" patternFilePath="templates/pattern._2sAHwHWMEemiHtSfRhpXIQ/method.__KGxkHeyEemiHtSfRhpXIQ.pt"/>
             <parameters xmi:id="_6aa6QHWMEemiHtSfRhpXIQ" name="element" type="org.polarsys.capella.core.data.capellacore.CapellaElement"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_2sAHx3WMEemiHtSfRhpXIQ"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_8656AHWMEemiHtSfRhpXIQ"
                 called="#_2sAHxXWMEemiHtSfRhpXIQ"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_Vmhe0He0EemiHtSfRhpXIQ"
+                called="#__KGxkHeyEemiHtSfRhpXIQ"/>
           </elements>
           <elements xmi:id="_C915AQahEeCbnKVq3TjTtg" name="SummaryGenerate" superPattern="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA"
               headerMethod="#_C915AwahEeCbnKVq3TjTtg" conditionMethod="#_C915BQahEeCbnKVq3TjTtg"
