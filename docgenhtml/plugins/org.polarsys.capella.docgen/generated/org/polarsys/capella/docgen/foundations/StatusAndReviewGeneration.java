@@ -8,6 +8,8 @@ import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.core.data.capellacore.EnumerationPropertyLiteral;
+import org.polarsys.capella.docgen.helper.ProgressHelper;
+import org.polarsys.capella.core.data.capellamodeller.Project;
 
 public class StatusAndReviewGeneration {
 	protected static String nl;
@@ -26,6 +28,7 @@ public class StatusAndReviewGeneration {
 	protected final String TEXT_4 = NL + "\t\t<p><b>Review:</b> </p>" + NL + "\t\t";
 	protected final String TEXT_5 = NL + "\t\t<p>";
 	protected final String TEXT_6 = NL;
+	protected final String TEXT_7 = NL + "<h2>Progress Overview</h2>";
 
 	public StatusAndReviewGeneration() {
 		//Here is the constructor
@@ -69,7 +72,9 @@ public class StatusAndReviewGeneration {
 	public String orchestration(PatternContext ctx) throws Exception {
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-		method_body(new StringBuffer(), ictx);
+		method_genStatusAndReview(new StringBuffer(), ictx);
+
+		method_genProgressOverview(new StringBuffer(), ictx);
 
 		if (ictx.useReporter()) {
 			Map<String, Object> parameterValues = new HashMap<String, Object>();
@@ -93,7 +98,8 @@ public class StatusAndReviewGeneration {
 		return parameters;
 	}
 
-	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+	protected void method_genStatusAndReview(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
 		EnumerationPropertyLiteral status = element.getStatus();
 		String review = element.getReview();
@@ -116,7 +122,23 @@ public class StatusAndReviewGeneration {
 
 		stringBuffer.append(TEXT_6);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+		new Node.DataLeaf(ictx.getNode(), getClass(), "genStatusAndReview", stringBuffer.toString());
+	}
+
+	protected void method_genProgressOverview(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
+
+		String projectName = ctx.getValue("projectName").toString();
+		String outputFolder = ctx.getValue("outputFolder").toString();
+
+		stringBuffer.append(TEXT_6);
+		if (element instanceof Project) {
+			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_6);
+			stringBuffer.append(new ProgressHelper(projectName, outputFolder).generateProgressTable(element));
+		}
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "genProgressOverview", stringBuffer.toString());
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
