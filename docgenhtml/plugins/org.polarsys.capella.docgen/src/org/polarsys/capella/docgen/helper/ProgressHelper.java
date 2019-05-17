@@ -30,6 +30,8 @@ import org.polarsys.capella.core.data.capellacore.EnumerationPropertyType;
 import org.polarsys.capella.core.diagram.helpers.RepresentationAnnotationHelper;
 import org.polarsys.capella.core.model.handler.helpers.CapellaProjectHelper;
 import org.polarsys.capella.core.ui.metric.utils.ProgressMonitoringPropagator;
+import org.eclipse.sirius.viewpoint.description.DAnnotation;
+import org.polarsys.capella.core.model.handler.helpers.RepresentationHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
