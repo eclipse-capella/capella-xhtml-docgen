@@ -10,6 +10,7 @@ import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.core.data.capellacore.EnumerationPropertyLiteral;
 import org.polarsys.capella.docgen.helper.ProgressHelper;
 import org.polarsys.capella.core.data.capellamodeller.Project;
+import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 
 public class StatusAndReviewGeneration {
 	protected static String nl;
@@ -147,6 +148,6 @@ public class StatusAndReviewGeneration {
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return true;
+		return CapellaDocgenPreferenceHelper.isExportStatusAndReview();
 	}
 }
