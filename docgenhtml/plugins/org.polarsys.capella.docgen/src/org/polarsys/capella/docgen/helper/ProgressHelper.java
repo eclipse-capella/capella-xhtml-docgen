@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2019 Thales Global Services S.A.S.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *  
+ * Contributors:
+ *   Thales Global Services S.A.S - initial API and implementation
+ ******************************************************************************/
+
 package org.polarsys.capella.docgen.helper;
 
 import java.util.List;
@@ -22,6 +33,9 @@ import org.polarsys.capella.core.ui.properties.annotations.IRepresentationAnnota
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
+/**
+ * @author Zendagui Boubekeur
+ */
 public class ProgressHelper {
 	
 	private static final DataContentProvider dataProvider = new DataContentProvider();
@@ -29,22 +43,37 @@ public class ProgressHelper {
 	private String projectName;
 	private String outputFolder;
 	
+	/**
+	 * Default constructor. The two parameters are needed for managing the element icons
+	 * @param projectName the project wherein the documentation will be generated
+	 * @param outputFolder the folder wherein the documentation will be generated
+	 */
 	public ProgressHelper(String projectName, String outputFolder) {
 		this.projectName = projectName;
 		this.outputFolder = outputFolder;
 	}
 	
+	/**
+	 * Generate the HTML page. This method is the root one.
+	 * @param element a model element
+	 * @return an HTML table (<code>&lttable&gt ... &lt/table&gt</codes>)
+	 */
 	public String generateProgressTable(EObject element){
 		StringBuffer result = new StringBuffer();
 		result.append("<table id=\"").append(TABLE_ID).append("\">");
 		result.append(generateExpandCollapsAction(TABLE_ID));
-		result.append(generateTableHeader(element));
+		result.append(generateTableHeader());
 		result.append(generateTableBody(element));
 		result.append("</table>");
 		result.append(getPluginIntegration(TABLE_ID));
 		return result.toString();
 	}
 	
+	/**
+	 * Generate the Collapse and Expand all buttons for a given HTML table
+	 * @param tableID the ID of the table
+	 * @return the section <code>&ltcaption&gt ... &lt/caption&gt</codes> 
+	 */
 	public String generateExpandCollapsAction(String tableID){
 		StringBuffer result = new StringBuffer();
 		result.append("<caption>");
@@ -58,6 +87,10 @@ public class ProgressHelper {
 		return result.toString();
 	}
 	
+	/**
+	 * @param tableID the ID of the table
+	 * @return the HTML content allowing the integration of the JQuery scripts
+	 */
 	public String getPluginIntegration(String tableID){
 		StringBuffer result = new StringBuffer();
 		result.append("<script src=\"../../scripts/jquery-treeview/lib/jquery-1.11.1.js\"></script>");
@@ -74,7 +107,11 @@ public class ProgressHelper {
 		return result.toString();
 	}
 	
-	public String generateTableHeader(EObject element){
+	/**
+	 * Generate a static table header
+	 * @return the section <code>&ltthead&gt ... &lt/thead&gt</code>
+	 */
+	public String generateTableHeader(){
 		StringBuffer result = new StringBuffer();
 		result.append("<thead>");
 		result.append("<tr>");
@@ -86,6 +123,11 @@ public class ProgressHelper {
 		return result.toString();
 	}
 	
+	/**
+	 * Generate the table body
+	 * @param element a model element
+	 * @return the section <code>&lttbody&gt ... &lt/tbody&gt</code>
+	 */
 	public String generateTableBody(EObject element){
 		StringBuffer result = new StringBuffer();
 		List<EObject> taggedObjects = ProgressMonitoringPropagator.getInstance().getTaggedObjects(EcoreUtil.getRootContainer(element));
@@ -98,6 +140,12 @@ public class ProgressHelper {
 		return result.toString();
 	}
 	
+	/**
+	 * Generate a table line for a given element. Because the first column is a tree, each line is considered as a node.
+	 * @param elements the model element
+	 * @param parentID the ID of parent node of the new node 
+	 * @return
+	 */
 	public String generateSubElementTableLines(Object[] elements, String parentID){
 		StringBuffer result = new StringBuffer();
 		for (Object element : elements) {
@@ -113,10 +161,9 @@ public class ProgressHelper {
 	}
 	
 	/**
-	 * 
 	 * @param element
 	 * @param parentID if null, this means that the element is the root
-	 * @return
+	 * @return a set of <code>&lttr&gt ... &lt/tr&gt</code>
 	 */
 	public String generateElementHtmlLine(Object element, String parentID){
 		String[] exportableData = getExportableData(element);
@@ -180,6 +227,12 @@ public class ProgressHelper {
 		return new String[] {"", "", "", ""};
 	}
 	
+	/**
+	 * Compute a Label to display. The label is composed of two parts: an icon and a text. 
+	 * The text is an HTML link if an HTML page is available for the element  
+	 * @param element the Element for which the label is to be computed
+	 * @return the element label.
+	 */
 	private String getLabel(Object element){
 		StringBuffer result = new StringBuffer();
 		result.append(CapellaServices.getImageLinkFromElement((EObject) element, this.projectName, this.outputFolder));
@@ -196,20 +249,31 @@ public class ProgressHelper {
 		return result.toString();
 	}
 
+	/**
+	 * Return the ID of an element
+	 * @param current the Element
+	 * @return it's ID
+	 */
 	protected String getID(Object current) {
 		if (current instanceof CapellaElement) {
-			CapellaElement ce = (CapellaElement) current;
-			return ce.getId();
+			/** Capella ModelElement ID attribute */
+			return ((CapellaElement) current).getId();
 		} else if (current instanceof DRepresentation) {
+			/** DRepresentation UID attribute */
 			return ((DRepresentation) current).getUid();
 		} else if (current instanceof DAnalysis){
-			return ((DAnalysis) current).getVersion();
+			/** The version of the DAnalysis. Only one DAnalysis can be displayed
+			 *  in the table so there are no conflict on this data */ 
+			return ((DAnalysis) current).getVersion();			
 		} else if (current instanceof DView){
+			/** The name of the Sirius Viewpoint. Each DView is  */
 			return ((DView) current).getViewpoint().getName();
 		} else if (current instanceof EObject) {
 			EObject eElement = (EObject) current;
+			/** Trying the use an attribute which name is "id" */ 
 			EStructuralFeature idSF = eElement.eClass().getEStructuralFeature("id");
 			if (idSF == null) {
+				/** Trying the use an ID attribute*/
 				idSF = eElement.eClass().getEIDAttribute();
 			}
 			if (idSF != null) {

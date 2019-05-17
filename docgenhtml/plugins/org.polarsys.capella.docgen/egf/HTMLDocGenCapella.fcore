@@ -7,12 +7,12 @@
     <contractContainer xmi:id="_2HmpYNz-Ed-Vzvs7Wt1vzQ">
       <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_60tqgN43Ed-Qav1YnqlO9A"
           description="Project where the result of the emf document generation is located"
-          name="projectName" mandatory="true" invocationContracts="#_JKBjMN44Ed-Qav1YnqlO9A">
+          name="projectName" mandatory="true" invocationContracts="#_JKBjMN44Ed-Qav1YnqlO9A #_7NJt0nf0EemiHtSfRhpXIQ">
         <type xmi:type="types:TypeString" xmi:id="_60tqgd43Ed-Qav1YnqlO9A" value="org.polarsys.capella.doc"/>
       </contracts>
       <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_60tqgt43Ed-Qav1YnqlO9A"
           description="Project folder where the result of the emf document generation is located"
-          name="outputFolder" invocationContracts="#_M9Ng8N44Ed-Qav1YnqlO9A">
+          name="outputFolder" invocationContracts="#_M9Ng8N44Ed-Qav1YnqlO9A #_7NJt03f0EemiHtSfRhpXIQ">
         <type xmi:type="types:TypeString" xmi:id="_60tqg943Ed-Qav1YnqlO9A" value="output/Capella"/>
       </contracts>
       <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_cxneQN0OEd-Vzvs7Wt1vzQ"
@@ -790,6 +790,17 @@
           </invocationContracts>
           <invocationContracts xmi:id="_jxFv1dV2EeW9p5oksEzglA" targetInvocationContract="#_kIXh4N6ZEd-ZSZ6AN4Dlrg"
               invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_7NJt0Hf0EemiHtSfRhpXIQ" name="Unzip treetable" invokedActivity="ftask:Task platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_O5eeweJpEd-grZ8S-iQR-w">
+        <invocationContractContainer xmi:id="_7NJt0Xf0EemiHtSfRhpXIQ">
+          <invocationContracts xmi:id="_7NJt0nf0EemiHtSfRhpXIQ" factoryComponentContract="#_60tqgN43Ed-Qav1YnqlO9A"
+              invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_V4qecOJpEd-grZ8S-iQR-w"/>
+          <invocationContracts xmi:id="_7NJt03f0EemiHtSfRhpXIQ" factoryComponentContract="#_60tqgt43Ed-Qav1YnqlO9A"
+              invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_V4qecuJpEd-grZ8S-iQR-w"/>
+          <invocationContracts xmi:id="_7NJt1Hf0EemiHtSfRhpXIQ" invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_XQudkOJpEd-grZ8S-iQR-w">
+            <type xmi:type="types:TypeURI" xmi:id="_B3VG0Hf1EemiHtSfRhpXIQ" value="platform:/plugin/org.polarsys.capella.docgen/file/misc.zip"/>
+          </invocationContracts>
         </invocationContractContainer>
       </invocations>
       <invocations xmi:id="_DpAlwN34Ed-Qav1YnqlO9A" name="Generate documentation"
