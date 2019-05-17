@@ -22,6 +22,7 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core;visibility:=reexport
  org.polarsys.capella.shared.id.handler,
  org.polarsys.capella.core.diagram.helpers,
  org.polarsys.capella.core.explorer.activity.ui,
+ org.polarsys.capella.docgen.preference,
  org.eclipse.sirius.table
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
