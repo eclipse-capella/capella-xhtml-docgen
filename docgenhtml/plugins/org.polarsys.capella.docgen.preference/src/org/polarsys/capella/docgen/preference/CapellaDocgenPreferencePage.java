@@ -17,7 +17,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.ui.dialogs.PreferenceLinkArea;
+import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.polarsys.capella.docgen.preference.internal.Messages;
+import org.polarsys.capella.docgen.preference.internal.PreferencesUIMsg;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.ui.AbstractDocgenPreferencePage;
 
 /**
@@ -33,6 +36,8 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 	 */
 	@Override
 	protected void createFieldEditors() {
+		createLink();
+		
 		createExportDiagramsField();
 		addField(useExportStatusAndReview);
 	}
@@ -82,5 +87,11 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 		result.setLayoutData(gd);
 		result.setLayout(layout);
         return result;
+	}
+	
+	private void createLink(){
+		final IWorkbenchPreferenceContainer preferenceContainer = (IWorkbenchPreferenceContainer) getContainer();
+		PreferenceLinkArea pageLink = new PreferenceLinkArea(getFieldEditorParent(), SWT.NONE, "org.polarsys.kitalpha.mdecore.docgen.preference.category", PreferencesUIMsg.CATEGORY_PAGE_LABEL_DOCGEN, preferenceContainer, null);
+		pageLink.getControl().setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 	}
 }
