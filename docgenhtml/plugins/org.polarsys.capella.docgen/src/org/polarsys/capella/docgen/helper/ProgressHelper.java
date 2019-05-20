@@ -26,6 +26,8 @@ import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.polarsys.capella.common.ui.toolkit.viewers.data.DataContentProvider;
 import org.polarsys.capella.common.ui.toolkit.viewers.data.TreeData;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.capellacore.EnumerationPropertyType;
+import org.polarsys.capella.core.model.handler.helpers.CapellaProjectHelper;
 import org.polarsys.capella.core.model.handler.helpers.RepresentationHelper;
 import org.polarsys.capella.core.ui.metric.utils.ProgressMonitoringPropagator;
 import org.polarsys.capella.core.ui.metric.utils.Utils;
@@ -60,12 +62,15 @@ public class ProgressHelper {
 	 */
 	public String generateProgressTable(EObject element){
 		StringBuffer result = new StringBuffer();
+		result.append(generateSearchArea(element));
 		result.append("<table id=\"").append(TABLE_ID).append("\">");
 		result.append(generateExpandCollapsAction(TABLE_ID));
 		result.append(generateTableHeader());
 		result.append(generateTableBody(element));
 		result.append("</table>");
-		result.append(getPluginIntegration(TABLE_ID));
+		result.append(generateCustomStype());
+		result.append(getTreeTablePluginIntegration(TABLE_ID));
+		result.append(getSearchJavascriptFucntions());
 		return result.toString();
 	}
 	
@@ -76,14 +81,39 @@ public class ProgressHelper {
 	 */
 	public String generateExpandCollapsAction(String tableID){
 		StringBuffer result = new StringBuffer();
-		result.append("<caption>");
-		result.append("  <a href=\"#\" onclick=\"jQuery('#")
-			  .append(tableID)
-			  .append("').treetable('expandAll'); return false;\"><img src=\"../../img/closed.gif\" alt=\"Collapse all\"/></a>");
-		result.append("  <a href=\"#\" onclick=\"jQuery('#")
-			  .append(tableID)
-			  .append("').treetable('collapseAll'); return false;\"><img src=\"../../img/open.gif\" alt=\"Collapse all\"/></a>");
-		result.append("</caption>");
+		result.append("<img class=\"cebutton\" src=\"../../img/closed.gif\" alt=\"Collapse all\" onclick=\"jQuery('#progress-overview-table').treetable('expandAll'); return false;\"/>");
+		result.append("<img class=\"cebutton\" src=\"../../img/open.gif\" alt=\"Collapse all\" onclick=\"jQuery('#progress-overview-table').treetable('collapseAll'); return false;\"/>");
+		return result.toString();
+	}
+	
+	/**
+	 * @return The search area HTML code. It contains 3 search criteria, end-user can use to filter table lines
+	 */
+	public String generateSearchArea(EObject element){
+		StringBuffer result = new StringBuffer();
+		result.append("<label for=\"filter-object\">Object:</label>");
+		result.append("<input class=\"search\" type=\"text\" id=\"filter-object\" onkeyup=\"multiSearch()\" placeholder=\"Search Object by name..\">");
+		result.append("<label for=\"filter-status\">Status:</label>");
+		result.append("<select class=\"search\" id=\"filter-status\" style=\"min-width:60px\" onchange=\"multiSearch()\">");
+		result.append("	<option value=\"\">- All -</option>");
+		
+		EnumerationPropertyType progressStatus = CapellaProjectHelper.getEnumerationPropertyType(element, CapellaProjectHelper.PROGRESS_STATUS_KEYWORD);
+		progressStatus.getOwnedLiterals().forEach( literal -> {
+			result.append("	<option value=\"").append(literal.getName()).append("\">").append(literal.getName()).append("</option>");
+		});
+		result.append("</select>");
+		result.append("<label for=\"filter-review\">Review:</label>");
+		result.append("<input class=\"search\" type=\"text\" id=\"filter-review\" onkeyup=\"multiSearch()\" placeholder=\"Search in review..\">");
+		return result.toString();
+	}
+	
+	public String generateCustomStype(){
+		StringBuffer result = new StringBuffer();
+		result.append("<style>");
+		result.append("	.search {width: 160;height: 30px;border-radius: 3px;border: 1px solid #000000; margin: 15px}");
+		result.append("	.search input {width: 120px;padding: 10px 5px;float: left;color: #ccc;border: 0;background: transparent;border-radius: 3px 0 0 3px;}");
+		result.append("	.cebutton {width: 20px;padding: 20px 5px;float: right;}");
+		result.append("</style>");
 		return result.toString();
 	}
 	
@@ -91,7 +121,7 @@ public class ProgressHelper {
 	 * @param tableID the ID of the table
 	 * @return the HTML content allowing the integration of the JQuery scripts
 	 */
-	public String getPluginIntegration(String tableID){
+	public String getTreeTablePluginIntegration(String tableID){
 		StringBuffer result = new StringBuffer();
 		result.append("<script src=\"../../scripts/jquery-treeview/lib/jquery-1.11.1.js\"></script>");
 		result.append("<script src=\"../../scripts/jquery-treetable/jquery.treetable.js\"></script>");
@@ -103,6 +133,65 @@ public class ProgressHelper {
 		result.append("		$(\".selected\").not(this).removeClass(\"selected\");");
 		result.append("		$(this).toggleClass(\"selected\");");
 		result.append("	});");
+		result.append("</script>");
+		return result.toString();
+	}
+	
+	/**
+	 * @param tableID the ID of the table
+	 * @return the HTML content allowing the integration of the JQuery scripts
+	 */
+	public String getSearchJavascriptFucntions(){
+		StringBuffer result = new StringBuffer();
+		result.append("<script>");
+		result.append("	function multiSearch() {");
+		result.append("		$(\"#progress-overview-table\").treetable(\"expandAll\");");
+		result.append("		filterName   = document.getElementById('filter-object').value.toUpperCase();");
+		result.append("		filterStatus = document.getElementById('filter-status').value.toUpperCase();");
+		result.append("		filterReview = document.getElementById('filter-review').value.toUpperCase();");		
+		result.append("		table = document.getElementById(\"progress-overview-table\");");
+		result.append("		tr = table.getElementsByTagName(\"tr\");");
+		result.append("		for (i = 1; i < tr.length; i++) {");
+		result.append("			tdStatus = tr[i].getElementsByTagName(\"td\")[1];");
+		result.append("			if (tdStatus) {");
+		result.append("				status = tdStatus.textContent || tdStatus.innerText;");
+		result.append("				if (filterStatus.toUpperCase().indexOf(status) > -1) {");
+		result.append("					doDisplay=true;");
+		result.append("				} else {");
+		result.append("					if (filterStatus===\"\") {");
+		result.append("						doDisplay=true;");
+		result.append("					} else {");
+		result.append("						doDisplay=false;");
+		result.append("					}");
+		result.append("				}");
+		result.append("			}");
+		result.append("			tdObject = tr[i].getElementsByTagName(\"td\")[0];");
+		result.append("			if (tdObject) {");
+		result.append("				doDisplay = doDisplay && checkValue(tdObject, filterName);");
+		result.append("			} ");
+		result.append("			tdReview = tr[i].getElementsByTagName(\"td\")[2];");
+		result.append("			if (tdObject) {");
+		result.append("				doDisplay = doDisplay && checkValue(tdReview, filterReview);");
+		result.append("			} 			");
+		result.append("			if (doDisplay) {");
+		result.append("				tr[i].style.display = \"\";");
+		result.append("			} else {");
+		result.append("				tr[i].style.display = \"none\";");
+		result.append("			}");
+		result.append("		}");
+		result.append("	}");
+		result.append("	function checkValue(td, filter){");
+		result.append("		txtValue = td.textContent || td.innerText;");
+		result.append("		if (txtValue && txtValue.toUpperCase().indexOf(filter) > -1) {");
+		result.append("			return true;");
+		result.append("		} else {");
+		result.append("			if (filter===\"\") {");
+		result.append("				return true;");
+		result.append("			} else {");
+		result.append("				return false;");
+		result.append("			}");
+		result.append("		}");
+		result.append("	}");
 		result.append("</script>");
 		return result.toString();
 	}
