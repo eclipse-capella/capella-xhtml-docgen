@@ -20,6 +20,9 @@ import org.eclipse.osgi.util.NLS;
 public class Messages {
 
 	public static String EXPORT__STATUS_AND_REVIEW_FIELD_LABEL;
+	public static String EXPORT__COMPONENT_EXCHANGE_FIELD_LABEL;
+	public static String EXPORT__FUNCTIONAL_EXCHANGE_FIELD_LABEL;
+	public static String EXPORT__PHYSICAL_LINK_FIELD_LABEL;
 	
 	private static final String BUNDLE_PACKAGE = Activator.PLUGIN_ID; //$NON-NLS-1$
 	private static final String BUNDLE_FILENAME = "Messages"; //$NON-NLS-1$
