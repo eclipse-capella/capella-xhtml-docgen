@@ -31,7 +31,7 @@
 		<module>org.polarsys.capella.docgen</module>
 		<module>org.polarsys.capella.docgen.commandline</module>
 		<module>org.polarsys.capella.docgen.ui</module>
-		
+		<module>org.polarsys.capella.docgen.preference</module>
 		<module>org.polarsys.capella.docgen.configuration</module>
 		<module>org.polarsys.capella.docgen.configuration.commandline</module>
 		<module>org.polarsys.capella.docgen.configuration.edit</module>

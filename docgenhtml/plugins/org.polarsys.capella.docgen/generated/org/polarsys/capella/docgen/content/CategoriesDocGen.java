@@ -215,4 +215,9 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
+
+	public boolean preCondition(PatternContext ctx) throws Exception {
+		return element instanceof ExchangeCategory || element instanceof ComponentExchangeCategory
+				|| element instanceof PhysicalLinkCategory;
+	}
 }

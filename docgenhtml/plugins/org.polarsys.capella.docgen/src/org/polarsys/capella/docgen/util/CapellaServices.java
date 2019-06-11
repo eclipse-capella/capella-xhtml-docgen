@@ -216,10 +216,12 @@ public class CapellaServices {
 			if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
 				return 0;
 			else {
-				EObject parent = element.eContainer();
-				if (parent instanceof CapellaElement) {
-					if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
-						return 1;
+				if (! DocGenHtmlCapellaControl.isPageOptional((CapellaElement) element)) {
+					EObject parent = element.eContainer();
+					if (parent instanceof CapellaElement) {
+						if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
+							return 1;
+						}
 					}
 				}
 			}
@@ -240,10 +242,12 @@ public class CapellaServices {
 			if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
 				return 0;
 			else {
-				EObject parent = element.eContainer();
-				if (parent instanceof CapellaElement) {
-					if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
-						return 1;
+				if (! DocGenHtmlCapellaControl.isPageOptional((CapellaElement) element)) {
+					EObject parent = element.eContainer();
+					if (parent instanceof CapellaElement) {
+						if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
+							return 1;
+						}
 					}
 				}
 			}

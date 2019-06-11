@@ -16,5 +16,14 @@ package org.polarsys.capella.docgen.preference;
  */
 public class CapellaDocgenPreferenceConstant {
 	public static final String DOCGEN_EXPORT__STATUS_AND_REVIEW = "DocgenExportStatusAndReview";
-	public static final boolean DOCGEN_EXPORT__STATUS_AND_REVIEW_DEFAULT_VALUE = true;
+	public static final boolean DOCGEN_EXPORT__STATUS_AND_REVIEW_DEFAULT_VALUE = false;
+	
+	public static final String DOCGEN_EXPORT__COMPONENT_EXCHANGE = "DocgenExportComponentExchange";
+	public static final boolean DOCGEN_EXPORT__COMPONENT_EXCHANGE_DEFAULT_VALUE = false;
+	
+	public static final String DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE = "DocgenExportFunctionalExchange";
+	public static final boolean DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE_DEFAULT_VALUE = true;
+	
+	public static final String DOCGEN_EXPORT__PHYSICAL_LINK = "DocgenExportPhysicalLink";
+	public static final boolean DOCGEN_EXPORT__PHYSICAL_LINK_DEFAULT_VALUE = false;
 }

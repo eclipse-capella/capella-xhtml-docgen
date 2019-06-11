@@ -123,7 +123,7 @@ public class CapellaComponentPortHelper {
 		buffer.append("<td id=\"" + CapellaServices.getAnchorId(componentExchange) + "\">");
 		buffer.append(CapellaServices.getImageLinkFromElement(componentExchange, projectName, outputFolder));
 		buffer.append(" ");
-		buffer.append(componentExchange.getName());
+		buffer.append(CapellaServices.getHyperlinkFromElement(componentExchange));
 		buffer.append("</td>");
 
 		ModelElement sourceTargetComponentPort = getOppositeComponentPort(currentComponentPort, componentExchange);
@@ -142,36 +142,7 @@ public class CapellaComponentPortHelper {
 		buffer.append("<td>");
 		buffer.append(getDescription(componentExchange, projectName, outputFolder));
 		buffer.append("</td>");
-		// buffer.append("<td>");
-		// EList<FunctionalExchange> functionalExchanges = componentExchange.getAllocatedFunctionalExchanges();
-		// if (functionalExchanges.size() > 0) {
-		// buffer.append(CapellaServices.UL_OPEN);
-		//
-		// for (FunctionalExchange currentItem : functionalExchanges) {
-		// buffer.append("<li>");
-		// buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
-		// buffer.append(" ");
-		// buffer.append(currentItem.getName());
-		// buffer.append("</li>");
-		// }
-		// buffer.append(CapellaServices.UL_CLOSE);
-		// }
-		// buffer.append("</td>");
-		// buffer.append("<td>");
-		// if (componentExchange.getConvoyedInformations().size() > 0) {
-		// buffer.append(CapellaServices.UL_OPEN);
-		// for (AbstractExchangeItem currentItem : componentExchange.getConvoyedInformations()) {
-		// buffer.append("<li>");
-		// buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
-		// buffer.append(" ");
-		// buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
-		// buffer.append("</li>");
-		// }
-		// buffer.append(CapellaServices.UL_CLOSE);
-		// }
-		// buffer.append("</td>");
 		buffer.append("</tr>");
-
 		return buffer.toString();
 	}
 

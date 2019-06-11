@@ -82,7 +82,7 @@ public class CapellaComponentServices {
 		buffer.append("<td id=\"" + CapellaServices.getAnchorId(componentExchange) + "\">");
 		buffer.append(CapellaServices.getImageLinkFromElement(componentExchange, projectName, outputFolder));
 		buffer.append(" ");
-		buffer.append(componentExchange.getName());
+		buffer.append(CapellaServices.getHyperlinkFromElement(componentExchange));
 		buffer.append("</td>");
 
 		ModelElement sourceTargetComponent;
@@ -109,7 +109,7 @@ public class CapellaComponentServices {
 				buffer.append("<li>");
 				buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
 				buffer.append(" ");
-				buffer.append(currentItem.getName());
+				buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
 				buffer.append("</li>");
 			}
 			buffer.append(CapellaServices.UL_CLOSE);
