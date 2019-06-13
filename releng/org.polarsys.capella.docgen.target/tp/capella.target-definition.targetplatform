@@ -18,6 +18,6 @@ location capella-master "https://download.polarsys.org/capella/core/updates/stab
 	org.polarsys.capella.rcp.feature.feature.group 
 }
 
-location kitalpha-runtime-master-latest "http://download.polarsys.org/kitalpha/updates/stable/runtime/1.3.1RC6" {
+location kitalpha-runtime-master-latest "https://download.polarsys.org/kitalpha/updates/nightly/runtime/1.3.1-N269" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group 
 }
