@@ -42,6 +42,7 @@ import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.oa.Entity;
 import org.polarsys.capella.core.data.oa.Role;
 import org.polarsys.capella.core.data.requirement.Requirement;
+import org.polarsys.capella.core.semantic.queries.basic.queries.FunctionalExchangeCategory;
 import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 
 public class DocGenHtmlCapellaControl {
@@ -89,11 +90,12 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof Unit
 				|| element instanceof Requirement 
 				|| element instanceof Region
+				|| element instanceof FunctionalExchangeCategory 
 				|| element instanceof ComponentExchangeCategory 
+				|| element instanceof PhysicalLinkCategory 
 				|| (element instanceof FunctionalExchange 	&& CapellaDocgenPreferenceHelper.isExportFunctionalExchange())
 				|| (element instanceof ComponentExchange 	&& CapellaDocgenPreferenceHelper.isExportComponentExchange())
-				|| (element instanceof PhysicalLink 		&& CapellaDocgenPreferenceHelper.isExportPhysialLink())
-				|| element instanceof PhysicalLinkCategory);
+				|| (element instanceof PhysicalLink 		&& CapellaDocgenPreferenceHelper.isExportPhysialLink()));
 	}
 
 	/**
@@ -129,8 +131,6 @@ public class DocGenHtmlCapellaControl {
 				|| (element instanceof AbstractState && element instanceof InitialPseudoState == false)
 				|| element instanceof Region
 				|| element instanceof ExchangeItemElement
-				|| element instanceof ComponentExchangeCategory
-				|| element instanceof PhysicalLinkCategory
 		));
 	}
 }
