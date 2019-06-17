@@ -117,7 +117,7 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.polarsys.capella.rcp.feature.feature.group" version="1.2.2.201901241810"/>
-      <repository id="capella-1.2.x" location="https://ci.polarsys.org/capella/view/Capella-v1.2.x/job/capella-v1.2.x/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.capella.rcp.site/target/repository/"/>
+      <repository id="capella-1.2.x" location="https://ci.eclipse.org/capella/view/Capella/job/capella-v1.2.x/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.capella.rcp.site/target/repository/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.egf.feature.group" version="1.5.1.v20180423-0901"/>
