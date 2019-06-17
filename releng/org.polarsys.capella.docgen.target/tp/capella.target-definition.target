@@ -116,7 +116,7 @@
       <repository id="orbit-R20140525021250" location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.capella.rcp.feature.feature.group" version="1.2.2.201901241810"/>
+      <unit id="org.polarsys.capella.rcp.feature.feature.group" version="0.0.0"/>
       <repository id="capella-1.2.x" location="https://ci.eclipse.org/capella/view/Capella/job/capella-v1.2.x/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.capella.rcp.site/target/repository/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
