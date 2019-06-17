@@ -33,7 +33,7 @@
       <unit id="org.eclipse.acceleo.query.source.feature.group" version="6.0.4.201807201001"/>
       <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group" version="5.1.4.201811301634"/>
       <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.source.feature.group" version="5.1.4.201811301634"/>
-      <repository id="sirius-5.1.x" location="http://download.eclipse.org/sirius/updates/stable/5.1.4-S20181130-113030/neon"/>
+      <repository id="sirius-5.1.x" location="http://download.eclipse.org/sirius/updates/releases/5.1.4/neon"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.polarsys.kitalpha.ad.runtime.feature.feature.group" version="1.2.2.201812041251"/>
