@@ -10,11 +10,12 @@
  *******************************************************************************/
 package org.polarsys.capella.docgen.configuration.ui.viewer.providers;
 
+import java.util.Optional;
+
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.sirius.common.tools.api.util.ReflectionHelper;
-import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.DRepresentationElement;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
@@ -40,7 +41,7 @@ public class DetailsLabelProvider extends CapellaNavigatorLabelProvider implemen
 		super(CapellaAdapterFactoryProvider.getInstance().getAdapterFactory());
 		ILabelProvider referencedLabelProvider = AbstractLabelProviderFactory.getInstance()
 				.getReferencedLabelProvider();
-		Option<Object> option = ReflectionHelper.getFieldValueWithoutException(referencedLabelProvider,
+		Optional<Object> option = ReflectionHelper.getFieldValueWithoutException(referencedLabelProvider,
 				"_labelProvider"); //$NON-NLS-1$
 		if (option.get() instanceof CapellaNavigatorLabelProvider) {
 			referencedCapellaNavigatorLabelProvider = (CapellaNavigatorLabelProvider) option.get();

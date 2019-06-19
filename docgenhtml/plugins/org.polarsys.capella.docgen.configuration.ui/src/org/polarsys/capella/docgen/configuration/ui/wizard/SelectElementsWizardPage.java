@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -414,9 +415,9 @@ public class SelectElementsWizardPage extends WizardPage {
 				// check click on referenced/referencing element
 				if (element instanceof EObjectWrapper) {
 					TreeItem lastClickedItem = null;
-					Option<Object> itemOption = ReflectionHelper.getFieldValueWithoutException(rightTreeViewer,
+					Optional<Object> itemOption = ReflectionHelper.getFieldValueWithoutException(rightTreeViewer,
 							"lastClickedItem"); //$NON-NLS-1$
-					if (itemOption.some()) {
+					if (itemOption.isPresent()) {
 						lastClickedItem = (TreeItem) itemOption.get();
 						while (lastClickedItem.getParentItem() != null
 								&& lastClickedItem.getParentItem().getData() instanceof EObjectWrapper) {

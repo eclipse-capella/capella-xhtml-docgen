@@ -12,6 +12,7 @@ package org.polarsys.capella.docgen.configuration.ui.viewer;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.eclipse.jface.util.Policy;
 import org.eclipse.sirius.common.tools.api.util.ReflectionHelper;
@@ -102,8 +103,8 @@ public class GenerationContainerCheckedTreeViewer extends ContainerCheckedTreeVi
 	@Override
 	protected void mapElement(Object element, final Widget item) {
 
-		Option<Object> value = ReflectionHelper.getFieldValueWithoutException(this, "elementMap"); //$NON-NLS-1$
-		if (value.some()) {
+		Optional<Object> value = ReflectionHelper.getFieldValueWithoutException(this, "elementMap"); //$NON-NLS-1$
+		if (value.isPresent()) {
 			if (value.get() != null) {
 				Object widgetOrWidgets = getElementMap(value.get(), element);
 				if (widgetOrWidgets == null) {
@@ -135,7 +136,7 @@ public class GenerationContainerCheckedTreeViewer extends ContainerCheckedTreeVi
 					item.addDisposeListener(new DisposeListener() {
 						@Override
 						public void widgetDisposed(DisposeEvent e) {
-							Option<Object> treeIsDisposed = ReflectionHelper.getFieldValueWithoutException(this,
+							Optional<Object> treeIsDisposed = ReflectionHelper.getFieldValueWithoutException(this,
 									"treeIsDisposed"); //$NON-NLS-1$
 							if (!((Boolean) treeIsDisposed.get())) {
 								Object data = item.getData();
@@ -221,8 +222,8 @@ public class GenerationContainerCheckedTreeViewer extends ContainerCheckedTreeVi
 		// double-check that the element actually maps to the given item
 		// before
 		// unmapping it
-		Option<Object> value = ReflectionHelper.getFieldValueWithoutException(this, "elementMap"); //$NON-NLS-1$
-		if (value.some()) {
+		Optional<Object> value = ReflectionHelper.getFieldValueWithoutException(this, "elementMap"); //$NON-NLS-1$
+		if (value.isPresent()) {
 			Object widgetOrWidgets = getElementMap(value.get(), element);
 			if (widgetOrWidgets == null) {
 				// item was not mapped, return
