@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -28,37 +28,15 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL + "<div title=\"Features\">";
 	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL + "</div>";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL + "<div title=\"Realisation\">";
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL;
-	protected final String TEXT_10 = NL + "</div>";
-	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL + "<div title=\"Properties\">";
-	protected final String TEXT_13 = NL;
-	protected final String TEXT_14 = NL;
-	protected final String TEXT_15 = NL + "</div>";
-	protected final String TEXT_16 = NL + " ";
-	protected final String TEXT_17 = NL + " <div title=\"Operations\">";
-	protected final String TEXT_18 = NL;
-	protected final String TEXT_19 = NL;
-	protected final String TEXT_20 = NL + "</div>";
-	protected final String TEXT_21 = NL;
-	protected final String TEXT_22 = NL + "<div title=\"Data Values\">";
-	protected final String TEXT_23 = NL;
-	protected final String TEXT_24 = NL;
-	protected final String TEXT_25 = NL + "</div>";
-	protected final String TEXT_26 = NL;
-	protected final String TEXT_27 = NL + "<h2>Part Of</h2>";
-	protected final String TEXT_28 = NL;
-	protected final String TEXT_29 = NL + "<h2>Referenced By</h2>";
-	protected final String TEXT_30 = NL;
-	protected final String TEXT_31 = NL + "<h2>Parameter Of</h2>";
-	protected final String TEXT_32 = NL;
-	protected final String TEXT_33 = NL;
-	protected final String TEXT_34 = NL;
+	protected final String TEXT_4 = NL + "</div>";
+	protected final String TEXT_5 = NL + "<div title=\"Realisation\">";
+	protected final String TEXT_6 = NL + "<div title=\"Properties\">";
+	protected final String TEXT_7 = NL + " ";
+	protected final String TEXT_8 = NL + " <div title=\"Operations\">";
+	protected final String TEXT_9 = NL + "<div title=\"Data Values\">";
+	protected final String TEXT_10 = NL + "<h2>Part Of</h2>";
+	protected final String TEXT_11 = NL + "<h2>Referenced By</h2>";
+	protected final String TEXT_12 = NL + "<h2>Parameter Of</h2>";
 
 	public ClassDocGen() {
 		//Here is the constructor
@@ -94,8 +72,8 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_33);
-		stringBuffer.append(TEXT_34);
+		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_3);
 		return stringBuffer.toString();
 	}
 
@@ -147,15 +125,15 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(CapellaClassServices.getClassFeatures(element)));
-			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_4);
 		}
-		stringBuffer.append(TEXT_6);
+		stringBuffer.append(TEXT_3);
 		if (CapellaClassServices.getClassRealizeInformation(element).size() >= 1) {
-			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_5);
 			String realisation = "Realisation";
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_3);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,realisation:property"%>
 
@@ -172,19 +150,19 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_9);
+			stringBuffer.append(TEXT_3);
 			stringBuffer
 					.append(StringUtil.stringListToBulette(CapellaClassServices.getClassRealizeInformation(element)));
-			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_4);
 		}
-		stringBuffer.append(TEXT_11);
+		stringBuffer.append(TEXT_3);
 
 		Collection<String> propertiesCollection = CapellaClassServices.getClassProperties(element, projectName,
 				outputFolder);
 		if (propertiesCollection.size() >= 1) {
-			stringBuffer.append(TEXT_12);
+			stringBuffer.append(TEXT_6);
 			String properties = "Properties";
-			stringBuffer.append(TEXT_13);
+			stringBuffer.append(TEXT_3);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,properties:property"%>
 
@@ -201,15 +179,15 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_14);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(propertiesCollection));
-			stringBuffer.append(TEXT_15);
+			stringBuffer.append(TEXT_4);
 		}
-		stringBuffer.append(TEXT_16);
+		stringBuffer.append(TEXT_7);
 		if (CapellaClassServices.getClassOperation(element).size() > 0) {
-			stringBuffer.append(TEXT_17);
+			stringBuffer.append(TEXT_8);
 			String operation = "Operations";
-			stringBuffer.append(TEXT_18);
+			stringBuffer.append(TEXT_3);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,operation:property"%>
 
@@ -226,18 +204,18 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_19);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(CapellaClassServices.getClassOperation(element)));
-			stringBuffer.append(TEXT_20);
+			stringBuffer.append(TEXT_4);
 		}
-		stringBuffer.append(TEXT_21);
+		stringBuffer.append(TEXT_3);
 
 		Collection<String> dataValuesCollection = CapellaClassServices.getClassDataValues(element, projectName,
 				outputFolder);
 		if (dataValuesCollection.size() >= 1) {
-			stringBuffer.append(TEXT_22);
+			stringBuffer.append(TEXT_9);
 			String dataValue = "Data Values";
-			stringBuffer.append(TEXT_23);
+			stringBuffer.append(TEXT_3);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,dataValue:property"%>
 
@@ -254,32 +232,32 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_24);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(dataValuesCollection));
-			stringBuffer.append(TEXT_25);
+			stringBuffer.append(TEXT_4);
 		}
-		stringBuffer.append(TEXT_26);
+		stringBuffer.append(TEXT_3);
 		Collection<String> partofCollection = CapellaClassServices.getPartOf((Class) element, projectName,
 				outputFolder);
 		if (partofCollection.size() > 0) {
-			stringBuffer.append(TEXT_27);
-			stringBuffer.append(TEXT_28);
+			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(partofCollection));
 		}
 
 		Collection<String> referencedByCollection = CapellaClassServices.getReferencedBy((Class) element, projectName,
 				outputFolder);
 		if (referencedByCollection.size() > 0) {
-			stringBuffer.append(TEXT_29);
-			stringBuffer.append(TEXT_30);
+			stringBuffer.append(TEXT_11);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(referencedByCollection));
 		}
 
 		Collection<String> parameterOfCollection = CapellaClassServices.getParameterOf((Class) element, projectName,
 				outputFolder);
 		if (parameterOfCollection.size() > 0) {
-			stringBuffer.append(TEXT_31);
-			stringBuffer.append(TEXT_32);
+			stringBuffer.append(TEXT_12);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(parameterOfCollection));
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;

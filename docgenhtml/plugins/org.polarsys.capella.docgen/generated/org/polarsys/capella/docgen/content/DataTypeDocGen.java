@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -27,21 +27,10 @@ public class DataTypeDocGen extends org.polarsys.capella.docgen.content.Generali
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<div title=\"Features\">";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL + "</div>";
-	protected final String TEXT_5 = NL + "<div title=\"Literals\">";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL + "</div>";
-	protected final String TEXT_9 = NL + "<div title=\"Data Values\">";
-	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL + "</div>";
-	protected final String TEXT_13 = NL + "<h2>Type Of</h2>";
-	protected final String TEXT_14 = NL;
-	protected final String TEXT_15 = NL;
-	protected final String TEXT_16 = NL;
-	protected final String TEXT_17 = NL;
+	protected final String TEXT_3 = NL + "</div>";
+	protected final String TEXT_4 = NL + "<div title=\"Literals\">";
+	protected final String TEXT_5 = NL + "<div title=\"Data Values\">";
+	protected final String TEXT_6 = NL + "<h2>Type Of</h2>";
 
 	public DataTypeDocGen() {
 		//Here is the constructor
@@ -77,8 +66,8 @@ public class DataTypeDocGen extends org.polarsys.capella.docgen.content.Generali
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_16);
-		stringBuffer.append(TEXT_17);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 
@@ -130,16 +119,16 @@ public class DataTypeDocGen extends org.polarsys.capella.docgen.content.Generali
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_3);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(featuresCollection));
-			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_3);
 		}
 
 		Collection<String> literalsCollection = CapellaDataTypeService.getLiterals(element, projectName, outputFolder);
 		if (literalsCollection.size() >= 1) {
-			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_4);
 			String propertyValue = "Literals";
-			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_2);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,propertyValue:property"%>
 
@@ -156,17 +145,17 @@ public class DataTypeDocGen extends org.polarsys.capella.docgen.content.Generali
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(literalsCollection));
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_3);
 		}
 
 		Collection<String> dataValuesCollection = CapellaDataValuePkgService.getDataValues(element, projectName,
 				outputFolder);
 		if (dataValuesCollection.size() >= 1) {
-			stringBuffer.append(TEXT_9);
+			stringBuffer.append(TEXT_5);
 			String dataValue = "Data Values";
-			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_2);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,dataValue:property"%>
 
@@ -183,16 +172,16 @@ public class DataTypeDocGen extends org.polarsys.capella.docgen.content.Generali
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_11);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(dataValuesCollection));
-			stringBuffer.append(TEXT_12);
+			stringBuffer.append(TEXT_3);
 		}
 
 		Collection<String> typeOfCollection = CapellaDataTypeService.getTypeOf((DataType) element, projectName,
 				outputFolder);
 		if (typeOfCollection.size() >= 1) {
-			stringBuffer.append(TEXT_13);
-			stringBuffer.append(TEXT_14);
+			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(typeOfCollection));
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
@@ -208,7 +197,7 @@ public class DataTypeDocGen extends org.polarsys.capella.docgen.content.Generali
 		String elementFullName = CapellaServices.getHyperlinkFromElement(element);
 		documentTitle = "<span class=\"elementMetaClass\">" + visibility + "</span> " + elementFullName;
 
-		stringBuffer.append(TEXT_15);
+		stringBuffer.append(TEXT_2);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle", stringBuffer.toString());
 	}

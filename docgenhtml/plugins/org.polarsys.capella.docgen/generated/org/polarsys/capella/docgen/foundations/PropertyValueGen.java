@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.0.201805040915
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -37,11 +37,7 @@ public class PropertyValueGen {
 			+ "\t           <th>Name</th>" + NL + "\t           <th>Value</th>" + NL
 			+ "\t           <th>Description</th>" + NL + "\t       </tr>" + NL + "\t   </thead>" + NL + "\t   <tbody>"
 			+ NL + "\t";
-	protected final String TEXT_5 = NL + "\t";
-	protected final String TEXT_6 = NL + "\t</tbody>" + NL + "\t</table>" + NL + "\t";
-	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL;
+	protected final String TEXT_5 = NL;
 
 	public PropertyValueGen() {
 		//Here is the constructor
@@ -87,8 +83,8 @@ public class PropertyValueGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_8);
-		stringBuffer.append(TEXT_9);
+		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_5);
 		return stringBuffer.toString();
 	}
 
@@ -164,13 +160,13 @@ public class PropertyValueGen {
 
 			String table = PropertyValueHelper.getPVGTable(element, 0, projectName, outputFolder);
 
-			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(table);
-			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_3);
 
 		}
 
-		stringBuffer.append(TEXT_7);
+		stringBuffer.append(TEXT_5);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}

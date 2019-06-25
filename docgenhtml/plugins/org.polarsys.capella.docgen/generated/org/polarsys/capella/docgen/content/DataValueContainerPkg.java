@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -24,10 +24,8 @@ public class DataValueContainerPkg extends org.polarsys.capella.docgen.content.p
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL + "<div title=\"Data Values\">";
 	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL + "</div>";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL;
+	protected final String TEXT_4 = NL + "</div>";
+	protected final String TEXT_5 = NL;
 
 	public DataValueContainerPkg() {
 		//Here is the constructor
@@ -63,8 +61,8 @@ public class DataValueContainerPkg extends org.polarsys.capella.docgen.content.p
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_6);
-		stringBuffer.append(TEXT_7);
+		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_5);
 		return stringBuffer.toString();
 	}
 
@@ -117,10 +115,10 @@ public class DataValueContainerPkg extends org.polarsys.capella.docgen.content.p
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil
 					.stringListToBulette(DataValuePkgService.getDataValues(element, projectName, outputFolder)));
-			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_4);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());

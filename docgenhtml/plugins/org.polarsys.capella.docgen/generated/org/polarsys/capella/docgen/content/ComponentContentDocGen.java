@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -31,41 +31,25 @@ public class ComponentContentDocGen {
 	protected final String TEXT_2 = NL + "<h2>Allocated Functions</h2>";
 	protected final String TEXT_3 = NL;
 	protected final String TEXT_4 = NL + "<h2>Implemented Interfaces</h2>";
-	protected final String TEXT_5 = NL;
-	protected final String TEXT_6 = NL + "<h2>Provided Interfaces</h2>";
-	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL + "<h2>Used Interfaces</h2>";
-	protected final String TEXT_9 = NL;
-	protected final String TEXT_10 = NL + "<h2>Required Interfaces</h2>";
-	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL + "<h2>Incoming Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+	protected final String TEXT_5 = NL + "<h2>Provided Interfaces</h2>";
+	protected final String TEXT_6 = NL + "<h2>Used Interfaces</h2>";
+	protected final String TEXT_7 = NL + "<h2>Required Interfaces</h2>";
+	protected final String TEXT_8 = NL + "<h2>Incoming Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
 			+ "\t</tr>" + NL + "\t";
-	protected final String TEXT_13 = NL + "\t";
-	protected final String TEXT_14 = NL + "\t";
-	protected final String TEXT_15 = NL + "</table>";
-	protected final String TEXT_16 = NL + "<h2>Outgoing Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+	protected final String TEXT_9 = NL + "\t";
+	protected final String TEXT_10 = NL + "</table>";
+	protected final String TEXT_11 = NL + "<h2>Outgoing Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
 			+ "\t</tr>" + NL + "\t";
-	protected final String TEXT_17 = NL + "\t";
-	protected final String TEXT_18 = NL + "\t";
-	protected final String TEXT_19 = NL + "</table>";
-	protected final String TEXT_20 = NL + "<h2>In/Out Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+	protected final String TEXT_12 = NL + "<h2>In/Out Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
 			+ "\t</tr>" + NL + "\t";
-	protected final String TEXT_21 = NL + "\t";
-	protected final String TEXT_22 = NL + "\t";
-	protected final String TEXT_23 = NL + "</table>";
-	protected final String TEXT_24 = NL + "<h2>Ports</h2>";
-	protected final String TEXT_25 = NL;
-	protected final String TEXT_26 = NL + "<h2>State Machines</h2>";
-	protected final String TEXT_27 = NL;
-	protected final String TEXT_28 = NL;
-	protected final String TEXT_29 = NL;
-	protected final String TEXT_30 = NL;
+	protected final String TEXT_13 = NL + "<h2>Ports</h2>";
+	protected final String TEXT_14 = NL + "<h2>State Machines</h2>";
 
 	public ComponentContentDocGen() {
 		//Here is the constructor
@@ -111,8 +95,8 @@ public class ComponentContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_29);
-		stringBuffer.append(TEXT_30);
+		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_3);
 		return stringBuffer.toString();
 	}
 
@@ -184,7 +168,7 @@ public class ComponentContentDocGen {
 				.getImplementedInterfaces((Component) element, projectName, outputFolder);
 		if (implementedInterfaces.size() > 0) {
 			stringBuffer.append(TEXT_4);
-			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(implementedInterfaces));
 
 		}
@@ -192,8 +176,8 @@ public class ComponentContentDocGen {
 		Collection<String> providedInterfaces = CapellaComponentServices.getProvidedInterfaces((Component) element,
 				projectName, outputFolder);
 		if (providedInterfaces.size() > 0) {
-			stringBuffer.append(TEXT_6);
-			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(providedInterfaces));
 
 		}
@@ -201,8 +185,8 @@ public class ComponentContentDocGen {
 		Collection<String> usedInterfaces = CapellaComponentServices.getUsedInterfaces((Component) element, projectName,
 				outputFolder);
 		if (usedInterfaces.size() > 0) {
-			stringBuffer.append(TEXT_8);
-			stringBuffer.append(TEXT_9);
+			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(usedInterfaces));
 
 		}
@@ -210,8 +194,8 @@ public class ComponentContentDocGen {
 		Collection<String> requiredInterfaces = CapellaComponentServices.getRequiredInterfaces((Component) element,
 				projectName, outputFolder);
 		if (requiredInterfaces.size() > 0) {
-			stringBuffer.append(TEXT_10);
-			stringBuffer.append(TEXT_11);
+			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(requiredInterfaces));
 
 		}
@@ -220,32 +204,32 @@ public class ComponentContentDocGen {
 				.getIncomingComponentExchanges((Component) element);
 		if (incomingComponentExchanges.size() > 0) {
 
-			stringBuffer.append(TEXT_12);
+			stringBuffer.append(TEXT_8);
 			for (ComponentExchange componentExchange : incomingComponentExchanges) {
 
-				stringBuffer.append(TEXT_13);
+				stringBuffer.append(TEXT_9);
 				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
 						componentExchange, projectName, outputFolder));
-				stringBuffer.append(TEXT_14);
+				stringBuffer.append(TEXT_9);
 
 			}
-			stringBuffer.append(TEXT_15);
+			stringBuffer.append(TEXT_10);
 
 		}
 		Collection<ComponentExchange> outgoingComponentExchanges = CapellaComponentServices
 				.getOutgoingComponentExchanges((Component) element);
 		if (outgoingComponentExchanges.size() > 0) {
 
-			stringBuffer.append(TEXT_16);
+			stringBuffer.append(TEXT_11);
 			for (ComponentExchange componentExchange : outgoingComponentExchanges) {
 
-				stringBuffer.append(TEXT_17);
+				stringBuffer.append(TEXT_9);
 				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
 						componentExchange, projectName, outputFolder));
-				stringBuffer.append(TEXT_18);
+				stringBuffer.append(TEXT_9);
 
 			}
-			stringBuffer.append(TEXT_19);
+			stringBuffer.append(TEXT_10);
 
 		}
 
@@ -253,34 +237,34 @@ public class ComponentContentDocGen {
 				.getInOutComponentExchanges((Component) element);
 		if (inoutComponentExchanges.size() > 0) {
 
-			stringBuffer.append(TEXT_20);
+			stringBuffer.append(TEXT_12);
 			for (ComponentExchange componentExchange : inoutComponentExchanges) {
 
-				stringBuffer.append(TEXT_21);
+				stringBuffer.append(TEXT_9);
 				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
 						componentExchange, projectName, outputFolder));
-				stringBuffer.append(TEXT_22);
+				stringBuffer.append(TEXT_9);
 
 			}
-			stringBuffer.append(TEXT_23);
+			stringBuffer.append(TEXT_10);
 
 		}
 
 		Collection<String> ports = CapellaComponentServices.getPorts((Component) element, projectName, outputFolder);
 		if (ports.size() > 0) {
-			stringBuffer.append(TEXT_24);
-			stringBuffer.append(TEXT_25);
+			stringBuffer.append(TEXT_13);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(ports));
 		}
 
 		Collection<String> stateMachines = BlockHelper.getStateMachine(projectName, outputFolder, (Component) element);
 		if (stateMachines.size() > 0) {
-			stringBuffer.append(TEXT_26);
-			stringBuffer.append(TEXT_27);
+			stringBuffer.append(TEXT_14);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(stateMachines));
 		}
 
-		stringBuffer.append(TEXT_28);
+		stringBuffer.append(TEXT_3);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}

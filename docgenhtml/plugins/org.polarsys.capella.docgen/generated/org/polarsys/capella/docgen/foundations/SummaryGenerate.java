@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -22,7 +22,6 @@ public class SummaryGenerate extends org.polarsys.kitalpha.doc.gen.business.core
 	protected final String TEXT_1 = "<em>";
 	protected final String TEXT_2 = "</em>";
 	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL;
 
 	public SummaryGenerate() {
 		//Here is the constructor
@@ -74,7 +73,7 @@ public class SummaryGenerate extends org.polarsys.kitalpha.doc.gen.business.core
 		}
 
 		stringBuffer.append(TEXT_3);
-		stringBuffer.append(TEXT_4);
+		stringBuffer.append(TEXT_3);
 		return stringBuffer.toString();
 	}
 

@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -25,16 +25,11 @@ public class EntityContentDocGen {
 			+ "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
 	protected final String TEXT_2 = NL + "\t";
-	protected final String TEXT_3 = NL + "\t";
-	protected final String TEXT_4 = NL + "</table>";
-	protected final String TEXT_5 = NL + "<h2>Outgoing Communication Means</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+	protected final String TEXT_3 = NL + "</table>";
+	protected final String TEXT_4 = NL + "<h2>Outgoing Communication Means</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
 			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
-	protected final String TEXT_6 = NL + "\t";
-	protected final String TEXT_7 = NL + "\t";
-	protected final String TEXT_8 = NL + "</table>";
-	protected final String TEXT_9 = NL;
-	protected final String TEXT_10 = NL;
+	protected final String TEXT_5 = NL;
 
 	public EntityContentDocGen() {
 		//Here is the constructor
@@ -70,8 +65,8 @@ public class EntityContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_9);
-		stringBuffer.append(TEXT_10);
+		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_5);
 		return stringBuffer.toString();
 	}
 
@@ -116,25 +111,25 @@ public class EntityContentDocGen {
 
 				stringBuffer.append(TEXT_2);
 				stringBuffer.append(communicationMean);
-				stringBuffer.append(TEXT_3);
+				stringBuffer.append(TEXT_2);
 
 			}
-			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_3);
 		}
 
 		Collection<String> outgoingCommunicationMeans = CapellaEntityHelper
 				.getOutgoingCommunicationMeansLines((Entity) element, projectName, outputFolder);
 		if (outgoingCommunicationMeans.size() > 0) {
 
-			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_4);
 			for (String communicationMean : outgoingCommunicationMeans) {
 
-				stringBuffer.append(TEXT_6);
+				stringBuffer.append(TEXT_2);
 				stringBuffer.append(communicationMean);
-				stringBuffer.append(TEXT_7);
+				stringBuffer.append(TEXT_2);
 
 			}
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_3);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());

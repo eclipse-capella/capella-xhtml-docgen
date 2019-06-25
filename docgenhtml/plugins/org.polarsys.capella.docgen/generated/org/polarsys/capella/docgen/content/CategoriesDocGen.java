@@ -1,4 +1,4 @@
-//Generated with EGF 1.5.1.v20180423-0901
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.polarsys.capella.docgen.util.CapellaCategoryServices;
@@ -31,24 +31,16 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 			+ NL + "\t\t\t\t<th>Source Function</th>" + NL + "\t\t\t\t<th>Target Function</th>" + NL
 			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
 	protected final String TEXT_3 = NL + "\t\t\t";
-	protected final String TEXT_4 = NL + "\t\t\t";
-	protected final String TEXT_5 = NL + "\t\t</table>" + NL + "\t\t";
-	protected final String TEXT_6 = NL + "\t\t<h2>Involved Component Exchanges</h2>" + NL + "\t\t";
-	protected final String TEXT_7 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Component Exchange</th>"
+	protected final String TEXT_4 = NL + "\t\t</table>" + NL + "\t\t";
+	protected final String TEXT_5 = NL + "\t\t<h2>Involved Component Exchanges</h2>" + NL + "\t\t";
+	protected final String TEXT_6 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Component Exchange</th>"
 			+ NL + "\t\t\t\t<th>Source Component</th>" + NL + "\t\t\t\t<th>Target Component</th>" + NL
 			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
-	protected final String TEXT_8 = NL + "\t\t\t";
-	protected final String TEXT_9 = NL + "\t\t\t";
-	protected final String TEXT_10 = NL + "\t\t</table>" + NL + "\t\t";
-	protected final String TEXT_11 = NL + "\t\t<h2>Involved Physical Links</h2>" + NL + "\t\t";
-	protected final String TEXT_12 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Physical Link</th>" + NL
+	protected final String TEXT_7 = NL + "\t\t<h2>Involved Physical Links</h2>" + NL + "\t\t";
+	protected final String TEXT_8 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Physical Link</th>" + NL
 			+ "\t\t\t\t<th>Source Component</th>" + NL + "\t\t\t\t<th>Target Component</th>" + NL
 			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
-	protected final String TEXT_13 = NL + "\t\t\t";
-	protected final String TEXT_14 = NL + "\t\t\t";
-	protected final String TEXT_15 = NL + "\t\t</table>" + NL + "\t\t";
-	protected final String TEXT_16 = NL;
-	protected final String TEXT_17 = NL;
+	protected final String TEXT_9 = NL;
 
 	public CategoriesDocGen() {
 		//Here is the constructor
@@ -84,8 +76,8 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_16);
-		stringBuffer.append(TEXT_17);
+		stringBuffer.append(TEXT_9);
+		stringBuffer.append(TEXT_9);
 		return stringBuffer.toString();
 	}
 
@@ -148,12 +140,12 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 
 					stringBuffer.append(TEXT_3);
 					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(fe, projectName, outputFolder));
-					stringBuffer.append(TEXT_4);
+					stringBuffer.append(TEXT_3);
 
 				}
 				// Create table footer
 
-				stringBuffer.append(TEXT_5);
+				stringBuffer.append(TEXT_4);
 
 			}
 		}
@@ -164,23 +156,23 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 			if (category.getExchanges().size() > 0) {
 				// Display Title
 
-				stringBuffer.append(TEXT_6);
+				stringBuffer.append(TEXT_5);
 
 				// Create table header
 
-				stringBuffer.append(TEXT_7);
+				stringBuffer.append(TEXT_6);
 
 				// Create each line
 				for (ComponentExchange ce : category.getExchanges()) {
 
-					stringBuffer.append(TEXT_8);
+					stringBuffer.append(TEXT_3);
 					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(ce, projectName, outputFolder));
-					stringBuffer.append(TEXT_9);
+					stringBuffer.append(TEXT_3);
 
 				}
 				// Create table footer
 
-				stringBuffer.append(TEXT_10);
+				stringBuffer.append(TEXT_4);
 
 			}
 		}
@@ -191,23 +183,23 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 			if (category.getLinks().size() > 0) {
 				// Display Title
 
-				stringBuffer.append(TEXT_11);
+				stringBuffer.append(TEXT_7);
 
 				// Create table header
 
-				stringBuffer.append(TEXT_12);
+				stringBuffer.append(TEXT_8);
 
 				// Create each line
 				for (PhysicalLink pl : category.getLinks()) {
 
-					stringBuffer.append(TEXT_13);
+					stringBuffer.append(TEXT_3);
 					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(pl, projectName, outputFolder));
-					stringBuffer.append(TEXT_14);
+					stringBuffer.append(TEXT_3);
 
 				}
 				// Create table footer
 
-				stringBuffer.append(TEXT_15);
+				stringBuffer.append(TEXT_4);
 
 			}
 		}

@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -25,9 +25,6 @@ public class CapabilityRealizationDocGen extends org.polarsys.capella.docgen.con
 	protected final String TEXT_1 = "<h2>Involved Components</h2>";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL + "<h2>Related Functions</h2>";
-	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL;
-	protected final String TEXT_6 = NL;
 
 	public CapabilityRealizationDocGen() {
 		//Here is the constructor
@@ -63,8 +60,8 @@ public class CapabilityRealizationDocGen extends org.polarsys.capella.docgen.con
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_5);
-		stringBuffer.append(TEXT_6);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 
@@ -111,7 +108,7 @@ public class CapabilityRealizationDocGen extends org.polarsys.capella.docgen.con
 		if (involvedFunctions.size() > 0) {
 
 			stringBuffer.append(TEXT_3);
-			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(involvedFunctions));
 
 		}

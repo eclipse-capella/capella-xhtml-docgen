@@ -1,4 +1,4 @@
-//Generated with EGF 1.5.1.v20180423-0901
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -33,15 +33,11 @@ public class ConstraintsDocGen {
 	protected final String TEXT_3 = NL;
 	protected final String TEXT_4 = "  " + NL + "        <tr>" + NL + "\t\t\t<td>" + NL + "<b>";
 	protected final String TEXT_5 = " </b>";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL + "\t\t\t</td>" + NL + "\t\t\t<td> ";
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = "\t\t\t\t" + NL + "\t\t\t</td>" + NL + "\t\t\t<td>  ";
+	protected final String TEXT_6 = NL + "\t\t\t</td>" + NL + "\t\t\t<td> ";
+	protected final String TEXT_7 = "\t\t\t\t" + NL + "\t\t\t</td>" + NL + "\t\t\t<td>  ";
+	protected final String TEXT_8 = "\t\t\t" + NL + "\t\t\t</td>" + NL + "        </tr>";
+	protected final String TEXT_9 = NL + "\t</tbody>" + NL + "</table>";
 	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = "\t\t\t" + NL + "\t\t\t</td>" + NL + "        </tr>";
-	protected final String TEXT_12 = NL + "\t</tbody>" + NL + "</table>";
-	protected final String TEXT_13 = NL;
-	protected final String TEXT_14 = NL;
 
 	public ConstraintsDocGen() {
 		//Here is the constructor
@@ -77,8 +73,8 @@ public class ConstraintsDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_13);
-		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_10);
+		stringBuffer.append(TEXT_10);
 		return stringBuffer.toString();
 	}
 
@@ -143,7 +139,7 @@ public class ConstraintsDocGen {
 			stringBuffer.append(constraintName);
 			stringBuffer.append(TEXT_5);
 			// Summary and description generation
-			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_3);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="constraint:element"%>
 
@@ -159,16 +155,16 @@ public class ConstraintsDocGen {
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_7);
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(ConstraintsService.getValueSpecification(constraint.getOwnedSpecification(),
 					projectName, outputFolder));
-			stringBuffer.append(TEXT_9);
-			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(ConstraintsService.getConstrainedElement(constraint, projectName, outputFolder));
-			stringBuffer.append(TEXT_11);
+			stringBuffer.append(TEXT_8);
 		}
-		stringBuffer.append(TEXT_12);
+		stringBuffer.append(TEXT_9);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "genConstraints", stringBuffer.toString());
 	}

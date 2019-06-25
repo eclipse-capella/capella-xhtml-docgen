@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -25,8 +25,6 @@ public class DiagramsGeneration {
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Owned diagrams</h2>";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL;
 
 	public DiagramsGeneration() {
 		//Here is the constructor
@@ -62,8 +60,8 @@ public class DiagramsGeneration {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_3);
-		stringBuffer.append(TEXT_4);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 

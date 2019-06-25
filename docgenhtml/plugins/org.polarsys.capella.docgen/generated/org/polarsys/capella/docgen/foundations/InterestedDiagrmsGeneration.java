@@ -1,4 +1,4 @@
-//Generated with EGF 1.5.1.v20180423-0901
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import java.util.stream.Collectors;
@@ -52,8 +52,6 @@ public class InterestedDiagrmsGeneration {
 	protected final String TEXT_9 = NL + "\t\t\t\t";
 	protected final String TEXT_10 = NL + "\t\t\t\t<br/>" + NL + "\t\t\t\t<br/>" + NL + "\t\t\t</p>" + NL + "\t\t</div>"
 			+ NL + "\t";
-	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL;
 
 	public InterestedDiagrmsGeneration() {
 		//Here is the constructor
@@ -89,8 +87,8 @@ public class InterestedDiagrmsGeneration {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_11);
-		stringBuffer.append(TEXT_12);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 

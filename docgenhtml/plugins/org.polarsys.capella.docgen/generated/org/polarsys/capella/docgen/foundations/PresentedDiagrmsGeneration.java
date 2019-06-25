@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.1.v20161010-1511
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -34,11 +34,8 @@ public class PresentedDiagrmsGeneration {
 	protected final String TEXT_3 = NL + "<li>";
 	protected final String TEXT_4 = NL;
 	protected final String TEXT_5 = " ";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL + "</li>";
-	protected final String TEXT_8 = NL + "</ul>";
-	protected final String TEXT_9 = NL;
-	protected final String TEXT_10 = NL;
+	protected final String TEXT_6 = NL + "</li>";
+	protected final String TEXT_7 = NL + "</ul>";
 
 	public PresentedDiagrmsGeneration() {
 		//Here is the constructor
@@ -74,8 +71,8 @@ public class PresentedDiagrmsGeneration {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_9);
-		stringBuffer.append(TEXT_10);
+		stringBuffer.append(TEXT_4);
+		stringBuffer.append(TEXT_4);
 		return stringBuffer.toString();
 	}
 
@@ -150,13 +147,13 @@ public class PresentedDiagrmsGeneration {
 					stringBuffer.append(CapellaServices.getHyperlinkFromElement(diagram));
 					stringBuffer.append(TEXT_5);
 				} else {
-					stringBuffer.append(TEXT_6);
+					stringBuffer.append(TEXT_4);
 					stringBuffer.append(LabelProviderHelper.getText(eObject));
 				}
-				stringBuffer.append(TEXT_7);
+				stringBuffer.append(TEXT_6);
 
 			}
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_7);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());

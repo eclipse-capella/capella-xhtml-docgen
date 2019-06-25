@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.0.201805040915
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -25,11 +25,7 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 	protected final String TEXT_1 = "<h2>Modes and States</h2>";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL + "<h2>Involved functions</h2>";
-	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL + "<h2>Involved functional exchanges</h2>";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL;
+	protected final String TEXT_4 = NL + "<h2>Involved functional exchanges</h2>";
 
 	public FunctionalChainGenDoc() {
 		//Here is the constructor
@@ -65,8 +61,8 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_7);
-		stringBuffer.append(TEXT_8);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 
@@ -120,7 +116,7 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 		if (functionAndDesc.size() > 0) {
 
 			stringBuffer.append(TEXT_3);
-			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description"));
 
 		}
@@ -130,8 +126,8 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 
 		if (functionalExchangesAndDesc.size() > 0) {
 
-			stringBuffer.append(TEXT_5);
-			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange",
 					"Involvement Description"));
 

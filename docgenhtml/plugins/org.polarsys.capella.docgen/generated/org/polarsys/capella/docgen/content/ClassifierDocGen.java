@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -21,8 +21,6 @@ public class ClassifierDocGen extends org.polarsys.capella.docgen.content.Genera
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = NL;
-	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL;
 
 	public ClassifierDocGen() {
 		//Here is the constructor
@@ -58,8 +56,8 @@ public class ClassifierDocGen extends org.polarsys.capella.docgen.content.Genera
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_1);
+		stringBuffer.append(TEXT_1);
 		return stringBuffer.toString();
 	}
 

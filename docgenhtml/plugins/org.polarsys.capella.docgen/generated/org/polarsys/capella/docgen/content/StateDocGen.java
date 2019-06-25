@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -27,19 +27,11 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
 	protected final String TEXT_3 = NL + "<h2>Modes and States</h2>";
 	protected final String TEXT_4 = NL;
 	protected final String TEXT_5 = NL + "<h3>Referenced</h3>";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL + "<h2>Previous States / Modes</h2>";
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL + "<h2>Following States / Modes</h2>";
-	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = NL + "<h2>Functions</h2>";
-	protected final String TEXT_12 = NL;
-	protected final String TEXT_13 = NL + "<h2>Functional Chains</h2>";
-	protected final String TEXT_14 = NL;
-	protected final String TEXT_15 = NL + "<h2>Capabilities</h2>";
-	protected final String TEXT_16 = NL;
-	protected final String TEXT_17 = NL;
-	protected final String TEXT_18 = NL;
+	protected final String TEXT_6 = NL + "<h2>Previous States / Modes</h2>";
+	protected final String TEXT_7 = NL + "<h2>Following States / Modes</h2>";
+	protected final String TEXT_8 = NL + "<h2>Functions</h2>";
+	protected final String TEXT_9 = NL + "<h2>Functional Chains</h2>";
+	protected final String TEXT_10 = NL + "<h2>Capabilities</h2>";
 
 	public StateDocGen() {
 		//Here is the constructor
@@ -75,8 +67,8 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_17);
-		stringBuffer.append(TEXT_18);
+		stringBuffer.append(TEXT_4);
+		stringBuffer.append(TEXT_4);
 		return stringBuffer.toString();
 	}
 
@@ -137,7 +129,7 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
 		if (referencedStatesModes.size() > 0) {
 
 			stringBuffer.append(TEXT_5);
-			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_4);
 			stringBuffer.append(StringUtil.stringListToBulette(referencedStatesModes));
 
 		}
@@ -147,8 +139,8 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
 					
 					if(previousStatesModes.size() > 0) {
 		
-		    stringBuffer.append(TEXT_7);
-		    stringBuffer.append(TEXT_8);
+		    stringBuffer.append(TEXT_6);
+		    stringBuffer.append(TEXT_4);
 		    stringBuffer.append(StringUtil.stringListToBulette(previousStatesModes));
 		    
 		}
@@ -159,8 +151,8 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
 					
 					if(followingStatesModes.size() > 0) {
 		
-		    stringBuffer.append(TEXT_9);
-		    stringBuffer.append(TEXT_10);
+		    stringBuffer.append(TEXT_7);
+		    stringBuffer.append(TEXT_4);
 		    stringBuffer.append(StringUtil.stringListToBulette(followingStatesModes));
 		    
 		}
@@ -170,8 +162,8 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
 
 		if (functions.size() > 0) {
 
-			stringBuffer.append(TEXT_11);
-			stringBuffer.append(TEXT_12);
+			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_4);
 			stringBuffer.append(StringUtil.stringListToBulette(functions));
 
 		}
@@ -181,8 +173,8 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
 
 		if (functionalChain.size() > 0) {
 
-			stringBuffer.append(TEXT_13);
-			stringBuffer.append(TEXT_14);
+			stringBuffer.append(TEXT_9);
+			stringBuffer.append(TEXT_4);
 			stringBuffer.append(StringUtil.stringListToBulette(functionalChain));
 
 		}
@@ -192,8 +184,8 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
 
 		if (capabilities.size() > 0) {
 
-			stringBuffer.append(TEXT_15);
-			stringBuffer.append(TEXT_16);
+			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_4);
 			stringBuffer.append(StringUtil.stringListToBulette(capabilities));
 
 		}

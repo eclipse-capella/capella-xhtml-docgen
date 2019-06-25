@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.0.201805040915
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -24,23 +24,8 @@ public class CapellaElementEndContentDocGen {
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL + "<h2>Realized Elements</h2>" + NL;
 	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL;
+	protected final String TEXT_4 = NL + "<h2>Realizing Elements </h2>" + NL;
 	protected final String TEXT_5 = NL;
-	protected final String TEXT_6 = NL + "<h2>Realizing Elements </h2>" + NL;
-	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL;
-	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL;
-	protected final String TEXT_13 = NL;
-	protected final String TEXT_14 = NL;
-	protected final String TEXT_15 = NL;
-	protected final String TEXT_16 = NL;
-	protected final String TEXT_17 = NL;
-	protected final String TEXT_18 = NL;
-	protected final String TEXT_19 = NL;
-	protected final String TEXT_20 = NL;
 
 	public CapellaElementEndContentDocGen() {
 		//Here is the constructor
@@ -76,8 +61,8 @@ public class CapellaElementEndContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_19);
-		stringBuffer.append(TEXT_20);
+		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_5);
 		return stringBuffer.toString();
 	}
 
@@ -121,9 +106,9 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.append(TEXT_2);
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(allocations));
-			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_3);
 		}
-		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_3);
 		// Realizing Elements 
 
 		//String outputFolder = ctx.getValue("outputFolder").toString();
@@ -131,14 +116,14 @@ public class CapellaElementEndContentDocGen {
 		Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName,
 				outputFolder);
 		if (allocations2.size() > 0) {
-			stringBuffer.append(TEXT_6);
-			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_3);
 			stringBuffer.append(StringUtil.stringListToBulette(allocations2));
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_3);
 		}
-		stringBuffer.append(TEXT_9);
+		stringBuffer.append(TEXT_3);
 		if (element.getOwnedConstraints().isEmpty() == false) {
-			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_3);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="element:parameter"%>
 
@@ -155,9 +140,9 @@ public class CapellaElementEndContentDocGen {
 			}
 
 		}
-		stringBuffer.append(TEXT_11);
+		stringBuffer.append(TEXT_3);
 		// Presented in diagrams generation
-		stringBuffer.append(TEXT_12);
+		stringBuffer.append(TEXT_3);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
 
@@ -175,9 +160,9 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_13);
+		stringBuffer.append(TEXT_3);
 		// owned diagrams
-		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_3);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
@@ -193,9 +178,9 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_15);
+		stringBuffer.append(TEXT_3);
 		// Presented in diagrams generation
-		stringBuffer.append(TEXT_16);
+		stringBuffer.append(TEXT_3);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PresentedDiagrmsGeneration" args="element:element"%>
 
@@ -211,9 +196,9 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_17);
+		stringBuffer.append(TEXT_3);
 		// Interested diagram in this model element 
-		stringBuffer.append(TEXT_18);
+		stringBuffer.append(TEXT_3);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.InterestedDiagrmsGeneration" args="element:element"%>
 

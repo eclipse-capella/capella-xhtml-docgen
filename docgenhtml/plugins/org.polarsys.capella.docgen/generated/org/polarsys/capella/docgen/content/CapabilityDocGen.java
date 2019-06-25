@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -24,24 +24,14 @@ public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packag
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = NL + "<h2>Exploiting Missions</h2>";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL + "<h2>Involved Actors</h2>";
-	protected final String TEXT_5 = NL;
-	protected final String TEXT_6 = NL + "<h2>Relationships with other Capabilities</h2>";
-	protected final String TEXT_7 = NL + "<h3>Extended Capabilities</h3>";
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL + "<h3>Included Capabilities</h3>";
-	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = NL + NL + "<h3>Super</h3>";
-	protected final String TEXT_12 = NL;
-	protected final String TEXT_13 = NL;
-	protected final String TEXT_14 = NL + "<h2>Related Functions</h2>";
-	protected final String TEXT_15 = NL;
-	protected final String TEXT_16 = NL + "<h2>Modes and States</h2>";
-	protected final String TEXT_17 = NL;
-	protected final String TEXT_18 = NL + NL + NL;
-	protected final String TEXT_19 = NL;
-	protected final String TEXT_20 = NL;
+	protected final String TEXT_3 = NL + "<h2>Involved Actors</h2>";
+	protected final String TEXT_4 = NL + "<h2>Relationships with other Capabilities</h2>";
+	protected final String TEXT_5 = NL + "<h3>Extended Capabilities</h3>";
+	protected final String TEXT_6 = NL + "<h3>Included Capabilities</h3>";
+	protected final String TEXT_7 = NL + NL + "<h3>Super</h3>";
+	protected final String TEXT_8 = NL + "<h2>Related Functions</h2>";
+	protected final String TEXT_9 = NL + "<h2>Modes and States</h2>";
+	protected final String TEXT_10 = NL + NL + NL;
 
 	public CapabilityDocGen() {
 		//Here is the constructor
@@ -77,8 +67,8 @@ public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packag
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_19);
-		stringBuffer.append(TEXT_20);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 
@@ -117,7 +107,7 @@ public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packag
 			stringBuffer.append(TEXT_1);
 			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(exploitingMissions));
-			stringBuffer.append(TEXT_3);
+			stringBuffer.append(TEXT_2);
 
 		}
 		Collection<String> actors = CapellaCapabilityHelper.INSTANCE.getInvolvedActors(projectName, outputFolder,
@@ -125,8 +115,8 @@ public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packag
 
 		if (actors.size() > 0) {
 
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_3);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(actors));
 
 		}
@@ -139,31 +129,31 @@ public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packag
 				outputFolder, (Capability) parameter);
 		if ((extendedCapabilities.size() > 0) && (includedCapabilities.size() > 0) && (superCapabilities.size() > 0)) {
 
-			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_4);
 
 		}
 		if (extendedCapabilities.size() > 0) {
 
-			stringBuffer.append(TEXT_7);
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(extendedCapabilities));
 
 		}
 
 		if (includedCapabilities.size() > 0) {
 
-			stringBuffer.append(TEXT_9);
-			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(includedCapabilities));
 
 		}
 
 		if (superCapabilities.size() > 0) {
 
-			stringBuffer.append(TEXT_11);
-			stringBuffer.append(TEXT_12);
+			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(superCapabilities));
-			stringBuffer.append(TEXT_13);
+			stringBuffer.append(TEXT_2);
 
 		}
 		Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectName,
@@ -171,8 +161,8 @@ public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packag
 
 		if (involvedFunctions.size() > 0) {
 
-			stringBuffer.append(TEXT_14);
-			stringBuffer.append(TEXT_15);
+			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(involvedFunctions));
 
 		}
@@ -182,13 +172,13 @@ public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packag
 
 		if (availableModeAndState.size() > 0) {
 
-			stringBuffer.append(TEXT_16);
-			stringBuffer.append(TEXT_17);
+			stringBuffer.append(TEXT_9);
+			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
 
 		}
 
-		stringBuffer.append(TEXT_18);
+		stringBuffer.append(TEXT_10);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}

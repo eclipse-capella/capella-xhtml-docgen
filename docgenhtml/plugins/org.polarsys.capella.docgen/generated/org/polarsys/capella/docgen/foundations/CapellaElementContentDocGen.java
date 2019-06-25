@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -31,15 +31,11 @@ public class CapellaElementContentDocGen {
 	protected final String TEXT_5 = "</span></p>" + NL + "<em class=\"elementPath\">";
 	protected final String TEXT_6 = "</em>";
 	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL + "<h2>Requirements</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>" + NL
+	protected final String TEXT_8 = NL + "<h2>Requirements</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>" + NL
 			+ "\t\t<th>ID</th>" + NL + "\t\t<th>Name</th>" + NL + "\t\t<th>Description</th>" + NL + "\t</tr>" + NL
 			+ "\t";
-	protected final String TEXT_10 = NL + "\t";
-	protected final String TEXT_11 = NL + "\t";
-	protected final String TEXT_12 = NL + "</table>";
-	protected final String TEXT_13 = NL;
-	protected final String TEXT_14 = NL;
+	protected final String TEXT_9 = NL + "\t";
+	protected final String TEXT_10 = NL + "</table>";
 
 	public CapellaElementContentDocGen() {
 		//Here is the constructor
@@ -80,8 +76,8 @@ public class CapellaElementContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_13);
-		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_7);
+		stringBuffer.append(TEXT_7);
 		return stringBuffer.toString();
 	}
 
@@ -159,20 +155,20 @@ public class CapellaElementContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_8);
+		stringBuffer.append(TEXT_7);
 		// requirements
 
 		Collection<String> requirementsTableLines = CapellaElementService.getRequirementsToLine(element, projectName,
 				outputFolder);
 		if (requirementsTableLines.size() > 0) {
 
-			stringBuffer.append(TEXT_9);
+			stringBuffer.append(TEXT_8);
 			for (String line : requirementsTableLines) {
-				stringBuffer.append(TEXT_10);
+				stringBuffer.append(TEXT_9);
 				stringBuffer.append(line);
-				stringBuffer.append(TEXT_11);
+				stringBuffer.append(TEXT_9);
 			}
-			stringBuffer.append(TEXT_12);
+			stringBuffer.append(TEXT_10);
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());

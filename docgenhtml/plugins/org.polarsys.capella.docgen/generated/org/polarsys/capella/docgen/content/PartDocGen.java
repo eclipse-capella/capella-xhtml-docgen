@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -34,18 +34,9 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 	protected final String TEXT_7 = "No type specified";
 	protected final String TEXT_8 = "</em></p>" + NL;
 	protected final String TEXT_9 = NL;
-	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL + NL;
-	protected final String TEXT_13 = NL + "\t";
-	protected final String TEXT_14 = NL;
-	protected final String TEXT_15 = NL;
-	protected final String TEXT_16 = NL + "\t";
-	protected final String TEXT_17 = NL;
-	protected final String TEXT_18 = NL + NL;
-	protected final String TEXT_19 = "</div>";
-	protected final String TEXT_20 = NL;
-	protected final String TEXT_21 = NL;
+	protected final String TEXT_10 = NL + NL;
+	protected final String TEXT_11 = NL + "\t";
+	protected final String TEXT_12 = "</div>";
 
 	public PartDocGen() {
 		//Here is the constructor
@@ -81,8 +72,8 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_20);
-		stringBuffer.append(TEXT_21);
+		stringBuffer.append(TEXT_9);
+		stringBuffer.append(TEXT_9);
 		return stringBuffer.toString();
 	}
 
@@ -167,9 +158,9 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_10);
+		stringBuffer.append(TEXT_9);
 		// owned diagrams and Contained in diagrams generation
-		stringBuffer.append(TEXT_11);
+		stringBuffer.append(TEXT_9);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
@@ -185,12 +176,12 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_12);
+		stringBuffer.append(TEXT_10);
 		// type 
 
 		if (type != null) {
-			stringBuffer.append(TEXT_13);
-			stringBuffer.append(TEXT_14);
+			stringBuffer.append(TEXT_11);
+			stringBuffer.append(TEXT_9);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementContentDocGen" args="type:element, documentTitle:documentTitle"%>
 
@@ -207,7 +198,7 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_15);
+			stringBuffer.append(TEXT_9);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.ComponentContentDocGen" args="type:element, projectName:projectName, outputFolder:outputFolder"%>
 
@@ -226,7 +217,7 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 			}
 
 			if (type instanceof Entity) {
-				stringBuffer.append(TEXT_16);
+				stringBuffer.append(TEXT_11);
 				{
 					//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.EntityContentDocGen" args="type:element"%>
 
@@ -243,7 +234,7 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 				}
 
 			}
-			stringBuffer.append(TEXT_17);
+			stringBuffer.append(TEXT_9);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="type:element"%>
 
@@ -261,14 +252,14 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 
 		}
 
-		stringBuffer.append(TEXT_18);
+		stringBuffer.append(TEXT_10);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
 
 	protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		stringBuffer.append(TEXT_19);
+		stringBuffer.append(TEXT_12);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
 	}

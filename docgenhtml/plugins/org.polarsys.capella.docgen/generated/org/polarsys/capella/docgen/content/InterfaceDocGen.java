@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -31,20 +31,10 @@ public class InterfaceDocGen extends org.polarsys.capella.docgen.content.Classif
 	protected final String TEXT_5 = NL + "\t <h3>Used by</h3>" + NL + " \t";
 	protected final String TEXT_6 = NL + "<h2>Operations</h2>";
 	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL + "<h2> Flow </h2>";
-	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = NL;
-	protected final String TEXT_12 = NL + "<h2>Shared Data</h2>";
-	protected final String TEXT_13 = NL;
-	protected final String TEXT_14 = NL;
-	protected final String TEXT_15 = NL + "<h2>Events</h2>";
-	protected final String TEXT_16 = NL;
-	protected final String TEXT_17 = NL;
-	protected final String TEXT_18 = NL + "<h2>Unset Exchange Items</h2>";
-	protected final String TEXT_19 = NL;
-	protected final String TEXT_20 = NL;
-	protected final String TEXT_21 = NL;
+	protected final String TEXT_8 = NL + "<h2> Flow </h2>";
+	protected final String TEXT_9 = NL + "<h2>Shared Data</h2>";
+	protected final String TEXT_10 = NL + "<h2>Events</h2>";
+	protected final String TEXT_11 = NL + "<h2>Unset Exchange Items</h2>";
 
 	public InterfaceDocGen() {
 		//Here is the constructor
@@ -80,8 +70,8 @@ public class InterfaceDocGen extends org.polarsys.capella.docgen.content.Classif
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_20);
-		stringBuffer.append(TEXT_21);
+		stringBuffer.append(TEXT_7);
+		stringBuffer.append(TEXT_7);
 		return stringBuffer.toString();
 	}
 
@@ -171,40 +161,40 @@ public class InterfaceDocGen extends org.polarsys.capella.docgen.content.Classif
 			stringBuffer.append(TEXT_7);
 			stringBuffer.append(StringUtil.stringListToBulette(operationExchangeItems));
 		}
-		stringBuffer.append(TEXT_8);
+		stringBuffer.append(TEXT_7);
 		Collection<String> sharedFlowExchangeItems = CapellaInterfaceHelper.getFlowExchangeItems((Interface) element,
 				projectName, outputFolder);
 		if (sharedFlowExchangeItems.size() > 0) {
 
-			stringBuffer.append(TEXT_9);
-			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_7);
 			stringBuffer.append(StringUtil.stringListToBulette(sharedFlowExchangeItems));
 		}
-		stringBuffer.append(TEXT_11);
+		stringBuffer.append(TEXT_7);
 		Collection<String> sharedDataExchangeItems = CapellaInterfaceHelper
 				.getSharedDataExchangeItems((Interface) element, projectName, outputFolder);
 		if (sharedDataExchangeItems.size() > 0) {
 
-			stringBuffer.append(TEXT_12);
-			stringBuffer.append(TEXT_13);
+			stringBuffer.append(TEXT_9);
+			stringBuffer.append(TEXT_7);
 			stringBuffer.append(StringUtil.stringListToBulette(sharedDataExchangeItems));
 		}
-		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_7);
 		Collection<String> eventExchangeItems = CapellaInterfaceHelper.getEventExchangeItems((Interface) element,
 				projectName, outputFolder);
 		if (eventExchangeItems.size() > 0) {
 
-			stringBuffer.append(TEXT_15);
-			stringBuffer.append(TEXT_16);
+			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_7);
 			stringBuffer.append(StringUtil.stringListToBulette(eventExchangeItems));
 		}
-		stringBuffer.append(TEXT_17);
+		stringBuffer.append(TEXT_7);
 		Collection<String> unsetExchangeItems = CapellaInterfaceHelper.getUnsetExchangeItems((Interface) element,
 				projectName, outputFolder);
 		if (unsetExchangeItems.size() > 0) {
 
-			stringBuffer.append(TEXT_18);
-			stringBuffer.append(TEXT_19);
+			stringBuffer.append(TEXT_11);
+			stringBuffer.append(TEXT_7);
 			stringBuffer.append(StringUtil.stringListToBulette(unsetExchangeItems));
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
