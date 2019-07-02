@@ -87,7 +87,7 @@ public class CapellaEntityHelper {
 			StringBuffer buffer = new StringBuffer();
 			buffer.append(CapellaServices.getImageLinkFromElement(functionalExchange, projectName, outputFolder));
 			buffer.append("&nbsp;");
-			buffer.append(CapellaServices.getHyperlinkFromElement(functionalExchange.getSource()));
+			buffer.append(CapellaServices.getHyperlinkFromElement(functionalExchange));
 			ret.add(buffer.toString());
 		}
 		return ret;
