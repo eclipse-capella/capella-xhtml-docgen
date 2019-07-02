@@ -11,25 +11,31 @@
 package org.polarsys.capella.docgen.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.polarsys.capella.core.data.capellacore.AbstractDependenciesPkg;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.core.data.capellacore.Classifier;
-import org.polarsys.capella.core.data.interaction.CombinedFragment;
-import org.polarsys.capella.core.data.interaction.InteractionOperand;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
+
+import org.polarsys.capella.core.data.capellacore.AbstractDependenciesPkg;
+import org.polarsys.capella.core.data.capellacore.Classifier;
+import org.polarsys.capella.core.data.interaction.CombinedFragment;
+import org.polarsys.capella.core.data.interaction.InteractionOperand;
+import org.polarsys.capella.core.data.requirement.Requirement;
+import org.polarsys.capella.core.data.requirement.RequirementsPkg;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
+
+import org.eclipse.sirius.diagram.DSemanticDiagram;
 
 public class CapellaServices {
 	public static final String BOLD_BEGIN = "<b>";
@@ -47,6 +53,7 @@ public class CapellaServices {
 
 	public static final String UL_OPEN = "<ul class=\"generatedList\">";
 	public static final String UL_OPEN_WITH_BORDER = "<ul class=\"generatedListWithBorder\">";
+	public static final String UL_OPEN_SIMPLE = "<ul>";
 	public static final String UL_CLOSE = "</ul>";
 
 	public static final String NONE = "None";
@@ -334,8 +341,7 @@ public class CapellaServices {
 	 */
 	public static String getDiagramUid(DSemanticDiagram diagram) {
 		return diagram.getUid();
-	}
-	
+	}	
 
 	public static String getImageLinkFromElement(EObject element, String projectName, String outputFolder) {
 		String imageFileName = LabelProviderHelper.getImageFileName(element, projectName, outputFolder);
@@ -490,6 +496,44 @@ public class CapellaServices {
 		hyperLinkBuffer.append(" "); //$NON-NLS-1$
 		hyperLinkBuffer.append(((CapellaElement) object).getLabel());
 		return hyperLinkBuffer.toString();
+	}
+
+	public static String getRequirementPathHyperLinkWithIcon(String projectName, String outputFolder, EObject element) {
+		StringBuffer buffer = new StringBuffer();
+		Iterator<EObject> iterator = getFullRequirementPath(element).iterator();
+		while (iterator.hasNext()) {
+			buffer.append(LabelProviderHelper.getText(iterator.next()));
+			if (iterator.hasNext()) {
+				buffer.append(" > ");
+			}
+		}
+		StringBuffer hyperLinkBuffer = new StringBuffer();
+		hyperLinkBuffer.append(getImageLinkFromElement(element, projectName, outputFolder));
+		hyperLinkBuffer.append(" "); //$NON-NLS-1$
+		hyperLinkBuffer.append(getHyperlinkFromElement(element, buffer.toString()));
+		return hyperLinkBuffer.toString();
+	}
+	
+	public static String getRequirementPath(EObject element) {
+		StringBuffer buffer = new StringBuffer();
+		Iterator<EObject> iterator = getFullRequirementPath(element).iterator();
+		while (iterator.hasNext()) {
+			buffer.append(LabelProviderHelper.getText(iterator.next()));
+			if (iterator.hasNext()) {
+				buffer.append(" > ");
+			}
+		}
+		return buffer.toString();
+	}
+
+	private static List<EObject> getFullRequirementPath(EObject element) {
+		List<EObject> eObjects = new ArrayList<EObject>();
+		EObject parent = element.eContainer();
+		if (parent instanceof RequirementsPkg) {
+			eObjects.addAll(getFullRequirementPath(parent));
+		}
+		eObjects.add(element);
+		return eObjects;
 	}
 
 }
