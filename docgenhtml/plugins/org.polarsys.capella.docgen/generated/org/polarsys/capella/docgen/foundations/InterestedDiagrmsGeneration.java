@@ -1,6 +1,8 @@
 //Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
+import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
+import org.eclipse.sirius.business.api.query.DRepresentationQuery;
 import java.util.stream.Collectors;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
@@ -29,8 +31,6 @@ import org.polarsys.capella.docgen.util.CapellaDiagramHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
-import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
-import org.eclipse.sirius.business.api.query.DRepresentationQuery; 
 
 public class InterestedDiagrmsGeneration {
 	protected static String nl;
@@ -161,8 +161,9 @@ public class InterestedDiagrmsGeneration {
 				stringBuffer.append(TEXT_5);
 				String id = DiagramSessionHelper.getID(diagram);
 				DRepresentationQuery rep2descQuery = new DRepresentationQuery(diagram);
-	        	DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
-	    		String name = (result == null) ? id : result.getName();
+				DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
+				String name = (result == null) ? id : result.getName();
+
 				stringBuffer.append(TEXT_6);
 				stringBuffer.append(id);
 				stringBuffer.append(TEXT_7);
