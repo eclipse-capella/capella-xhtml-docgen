@@ -1,16 +1,16 @@
 //Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.foundations;
 
-import org.eclipse.egf.common.helper.*;
 import java.util.*;
-import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.docgen.util.ImageHelper;
-import org.polarsys.capella.docgen.util.CapellaElementService;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
+import org.eclipse.emf.common.util.EList;
+import org.polarsys.capella.core.data.requirement.Requirement;
+import org.polarsys.capella.docgen.util.RequirementsServices;
 
 public class CapellaElementContentDocGen {
 	protected static String nl;
@@ -31,15 +31,10 @@ public class CapellaElementContentDocGen {
 	protected final String TEXT_5 = "</span></p>" + NL + "<em class=\"elementPath\">";
 	protected final String TEXT_6 = "</em>";
 	protected final String TEXT_7 = NL;
-	protected final String TEXT_8 = NL;
-	protected final String TEXT_9 = NL + "<h2>Requirements</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>ID</th>" + NL + "\t\t<th>Name</th>" + NL + "\t\t<th>Description</th>" + NL + "\t</tr>" + NL
-			+ "\t";
-	protected final String TEXT_10 = NL + "\t";
+	protected final String TEXT_8 = NL + "\t<h2>" + NL + "\tRequirements" + NL + "\t</h2>" + NL + "\t" + NL + "\t";
+	protected final String TEXT_9 = NL + "\t<br>" + NL + "\t" + NL + "\t";
+	protected final String TEXT_10 = NL + "\t" + NL + "\t";
 	protected final String TEXT_11 = NL + "\t";
-	protected final String TEXT_12 = NL + "</table>";
-	protected final String TEXT_13 = NL;
-	protected final String TEXT_14 = NL;
 
 	public CapellaElementContentDocGen() {
 		//Here is the constructor
@@ -80,8 +75,8 @@ public class CapellaElementContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_13);
-		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_7);
+		stringBuffer.append(TEXT_7);
 		return stringBuffer.toString();
 	}
 
@@ -159,21 +154,53 @@ public class CapellaElementContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_8);
+		stringBuffer.append(TEXT_7);
 		// requirements
 
-		Collection<String> requirementsTableLines = CapellaElementService.getRequirementsToLine(element, projectName,
-				outputFolder);
-		if (requirementsTableLines.size() > 0) {
+		EList<Requirement> appliedReq = element.getAppliedRequirements();
+		if (appliedReq.size() > 0) {
+
+			stringBuffer.append(TEXT_8);
+			{
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlHeader" args="element:parameter, RequirementsServices.REQUIREMENT_TREE_ID:treeID"%>
+
+				InternalPatternContext ictx = (InternalPatternContext) ctx;
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+				stringBuffer.setLength(0);
+
+				final Map<String, Object> callParameters = new HashMap<String, Object>();
+				callParameters.put("parameter", element);
+				callParameters.put("treeID", RequirementsServices.REQUIREMENT_TREE_ID);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_V6ybEJ52EemYav3Xat9ApA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
+				stringBuffer.setLength(0);
+			}
 
 			stringBuffer.append(TEXT_9);
-			for (String line : requirementsTableLines) {
-				stringBuffer.append(TEXT_10);
-				stringBuffer.append(line);
-				stringBuffer.append(TEXT_11);
+			stringBuffer.append(RequirementsServices.getRequirementsTree(appliedReq, projectName, outputFolder));
+			stringBuffer.append(TEXT_10);
+			{
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlFooter" args="element:parameter, RequirementsServices.REQUIREMENT_TREE_ID:treeID, true:collapsed"%>
+
+				InternalPatternContext ictx = (InternalPatternContext) ctx;
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+				stringBuffer.setLength(0);
+
+				final Map<String, Object> callParameters = new HashMap<String, Object>();
+				callParameters.put("parameter", element);
+				callParameters.put("treeID", RequirementsServices.REQUIREMENT_TREE_ID);
+				callParameters.put("collapsed", true);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_-tPnEJ8dEemYav3Xat9ApA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
+				stringBuffer.setLength(0);
 			}
-			stringBuffer.append(TEXT_12);
+
+			stringBuffer.append(TEXT_11);
+
 		}
+
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}

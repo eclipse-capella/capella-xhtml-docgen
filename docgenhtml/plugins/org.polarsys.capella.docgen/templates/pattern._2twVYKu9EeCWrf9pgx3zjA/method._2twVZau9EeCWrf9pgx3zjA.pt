@@ -14,19 +14,19 @@ String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder
 
 <% // requirements%>
 <%
-Collection<String> requirementsTableLines = CapellaElementService.getRequirementsToLine(element, projectName, outputFolder);
-if(requirementsTableLines.size() > 0) {
+EList<Requirement> appliedReq = element.getAppliedRequirements();
+if (appliedReq.size() > 0){
+	%>
+	<h2>
+	Requirements
+	</h2>
+	
+	<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlHeader" args="element:parameter, RequirementsServices.REQUIREMENT_TREE_ID:treeID"%>
+	<br>
+	
+	<%=RequirementsServices.getRequirementsTree(appliedReq, projectName, outputFolder)%>
+	
+	<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlFooter" args="element:parameter, RequirementsServices.REQUIREMENT_TREE_ID:treeID, true:collapsed"%>
+	<%
+}
 %>
-<h2>Requirements</h2>
-
-<table>
-	<tr>
-		<th>ID</th>
-		<th>Name</th>
-		<th>Description</th>
-	</tr>
-	<%for(String line : requirementsTableLines) {%>
-	<%=line%>
-	<%}%>
-</table>
-<%}%>
