@@ -1,4 +1,4 @@
-//Generated with EGF 1.5.1.v20180423-0901
+//Generated with EGF 1.6.0.201805040915
 package org.polarsys.capella.docgen.content;
 
 import org.polarsys.capella.docgen.util.CapellaCategoryServices;
@@ -214,5 +214,10 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+	}
+
+	public boolean preCondition(PatternContext ctx) throws Exception {
+		return element instanceof ExchangeCategory || element instanceof ComponentExchangeCategory
+				|| element instanceof PhysicalLinkCategory;
 	}
 }

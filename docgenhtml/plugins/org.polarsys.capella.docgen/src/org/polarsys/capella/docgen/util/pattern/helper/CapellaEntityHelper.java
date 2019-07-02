@@ -76,6 +76,7 @@ public class CapellaEntityHelper {
 		if (functionalExchanges.size() > 0)
 			buffer.append(StringUtil.stringListToBulette(functionalExchanges));
 		buffer.append("</td>");
+		buffer.append("</tr>");
 		return buffer.toString();
 	}
 
