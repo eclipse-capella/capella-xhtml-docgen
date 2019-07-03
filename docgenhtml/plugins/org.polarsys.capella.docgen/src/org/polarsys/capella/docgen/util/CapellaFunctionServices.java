@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -359,6 +359,103 @@ public class CapellaFunctionServices {
 			buffer.append("</td>");
 			buffer.append("</tr>");
 		}
+
+		return buffer.toString();
+	}
+
+
+	/**
+	 * Formats an HTML row representation for an incoming FunctionalExchange element
+	 * @param functionalExchange
+	 * @param projectName
+	 * @param outputFolder
+	 * @return An HTML row representation for an incoming FunctionalExchange element
+	 */
+	public static String incomingActivityEdgeToTableLine(FunctionalExchange functionalExchange, String projectName, String outputFolder) {
+		return activityEdgeToTableLine(functionalExchange, true, false, projectName, outputFolder);
+	}
+
+	/**
+	 * Formats an HTML row representation for an outgoing FunctionalExchange element
+	 * @param functionalExchange
+	 * @param projectName
+	 * @param outputFolder
+	 * @return An HTML row representation for an outgoing FunctionalExchange element
+	 */
+	public static String outgoingActivityEdgeToTableLine(FunctionalExchange functionalExchange, String projectName, String outputFolder) {
+		return activityEdgeToTableLine(functionalExchange, false, false, projectName, outputFolder);
+	}
+
+	/**
+	 * Formats an HTML row representation for a FunctionalExchange element
+	 * @param functionalExchange
+	 * @param projectName
+	 * @param outputFolder
+	 * @return An HTML row representation for a FunctionalExchange element
+	 */
+	public static String activityEdgeToTableLine(FunctionalExchange functionalExchange, String projectName, String outputFolder) {
+		return activityEdgeToTableLine(functionalExchange, false, true, projectName, outputFolder);
+	}
+	
+	/**
+	 * Generic method for the production of an HTML row element for an ActivityEdge element  
+	 * @param activityEdge
+	 * @param incoming Is the ActivityEdge element incoming with regards to the context
+	 * @param showBothSourceAndTarget Does the output needs to provide HTML columns for both sources and target elements (overrides 'incoming' parameter behavior)
+	 * @param projectName
+	 * @param outputFolder
+	 * @return
+	 */
+	private static String activityEdgeToTableLine(FunctionalExchange activityEdge, boolean incoming, boolean showBothSourceAndTarget, String projectName,
+			String outputFolder) {
+		StringBuffer buffer = new StringBuffer();
+
+		buffer.append("<tr>");
+
+		buffer.append("<td id=\"" + CapellaServices.getAnchorId(activityEdge) + "\">");
+		buffer.append(CapellaServices.getImageLinkFromElement(activityEdge, projectName, outputFolder));
+		buffer.append(CapellaServices.SPACE);
+		buffer.append(CapellaServices.getHyperlinkFromElement(activityEdge));
+		buffer.append("</td>");
+
+		if (incoming || showBothSourceAndTarget) {
+			// Source
+			buffer.append("<td>");
+			buffer.append(CapellaServices.getImageLinkFromElement(activityEdge.getSource(), projectName, outputFolder));
+			buffer.append(CapellaServices.SPACE);
+			buffer.append(CapellaServices.getHyperlinkFromElement(activityEdge.getSource()));
+			buffer.append("</td>");
+		} 
+		if (!incoming || showBothSourceAndTarget) {
+			// Target
+			buffer.append("<td>");
+			buffer.append(CapellaServices.getImageLinkFromElement(activityEdge.getTarget(), projectName, outputFolder));
+			buffer.append(CapellaServices.SPACE);
+			buffer.append(CapellaServices.getHyperlinkFromElement(activityEdge.getTarget()));
+			buffer.append("</td>");
+		}
+
+		// Description
+		buffer.append("<td>");
+		buffer.append(getDescription(activityEdge, projectName, outputFolder));
+		buffer.append("</td>");
+		
+		// Exchange items
+		EList<ExchangeItem> abstractExchangeItems = activityEdge.getExchangedItems();
+		buffer.append("<td>");
+		if (abstractExchangeItems.size() > 0) {
+			buffer.append(CapellaServices.UL_OPEN);
+			for (AbstractExchangeItem currentItem : abstractExchangeItems) {
+				buffer.append("<li>");
+				buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
+				buffer.append(" ");
+				buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
+				buffer.append("</li>");
+			}
+			buffer.append(CapellaServices.UL_CLOSE);
+		}
+		buffer.append("</td>");
+		buffer.append("</tr>");
 
 		return buffer.toString();
 	}

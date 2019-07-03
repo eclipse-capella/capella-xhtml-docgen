@@ -83,6 +83,44 @@ if(outgoingInteralFunctionalExchanges.size() > 0) {
 }
 }
 
+if (element instanceof ActivityNode) {
+	Collection<FunctionalExchange> incomingActivityEdges = CapellaFunctionServices.getIncomingFunctionalExchanges((AbstractFunction) element);
+	if (incomingActivityEdges.size() > 0) {
+%>
+	<h2>Incoming Exchanges</h2>
+	<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Source</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for(FunctionalExchange ae : incomingActivityEdges) {%>
+	<%=CapellaFunctionServices.incomingActivityEdgeToTableLine(ae, projectName, outputFolder)%>
+<% }%>
+</table>
+<%
+	}
+
+	Collection<FunctionalExchange> outgoingActivityEdges = CapellaFunctionServices.getOutgoingFunctionalExchanges((AbstractFunction) element);
+	if (outgoingActivityEdges.size() > 0) {
+%>
+	<h2>Outgoing Exchanges</h2>
+	<table>
+	<tr>
+		<th>Exchange</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for(FunctionalExchange ae : outgoingActivityEdges) {%>
+	<%=CapellaFunctionServices.outgoingActivityEdgeToTableLine(ae, projectName, outputFolder)%>
+<% }%>
+</table>
+<%
+}
+}
+
 Collection<String> availableModeAndState = CapellaFunctionServices.getAvailableModeAndState(projectName,
 			outputFolder, (AbstractFunction)element);
 			

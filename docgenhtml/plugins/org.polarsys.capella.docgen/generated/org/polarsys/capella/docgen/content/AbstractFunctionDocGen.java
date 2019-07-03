@@ -18,6 +18,8 @@ import org.polarsys.capella.docgen.util.pattern.helper.FunctionHelper;
 import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
 import org.eclipse.emf.common.util.EList;
+import org.polarsys.capella.common.data.activity.ActivityNode;
+import org.polarsys.capella.common.data.activity.ActivityEdge;
 
 public class AbstractFunctionDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
@@ -45,7 +47,13 @@ public class AbstractFunctionDocGen extends org.polarsys.capella.docgen.foundati
 			+ "    <table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL
 			+ "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Exchange Items</th>"
 			+ NL + "\t</tr>";
-	protected final String TEXT_10 = NL + "<h2>Modes and States</h2>";
+	protected final String TEXT_10 = NL + "\t<h2>Incoming Exchanges</h2>" + NL + "\t<table>" + NL + "\t<tr>" + NL
+			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
+			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
+	protected final String TEXT_11 = NL + "\t<h2>Outgoing Exchanges</h2>" + NL + "\t<table>" + NL + "\t<tr>" + NL
+			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
+			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
+	protected final String TEXT_12 = NL + "<h2>Modes and States</h2>";
 
 	public AbstractFunctionDocGen() {
 		//Here is the constructor
@@ -199,12 +207,42 @@ public class AbstractFunctionDocGen extends org.polarsys.capella.docgen.foundati
 			}
 		}
 
+		if (element instanceof ActivityNode) {
+			Collection<FunctionalExchange> incomingActivityEdges = CapellaFunctionServices
+					.getIncomingFunctionalExchanges((AbstractFunction) element);
+			if (incomingActivityEdges.size() > 0) {
+
+				stringBuffer.append(TEXT_10);
+				for (FunctionalExchange ae : incomingActivityEdges) {
+					stringBuffer.append(TEXT_7);
+					stringBuffer.append(
+							CapellaFunctionServices.incomingActivityEdgeToTableLine(ae, projectName, outputFolder));
+				}
+				stringBuffer.append(TEXT_8);
+
+			}
+
+			Collection<FunctionalExchange> outgoingActivityEdges = CapellaFunctionServices
+					.getOutgoingFunctionalExchanges((AbstractFunction) element);
+			if (outgoingActivityEdges.size() > 0) {
+
+				stringBuffer.append(TEXT_11);
+				for (FunctionalExchange ae : outgoingActivityEdges) {
+					stringBuffer.append(TEXT_7);
+					stringBuffer.append(
+							CapellaFunctionServices.outgoingActivityEdgeToTableLine(ae, projectName, outputFolder));
+				}
+				stringBuffer.append(TEXT_8);
+
+			}
+		}
+
 		Collection<String> availableModeAndState = CapellaFunctionServices.getAvailableModeAndState(projectName,
 				outputFolder, (AbstractFunction) element);
 
 		if (availableModeAndState.size() > 0) {
 
-			stringBuffer.append(TEXT_10);
+			stringBuffer.append(TEXT_12);
 			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
 
