@@ -33,13 +33,14 @@ public class CapellaElementContentDocGen {
 	protected final String TEXT_7 = NL;
 	protected final String TEXT_8 = NL;
 	protected final String TEXT_9 = NL;
-	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = NL + "\t<h2>" + NL + "\tRequirements" + NL + "\t</h2>" + NL + "\t" + NL + "\t";
-	protected final String TEXT_12 = NL + "\t<br>" + NL + "\t" + NL + "\t";
-	protected final String TEXT_13 = NL + "\t" + NL + "\t";
-	protected final String TEXT_14 = NL + "\t";
-	protected final String TEXT_15 = NL;
+	protected final String TEXT_10 = NL + NL + NL + NL;
+	protected final String TEXT_11 = NL + NL + NL + NL;
+	protected final String TEXT_12 = NL + "\t<h2>" + NL + "\tRequirements" + NL + "\t</h2>" + NL + "\t" + NL + "\t";
+	protected final String TEXT_13 = NL + "\t<br>" + NL + "\t" + NL + "\t";
+	protected final String TEXT_14 = NL + "\t" + NL + "\t";
+	protected final String TEXT_15 = NL + "\t";
 	protected final String TEXT_16 = NL;
+	protected final String TEXT_17 = NL;
 
 	public CapellaElementContentDocGen() {
 		//Here is the constructor
@@ -80,8 +81,8 @@ public class CapellaElementContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_15);
 		stringBuffer.append(TEXT_16);
+		stringBuffer.append(TEXT_17);
 		return stringBuffer.toString();
 	}
 
@@ -178,12 +179,17 @@ public class CapellaElementContentDocGen {
 		}
 
 		stringBuffer.append(TEXT_10);
+
+		org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactory.newDocGenExtensionEngine()
+				.apply("CAPELLA_REQUIREMENTS_EXTENSION", ctx, getParameters(), stringBuffer);
+
+		stringBuffer.append(TEXT_11);
 		// requirements
 
 		EList<Requirement> appliedReq = element.getAppliedRequirements();
 		if (appliedReq.size() > 0) {
 
-			stringBuffer.append(TEXT_11);
+			stringBuffer.append(TEXT_12);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlHeader" args="element:parameter, TreeServices.REQUIREMENT_TREE_ID:treeID"%>
 
@@ -200,9 +206,9 @@ public class CapellaElementContentDocGen {
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_12);
-			stringBuffer.append(TreeServices.getRequirementsTree(appliedReq, projectName, outputFolder));
 			stringBuffer.append(TEXT_13);
+			stringBuffer.append(TreeServices.getRequirementsTree(appliedReq, projectName, outputFolder));
+			stringBuffer.append(TEXT_14);
 			{
 				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlFooter" args="element:parameter, TreeServices.REQUIREMENT_TREE_ID:treeID, true:collapsed"%>
 
@@ -220,7 +226,7 @@ public class CapellaElementContentDocGen {
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_14);
+			stringBuffer.append(TEXT_15);
 
 		}
 

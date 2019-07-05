@@ -15,6 +15,16 @@ String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder
 <%// Generating status and review information %>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.StatusAndReviewGeneration" args="element:element"%>
 
+
+
+
+<%
+org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactory.newDocGenExtensionEngine().apply("CAPELLA_REQUIREMENTS_EXTENSION", ctx, getParameters(), stringBuffer);
+%>
+
+
+
+
 <% // requirements%>
 <%
 EList<Requirement> appliedReq = element.getAppliedRequirements();
