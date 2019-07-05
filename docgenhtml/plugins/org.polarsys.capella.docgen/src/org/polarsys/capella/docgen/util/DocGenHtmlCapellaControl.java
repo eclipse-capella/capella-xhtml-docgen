@@ -44,6 +44,7 @@ import org.polarsys.capella.core.data.oa.Role;
 import org.polarsys.capella.core.data.requirement.Requirement;
 import org.polarsys.capella.core.semantic.queries.basic.queries.FunctionalExchangeCategory;
 import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.extension.page.PageExtensionRegistry;
 
 public class DocGenHtmlCapellaControl {
 
@@ -95,7 +96,8 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof PhysicalLinkCategory 
 				|| (element instanceof FunctionalExchange 	&& CapellaDocgenPreferenceHelper.isExportFunctionalExchange())
 				|| (element instanceof ComponentExchange 	&& CapellaDocgenPreferenceHelper.isExportComponentExchange())
-				|| (element instanceof PhysicalLink 		&& CapellaDocgenPreferenceHelper.isExportPhysialLink()));
+				|| (element instanceof PhysicalLink 		&& CapellaDocgenPreferenceHelper.isExportPhysialLink()))
+				|| PageExtensionRegistry.getInstance().isPageCandidate(element, "capella");
 	}
 
 	/**

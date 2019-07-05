@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,33 +23,38 @@ import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.oa.CommunicationMean;
 import org.polarsys.capella.core.model.helpers.ComponentExchangeExt;
+import org.polarsys.kitalpha.doc.gen.business.core.extension.page.PageExtensionRegistry;
+import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlConstants;
+import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
+import org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService;
 
 public class DocGenHtmlCapellaUtil {
 
-	public static IFileNameService SERVICE = new IFileNameService() {
+//	class CapellaFileNameService implements IFileNameService {
+//		public String getFileName(EObject eObject) {
+//			EObject element;
+//			element = eObject;
+//			if (CapellaServices.isLinkable(eObject) == 1) {
+//				if (eObject instanceof ExchangeItemAllocation) {
+//					element = ((ExchangeItemAllocation) eObject).getAllocatingInterface();
+//				} else if (eObject instanceof CommunicationMean) {
+//					element = ((CommunicationMean) eObject).getSource();
+//				} else if (eObject instanceof ComponentExchange) {
+//					element = ComponentExchangeExt.getSourceComponent((ComponentExchange) eObject);
+//				} else if (eObject instanceof FunctionalExchange) {
+//					element = FunctionExt.getIncomingAbstractFunction(((FunctionalExchange) eObject));
+//				} else {
+//					element = eObject.eContainer();
+//				}
+//			}
+//			String fileName = DocGenHtmlCapellaUtil.getFileName(element);
+//			return DocGenHtmlUtil.getValidFileName(fileName);
+//		}
+//	}
 
-		public String getFileName(EObject eObject) {
-			EObject element;
-			element = eObject;
-			if (CapellaServices.isLinkable(eObject) == 1) {
-				if (eObject instanceof ExchangeItemAllocation) {
-					element = ((ExchangeItemAllocation) eObject).getAllocatingInterface();
-				} else if (eObject instanceof CommunicationMean) {
-					element = ((CommunicationMean) eObject).getSource();
-				} else if (eObject instanceof ComponentExchange) {
-					element = ComponentExchangeExt.getSourceComponent((ComponentExchange) eObject);
-				} else if (eObject instanceof FunctionalExchange) {
-					element = FunctionExt.getIncomingAbstractFunction(((FunctionalExchange) eObject));
-				} else {
-					element = eObject.eContainer();
-				}
-			}
-			String fileName = DocGenHtmlCapellaUtil.getFileName(element);
-			return DocGenHtmlUtil.getValidFileName(fileName);
-		}
-	};
+	public static IFileNameService SERVICE = new CapellaFileNameService();
 
-	private static String getFileName(EObject eObject) {
+	public static String getFileName(EObject eObject) {
 		if (eObject instanceof NamedElement) {
 			NamedElement namedElement = (NamedElement) eObject;
 			return getNamedElementRootFileName(namedElement);
@@ -132,6 +137,9 @@ public class DocGenHtmlCapellaUtil {
 	public static boolean hasChildren(CapellaElement element) {
 		for (EObject subElement : element.eContents()) {
 			if (subElement instanceof CapellaElement && DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) subElement)) {
+				return true;
+			} 
+			if (PageExtensionRegistry.getInstance().isPageCandidate(subElement, "capella")) {
 				return true;
 			}
 		}
