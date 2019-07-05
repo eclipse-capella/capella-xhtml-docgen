@@ -769,6 +769,19 @@
       </viewpoints>
     </viewpointContainer>
     <orchestration xmi:type="fprod:ProductionPlan" xmi:id="_BcMYgNz-Ed-Vzvs7Wt1vzQ">
+      <invocations xmi:id="_3X7gIJ2NEemJ2K-s0Y7hRg" name="Initi runtime parameters (File name service)"
+          invokedActivity="#_UQifoJ2NEemJ2K-s0Y7hRg"/>
+      <invocations xmi:id="_3X87AJi7EemmGrHrkYlNKg" name="Load page extensions" invokedActivity="ftask:Task platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_QF8EsJgtEemmGrHrkYlNKg">
+        <invocationContractContainer xmi:id="_3X87AZi7EemmGrHrkYlNKg">
+          <invocationContracts xmi:id="_3X87Api7EemmGrHrkYlNKg" invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_Tg-oMJgtEemmGrHrkYlNKg">
+            <type xmi:type="types:TypeString" xmi:id="_6mLKgJi7EemmGrHrkYlNKg" value="capella"/>
+          </invocationContracts>
+          <invocationContracts xmi:id="_3X87A5i7EemmGrHrkYlNKg" targetInvocationContract="#_C0LGtJi8EemmGrHrkYlNKg"
+              invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_WzFSIJgtEemmGrHrkYlNKg"/>
+          <invocationContracts xmi:id="_bH6mAJyvEemJ2K-s0Y7hRg" targetInvocationContract="#_hfKb9JyvEemJ2K-s0Y7hRg"
+              invokedContract="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_SgkVsJyvEemJ2K-s0Y7hRg"/>
+        </invocationContractContainer>
+      </invocations>
       <invocations xmi:id="_cfRA8EsFEeSfyeTEy5zUcw" name="Update branding data" invokedActivity="#_MtkCwUsFEeSfyeTEy5zUcw">
         <invocationContractContainer xmi:id="_cfRA8UsFEeSfyeTEy5zUcw">
           <invocationContracts xmi:id="_cfRA8ksFEeSfyeTEy5zUcw" factoryComponentContract="#_--ofgEsCEeSwTsYi0RQ-Ig"
@@ -805,7 +818,18 @@
           </invocationContracts>
           <invocationContracts xmi:id="_xHdBo28PEeSjPIMKP6Xr0g" factoryComponentContract="#_gCg58G8PEeSjPIMKP6Xr0g"
               invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>
-          <invocationContracts xmi:id="_xHdBpG8PEeSjPIMKP6Xr0g" targetInvocationContract="#_m70JEN4ZEd-Qav1YnqlO9A"
+          <invocationContracts xmi:id="_xHdBpG8PEeSjPIMKP6Xr0g" targetInvocationContract="#_C0LGspi8EemmGrHrkYlNKg"
+              invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_C0LGsJi8EemmGrHrkYlNKg" name="Merge Content Patterns With Page Extensions"
+          invokedActivity="#__iSI8G8OEeSjPIMKP6Xr0g">
+        <invocationContractContainer xmi:id="_C0LGsZi8EemmGrHrkYlNKg">
+          <invocationContracts xmi:id="_C0LGspi8EemmGrHrkYlNKg" sourceInvocationContract="#_xHdBpG8PEeSjPIMKP6Xr0g"
+              invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g"/>
+          <invocationContracts xmi:id="_C0LGtJi8EemmGrHrkYlNKg" sourceInvocationContract="#_3X87A5i7EemmGrHrkYlNKg"
+              invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>
+          <invocationContracts xmi:id="_C0LGtZi8EemmGrHrkYlNKg" targetInvocationContract="#_m70JEN4ZEd-Qav1YnqlO9A"
               invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
         </invocationContractContainer>
       </invocations>
@@ -818,14 +842,25 @@
           </invocationContracts>
           <invocationContracts xmi:id="_DL3pU28QEeSjPIMKP6Xr0g" factoryComponentContract="#_dZZioG8PEeSjPIMKP6Xr0g"
               invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>
-          <invocationContracts xmi:id="_DL3pVG8QEeSjPIMKP6Xr0g" targetInvocationContract="#_jxFv0tV2EeW9p5oksEzglA"
+          <invocationContracts xmi:id="_DL3pVG8QEeSjPIMKP6Xr0g" targetInvocationContract="#_hfKb8pyvEemJ2K-s0Y7hRg"
+              invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
+        </invocationContractContainer>
+      </invocations>
+      <invocations xmi:id="_hfKb8JyvEemJ2K-s0Y7hRg" name="Merge Sidebar Patterns - Merging contributions"
+          invokedActivity="#__iSI8G8OEeSjPIMKP6Xr0g">
+        <invocationContractContainer xmi:id="_hfKb8ZyvEemJ2K-s0Y7hRg">
+          <invocationContracts xmi:id="_hfKb8pyvEemJ2K-s0Y7hRg" sourceInvocationContract="#_DL3pVG8QEeSjPIMKP6Xr0g"
+              invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g"/>
+          <invocationContracts xmi:id="_hfKb9JyvEemJ2K-s0Y7hRg" sourceInvocationContract="#_bH6mAJyvEemJ2K-s0Y7hRg"
+              invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>
+          <invocationContracts xmi:id="_hfKb9ZyvEemJ2K-s0Y7hRg" targetInvocationContract="#_jxFv0tV2EeW9p5oksEzglA"
               invokedContract="#_Lb_h4G8PEeSjPIMKP6Xr0g"/>
         </invocationContractContainer>
       </invocations>
       <invocations xmi:id="_jxFv0NV2EeW9p5oksEzglA" name="Merge Sidebar Patterns (2/2) Merging the footer pattern at the end"
           invokedActivity="#__iSI8G8OEeSjPIMKP6Xr0g">
         <invocationContractContainer xmi:id="_jxFv0dV2EeW9p5oksEzglA">
-          <invocationContracts xmi:id="_jxFv0tV2EeW9p5oksEzglA" sourceInvocationContract="#_DL3pVG8QEeSjPIMKP6Xr0g"
+          <invocationContracts xmi:id="_jxFv0tV2EeW9p5oksEzglA" sourceInvocationContract="#_hfKb9ZyvEemJ2K-s0Y7hRg"
               invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g"/>
           <invocationContracts xmi:id="_jxFv1NV2EeW9p5oksEzglA" invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g">
             <type xmi:type="pattern:TypePatternList" xmi:id="_jxFv09V2EeW9p5oksEzglA"
@@ -851,7 +886,7 @@
         <invocationContractContainer xmi:id="_DpAlwd34Ed-Qav1YnqlO9A">
           <invocationContracts xmi:id="_DpAlwt34Ed-Qav1YnqlO9A" factoryComponentContract="#_qVQM8N0PEd-Vzvs7Wt1vzQ"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_67_oxN3rEd-Qav1YnqlO9A"/>
-          <invocationContracts xmi:id="_m70JEN4ZEd-Qav1YnqlO9A" sourceInvocationContract="#_xHdBpG8PEeSjPIMKP6Xr0g"
+          <invocationContracts xmi:id="_m70JEN4ZEd-Qav1YnqlO9A" sourceInvocationContract="#_C0LGtZi8EemmGrHrkYlNKg"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_fGFi8N4ZEd-Qav1YnqlO9A"/>
           <invocationContracts xmi:id="_kIXh4N6ZEd-ZSZ6AN4Dlrg" sourceInvocationContract="#_jxFv1dV2EeW9p5oksEzglA"
               invokedContract="fcore:FactoryComponentContract platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_jEMzUN6SEd-ZSZ6AN4Dlrg"/>
@@ -917,4 +952,6 @@
       </contracts>
     </contractContainer>
   </ftask:Task>
+  <ftask:Task xmi:id="_UQifoJ2NEemJ2K-s0Y7hRg" name="Init.Page.Extension.Runtime.Parameters"
+      kind="java" implementation="org.polarsys.capella.docgen.task.InitPageExtensionRuntimeParametersTask"/>
 </xmi:XMI>
