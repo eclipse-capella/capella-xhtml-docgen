@@ -4,7 +4,7 @@ String outputFolder = ctx.getValue("outputFolder").toString();
 String elementPath = CapellaServices.getElementPath(element);
 String elementName = CapellaServices.getHyperlinkFromElement(element);
 String elementType = EscapeChars.forHTML(element.eClass().getName());
-String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder);
+String logo = ImageHelper.getTypePng(element, projectName, outputFolder);
 %>
 <img src="../icon/<%=logo%>" alt="<%=elementType%>" style="float:left; margin-right:10px" /><h1><%=documentTitle%></h1>
 <p style="margin-top:3px; margin-bottom:3px"><span class="elementMetaClass"><%=elementType%></span></p>
@@ -14,6 +14,16 @@ String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder
 
 <%// Generating status and review information %>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.StatusAndReviewGeneration" args="element:element"%>
+
+
+
+
+<%
+org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactory.newDocGenExtensionEngine().apply("CAPELLA_REQUIREMENTS_EXTENSION", ctx, getParameters(), stringBuffer);
+%>
+
+
+
 
 <% // requirements%>
 <%
