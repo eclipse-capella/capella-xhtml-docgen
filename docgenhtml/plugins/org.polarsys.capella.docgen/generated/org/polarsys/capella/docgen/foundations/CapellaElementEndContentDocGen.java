@@ -234,6 +234,7 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
+		stringBuffer.append(TEXT_5);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}
