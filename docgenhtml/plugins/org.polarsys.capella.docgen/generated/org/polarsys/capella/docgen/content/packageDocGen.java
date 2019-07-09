@@ -114,6 +114,7 @@ public class packageDocGen extends org.polarsys.capella.docgen.foundations.Named
 			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(content));
 		}
+
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}

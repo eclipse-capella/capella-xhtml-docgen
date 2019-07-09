@@ -1,0 +1,19 @@
+<%
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+String treeID = TreeServices.DIAGRAMS_TREE_ID;
+%>
+<%
+if (element instanceof BlockArchitecture) {
+	if (CapellaHelper.hostDiagrams((BlockArchitecture) element)) {
+%>
+	<h2>Diagrams</h2>
+	<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlHeader" args="element:parameter, treeID:treeID"%>
+	<br>
+	
+	<%=TreeServices.getDiagramsTree((BlockArchitecture) element, projectName, outputFolder)%>
+	<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlFooter" args="element:parameter, treeID:treeID, false:collapsed"%>
+	<%
+	}
+}
+%>

@@ -246,6 +246,23 @@
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_70tKAAHoEemzNsJkc2kajg"
                 called="#_7jkWsAHoEemzNsJkc2kajg"/>
           </elements>
+          <elements xmi:id="_mpoLIKGQEemXudi5U_Uo0A" name="DiagramNavigationTree"
+              headerMethod="#_mpoLIqGQEemXudi5U_Uo0A" conditionMethod="#_mpoLJKGQEemXudi5U_Uo0A"
+              initMethod="#_mpoLI6GQEemXudi5U_Uo0A" footerMethod="#_mpoLJqGQEemXudi5U_Uo0A">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_mpoLIaGQEemXudi5U_Uo0A"
+                name="JET"/>
+            <methods xmi:id="_mpoLIqGQEemXudi5U_Uo0A" name="header" patternFilePath="templates/pattern._mpoLIKGQEemXudi5U_Uo0A/method._mpoLIqGQEemXudi5U_Uo0A.pt"/>
+            <methods xmi:id="_mpoLI6GQEemXudi5U_Uo0A" name="init" patternFilePath="templates/pattern._mpoLIKGQEemXudi5U_Uo0A/method._mpoLI6GQEemXudi5U_Uo0A.pt"/>
+            <methods xmi:id="_mpoLJKGQEemXudi5U_Uo0A" name="preCondition" patternFilePath="templates/pattern._mpoLIKGQEemXudi5U_Uo0A/method._mpoLJKGQEemXudi5U_Uo0A.pt"/>
+            <methods xmi:id="_mpoLJaGQEemXudi5U_Uo0A" name="body" patternFilePath="templates/pattern._mpoLIKGQEemXudi5U_Uo0A/method._mpoLJaGQEemXudi5U_Uo0A.pt"/>
+            <methods xmi:id="_mpoLJqGQEemXudi5U_Uo0A" name="footer" patternFilePath="templates/pattern._mpoLIKGQEemXudi5U_Uo0A/method._mpoLJqGQEemXudi5U_Uo0A.pt"/>
+            <parameters xmi:id="_mpoLJ6GQEemXudi5U_Uo0A" name="element" type="http://www.polarsys.org/capella/core/core/1.4.0#//CapellaElement"/>
+            <parameters xmi:id="_mpoLKKGQEemXudi5U_Uo0A" name="outputFolder" type="java.lang.String"/>
+            <parameters xmi:id="_mpoLKaGQEemXudi5U_Uo0A" name="projectName" type="java.lang.String"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_mpoLKqGQEemXudi5U_Uo0A"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_mpoLK6GQEemXudi5U_Uo0A"
+                called="#_mpoLJaGQEemXudi5U_Uo0A"/>
+          </elements>
         </libraries>
         <libraries xmi:id="_OnutENz7Ed-Vzvs7Wt1vzQ" name="org.polarsys.capella.docgen.content">
           <elements xmi:id="_hW854N47Ed-Qav1YnqlO9A" name="AnyNamedElementDocGen"

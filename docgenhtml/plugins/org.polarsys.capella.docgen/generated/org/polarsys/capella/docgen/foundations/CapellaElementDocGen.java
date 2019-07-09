@@ -9,7 +9,9 @@ import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
 import org.polarsys.capella.docgen.util.CapellaServices;
-import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;;
+import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
+import org.polarsys.capella.docgen.diagram.CapellaHelper;
 
 public class CapellaElementDocGen extends org.polarsys.kitalpha.doc.gen.business.core.doccontent.ElementDocContent {
 	protected static String nl;
