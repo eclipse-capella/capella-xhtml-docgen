@@ -43,6 +43,7 @@ public class CapellaElementEndContentDocGen {
 	protected final String TEXT_20 = NL;
 	protected final String TEXT_21 = NL;
 	protected final String TEXT_22 = NL;
+	protected final String TEXT_23 = NL;
 
 	public CapellaElementEndContentDocGen() {
 		//Here is the constructor
@@ -78,8 +79,8 @@ public class CapellaElementEndContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_21);
 		stringBuffer.append(TEXT_22);
+		stringBuffer.append(TEXT_23);
 		return stringBuffer.toString();
 	}
 
@@ -251,6 +252,7 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
+		stringBuffer.append(TEXT_21);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}

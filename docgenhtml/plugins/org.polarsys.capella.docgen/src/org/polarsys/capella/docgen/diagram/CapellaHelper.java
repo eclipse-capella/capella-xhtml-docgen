@@ -135,6 +135,7 @@ public class CapellaHelper {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Scrutinize all EOI (element of interest: See
 	 * {@link org.polarsys.capella.core.diagram.helpers.naming.DAnnotationSourceConstants.CAPELLA_ELEMENT_OF_INTEREST})
 	 * annotation of all representation descriptors to find all representations
@@ -162,6 +163,8 @@ public class CapellaHelper {
 	}
 
 	/**
+=======
+>>>>>>> 15dc1fd... [2547] Tree view of diagrams in architecture levels
 	 * Retrieve all <code>DRepresentation</code> objects for elements of <code>archi</code>
 	 * 
 	 * @param archi
