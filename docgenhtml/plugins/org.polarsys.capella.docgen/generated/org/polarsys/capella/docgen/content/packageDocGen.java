@@ -1,4 +1,4 @@
-//Generated with EGF 1.4.0.v20160519-0641
+//Generated with EGF 1.6.0.201805040915
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -116,6 +116,7 @@ public class packageDocGen extends org.polarsys.capella.docgen.foundations.Named
 			stringBuffer.append(TEXT_2);
 			stringBuffer.append(StringUtil.stringListToBulette(content));
 		}
+
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
 	}
