@@ -48,6 +48,7 @@ public class CapellaServices {
 
 	public static final String UL_OPEN = "<ul class=\"generatedList\">";
 	public static final String UL_OPEN_WITH_BORDER = "<ul class=\"generatedListWithBorder\">";
+	public static final String UL_OPEN_SIMPLE = "<ul>";
 	public static final String UL_CLOSE = "</ul>";
 
 	public static final String NONE = "None";
