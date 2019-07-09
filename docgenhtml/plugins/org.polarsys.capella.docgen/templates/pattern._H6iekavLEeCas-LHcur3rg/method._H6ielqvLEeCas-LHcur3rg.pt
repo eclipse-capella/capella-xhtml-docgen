@@ -38,3 +38,6 @@ if(allocations2.size() > 0) {%>
 
 <%// Interested diagram in this model element %>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.InterestedDiagrmsGeneration" args="element:element"%>
+
+<% // Diagrams navigation tree%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramNavigationTree" args="element:element, outputFolder:outputFolder, projectName:projectName"%>

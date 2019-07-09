@@ -1,4 +1,4 @@
-//Generated with EGF 1.5.1.v20180423-0901
+//Generated with EGF 1.6.0.201805040915
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -9,7 +9,9 @@ import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
 import org.polarsys.capella.docgen.util.CapellaServices;
-import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;;
+import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
+import org.polarsys.capella.docgen.diagram.CapellaHelper;
 
 public class CapellaElementDocGen extends org.polarsys.kitalpha.doc.gen.business.core.doccontent.ElementDocContent {
 	protected static String nl;
