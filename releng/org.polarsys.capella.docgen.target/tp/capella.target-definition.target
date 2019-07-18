@@ -125,7 +125,7 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
-      <repository id="kitalpha-runtime-1.2.x" location="https://download.eclipse.org/kitalpha/updates/nightly/runtime/1.2.1/"/>
+      <repository id="kitalpha-runtime-1.2.1" location="https://download.eclipse.org/kitalpha/updates/nightly/runtime/1.2.1-N4/"/>
     </location>
   </locations>
 </target>
