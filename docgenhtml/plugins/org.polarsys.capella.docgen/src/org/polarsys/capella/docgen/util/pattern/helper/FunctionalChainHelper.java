@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,6 +24,7 @@ import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.docgen.util.CapellaServices;
+import org.polarsys.capella.docgen.util.StringUtil;
 
 public class FunctionalChainHelper {
 
@@ -89,7 +90,7 @@ public class FunctionalChainHelper {
 		EList<Involvement> involvements = function.getInvolvingInvolvements();
 		for (Involvement involvement : involvements) {
 			if (involvement.eContainer() != null && involvement.eContainer().equals(functionalChain)){
-				String description = involvement.getDescription();
+				String description = StringUtil.transformAREFString(involvement, involvement.getDescription(), projectName, outputFolder);
 				if (description != null && !description.isEmpty()){
 					involvementDescriptionBuffer.append(description);
 				} else {
