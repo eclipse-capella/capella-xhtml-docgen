@@ -11,21 +11,19 @@
  *******************************************************************************/
 package org.polarsys.capella.docgen.configuration.ui.viewer;
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.IJobChangeListener;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.events.FocusAdapter;
-import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.polarsys.capella.common.mdsofa.common.constant.ICommonConstants;
-import org.polarsys.capella.common.ui.toolkit.widgets.filter.FilteredTree;
-import org.polarsys.capella.common.ui.toolkit.widgets.filter.PatternFilter;
-import org.polarsys.capella.core.platform.sirius.ui.navigator.CapellaNavigatorPlugin;
-import org.polarsys.capella.core.platform.sirius.ui.navigator.IImageKeys;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.ui.dialogs.FilteredTree;
+import org.eclipse.ui.progress.WorkbenchJob;
+import org.polarsys.capella.common.ui.toolkit.widgets.filter.CapellaPatternFilter;
+import org.polarsys.capella.common.ui.toolkit.widgets.filter.Messages;
 
 /**
  * Copy of org.polarsys.capella.core.platform.sirius.ui.navigator.view.
@@ -33,181 +31,129 @@ import org.polarsys.capella.core.platform.sirius.ui.navigator.IImageKeys;
  * Standard {@link FilteredTree} adapted to CNF.
  */
 public class CapellaFilteredTree extends FilteredTree {
+	  int levelOfExpandByDefault = AbstractTreeViewer.ALL_LEVELS;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param parent
-	 */
-	protected CapellaFilteredTree(Composite parent) {
-		super(parent);
-		attachFilterControlFocusListener();
-	}
+	  public CapellaFilteredTree(Composite parent, int treeStyle, CapellaNavigatorPatternFilter filter) {
+	    super(parent, treeStyle, filter, true);
+	  }
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param parent
-	 * @param treeStyle
-	 * @param filter
-	 */
-	public CapellaFilteredTree(Composite parent, int treeStyle, PatternFilter filter) {
-		super(parent, treeStyle, filter);
-		attachFilterControlFocusListener();
-	}
+	  @Override
+	  protected WorkbenchJob doCreateRefreshJob() {
+	    WorkbenchJob refreshJob = super.doCreateRefreshJob();
+	    final CapellaFilteredTree tree = this;
+	    refreshJob.addJobChangeListener(new IJobChangeListener() {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void clearText() {
-		// Reset pattern filter to default algorithm.
-		getPatternFilter().setSearchInDescription(false);
-		super.clearText();
-	}
+	      ISelection selectionBeforeRefresh;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void createClearText(Composite parent) {
-		// filterToolBar = new ToolBarManager(SWT.FLAT | SWT.HORIZONTAL);
-		// filterToolBar.createControl(parent);
-		// createSearchDescriptionButton(parent);
-		// super.createClearText(parent);
-	}
+	      @Override
+	      public void sleeping(IJobChangeEvent event) {
+	        // Nothing needs to be handled
+	      }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected Composite createFilterControls(Composite parent) {
-		// Change the layout of the parent to host 3 widgets.
-		GridLayout layout = (GridLayout) parent.getLayout();
-		layout.numColumns = 3;
-		Composite filterControls = super.createFilterControls(parent);
-		return filterControls;
-	}
+	      @Override
+	      public void scheduled(IJobChangeEvent event) {
+	        // Just after the job is scheduled, we keep track the current selection of the tree
+	        selectionBeforeRefresh = tree.getViewer().getSelection();
+	      }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected Label createMessageArea(Composite parent) {
-		Label messageArea = super.createMessageArea(parent);
-		GridData layoutData = (GridData) messageArea.getLayoutData();
-		layoutData.horizontalSpan = 3;
-		String labelText = messageArea.getText();
-		labelText += ". Hit Enter to appply the filter";
-		messageArea.setText(labelText);
-		return messageArea;
-	}
+	      @Override
+	      public void running(IJobChangeEvent event) {
+	        // Nothing needs to be handled
+	      }
 
-	/**
-	 * Create the button that triggers search in description.
-	 * 
-	 * @param parent
-	 *            parent <code>Composite</code> of toolbar button
-	 */
-	private void createSearchDescriptionButton(Composite parent) {
-		IAction searchInDescriptionAction = new Action(ICommonConstants.EMPTY_STRING, IAction.AS_PUSH_BUTTON) {
-			/**
-			 * {@inheritDoc}
-			 */
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void run() {
-				// Set pattern filter to search in description algorithm.
-				getPatternFilter().setSearchInDescription(true);
-				textChanged();
-			}
-		};
-		searchInDescriptionAction.setToolTipText(
-				org.polarsys.capella.core.platform.sirius.ui.navigator.view.Messages.CapellaCommonNavigator_searchInDescriptionAction_Tooltip);
-		searchInDescriptionAction.setImageDescriptor(
-				CapellaNavigatorPlugin.getDefault().getImageDescriptor(IImageKeys.IM_SEARCH_DESCRIPTION));
-		filterToolBar.add(searchInDescriptionAction);
-	}
+	      @Override
+	      public void done(IJobChangeEvent event) {
+	        if (tree.getFilterString().isEmpty()) {
+	          // If the pattern is cleared by user
+	          // Expand the tree to default level
+	          tree.getViewer().expandToLevel(tree.levelOfExpandByDefault, true);
+	          // And set the selection as same as before refreshing.
+	          // It supports the use case:
+	          // 1. User searches for some thing
+	          // 2. User finds the wanted element and select it on the tree.
+	          // 3. User clears the search bar
+	          // 4. The tree is refresh and the selected element is preserved so user can directly do something with it
+	          // instead of manually expanding the tree level by level to re-find the wanted element.
+	          if (selectionBeforeRefresh != null) {
+	            tree.getViewer().setSelection(selectionBeforeRefresh);
+	          }
+	        }
+	      }
 
-	/**
-	 * @see org.eclipse.ui.dialogs.FilteredTree#doCreateTreeViewer(org.eclipse.swt.widgets.Composite,
-	 *      int)
-	 */
-	@Override
-	protected TreeViewer doCreateTreeViewer(Composite parent, int style) {
-		return new GenerationContainerCheckedTreeViewer(parent, style);
-	}
+	      @Override
+	      public void awake(IJobChangeEvent event) {
+	        // Nothing needs to be handled
+	      }
 
-	/**
-	 * @see org.polarsys.capella.common.ui.toolkit.widgets.filter.FilteredTree#getExpansionLevelWhenNoFilter()
-	 */
-	@Override
-	protected int getExpansionLevelWhenNoFilter() {
-		return 4; // Enables to see all architecture packages.
-	}
+	      @Override
+	      public void aboutToRun(IJobChangeEvent event) {
+	        // Nothing needs to be handled
+	      }
+	    });
+	    return refreshJob;
+	  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public CapellaNavigatorPatternFilter getPatternFilter() {
-		return (CapellaNavigatorPatternFilter) super.getPatternFilter();
-	}
+	  @Override
+	  protected long getRefreshJobDelay() {
+	    // As we removed the modify listener, we schedule the job immediately after the Enter is hit.
+	    return 0L;
+	  }
 
-	/**
-	 * It seems there is a bug when the filter is cleared.
-	 */
-	protected void handleTreeViewerExpansionWhenNoFilter(ISelection currentSelection, Object[] expandedElements) {
-		super.handleTreeViewerExpansionWhenNoFilter(currentSelection, expandedElements);
-		treeViewer.refresh(false);
-	}
+	  @Override
+	  protected void createFilterText(Composite parent) {
+	    super.createFilterText(parent);
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void handleCRKeyStoke() {
-		// Reset pattern filter to default algorithm.
-		getPatternFilter().setSearchInDescription(false);
-		super.handleCRKeyStoke();
-	}
+	    // Remove the default modify listener which triggers the view refresh on each key pressed.
+	    Listener[] modifyListeners = filterText.getListeners(SWT.Modify);
+	    for (int i = 0; i < modifyListeners.length; i++) {
+	      filterText.removeListener(SWT.Modify, modifyListeners[i]);
+	    }
 
-	/**
-	 * @see org.polarsys.capella.common.ui.toolkit.widgets.filter.FilteredTree#init(int,
-	 *      org.polarsys.capella.common.ui.toolkit.widgets.filter.PatternFilter)
-	 */
-	@Override
-	protected void init(int treeStyle, PatternFilter filter) {
-		// Disable auto filtering for usability.
-		setAutoFiltering(false);
-		super.init(treeStyle, filter);
-	}
+	    // Remove the default "ENTER" listener which set the tree selection to the first matched element
+	    Listener[] traverseListeners = filterText.getListeners(SWT.Traverse);
+	    for (int i = 0; i < traverseListeners.length; i++) {
+	      filterText.removeListener(SWT.Traverse, traverseListeners[i]);
+	    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void updateToolbar(boolean visible) {
-		// Do nothing as we want to always see the toolbar to access search
-		// in description.
-		// IContributionItem[] items = filterToolBar.getItems();
-		// items[hasNativeClearButton() ? 0 : 1].setVisible(visible);
-		// filterToolBar.update(true);
-	}
+	    // Add our own "ENTER" listener which will filter the tree based on pattern text
+	    // Use the KeyListener instead of Traverse in order to support RCPTT test
+	    filterText.addKeyListener(new KeyListener() {
+	      
+	      @Override
+	      public void keyPressed(KeyEvent e) {
+	        if (e.keyCode == SWT.CR ||e.keyCode == SWT.KEYPAD_CR) {
+	          textChanged();
+	        }
+	      }
 
-	private void attachFilterControlFocusListener() {
-		getFilterControl().addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				// whenever the filter text control receives the focus,
-				// uninstall
-				// the global cut/copy/paste handlers set in
-				// EditCommonActionProvider
-				// IActionBars ab = getViewSite().getActionBars();
-				// ab.setGlobalActionHandler(ActionFactory.CUT.getId(), null);
-				// ab.setGlobalActionHandler(ActionFactory.COPY.getId(), null);
-				// ab.setGlobalActionHandler(ActionFactory.PASTE.getId(), null);
-			}
-		});
-	}
+	      @Override
+	      public void keyReleased(KeyEvent e) {
+	        
+	      }
+	    });
+	  }
+
+	  public void setLevelOfExpandByDefault(int levelOfExpandByDefault) {
+	    this.levelOfExpandByDefault = levelOfExpandByDefault;
+	  }
+
+	  public int getLevelOfExpandByDefault() {
+	    return levelOfExpandByDefault;
+	  }
+
+	  public void refresh() {
+	    // Only refresh if the filter string is not empty
+	    if (!getFilterString().isEmpty()) {
+	      textChanged();
+	    }
+	  }
+
+	  @Override
+	  public void setInitialText(String text) {
+	    super.setInitialText(Messages.CapellaFilteredTree_FILTER_TEXT_PLACEHOLDER);
+	  }
+
+	  public void setCaseSensitiveEnabled(boolean isSearchCaseSensitiveEnabled) {
+	    ((CapellaPatternFilter) getPatternFilter()).setCaseSensitiveEnabled(isSearchCaseSensitiveEnabled);
+	  }
 }

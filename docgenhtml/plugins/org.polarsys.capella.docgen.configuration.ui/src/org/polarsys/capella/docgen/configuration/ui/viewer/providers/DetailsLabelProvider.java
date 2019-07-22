@@ -38,7 +38,7 @@ public class DetailsLabelProvider extends CapellaNavigatorLabelProvider implemen
 	 * Constructor
 	 */
 	public DetailsLabelProvider() {
-		super(CapellaAdapterFactoryProvider.getInstance().getAdapterFactory());
+		super();
 		ILabelProvider referencedLabelProvider = AbstractLabelProviderFactory.getInstance()
 				.getReferencedLabelProvider();
 		Optional<Object> option = ReflectionHelper.getFieldValueWithoutException(referencedLabelProvider,

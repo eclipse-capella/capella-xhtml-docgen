@@ -9,7 +9,7 @@
 	<% exportableDiagrams.forEach(diagram -> { %>
 		<div>
 			<% String id = DiagramSessionHelper.getID(diagram); %>
-			<p class="diagram-name" id="<%=id%>"><%= EscapeChars.forHTML(diagram.getName())%></p>
+			<p class="diagram-name" id="<%=id%>"><%= EscapeChars.forHTML(diagram.getDescription().getName())%></p>
 			<p class="diagram">
 				<% String generatedFolder = fileNameService.getFileName(diagram.getTarget()); %>
 				<%= CapellaServices.getImageLinkForDiagram(generatedFolder, diagram) %>

@@ -72,11 +72,10 @@ import org.polarsys.capella.common.ui.toolkit.browser.category.ICategory;
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.BrowserElementWrapper;
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.CategoryWrapper;
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.EObjectWrapper;
-import org.polarsys.capella.common.ui.toolkit.widgets.filter.StringMatcherFactory;
 import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
 import org.polarsys.capella.core.platform.sirius.ui.navigator.preferences.ICapellaNavigatorPreferences;
+import org.polarsys.capella.core.platform.sirius.ui.navigator.viewer.CapellaNavigatorLabelProvider;
 import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
-import org.polarsys.capella.core.ui.toolkit.viewers.CapellaElementLabelProvider;
 import org.polarsys.capella.docgen.configuration.ui.Activator;
 import org.polarsys.capella.docgen.configuration.ui.Messages;
 import org.polarsys.capella.docgen.configuration.ui.actions.IImageKeys;
@@ -100,7 +99,7 @@ public class SelectElementsWizardPage extends WizardPage {
 	 * {@link IColorProvider} such that elements for which no HTML documentation
 	 * is generated have their label in grey.
 	 */
-	private final static class CapellaElementLabelProviderWithColors extends CapellaElementLabelProvider
+	private final static class CapellaElementLabelProviderWithColors extends CapellaNavigatorLabelProvider
 			implements IColorProvider {
 
 		@Override
@@ -555,14 +554,6 @@ public class SelectElementsWizardPage extends WizardPage {
 	protected CheckboxTreeViewer createRightFilteredCheckBoxTreeViewer(Group grpSelectElements) {
 
 		patternFilter = new CapellaNavigatorPatternFilter();
-		patternFilter.setStringMatcherFactory(new StringMatcherFactory() {
-			@Override
-			public StringMatcher createStringMatcher(String pattern) {
-				IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-				return new StringMatcher(pattern, store.getBoolean(ICapellaNavigatorPreferences.PREFERENCE_IGNORE_CASE),
-						false);
-			}
-		});
 		CapellaFilteredTree _filteredTree = new CapellaFilteredTree(grpSelectElements,
 				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL, patternFilter);
 
@@ -611,14 +602,6 @@ public class SelectElementsWizardPage extends WizardPage {
 	protected CheckboxTreeViewer createFilteredCheckBoxTreeViewer(Group grpSelectElements) {
 
 		patternFilter = new CapellaNavigatorPatternFilter();
-		patternFilter.setStringMatcherFactory(new StringMatcherFactory() {
-			@Override
-			public StringMatcher createStringMatcher(String pattern) {
-				IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-				return new StringMatcher(pattern, store.getBoolean(ICapellaNavigatorPreferences.PREFERENCE_IGNORE_CASE),
-						false);
-			}
-		});
 		CapellaFilteredTree filteredTree = new CapellaFilteredTree(grpSelectElements,
 				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL, patternFilter);
 		filteredTree.getViewer().setLabelProvider(new CapellaElementLabelProviderWithColors());

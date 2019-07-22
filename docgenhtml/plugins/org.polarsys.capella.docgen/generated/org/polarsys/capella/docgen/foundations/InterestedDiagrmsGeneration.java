@@ -161,7 +161,7 @@ public class InterestedDiagrmsGeneration {
 				stringBuffer.append(TEXT_6);
 				stringBuffer.append(id);
 				stringBuffer.append(TEXT_7);
-				stringBuffer.append(EscapeChars.forHTML(diagram.getName()));
+				stringBuffer.append(EscapeChars.forHTML(diagram.getDescription().getName()));
 				stringBuffer.append(TEXT_8);
 				String generatedFolder = fileNameService.getFileName(diagram.getTarget());
 				stringBuffer.append(TEXT_9);

@@ -11,117 +11,131 @@
  *******************************************************************************/
 package org.polarsys.capella.docgen.configuration.ui.viewer;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.ITreeContentProvider;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.polarsys.capella.common.mdsofa.common.constant.ICommonConstants;
-import org.polarsys.capella.common.ui.toolkit.widgets.filter.TreePatternFilter;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.eclipse.ui.dialogs.FilteredTree;
+import org.eclipse.ui.dialogs.PatternFilter;
+import org.eclipse.ui.internal.misc.StringMatcher;
 
 /**
  * Copy of org.polarsys.capella.core.platform.sirius.ui.navigator.view.
- * CapellaCommonNavigator.CapellaNavigatorPatternFilter. Specific pattern filter
+ * CapellaCommonNavigator.CapellaPatternFilter. Specific pattern filter
  * for the Capella Navigator to be able to search base on {@link LabelProvider}
  * or on Description model element attribute.
  */
-public class CapellaNavigatorPatternFilter extends TreePatternFilter {
-	/**
-	 * Flag to tell if we are searching in description
-	 * {@link CapellaElement#getDescription()} rather than label provider.
-	 */
-	private boolean searchInDescription;
+public class CapellaNavigatorPatternFilter extends PatternFilter {
+	  private String pattern;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected String getTextFromModelElement(EObject element) {
-		String result = null;
-		if (searchInDescription) {
-			// Search on description attribute.
-			if (element instanceof CapellaElement) {
-				result = ((CapellaElement) element).getDescription();
-			} else if (element instanceof DSemanticDiagram) {
-				result = ((DSemanticDiagram) element).getDocumentation();
-			}
-		} else {
-			result = super.getTextFromModelElement(element);
-		}
-		return (null == result) ? ICommonConstants.EMPTY_STRING : result;
-	}
+	  StringMatcher matcher;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isElementVisible(Viewer viewer, Object parentElement, Object element) {
-		if (searchInDescription) {
-			// Apply strict match algorithm.
-			return isLeafMatch(viewer, parentElement, element) || isParentMatch(viewer, parentElement, element);
-		}
-		boolean visible = super.isElementVisible(viewer, parentElement, element);
-		return visible;
-	}
+	  private boolean caseSensitiveEnabled = false;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected boolean isLeafMatch(Viewer viewer, Object parentElement, Object element) {
-		if (searchInDescription) {
-			// Apply strict match algorithm.
-			return doIsLeafMatch(viewer, parentElement, element);
-		}
-		return super.isLeafMatch(viewer, parentElement, element);
-	}
+	  protected String getText(Viewer viewer, Object element) {
+	    return ((ILabelProvider) ((StructuredViewer) viewer).getLabelProvider()).getText(element);
+	  }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected boolean isParentMatch(Viewer viewer, Object parentElement, Object element) {
-		// we provide our own content provider instead of getting it from
-		// the viewer
-		ITreeContentProvider iTreeContentProvider = (ITreeContentProvider) ((StructuredViewer) viewer)
-				.getContentProvider();
-		Object[] children = iTreeContentProvider.getChildren(element);
-		if ((children != null) && (children.length > 0)) {
-			return isAnyVisible(viewer, element, children);
-		}
-		return false;
-	}
+	  @Override
+	  protected boolean isLeafMatch(Viewer viewer, Object element) {
+	    String labelText = getText(viewer, element);
+	    if (labelText == null) {
+	      return false;
+	    }
+	    return wordMatches(labelText);
+	  }
 
-	/**
-	 * Is searching is description.
-	 * 
-	 * @return the searchInDescription
-	 */
-	protected boolean isSearchingInDescription() {
-		return searchInDescription;
-	}
+	  @Override
+	  public void setPattern(String patternString) {
+	    super.setPattern(patternString);
+	    if (patternString != null) {
+	      this.pattern = patternString;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		if (searchInDescription) {
-			// Apply strict match algorithm.
-			return isElementVisible(viewer, parentElement, element);
-		}
-		return super.select(viewer, parentElement, element);
-	}
+	      // As the matcher of PatternFilter use by default "true" for "ignoreCase" and "false" for "ignoreWildCard"
+	      // We create a another matcher here so that we can provide search options for user.
+	      if (!patternString.endsWith(" ")) {
+	        // So that if search for "Air", the results will include texts containing "Aircraft" or "Airplane"
+	        patternString += "*";
+	      }
+	      matcher = new StringMatcher(patternString, !caseSensitiveEnabled, false);
+	    }
+	  }
 
-	/**
-	 * Set Search in description flag.
-	 * 
-	 * @param newSearchInDescription
-	 *            the searchInDescription to set
-	 */
-	protected void setSearchInDescription(boolean newSearchInDescription) {
-		searchInDescription = newSearchInDescription;
+	  public String getPattern() {
+	    return pattern;
+	  }
+
+	  @Override
+	  protected boolean wordMatches(String text) {
+	    if (pattern == null || pattern.isEmpty()) {
+	      return true;
+	    }
+
+	    if (text == null) {
+	      return false;
+	    }
+
+	    return matcher.match(text);
+	  }
+
+	  public void setCaseSensitiveEnabled(boolean caseSensitiveEnabled) {
+	    this.caseSensitiveEnabled = caseSensitiveEnabled;
+	  }
+
+	  /**
+	   * By default, the cache is used only for {@link FilteredTree.NotifyingTreeViewer} and the
+	   * {@link PatternFilter#setUseCache()} is not public accessed. Use java reflection to be able to activate the caches
+	   * to improve performance while searching in big Capella model
+	   * 
+	   * If activating the cache for a viewer, DO NOT forget to clear cache before refreshing a viewer. Otherwise, a
+	   * potential {@link ArrayIndexOutOfBoundsException} is thrown at {@link StructuredViewer#notifyFilteredOut()}
+	   * 
+	   * @see https://jira.appcelerator.org/browse/APSTUD-1074
+	   * @see PatternFilter#setUseCache()
+	   */
+	  public void doSetUseCache(boolean useCache) {
+	    try {
+	      // As we are not using the default NotifyingTreeViewer of FilteredTree, the cache is not activated.
+	      // Use java reflection to activate it here
+	      Method setUseCacheMethod = PatternFilter.class.getDeclaredMethod("setUseCache", boolean.class); //$NON-NLS-1$
+	      setUseCacheMethod.setAccessible(true);
+	      setUseCacheMethod.invoke(this, useCache);
+	    } catch (IllegalAccessException e) {
+	      e.printStackTrace();
+	    } catch (IllegalArgumentException e) {
+	      e.printStackTrace();
+	    } catch (InvocationTargetException e) {
+	      e.printStackTrace();
+	    } catch (NoSuchMethodException e) {
+	      e.printStackTrace();
+	    } catch (SecurityException e) {
+	      e.printStackTrace();
+	    }
+	  }
+
+	  /**
+	   * Use java reflection to be able to clear the caches.
+	   * 
+	   * @see PatternFilter#clearCaches()
+	   */
+	  public void doClearCaches() {
+	    try {
+	      Method clearCachesMethod = PatternFilter.class.getDeclaredMethod("clearCaches");
+	      clearCachesMethod.setAccessible(true);
+	      clearCachesMethod.invoke(this);
+	    } catch (NoSuchMethodException e) {
+	      e.printStackTrace();
+	    } catch (SecurityException e) {
+	      e.printStackTrace();
+	    } catch (IllegalAccessException e) {
+	      e.printStackTrace();
+	    } catch (IllegalArgumentException e) {
+	      e.printStackTrace();
+	    } catch (InvocationTargetException e) {
+	      e.printStackTrace();
+	    }
+	  }
 	}
-}

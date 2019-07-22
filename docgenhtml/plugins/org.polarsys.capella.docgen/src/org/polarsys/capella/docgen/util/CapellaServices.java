@@ -386,7 +386,7 @@ public class CapellaServices {
 		builder.append("\" src=\""); //$NON-NLS-1$
 		builder.append(generatedFolder);
 		builder.append("/"); //$NON-NLS-1$
-		String validFileName = DocGenHtmlUtil.getValidFileName(diagram.getName());
+		String validFileName = DocGenHtmlUtil.getValidFileName(diagram.getDescription().getName());
 		builder.append(validFileName);
 		builder.append(".jpg\" alt=\"").append(validFileName).append("\"/>"); //$NON-NLS-1$
 		builder.append("</a>"); //$NON-NLS-1$
