@@ -19,7 +19,9 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.sirius.business.api.query.DRepresentationQuery;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.polarsys.capella.core.data.capellacore.AbstractDependenciesPkg;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.Classifier;
@@ -386,7 +388,11 @@ public class CapellaServices {
 		builder.append("\" src=\""); //$NON-NLS-1$
 		builder.append(generatedFolder);
 		builder.append("/"); //$NON-NLS-1$
-		String validFileName = DocGenHtmlUtil.getValidFileName(diagram.getDescription().getName());
+        DRepresentationQuery rep2descQuery = new DRepresentationQuery(diagram);
+        DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
+    	String representationName = (result == null) ? diagram.getUid() : result.getName();
+
+		String validFileName = DocGenHtmlUtil.getValidFileName(representationName);
 		builder.append(validFileName);
 		builder.append(".jpg\" alt=\"").append(validFileName).append("\"/>"); //$NON-NLS-1$
 		builder.append("</a>"); //$NON-NLS-1$

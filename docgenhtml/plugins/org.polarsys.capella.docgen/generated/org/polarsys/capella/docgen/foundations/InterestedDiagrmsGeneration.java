@@ -29,6 +29,8 @@ import org.polarsys.capella.docgen.util.CapellaDiagramHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
+import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
+import org.eclipse.sirius.business.api.query.DRepresentationQuery; 
 
 public class InterestedDiagrmsGeneration {
 	protected static String nl;
@@ -158,10 +160,13 @@ public class InterestedDiagrmsGeneration {
 			exportableDiagrams.forEach(diagram -> {
 				stringBuffer.append(TEXT_5);
 				String id = DiagramSessionHelper.getID(diagram);
+				DRepresentationQuery rep2descQuery = new DRepresentationQuery(diagram);
+	        	DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
+	    		String name = (result == null) ? id : result.getName();
 				stringBuffer.append(TEXT_6);
 				stringBuffer.append(id);
 				stringBuffer.append(TEXT_7);
-				stringBuffer.append(EscapeChars.forHTML(diagram.getDescription().getName()));
+				stringBuffer.append(EscapeChars.forHTML(name));
 				stringBuffer.append(TEXT_8);
 				String generatedFolder = fileNameService.getFileName(diagram.getTarget());
 				stringBuffer.append(TEXT_9);
