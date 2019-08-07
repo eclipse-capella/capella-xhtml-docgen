@@ -177,6 +177,10 @@ public class TreeServices {
 				}
 				description = ((DSemanticDiagram) rep).getDescription();
 			} else if (rep instanceof DTable) {
+				EObject target = ((DTable) rep).getTarget();
+				if (! GenerationGlobalScope.getInstance().inScope(target, false)){
+					continue;
+				}
 				description = ((DTable) rep).getDescription();
 			} else {
 				break;

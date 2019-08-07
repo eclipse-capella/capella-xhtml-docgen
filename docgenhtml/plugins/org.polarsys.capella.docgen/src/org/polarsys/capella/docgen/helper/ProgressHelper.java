@@ -222,7 +222,18 @@ public class ProgressHelper {
 	public String generateTableBody(EObject element){
 		StringBuffer result = new StringBuffer();
 		List<EObject> allTaggedObjects = ProgressMonitoringPropagator.getInstance().getTaggedObjects(EcoreUtil.getRootContainer(element));
-		List<EObject> taggedObjects = allTaggedObjects.stream().filter(eObject -> GenerationGlobalScope.getInstance().inScope(eObject, true)).collect(Collectors.toList());
+		List<EObject> taggedObjects = allTaggedObjects.stream().filter(eObject -> {
+			if (GenerationGlobalScope.getInstance().inScope(eObject, true)){
+				return true;
+			} else {
+				if (eObject instanceof DRepresentationDescriptor) {
+					EObject target = ((DRepresentationDescriptor) eObject).getTarget();
+					return GenerationGlobalScope.getInstance().inScope(target, true);
+				}
+				return false;
+			}
+		}
+		).collect(Collectors.toList());
 		TreeData treeData = new TreeData(taggedObjects, null);
 		dataProvider.inputChanged(null, null, treeData);
 		Object[] elements = dataProvider.getElements(element);
