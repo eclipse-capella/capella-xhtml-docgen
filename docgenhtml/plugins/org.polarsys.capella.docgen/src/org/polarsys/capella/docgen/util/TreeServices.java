@@ -28,6 +28,7 @@ import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.requirement.Requirement;
 import org.polarsys.capella.core.data.requirement.RequirementsPkg;
 import org.polarsys.capella.docgen.diagram.CapellaHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 
 /**
  * 
@@ -170,6 +171,10 @@ public class TreeServices {
 			// Get description
 			RepresentationDescription description = null;
 			if (rep instanceof DSemanticDiagram) {
+				EObject target = ((DSemanticDiagram) rep).getTarget();
+				if (! GenerationGlobalScope.getInstance().inScope(target, false)){
+					continue;
+				}
 				description = ((DSemanticDiagram) rep).getDescription();
 			} else if (rep instanceof DTable) {
 				description = ((DTable) rep).getDescription();
