@@ -1,5 +1,7 @@
 package org.polarsys.capella.docgen.util.pattern.helper;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
@@ -96,6 +98,11 @@ public class PropertyValueHelper {
 	}
 	
 	public static String getPVGTable (CapellaElement element, int level, String projectName, String outputFolder) {
+		BasicEList<CapellaElement> emptyList = new BasicEList<CapellaElement>();
+		return getPVGTable(element, level, projectName, outputFolder, emptyList);
+	}
+	
+	public static String getPVGTable (CapellaElement element, int level, String projectName, String outputFolder, List<CapellaElement> alreadyGeneratedElements) {
 		StringBuffer result = new StringBuffer();
 		
 		// We get the list of applied and owned PVG
@@ -151,14 +158,18 @@ public class PropertyValueHelper {
 				result.append("</td>");
 			result.append("</tr>");
 			
-			//We deal with its owned / applied Property Values
+			alreadyGeneratedElements.add(element);
+
 			CapellaElement subelement = (CapellaElement) group;
-			String tablePV = PropertyValueHelper.getPVTable(subelement, level + 1, projectName, outputFolder);
-			result.append(tablePV);
-			
-			//We deal with its owned / applied Property Value Groups
-			String tablePVG = PropertyValueHelper.getPVGTable(subelement, level + 1, projectName, outputFolder);
-			result.append(tablePVG);
+			if (!alreadyGeneratedElements.contains(subelement)) {
+				//We deal with its owned / applied Property Values
+				String tablePV = PropertyValueHelper.getPVTable(subelement, level + 1, projectName, outputFolder);
+				result.append(tablePV);
+				
+				//We deal with its owned / applied Property Value Groups
+				String tablePVG = PropertyValueHelper.getPVGTable(subelement, level + 1, projectName, outputFolder, alreadyGeneratedElements);
+				result.append(tablePVG);
+			}
 		}
 		return result.toString();
 	}
