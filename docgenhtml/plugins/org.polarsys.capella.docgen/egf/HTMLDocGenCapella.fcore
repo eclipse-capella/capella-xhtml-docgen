@@ -64,6 +64,7 @@
             <methods xmi:id="_51oEsN46Ed-Qav1YnqlO9A" name="content" patternFilePath="templates/pattern._ixj0MN0eEd-Vzvs7Wt1vzQ/method._51oEsN46Ed-Qav1YnqlO9A.pt"/>
             <methods xmi:id="_TM8hYPbpEd-RH7MH9LLQsg" name="setFileNameService" patternFilePath="templates/pattern._ixj0MN0eEd-Vzvs7Wt1vzQ/method._TM8hYPbpEd-RH7MH9LLQsg.pt"/>
             <methods xmi:id="_5jqVAErlEeCvqtVx_IKrqA" name="endContent" patternFilePath="templates/pattern._ixj0MN0eEd-Vzvs7Wt1vzQ/method._5jqVAErlEeCvqtVx_IKrqA.pt"/>
+            <methods xmi:id="_ALikYLklEemEHKw9GhkeOQ" name="docHeader" patternFilePath="templates/pattern._ixj0MN0eEd-Vzvs7Wt1vzQ/method._ALikYLklEemEHKw9GhkeOQ.pt"/>
             <variables xmi:id="_8ZnqQN4gEd-Qav1YnqlO9A" name="element" type="http://www.polarsys.org/capella/core/core/1.3.0#//CapellaElement"/>
             <variables xmi:id="_dqbzEHuzEeCAr9zliRjheA" name="documentTitle" type="java.lang.String"/>
             <variables xmi:id="_yKihsIwoEeCksqA-SB02WQ" name="elementPath" type="java.lang.String"/>

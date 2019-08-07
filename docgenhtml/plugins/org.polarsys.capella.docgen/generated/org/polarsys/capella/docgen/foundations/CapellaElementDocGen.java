@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.0.201805040915
+//Generated with EGF 1.5.1.v20180423-0901
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -24,8 +24,34 @@ public class CapellaElementDocGen extends org.polarsys.kitalpha.doc.gen.business
 	}
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "";
-	protected final String TEXT_2 = NL;
+	protected final String TEXT_1 = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" + NL
+			+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"" + NL
+			+ "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" + NL
+			+ "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">" + NL + "" + NL + "\t<head>"
+			+ NL + "\t\t<meta name=\"copyright\" content=\"";
+	protected final String TEXT_2 = "\" />" + NL
+			+ "\t\t<meta http-equiv=\"content-type\" content=\"text/html;charset=ISO-8859-1\" />" + NL
+			+ "\t\t<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />" + NL + "" + NL + "\t\t<title>";
+	protected final String TEXT_3 = "</title>" + NL
+			+ "\t\t<link rel=\"stylesheet\" href=\"../../scripts/jquery-treeview/jquery.treeview.css\" />" + NL
+			+ "  \t\t<script src=\"../../scripts/jquery-treeview/lib/jquery-1.11.1.js\" type=\"text/javascript\"></script>"
+			+ NL
+			+ "  \t\t<script src=\"../../scripts/jquery-treeview/jquery.treeview.js\" type=\"text/javascript\"></script>"
+			+ NL + "\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../css/simpletree.css\" />\t\t" + NL
+			+ "\t\t<link title=\"default\" rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" href=\"../../css/content.css\"></link>"
+			+ NL + "\t\t<script type=\"text/javascript\">" + NL
+			+ "\t\t\tif(parent.location.href == self.location.href) {" + NL
+			+ "\t\t\t\twindow.location.href = 'index.html?";
+	protected final String TEXT_4 = "';" + NL + "\t\t\t}" + NL + "\t\t</script>" + NL + "\t\t" + NL + "\t\t<style>" + NL
+			+ "\t\t\tbody {" + NL + "\t\t\t\tbackground: white;" + NL + "\t\t\t\tfont-family: Arial;" + NL + "\t\t\t}"
+			+ NL + "\t\t\t.treeview {" + NL + "\t\t\t\tbackground-color: white ;" + NL + "\t\t\t}" + NL + "\t" + NL
+			+ "\t\t\t.treeview ul{ /*CSS for Simple Tree Menu*/" + NL + "\t\t\t\tbackground-color: white;" + NL
+			+ "\t\t\t\tfont-size: 12px;" + NL + "\t\t\t}" + NL + "\t" + NL
+			+ "\t\t\t.treeview li{ /*Style for LI elements in general (excludes an LI that contains sub lists)*/" + NL
+			+ "\t\t\t\tbackground-color: white;" + NL + "\t\t\t}" + NL + "\t\t</style>" + NL + "\t\t" + NL + "\t</head>"
+			+ NL + "\t" + NL + "\t<body>\t";
+	protected final String TEXT_5 = NL;
+	protected final String TEXT_6 = NL;
 
 	public CapellaElementDocGen() {
 		//Here is the constructor
@@ -53,8 +79,8 @@ public class CapellaElementDocGen extends org.polarsys.kitalpha.doc.gen.business
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_1);
-		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_6);
 		return stringBuffer.toString();
 	}
 
@@ -184,5 +210,18 @@ public class CapellaElementDocGen extends org.polarsys.kitalpha.doc.gen.business
 		super.method_endContent(new StringBuffer(), ctx);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
+	}
+
+	protected void method_docHeader(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+		stringBuffer.append(TEXT_1);
+		stringBuffer.append(copyright);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(title);
+		stringBuffer.append(TEXT_3);
+		stringBuffer.append(fileName);
+		stringBuffer.append(TEXT_4);
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "docHeader", stringBuffer.toString());
 	}
 }
