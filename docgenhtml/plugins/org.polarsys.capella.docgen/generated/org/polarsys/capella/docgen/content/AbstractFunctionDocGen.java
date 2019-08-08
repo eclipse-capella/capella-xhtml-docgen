@@ -41,15 +41,21 @@ public class AbstractFunctionDocGen extends org.polarsys.capella.docgen.foundati
 	protected final String TEXT_9 = NL;
 	protected final String TEXT_10 = NL;
 	protected final String TEXT_11 = NL + "    <h2>Incoming Internal Functional Exchanges</h2>" + NL + "    " + NL
-			+ "    " + NL + "   <table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>"
-			+ NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Exchange Items</th>" + NL + "\t</tr>";
+			+ "    " + NL + "   <table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL
+			+ "\t\t<th>Involving functional chains</th>" + NL + "\t\t<th>Allocating component Exchanges</th>" + NL
+			+ "\t\t<th>Distant Port</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Target</th>" + NL
+			+ "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
+			+ "\t\t<th>Realized Functional Exchange</th>" + NL + "\t\t<th>Realizing Functional Exchange</th>" + NL
+			+ "\t</tr>";
 	protected final String TEXT_12 = NL + "\t";
 	protected final String TEXT_13 = NL + "</table>";
 	protected final String TEXT_14 = NL + " <h2>Outgoing Internal Functional Exchanges</h2>" + NL + "" + NL
-			+ "    <table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL
-			+ "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Exchange Items</th>"
-			+ NL + "\t</tr>";
+			+ "    <table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL
+			+ "\t\t<th>Involving functional chains</th>" + NL + "\t\t<th>Allocating component Exchanges</th>" + NL
+			+ "\t\t<th>Distant Port</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Target</th>" + NL
+			+ "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
+			+ "\t\t<th>Realized Functional Exchange</th>" + NL + "\t\t<th>Realizing Functional Exchange</th>" + NL
+			+ "\t</tr>";
 	protected final String TEXT_15 = NL + "\t";
 	protected final String TEXT_16 = NL + "</table>";
 	protected final String TEXT_17 = NL + "<h2>Modes and States</h2>";
