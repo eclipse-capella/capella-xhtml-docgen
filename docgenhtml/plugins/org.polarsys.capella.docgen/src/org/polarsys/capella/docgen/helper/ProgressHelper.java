@@ -12,6 +12,7 @@
 package org.polarsys.capella.docgen.helper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -34,6 +35,7 @@ import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.polarsys.capella.core.model.handler.helpers.RepresentationHelper;
 import org.polarsys.capella.core.ui.metric.utils.Utils;
 import org.polarsys.capella.docgen.util.CapellaServices;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 /**
@@ -220,7 +222,19 @@ public class ProgressHelper {
 	 */
 	public String generateTableBody(EObject element){
 		StringBuffer result = new StringBuffer();
-		List<EObject> taggedObjects = ProgressMonitoringPropagator.getInstance().getTaggedObjects(EcoreUtil.getRootContainer(element));
+		List<EObject> allTaggedObjects = ProgressMonitoringPropagator.getInstance().getTaggedObjects(EcoreUtil.getRootContainer(element));
+		List<EObject> taggedObjects = allTaggedObjects.stream().filter(eObject -> {
+			if (GenerationGlobalScope.getInstance().inScope(eObject, true)){
+				return true;
+			} else {
+				if (eObject instanceof DRepresentationDescriptor) {
+					EObject target = ((DRepresentationDescriptor) eObject).getTarget();
+					return GenerationGlobalScope.getInstance().inScope(target, true);
+				}
+				return false;
+			}
+		}
+		).collect(Collectors.toList());
 		TreeData treeData = new TreeData(taggedObjects, null);
 		dataProvider.inputChanged(null, null, treeData);
 		Object[] elements = dataProvider.getElements(element);
