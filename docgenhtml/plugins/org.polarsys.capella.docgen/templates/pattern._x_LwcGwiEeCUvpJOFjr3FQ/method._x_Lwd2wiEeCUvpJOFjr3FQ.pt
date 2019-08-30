@@ -51,10 +51,15 @@ if(incomingInteralFunctionalExchanges.size() > 0) {
    <table>
 	<tr>
 		<th>Exchange</th>
+		<th>Involving functional chains</th>
+		<th>Allocating component Exchanges</th>
+		<th>Distant Port</th>
 		<th>Source</th>
 		<th>Target</th>
 		<th>Description</th>
 		<th>Allocated Exchange Items</th>
+		<th>Realized Functional Exchange</th>
+		<th>Realizing Functional Exchange</th>
 	</tr>
 <% for(FunctionalExchange functionalExchange : incomingInteralFunctionalExchanges) {%>
 	<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
@@ -70,10 +75,15 @@ if(outgoingInteralFunctionalExchanges.size() > 0) {
     <table>
 	<tr>
 		<th>Exchange</th>
+		<th>Involving functional chains</th>
+		<th>Allocating component Exchanges</th>
+		<th>Distant Port</th>
 		<th>Source</th>
 		<th>Target</th>
 		<th>Description</th>
 		<th>Allocated Exchange Items</th>
+		<th>Realized Functional Exchange</th>
+		<th>Realizing Functional Exchange</th>
 	</tr>
 <% for(FunctionalExchange functionalExchange : outgoingInteralFunctionalExchanges) {%>
 	<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
