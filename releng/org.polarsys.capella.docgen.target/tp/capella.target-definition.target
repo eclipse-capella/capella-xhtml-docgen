@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
-<!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1563801516">
+<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1567156386">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.gmf.runtime.notation.feature.group" version="0.0.0"/>
@@ -43,37 +43,37 @@
       <repository id="sirius" location="https://download.eclipse.org/sirius/updates/stable/6.3.0-S20190716-100145/2019-06"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.ad.runtime.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.cadence.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.common.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.emde.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.emde.ui.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.massactions.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.massactions.feature.source.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.model.common.share.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.model.common.commands.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.model.common.scrutiny.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.model.detachment.contrib.viewpoints.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.model.detachment.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.model.detachment.ui.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.patterns.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.report.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.report.ui.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.resourcereuse.emfscheme.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.resourcereuse.emfscheme.ui.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.resourcereuse.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.resourcereuse.ui.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.richtext.widget.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.richtext.widget.feature.source.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.source.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.transposer.feature.feature.group" version="1.4.0.201906200718"/>
-      <repository id="kitalpha-runtime-core-master" location="http://download.eclipse.org/kitalpha/updates/stable/runtimecore/1.4.0.201906200718"/>
+      <unit id="org.polarsys.kitalpha.ad.runtime.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.cadence.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.common.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.emde.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.emde.ui.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.massactions.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.massactions.feature.source.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.model.common.share.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.model.common.commands.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.model.common.scrutiny.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.model.detachment.contrib.viewpoints.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.model.detachment.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.model.detachment.ui.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.patterns.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.report.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.report.ui.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.resourcereuse.emfscheme.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.resourcereuse.emfscheme.ui.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.resourcereuse.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.resourcereuse.ui.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.feature.source.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.source.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.transposer.feature.feature.group" version="1.4.0.201907221036"/>
+      <repository id="kitalpha-runtime-core-master" location="https://download.eclipse.org/kitalpha/updates/milestone/runtimecore/1.4.0-N1386/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.doc.feature.feature.group" version="1.4.0.201906200718"/>
-      <unit id="org.polarsys.kitalpha.emde.sdk.feature.feature.group" version="1.4.0.201906200718"/>
-      <repository id="kitalpha-sdk-master" location="https://download.eclipse.org/kitalpha/updates/stable/sdk/1.4.0.201906200718"/>
+      <unit id="org.polarsys.kitalpha.doc.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.emde.sdk.feature.feature.group" version="1.4.0.201907221036"/>
+      <repository id="kitalpha-sdk-master" location="https://download.eclipse.org/kitalpha/updates/milestone/sdk/1.4.0-N1386"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.diffmerge.feature.feature.group" version="0.12.0.201907170855"/>
@@ -92,9 +92,9 @@
       <repository id="diffmerge-patterns-master" location="http://download.eclipse.org/diffmerge/releases/0.11.0/edm-patterns-site"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.amalgam.explorer.activity.feature.group" version="1.11.0.201907161213"/>
-      <unit id="org.eclipse.amalgam.explorer.activity.source.feature.group" version="1.11.0.201907161213"/>
-      <repository id="amalgam" location="https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20190716/capella"/>
+      <unit id="org.eclipse.amalgam.explorer.activity.feature.group" version="1.11.0.201907290729"/>
+      <unit id="org.eclipse.amalgam.explorer.activity.source.feature.group" version="1.11.0.201907290729"/>
+      <repository id="amalgam" location="https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20190729/capella"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sirius.query.legacy.feature.feature.group" version="1.1.0.201504271341"/>
@@ -125,11 +125,11 @@
       <repository id="orbit-R20140525021250" location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.capella.rcp.feature.feature.group" version="1.4.0.201907191932"/>
-      <repository id="capella-master" location="http://download.polarsys.org/capella/core/updates/nightly/1.4.0/org.polarsys.capella.rcp.site/"/>
+      <unit id="org.polarsys.capella.rcp.feature.feature.group" version="1.4.0.201907230758"/>
+      <repository id="capella-master" location="http://download.eclipse.org/capella/core/updates/stable/1.4.0-S20190723-075896/org.polarsys.capella.rcp.site/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="1.4.0.201907221036"/>
+      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
       <repository id="kitalpha-runtime-master-latest" location="http://download.polarsys.org/kitalpha/updates/nightly/runtime/1.4.0"/>
     </location>
   </locations>
