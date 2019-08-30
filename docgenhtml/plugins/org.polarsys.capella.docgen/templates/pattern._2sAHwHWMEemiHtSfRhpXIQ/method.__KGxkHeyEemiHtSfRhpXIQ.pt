@@ -1,0 +1,9 @@
+<%
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+%>
+
+<%if (element instanceof Project) {%>
+<h2>Progress Overview</h2>
+<%=new ProgressHelper(projectName, outputFolder).generateProgressTable(element)%>
+<%}%>
