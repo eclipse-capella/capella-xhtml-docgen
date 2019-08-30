@@ -1,4 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *  
+ * Contributors:
+ *   Thales - initial API and implementation
+ ******************************************************************************/
+
 package org.polarsys.capella.docgen.util.pattern.helper;
+
+import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -96,6 +109,11 @@ public class PropertyValueHelper {
 	}
 	
 	public static String getPVGTable (CapellaElement element, int level, String projectName, String outputFolder) {
+		BasicEList<CapellaElement> emptyList = new BasicEList<CapellaElement>();
+		return getPVGTable(element, level, projectName, outputFolder, emptyList);
+	}
+	
+	public static String getPVGTable (CapellaElement element, int level, String projectName, String outputFolder, List<CapellaElement> alreadyGeneratedElements) {
 		StringBuffer result = new StringBuffer();
 		
 		// We get the list of applied and owned PVG
@@ -151,14 +169,18 @@ public class PropertyValueHelper {
 				result.append("</td>");
 			result.append("</tr>");
 			
-			//We deal with its owned / applied Property Values
+			alreadyGeneratedElements.add(element);
+
 			CapellaElement subelement = (CapellaElement) group;
-			String tablePV = PropertyValueHelper.getPVTable(subelement, level + 1, projectName, outputFolder);
-			result.append(tablePV);
-			
-			//We deal with its owned / applied Property Value Groups
-			String tablePVG = PropertyValueHelper.getPVGTable(subelement, level + 1, projectName, outputFolder);
-			result.append(tablePVG);
+			if (!alreadyGeneratedElements.contains(subelement)) {
+				//We deal with its owned / applied Property Values
+				String tablePV = PropertyValueHelper.getPVTable(subelement, level + 1, projectName, outputFolder);
+				result.append(tablePV);
+				
+				//We deal with its owned / applied Property Value Groups
+				String tablePVG = PropertyValueHelper.getPVGTable(subelement, level + 1, projectName, outputFolder, alreadyGeneratedElements);
+				result.append(tablePVG);
+			}
 		}
 		return result.toString();
 	}
