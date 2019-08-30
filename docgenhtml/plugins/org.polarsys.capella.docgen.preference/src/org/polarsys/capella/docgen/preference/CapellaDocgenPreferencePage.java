@@ -15,7 +15,9 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.dialogs.PreferenceLinkArea;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
@@ -29,6 +31,9 @@ import org.polarsys.kitalpha.doc.gen.business.core.preference.ui.AbstractDocgenP
 public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 
 	private BooleanFieldEditor useExportStatusAndReview;
+	private BooleanFieldEditor useExportComponentExchange;
+	private BooleanFieldEditor useExportFunctionalExchange;
+	private BooleanFieldEditor useExportPhysicalLink;
 	
 	/*
 	 * (non-Javadoc)
@@ -38,18 +43,49 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 	protected void createFieldEditors() {
 		createLink();
 		
-		createExportDiagramsField();
+		createExportStatusAndReview();
 		addField(useExportStatusAndReview);
+		
+		createExportExchanges();
+		addField(useExportFunctionalExchange);
+		addField(useExportComponentExchange);
+		addField(useExportPhysicalLink);
+		
+		CapellaDocgenPreferenceHelper.setDefaultValues();
+	}
+	
+	private void initilizeBoolean(Composite parent, BooleanFieldEditor bfe, boolean value) {
+		Control c = bfe.getDescriptionControl(parent);
+		if (c != null && c instanceof Button) {
+			((Button)c).setSelection(value);
+		}
+	}
+
+	/**
+	 * Creation of the Boolean field. 
+	 * If checked, the status and review will be generated, otherwise, they will ignored.
+	 */
+	private void createExportStatusAndReview(){
+		Composite composite = createParent(getFieldEditorParent(), "Common");
+		useExportStatusAndReview = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, 
+				 Messages.EXPORT__STATUS_AND_REVIEW_FIELD_LABEL, composite);
+		initilizeBoolean(composite, useExportStatusAndReview, CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW_DEFAULT_VALUE);
 	}
 	
 	/**
 	 * Creation of the Boolean field. 
-	 * If checked, the diagram will be handled, otherwise, they will ignored.
+	 * If checked, the status and review will be generated, otherwise, they will ignored.
 	 */
-	private void createExportDiagramsField(){
-		Composite composite = createParent(getFieldEditorParent(), "Common");
-		useExportStatusAndReview = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, 
-				 Messages.EXPORT__STATUS_AND_REVIEW_FIELD_LABEL, composite);
+	private void createExportExchanges(){
+		Composite composite = createParent(getFieldEditorParent(), "Exchanges");
+		useExportComponentExchange = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__COMPONENT_EXCHANGE, 
+				 Messages.EXPORT__COMPONENT_EXCHANGE_FIELD_LABEL, composite);
+		
+		useExportFunctionalExchange = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE, 
+				 Messages.EXPORT__FUNCTIONAL_EXCHANGE_FIELD_LABEL, composite);
+		
+		useExportPhysicalLink = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK, 
+				 Messages.EXPORT__PHYSICAL_LINK_FIELD_LABEL, composite);
 	}
 	
 	/*
@@ -59,8 +95,7 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 	@Override
 	protected void performDefaults() {
 		super.performDefaults();
-		store.setDefault(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, 
-				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW_DEFAULT_VALUE);
+		CapellaDocgenPreferenceHelper.restoreDefaultValues();
 	}
 	
 	/**
@@ -91,7 +126,13 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 	
 	private void createLink(){
 		final IWorkbenchPreferenceContainer preferenceContainer = (IWorkbenchPreferenceContainer) getContainer();
-		PreferenceLinkArea pageLink = new PreferenceLinkArea(getFieldEditorParent(), SWT.NONE, "org.polarsys.kitalpha.mdecore.docgen.preference.category", PreferencesUIMsg.CATEGORY_PAGE_LABEL_DOCGEN, preferenceContainer, null);
+		PreferenceLinkArea pageLink = new PreferenceLinkArea(getFieldEditorParent(), 
+															 SWT.NONE, 
+															 "org.polarsys.kitalpha.mdecore.docgen.preference.category", 
+															 PreferencesUIMsg.CATEGORY_PAGE_LABEL_DOCGEN, 
+															 preferenceContainer, 
+															 null);
+		
 		pageLink.getControl().setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 	}
 }

@@ -1,0 +1,6 @@
+	<script type="text/javascript">
+		$("#<%=ExchangesServices.SOURCE_PORT_TREE_ID%>").treeview({ collapsed: false, animated: "fast", unique: false, control: "#treecontrol"});
+		$("#<%=ExchangesServices.TARGET_PORT_TREE_ID%>").treeview({ collapsed: false, animated: "fast", unique: false, control: "#treecontrol"});
+	</script>
+   </body>
+</html>

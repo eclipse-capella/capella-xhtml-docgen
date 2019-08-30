@@ -14,23 +14,37 @@ package org.polarsys.capella.docgen.preference;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.Activator;
 
+/**
+ * @author Boubekeur Zendagui
+ */
 public class CapellaDocgenPreferenceHelper {
 	
-	public final static IPreferenceStore STORE =  Activator.getDefault().getPreferenceStore();
-	
 	/**
-	 * @return The value of the preference STATUS_AND_REVIEW
+	 * @return The value of the preference {@link CapellaDocgenPreferenceConstant#DOCGEN_EXPORT__STATUS_AND_REVIEW} 
 	 */
 	public static boolean isExportStatusAndReview(){
 		return getCustomizedBooleanValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW);
 	}
 	
 	/**
-	 * Set STATUS_AND_REVIEW preference to it default value.
+	 * @return The value of the preference {@link CapellaDocgenPreferenceConstant#DOCGEN_EXPORT__COMPONENT_EXCHANGE} 
 	 */
-	public static void restorDefautCopyrightDefaultValues(){
-		STORE.setDefault(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, 
-				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW_DEFAULT_VALUE);
+	public static boolean isExportComponentExchange(){
+		return getCustomizedBooleanValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__COMPONENT_EXCHANGE);
+	}
+	
+	/**
+	 * @return The value of the preference {@link CapellaDocgenPreferenceConstant#DOCGEN_EXPORT__PHYSICAL_LINK} 
+	 */
+	public static boolean isExportPhysialLink(){
+		return getCustomizedBooleanValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK);
+	}
+	
+	/**
+	 * @return The value of the preference {@link CapellaDocgenPreferenceConstant#DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE} 
+	 */
+	public static boolean isExportFunctionalExchange(){
+		return getCustomizedBooleanValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE);
 	}
 	
 	/**
@@ -39,6 +53,37 @@ public class CapellaDocgenPreferenceHelper {
 	 * @return the value of a preference
 	 */
 	private static boolean getCustomizedBooleanValue(String preferenceName){
-		return STORE.getBoolean(preferenceName);
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		return store.getBoolean(preferenceName);
+	}
+	
+	/**
+	 * Set default values of preference.
+	 */
+	public static void setDefaultValues(){
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		store.setDefault(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, 
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW_DEFAULT_VALUE);
+		store.setDefault(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__COMPONENT_EXCHANGE, 
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__COMPONENT_EXCHANGE_DEFAULT_VALUE);
+		store.setDefault(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE,
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE_DEFAULT_VALUE);
+		store.setDefault(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK, 
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK_DEFAULT_VALUE);
+	}
+	
+	/**
+	 * Restore default values of preference.
+	 */
+	public static void restoreDefaultValues(){
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		store.setValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, 
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW_DEFAULT_VALUE);
+		store.setValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__COMPONENT_EXCHANGE, 
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__COMPONENT_EXCHANGE_DEFAULT_VALUE);
+		store.setValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE,
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE_DEFAULT_VALUE);
+		store.setValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK, 
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK_DEFAULT_VALUE);
 	}
 }
