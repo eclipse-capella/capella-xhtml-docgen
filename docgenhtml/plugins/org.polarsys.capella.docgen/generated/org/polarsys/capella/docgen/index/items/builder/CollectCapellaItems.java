@@ -1,4 +1,4 @@
-//Generated with EGF 1.5.1.v20180423-0901
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.index.items.builder;
 
 import org.polarsys.kitalpha.doc.gen.business.core.services.IndexItem;

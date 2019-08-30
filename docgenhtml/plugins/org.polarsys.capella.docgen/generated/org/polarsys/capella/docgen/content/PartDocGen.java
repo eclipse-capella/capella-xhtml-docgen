@@ -159,6 +159,24 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 		}
 
 		stringBuffer.append(TEXT_9);
+		// Generating status and review information 
+		stringBuffer.append(TEXT_9);
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.StatusAndReviewGeneration" args="element:element"%>
+
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
+
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("element", element);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_2sAHwHWMEemiHtSfRhpXIQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
+		}
+
+		stringBuffer.append(TEXT_9);
 		// owned diagrams and Contained in diagrams generation
 		stringBuffer.append(TEXT_9);
 		{

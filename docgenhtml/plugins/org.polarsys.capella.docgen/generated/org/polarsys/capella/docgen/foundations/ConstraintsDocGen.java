@@ -37,7 +37,6 @@ public class ConstraintsDocGen {
 	protected final String TEXT_7 = "\t\t\t\t" + NL + "\t\t\t</td>" + NL + "\t\t\t<td>  ";
 	protected final String TEXT_8 = "\t\t\t" + NL + "\t\t\t</td>" + NL + "        </tr>";
 	protected final String TEXT_9 = NL + "\t</tbody>" + NL + "</table>";
-	protected final String TEXT_10 = NL;
 
 	public ConstraintsDocGen() {
 		//Here is the constructor
@@ -73,8 +72,8 @@ public class ConstraintsDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_10);
-		stringBuffer.append(TEXT_10);
+		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_3);
 		return stringBuffer.toString();
 	}
 

@@ -16,6 +16,9 @@ String documentTitle = elementName; %>
 <%  // Summary and description generation%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="element:element"%>
 
+<%// Generating status and review information %>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.StatusAndReviewGeneration" args="element:element"%>
+
 <% // owned diagrams and Contained in diagrams generation%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
