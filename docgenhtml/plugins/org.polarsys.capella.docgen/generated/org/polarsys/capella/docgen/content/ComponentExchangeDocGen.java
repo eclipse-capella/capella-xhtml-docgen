@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.0.201805040915
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -23,7 +23,6 @@ public class ComponentExchangeDocGen extends org.polarsys.capella.docgen.foundat
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = " ";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL;
 
 	public ComponentExchangeDocGen() {
 		//Here is the constructor
@@ -61,7 +60,7 @@ public class ComponentExchangeDocGen extends org.polarsys.capella.docgen.foundat
 		}
 
 		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 

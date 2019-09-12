@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,14 +13,14 @@ package org.polarsys.capella.docgen.util.pattern.helper;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.polarsys.capella.core.data.cs.SystemComponentCapabilityRealizationInvolvement;
-import org.polarsys.capella.core.data.ctx.Actor;
 import org.polarsys.capella.core.data.ctx.Capability;
 import org.polarsys.capella.core.data.ctx.Mission;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.helpers.ctx.services.CapabilityExt;
 import org.polarsys.capella.core.data.interaction.AbstractCapability;
 import org.polarsys.capella.core.data.interaction.AbstractFunctionAbstractCapabilityInvolvement;
 import org.polarsys.capella.core.data.la.CapabilityRealization;
+import org.polarsys.capella.core.data.capellacommon.CapabilityRealizationInvolvedElement;
 import org.polarsys.capella.core.data.capellacommon.State;
 import org.polarsys.capella.core.data.capellacore.InvolvedElement;
 import org.polarsys.capella.docgen.util.CapellaServices;
@@ -46,12 +46,14 @@ public class CapellaCapabilityHelper {
 
 	public Collection<String> getInvolvedActors(String projectName, String outputFolder, Capability capability) {
 		Collection<String> ret = new ArrayList<String>();
-		for (Actor currentActor : CapabilityExt.getInvolvedActors(capability)) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(currentActor, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(currentActor));
-			ret.add(buffer.toString());
+		for (SystemComponent currentSystemComponent : CapabilityExt.getInvolvedSystemComponents(capability)) {
+			if (currentSystemComponent.isActor()) {
+				StringBuffer buffer = new StringBuffer();
+				buffer.append(CapellaServices.getImageLinkFromElement(currentSystemComponent, projectName, outputFolder));
+				buffer.append(" ");
+				buffer.append(CapellaServices.getHyperlinkFromElement(currentSystemComponent));
+				ret.add(buffer.toString());
+			}
 		}
 		return ret;
 	}
@@ -119,8 +121,7 @@ public class CapellaCapabilityHelper {
 
 	public Collection<String> getInvolvedComponent(String projectName, String outputFolder, CapabilityRealization capability) {
 		Collection<String> ret = new ArrayList<String>();
-		for (SystemComponentCapabilityRealizationInvolvement currentInvolvement : capability.getInvolvedSystemComponents()) {
-			InvolvedElement involvedElement = currentInvolvement.getInvolved();
+		for (CapabilityRealizationInvolvedElement involvedElement : capability.getInvolvedComponents()) {
 			StringBuffer buffer = new StringBuffer();
 			buffer.append(CapellaServices.getImageLinkFromElement(involvedElement, projectName, outputFolder));
 			buffer.append(" ");

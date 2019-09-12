@@ -86,7 +86,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			 * @return
 			 */
 			private EObject lookUpModelElement(BrowserElementWrapper wrapper) {
-				BrowserElementWrapper parentWrapper = _semanticParentHashMap.get(wrapper);
+				BrowserElementWrapper parentWrapper = semanticParentHashMap.get(wrapper);
 				if (parentWrapper instanceof CategoryWrapper) {
 					return lookUpModelElement(parentWrapper);
 				}
@@ -121,11 +121,11 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
-							if ((element == _rootElement) && _inputHasChanged) {
+							if ((element == rootElement) && inputHasChanged) {
 								// Root element has no parent : store null
 								// value.
-								_semanticParentHashMap.put(wrapper, null);
-								_inputHasChanged = false;
+								semanticParentHashMap.put(wrapper, null);
+								inputHasChanged = false;
 								// if
 								// (getBrowserId().equalsIgnoreCase(IBrowserContentProvider.ID_CURRENT_CP))
 								// {
@@ -150,7 +150,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 								// Add wrapper and element wrapper in internal
 								// data and returned collection.
 								wrappers.add(elementWrapper);
-								_semanticParentHashMap.put(elementWrapper, wrapper);
+								semanticParentHashMap.put(elementWrapper, wrapper);
 								// Flag to filter out empty category.
 								boolean shouldRemovedEmptyCategoryWrapper = false;
 								if (gatherElement instanceof ICategory) {
@@ -170,7 +170,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 								}
 								if (shouldRemovedEmptyCategoryWrapper) {
 									wrappers.remove(elementWrapper);
-									_semanticParentHashMap.remove(elementWrapper);
+									semanticParentHashMap.remove(elementWrapper);
 								}
 							}
 						}
@@ -179,8 +179,8 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 					} else {
 						// Wrap given element. This input element can't be a
 						// Category because a category element is computed.
-						_rootElement = (EObject) parentElement;
-						result = getChildren(new EObjectWrapper(parentElement));
+						rootElement = (EObject) parentElement;
+						result = getChildren(new EObjectWrapper(rootElement));
 
 					}
 				} catch (Exception exception) {
@@ -200,15 +200,15 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			private BrowserElementWrapper wrapElement(Object gatherElement) {
 				BrowserElementWrapper wrapper = null;
 				if ((gatherElement != null) && (gatherElement instanceof EObject)) {
-					wrapper = new EObjectWrapper(gatherElement);
+					wrapper = new EObjectWrapper((EObject) gatherElement);
 				} else if (gatherElement instanceof ICategory) {
-					wrapper = new CategoryWrapper(gatherElement);
+					wrapper = new CategoryWrapper((ICategory) gatherElement);
 				}
 				return wrapper;
 			}
 
 			private boolean isParentPresent(Object parentElement) {
-				return _semanticParentHashMap.containsKey(parentElement);
+				return semanticParentHashMap.containsKey(parentElement);
 			}
 
 		};
@@ -254,7 +254,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			 * @return
 			 */
 			private EObject lookUpModelElement(BrowserElementWrapper wrapper) {
-				BrowserElementWrapper parentWrapper = _semanticParentHashMap.get(wrapper);
+				BrowserElementWrapper parentWrapper = semanticParentHashMap.get(wrapper);
 				if (parentWrapper instanceof CategoryWrapper) {
 					return lookUpModelElement(parentWrapper);
 				}
@@ -275,7 +275,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 				try {
 					if (parentElement instanceof RootCategoryWrapper) {
 						if (((RootCategoryWrapper) parentElement).getBrowserID().equals(getBrowserId())) {
-							return getChildren(new EObjectWrapper(_rootElement));
+							return getChildren(new EObjectWrapper(rootElement));
 						} else {
 							return result;
 						}
@@ -291,11 +291,11 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
-							if ((element == _rootElement) && _inputHasChanged) {
+							if ((element == rootElement) && inputHasChanged) {
 								// Root element has no parent : store null
 								// value.
-								_semanticParentHashMap.put(wrapper, null);
-								_inputHasChanged = false;
+								semanticParentHashMap.put(wrapper, null);
+								inputHasChanged = false;
 								if (getBrowserId().equalsIgnoreCase(IBrowserContentProvider.ID_CURRENT_CP)) {
 									return new Object[] { wrapper };
 								}
@@ -318,7 +318,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 								// Add wrapper and element wrapper in internal
 								// data and returned collection.
 								wrappers.add(elementWrapper);
-								_semanticParentHashMap.put(elementWrapper, wrapper);
+								semanticParentHashMap.put(elementWrapper, wrapper);
 								// Flag to filter out empty category.
 								boolean shouldRemovedEmptyCategoryWrapper = false;
 								if (gatherElement instanceof ICategory) {
@@ -338,7 +338,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 								}
 								if (shouldRemovedEmptyCategoryWrapper) {
 									wrappers.remove(elementWrapper);
-									_semanticParentHashMap.remove(elementWrapper);
+									semanticParentHashMap.remove(elementWrapper);
 								}
 							}
 						}
@@ -347,7 +347,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 					} else {
 						// Wrap given element. This input element can't be a
 						// Category because a category element is computed.
-						_rootElement = (EObject) parentElement;
+						rootElement = (EObject) parentElement;
 						result = new Object[] { new RootCategoryWrapper(parentElement, getBrowserId()) };
 
 					}
@@ -368,15 +368,15 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			private BrowserElementWrapper wrapElement(Object gatherElement) {
 				BrowserElementWrapper wrapper = null;
 				if ((gatherElement != null) && (gatherElement instanceof EObject)) {
-					wrapper = new EObjectWrapper(gatherElement);
+					wrapper = new EObjectWrapper((EObject) gatherElement);
 				} else if (gatherElement instanceof ICategory) {
-					wrapper = new CategoryWrapper(gatherElement);
+					wrapper = new CategoryWrapper((ICategory) gatherElement);
 				}
 				return wrapper;
 			}
 
 			private boolean isParentPresent(Object parentElement_p) {
-				return _semanticParentHashMap.containsKey(parentElement_p);
+				return semanticParentHashMap.containsKey(parentElement_p);
 			}
 
 		};
@@ -422,7 +422,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			 * @return
 			 */
 			private EObject lookUpModelElement(BrowserElementWrapper wrapper) {
-				BrowserElementWrapper parentWrapper = _semanticParentHashMap.get(wrapper);
+				BrowserElementWrapper parentWrapper = semanticParentHashMap.get(wrapper);
 				if (parentWrapper instanceof CategoryWrapper) {
 					return lookUpModelElement(parentWrapper);
 				}
@@ -443,7 +443,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 				try {
 					if (parentElement instanceof RootCategoryWrapper) {
 						if (((RootCategoryWrapper) parentElement).getBrowserID().equals(getBrowserId())) {
-							return getChildren(new EObjectWrapper(_rootElement));
+							return getChildren(new EObjectWrapper(rootElement));
 						} else {
 							return result;
 						}
@@ -460,11 +460,11 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
-							if ((element == _rootElement) && _inputHasChanged) {
+							if ((element == rootElement) && inputHasChanged) {
 								// Root element has no parent : store null
 								// value.
-								_semanticParentHashMap.put(wrapper, null);
-								_inputHasChanged = false;
+								semanticParentHashMap.put(wrapper, null);
+								inputHasChanged = false;
 								if (getBrowserId().equalsIgnoreCase(IBrowserContentProvider.ID_CURRENT_CP)) {
 									return new Object[] { wrapper };
 								}
@@ -487,7 +487,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 								// Add wrapper and element wrapper in internal
 								// data and returned collection.
 								wrappers.add(elementWrapper);
-								_semanticParentHashMap.put(elementWrapper, wrapper);
+								semanticParentHashMap.put(elementWrapper, wrapper);
 								// Flag to filter out empty category.
 								boolean shouldRemovedEmptyCategoryWrapper = false;
 								if (gatherElement instanceof ICategory) {
@@ -507,7 +507,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 								}
 								if (shouldRemovedEmptyCategoryWrapper) {
 									wrappers.remove(elementWrapper);
-									_semanticParentHashMap.remove(elementWrapper);
+									semanticParentHashMap.remove(elementWrapper);
 								}
 							}
 						}
@@ -516,7 +516,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 					} else {
 						// Wrap given element. This input element can't be a
 						// Category because a category element is computed.
-						_rootElement = (EObject) parentElement;
+						rootElement = (EObject) parentElement;
 						result = new Object[] { new RootCategoryWrapper(parentElement, getBrowserId()) };
 					}
 				} catch (Exception exception) {
@@ -536,15 +536,15 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			private BrowserElementWrapper wrapElement(Object gatherElement) {
 				BrowserElementWrapper wrapper = null;
 				if ((gatherElement != null) && (gatherElement instanceof EObject)) {
-					wrapper = new EObjectWrapper(gatherElement);
+					wrapper = new EObjectWrapper((EObject) gatherElement);
 				} else if (gatherElement instanceof ICategory) {
-					wrapper = new CategoryWrapper(gatherElement);
+					wrapper = new CategoryWrapper((ICategory) gatherElement);
 				}
 				return wrapper;
 			}
 
 			private boolean isParentPresent(Object parentElement) {
-				return _semanticParentHashMap.containsKey(parentElement);
+				return semanticParentHashMap.containsKey(parentElement);
 			}
 
 		};
