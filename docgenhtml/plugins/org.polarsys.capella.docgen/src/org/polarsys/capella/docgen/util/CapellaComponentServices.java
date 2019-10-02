@@ -440,4 +440,22 @@ public class CapellaComponentServices {
 		}
 		return ret;
 	}
+
+	/**
+	 * Get the values of the common features to all Components:
+	 * <ul>
+	 * 	<li>isActor</li>
+	 * 	<li>isHuman</li>
+	 * 	<li>isAbstract</li>
+	 * </ul>
+	 * @param component A component
+	 * @return A list of {@code <feature_name>:<feature_value>} strings
+	 */
+	public static Collection<String> getFeatures(Component component) {
+		Collection<String> ret = new ArrayList<String>();
+		ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ACTOR + CapellaServices.BOLD_END + component.isActor());
+		ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_HUMAN + CapellaServices.BOLD_END + component.isHuman());
+		ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ABSTRACT + CapellaServices.BOLD_END + component.isAbstract());
+		return ret;
+	}
 }

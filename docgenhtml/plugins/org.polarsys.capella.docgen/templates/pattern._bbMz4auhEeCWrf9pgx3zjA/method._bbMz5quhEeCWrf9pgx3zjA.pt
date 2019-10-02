@@ -1,6 +1,14 @@
 <%
 String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
 String elementType = EscapeChars.forHTML(element.eClass().getName());
+Collection<String> componentFeatures = CapellaComponentServices.getFeatures((Component)element);
+if (componentFeatures.size() > 0) {
+%>
+<h2>Features</h2>
+<%=StringUtil.stringListToBulette(componentFeatures)%>
+<%
+}
+
 Collection<String> allocatedFunctionsInformations = CapellaComponentServices.getAllocatedFunctionsInformation((Component)element, projectName, outputFolder);
 if(allocatedFunctionsInformations.size() > 0) {
 	if(element instanceof Entity) {

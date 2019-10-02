@@ -11,14 +11,12 @@
 package org.polarsys.capella.docgen.util;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.sirius.business.api.query.DRepresentationQuery;
@@ -29,21 +27,12 @@ import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.Classifier;
 import org.polarsys.capella.core.data.interaction.CombinedFragment;
 import org.polarsys.capella.core.data.interaction.InteractionOperand;
+import org.polarsys.capella.core.data.requirement.RequirementsPkg;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
-
-import org.polarsys.capella.core.data.capellacore.AbstractDependenciesPkg;
-import org.polarsys.capella.core.data.capellacore.Classifier;
-import org.polarsys.capella.core.data.interaction.CombinedFragment;
-import org.polarsys.capella.core.data.interaction.InteractionOperand;
-import org.polarsys.capella.core.data.requirement.Requirement;
-import org.polarsys.capella.core.data.requirement.RequirementsPkg;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-
-import org.eclipse.sirius.diagram.DSemanticDiagram;
 
 public class CapellaServices {
 	public static final String BOLD_BEGIN = "<b>";
@@ -78,6 +67,8 @@ public class CapellaServices {
 	public static final String IS_ABSTRACT = "Is Abstract\t:\t";
 	public static final String IS_PRIMITIVE = "Is Primitive\t:\t";
 	public static final String IS_DISCRETE = "Is Discrete\t:\t";
+	public static final String IS_HUMAN = "Is Human\t:\t";
+	public static final String IS_ACTOR = "Is Actor\t:\t";
 	public static final String PATTERN = "Pattern\t:\t";
 	public static final String DEFAULT_FEATURE = "Default\t:\t";
 	public static final String MIN_FEATURE = "Min\t:\t";
