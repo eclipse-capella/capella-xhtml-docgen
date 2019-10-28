@@ -7,9 +7,16 @@ String outputFolder = ctx.getValue("outputFolder").toString();
 
 Collection<String> involvingFunctionalChains = FunctionHelper.getInvolvingFunctionalChains(projectName, outputFolder, (AbstractFunction)element);
 if(involvingFunctionalChains.size() > 0 ) {
+	if (!(element instanceof OperationalActivity)) {
 %>
 <h2>Involving Functional Chains</h2>
-
+<%
+	} else {
+	%>
+<h2>Involving Operational Processes</h2>
+<%
+}
+%>
 <%=StringUtil.stringListToBulette(involvingFunctionalChains)%>
 <%
 }
@@ -41,9 +48,9 @@ if(outgoingPorts.size() > 0) {
 <%
 }
 
-if(element instanceof AbstractFunction) {
-Collection<FunctionalExchange> incomingInteralFunctionalExchanges = CapellaFunctionServices.getIncomingInteralFunctionalExchanges((AbstractFunction)element);
-if(incomingInteralFunctionalExchanges.size() > 0) {
+if(!(element instanceof OperationalActivity)) {
+Collection<FunctionalExchange> incomingInternalFunctionalExchanges = CapellaFunctionServices.getIncomingInternalFunctionalExchanges((AbstractFunction)element);
+if(incomingInternalFunctionalExchanges.size() > 0) {
 %>
     <h2>Incoming Internal Functional Exchanges</h2>
     
@@ -61,14 +68,14 @@ if(incomingInteralFunctionalExchanges.size() > 0) {
 		<th>Realized Functional Exchange</th>
 		<th>Realizing Functional Exchange</th>
 	</tr>
-<% for(FunctionalExchange functionalExchange : incomingInteralFunctionalExchanges) {%>
+<% for(FunctionalExchange functionalExchange : incomingInternalFunctionalExchanges) {%>
 	<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
 <% }%>
 </table>
   <%
 }
-Collection<FunctionalExchange> outgoingInteralFunctionalExchanges = CapellaFunctionServices.getOutgoingInteralFunctionalExchanges((AbstractFunction)element);
-if(outgoingInteralFunctionalExchanges.size() > 0) {
+Collection<FunctionalExchange> outgoingInternalFunctionalExchanges = CapellaFunctionServices.getOutgoingInternalFunctionalExchanges((AbstractFunction)element);
+if(outgoingInternalFunctionalExchanges.size() > 0) {
 %>
  <h2>Outgoing Internal Functional Exchanges</h2>
 
@@ -85,46 +92,134 @@ if(outgoingInteralFunctionalExchanges.size() > 0) {
 		<th>Realized Functional Exchange</th>
 		<th>Realizing Functional Exchange</th>
 	</tr>
-<% for(FunctionalExchange functionalExchange : outgoingInteralFunctionalExchanges) {%>
+<% for(FunctionalExchange functionalExchange : outgoingInternalFunctionalExchanges) {%>
 	<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
 <% }%>
 </table>
   <%
 }
-}
-
-if (element instanceof ActivityNode) {
-	Collection<FunctionalExchange> incomingActivityEdges = CapellaFunctionServices.getIncomingFunctionalExchanges((AbstractFunction) element);
-	if (incomingActivityEdges.size() > 0) {
+	Collection<FunctionalExchange> incomingFunctionalExchanges = CapellaFunctionServices.getIncomingFunctionalExchanges((AbstractFunction) element);
+	if (incomingFunctionalExchanges.size() > 0) {
 %>
-	<h2>Incoming Exchanges</h2>
+	<h2>Incoming Functional Exchanges</h2>
 	<table>
 	<tr>
 		<th>Exchange</th>
+		<th>Involving functional chains</th>
+		<th>Allocating component Exchanges</th>
+		<th>Distant Port</th>
 		<th>Source</th>
 		<th>Description</th>
 		<th>Allocated Exchange Items</th>
+		<th>Realized Functional Exchange</th>
+		<th>Realizing Functional Exchange</th>
 	</tr>
-<% for(FunctionalExchange ae : incomingActivityEdges) {%>
-	<%=CapellaFunctionServices.incomingActivityEdgeToTableLine(ae, projectName, outputFolder)%>
+<% for(FunctionalExchange ae : incomingFunctionalExchanges) {%>
+	<%=CapellaFunctionServices.incomingFunctionalExchangeToTableLine(ae, projectName, outputFolder)%>
 <% }%>
 </table>
 <%
 	}
 
-	Collection<FunctionalExchange> outgoingActivityEdges = CapellaFunctionServices.getOutgoingFunctionalExchanges((AbstractFunction) element);
-	if (outgoingActivityEdges.size() > 0) {
+	Collection<FunctionalExchange> outgoingFunctionalExchanges = CapellaFunctionServices.getOutgoingFunctionalExchanges((AbstractFunction) element);
+	if (outgoingFunctionalExchanges.size() > 0) {
 %>
-	<h2>Outgoing Exchanges</h2>
+	<h2>Outgoing Functional Exchanges</h2>
 	<table>
 	<tr>
 		<th>Exchange</th>
+		<th>Involving functional chains</th>
+		<th>Allocating component Exchanges</th>
+		<th>Distant Port</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+		<th>Realized Functional Exchange</th>
+		<th>Realizing Functional Exchange</th>
+	</tr>
+<% for(FunctionalExchange ae : outgoingFunctionalExchanges) {%>
+	<%=CapellaFunctionServices.outgoingFunctionalExchangeToTableLine(ae, projectName, outputFolder)%>
+<% }%>
+</table>
+<%
+}
+} else {
+Collection<FunctionalExchange> incomingInternalInteractions = CapellaFunctionServices.getIncomingInternalFunctionalExchanges((AbstractFunction)element);
+if(incomingInternalInteractions.size() > 0) {
+%>
+    <h2>Incoming Internal Interactions</h2>
+        
+   <table>
+	<tr>
+		<th>Interaction</th>
+		<th>Involving Operational Processes</th>
+		<th>Source</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+		<th>Realized Functional Exchange</th>
+		<th>Realizing Functional Exchange</th>
+	</tr>
+<% for(FunctionalExchange activityEdge : incomingInternalInteractions) {%>
+	<%=CapellaFunctionServices.externalInteractionToTableLine(activityEdge, projectName, outputFolder)%>
+<% }%>
+</table>
+  <%
+}
+Collection<FunctionalExchange> outgoingInternalInteractions = CapellaFunctionServices.getOutgoingInternalFunctionalExchanges((AbstractFunction)element);
+if(outgoingInternalInteractions.size() > 0) {
+%>
+ <h2>Outgoing Internal Interactions</h2>
+
+    <table>
+	<tr>
+		<th>Interaction</th>
+		<th>Involving Operational Processes</th>
+		<th>Source</th>
+		<th>Target</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+		<th>Realized Functional Exchange</th>
+		<th>Realizing Functional Exchange</th>
+	</tr>
+<% for(FunctionalExchange activityEdge : outgoingInternalInteractions) {%>
+	<%=CapellaFunctionServices.externalInteractionToTableLine(activityEdge, projectName, outputFolder)%>
+<% }%>
+</table>
+  <%
+}
+  
+	Collection<FunctionalExchange> incomingInteractions = CapellaFunctionServices.getIncomingFunctionalExchanges((AbstractFunction) element);
+	if (incomingInteractions.size() > 0) {
+%>
+	<h2>Incoming Interactions</h2>
+	<table>
+	<tr>
+		<th>Interaction</th>
+		<th>Source</th>
+		<th>Description</th>
+		<th>Allocated Exchange Items</th>
+	</tr>
+<% for(FunctionalExchange ae : incomingInteractions) {%>
+	<%=CapellaFunctionServices.incomingInteractionToTableLine(ae, projectName, outputFolder)%>
+<% }%>
+</table>
+<%
+	}
+
+	Collection<FunctionalExchange> outgoingInteractions = CapellaFunctionServices.getOutgoingFunctionalExchanges((AbstractFunction) element);
+	if (outgoingInteractions.size() > 0) {
+%>
+	<h2>Outgoing Interactions</h2>
+	<table>
+	<tr>
+		<th>Interaction</th>
 		<th>Target</th>
 		<th>Description</th>
 		<th>Allocated Exchange Items</th>
 	</tr>
-<% for(FunctionalExchange ae : outgoingActivityEdges) {%>
-	<%=CapellaFunctionServices.outgoingActivityEdgeToTableLine(ae, projectName, outputFolder)%>
+<% for(FunctionalExchange ae : outgoingInteractions) {%>
+	<%=CapellaFunctionServices.outgoingInteractionToTableLine(ae, projectName, outputFolder)%>
 <% }%>
 </table>
 <%
