@@ -14,12 +14,12 @@ include "http://git.polarsys.org/c/capella/capella.git/plain/releng/plugins/org.
 
 with source, requirements
 
-location capella-1.2.x "http://download.polarsys.org/capella/core/updates/releases/1.2.1-R20180601-102021/org.polarsys.capella.rcp.site/" {
-	org.polarsys.capella.rcp.feature.feature.group
+location capella-1.2.x "https://download.eclipse.org/capella/core/updates/releases/1.2.1-R20180601-102021/org.polarsys.capella.rcp.site/" {
+	org.polarsys.capella.rcp.feature.feature.group lazy
 }
 
 location egf-1.5.1 "http://download.eclipse.org/egf/updates/1.5.1/neon/" {
-	org.eclipse.egf.feature.group
+	org.eclipse.egf.feature.group lazy
 }
 
 location kitalpha-runtime-1.2.1 "https://download.eclipse.org/kitalpha/updates/stable/runtime/1.2.1-1" {
