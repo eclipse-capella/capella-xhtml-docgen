@@ -15,20 +15,33 @@ if(availableModeAndState.size() > 0) {
 Map<String, String> functionAndDesc = FunctionalChainHelper.getAvailableFunctionWithInvolvementDescription(projectName, outputFolder,(FunctionalChain) parameter);
 
 if(functionAndDesc.size() > 0) {
+if(parameter instanceof OperationalProcess) {
+%>
+<h2>Involved activities</h2>
+<%=StringUtil.mapToHTMLTable(functionAndDesc, "Activity", "Involvement Description")%>
+<%
+} else {
 %>
 <h2>Involved functions</h2>
 <%=StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description")%>
 <%
+}
 }
 
 
 Map<String, String> functionalExchangesAndDesc = FunctionalChainHelper.getInvolvedFunctionalExchanges(projectName, outputFolder, (FunctionalChain) parameter);
 
 if(functionalExchangesAndDesc.size() > 0) {
+if (parameter instanceof OperationalProcess) {
+%>
+<h2>Involved interactions</h2>
+<%=StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Interaction", "Involvement Description")%>
+<%
+} else {
 %>
 <h2>Involved functional exchanges</h2>
 <%=StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange", "Involvement Description")%>
 <%
 }
-
+}
 %>
