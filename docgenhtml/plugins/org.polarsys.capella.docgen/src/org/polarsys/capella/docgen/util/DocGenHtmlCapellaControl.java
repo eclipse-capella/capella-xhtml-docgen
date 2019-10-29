@@ -130,7 +130,6 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof FunctionalExchange
 				|| element instanceof PhysicalLink
 				|| element instanceof ComponentExchange
-				|| (element instanceof AbstractState && element instanceof InitialPseudoState == false)
 				|| element instanceof Region
 				|| element instanceof ExchangeItemElement
 		));
