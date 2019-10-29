@@ -1,15 +1,14 @@
 //Generated with EGF 1.6.0.201805040915
 package org.polarsys.capella.docgen.content;
 
-import org.eclipse.egf.common.helper.*;
 import java.util.*;
-import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.FunctionalChainHelper;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
+import org.polarsys.capella.core.data.oa.OperationalProcess;
 
 public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
 	protected static String nl;
@@ -24,12 +23,16 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "<h2>Modes and States</h2>";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "<h2>Involved functions</h2>";
+	protected final String TEXT_3 = NL + "<h2>Involved activities</h2>";
 	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL + "<h2>Involved functional exchanges</h2>";
+	protected final String TEXT_5 = NL + "<h2>Involved functions</h2>";
 	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL;
+	protected final String TEXT_7 = NL + "<h2>Involved interactions</h2>";
 	protected final String TEXT_8 = NL;
+	protected final String TEXT_9 = NL + "<h2>Involved functional exchanges</h2>";
+	protected final String TEXT_10 = NL;
+	protected final String TEXT_11 = NL;
+	protected final String TEXT_12 = NL;
 
 	public FunctionalChainGenDoc() {
 		//Here is the constructor
@@ -65,8 +68,8 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_7);
-		stringBuffer.append(TEXT_8);
+		stringBuffer.append(TEXT_11);
+		stringBuffer.append(TEXT_12);
 		return stringBuffer.toString();
 	}
 
@@ -118,23 +121,40 @@ public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundatio
 				.getAvailableFunctionWithInvolvementDescription(projectName, outputFolder, (FunctionalChain) parameter);
 
 		if (functionAndDesc.size() > 0) {
+			if (parameter instanceof OperationalProcess) {
 
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description"));
+				stringBuffer.append(TEXT_3);
+				stringBuffer.append(TEXT_4);
+				stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Activity", "Involvement Description"));
 
+			} else {
+
+				stringBuffer.append(TEXT_5);
+				stringBuffer.append(TEXT_6);
+				stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description"));
+
+			}
 		}
 
 		Map<String, String> functionalExchangesAndDesc = FunctionalChainHelper
 				.getInvolvedFunctionalExchanges(projectName, outputFolder, (FunctionalChain) parameter);
 
 		if (functionalExchangesAndDesc.size() > 0) {
+			if (parameter instanceof OperationalProcess) {
 
-			stringBuffer.append(TEXT_5);
-			stringBuffer.append(TEXT_6);
-			stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange",
-					"Involvement Description"));
+				stringBuffer.append(TEXT_7);
+				stringBuffer.append(TEXT_8);
+				stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Interaction",
+						"Involvement Description"));
 
+			} else {
+
+				stringBuffer.append(TEXT_9);
+				stringBuffer.append(TEXT_10);
+				stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange",
+						"Involvement Description"));
+
+			}
 		}
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
