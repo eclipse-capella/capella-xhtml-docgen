@@ -11,6 +11,8 @@ import org.polarsys.capella.core.data.capellacore.EnumerationPropertyLiteral;
 import org.polarsys.capella.docgen.helper.ProgressHelper;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
+import org.polarsys.capella.core.data.capellacore.EnumerationPropertyType;
+import org.polarsys.capella.core.model.handler.helpers.CapellaProjectHelper;
 
 public class StatusAndReviewGeneration {
 	protected static String nl;
@@ -33,8 +35,9 @@ public class StatusAndReviewGeneration {
 	protected final String TEXT_8 = NL;
 	protected final String TEXT_9 = NL + "<h2>Progress Overview</h2>";
 	protected final String TEXT_10 = NL;
-	protected final String TEXT_11 = NL;
+	protected final String TEXT_11 = NL + "No Progress information in this project";
 	protected final String TEXT_12 = NL;
+	protected final String TEXT_13 = NL;
 
 	public StatusAndReviewGeneration() {
 		//Here is the constructor
@@ -70,8 +73,8 @@ public class StatusAndReviewGeneration {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_11);
 		stringBuffer.append(TEXT_12);
+		stringBuffer.append(TEXT_13);
 		return stringBuffer.toString();
 	}
 
@@ -140,8 +143,14 @@ public class StatusAndReviewGeneration {
 		stringBuffer.append(TEXT_8);
 		if (element instanceof Project) {
 			stringBuffer.append(TEXT_9);
-			stringBuffer.append(TEXT_10);
-			stringBuffer.append(new ProgressHelper(projectName, outputFolder).generateProgressTable(element));
+			EnumerationPropertyType progressStatus = CapellaProjectHelper.getEnumerationPropertyType(element,
+					CapellaProjectHelper.PROGRESS_STATUS_KEYWORD);
+			if (progressStatus != null) {
+				stringBuffer.append(TEXT_10);
+				stringBuffer.append(new ProgressHelper(projectName, outputFolder).generateProgressTable(element));
+			} else {
+				stringBuffer.append(TEXT_11);
+			}
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "genProgressOverview", stringBuffer.toString());
