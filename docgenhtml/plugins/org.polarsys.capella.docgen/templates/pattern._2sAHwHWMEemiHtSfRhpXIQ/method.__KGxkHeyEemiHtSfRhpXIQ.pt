@@ -5,5 +5,9 @@ String outputFolder = ctx.getValue("outputFolder").toString();
 
 <%if (element instanceof Project) {%>
 <h2>Progress Overview</h2>
+<%	EnumerationPropertyType progressStatus = CapellaProjectHelper.getEnumerationPropertyType(element, CapellaProjectHelper.PROGRESS_STATUS_KEYWORD);
+	if (progressStatus != null) {%>
 <%=new ProgressHelper(projectName, outputFolder).generateProgressTable(element)%>
-<%}%>
+<%} else {%>
+No Progress information in this project
+<%}}%>

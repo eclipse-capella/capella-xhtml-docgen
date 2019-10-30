@@ -11,6 +11,8 @@ import org.polarsys.capella.core.data.capellacore.EnumerationPropertyLiteral;
 import org.polarsys.capella.docgen.helper.ProgressHelper;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
+import org.polarsys.capella.core.data.capellacore.EnumerationPropertyType;
+import org.polarsys.capella.core.model.handler.helpers.CapellaProjectHelper;
 
 public class StatusAndReviewGeneration {
 	protected static String nl;
@@ -30,6 +32,7 @@ public class StatusAndReviewGeneration {
 	protected final String TEXT_5 = NL + "\t\t<p>";
 	protected final String TEXT_6 = NL;
 	protected final String TEXT_7 = NL + "<h2>Progress Overview</h2>";
+	protected final String TEXT_8 = NL + "No Progress information in this project";
 
 	public StatusAndReviewGeneration() {
 		//Here is the constructor
@@ -135,8 +138,14 @@ public class StatusAndReviewGeneration {
 		stringBuffer.append(TEXT_6);
 		if (element instanceof Project) {
 			stringBuffer.append(TEXT_7);
-			stringBuffer.append(TEXT_6);
-			stringBuffer.append(new ProgressHelper(projectName, outputFolder).generateProgressTable(element));
+			EnumerationPropertyType progressStatus = CapellaProjectHelper.getEnumerationPropertyType(element,
+					CapellaProjectHelper.PROGRESS_STATUS_KEYWORD);
+			if (progressStatus != null) {
+				stringBuffer.append(TEXT_6);
+				stringBuffer.append(new ProgressHelper(projectName, outputFolder).generateProgressTable(element));
+			} else {
+				stringBuffer.append(TEXT_8);
+			}
 		}
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "genProgressOverview", stringBuffer.toString());
