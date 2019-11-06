@@ -678,7 +678,7 @@
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_a6_HJ7XaEeiyaM1QyFX3Jg"/>
           </elements>
           <elements xmi:id="_EC31ALXcEeiyaM1QyFX3Jg" name="FunctionalExchangeDocGen"
-              superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ" headerMethod="#_EC31ArXcEeiyaM1QyFX3Jg"
+              superPattern="#_ZFI0MIFLEemoWLDLVaBCIQ" headerMethod="#_EC31ArXcEeiyaM1QyFX3Jg"
               conditionMethod="#_EC31BLXcEeiyaM1QyFX3Jg" initMethod="#_EC31A7XcEeiyaM1QyFX3Jg"
               footerMethod="#_EC31BrXcEeiyaM1QyFX3Jg">
             <nature xmi:type="jetpattern:JetNature" xmi:id="_EC31AbXcEeiyaM1QyFX3Jg"

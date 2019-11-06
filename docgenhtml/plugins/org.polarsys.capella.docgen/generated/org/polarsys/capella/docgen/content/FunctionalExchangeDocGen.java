@@ -14,7 +14,7 @@ import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 
-public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
+public class FunctionalExchangeDocGen extends org.polarsys.capella.docgen.foundations.AbstractExchangeDocGen {
 	protected static String nl;
 
 	public static synchronized FunctionalExchangeDocGen create(String lineSeparator) {
