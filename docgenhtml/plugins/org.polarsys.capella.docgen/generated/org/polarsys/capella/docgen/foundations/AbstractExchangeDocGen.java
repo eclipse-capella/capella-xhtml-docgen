@@ -23,9 +23,9 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
 	}
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = NL + "<h2> Source </h2>";
+	protected final String TEXT_1 = "<h2> Source </h2>";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + NL + "<h2> Target </h2>";
+	protected final String TEXT_3 = NL + "<h2> Target </h2>";
 	protected final String TEXT_4 = NL + "\t<h2> Allocated Function Exchanges </h2>" + NL + "\t";
 	protected final String TEXT_5 = NL + "\t\t<h2> Allocated Exchanges Items </h2>" + NL + "\t\t";
 	protected final String TEXT_6 = NL + "\t<h2> Categories </h2>" + NL + "\t";
@@ -110,12 +110,20 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
 		super.method_content(new StringBuffer(), ctx);
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
-		stringBuffer.append(TEXT_1);
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(ExchangesServices.getSource(element, projectName, outputFolder));
-		stringBuffer.append(TEXT_3);
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(ExchangesServices.getTarget(element, projectName, outputFolder));
+
+		String sourceContent = ExchangesServices.getSource(element, projectName, outputFolder);
+		String targetContent = ExchangesServices.getTarget(element, projectName, outputFolder);
+
+		if (!sourceContent.equals("")) {
+			stringBuffer.append(TEXT_1);
+			stringBuffer.append(TEXT_2);
+			stringBuffer.append(sourceContent);
+		}
+		if (!targetContent.equals("")) {
+			stringBuffer.append(TEXT_3);
+			stringBuffer.append(TEXT_2);
+			stringBuffer.append(targetContent);
+		}
 		stringBuffer.append(TEXT_2);
 		if (ExchangesServices.genAllocatedFunctionExchanges(element)) {
 			if (element instanceof ComponentExchange) {
