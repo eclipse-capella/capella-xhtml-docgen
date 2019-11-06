@@ -55,7 +55,7 @@ public class CapellaEntityHelper {
 		buffer.append("<td id=\"" + CapellaServices.getAnchorId(communicationMean) + "\">");
 		buffer.append(CapellaServices.getImageLinkFromElement(communicationMean, projectName, outputFolder));
 		buffer.append(" ");
-		buffer.append(communicationMean.getName());
+		buffer.append(CapellaServices.getHyperlinkFromElement(communicationMean));
 		buffer.append("</td>");
 		buffer.append("<td>");
 		InformationsExchanger informationsExchanger;
