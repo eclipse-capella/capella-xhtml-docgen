@@ -1,12 +1,18 @@
 <% super.method_content(new StringBuffer(), ctx); %>
 <% String projectName= ctx.getValue("projectName").toString(); %>
 <% String outputFolder = ctx.getValue("outputFolder").toString(); %>
+<% 
+String sourceContent = ExchangesServices.getSource(element, projectName, outputFolder);
+String targetContent = ExchangesServices.getTarget(element, projectName, outputFolder);
 
+if (!sourceContent.equals("")) {%>
 <h2> Source </h2>
-<%=ExchangesServices.getSource(element, projectName, outputFolder)%>
-
+<%=sourceContent%>
+<%}
+if (!targetContent.equals("")) {%>
 <h2> Target </h2>
-<%=ExchangesServices.getTarget(element, projectName, outputFolder)%>
+<%=targetContent%>
+<%}%>
 
 <%if (ExchangesServices.genAllocatedFunctionExchanges(element)){ %>
 <%if (element instanceof ComponentExchange) {%>
