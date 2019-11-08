@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1572258173">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1573205206">
   <locations>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.gmf.runtime.notation.feature.group" version="0.0.0"/>
-      <repository id="GMF-Notation-1.12rc1" location="http://download.eclipse.org/modeling/gmp/gmf-notation/updates/milestones/S201805221301"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.gmf.feature.group" version="0.0.0"/>
-      <repository id="GMF-Runtime-1.12rc3" location="http://download.eclipse.org/modeling/gmp/gmf-runtime/updates/milestones/S201806010809"/>
-    </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sdk.feature.group" version="4.7.3.v20180301-1154"/>
       <unit id="org.eclipse.platform.feature.group" version="4.7.3.v20180301-0715"/>
@@ -131,7 +123,7 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
-      <repository id="kitalpha-runtime-master-latest" location="https://download.eclipse.org/kitalpha/updates/nightly/runtime/1.3.1/"/>
+      <repository id="kitalpha-runtime-master-latest" location="https://download.eclipse.org/kitalpha/updates/stable/runtime/1.3.1-S428/"/>
     </location>
   </locations>
 </target>
