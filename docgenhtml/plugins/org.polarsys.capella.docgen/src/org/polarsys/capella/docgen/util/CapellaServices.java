@@ -362,7 +362,7 @@ public class CapellaServices {
 	public static String getIndexImageLinkFromElement(EObject element, String projectName, String outputFolder) {
 		String imageFileName = LabelProviderHelper.getImageFileName(element, projectName, outputFolder);
 		StringBuffer buffer = new StringBuffer();
-		return appendRelativePath(element, imageFileName, buffer, "../icon/");
+		return appendRelativePath(element, imageFileName, buffer, "../../icon/");
 	}
 	
 	private static String appendRelativePath(EObject element, String imageFileName, StringBuffer buffer, String relativePath) {

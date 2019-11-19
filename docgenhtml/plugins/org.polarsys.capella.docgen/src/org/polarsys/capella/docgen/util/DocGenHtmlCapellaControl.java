@@ -11,7 +11,6 @@
 package org.polarsys.capella.docgen.util;
 
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
-import org.polarsys.capella.core.data.capellacommon.InitialPseudoState;
 import org.polarsys.capella.core.data.capellacommon.Region;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
@@ -115,7 +114,7 @@ public class DocGenHtmlCapellaControl {
 	 */
 	public static boolean isPageCandidateForAnyElement(CapellaElement element) {
 		return (isPageCandidate(element) &&	!
-				(  element instanceof Component
+				(   element instanceof Component
 				|| element instanceof Part
 				|| element instanceof AbstractFunction
 				|| element instanceof org.polarsys.capella.core.data.information.Class 
@@ -127,6 +126,9 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof Structure
 				|| element instanceof Mission
 				|| element instanceof FunctionalChain
+				|| element instanceof FunctionPort
+				|| element instanceof ComponentPort
+				|| element instanceof Scenario
 				|| element instanceof FunctionalExchange
 				|| element instanceof PhysicalLink
 				|| element instanceof ComponentExchange

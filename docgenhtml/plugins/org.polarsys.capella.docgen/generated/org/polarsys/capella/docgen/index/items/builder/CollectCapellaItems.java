@@ -7,12 +7,11 @@ import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.services.IndexerService;
 import org.polarsys.kitalpha.doc.gen.business.core.services.ExtensionService;
 import org.polarsys.kitalpha.doc.gen.business.core.helper.IConceptsHelper;
-import org.eclipse.egf.common.helper.*;
 import java.util.*;
-import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
+import org.polarsys.kitalpha.doc.gen.business.core.util.DefaultFileNameService;
 
 public class CollectCapellaItems {
 	protected static String nl;
@@ -126,6 +125,11 @@ public class CollectCapellaItems {
 				String fileName = DocGenHtmlCapellaUtil.SERVICE.getFileName(parameter);
 				IndexItem item = new IndexItem(conceptLabel, parameter.eClass().getName(), iconTagOfElement,
 						linkTagTowardPageElement, fileName);
+				// Check if the default indexer have already indexed the element
+				String defaultFileName = DefaultFileNameService.INSTANCE.getFileName(parameter);
+				if (IndexerService.INSTANCE.getElementsToIndexItems().get(defaultFileName) != null) {
+					IndexerService.INSTANCE.getElementsToIndexItems().remove(defaultFileName);
+				}
 				IndexerService.INSTANCE.getElementsToIndexItems().put(fileName, item);
 				break;
 			}

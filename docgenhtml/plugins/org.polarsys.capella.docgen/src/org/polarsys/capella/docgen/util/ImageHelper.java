@@ -22,6 +22,7 @@ import java.util.List;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -50,7 +51,6 @@ public class ImageHelper {
 	private static final String FILES_SUFFIX = "_files";
 
 	private ImageHelper() {
-
 	}
 
 	public void copyProjectImageToSystemLocation(String srcFile, String targetFile) throws IOException {
@@ -162,6 +162,12 @@ public class ImageHelper {
 			if (iconFileTemp != null) {
 				iconFile = iconFileTemp;
 			}
+			try {
+				iconFolder.refreshLocal(IResource.DEPTH_ONE, MONITOR);
+			} catch (CoreException e) {
+				org.polarsys.capella.docgen.Activator.getDefault().getLog()
+				.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, folderName + " can not be refreshed.", e));
+			}
 		}
 		if (image != null)
 			image.dispose();
@@ -183,7 +189,6 @@ public class ImageHelper {
 			}
 		}
 		return iconFolder;
-
 	}
 
 	private static IFile createNewIconFile(Image iconImage, String fileName) {
