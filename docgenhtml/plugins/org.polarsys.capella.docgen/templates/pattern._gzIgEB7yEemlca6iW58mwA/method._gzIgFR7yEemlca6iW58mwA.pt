@@ -13,6 +13,11 @@ for (IConceptsHelper iConceptsHelper : conceptsHelperList) {
 		String fileName = DocGenHtmlCapellaUtil.SERVICE.getFileName(parameter);
 		IndexItem item = new IndexItem(conceptLabel, parameter.eClass().getName(), 
 						iconTagOfElement, linkTagTowardPageElement, fileName);
+		// Check if the default indexer have already indexed the element
+		String defaultFileName = DefaultFileNameService.INSTANCE.getFileName(parameter);
+		if (IndexerService.INSTANCE.getElementsToIndexItems().get(defaultFileName) != null) {
+			IndexerService.INSTANCE.getElementsToIndexItems().remove(defaultFileName);
+		}
 		IndexerService.INSTANCE.getElementsToIndexItems().put(fileName, item);
 		break;
 	}

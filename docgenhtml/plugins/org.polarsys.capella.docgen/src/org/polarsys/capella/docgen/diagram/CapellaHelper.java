@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,33 +23,28 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.query.EObjectQuery;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.common.tools.api.editing.EditingDomainFactoryService;
 import org.eclipse.sirius.diagram.DDiagram;
-import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.eclipse.sirius.table.metamodel.table.DTable;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.eclipse.sirius.viewpoint.description.DescriptionPackage;
-import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
-import org.eclipse.sirius.viewpoint.description.Viewpoint;
+import org.polarsys.capella.common.data.modellingcore.AbstractType;
+import org.polarsys.capella.common.data.modellingcore.AbstractTypedElement;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
-import org.polarsys.capella.core.data.cs.Part;
-import org.polarsys.capella.core.data.interaction.InstanceRole;
-import org.polarsys.capella.core.data.interaction.StateFragment;
+import org.polarsys.capella.core.data.information.AbstractInstance;
 import org.polarsys.capella.core.diagram.helpers.naming.DAnnotationSourceConstants;
-import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeReferencesStrategy;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.util.SiriusHelper;
 
 public class CapellaHelper {
 	private static final String AIRD = ".aird";
@@ -82,60 +78,67 @@ public class CapellaHelper {
 
 	public static Set<DSemanticDiagram> getDiagramContainingObject(CapellaElement element) {
 		Set<DSemanticDiagram> diagrams = new HashSet<DSemanticDiagram>();
-		if (!DocgenDiagramPreferencesHelper.getExportDiagram()) {
-			return diagrams;
-		}
-
+		
 		if (GenerationGlobalScope.getInstance().getReferencesStrategy().equals(ScopeReferencesStrategy.DONT_EXPORT)) {
 			element = (CapellaElement) GenerationGlobalScope.getInstance().getOriginalModelElement(element);
 		}
-
-		for (DRepresentation representation : DiagramSessionHelper.getSessionDRepresentation()) {
-			if (representation instanceof DSemanticDiagram) {
-				DSemanticDiagram dSemanticDiagram = (DSemanticDiagram) representation;
-				EObject semanticTarget = ((DSemanticDiagram) representation).getTarget();
-				final boolean copyInScope = GenerationGlobalScope.getInstance().isCopyInScope(semanticTarget);
-				if (copyInScope == false)
-					continue;
-
-				for (DDiagramElement diagramElement : dSemanticDiagram.getDiagramElements()) {
-					EObject repTarget = diagramElement.getTarget();
-					EList<EObject> targets = resolveReferencedElements(repTarget);
-					for (EObject target : targets) {
-						if (diagramElement.isVisible() && EcoreUtil.equals(element, target)
-								&& EcoreUtil.equals(semanticTarget, target) == false) {
-							// Current representation contains our model element.
-							// Add it in resulting set, break current loop to search for next
-							// representation.
-							diagrams.add((DSemanticDiagram) representation);
-							break;
-						}
-					}
-				}
-			}
-		}
+		
+		getAllDiagramsForObject(element).stream()
+			.filter(rep -> rep instanceof DSemanticDiagram)
+			.filter(rep -> GenerationGlobalScope.getInstance().isCopyInScope(((DSemanticDiagram) rep).getTarget()))
+			.forEach(diag -> diagrams.add((DSemanticDiagram) diag));
+		
 		return diagrams;
 	}
-
-	private static EList<EObject> resolveReferencedElements(EObject repTarget) {
+	
+	/**
+	 * <p>
+	 * Get all DRepresentation element displaying the model element.
+	 * <br>
+	 * This method keep only one instance of a given representation if it 
+	 * is return many times by Sirius APIs.
+	 * </p>
+	 * @param element The model element 
+	 * @return a {@link Collection} of all {@link DRepresentation}
+	 */
+	private static Collection<DRepresentation> getAllDiagramsForObject(EObject element) {
+		Collection<DRepresentation> result = new ArrayList<DRepresentation>();
+		// Check Diagram export preference
+		if (DocgenDiagramPreferencesHelper.getExportDiagram())
+		{
+			Collection<EObject> refElements = resolveReferencedElements(element);
+			for (EObject refElement: refElements) {
+				SiriusHelper.getDiagramForObject(refElement, false).stream().forEach(rep -> {
+					if (!result.contains(rep)) {
+						result.add(rep);
+					}
+				});
+			}
+		}
+		return result;
+	}
+	
+	private static EList<EObject> resolveReferencedElements(EObject element) {
 		EList<EObject> objects = new BasicEList<EObject>();
-		objects.add(repTarget);
-		if (repTarget instanceof Part) {
-			objects.addAll(resolveReferencedElements(((Part) repTarget).getAbstractType()));
-		}
-
-		if (repTarget instanceof InstanceRole) {
-			objects.addAll(resolveReferencedElements(((InstanceRole) repTarget).getRepresentedInstance()));
-		}
-
-		if (repTarget instanceof StateFragment) {
-			objects.addAll(resolveReferencedElements(((StateFragment) repTarget).getRelatedAbstractFunction()));
+		objects.add(element);
+		// If we have a Component then we look also for Parts
+		if (element instanceof AbstractType) {
+			List<AbstractTypedElement> ates = ((AbstractType)element).getAbstractTypedElements();
+			objects.addAll(ates);
+			// Then we look for InstanceRoles for these parts
+			for (EObject ate : ates) {
+				if (element instanceof AbstractInstance) {
+					objects.addAll(((AbstractInstance)ate).getRepresentingInstanceRoles());
+				}
+			}
+		} 
+		if (element instanceof AbstractInstance) {
+			objects.addAll(((AbstractInstance)element).getRepresentingInstanceRoles());
 		}
 		return objects;
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Scrutinize all EOI (element of interest: See
 	 * {@link org.polarsys.capella.core.diagram.helpers.naming.DAnnotationSourceConstants.CAPELLA_ELEMENT_OF_INTEREST})
 	 * annotation of all representation descriptors to find all representations
@@ -163,8 +166,6 @@ public class CapellaHelper {
 	}
 
 	/**
-=======
->>>>>>> 15dc1fd... [2547] Tree view of diagrams in architecture levels
 	 * Retrieve all <code>DRepresentation</code> objects for elements of <code>archi</code>
 	 * 
 	 * @param archi
