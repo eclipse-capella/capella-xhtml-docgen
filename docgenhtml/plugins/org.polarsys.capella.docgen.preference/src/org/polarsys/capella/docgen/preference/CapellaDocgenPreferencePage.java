@@ -19,8 +19,10 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.PreferenceLinkArea;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
+import org.polarsys.capella.docgen.preference.internal.Activator;
 import org.polarsys.capella.docgen.preference.internal.Messages;
 import org.polarsys.capella.docgen.preference.internal.PreferencesUIMsg;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.ui.AbstractDocgenPreferencePage;
@@ -50,17 +52,8 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 		addField(useExportFunctionalExchange);
 		addField(useExportComponentExchange);
 		addField(useExportPhysicalLink);
-		
-		CapellaDocgenPreferenceHelper.setDefaultValues();
 	}
 	
-	private void initilizeBoolean(Composite parent, BooleanFieldEditor bfe, boolean value) {
-		Control c = bfe.getDescriptionControl(parent);
-		if (c != null && c instanceof Button) {
-			((Button)c).setSelection(value);
-		}
-	}
-
 	/**
 	 * Creation of the Boolean field. 
 	 * If checked, the status and review will be generated, otherwise, they will ignored.
@@ -69,7 +62,6 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 		Composite composite = createParent(getFieldEditorParent(), "Common");
 		useExportStatusAndReview = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, 
 				 Messages.EXPORT__STATUS_AND_REVIEW_FIELD_LABEL, composite);
-		initilizeBoolean(composite, useExportStatusAndReview, CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW_DEFAULT_VALUE);
 	}
 	
 	/**
@@ -134,5 +126,10 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 															 null);
 		
 		pageLink.getControl().setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
+	}
+	
+	@Override
+	public void init(IWorkbench workbench) {
+		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 	}
 }
