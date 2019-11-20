@@ -12,7 +12,7 @@
 package org.polarsys.capella.docgen.preference;
 
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.polarsys.kitalpha.doc.gen.business.core.preference.Activator;
+import org.polarsys.capella.docgen.preference.internal.Activator;
 
 /**
  * @author Boubekeur Zendagui
