@@ -32,7 +32,7 @@ Collection<String> includedCapabilities = CapellaCapabilityHelper.INSTANCE.getIn
 			outputFolder,(Capability) parameter);
 Collection<String> superCapabilities = CapellaCapabilityHelper.INSTANCE.getParentCapabilities(projectName,
 			outputFolder,(Capability) parameter);
-			if((extendedCapabilities.size() > 0) && (includedCapabilities.size() > 0) && (superCapabilities.size() > 0)) {
+			if((extendedCapabilities.size() > 0) || (includedCapabilities.size() > 0) || (superCapabilities.size() > 0)) {
 		%>
 <h2>Relationships with other Capabilities</h2>
 <%	

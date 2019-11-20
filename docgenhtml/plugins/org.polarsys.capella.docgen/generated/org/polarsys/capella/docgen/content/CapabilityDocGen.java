@@ -127,7 +127,7 @@ public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packag
 				outputFolder, (Capability) parameter);
 		Collection<String> superCapabilities = CapellaCapabilityHelper.INSTANCE.getParentCapabilities(projectName,
 				outputFolder, (Capability) parameter);
-		if ((extendedCapabilities.size() > 0) && (includedCapabilities.size() > 0) && (superCapabilities.size() > 0)) {
+		if ((extendedCapabilities.size() > 0) || (includedCapabilities.size() > 0) || (superCapabilities.size() > 0)) {
 
 			stringBuffer.append(TEXT_4);
 
