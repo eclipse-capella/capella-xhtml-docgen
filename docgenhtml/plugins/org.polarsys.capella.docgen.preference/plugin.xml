@@ -20,4 +20,10 @@ Contributors:
             name="%preferencePage">
       	</page>
    	</extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceInitializer">
+      </initializer>
+   </extension>
 </plugin>
