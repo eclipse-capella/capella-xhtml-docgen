@@ -22,6 +22,6 @@ location egf-1.5.1 "http://download.eclipse.org/egf/updates/1.5.1/neon/" {
 	org.eclipse.egf.feature.group
 }
 
-location kitalpha-runtime-1.2.x "https://download.eclipse.org/kitalpha/updates/nightly/runtime/1.2.x/" {
+location kitalpha-runtime-1.2.x "https://download.eclipse.org/kitalpha/updates/stable/runtime/1.2.2.201910301047/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 }
