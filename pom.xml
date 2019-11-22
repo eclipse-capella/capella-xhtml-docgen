@@ -38,8 +38,8 @@
 		<!-- for packaging -->
 		<platform-name>neon</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
-		<packagedAddonName>XHTMLDocGen</packagedAddonName>
-		<capellaVersion>1.2.1</capellaVersion>
+		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
+		<capellaVersion>1.2.2</capellaVersion>
 
 		<!-- for sonar -->
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
