@@ -7,20 +7,17 @@
  *  
  * Contributors:
  *    Obeo - initial API and implementation
+ *    Thales - additional customizations
  *******************************************************************************/
 package org.polarsys.capella.docgen.configuration.ui.viewer.providers;
-
-import java.util.Optional;
 
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
-import org.eclipse.sirius.common.tools.api.util.ReflectionHelper;
 import org.eclipse.sirius.viewpoint.DRepresentationElement;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.polarsys.capella.common.ui.toolkit.browser.label.provider.factory.AbstractLabelProviderFactory;
-import org.polarsys.capella.core.model.handler.provider.CapellaAdapterFactoryProvider;
 import org.polarsys.capella.core.platform.sirius.ui.navigator.viewer.CapellaNavigatorLabelProvider;
 import org.polarsys.capella.docgen.configuration.ui.utils.ConfigurationUtils;
 
@@ -32,20 +29,16 @@ import org.polarsys.capella.docgen.configuration.ui.utils.ConfigurationUtils;
  */
 public class DetailsLabelProvider extends CapellaNavigatorLabelProvider implements IColorProvider {
 
-	private CapellaNavigatorLabelProvider referencedCapellaNavigatorLabelProvider;
+	private ILabelProvider referencedCapellaNavigatorLabelProvider;
 
 	/**
 	 * Constructor
 	 */
 	public DetailsLabelProvider() {
 		super();
-		ILabelProvider referencedLabelProvider = AbstractLabelProviderFactory.getInstance()
+		referencedCapellaNavigatorLabelProvider = AbstractLabelProviderFactory.getInstance()
 				.getReferencedLabelProvider();
-		Optional<Object> option = ReflectionHelper.getFieldValueWithoutException(referencedLabelProvider,
-				"_labelProvider"); //$NON-NLS-1$
-		if (option.get() instanceof CapellaNavigatorLabelProvider) {
-			referencedCapellaNavigatorLabelProvider = (CapellaNavigatorLabelProvider) option.get();
-		} else {
+		if (referencedCapellaNavigatorLabelProvider == null) {
 			referencedCapellaNavigatorLabelProvider = new CapellaNavigatorLabelProvider();
 		}
 	}

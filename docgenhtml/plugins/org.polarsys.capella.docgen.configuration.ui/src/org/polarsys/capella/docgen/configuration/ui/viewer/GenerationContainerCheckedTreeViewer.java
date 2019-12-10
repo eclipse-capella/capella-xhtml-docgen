@@ -7,6 +7,7 @@
  *  
  * Contributors:
  *    Obeo - initial API and implementation
+ *    Thales - additional customizations
  *******************************************************************************/
 package org.polarsys.capella.docgen.configuration.ui.viewer;
 
@@ -16,7 +17,6 @@ import java.util.Optional;
 
 import org.eclipse.jface.util.Policy;
 import org.eclipse.sirius.common.tools.api.util.ReflectionHelper;
-import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.eclipse.sirius.viewpoint.DRepresentationElement;
 import org.eclipse.swt.SWT;

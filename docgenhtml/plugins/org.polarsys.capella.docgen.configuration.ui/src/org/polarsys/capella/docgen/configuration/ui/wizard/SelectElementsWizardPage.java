@@ -7,6 +7,7 @@
  *  
  * Contributors:
  *    Obeo - initial API and implementation
+ *    Thales - additional customizations
  *******************************************************************************/
 package org.polarsys.capella.docgen.configuration.ui.wizard;
 
@@ -25,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ICheckStateListener;
@@ -37,13 +38,12 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.common.tools.api.util.ReflectionHelper;
-import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.eclipse.sirius.viewpoint.DRepresentationElement;
@@ -65,7 +65,6 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.misc.StringMatcher;
 import org.eclipse.ui.navigator.CommonNavigator;
 import org.eclipse.ui.navigator.CommonViewer;
 import org.polarsys.capella.common.ui.toolkit.browser.category.ICategory;
@@ -73,7 +72,7 @@ import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.B
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.CategoryWrapper;
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.EObjectWrapper;
 import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
-import org.polarsys.capella.core.platform.sirius.ui.navigator.preferences.ICapellaNavigatorPreferences;
+import org.polarsys.capella.core.platform.sirius.ui.navigator.view.CapellaCommonNavigatorPatternFilter;
 import org.polarsys.capella.core.platform.sirius.ui.navigator.viewer.CapellaNavigatorLabelProvider;
 import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
 import org.polarsys.capella.docgen.configuration.ui.Activator;
@@ -81,7 +80,6 @@ import org.polarsys.capella.docgen.configuration.ui.Messages;
 import org.polarsys.capella.docgen.configuration.ui.actions.IImageKeys;
 import org.polarsys.capella.docgen.configuration.ui.utils.ConfigurationUtils;
 import org.polarsys.capella.docgen.configuration.ui.viewer.CapellaFilteredTree;
-import org.polarsys.capella.docgen.configuration.ui.viewer.CapellaNavigatorPatternFilter;
 import org.polarsys.capella.docgen.configuration.ui.viewer.GenerationContainerCheckedTreeViewer;
 import org.polarsys.capella.docgen.configuration.ui.viewer.providers.DetailsContentProvider;
 import org.polarsys.capella.docgen.configuration.ui.viewer.providers.DetailsLabelProvider;
@@ -91,16 +89,16 @@ import org.polarsys.capella.docgen.configuration.ui.viewer.providers.SessionCont
  * Wizard page to select capella element for XHTML generation.
  */
 
-@SuppressWarnings("restriction")
 public class SelectElementsWizardPage extends WizardPage {
 
+	private static final int DEFAULT_EXPAND_LEVEL = 2;
+	
 	/**
 	 * {@link CapellaElementLabelProvider} that implements
 	 * {@link IColorProvider} such that elements for which no HTML documentation
 	 * is generated have their label in grey.
 	 */
-	private final static class CapellaElementLabelProviderWithColors extends CapellaNavigatorLabelProvider
-			implements IColorProvider {
+	private final static class CapellaElementLabelProviderWithColors extends CapellaNavigatorLabelProvider {
 
 		@Override
 		public Color getBackground(Object object) {
@@ -127,7 +125,8 @@ public class SelectElementsWizardPage extends WizardPage {
 	 * Widgets.
 	 */
 	private Text fileText;
-	private CapellaNavigatorPatternFilter patternFilter;
+	private CapellaCommonNavigatorPatternFilter leftPatternFilter;
+	private CapellaCommonNavigatorPatternFilter rightPatternFilter;
 	private GenerationContainerCheckedTreeViewer leftTreeViewer;
 	private GenerationContainerCheckedTreeViewer rightTreeViewer;
 	private Button buttonLoad;
@@ -355,13 +354,16 @@ public class SelectElementsWizardPage extends WizardPage {
 					CommonViewer viewer = ((CommonNavigator) viewPart).getCommonViewer();
 					if (viewer != null) {
 						ViewerFilter[] filters = viewer.getFilters();
+						ViewerFilter[] previousFilters = leftTreeViewer.getFilters();
 						leftTreeViewer.setFilters(filters);
+						for (int i = 0; i < previousFilters.length; i++) {
+							leftTreeViewer.addFilter(previousFilters[i]);
+						}
 					}
 				}
 
 			}
 		}
-
 		leftTreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
@@ -371,7 +373,7 @@ public class SelectElementsWizardPage extends WizardPage {
 					// have to call setInput 2 times because checked and grayed
 					// element are calculated before removing items...
 					rightTreeViewer.setInput(leftTreeViewer.getInput());
-					rightTreeViewer.setAllChecked(false);
+					rightTreeViewer.setSubtreeChecked(leftTreeViewer.getInput(), false);
 					rightTreeViewer.setInput(((IStructuredSelection) event.getSelection()).getFirstElement());
 					checkRightOnLeftSelection();
 				}
@@ -387,7 +389,7 @@ public class SelectElementsWizardPage extends WizardPage {
 				// have to call setInput 2 times because checked and grayed
 				// element are calculated before removing items...
 				rightTreeViewer.setInput(leftTreeViewer.getInput());
-				rightTreeViewer.setAllChecked(false);
+				rightTreeViewer.setSubtreeChecked(leftTreeViewer.getInput(), false);
 				rightTreeViewer.setInput(element);
 
 				// check already checked elements
@@ -404,10 +406,11 @@ public class SelectElementsWizardPage extends WizardPage {
 			}
 
 		});
+		
 		rightTreeViewer = (GenerationContainerCheckedTreeViewer) createRightFilteredCheckBoxTreeViewer(
 				grpSelectElements);
+		
 		rightTreeViewer.addCheckStateListener(new ICheckStateListener() {
-
 			@Override
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				Object element = event.getElement();
@@ -434,7 +437,6 @@ public class SelectElementsWizardPage extends WizardPage {
 				// update wizard status
 				dialogChanged();
 			}
-
 		});
 	}
 
@@ -553,13 +555,12 @@ public class SelectElementsWizardPage extends WizardPage {
 	 */
 	protected CheckboxTreeViewer createRightFilteredCheckBoxTreeViewer(Group grpSelectElements) {
 
-		patternFilter = new CapellaNavigatorPatternFilter();
+		rightPatternFilter = new CapellaCommonNavigatorPatternFilter();
 		CapellaFilteredTree _filteredTree = new CapellaFilteredTree(grpSelectElements,
-				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL, patternFilter);
-
+				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL, rightPatternFilter, AbstractTreeViewer.ALL_LEVELS);
 		_filteredTree.getViewer().setLabelProvider(new DetailsLabelProvider());
 		_filteredTree.getViewer().setContentProvider(new DetailsContentProvider(session));
-		_filteredTree.getViewer().setSorter(new ViewerSorter() {
+		_filteredTree.getViewer().setComparator(new ViewerComparator() {
 			/**
 			 * Overridden to force All Related Diagrams and All Related Tables
 			 * to be located at the end of the tree. {@inheritDoc}
@@ -588,7 +589,7 @@ public class SelectElementsWizardPage extends WizardPage {
 						|| categoryName.equals(DetailsContentProvider.ALL_RELATED_TABLES);
 			}
 		});
-		_filteredTree.getViewer().setAutoExpandLevel(4);
+		_filteredTree.getViewer().setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 		return (CheckboxTreeViewer) _filteredTree.getViewer();
 	}
 
@@ -601,12 +602,12 @@ public class SelectElementsWizardPage extends WizardPage {
 	 */
 	protected CheckboxTreeViewer createFilteredCheckBoxTreeViewer(Group grpSelectElements) {
 
-		patternFilter = new CapellaNavigatorPatternFilter();
+		leftPatternFilter = new CapellaCommonNavigatorPatternFilter();
 		CapellaFilteredTree filteredTree = new CapellaFilteredTree(grpSelectElements,
-				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL, patternFilter);
+				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL, leftPatternFilter, DEFAULT_EXPAND_LEVEL);
 		filteredTree.getViewer().setLabelProvider(new CapellaElementLabelProviderWithColors());
 		filteredTree.getViewer().setContentProvider(new SessionContentProvider(session));
-		filteredTree.getViewer().setAutoExpandLevel(2);
+		filteredTree.getViewer().setAutoExpandLevel(DEFAULT_EXPAND_LEVEL);
 		return (CheckboxTreeViewer) filteredTree.getViewer();
 	}
 

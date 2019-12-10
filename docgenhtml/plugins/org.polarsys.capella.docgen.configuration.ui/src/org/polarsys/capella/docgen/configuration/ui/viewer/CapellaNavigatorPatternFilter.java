@@ -13,14 +13,18 @@ package org.polarsys.capella.docgen.configuration.ui.viewer;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.dialogs.FilteredTree;
 import org.eclipse.ui.dialogs.PatternFilter;
-import org.eclipse.ui.internal.misc.StringMatcher;
+import org.polarsys.capella.core.platform.sirius.ui.navigator.view.CapellaCommonNavigatorPatternFilter;
+import org.polarsys.capella.docgen.configuration.ui.Activator;
 
 /**
  * Copy of org.polarsys.capella.core.platform.sirius.ui.navigator.view.
@@ -28,10 +32,9 @@ import org.eclipse.ui.internal.misc.StringMatcher;
  * for the Capella Navigator to be able to search base on {@link LabelProvider}
  * or on Description model element attribute.
  */
-public class CapellaNavigatorPatternFilter extends PatternFilter {
+public class CapellaNavigatorPatternFilter extends CapellaCommonNavigatorPatternFilter {
 	  private String pattern;
-
-	  StringMatcher matcher;
+	  private Pattern matchingPattern;
 
 	  private boolean caseSensitiveEnabled = false;
 
@@ -52,15 +55,25 @@ public class CapellaNavigatorPatternFilter extends PatternFilter {
 	  public void setPattern(String patternString) {
 	    super.setPattern(patternString);
 	    if (patternString != null) {
-	      this.pattern = patternString;
-
 	      // As the matcher of PatternFilter use by default "true" for "ignoreCase" and "false" for "ignoreWildCard"
 	      // We create a another matcher here so that we can provide search options for user.
+	      int flags = 0;
 	      if (!patternString.endsWith(" ")) {
-	        // So that if search for "Air", the results will include texts containing "Aircraft" or "Airplane"
-	        patternString += "*";
+	    	  // So that if search for "Air", the results will include texts containing "Aircraft" or "Airplane"
+	    	  flags |= Pattern.DOTALL;//patternString += ".*";
 	      }
-	      matcher = new StringMatcher(patternString, !caseSensitiveEnabled, false);
+	      if (!caseSensitiveEnabled) {
+	    	  flags |= Pattern.CASE_INSENSITIVE;
+	      }
+	      this.pattern = patternString;
+	      try {
+	    	  matchingPattern = Pattern.compile(this.pattern, flags);
+	      } catch (PatternSyntaxException e) {
+	    	  Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, e.getMessage()));
+	      }
+	    } else {
+	    	this.pattern = "";
+	    	matchingPattern = Pattern.compile(pattern);
 	    }
 	  }
 
@@ -70,7 +83,7 @@ public class CapellaNavigatorPatternFilter extends PatternFilter {
 
 	  @Override
 	  protected boolean wordMatches(String text) {
-	    if (pattern == null || pattern.isEmpty()) {
+	    if (this.pattern == null || this.pattern.isEmpty() || matchingPattern == null) {
 	      return true;
 	    }
 
@@ -78,7 +91,7 @@ public class CapellaNavigatorPatternFilter extends PatternFilter {
 	      return false;
 	    }
 
-	    return matcher.match(text);
+	    return matchingPattern.matcher(text).find();
 	  }
 
 	  public void setCaseSensitiveEnabled(boolean caseSensitiveEnabled) {
