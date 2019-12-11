@@ -38,9 +38,13 @@ Contributors:
    <includes
          id="org.eclipse.egf.feature"
          version="0.0.0"/>
-         
+
    <includes
          id="org.polarsys.capella.docgen.configuration.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.query"
          version="0.0.0"/>
 
 </feature>

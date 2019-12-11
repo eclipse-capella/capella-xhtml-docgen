@@ -22,3 +22,8 @@ location kitalpha-runtime-master-nightly "https://download.eclipse.org/kitalpha/
 //location kitalpha-runtime-master-latest "https://download.polarsys.org/kitalpha/updates/stable/runtime/1.4.0RC4" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 }
+
+
+location eclipse_2019_06 "https://download.eclipse.org/releases/2019-06/" {
+	org.eclipse.emf.query.feature.group lazy
+}

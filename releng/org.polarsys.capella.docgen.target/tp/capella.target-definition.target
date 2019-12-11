@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1575991606">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1576077864">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sdk.feature.group" version="4.12.0.v20190605-1801"/>
@@ -138,6 +138,10 @@
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
       <repository id="kitalpha-runtime-master-nightly" location="https://download.eclipse.org/kitalpha/updates/nightly/runtime/1.4.0-N1559/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.query.feature.group" version="0.0.0"/>
+      <repository id="eclipse_2019_06" location="https://download.eclipse.org/releases/2019-06/"/>
     </location>
   </locations>
 </target>
