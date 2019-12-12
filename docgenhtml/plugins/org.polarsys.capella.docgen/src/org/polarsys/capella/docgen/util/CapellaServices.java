@@ -307,7 +307,7 @@ public class CapellaServices {
 		buffer.append(getPathFromElement(diagram.getTarget()));
 		// Add diagram fragment id as link anchor
 		buffer.append("#");
-		buffer.append(getDiagramId(diagram));
+		buffer.append(getDiagramUid(diagram));
 		// Add the href tag completion to the buffer
 		buffer.append(HYPERLINK_COMPLETE);
 		// Add the name to present to the buffer

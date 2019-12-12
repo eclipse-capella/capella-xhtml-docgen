@@ -32,7 +32,6 @@ import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.requirement.Requirement;
 import org.polarsys.capella.core.data.requirement.RequirementsPkg;
 import org.polarsys.capella.docgen.diagram.CapellaHelper;
-import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 
 /**
  * A class providing methods to build trees of elements and to display them as html lists
@@ -227,13 +226,13 @@ public class TreeServices {
 			RepresentationDescription description = null;
 			if (rep instanceof DSemanticDiagram) {
 				EObject target = ((DSemanticDiagram) rep).getTarget();
-				if (! GenerationGlobalScope.getInstance().inScope(target, false)){
+				if (!CapellaHelper.exportRefToDiagram(rep, target)) {
 					continue;
 				}
 				description = ((DSemanticDiagram) rep).getDescription();
 			} else if (rep instanceof DTable) {
 				EObject target = ((DTable) rep).getTarget();
-				if (! GenerationGlobalScope.getInstance().inScope(target, false)){
+				if (!CapellaHelper.exportRefToDiagram(rep, target)) {
 					continue;
 				}
 				description = ((DTable) rep).getDescription();

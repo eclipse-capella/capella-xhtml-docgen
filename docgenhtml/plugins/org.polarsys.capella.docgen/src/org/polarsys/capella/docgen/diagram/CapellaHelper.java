@@ -40,6 +40,7 @@ import org.polarsys.capella.core.diagram.helpers.naming.DAnnotationSourceConstan
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeReferencesStrategy;
+import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeStatus;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.SiriusHelper;
 
@@ -62,7 +63,10 @@ public class CapellaHelper {
 			representations = DialectManager.INSTANCE.getRepresentations(element, currentSession);
 		}
 
-		return representations;
+		return representations.stream()
+				.filter(rep -> rep instanceof DSemanticDiagram)
+				.filter(rep -> exportRefToDiagram(rep, ((DSemanticDiagram) rep).getTarget()))
+				.collect(Collectors.toList());
 	}
 
 	public static Resource getAIRDResource(CapellaElement element) {
@@ -82,7 +86,7 @@ public class CapellaHelper {
 		
 		getAllDiagramsForObject(element).stream()
 			.filter(rep -> rep instanceof DSemanticDiagram)
-			.filter(rep -> GenerationGlobalScope.getInstance().isCopyInScope(((DSemanticDiagram) rep).getTarget()))
+			.filter(rep -> exportRefToDiagram(rep, ((DSemanticDiagram) rep).getTarget()))
 			.forEach(diag -> diagrams.add((DSemanticDiagram) diag));
 		
 		return diagrams;
@@ -162,7 +166,11 @@ public class CapellaHelper {
 		Collection<DRepresentation> representations = new ArrayList<DRepresentation>();
 		for (DRepresentation rep : DiagramSessionHelper.getSessionDRepresentation()) {
 			// Return only representations belonging to the current BlockArchitecture
-			if (archi.equals(getBlockArchitectureContainer(rep))) {
+			EObject originalContainer = archi;
+			if (GenerationGlobalScope.getInstance().getScopeStatus().equals(ScopeStatus.LIMITED)) {
+				originalContainer = GenerationGlobalScope.getInstance().getOriginalModelElement(archi);
+			}
+			if (originalContainer.equals(getBlockArchitectureContainer(rep))) {
 				representations.add(rep);
 			}
 		}
@@ -178,7 +186,11 @@ public class CapellaHelper {
 	public static boolean hostDiagrams(BlockArchitecture archi) {
 		for (DRepresentation rep : DiagramSessionHelper.getSessionDRepresentation()) {
 			// Return only representations belonging to the current BlockArchitecture
-			if (archi.equals(getBlockArchitectureContainer(rep))) {
+			EObject originalContainer = archi;
+			if (GenerationGlobalScope.getInstance().getScopeStatus().equals(ScopeStatus.LIMITED)) {
+				originalContainer = GenerationGlobalScope.getInstance().getOriginalModelElement(archi);
+			}
+			if (originalContainer.equals(getBlockArchitectureContainer(rep))) {
 				return true;
 			}
 		}
@@ -201,5 +213,16 @@ public class CapellaHelper {
 			parent = parent.eContainer();
 		}
 		return parent;
+	}
+	
+	/**
+	 * Checks whether we have to export at least a reference to the representation
+	 * @param rep A DRepresentation to check
+	 * @param target The target of the DRepresentation
+	 * @return
+	 */
+	public static boolean exportRefToDiagram(DRepresentation rep, EObject target) {
+		return GenerationGlobalScope.getInstance().inScope(rep, false) || 
+			   (GenerationGlobalScope.getInstance().getReferencesStrategy().equals(ScopeReferencesStrategy.EXPORT) && GenerationGlobalScope.getInstance().inScope(target, false));
 	}
 }
