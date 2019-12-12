@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@ package org.polarsys.capella.docgen.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.DDiagramElement;
+import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.cs.ExchangeItemAllocation;
+import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
 import org.polarsys.capella.core.data.information.AbstractEventOperation;
 import org.polarsys.capella.core.data.interaction.Execution;
@@ -72,7 +74,14 @@ public class CapellaDiagramHelper implements IDiagramHelper {
 			return null;
 		}
 		if (target instanceof StateFragment) {
-			return ((StateFragment) target).getRelatedAbstractFunction();
+			AbstractState aState = ((StateFragment) target).getRelatedAbstractState();
+			if (aState != null) {
+				return aState;
+			}
+			AbstractFunction aFunction = ((StateFragment) target).getRelatedAbstractFunction();
+			if (aFunction != null) {
+				return aFunction;
+			}
 		}
 		if (target instanceof FunctionalChainInvolvement) {
 			return ((FunctionalChainInvolvement) target).getInvolvedElement();

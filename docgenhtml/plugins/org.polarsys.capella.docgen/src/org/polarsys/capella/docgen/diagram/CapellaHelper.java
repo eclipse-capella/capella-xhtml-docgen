@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,9 +34,11 @@ import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.eclipse.sirius.viewpoint.description.DescriptionPackage;
+import org.polarsys.capella.common.data.modellingcore.AbstractType;
+import org.polarsys.capella.common.data.modellingcore.AbstractTypedElement;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
-import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.information.AbstractInstance;
 import org.polarsys.capella.core.diagram.helpers.naming.DAnnotationSourceConstants;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
@@ -123,8 +126,18 @@ public class CapellaHelper {
 		EList<EObject> objects = new BasicEList<EObject>();
 		objects.add(element);
 		// If we have a Component then we look also for Parts
-		if (element instanceof Component) {
-			objects.addAll(((Component)element).getAbstractTypedElements());
+		if (element instanceof AbstractType) {
+			List<AbstractTypedElement> ates = ((AbstractType)element).getAbstractTypedElements();
+			objects.addAll(ates);
+			// Then we look for InstanceRoles for these parts
+			for (EObject ate : ates) {
+				if (element instanceof AbstractInstance) {
+					objects.addAll(((AbstractInstance)ate).getRepresentingInstanceRoles());
+				}
+			}
+		} 
+		if (element instanceof AbstractInstance) {
+			objects.addAll(((AbstractInstance)element).getRepresentingInstanceRoles());
 		}
 		return objects;
 	}
