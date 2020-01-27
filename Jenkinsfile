@@ -29,13 +29,13 @@ pipeline {
           sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
             sh '''
 				PROMOTED_SRC="releng/org.polarsys.capella.docgen.site/target/repository/*"
-				PROMOTED_DST="/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/updates/nightly/1.5.x/"
+				PROMOTED_DST="/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/updates/nightly/master/"
 				ssh genie.capella@projects-storage.eclipse.org rm -fr $PROMOTED_DST
 				ssh genie.capella@projects-storage.eclipse.org mkdir -p $PROMOTED_DST
 				scp -r $PROMOTED_SRC genie.capella@projects-storage.eclipse.org:$PROMOTED_DST
 				
 				PROMOTED_SRC="releng/org.polarsys.capella.docgen.site/target/*-dropins.zip"
-				PROMOTED_DST="/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/dropins/nightly/1.5.x/"
+				PROMOTED_DST="/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/dropins/nightly/master/"
 				ssh genie.capella@projects-storage.eclipse.org rm -fr $PROMOTED_DST
 				ssh genie.capella@projects-storage.eclipse.org mkdir -p $PROMOTED_DST
 				scp -r $PROMOTED_SRC genie.capella@projects-storage.eclipse.org:$PROMOTED_DST
