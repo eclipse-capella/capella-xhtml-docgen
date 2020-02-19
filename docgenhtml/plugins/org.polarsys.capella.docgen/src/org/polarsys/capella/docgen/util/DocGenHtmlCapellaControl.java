@@ -114,8 +114,7 @@ public class DocGenHtmlCapellaControl {
 	 */
 	public static boolean isPageCandidateForAnyElement(CapellaElement element) {
 		return (isPageCandidate(element) &&	!
-				(  element instanceof AbstractState
-				|| element instanceof Component
+				(  element instanceof Component
 				|| element instanceof Part
 				|| element instanceof AbstractFunction
 				|| element instanceof org.polarsys.capella.core.data.information.Class 
