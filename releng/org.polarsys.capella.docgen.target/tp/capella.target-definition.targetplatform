@@ -10,7 +10,7 @@
  *******************************************************************************/
 target "CapellaXHTMLDocGenAddon"
 
-include "https://raw.githubusercontent.com/eclipse/capella/v1.4.x/releng/plugins/org.polarsys.capella.targets/full/capella.target-definition.targetplatform"
+include "https://raw.githubusercontent.com/eclipse/capella/v1.4.1-S20200325/releng/plugins/org.polarsys.capella.targets/full/capella.target-definition.targetplatform"
 
 with source, requirements
 
