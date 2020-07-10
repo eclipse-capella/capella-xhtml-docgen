@@ -32,7 +32,7 @@ public class RegionDocGen extends org.polarsys.capella.docgen.foundations.NamedE
 	protected final String TEXT_4 = NL + "<h2>Realizing Elements </h2>" + NL;
 	protected final String TEXT_5 = NL + "<h2>Owned Transitions</h2>" + NL + "<table max-width=\"screen.width\">" + NL
 			+ "   <thead> " + NL + "       <tr>" + NL + "           <th>Transition</th>" + NL
-			+ "           <th>Source</th>" + NL + "           <th>Target</th>" + NL + "           <th>Tigger</th>" + NL
+			+ "           <th>Source</th>" + NL + "           <th>Target</th>" + NL + "           <th>Trigger</th>" + NL
 			+ "           <th>Effect</th>" + NL + "           <th>Description</th>" + NL + "       </tr>" + NL
 			+ "   </thead>" + NL + "   <tbody>";
 	protected final String TEXT_6 = NL + "\t   <tr>" + NL + "           <td>";
