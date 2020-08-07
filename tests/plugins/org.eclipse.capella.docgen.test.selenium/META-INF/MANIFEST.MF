@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XHTML DocGen Selenium Tests
+Bundle-SymbolicName: org.eclipse.capella.docgen.test.selenium
+Bundle-Version: 1.4.1.qualifier
+Automatic-Module-Name: org.eclipse.capella.docgen.test.selenium
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.junit,
+ org.eclipse.core.runtime;bundle-version="3.13.0",
+ org.eclipse.debug.ui;bundle-version="3.12.50",
+ org.eclipse.emf.ecore,
+ org.polarsys.capella.core.data.gen,
+ org.polarsys.kitalpha.doc.gen.business.core,
+ org.polarsys.capella.common.libraries.gen;bundle-version="1.4.1",
+ org.polarsys.capella.common.data.helpers;bundle-version="1.4.1",
+ org.polarsys.capella.core.data.helpers;bundle-version="1.4.1"
+Export-Package: org.eclipse.capella.docgen.test.selenium.testcases
+Bundle-ClassPath: .,
+ libs/client-combined-3.141.59.jar,
+ libs/byte-buddy-1.8.15.jar,
+ libs/commons-exec-1.3.jar,
+ libs/guava-25.0-jre.jar,
+ libs/okhttp-3.11.0.jar,
+ libs/okio-1.14.0.jar

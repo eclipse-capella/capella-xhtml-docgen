@@ -5,6 +5,10 @@ pipeline {
         maven 'apache-maven-latest'
         jdk 'oracle-jdk8-latest'
   }
+  environment {
+        BUILD_KEY = (github.isPullRequest() ? CHANGE_TARGET : BRANCH_NAME).replaceFirst(/^v/, '')
+        CAPELLA_PRODUCT_PATH = "${WORKSPACE}/capella/capella"
+  }
   stages {
     stage('Generate TP') {
       steps {
@@ -43,6 +47,53 @@ pipeline {
             '''
         }
       }
+    }
+    stage('Download Capella') {
+        when {
+            expression { 
+                github.isPullRequest() 
+            }
+        }
+        steps {
+            script {
+                def capellaURL = capella.getDownloadURL("${BUILD_KEY}", 'linux', '')
+                sh "curl -k -o capella.zip ${capellaURL}"
+                sh "unzip -q capella.zip"
+            }
+        }
+    }
+    stage('Install test features') {
+        when {
+            expression { 
+                github.isPullRequest() 
+            }
+        }
+        steps {
+            script {
+                sh "chmod 755 ${CAPELLA_PRODUCT_PATH}"
+
+                eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", 'http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository', 'org.jsoup')	        		
+                eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", capella.getTestUpdateSiteURL("${BUILD_KEY}"), 'org.polarsys.capella.test.feature.feature.group')
+
+                eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.docgen.feature.feature.group')
+                eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.docgen.tests.feature.feature.group')
+            }
+        }
+    }
+    stage('Run tests') {
+        when {
+            expression { 
+                github.isPullRequest() 
+            }
+        }
+        steps {
+            script {
+                wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
+                    sh 'mvn clean verify -e -f tests/features/pom.xml'
+                }
+                junit '*.xml'
+            }
+        }
     }
   }
 }
