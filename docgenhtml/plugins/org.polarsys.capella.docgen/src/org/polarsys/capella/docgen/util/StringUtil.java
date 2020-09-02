@@ -12,8 +12,8 @@ package org.polarsys.capella.docgen.util;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +57,7 @@ public class StringUtil {
 	private static final String ERROR_CPY = "Error during project relative file copy: {0}";
 	private static final String ERROR_DECODE_FILE_LOCATION = "Error while decoding file location: {0}";
 	private static final String ERROR_READ_FILE_LOCATION = "Error while reading decoded file location: {0}";
+	private static final String WARNING_IMAGE_SERIALIZATION_FAILED = "Image serialization failed, default to keep img serialized value for element if id: {0}";
 
 	/**
 	 * Transform all links added in an model element description to Html links
@@ -156,7 +157,7 @@ public class StringUtil {
 				final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
 				String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
 				id = id.replace("-", "");
-				
+
 				// Use an inline creation of HTMLDocument to get correct html content
 				String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, loger);
 
@@ -218,40 +219,64 @@ public class StringUtil {
 		Matcher matcher = pattern.matcher(input);
 		final IPath parentSrcFolder = new Path(eObject.eResource().getURI().segment(1));
 		final IPath parentTargetFolderPath = new Path(projectName).append(outputFolder);
+		IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
+		List<String> imageFileNames = new ArrayList<String>();
 		while (matcher.find()) {
 			if (matcher.groupCount() == 1) {
-				final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
+				final ILog logger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
 				String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
 				id = id.replace("-", "");
 				String firstMatchGroup = matcher.group(1);
-				// Use an inline creation of HTMLDocument to get correct html content
-				String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, loger);
+				// As we do a replace all, we may have already serialized/copied some files so we check to avoid work duplication
+				if (input.contains(firstMatchGroup)) {
+					// Use an inline creation of HTMLDocument to get correct html content
+					String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, logger);
 
-				IPath patha = new Path(decodedFirstMatchGroup);
-				String iconName = id + "/" + patha.lastSegment();
-				String iconSourcePath = "";
+					IPath patha = new Path(decodedFirstMatchGroup);
+					String iconName = id + "/" + patha.lastSegment();
+					String iconSourcePath = "";
 
-				if (patha.isAbsolute()) {
-					for (String segment : patha.segments()) {
-						iconSourcePath += "/" + segment;
+					boolean isDataImage = firstMatchGroup.startsWith(ImageHelper.DATA_IMAGE_PREFIX);
+					boolean breakCurrentProcessing = false;
+					if (isDataImage) {
+						// Serialize image in target folder: "[dogen_output]/object_id/folder
+						iconName = ImageHelper.INSTANCE.serializeImageInTargetFolder(firstMatchGroup,
+								parentTargetFolder.getLocationURI().getPath() + "/images/", id, imageFileNames, logger);
+						if (iconName == null) {
+							// Image serialization has failed, we will keep current image
+							breakCurrentProcessing = true;
+							logger.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID,
+									MessageFormat.format(WARNING_IMAGE_SERIALIZATION_FAILED,
+											eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString()),
+									new Exception()));
+						}
+					} else {
+						if (patha.isAbsolute()) {
+							for (String segment : patha.segments()) {
+								iconSourcePath += "/" + segment;
+							}
+						} else {
+							IPath path = parentSrcFolder.append(decodedFirstMatchGroup);
+							IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+							iconSourcePath = iconFile.getLocationURI().getPath();
+						}
 					}
-				} else {
-					IPath path = parentSrcFolder.append(decodedFirstMatchGroup);
-					IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-					iconSourcePath = iconFile.getLocationURI().getPath();
-				}
 
-				IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
-				input = input.replace(firstMatchGroup, "./images/" + iconName + "\"");
-				try {
-					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath,
-							parentTargetFolder.getLocationURI().getPath() + "/images/" + iconName);
-				} catch (IOException e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-							MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
-				} catch (Exception e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-							MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
+					if (!breakCurrentProcessing) {
+						input = input.replace(firstMatchGroup, "./images/" + iconName);
+					}
+					try {
+						if (!isDataImage) {
+							ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath,
+									parentTargetFolder.getLocationURI().getPath() + "/images/" + iconName);
+						}
+					} catch (IOException e) {
+						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+								MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
+					} catch (Exception e) {
+						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+								MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
+					}
 				}
 			}
 		}
@@ -259,11 +284,14 @@ public class StringUtil {
 	}
 
 	/**
-	 * File path being taken from an HTML document may be encoded. It may thus be necessary to decode this content 
-	 * if we need to get real file paths for examples.
+	 * File path being taken from an HTML document may be encoded. It may thus be
+	 * necessary to decode this content if we need to get real file paths for
+	 * examples.
 	 * 
-	 * @param filePath The file path to decode.
-	 * @param loger An ILog instance for exceptions management. 
+	 * @param filePath
+	 *            The file path to decode.
+	 * @param loger
+	 *            An ILog instance for exceptions management.
 	 * @return A decoded String.
 	 */
 	private static String decodeHtmlFilePath(String filePath, ILog loger) {
