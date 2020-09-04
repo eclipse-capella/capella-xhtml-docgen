@@ -10,14 +10,18 @@
  ******************************************************************************/
 package org.polarsys.capella.docgen.util;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -25,6 +29,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -49,6 +54,11 @@ public class ImageHelper {
 	private static final NullProgressMonitor MONITOR = new NullProgressMonitor();
 	private static final String PNG = "png";
 	private static final String FILES_SUFFIX = "_files";
+	public static final String DATA_IMAGE_PREFIX = "data:image/";
+	private static final String DOC_GEN_GENERATED = "_gen_";
+	private static final String BASE64_POSTFIX = ";base64";
+	private static final String ERROR_IMAGE_DATA_FORMAT = "Error while interpreting image data format: {0}";
+	private static final String ERROR_IMAGE_DATA_WRITE = "Error while writing image data to file: {0}";
 
 	private ImageHelper() {
 	}
@@ -207,6 +217,53 @@ public class ImageHelper {
 			return ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(fileName));
 		}
 		return null;
+	}
+
+	public String serializeImageInTargetFolder(String imageData, String targetFolderPath, String pageObjectId, List<String> imageFileNames, ILog logger) {
+		// Compute image file name
+		String outputImageFileName = pageObjectId + "/gen/";
+		int iter = 1;
+		String uniqueFileName = pageObjectId + DOC_GEN_GENERATED + (imageFileNames.size() + iter);
+		while (imageFileNames.contains(uniqueFileName)) {
+			iter += 1;
+			uniqueFileName = pageObjectId + DOC_GEN_GENERATED + (imageFileNames.size() + iter);
+		}
+		outputImageFileName += uniqueFileName;
+		imageFileNames.add(outputImageFileName);
+		
+		// Compute image extension
+		String extension = "";
+		String[] imageDatas = imageData.split(",");
+		switch (imageDatas[0]) {
+		case DATA_IMAGE_PREFIX + "jpeg" + BASE64_POSTFIX:
+		case DATA_IMAGE_PREFIX + "png" + BASE64_POSTFIX:
+		case DATA_IMAGE_PREFIX + "jpg" + BASE64_POSTFIX:
+		case DATA_IMAGE_PREFIX + "bmp" + BASE64_POSTFIX:
+			int endIndex = imageDatas[0].length() - BASE64_POSTFIX.length();
+			extension = imageDatas[0].substring(DATA_IMAGE_PREFIX.length(), endIndex);
+			outputImageFileName = outputImageFileName + "." + extension;
+			break;
+		default:
+			logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+					MessageFormat.format(ERROR_IMAGE_DATA_FORMAT, imageDatas[0]), new IllegalArgumentException()));
+			return null;
+		}
+		
+		// Serialize image
+		byte[] parseBase64Binary = DatatypeConverter.parseBase64Binary(imageDatas[1]);
+		String targetFilePath = targetFolderPath + outputImageFileName;
+		File imageFile = new File(targetFilePath);
+		createFoldersHierarchy(imageFile);
+		try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(imageFile))) {
+            outputStream.write(parseBase64Binary);
+        } catch (IOException e) {
+        	logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+					MessageFormat.format(ERROR_IMAGE_DATA_WRITE, targetFilePath), e));
+        	return null;
+        }
+		
+		// Return output image path end value
+		return outputImageFileName;
 	}
 
 }
