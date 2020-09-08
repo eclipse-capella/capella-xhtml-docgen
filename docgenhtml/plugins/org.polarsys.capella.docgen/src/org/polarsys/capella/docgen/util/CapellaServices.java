@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,12 +15,18 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.osgi.util.NLS;
+import org.eclipse.sirius.business.api.dialect.DialectManager;
 import org.eclipse.sirius.business.api.query.DRepresentationQuery;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
 import org.polarsys.capella.core.data.capellacore.AbstractDependenciesPkg;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
@@ -28,6 +34,7 @@ import org.polarsys.capella.core.data.capellacore.Classifier;
 import org.polarsys.capella.core.data.interaction.CombinedFragment;
 import org.polarsys.capella.core.data.interaction.InteractionOperand;
 import org.polarsys.capella.core.data.requirement.RequirementsPkg;
+import org.polarsys.capella.docgen.Messages;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
@@ -304,7 +311,7 @@ public class CapellaServices {
 		// Add the opening href tag to the buffer
 		buffer.append(HYPERLINK_OPEN);
 		// Add the project root resource to the buffer
-		buffer.append(getPathFromElement(diagram.getTarget()));
+		buffer.append(getPathFromElement(getRepresentationTarget(diagram)));
 		// Add diagram fragment id as link anchor
 		buffer.append("#");
 		buffer.append(getDiagramUid(diagram));
@@ -542,6 +549,28 @@ public class CapellaServices {
 		}
 		eObjects.add(element);
 		return eObjects;
+	}
+
+	/**
+	 * Retrieve a DRepresentation target either directly or from the session's contained RepresentationDescritors.
+	 * 
+	 * @param representation
+	 * @return
+	 */
+	public static EObject getRepresentationTarget(DRepresentation representation) {
+		EObject target = ((DSemanticDiagram) representation).getTarget();
+		if (target == null) {
+			Session session = SessionManager.INSTANCE.getSession(representation);
+			Optional<DRepresentationDescriptor> optDesc = DialectManager.INSTANCE.getAllRepresentationDescriptors(session).stream().filter(repDesc -> repDesc.getRepresentation().equals(representation)).findFirst();
+			if (optDesc.isPresent()) {
+				target = optDesc.get().getTarget();
+			}
+		}
+		if (target == null) {
+			// Message is logged as warning without exception to avoid unnecessary overhead
+			Logger.logWarning(NLS.bind(Messages.DOCGEN__DIAGRAM_TARGET_NULL, representation), null);
+		}
+		return target;
 	}
 
 }
