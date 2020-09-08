@@ -1,1 +1,1 @@
-return element instanceof BlockArchitecture;
+return element instanceof BlockArchitecture && CapellaDocgenPreferenceHelper.isExportDiagramTree();

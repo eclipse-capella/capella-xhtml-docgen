@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Thales Global Services S.A.S.
+ * Copyright (c) 2019, 2020 Thales Global Services S.A.S.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -48,6 +48,13 @@ public class CapellaDocgenPreferenceHelper {
 	}
 	
 	/**
+	 * @return The value of the preference {@link CapellaDocgenPreferenceConstant#DOCGEN_EXPORT__DIAGRAM_TREE} 
+	 */
+	public static boolean isExportDiagramTree(){
+		return getCustomizedBooleanValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__DIAGRAM_TREE);
+	}
+	
+	/**
 	 * Get a string value of a preference
 	 * @param preferenceName name of a preference
 	 * @return the value of a preference
@@ -70,6 +77,8 @@ public class CapellaDocgenPreferenceHelper {
 				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE_DEFAULT_VALUE);
 		store.setDefault(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK, 
 				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK_DEFAULT_VALUE);
+		store.setDefault(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__DIAGRAM_TREE, 
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__DIAGRAM_TREE_DEFAULT_VALUE);
 	}
 	
 	/**
@@ -85,5 +94,7 @@ public class CapellaDocgenPreferenceHelper {
 				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE_DEFAULT_VALUE);
 		store.setValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK, 
 				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK_DEFAULT_VALUE);
+		store.setValue(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__DIAGRAM_TREE, 
+				CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__DIAGRAM_TREE_DEFAULT_VALUE);
 	}
 }
