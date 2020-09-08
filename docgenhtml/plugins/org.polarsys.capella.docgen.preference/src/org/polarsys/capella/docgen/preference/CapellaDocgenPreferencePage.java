@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Thales Global Services S.A.S.
+ * Copyright (c) 2019, 2020 Thales Global Services S.A.S.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,9 +15,7 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.PreferenceLinkArea;
@@ -36,6 +34,7 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 	private BooleanFieldEditor useExportComponentExchange;
 	private BooleanFieldEditor useExportFunctionalExchange;
 	private BooleanFieldEditor useExportPhysicalLink;
+	private BooleanFieldEditor useExportDiagramTree;
 	
 	/*
 	 * (non-Javadoc)
@@ -45,8 +44,9 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 	protected void createFieldEditors() {
 		createLink();
 		
-		createExportStatusAndReview();
+		createCommon();
 		addField(useExportStatusAndReview);
+		addField(useExportDiagramTree);
 		
 		createExportExchanges();
 		addField(useExportFunctionalExchange);
@@ -55,13 +55,16 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 	}
 	
 	/**
-	 * Creation of the Boolean field. 
-	 * If checked, the status and review will be generated, otherwise, they will ignored.
+	 * Creation of the Boolean fields:
+	 * * Status and review: If checked, the status and review will be generated, otherwise, they will ignored.
+	 * * Diagram tree: If checked, the diagram tree in the block architecture pages will be generated, otherwise, they will ignored.
 	 */
-	private void createExportStatusAndReview(){
+	private void createCommon(){
 		Composite composite = createParent(getFieldEditorParent(), "Common");
 		useExportStatusAndReview = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, 
 				 Messages.EXPORT__STATUS_AND_REVIEW_FIELD_LABEL, composite);
+		useExportDiagramTree = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__DIAGRAM_TREE, 
+				 Messages.EXPORT__DIAGRAM_TREE_FIELD_LABEL, composite);
 	}
 	
 	/**
