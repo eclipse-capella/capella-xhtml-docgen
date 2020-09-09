@@ -20,7 +20,7 @@
 	<name>Capella XHTML DocGen Add-on</name>
 	<groupId>org.polarsys</groupId>
 	<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-	<version>1.4.1-SNAPSHOT</version>
+	<version>1.4.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -39,7 +39,7 @@
 		<platform-name>oxygen/201803211000</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
-		<capellaVersion>1.4.0</capellaVersion>
+		<capellaVersion>1.4.2</capellaVersion>
 
 		<!-- for sonar -->
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
@@ -90,7 +90,7 @@
 						<artifact>
 							<groupId>org.polarsys</groupId>
 							<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-							<version>1.4.1-SNAPSHOT</version>
+							<version>1.4.2-SNAPSHOT</version>
 							<classifier>releng/org.polarsys.capella.docgen.target/tp/capella.target-definition</classifier>
 						</artifact>
 					</target>
