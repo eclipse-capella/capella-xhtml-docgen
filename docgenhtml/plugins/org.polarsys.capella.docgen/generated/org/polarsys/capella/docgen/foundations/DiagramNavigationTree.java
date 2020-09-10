@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
 import java.util.*;
@@ -8,6 +8,7 @@ import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.docgen.util.TreeServices;
 import org.polarsys.capella.docgen.diagram.CapellaHelper;
+import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 
 public class DiagramNavigationTree {
 	protected static String nl;
@@ -174,6 +175,6 @@ public class DiagramNavigationTree {
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return element instanceof BlockArchitecture;
+		return element instanceof BlockArchitecture && CapellaDocgenPreferenceHelper.isExportDiagramTree();
 	}
 }

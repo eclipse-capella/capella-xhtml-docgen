@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -40,6 +40,7 @@ import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.information.AbstractInstance;
 import org.polarsys.capella.core.diagram.helpers.naming.DAnnotationSourceConstants;
+import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeReferencesStrategy;
@@ -220,7 +221,10 @@ public class CapellaHelper {
 	private static EObject getBlockArchitectureContainer(DRepresentation representation) {
 		EObject parent = null;
 		if (representation instanceof DSemanticDiagram) {
-			parent = ((DSemanticDiagram) representation).getTarget().eContainer();
+			EObject target = CapellaServices.getRepresentationTarget(representation);
+			if (target != null) {
+				parent = target.eContainer();
+			}
 		}
 		while (!(parent instanceof BlockArchitecture) && parent != null) {
 			parent = parent.eContainer();
