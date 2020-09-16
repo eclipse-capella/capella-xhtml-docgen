@@ -33,7 +33,7 @@ if(allocations2.size() > 0) {%>
            <th>Transition</th>
            <th>Source</th>
            <th>Target</th>
-           <th>Tigger</th>
+           <th>Trigger</th>
            <th>Effect</th>
            <th>Description</th>
        </tr>

@@ -11,12 +11,19 @@
 package org.polarsys.capella.docgen.util;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.text.BadLocationException;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -42,11 +49,15 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
-//	private static final String REGEX = "<[\\s]*a[\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>[\\s]*(.+?)[\\s]*<[\\s]*/[\\s]*a[\\s]*>";
+	// private static final String REGEX =
+	// "<[\\s]*a[\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>[\\s]*(.+?)[\\s]*<[\\s]*/[\\s]*a[\\s]*>";
 	private static final String REGEX = "<[\\s]*[aA][\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>(.*?)<[\\s]*/[\\s]*[aA][\\s]*>";
 	private static final String REGEX_IMG = "<[\\s]*img[^>]*?src[\\s]*=[\\s]*\"([^>\"]+?)\"[^>]*?/[\\s]*>";
 	private static final String REGEX_FilePATH = "<[aA][\\s]+href=\"(.+?)\">";
-	private static final String ERROR_CPY = "Error during project relative image copy";
+	private static final String ERROR_CPY = "Error during project relative file copy: {0}";
+	private static final String ERROR_DECODE_FILE_LOCATION = "Error while decoding file location: {0}";
+	private static final String ERROR_READ_FILE_LOCATION = "Error while reading decoded file location: {0}";
+	private static final String WARNING_IMAGE_SERIALIZATION_FAILED = "Image serialization failed, default to keep img serialized value for element if id: {0}";
 
 	/**
 	 * Transform all links added in an model element description to Html links
@@ -59,27 +70,26 @@ public class StringUtil {
 	 *            project name wherein documentation is generated
 	 * @param outputFolder
 	 *            folder name wherein documentation is generated
-	 * @return model element description with all links transformed to html
-	 *         links
+	 * @return model element description with all links transformed to html links
 	 */
 	public static String transformAREFString(EObject eObject, String input, String projectName, String outputFolder) {
 
 		if (input != null) {
 			/**
-			 * Manage Links to Capella model element and Sirius diagrams Links
-			 * are translated to HTML link to generated HTML page
+			 * Manage Links to Capella model element and Sirius diagrams Links are
+			 * translated to HTML link to generated HTML page
 			 **/
 			input = manageModelAndDiagramElementsLinks(input, eObject);
 
 			/**
-			 * Manage Links to relative image path. Image is copied in a sub
-			 * folder of output folder and link copy is used
+			 * Manage Links to relative image path. Image is copied in a sub folder of
+			 * output folder and link copy is used
 			 **/
 			input = manageImages(eObject, input, projectName, outputFolder);
 
 			/**
-			 * Manage links to relative files path Relative path will be
-			 * translated to absolute path.
+			 * Manage links to relative files path Relative path will be translated to
+			 * absolute path.
 			 */
 			input = manageFileLinks(eObject, input, projectName, outputFolder);
 
@@ -96,8 +106,8 @@ public class StringUtil {
 	 *            <code> eObject </code> description
 	 * @param eObject
 	 *            model element for which documentation is about to be generated
-	 * @return model element description (<code>input</code>) with links to
-	 *         model or diagram elements are transformed to html links
+	 * @return model element description (<code>input</code>) with links to model or
+	 *         diagram elements are transformed to html links
 	 */
 	private static String manageModelAndDiagramElementsLinks(String input, EObject eObject) {
 		Pattern pattern = Pattern.compile(REGEX, Pattern.DOTALL);
@@ -107,7 +117,8 @@ public class StringUtil {
 			if (matcher.groupCount() == 2) {
 				final String akB = "<a href=\"";
 				final String akE = "</a>";
-				final String link = akB + switchToDocPath(matcher.group(1), eObject.eResource()) + "\">" + matcher.group(2) + akE;
+				final String link = akB + switchToDocPath(matcher.group(1), eObject.eResource()) + "\">"
+						+ matcher.group(2) + akE;
 				input = input.replace(matcher.group(0), link);
 			}
 		}
@@ -138,32 +149,41 @@ public class StringUtil {
 		final IPath parentSrcFolder = new Path(eObject.eResource().getURI().segment(1));
 		final IPath parentTargetFolderPath = new Path(projectName).append(outputFolder);
 		while (matcher.find()) {
-			// we check that we really have a link to a file (absolute or relative) and not a link to URL, model element, diagram...
-			if (matcher.group(1).startsWith("file://") || matcher.group(1).startsWith("local://")) {
-				// in the following, replaceAll("%20", " ") is used to fix spaces in file path
+			// we check that we really have a link to a file (absolute or relative) and not
+			// a link to URL, model element, diagram...
+			String firstMatchGroup = matcher.group(1);
+			if (firstMatchGroup.startsWith("file://") || firstMatchGroup.startsWith("local://")) {
+
+				final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
 				String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
 				id = id.replace("-", "");
-				IPath patha = new Path(matcher.group(1).replaceAll("%20", " "));
+
+				// Use an inline creation of HTMLDocument to get correct html content
+				String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, loger);
+
+				IPath patha = new Path(decodedFirstMatchGroup.replaceAll("%20", " "));
 				String iconName = id + "/" + patha.lastSegment();
 				StringBuilder iconSourcePath = new StringBuilder();
 
 				// if absolute path
-				if (matcher.group(1).startsWith("file://")) {
+				if (decodedFirstMatchGroup.startsWith("file://")) {
 					for (String segment : patha.segments()) {
 						iconSourcePath.append("/").append(segment);
 					}
 				} else {
-					// relative path. We need to remove "local://" from matcher.group(1) => we starts with character n°8
-					IPath path = parentSrcFolder.append(matcher.group(1).substring(8, matcher.group(1).length()).replaceAll("%20", " "));
+					// relative path. We need to remove "local://" from matcher.group(1) => we
+					// starts with character n°8
+					IPath path = parentSrcFolder
+							.append(decodedFirstMatchGroup.substring(8, decodedFirstMatchGroup.length()));
 					IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 					iconSourcePath.append(iconFile.getLocationURI().getPath());
 				}
 
 				IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
-				input = input.replace(matcher.group(1), "./files/" + iconName + "\"");
-				final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
+				input = input.replace(firstMatchGroup, "./files/" + iconName + "\"");
 				try {
-					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath.toString(), parentTargetFolder.getLocationURI().getPath() + "/files/" + iconName);
+					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath.toString(),
+							parentTargetFolder.getLocationURI().getPath() + "/files/" + iconName);
 				} catch (IOException e) {
 					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
 				} catch (Exception e) {
@@ -187,8 +207,8 @@ public class StringUtil {
 	 *            project name wherein documentation is generated
 	 * @param outputFolder
 	 *            folder name wherein documentation is generated
-	 * @return model element description (<code>input</code>) with image
-	 *         relative paths transformed to local copy absolute paths
+	 * @return model element description (<code>input</code>) with image relative
+	 *         paths transformed to local copy absolute paths
 	 */
 	private static String manageImages(EObject eObject, String input, String projectName, String outputFolder) {
 		if (input.trim().isEmpty()) {
@@ -199,38 +219,95 @@ public class StringUtil {
 		Matcher matcher = pattern.matcher(input);
 		final IPath parentSrcFolder = new Path(eObject.eResource().getURI().segment(1));
 		final IPath parentTargetFolderPath = new Path(projectName).append(outputFolder);
+		IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
+		List<String> imageFileNames = new ArrayList<String>();
 		while (matcher.find()) {
 			if (matcher.groupCount() == 1) {
-				// in the following, replaceAll("%20", " ") is used to fix spaces in image path
+				final ILog logger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
 				String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
 				id = id.replace("-", "");
-				IPath patha = new Path(matcher.group(1).replaceAll("%20", " "));
-				String iconName = id + "/" + patha.lastSegment();
-				String iconSourcePath = "";
+				String firstMatchGroup = matcher.group(1);
+				// As we do a replace all, we may have already serialized/copied some files so we check to avoid work duplication
+				if (input.contains(firstMatchGroup)) {
+					// Use an inline creation of HTMLDocument to get correct html content
+					String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, logger);
 
-				if (patha.isAbsolute()) {
-					for (String segment : patha.segments()) {
-						iconSourcePath += "/" + segment;
+					IPath patha = new Path(decodedFirstMatchGroup);
+					String iconName = id + "/" + patha.lastSegment();
+					String iconSourcePath = "";
+
+					boolean isDataImage = firstMatchGroup.startsWith(ImageHelper.DATA_IMAGE_PREFIX);
+					boolean breakCurrentProcessing = false;
+					if (isDataImage) {
+						// Serialize image in target folder: "[dogen_output]/object_id/folder
+						iconName = ImageHelper.INSTANCE.serializeImageInTargetFolder(firstMatchGroup,
+								parentTargetFolder.getLocationURI().getPath() + "/images/", id, imageFileNames, logger);
+						if (iconName == null) {
+							// Image serialization has failed, we will keep current image
+							breakCurrentProcessing = true;
+							logger.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID,
+									MessageFormat.format(WARNING_IMAGE_SERIALIZATION_FAILED,
+											eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString()),
+									new Exception()));
+						}
+					} else {
+						if (patha.isAbsolute()) {
+							for (String segment : patha.segments()) {
+								iconSourcePath += "/" + segment;
+							}
+						} else {
+							IPath path = parentSrcFolder.append(decodedFirstMatchGroup);
+							IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+							iconSourcePath = iconFile.getLocationURI().getPath();
+						}
 					}
-				} else {
-					IPath path = parentSrcFolder.append(matcher.group(1).replaceAll("%20", " "));
-					IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-					iconSourcePath = iconFile.getLocationURI().getPath();
-				}
 
-				IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
-				input = input.replace(matcher.group(1), "./images/" + iconName + "\"");
-				final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
-				try {
-					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath, parentTargetFolder.getLocationURI().getPath() + "/images/" + iconName);
-				} catch (IOException e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
-				} catch (Exception e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
+					if (!breakCurrentProcessing) {
+						input = input.replace(firstMatchGroup, "./images/" + iconName);
+					}
+					try {
+						if (!isDataImage) {
+							ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath,
+									parentTargetFolder.getLocationURI().getPath() + "/images/" + iconName);
+						}
+					} catch (IOException e) {
+						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+								MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
+					} catch (Exception e) {
+						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+								MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
+					}
 				}
 			}
 		}
 		return input;
+	}
+
+	/**
+	 * File path being taken from an HTML document may be encoded. It may thus be
+	 * necessary to decode this content if we need to get real file paths for
+	 * examples.
+	 * 
+	 * @param filePath
+	 *            The file path to decode.
+	 * @param loger
+	 *            An ILog instance for exceptions management.
+	 * @return A decoded String.
+	 */
+	private static String decodeHtmlFilePath(String filePath, ILog loger) {
+		try {
+			HTMLDocument doc = new HTMLDocument();
+			new HTMLEditorKit().read(new StringReader("<html><body>" + filePath), doc, 0);
+			String decodedFirstMatchGroup = doc.getText(1, doc.getLength()).trim();
+			return decodedFirstMatchGroup;
+		} catch (BadLocationException e) {
+			loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+					MessageFormat.format(ERROR_DECODE_FILE_LOCATION, filePath), e));
+		} catch (IOException e) {
+			loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+					MessageFormat.format(ERROR_READ_FILE_LOCATION, filePath), e));
+		}
+		return null;
 	}
 
 	/**
@@ -279,10 +356,9 @@ public class StringUtil {
 					}
 				}
 			}
-			
+
 			// If the object is still not found, so we use the Capella API.
-			if (eObject == null) 
-			{
+			if (eObject == null) {
 				final ResourceSet rs = resource.getResourceSet();
 				eObject = IdManager.getInstance().getEObject(id, new IScope() {
 					@Override
@@ -313,7 +389,8 @@ public class StringUtil {
 		if (eObject != null) {
 			String fileName = DocGenHtmlCapellaUtil.SERVICE.getFileName(eObject);
 			String modelName = DocGenHtmlUtil.getModelName(eObject);
-			String validFileName = "../" + modelName + "/" + DocGenHtmlUtil.getValidFileName(fileName) + "." + DocGenHtmlConstants.HTML_FILE_EXTENSION;
+			String validFileName = "../" + modelName + "/" + DocGenHtmlUtil.getValidFileName(fileName) + "."
+					+ DocGenHtmlConstants.HTML_FILE_EXTENSION;
 			return validFileName;
 		}
 		return "#";
@@ -345,7 +422,8 @@ public class StringUtil {
 		return buffer.toString();
 	}
 
-	public static String stringListToBulette(EList<? extends AbstractNamedElement> list_elts, String projectName, String outputFolder) {
+	public static String stringListToBulette(EList<? extends AbstractNamedElement> list_elts, String projectName,
+			String outputFolder) {
 		// Buffer declaration
 		StringBuffer buffer = new StringBuffer();
 		if (list_elts.size() < 1) {
@@ -361,7 +439,8 @@ public class StringUtil {
 				buffer.append(CapellaServices.SPACE);
 				buffer.append(CapellaServices.getHyperlinkFromElement(elt));
 				// Add the close bullet tag to the buffer
-				buffer.append(CapellaServices.LI_CLOSE);			}
+				buffer.append(CapellaServices.LI_CLOSE);
+			}
 			buffer.append(CapellaServices.UL_CLOSE);
 		}
 		// Return the buffer
@@ -378,52 +457,58 @@ public class StringUtil {
 	}
 
 	/**
-	 * Build a 2 columns html table. The first table contains the keys of the map and the second
-	 * contains the values of the map
-	 * @param map data of the table
-	 * @param firstColTitle the title of the first column
-	 * @param secondColTitle the title of the second column
+	 * Build a 2 columns html table. The first table contains the keys of the map
+	 * and the second contains the values of the map
+	 * 
+	 * @param map
+	 *            data of the table
+	 * @param firstColTitle
+	 *            the title of the first column
+	 * @param secondColTitle
+	 *            the title of the second column
 	 * @return html table string
 	 */
-	public static String mapToHTMLTable(Map<String, String> map, 
-			String firstColTitle, String secondColTitle){
-		
-		//To generate header one of the first or second title must be set
-		boolean generateTableHeader = (firstColTitle != null && !firstColTitle.isEmpty()) || (secondColTitle != null && !secondColTitle.isEmpty());
-		
-		firstColTitle = firstColTitle== null ? "" : firstColTitle;
-		secondColTitle = secondColTitle== null ? "" : secondColTitle;
-		
+	public static String mapToHTMLTable(Map<String, String> map, String firstColTitle, String secondColTitle) {
+
+		// To generate header one of the first or second title must be set
+		boolean generateTableHeader = (firstColTitle != null && !firstColTitle.isEmpty())
+				|| (secondColTitle != null && !secondColTitle.isEmpty());
+
+		firstColTitle = firstColTitle == null ? "" : firstColTitle;
+		secondColTitle = secondColTitle == null ? "" : secondColTitle;
+
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<table>"); //$NON-NLS-1$
-		if (generateTableHeader){
+		if (generateTableHeader) {
 			buffer.append("<tr>").append("<th>"); //$NON-NLS-1$ //$NON-NLS-2$
-			buffer.append(firstColTitle).append("</th>"); //End first col //$NON-NLS-1$
-			
+			buffer.append(firstColTitle).append("</th>"); // End first col //$NON-NLS-1$
+
 			buffer.append("<th>"); //$NON-NLS-1$
 			buffer.append(secondColTitle);
-			buffer.append("</th></tr>"); //End second col and the first row //$NON-NLS-1$
+			buffer.append("</th></tr>"); // End second col and the first row //$NON-NLS-1$
 		}
-		
-		//Generate the table content
-		for(Entry<String, String> e: map.entrySet()){
+
+		// Generate the table content
+		for (Entry<String, String> e : map.entrySet()) {
 			buffer.append("<tr>"); //$NON-NLS-1$
 			buffer.append("<td>").append(e.getKey()).append("</td><td>").append(e.getValue()).append("</td>"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			buffer.append("</tr>"); //$NON-NLS-1$
 		}
 		buffer.append("</table>"); //$NON-NLS-1$
-		
+
 		return buffer.toString();
 	}
-	
+
 	/**
-	 * @param stringSet must be not null
-	 * @return true if the stringSet contains a not empty or null value string, otherwise false
+	 * @param stringSet
+	 *            must be not null
+	 * @return true if the stringSet contains a not empty or null value string,
+	 *         otherwise false
 	 */
-	public static boolean containsNotEmptyString(Collection<String> stringSet){
-		
+	public static boolean containsNotEmptyString(Collection<String> stringSet) {
+
 		for (String string : stringSet) {
-			if (string != null && !string.isEmpty()){
+			if (string != null && !string.isEmpty()) {
 				return true;
 			}
 		}
