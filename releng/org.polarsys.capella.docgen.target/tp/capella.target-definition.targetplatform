@@ -10,20 +10,20 @@
  *******************************************************************************/
 target "CapellaXHTMLDocGenAddon"
 
-include "https://download.eclipse.org/capella/core/updates/releases/1.4.0-R20191121-173601/targets/capella.target-definition.targetplatform"
+include "https://download.eclipse.org/capella/core/updates/nightly/master/targets/capella.target-definition.targetplatform"
 
 with source, requirements
 
-location capella-master "https://download.eclipse.org/capella/core/updates/releases/1.4.0-R20191121-173601/org.polarsys.capella.rcp.site/" {
+location capella-master "https://download.eclipse.org/capella/core/updates/nightly/master/org.polarsys.capella.rcp.site/" {
 	org.polarsys.capella.rcp.feature.feature.group lazy
+	org.polarsys.capella.core.re.feature.feature.group lazy
 }
 
-location kitalpha-runtime-master-nightly "https://download.eclipse.org/kitalpha/updates/milestone/runtime/1.4.0-N1604/" {
-//location kitalpha-runtime-master-latest "https://download.polarsys.org/kitalpha/updates/stable/runtime/1.4.0RC4" {
+location kitalpha-runtime "https://download.eclipse.org/kitalpha/updates/nightly/runtime/master/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 }
 
 
-location eclipse_2019_06 "https://download.eclipse.org/releases/2019-06/" {
+location eclipse_2020_06 "https://download.eclipse.org/releases/2020-06/" {
 	org.eclipse.emf.query.feature.group lazy
 }
