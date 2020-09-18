@@ -8,12 +8,12 @@ pipeline {
   stages {
     stage('Generate TP') {
       steps {
-        sh 'mvn verify -P full -P sign -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
+        sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
       }
     }
     stage('Package docgen addon') {
       steps {
-        sh 'mvn clean install -e -f pom.xml'
+        sh 'mvn clean install -P full -P sign -e -f pom.xml'
       }
     }
     stage('Archive artifacts') {
