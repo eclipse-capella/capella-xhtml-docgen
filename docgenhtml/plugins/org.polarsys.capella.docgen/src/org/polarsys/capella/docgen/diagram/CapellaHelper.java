@@ -107,17 +107,13 @@ public class CapellaHelper {
 	 * @return a {@link Collection} of all {@link DRepresentation}
 	 */
 	private static Collection<DRepresentation> getAllDiagramsForObject(EObject element) {
-		Collection<DRepresentation> result = new ArrayList<DRepresentation>();
+		Set<DRepresentation> result = new HashSet<DRepresentation>();
 		// Check Diagram export preference
 		if (DocgenDiagramPreferencesHelper.getExportDiagram())
 		{
 			Collection<EObject> refElements = resolveReferencedElements(element);
 			for (EObject refElement: refElements) {
-				SiriusHelper.getDiagramForObject(refElement, false).stream().forEach(rep -> {
-					if (!result.contains(rep)) {
-						result.add(rep);
-					}
-				});
+				SiriusHelper.getDiagramForObject(refElement, false).stream().forEach(rep -> result.add(rep));
 			}
 		}
 		return result;
