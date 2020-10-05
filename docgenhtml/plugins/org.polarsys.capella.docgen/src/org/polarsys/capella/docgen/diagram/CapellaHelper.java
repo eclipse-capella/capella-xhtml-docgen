@@ -30,8 +30,10 @@ import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.common.tools.api.editing.EditingDomainFactoryService;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
+import org.eclipse.sirius.viewpoint.ViewpointPackage;
 import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.eclipse.sirius.viewpoint.description.DescriptionPackage;
 import org.polarsys.capella.common.data.modellingcore.AbstractType;
@@ -46,7 +48,6 @@ import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeReferencesStrategy;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeStatus;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
-import org.polarsys.kitalpha.doc.gen.business.core.util.SiriusHelper;
 
 public class CapellaHelper {
 	private static final String AIRD = ".aird";
@@ -107,15 +108,19 @@ public class CapellaHelper {
 	 * @return a {@link Collection} of all {@link DRepresentation}
 	 */
 	private static Collection<DRepresentation> getAllDiagramsForObject(EObject element) {
-		Collection<DRepresentation> result = new ArrayList<DRepresentation>();
+		Set<DRepresentation> result = new HashSet<DRepresentation>();
 		// Check Diagram export preference
 		if (DocgenDiagramPreferencesHelper.getExportDiagram())
 		{
 			Collection<EObject> refElements = resolveReferencedElements(element);
 			for (EObject refElement: refElements) {
-				SiriusHelper.getDiagramForObject(refElement, false).stream().forEach(rep -> {
-					if (!result.contains(rep)) {
-						result.add(rep);
+				EObjectQuery semElementQuery = new EObjectQuery(refElement);
+				Collection<EObject> repElements = semElementQuery.getInverseReferences(ViewpointPackage.Literals.DSEMANTIC_DECORATOR__TARGET);
+				repElements.stream().forEach(dSemDecorator -> {
+					EObjectQuery decoratorQuery = new EObjectQuery(dSemDecorator);
+					Option<DRepresentation> rep = decoratorQuery.getRepresentation();
+					if (rep.some()) {
+						result.add(rep.get());
 					}
 				});
 			}
