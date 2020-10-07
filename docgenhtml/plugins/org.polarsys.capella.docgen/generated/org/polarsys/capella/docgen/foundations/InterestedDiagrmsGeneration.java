@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
@@ -29,7 +29,7 @@ import org.polarsys.capella.docgen.util.DocGenHtmlCapellaControl;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
 import org.polarsys.capella.docgen.util.CapellaDiagramHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 
 public class InterestedDiagrmsGeneration {
@@ -155,7 +155,7 @@ public class InterestedDiagrmsGeneration {
 		stringBuffer.append(TEXT_2);
 		if (!exportableDiagrams.isEmpty()) {
 			stringBuffer.append(TEXT_3);
-			stringBuffer.append(LabelProviderHelper.getText(element));
+			stringBuffer.append(CapellaLabelProviderHelper.getText(element));
 			stringBuffer.append(TEXT_4);
 			exportableDiagrams.forEach(diagram -> {
 				stringBuffer.append(TEXT_5);

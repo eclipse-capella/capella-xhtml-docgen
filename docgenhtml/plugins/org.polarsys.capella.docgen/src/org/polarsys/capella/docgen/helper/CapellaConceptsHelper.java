@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,11 +11,10 @@
 package org.polarsys.capella.docgen.helper;
 
 import org.eclipse.emf.ecore.EObject;
-import org.polarsys.kitalpha.doc.gen.business.core.helper.IConceptsHelper;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
-
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaControl;
+import org.polarsys.kitalpha.doc.gen.business.core.helper.IConceptsHelper;
 
 public class CapellaConceptsHelper implements IConceptsHelper {
 
@@ -29,7 +28,7 @@ public class CapellaConceptsHelper implements IConceptsHelper {
 
 	public String getConceptLabel(Object modelElement) {
 		if (modelElement instanceof EObject)
-			return LabelProviderHelper.getText((EObject) modelElement);
+			return CapellaLabelProviderHelper.getText((EObject) modelElement);
 		return modelElement.toString();
 	}
 

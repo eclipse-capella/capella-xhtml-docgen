@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -12,7 +12,7 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.StateMachineHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 
 public class StateMachineDocGen extends org.polarsys.capella.docgen.foundations.CapellaElementDocGen {
 	protected static String nl;
@@ -118,7 +118,7 @@ public class StateMachineDocGen extends org.polarsys.capella.docgen.foundations.
 			throws Exception {
 
 		element = parameter;
-		String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
+		String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
 		String elementType = EscapeChars.forHTML(element.eClass().getName());
 		title = "Capella - " + DocGenHtmlUtil.getModelName(element) + " - " + elementType + " " + elementName;
 

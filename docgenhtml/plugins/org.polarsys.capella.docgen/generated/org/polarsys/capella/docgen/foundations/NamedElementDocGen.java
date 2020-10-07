@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -9,7 +9,7 @@ import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 
 public class NamedElementDocGen extends org.polarsys.capella.docgen.foundations.CapellaElementDocGen {
@@ -72,7 +72,7 @@ public class NamedElementDocGen extends org.polarsys.capella.docgen.foundations.
 
 	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
+		String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
 		String elementType = EscapeChars.forHTML(element.eClass().getName());
 		/*NamedElement namedElement = ((NamedElement) element);
 		
