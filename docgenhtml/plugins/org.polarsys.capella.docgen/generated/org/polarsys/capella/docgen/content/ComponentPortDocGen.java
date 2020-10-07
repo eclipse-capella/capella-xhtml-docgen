@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -13,7 +13,6 @@ import org.polarsys.capella.docgen.util.CapellaComponentServices;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.BlockHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 import org.polarsys.capella.core.data.oa.Entity;
 import org.polarsys.capella.docgen.util.pattern.helper.CapellaComponentPortHelper;
 import org.polarsys.capella.core.data.fa.ComponentPort;

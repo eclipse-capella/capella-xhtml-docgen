@@ -4,7 +4,7 @@ String outputFolder = ctx.getValue("outputFolder").toString();
 String elementName = CapellaServices.getHyperlinkFromElement(element, ((Part)element).getName());
 String elementType = "<span class=\"elementMetaClass\">" + EscapeChars.forHTML(element.eClass().getName()) + "</span>";
 EObject type = ((Part)element).getType();
-String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder);
+String logo = ImageHelper.getTypePng(element, projectName, outputFolder);
 String documentTitle = elementName; %>
 <img src="../icon/<%=logo%>" alt="<%=EscapeChars.forHTML(element.eClass().getName())%>" style="float:left; margin-right:10px" /><h1><%=documentTitle%></h1>
 <p style="margin-top:3px; margin-bottom:3px"><span class="elementMetaClass"><%=elementType%></span></p>

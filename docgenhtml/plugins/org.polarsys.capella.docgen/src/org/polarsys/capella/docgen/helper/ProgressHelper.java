@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -31,9 +31,9 @@ import org.polarsys.capella.core.data.capellacore.EnumerationPropertyType;
 import org.polarsys.capella.core.diagram.helpers.RepresentationAnnotationHelper;
 import org.polarsys.capella.core.model.handler.helpers.CapellaProjectHelper;
 import org.polarsys.capella.core.ui.metric.utils.ProgressMonitoringPropagator;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 /**
  * @author Zendagui Boubekeur
@@ -346,7 +346,7 @@ public class ProgressHelper {
 		} else if (element instanceof DView){
 			result.append("DView");
 		} else if (element instanceof DTable){
-			result.append(LabelProviderHelper.getText((EObject)element));
+			result.append(CapellaLabelProviderHelper.getText((EObject)element));
 		}
 		return result.toString();
 	}
