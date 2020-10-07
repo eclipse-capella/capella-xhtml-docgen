@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.content;
 
 import java.util.*;
@@ -10,7 +10,7 @@ import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.docgen.util.CapellaFunctionServices;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.capella.docgen.util.pattern.helper.FunctionHelper;
 import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
@@ -161,7 +161,7 @@ public class AbstractFunctionDocGen extends org.polarsys.capella.docgen.foundati
 	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
-		String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
+		String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
 		String elementType = EscapeChars.forHTML(element.eClass().getName());
 		String projectName = ctx.getValue("projectName").toString();
 		String outputFolder = ctx.getValue("outputFolder").toString();
