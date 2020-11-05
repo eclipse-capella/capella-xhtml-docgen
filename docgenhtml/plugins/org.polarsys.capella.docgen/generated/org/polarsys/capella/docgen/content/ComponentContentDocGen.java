@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -13,7 +13,7 @@ import org.polarsys.capella.docgen.util.CapellaComponentServices;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.BlockHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.capella.core.data.oa.Entity;
 
 public class ComponentContentDocGen {
@@ -149,7 +149,7 @@ public class ComponentContentDocGen {
 
 	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
+		String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
 		String elementType = EscapeChars.forHTML(element.eClass().getName());
 		Collection<String> componentFeatures = CapellaComponentServices.getFeatures((Component) element);
 		if (componentFeatures.size() > 0) {

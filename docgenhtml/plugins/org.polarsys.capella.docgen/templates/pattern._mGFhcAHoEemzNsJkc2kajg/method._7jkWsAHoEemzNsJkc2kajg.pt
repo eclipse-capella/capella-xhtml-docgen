@@ -5,7 +5,7 @@
 			.filter(diagram -> GenerationGlobalScope.getInstance().isCopyInScope(diagram.getTarget())).collect(Collectors.toList()); %>
 
 <% if (!exportableDiagrams.isEmpty()) { %>
-	<h2>Diagrams interesting for "<%=LabelProviderHelper.getText(element)%>"</h2>
+	<h2>Diagrams interesting for "<%=CapellaLabelProviderHelper.getText(element)%>"</h2>
 	<% exportableDiagrams.forEach(diagram -> { %>
 		<div>
 			<% String id = DiagramSessionHelper.getID(diagram);
