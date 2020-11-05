@@ -1,7 +1,7 @@
 <%
 Set<DSemanticDiagram> diagramSet = CapellaHelper.getDiagramContainingObject(element);
 if (diagramSet.size() >= 1){%>
-<h2>Diagrams displaying "<%=LabelProviderHelper.getText(element)%>"</h2>
+<h2>Diagrams displaying "<%=CapellaLabelProviderHelper.getText(element)%>"</h2>
 <ul>
 <%for (DSemanticDiagram diagram : diagramSet){
 EObject eObject = diagram.getTarget();
@@ -14,7 +14,7 @@ String generatedFolder = fileNameService.getFileName(eObject);%>
 <%if(eObject instanceof NamedElement && DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) eObject)) {%>
 <%= CapellaServices.getHyperlinkFromElement(diagram) %> 
 <%} else {%>
-<%=LabelProviderHelper.getText(eObject)%>
+<%=CapellaLabelProviderHelper.getText(eObject)%>
 <%}%>
 </li>
 <%

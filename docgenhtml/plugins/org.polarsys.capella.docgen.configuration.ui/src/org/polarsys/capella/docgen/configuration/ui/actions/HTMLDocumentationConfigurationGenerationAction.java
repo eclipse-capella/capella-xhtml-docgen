@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2019 Obeo.
+ * Copyright (c) 2017, 2020 Obeo.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -58,6 +58,7 @@ import org.eclipse.ui.actions.BaseSelectionListenerAction;
 import org.polarsys.capella.docgen.configuration.ui.Activator;
 import org.polarsys.capella.docgen.configuration.ui.Messages;
 import org.polarsys.capella.docgen.configuration.ui.wizard.SelectElementsWizardPage;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeElementStrategy;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeException;
@@ -67,7 +68,6 @@ import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelpe
 import org.polarsys.kitalpha.doc.gen.business.core.ui.wizards.HTMLDocumentationBrandingWizardPage;
 import org.polarsys.kitalpha.doc.gen.business.core.ui.wizards.HTMLDocumentationGenerationWizard;
 import org.polarsys.kitalpha.doc.gen.business.core.ui.wizards.HTMLDocumentationGenerationWizardPage;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 /**
  * Generate XHTML action.
@@ -174,7 +174,7 @@ public class HTMLDocumentationConfigurationGenerationAction extends BaseSelectio
 
 				initializeScope();
 
-				LabelProviderHelper.initImageRegistry();
+				CapellaLabelProviderHelper.initImageRegistry();
 
 				List<URI> modelURIList = getURIList(modelURI);
 				final String projectName = getProjectName(containerName);
