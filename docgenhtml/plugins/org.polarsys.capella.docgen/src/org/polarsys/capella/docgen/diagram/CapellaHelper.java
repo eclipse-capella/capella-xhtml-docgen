@@ -50,7 +50,7 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.SiriusHelper;
 
 public class CapellaHelper {
 	private static final String AIRD = ".aird";
-	private static final String MELODYMODELLER = ".melodymodeller";
+	private static final String CAPELLA_EXTENSION = "." + org.polarsys.capella.core.model.handler.command.CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION;
 
 	public static Collection<DRepresentation> getDiagramForObject(CapellaElement element) {
 		Collection<DRepresentation> representations = new ArrayList<DRepresentation>();
@@ -74,7 +74,7 @@ public class CapellaHelper {
 	}
 
 	public static Resource getAIRDResource(CapellaElement element) {
-		URI uri = URI.createURI(element.eResource().getURI().toString().replace(MELODYMODELLER, AIRD));
+		URI uri = URI.createURI(element.eResource().getURI().toString().replace(CAPELLA_EXTENSION, AIRD));
 		EditingDomain domain = EditingDomainFactoryService.INSTANCE.getEditingDomainFactory().createEditingDomain();
 		if (domain != null)
 			return domain.getResourceSet().getResource(uri, true);
