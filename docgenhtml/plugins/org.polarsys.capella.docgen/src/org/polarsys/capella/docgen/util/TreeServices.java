@@ -118,19 +118,19 @@ public class TreeServices {
 	 * @return
 	 */
 	private static DefaultMutableTreeNode buildRequirementsTree(EList<Requirement> appliedReq) {
-		SortedTreeNode<DefaultMutableTreeNode> tree = new SortedTreeNode<DefaultMutableTreeNode>(requirementsComparator);
+		SortedTreeNode tree = new SortedTreeNode(requirementsComparator);
 		
 		// build the list of already visited requirement packages
-		Map<RequirementsPkg, SortedTreeNode<DefaultMutableTreeNode>> reqPkgToTreeNodeMap = new HashMap<RequirementsPkg, SortedTreeNode<DefaultMutableTreeNode>>();
+		Map<RequirementsPkg, SortedTreeNode> reqPkgToTreeNodeMap = new HashMap<RequirementsPkg, SortedTreeNode>();
 		for (Requirement req : appliedReq){
-			SortedTreeNode<DefaultMutableTreeNode> currentNode = new SortedTreeNode<DefaultMutableTreeNode>(req, requirementsComparator);
+			SortedTreeNode currentNode = new SortedTreeNode(req, requirementsComparator);
 			EObject parent = req.eContainer();
 			boolean hasFoundParent = false;
 			while (parent instanceof RequirementsPkg) {
-				SortedTreeNode<DefaultMutableTreeNode> pkgNode = reqPkgToTreeNodeMap.get(parent);
+				SortedTreeNode pkgNode = reqPkgToTreeNodeMap.get(parent);
 				// Build parent node if not yet created
 				if (pkgNode == null) {
-					pkgNode = new SortedTreeNode<DefaultMutableTreeNode>(parent, requirementsComparator);
+					pkgNode = new SortedTreeNode(parent, requirementsComparator);
 					reqPkgToTreeNodeMap.put((RequirementsPkg) parent, pkgNode);
 				} else {
 					hasFoundParent = true;
@@ -215,10 +215,10 @@ public class TreeServices {
 	 * @return
 	 */
 	private static DefaultMutableTreeNode buildDiagramsTree(BlockArchitecture archi) {
-		SortedTreeNode<DefaultMutableTreeNode> tree = new SortedTreeNode<DefaultMutableTreeNode>(diagramsComparator);
+		SortedTreeNode tree = new SortedTreeNode(diagramsComparator);
 		
-		Map<RepresentationDescription, SortedTreeNode<DefaultMutableTreeNode>> repDescToTreeNodeMap = new HashMap<RepresentationDescription, SortedTreeNode<DefaultMutableTreeNode>>();
-		Map<Viewpoint, SortedTreeNode<DefaultMutableTreeNode>> vpToTreeNodeMap = new HashMap<Viewpoint, SortedTreeNode<DefaultMutableTreeNode>>();
+		Map<RepresentationDescription, SortedTreeNode> repDescToTreeNodeMap = new HashMap<RepresentationDescription, SortedTreeNode>();
+		Map<Viewpoint, SortedTreeNode> vpToTreeNodeMap = new HashMap<Viewpoint, SortedTreeNode>();
 		
 		// Get all representations
 		for (DRepresentation rep : CapellaHelper.getAllDiagramsIn(archi)) {
@@ -244,21 +244,21 @@ public class TreeServices {
 			Viewpoint vp = (Viewpoint) description.eContainer();
 			
 			// Get description node
-			SortedTreeNode<DefaultMutableTreeNode> descNode = repDescToTreeNodeMap.get(description);
+			SortedTreeNode descNode = repDescToTreeNodeMap.get(description);
 			if (descNode == null) {
-				descNode = new SortedTreeNode<DefaultMutableTreeNode>(description, diagramsComparator);
+				descNode = new SortedTreeNode(description, diagramsComparator);
 				repDescToTreeNodeMap.put(description, descNode);
 			}
 			
 			// Get viewpoint node
-			SortedTreeNode<DefaultMutableTreeNode> vpNode = vpToTreeNodeMap.get(vp);
+			SortedTreeNode vpNode = vpToTreeNodeMap.get(vp);
 			if (vpNode == null) {
-				vpNode = new SortedTreeNode<DefaultMutableTreeNode>(vp, diagramsComparator);
+				vpNode = new SortedTreeNode(vp, diagramsComparator);
 				vpToTreeNodeMap.put(vp, vpNode);
 			}
 			
 			// Build representation node
-			SortedTreeNode<DefaultMutableTreeNode> repNode = new SortedTreeNode<DefaultMutableTreeNode>(rep, diagramsComparator);
+			SortedTreeNode repNode = new SortedTreeNode(rep, diagramsComparator);
 			
 			// Add nodes to tree
 			if (!tree.isNodeChild(vpNode)) {
