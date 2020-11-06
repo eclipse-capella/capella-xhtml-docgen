@@ -11,8 +11,8 @@
 
 package org.polarsys.capella.docgen.util;
 
-import java.util.Collections;
 import java.util.Comparator;
+import java.util.Vector;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
@@ -22,31 +22,33 @@ import javax.swing.tree.MutableTreeNode;
  * @author Arnaud Dieumegard
  */
 @SuppressWarnings("serial")
-public class SortedTreeNode<T> extends DefaultMutableTreeNode {
+public class SortedTreeNode extends DefaultMutableTreeNode {
 	
-	private final Comparator<T> comparator;
+    /** Force type of children */
+    protected Vector<DefaultMutableTreeNode> children;
 	
-	public SortedTreeNode(Comparator<T> comparator) {
+	private final Comparator<DefaultMutableTreeNode> comparator;
+	
+	public SortedTreeNode(Comparator<DefaultMutableTreeNode> comparator) {
 		super();
 		this.comparator = comparator;
 	}
 	
-	public SortedTreeNode(Object userObject, Comparator<T> comparator) {
+	public SortedTreeNode(Object userObject, Comparator<DefaultMutableTreeNode> comparator) {
 		super(userObject);
 		this.comparator = comparator;
 	}
 	
-	public SortedTreeNode(Object userObject, boolean allowsChildren, Comparator<T> comparator) {
+	public SortedTreeNode(Object userObject, boolean allowsChildren, Comparator<DefaultMutableTreeNode> comparator) {
 		super(userObject, allowsChildren);
 		this.comparator = comparator;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void add(MutableTreeNode newChild) {
 		super.add(newChild);
 		if (this.comparator != null) {
-			Collections.sort(this.children, this.comparator);
+			this.children.sort(this.comparator);
 		}
 	}
 
