@@ -144,7 +144,6 @@ public class HTMLConfigurationCommandLine extends AbstractCommandLine {
 
 			Project rootSemanticElement = SessionHelper.getCapellaProject(session);
 			if (rootSemanticElement != null) {
-				// Get the .melodymodeller resource (and not the .afm resource)
 				Resource semanticResource = rootSemanticElement.eResource();
 				semanticResourceURI = semanticResource.getURI();
 
