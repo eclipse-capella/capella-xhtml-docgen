@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,8 +15,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
-
+import org.polarsys.capella.common.data.modellingcore.AbstractExchangeItem;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Interface;
 import org.polarsys.capella.core.data.fa.ComponentPort;
@@ -25,8 +24,8 @@ import org.polarsys.capella.core.data.information.ExchangeItemElement;
 import org.polarsys.capella.core.data.information.ExchangeMechanism;
 import org.polarsys.capella.core.data.information.ParameterDirection;
 import org.polarsys.capella.core.model.helpers.InterfaceExt;
-import org.polarsys.capella.common.data.modellingcore.AbstractExchangeItem;
 import org.polarsys.capella.docgen.util.CapellaDataValueServices;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.capella.docgen.util.StringUtil;
 
@@ -200,7 +199,7 @@ public class CapellaInterfaceHelper {
 		if (componentPort != null) {
 			buffer.append(" ");
 			buffer.append("(");
-			buffer.append(LabelProviderHelper.getText(componentPort));
+			buffer.append(CapellaLabelProviderHelper.getText(componentPort));
 			buffer.append(")");
 		}
 		return buffer.toString();

@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -15,7 +15,7 @@ import org.polarsys.capella.docgen.util.DocGenHtmlCapellaControl;
 import org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil;
 import org.polarsys.capella.docgen.util.CapellaDiagramHelper;
 import org.polarsys.capella.docgen.util.CapellaServices;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
+import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 
 public class PresentedDiagrmsGeneration {
@@ -131,7 +131,7 @@ public class PresentedDiagrmsGeneration {
 		Set<DSemanticDiagram> diagramSet = CapellaHelper.getDiagramContainingObject(element);
 		if (diagramSet.size() >= 1) {
 			stringBuffer.append(TEXT_1);
-			stringBuffer.append(LabelProviderHelper.getText(element));
+			stringBuffer.append(CapellaLabelProviderHelper.getText(element));
 			stringBuffer.append(TEXT_2);
 			for (DSemanticDiagram diagram : diagramSet) {
 				EObject eObject = diagram.getTarget();
@@ -148,7 +148,7 @@ public class PresentedDiagrmsGeneration {
 					stringBuffer.append(TEXT_5);
 				} else {
 					stringBuffer.append(TEXT_4);
-					stringBuffer.append(LabelProviderHelper.getText(eObject));
+					stringBuffer.append(CapellaLabelProviderHelper.getText(eObject));
 				}
 				stringBuffer.append(TEXT_6);
 

@@ -205,11 +205,11 @@ public class CapellaServices {
 	 * @return
 	 */
 	public static String getHyperlinkFromElement(EObject element) {
-		return getHyperlinkFromElement(element, LabelProviderHelper.getText(element));
+		return getHyperlinkFromElement(element, CapellaLabelProviderHelper.getText(element));
 	}
 	
 	public static String getIndexHyperlinkFromElement(EObject element) {
-		return getIndexHyperlinkFromElement(element, LabelProviderHelper.getText(element));
+		return getIndexHyperlinkFromElement(element, CapellaLabelProviderHelper.getText(element));
 	}
 
 	public static boolean isElementLinkable(EObject element) {
@@ -303,7 +303,7 @@ public class CapellaServices {
 
 	private static String getHyperlinkFromDiagram(DSemanticDiagram diagram) {
 		// Get the representation name
-		String text = LabelProviderHelper.getText(diagram);
+		String text = CapellaLabelProviderHelper.getText(diagram);
 		// Format representation name with html rules
 		text = EscapeChars.forHTML(text);
 		// Initialize Buffer
@@ -354,7 +354,7 @@ public class CapellaServices {
 	}	
 
 	public static String getImageLinkFromElement(EObject element, String projectName, String outputFolder) {
-		String imageFileName = LabelProviderHelper.getImageFileName(element, projectName, outputFolder);
+		String imageFileName = CapellaLabelProviderHelper.getImageFileName(element, projectName, outputFolder);
 		StringBuffer buffer = new StringBuffer();
 		return appendRelativePath(element, imageFileName, buffer, "../icon/");
 	}
@@ -367,7 +367,7 @@ public class CapellaServices {
 	 * @return image tag to be reachable from the index
 	 */
 	public static String getIndexImageLinkFromElement(EObject element, String projectName, String outputFolder) {
-		String imageFileName = LabelProviderHelper.getImageFileName(element, projectName, outputFolder);
+		String imageFileName = CapellaLabelProviderHelper.getImageFileName(element, projectName, outputFolder);
 		StringBuffer buffer = new StringBuffer();
 		return appendRelativePath(element, imageFileName, buffer, "../../icon/");
 	}
@@ -440,7 +440,7 @@ public class CapellaServices {
 		if (linkedLastElement)
 			buffer.append(CapellaServices.getHyperlinkFromElement(elt));
 		else {
-			buffer.append(LabelProviderHelper.getText(elt));
+			buffer.append(CapellaLabelProviderHelper.getText(elt));
 		}
 		return buffer.toString();
 	}
@@ -517,7 +517,7 @@ public class CapellaServices {
 		StringBuffer buffer = new StringBuffer();
 		Iterator<EObject> iterator = getFullRequirementPath(element).iterator();
 		while (iterator.hasNext()) {
-			buffer.append(LabelProviderHelper.getText(iterator.next()));
+			buffer.append(CapellaLabelProviderHelper.getText(iterator.next()));
 			if (iterator.hasNext()) {
 				buffer.append(" > ");
 			}
@@ -533,7 +533,7 @@ public class CapellaServices {
 		StringBuffer buffer = new StringBuffer();
 		Iterator<EObject> iterator = getFullRequirementPath(element).iterator();
 		while (iterator.hasNext()) {
-			buffer.append(LabelProviderHelper.getText(iterator.next()));
+			buffer.append(CapellaLabelProviderHelper.getText(iterator.next()));
 			if (iterator.hasNext()) {
 				buffer.append(" > ");
 			}

@@ -1,5 +1,5 @@
 <%
-String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
+String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
 String elementType = EscapeChars.forHTML(element.eClass().getName());
 Collection<String> componentFeatures = CapellaComponentServices.getFeatures((Component)element);
 if (componentFeatures.size() > 0) {
