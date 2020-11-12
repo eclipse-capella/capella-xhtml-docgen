@@ -13,10 +13,10 @@
    <description url="http://www.polarsys.org/capella">
       Capella XHTML DocGen Add-on
    </description>
-   <feature id="org.polarsys.capella.docgen.package.feature" version="1.4.2.qualifier">
+   <feature id="org.polarsys.capella.docgen.package.feature" version="5.0.0.qualifier">
       <category name="org.polarsys.capella.docgen.addon"/>
    </feature>
-   <!--feature id="org.polarsys.capella.docgen.package.feature.source" version="1.4.2.qualifier">
+   <!--feature id="org.polarsys.capella.docgen.package.feature.source" version="5.0.0.qualifier">
       <category name="org.polarsys.capella.docgen.addon"/>
    </feature-->
    <category-def name="org.polarsys.capella.docgen.addon" label="Capella XHTML DocGen Add-on"/>
