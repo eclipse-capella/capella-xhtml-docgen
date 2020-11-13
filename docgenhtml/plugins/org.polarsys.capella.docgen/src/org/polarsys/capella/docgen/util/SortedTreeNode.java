@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2019, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -47,7 +47,7 @@ public class SortedTreeNode extends DefaultMutableTreeNode {
 	@Override
 	public void add(MutableTreeNode newChild) {
 		super.add(newChild);
-		if (this.comparator != null) {
+		if (this.comparator != null && this.children != null) {
 			this.children.sort(this.comparator);
 		}
 	}
