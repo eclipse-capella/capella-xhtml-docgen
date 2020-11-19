@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2019 Obeo.
+ * Copyright (c) 2017, 2020 Obeo.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -35,7 +35,7 @@ public interface ConfigurationElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = " Copyright (c) 2006, 2017 THALES GLOBAL SERVICES.\r\n This program and the accompanying materials are made available under the\r\nterms of the Eclipse Public License 2.0 which is available at\r\nhttp://www.eclipse.org/legal/epl-2.0\r\n\r\nSPDX-License-Identifier: EPL-2.0\r\n\r\n Contributors:\r\n    Thales - initial API and implementation";
+	String copyright = " Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.\r\n This program and the accompanying materials are made available under the\r\nterms of the Eclipse Public License 2.0 which is available at\r\nhttp://www.eclipse.org/legal/epl-2.0\r\n\r\nSPDX-License-Identifier: EPL-2.0\r\n\r\n Contributors:\r\n    Thales - initial API and implementation";
 
 	/**
 	 * Returns the value of the '<em><b>Reference</b></em>' reference.
