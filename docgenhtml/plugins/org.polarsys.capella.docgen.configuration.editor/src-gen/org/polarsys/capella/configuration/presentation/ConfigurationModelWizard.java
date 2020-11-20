@@ -1,9 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2019 Obeo.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2017, 2020 Obeo.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
  *  
  * Contributors:
  *    Obeo - initial API and implementation
@@ -105,7 +106,7 @@ public class ConfigurationModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2006, 2017 THALES GLOBAL SERVICES.\r\n All rights reserved. This program and the accompanying materials\r\n are made available under the terms of the Eclipse Public License v1.0\r\n which accompanies this distribution, and is available at\r\n http://www.eclipse.org/legal/epl-v10.html\r\n\r\n Contributors:\r\n    Thales - initial API and implementation";
+	public static final String copyright = " Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.\r\n This program and the accompanying materials are made available under the\r\nterms of the Eclipse Public License 2.0 which is available at\r\nhttp://www.eclipse.org/legal/epl-2.0\r\n\r\nSPDX-License-Identifier: EPL-2.0\r\n\r\n Contributors:\r\n    Thales - initial API and implementation";
 
 	/**
 	 * The supported extensions for created files.
