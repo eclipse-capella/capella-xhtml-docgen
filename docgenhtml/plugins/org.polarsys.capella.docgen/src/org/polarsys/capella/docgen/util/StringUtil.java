@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -117,9 +117,6 @@ public class StringUtil {
 			}
 			String part1 = MessageFormat.format(ERROR_CPY, resourcePath);
 			String part2 = MessageFormat.format(ERROR_COPY_PART_2, elementFQN);
-//			result.insert(0, ERROR_COPY_PART_2);
-//			result.insert(0, resourcePath);
-//			result.insert(0, ERROR_CPY);
 			result.append(part1);
 			result.append(part2);
 		} else {
