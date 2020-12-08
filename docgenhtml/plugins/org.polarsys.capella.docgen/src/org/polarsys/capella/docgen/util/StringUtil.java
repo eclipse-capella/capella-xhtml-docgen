@@ -46,6 +46,8 @@ import org.polarsys.capella.shared.id.handler.IScope;
 import org.polarsys.capella.shared.id.handler.IdManager;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlConstants;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
+import org.polarsys.kitalpha.doc.gen.business.core.util.EObjectLabelProviderHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
@@ -55,6 +57,7 @@ public class StringUtil {
 	private static final String REGEX_IMG = "<[\\s]*img[^>]*?src[\\s]*=[\\s]*\"([^>\"]+?)\"[^>]*?/[\\s]*>";
 	private static final String REGEX_FilePATH = "<[aA][\\s]+href=\"(.+?)\">";
 	private static final String ERROR_CPY = "Error during project relative file copy: {0}";
+	private static final String ERROR_COPY_PART_2 = " referenced in the description of the element: {0} "; //$NON-NLS-1$
 	private static final String ERROR_DECODE_FILE_LOCATION = "Error while decoding file location: {0}";
 	private static final String ERROR_READ_FILE_LOCATION = "Error while reading decoded file location: {0}";
 	private static final String WARNING_IMAGE_SERIALIZATION_FAILED = "Image serialization failed, default to keep img serialized value for element if id: {0}";
@@ -96,6 +99,33 @@ public class StringUtil {
 			return input;
 		}
 		return "";
+	}
+	
+	protected static String getResourceCopyError(EObject element, String resourcePath) {
+		StringBuilder result = new StringBuilder();
+		if (element != null) {
+			StringBuilder elementFQN = new StringBuilder();
+			String elementLabel = LabelProviderHelper.getText(element);
+			if (!EObjectLabelProviderHelper.EMPTY_STRING.equals(elementLabel)) {
+				elementFQN.append(elementLabel);
+				EObject currentElement = element;
+				while (currentElement.eContainer() != null){
+					currentElement = currentElement.eContainer();
+					elementFQN.insert(0, "::"); //$NON-NLS-1$
+					elementFQN.insert(0, LabelProviderHelper.getText(currentElement));				
+				}
+			}
+			String part1 = MessageFormat.format(ERROR_CPY, resourcePath);
+			String part2 = MessageFormat.format(ERROR_COPY_PART_2, elementFQN);
+//			result.insert(0, ERROR_COPY_PART_2);
+//			result.insert(0, resourcePath);
+//			result.insert(0, ERROR_CPY);
+			result.append(part1);
+			result.append(part2);
+		} else {
+			result.insert(0, ERROR_CPY);
+		}
+		return result.toString();
 	}
 
 	/**
@@ -164,7 +194,6 @@ public class StringUtil {
 				IPath patha = new Path(decodedFirstMatchGroup.replaceAll("%20", " "));
 				String iconName = id + "/" + patha.lastSegment();
 				StringBuilder iconSourcePath = new StringBuilder();
-
 				// if absolute path
 				if (decodedFirstMatchGroup.startsWith("file://")) {
 					for (String segment : patha.segments()) {
@@ -176,7 +205,12 @@ public class StringUtil {
 					IPath path = parentSrcFolder
 							.append(decodedFirstMatchGroup.substring(8, decodedFirstMatchGroup.length()));
 					IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-					iconSourcePath.append(iconFile.getLocationURI().getPath());
+					if (iconFile.exists()) {
+						iconSourcePath.append(iconFile.getLocationURI().getPath());
+					} else {
+						loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, getResourceCopyError(eObject, path.toString())));
+						continue;
+					}
 				}
 
 				IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
@@ -185,9 +219,9 @@ public class StringUtil {
 					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath.toString(),
 							parentTargetFolder.getLocationURI().getPath() + "/files/" + iconName);
 				} catch (IOException e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
+					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, getResourceCopyError(eObject, iconSourcePath.toString()), e));
 				} catch (Exception e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
+					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, getResourceCopyError(eObject, iconSourcePath.toString()), e));
 				}
 			}
 		}
@@ -258,7 +292,12 @@ public class StringUtil {
 						} else {
 							IPath path = parentSrcFolder.append(decodedFirstMatchGroup);
 							IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-							iconSourcePath = iconFile.getLocationURI().getPath();
+							if (iconFile.exists()) {
+								iconSourcePath = iconFile.getLocationURI().getPath();
+							} else {
+								logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, getResourceCopyError(eObject, path.toString())));
+								continue;
+							}
 						}
 					}
 
@@ -271,11 +310,9 @@ public class StringUtil {
 									parentTargetFolder.getLocationURI().getPath() + "/images/" + iconName);
 						}
 					} catch (IOException e) {
-						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-								MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
+						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, getResourceCopyError(eObject, iconSourcePath.toString()), e));
 					} catch (Exception e) {
-						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-								MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
+						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, getResourceCopyError(eObject, iconSourcePath.toString()), e));
 					}
 				}
 			}
