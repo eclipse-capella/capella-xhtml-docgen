@@ -64,26 +64,16 @@ public class PropertyValueHelper {
 
 		// We sum up those two lists in one while removing duplication
 		EList<AbstractPropertyValue> allpv_list = new BasicEList<AbstractPropertyValue>();
-		for (AbstractPropertyValue pv : applied_list) {
-			// we check that PV are stored whithin SystemEngineering model element (to get
-			// rid of PVMT definitions stored outside of SystemEngineering)
-			if (isInSystemEngineering(pv)) {
-				allpv_list.add(pv);
-			} else if (isInExternalPVPackage(element)) {
-				allpv_list.add(pv);
-			}
-		}
-		for (AbstractPropertyValue pv : owned_list) {
-			if (!allpv_list.contains(pv)) {
-				// we check that PV are stored whithin SystemEngineering model element (to get
-				// rid of PVMT definitions stored outside of SystemEngineering)
-				if (isInSystemEngineering(pv)) {
-					allpv_list.add(pv);
-				} else if (isInExternalPVPackage(element)) {
-					allpv_list.add(pv);
-				}
-			}
-		}
+
+		// We check that PV are stored whithin SystemEngineering model element (to get
+		// rid of PVMT definitions stored outside of SystemEngineering)
+		applied_list.stream().filter(pv -> isInSystemEngineering(pv) || isInExternalPVPackage(element))
+				.forEach(pv -> allpv_list.add(pv));
+
+		// We check that PV are stored whithin SystemEngineering model element (to get
+		// rid of PVMT definitions stored outside of SystemEngineering)
+		owned_list.stream().filter(pv -> isInSystemEngineering(pv) || isInExternalPVPackage(element))
+				.forEach(pv -> allpv_list.add(pv));
 
 		for (AbstractPropertyValue propertyValue : allpv_list) {
 			String basicname = propertyValue.getName();
@@ -128,26 +118,16 @@ public class PropertyValueHelper {
 
 		// We sum up those two lists in one while removing duplication
 		EList<PropertyValueGroup> allgroup_list = new BasicEList<PropertyValueGroup>();
-		for (PropertyValueGroup group : appliedgroup_list) {
-			// we check that PVG are stored whithin SystemEngineering model element (to get
-			// rid of PVMT definitions stored outside of SystemEngineering)
-			if (isInSystemEngineering(group)) {
-				allgroup_list.add(group);
-			} else if (isInExternalPVPackage(element)) {
-				allgroup_list.add(group);
-			}
-		}
-		for (PropertyValueGroup group : ownedgroup_list) {
-			if (!allgroup_list.contains(group)) {
-				// we check that PVG are stored whithin SystemEngineering model element (to get
-				// rid of PVMT definitions stored outside of SystemEngineering)
-				if (isInSystemEngineering(group)) {
-					allgroup_list.add(group);
-				} else if (isInExternalPVPackage(element)) {
-					allgroup_list.add(group);
-				}
-			}
-		}
+
+		// We check that PVG are stored whithin SystemEngineering model element (to get
+		// rid of PVMT definitions stored outside of SystemEngineering)
+		appliedgroup_list.stream().filter(group -> isInSystemEngineering(group) || isInExternalPVPackage(element))
+				.forEach(group -> allgroup_list.add(group));
+
+		// we check that PVG are stored whithin SystemEngineering model element (to get
+		// rid of PVMT definitions stored outside of SystemEngineering)
+		ownedgroup_list.stream().filter(group -> isInSystemEngineering(group) || isInExternalPVPackage(element))
+				.forEach(group -> allgroup_list.add(group));
 
 		for (PropertyValueGroup group : allgroup_list) {
 
@@ -222,18 +202,19 @@ public class PropertyValueHelper {
 
 	/**
 	 * Checks if {@code elem} containment hierarchy is only made of
-	 * {@link AbstractPropertyValue}, {@link PropertyValueGroup}, {@link PropertyValuePkg} or {@link Project}
-	 * elements.
+	 * {@link AbstractPropertyValue}, {@link PropertyValueGroup},
+	 * {@link PropertyValuePkg} or {@link Project} elements.
 	 * 
 	 * @param pv
 	 * @return
 	 */
 	private static boolean isInExternalPVPackage(EObject elem) {
 		if (elem.eContainer() != null) {
-			if (elem.eContainer() instanceof AbstractPropertyValue || elem.eContainer() instanceof PropertyValueGroup || elem.eContainer() instanceof PropertyValuePkg) {
+			if (elem.eContainer() instanceof AbstractPropertyValue || elem.eContainer() instanceof PropertyValueGroup
+					|| elem.eContainer() instanceof PropertyValuePkg) {
 				// Check one step up
 				return isInExternalPVPackage(elem.eContainer());
-			} else if (elem.eContainer() instanceof Project){
+			} else if (elem.eContainer() instanceof Project) {
 				return true;
 			}
 		}
