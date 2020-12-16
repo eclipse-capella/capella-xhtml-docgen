@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.index.items.builder;
 
 import org.polarsys.kitalpha.doc.gen.business.core.services.IndexItem;
@@ -12,6 +12,7 @@ import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DefaultFileNameService;
+import org.polarsys.capella.common.data.modellingcore.ModelElement;
 
 public class CollectCapellaItems {
 	protected static String nl;
@@ -140,6 +141,6 @@ public class CollectCapellaItems {
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return true;
+		return parameter instanceof ModelElement;
 	}
 }
