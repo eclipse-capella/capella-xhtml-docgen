@@ -19,6 +19,6 @@ location capella-master "https://download.eclipse.org/capella/core/updates/relea
 	org.polarsys.capella.common.feature.feature.group lazy
 }
 
-location kitalpha-runtime-master-latest "https://download.eclipse.org/kitalpha/updates/stable/runtime/1.3.3.202007201324/" {
+location kitalpha-runtime-master-latest "https://download.eclipse.org/kitalpha/updates/stable/runtime/1.3.4-S202012161447/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 }
