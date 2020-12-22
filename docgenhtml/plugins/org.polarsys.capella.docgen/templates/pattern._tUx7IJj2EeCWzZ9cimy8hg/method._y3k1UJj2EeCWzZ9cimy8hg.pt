@@ -17,8 +17,17 @@ document.write('<frameset rows="63,*,40" frameborder="0" framespacing="0" border
 document.write('<frame src="header.html" name="header" marginheight="0" marginwidth="0" scrolling="no" noresize="0"/>');
 document.write('<frameset cols="22%,*" border="5" frameborder="1" framespacing="1">');
 document.write('<frame src="sidebar.html" name="sideBar"/>');
-var locationText = (location.search ? location.search.substring(1):"<%=fileName%>");
-document.write('<frame src="'+ locationText +'.html" name="content"\/>');
+var locationText = "";
+var anchorText = "";
+if (location.search) {
+	locationText = location.search.substring(1);
+	if (location.href.lastIndexOf("#")>0) {
+		anchorText = anchorText + "#" + location.href.substring(location.href.lastIndexOf("#")+1);
+	}
+} else {
+	locationText = "<%=fileName%>";
+}
+document.write('<frame src="'+ locationText +'.html' + anchorText + '" name="content"\/>');
 document.write('<noframes>');
 document.write('Your browser cannot display this page !');
   document.write('</noframes>');

@@ -16,7 +16,7 @@
 		<link title="default" rel="stylesheet" type="text/css" media="screen, projection" href="../../css/content.css"></link>
 		<script type="text/javascript">
 			if(parent.location.href == self.location.href) {
-				window.location.href = 'index.html?<%=fileName%>';
+				window.location.href = 'index.html?<%=fileName%>' + '#' + self.location.href.substring(self.location.href.lastIndexOf("#")+1);
 			}
 		</script>
 		
