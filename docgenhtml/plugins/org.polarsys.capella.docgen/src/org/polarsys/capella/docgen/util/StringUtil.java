@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,6 +12,8 @@ package org.polarsys.capella.docgen.util;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,6 +35,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -46,6 +49,8 @@ import org.polarsys.capella.shared.id.handler.IScope;
 import org.polarsys.capella.shared.id.handler.IdManager;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlConstants;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
+import org.polarsys.kitalpha.doc.gen.business.core.util.EObjectLabelProviderHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
@@ -55,9 +60,13 @@ public class StringUtil {
 	private static final String REGEX_IMG = "<[\\s]*img[^>]*?src[\\s]*=[\\s]*\"([^>\"]+?)\"[^>]*?/[\\s]*>";
 	private static final String REGEX_FilePATH = "<[aA][\\s]+href=\"(.+?)\">";
 	private static final String ERROR_CPY = "Error during project relative file copy: {0}";
+	private static final String ERROR_COPY_PART_2 = " referenced in the description of the element: {0} "; //$NON-NLS-1$
 	private static final String ERROR_DECODE_FILE_LOCATION = "Error while decoding file location: {0}";
 	private static final String ERROR_READ_FILE_LOCATION = "Error while reading decoded file location: {0}";
 	private static final String WARNING_IMAGE_SERIALIZATION_FAILED = "Image serialization failed, default to keep img serialized value for element if id: {0}";
+	private static final String WARNING_NETWORK_IMAGE_NO_TREATMENT = "Network images are left as is and not copied to the generated documentation: {0}. Element id: {1}";
+	private static final String ERROR_STRING_PATH_URI_UNENCODE = "String to URI unencode failed with string: {0}";
+	private static final String IMAGES_FOLDER = "/images/";
 
 	/**
 	 * Transform all links added in an model element description to Html links
@@ -96,6 +105,30 @@ public class StringUtil {
 			return input;
 		}
 		return "";
+	}
+
+	protected static String getResourceCopyError(EObject element, String resourcePath) {
+		StringBuilder result = new StringBuilder();
+		if (element != null) {
+			StringBuilder elementFQN = new StringBuilder();
+			String elementLabel = LabelProviderHelper.getText(element);
+			if (!EObjectLabelProviderHelper.EMPTY_STRING.equals(elementLabel)) {
+				elementFQN.append(elementLabel);
+				EObject currentElement = element;
+				while (currentElement.eContainer() != null) {
+					currentElement = currentElement.eContainer();
+					elementFQN.insert(0, "::"); //$NON-NLS-1$
+					elementFQN.insert(0, LabelProviderHelper.getText(currentElement));
+				}
+			}
+			String part1 = MessageFormat.format(ERROR_CPY, resourcePath);
+			String part2 = MessageFormat.format(ERROR_COPY_PART_2, elementFQN);
+			result.append(part1);
+			result.append(part2);
+		} else {
+			result.insert(0, ERROR_CPY);
+		}
+		return result.toString();
 	}
 
 	/**
@@ -164,7 +197,6 @@ public class StringUtil {
 				IPath patha = new Path(decodedFirstMatchGroup.replaceAll("%20", " "));
 				String iconName = id + "/" + patha.lastSegment();
 				StringBuilder iconSourcePath = new StringBuilder();
-
 				// if absolute path
 				if (decodedFirstMatchGroup.startsWith("file://")) {
 					for (String segment : patha.segments()) {
@@ -176,7 +208,13 @@ public class StringUtil {
 					IPath path = parentSrcFolder
 							.append(decodedFirstMatchGroup.substring(8, decodedFirstMatchGroup.length()));
 					IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-					iconSourcePath.append(iconFile.getLocationURI().getPath());
+					if (iconFile.exists()) {
+						iconSourcePath.append(iconFile.getLocationURI().getPath());
+					} else {
+						loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+								getResourceCopyError(eObject, path.toString())));
+						continue;
+					}
 				}
 
 				IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
@@ -185,9 +223,11 @@ public class StringUtil {
 					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath.toString(),
 							parentTargetFolder.getLocationURI().getPath() + "/files/" + iconName);
 				} catch (IOException e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
+					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+							getResourceCopyError(eObject, iconSourcePath.toString()), e));
 				} catch (Exception e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, ERROR_CPY, e));
+					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+							getResourceCopyError(eObject, iconSourcePath.toString()), e));
 				}
 			}
 		}
@@ -214,73 +254,121 @@ public class StringUtil {
 		if (input.trim().isEmpty()) {
 			return input;
 		}
-
+		// Pattern to match <img[...]> html content
 		Pattern pattern = Pattern.compile(REGEX_IMG, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(input);
+
 		final IPath parentSrcFolder = new Path(eObject.eResource().getURI().segment(1));
 		final IPath parentTargetFolderPath = new Path(projectName).append(outputFolder);
 		IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
+
+		// List used to store unique file names in the generation folder
 		List<String> imageFileNames = new ArrayList<String>();
+		final ILog logger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
+		String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
+		id = DocGenHtmlUtil.getValidFileName(id);
+
 		while (matcher.find()) {
 			if (matcher.groupCount() == 1) {
-				final ILog logger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
-				String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
-				id = id.replace("-", "");
 				String firstMatchGroup = matcher.group(1);
-				// As we do a replace all, we may have already serialized/copied some files so we check to avoid work duplication
+				// As we do a replace all, we may have already serialized/copied some files so
+				// we check to avoid work duplication
 				if (input.contains(firstMatchGroup)) {
 					// Use an inline creation of HTMLDocument to get correct html content
 					String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, logger);
 
 					IPath patha = new Path(decodedFirstMatchGroup);
-					String iconName = id + "/" + patha.lastSegment();
+					String lastSegmentFileName = patha.removeFileExtension().lastSegment();
+					String iconName = id + "/" + lastSegmentFileName;
 					String iconSourcePath = "";
 
 					boolean isDataImage = firstMatchGroup.startsWith(ImageHelper.DATA_IMAGE_PREFIX);
-					boolean breakCurrentProcessing = false;
 					if (isDataImage) {
 						// Serialize image in target folder: "[dogen_output]/object_id/folder
 						iconName = ImageHelper.INSTANCE.serializeImageInTargetFolder(firstMatchGroup,
-								parentTargetFolder.getLocationURI().getPath() + "/images/", id, imageFileNames, logger);
+								parentTargetFolder.getLocationURI().getPath() + IMAGES_FOLDER, id, imageFileNames,
+								logger);
 						if (iconName == null) {
 							// Image serialization has failed, we will keep current image
-							breakCurrentProcessing = true;
 							logger.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID,
 									MessageFormat.format(WARNING_IMAGE_SERIALIZATION_FAILED,
 											eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString()),
 									new Exception()));
 						}
 					} else {
-						if (patha.isAbsolute()) {
-							for (String segment : patha.segments()) {
+						if (decodedFirstMatchGroup.startsWith("http") || decodedFirstMatchGroup.startsWith("https")) {
+							logger.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID,
+									MessageFormat.format(WARNING_NETWORK_IMAGE_NO_TREATMENT, decodedFirstMatchGroup,
+											eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString())));
+							continue;
+						}
+						if (decodedFirstMatchGroup.startsWith("//") || decodedFirstMatchGroup.startsWith("\\\\")) {
+							// Absolute path may be serialized with %20 string for spaces
+							// We should thus decode them for the upcoming copy
+							iconSourcePath = unencodeURIString(decodedFirstMatchGroup, logger);
+							iconName = unencodeURIString(iconName, logger);
+						} else if (patha.isAbsolute()) {
+							for (String segment : patha.removeFileExtension().segments()) {
 								iconSourcePath += "/" + segment;
 							}
+							iconSourcePath += "." + patha.getFileExtension();
+							// Absolute path may be serialized with %20 string for spaces
+							// We should thus decode them for the upcoming copy
+							iconSourcePath = unencodeURIString(iconSourcePath, logger);
+							iconName = unencodeURIString(iconName, logger);
 						} else {
 							IPath path = parentSrcFolder.append(decodedFirstMatchGroup);
 							IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-							iconSourcePath = iconFile.getLocationURI().getPath();
+							if (iconFile.exists()) {
+								iconSourcePath = iconFile.getLocationURI().getPath();
+							} else {
+								logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+										getResourceCopyError(eObject, path.toString())));
+								continue;
+							}
+						}
+						// Ensure unique file name
+						iconName = ImageHelper.INSTANCE.getUniqueFileName(iconName, imageFileNames);
+						iconName += "." + patha.getFileExtension();
+
+						try {
+							// Copy file
+							ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath,
+									parentTargetFolder.getLocationURI().getPath() + IMAGES_FOLDER + iconName);
+						} catch (IOException e) {
+							logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+									getResourceCopyError(eObject, iconSourcePath.toString()), e));
+						} catch (Exception e) {
+							logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+									getResourceCopyError(eObject, iconSourcePath.toString()), e));
 						}
 					}
 
-					if (!breakCurrentProcessing) {
-						input = input.replace(firstMatchGroup, "./images/" + iconName);
-					}
-					try {
-						if (!isDataImage) {
-							ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath,
-									parentTargetFolder.getLocationURI().getPath() + "/images/" + iconName);
-						}
-					} catch (IOException e) {
-						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-								MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
-					} catch (Exception e) {
-						logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-								MessageFormat.format(ERROR_CPY, firstMatchGroup), e));
-					}
+					input = input.replace(firstMatchGroup, "." + IMAGES_FOLDER + iconName);
 				}
 			}
 		}
 		return input;
+	}
+
+	/**
+	 * Method to unencode a String that will be used as URI to a file. Removes %20
+	 * from string.
+	 * 
+	 * @param stringToUnencode
+	 * @param logger
+	 * @return
+	 */
+	private static String unencodeURIString(String stringToUnencode, ILog logger) {
+		URI uri;
+		try {
+			uri = new URI(stringToUnencode);
+			stringToUnencode = URIUtil.toUnencodedString(uri);
+		} catch (URISyntaxException e) {
+			logger.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID,
+					MessageFormat.format(ERROR_STRING_PATH_URI_UNENCODE, stringToUnencode), e));
+		}
+		return stringToUnencode;
 	}
 
 	/**
@@ -294,17 +382,17 @@ public class StringUtil {
 	 *            An ILog instance for exceptions management.
 	 * @return A decoded String.
 	 */
-	private static String decodeHtmlFilePath(String filePath, ILog loger) {
+	private static String decodeHtmlFilePath(String filePath, ILog logger) {
 		try {
 			HTMLDocument doc = new HTMLDocument();
 			new HTMLEditorKit().read(new StringReader("<html><body>" + filePath), doc, 0);
 			String decodedFirstMatchGroup = doc.getText(1, doc.getLength()).trim();
 			return decodedFirstMatchGroup;
 		} catch (BadLocationException e) {
-			loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+			logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
 					MessageFormat.format(ERROR_DECODE_FILE_LOCATION, filePath), e));
 		} catch (IOException e) {
-			loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+			logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
 					MessageFormat.format(ERROR_READ_FILE_LOCATION, filePath), e));
 		}
 		return null;
