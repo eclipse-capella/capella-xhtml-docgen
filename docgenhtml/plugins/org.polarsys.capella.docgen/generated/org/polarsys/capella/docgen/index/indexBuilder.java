@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.index;
 
 import org.eclipse.egf.common.helper.*;
@@ -26,10 +26,13 @@ public class indexBuilder extends org.polarsys.kitalpha.doc.gen.business.core.in
 			+ "document.write('<frameset rows=\"63,*,40\" frameborder=\"0\" framespacing=\"0\" border=\"0\">');" + NL
 			+ "document.write('<frame src=\"header.html\" name=\"header\" marginheight=\"0\" marginwidth=\"0\" scrolling=\"no\" noresize=\"0\"/>');"
 			+ NL + "document.write('<frameset cols=\"22%,*\" border=\"5\" frameborder=\"1\" framespacing=\"1\">');" + NL
-			+ "document.write('<frame src=\"sidebar.html\" name=\"sideBar\"/>');" + NL
-			+ "var locationText = (location.search ? location.search.substring(1):\"";
-	protected final String TEXT_2 = "\");" + NL
-			+ "document.write('<frame src=\"'+ locationText +'.html\" name=\"content\"\\/>');" + NL
+			+ "document.write('<frame src=\"sidebar.html\" name=\"sideBar\"/>');" + NL + "var locationText = \"\";" + NL
+			+ "var anchorText = \"\";" + NL + "if (location.search) {" + NL
+			+ "\tlocationText = location.search.substring(1);" + NL + "\tif (location.href.lastIndexOf(\"#\")>0) {" + NL
+			+ "\t\tanchorText = anchorText + \"#\" + location.href.substring(location.href.lastIndexOf(\"#\")+1);" + NL
+			+ "\t}" + NL + "} else {" + NL + "\tlocationText = \"";
+	protected final String TEXT_2 = "\";" + NL + "}" + NL
+			+ "document.write('<frame src=\"'+ locationText +'.html' + anchorText + '\" name=\"content\"\\/>');" + NL
 			+ "document.write('<noframes>');" + NL + "document.write('Your browser cannot display this page !');" + NL
 			+ "  document.write('</noframes>');" + NL + "document.write('</frameset>');" + NL
 			+ "document.write('<frame src=\"footer.html\" name=\"footer\" scrolling=\"no\" frameborder=\"0\" noresize=\"noresize\"/>');"

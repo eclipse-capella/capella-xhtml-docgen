@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -47,11 +47,12 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
 			+ NL + "\t\t<script type=\"text/javascript\">" + NL
 			+ "\t\t\tif(parent.location.href == self.location.href) {" + NL
 			+ "\t\t\t\twindow.location.href = 'index.html?";
-	protected final String TEXT_10 = "';" + NL + "\t\t\t}" + NL + "\t\t</script>" + NL + "\t\t" + NL + "\t\t<style>"
-			+ NL + "\t\t\tbody {" + NL + "\t\t\t\tbackground: white;" + NL + "\t\t\t\tfont-family: Arial;" + NL
-			+ "\t\t\t}" + NL + "\t\t\t.treeview {" + NL + "\t\t\t\tbackground-color: white ;" + NL + "\t\t\t}" + NL
-			+ "\t" + NL + "\t\t\t.treeview ul{ /*CSS for Simple Tree Menu*/" + NL + "\t\t\t\tbackground-color: white;"
-			+ NL + "\t\t\t\tfont-size: 12px;" + NL + "\t\t\t}" + NL + "\t" + NL
+	protected final String TEXT_10 = "' + '#' + self.location.href.substring(self.location.href.lastIndexOf(\"#\")+1);"
+			+ NL + "\t\t\t}" + NL + "\t\t</script>" + NL + "\t\t" + NL + "\t\t<style>" + NL + "\t\t\tbody {" + NL
+			+ "\t\t\t\tbackground: white;" + NL + "\t\t\t\tfont-family: Arial;" + NL + "\t\t\t}" + NL
+			+ "\t\t\t.treeview {" + NL + "\t\t\t\tbackground-color: white ;" + NL + "\t\t\t}" + NL + "\t" + NL
+			+ "\t\t\t.treeview ul{ /*CSS for Simple Tree Menu*/" + NL + "\t\t\t\tbackground-color: white;" + NL
+			+ "\t\t\t\tfont-size: 12px;" + NL + "\t\t\t}" + NL + "\t" + NL
 			+ "\t\t\t.treeview li{ /*Style for LI elements in general (excludes an LI that contains sub lists)*/" + NL
 			+ "\t\t\t\tbackground-color: white;" + NL + "\t\t\t}" + NL + "\t\t</style>" + NL + "\t\t" + NL + "\t</head>"
 			+ NL + "\t" + NL + "\t<body>";
@@ -60,6 +61,7 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
 			+ NL + "\t\t$(\"#";
 	protected final String TEXT_13 = "\").treeview({ collapsed: false, animated: \"fast\", unique: false, control: \"#treecontrol\"});"
 			+ NL + "\t</script>" + NL + "   </body>" + NL + "</html>";
+	protected final String TEXT_14 = NL;
 
 	public AbstractExchangeDocGen() {
 		//Here is the constructor
@@ -87,8 +89,8 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_14);
 		return stringBuffer.toString();
 	}
 

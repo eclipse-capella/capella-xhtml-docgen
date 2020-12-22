@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -42,9 +42,10 @@ public class CapellaElementDocGen extends org.polarsys.kitalpha.doc.gen.business
 			+ NL + "\t\t<script type=\"text/javascript\">" + NL
 			+ "\t\t\tif(parent.location.href == self.location.href) {" + NL
 			+ "\t\t\t\twindow.location.href = 'index.html?";
-	protected final String TEXT_4 = "';" + NL + "\t\t\t}" + NL + "\t\t</script>" + NL + "\t\t" + NL + "\t\t<style>" + NL
-			+ "\t\t\tbody {" + NL + "\t\t\t\tbackground: white;" + NL + "\t\t\t\tfont-family: Arial;" + NL + "\t\t\t}"
-			+ NL + "\t\t\t.treeview {" + NL + "\t\t\t\tbackground-color: white ;" + NL + "\t\t\t}" + NL + "\t" + NL
+	protected final String TEXT_4 = "' + '#' + self.location.href.substring(self.location.href.lastIndexOf(\"#\")+1);"
+			+ NL + "\t\t\t}" + NL + "\t\t</script>" + NL + "\t\t" + NL + "\t\t<style>" + NL + "\t\t\tbody {" + NL
+			+ "\t\t\t\tbackground: white;" + NL + "\t\t\t\tfont-family: Arial;" + NL + "\t\t\t}" + NL
+			+ "\t\t\t.treeview {" + NL + "\t\t\t\tbackground-color: white ;" + NL + "\t\t\t}" + NL + "\t" + NL
 			+ "\t\t\t.treeview ul{ /*CSS for Simple Tree Menu*/" + NL + "\t\t\t\tbackground-color: white;" + NL
 			+ "\t\t\t\tfont-size: 12px;" + NL + "\t\t\t}" + NL + "\t" + NL
 			+ "\t\t\t.treeview li{ /*Style for LI elements in general (excludes an LI that contains sub lists)*/" + NL
