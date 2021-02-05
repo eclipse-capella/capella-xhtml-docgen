@@ -1,0 +1,27 @@
+= Capella Documentation Generation Preferences =
+
+Preferences allow for fine tuning the generated HTML pages.
+
+== Common ==
+
+=== Status and Review ===
+
+This preference allows to select whether or not the ''Status and Review'' content is included in the root HTML page generated for the Capella model.
+
+=== Architecture diagram tree ===
+
+This preference allows to select whether or not the tree for diagrams included in an element is generated in the element HTML page.
+
+== Exchanges ==
+
+=== Component Exchanges ===
+
+Select whether or not to generate pages for ''Component Exchange'' elements.
+
+=== Functional Exchanges ===
+
+Select whether or not to generate pages for ''Functional Exchange'' elements.
+
+=== Physical Link ===
+
+Select whether or not to generate pages for ''Physical link'' elements.

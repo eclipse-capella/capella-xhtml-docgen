@@ -1,0 +1,5 @@
+= Known issues =
+
+== Core DocGen issues ==
+
+Kitalpha ''Core DocGen known issues'' apply on Capella's DocGen. They can be found on the dedicated sub help topic.
