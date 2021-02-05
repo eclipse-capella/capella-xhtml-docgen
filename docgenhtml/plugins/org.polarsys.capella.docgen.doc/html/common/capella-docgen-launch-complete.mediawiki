@@ -1,0 +1,11 @@
+= Complete documentation generation =
+
+The complete documentation generation will produce a documentation for the whole Capella model. Additional customizations setup in the preferences pages are still taken into account.
+
+First select the output folder for the generation. Continue by either clicking on the '''Next''' button or on the '''Finish''' button. This second possibility will bypass the ''branding'' customization step and rely on default values modifiable in Kitalpha preferences pages.
+
+[[Image:img/docgen_complete2_output_selection.png|thumb|none|600px]]
+
+The final and optional step is the setup of branding information. Click on '''Finish''' to launch the generation.
+
+[[Image:img/docgen_complete3_branding.png|thumb|none|600px]]
