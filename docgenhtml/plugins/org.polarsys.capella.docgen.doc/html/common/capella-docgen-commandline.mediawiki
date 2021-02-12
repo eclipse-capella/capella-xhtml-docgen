@@ -1,0 +1,64 @@
+= HTML Production using command line =
+
+== Simple use case ==
+
+<pre>
+<CapellaInstallationPath>/capellac.exe -nosplash
+-application org.polarsys.capella.core.commandline.core
+-appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
+-data <workspacePath>
+-filepath /EOLE_AF/EOLE_AF.aird
+-outputfolder /DocProject/HTML
+-forceoutputfoldercreation
+</pre>
+
+This command will generate ''HTML'' report from the EOLE-AF aird file specified to the output folder '''''HTML''''' present into '''''Doc project'''''.
+
+== Complex use cases ==
+
+=== Import Capella project and generate inside it ===
+
+<pre>
+<CapellaInstallationPath>/capellac.exe -nosplash
+-application org.polarsys.capella.core.commandline.core
+-appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
+-data <targetWorkspacePath>
+-import <absolutePath>/EOLE_AF
+-input /EOLE_AF/EOLE_AF.aird
+-outputfolder /EOLE_AF/HTML
+-logfile D:/CommandLineLog/log.html
+</pre>
+
+This command will import the EOLE_AF project from ''&lt;absolutePath&gt;'' workspace into ''&lt;targetWorkspacePath&gt; ''workspace before generating the HTML report inside it.
+
+=== Import Capella project and generate inside a new project ===
+
+<pre>
+<CapellaInstallationPath>/capellac.exe -nosplash
+-application org.polarsys.capella.core.commandline.core
+-appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
+-data <targetWorkspacePath>
+-import <absolutePath>/EOLE_AF
+-input /EOLE_AF/EOLE_AF.aird
+-outputfolder /DocProject/HTML
+-logfile D:/CommandLineLog/log.html
+</pre>
+
+This command will import the EOLE_AF project from ''&lt;absolutePath&gt;'' workspace into ''&lt;targetWorkspacePath&gt; ''workspace and create the DocProject to generate the HTML report inside it.
+
+=== Import Capella project and a Doc project to generate inside it ===
+
+<pre>
+<CapellaInstallationPath>/capellac.exe -nosplash
+-application org.polarsys.capella.core.commandline.core
+-appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
+-data <targetWorkspacePath>
+-import "<absolutePath>/EOLE_AF | <absolutePath>/DocProject"
+-input /EOLE_AF/EOLE_AF.aird
+-outputfolder /DocProject/HTML
+-logfile D:/CommandLineLog/log.html
+</pre>
+
+This command will import two projects (EOLE_AF and DocProject) from ''&lt;absolutePath&gt;'' workspace into ''&lt;targetWorkspacePath&gt; ''workspace before generating the HTML report inside the DocProject.
+
+'''NOTE''': The source and target workspaces have to be different.

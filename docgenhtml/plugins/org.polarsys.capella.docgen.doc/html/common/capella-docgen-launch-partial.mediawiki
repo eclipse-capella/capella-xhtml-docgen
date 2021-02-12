@@ -1,0 +1,13 @@
+= Partial documentation generation =
+
+The partial documentation generation will produce a documentation for a subset of the Capella model. This subset is automatically built by relying on the element on which the contextual menu has been called. The generated documentation will contain documentation for this Capella element and all (recusively) its contained elements.
+
+The output folder selection will then be shown with an additional option : '''Export references to elements out of scope'''. This option modifies the handling of references to elements not present in the automatically selected subset of the model. If this option is selected, references to elements not selected for generation will still be displayed but will not be navigable in the generated documentation.
+
+Continue by either clicking on the '''Next''' button or on the '''Finish''' button. This second possibility will bypass the ''branding'' customization step and rely on default values modifiable in Kitalpha preferences pages.
+
+[[Image:img/docgen_partial2_output_selection.png|thumb|none|600px]]
+
+Finally set the branding information (relies on Kitalpha documentation branding preferences pages). Click on '''Finish''' to launch the generation.
+
+[[Image:img/docgen_selective4_branding.png|thumb|none|600px]]

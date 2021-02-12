@@ -1,0 +1,13 @@
+= Launching the documentation generation =
+
+Documentation generation on a Capella model can only be done if the session is opened and if the target folder exists.
+
+Once this is setup, calling the contextual menu on the ''aird'' file of a Capella model provides two '''HTML Documentation Generation''' options:
+* Complete documentation generation accessible through the '''HTML Documentation Generation''' menu element.
+* Selective documentation generation (choose which elements to generate) accessible through the '''HTML Documentation Generation on selected elements...''' menu element.
+
+[[Image:img/docgen_contextual.png|thumb|none|600px]]
+
+* Partial documentation generation (choose an element) accessible through the '''HTML Documentation Generation''' menu element while calling the contextual menu on an element of the model in the project explorer tree.
+
+[[Image:img/docgen_contextual_partial.png|thumb|none|600px]]

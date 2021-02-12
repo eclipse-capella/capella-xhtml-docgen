@@ -1,0 +1,25 @@
+= Selective documentation generation =
+
+The selective documentation generation will produce a documentation for a subset of the Capella model. This subset is explicitly selected by the user through the selection wizard. Additional customizations setup in the preferences pages are still taken into account.
+
+The selection dialog is as follows.
+
+Both the left and right viewers allows to select elements to be added to the generated documentation. The right viewer is a contextual viewer populated with elements related with the element selected in the left viewer.
+
+Elements displayed in this view are elements visible in the Capella '''Project Explorer''' view. This means that elements hidden from this view will not be displayed in the selection view and not selected for generation.
+
+Once the selection is done it can be saved as a ''.configuration'' file for later reuse.
+
+Validate the selection by clicking on the '''Next''' button.
+
+[[Image:img/docgen_selective2_selection.png|thumb|none|600px]]
+
+Then select the output folder for the generation. An option '''Export references to elements out of scope''' is available regarding the handling of references to elements not selected in the previous step. If this option is selected, references to elements not selected for generation will still be displayed but will not be navigable in the generated documentation.
+
+Continue by either clicking on the '''Next''' button or on the '''Finish''' button. This second possibility will bypass the ''branding'' customization step and rely on default values modifiable in Kitalpha preferences pages.
+
+[[Image:img/docgen_selective3_output_selection.png|thumb|none|600px]]
+
+Finally set the branding information (relies on Kitalpha documentation branding preferences pages). Click on '''Finish''' to launch the generation.
+
+[[Image:img/docgen_selective4_branding.png|thumb|none|600px]]
