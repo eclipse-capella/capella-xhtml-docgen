@@ -33,11 +33,12 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<antrun-version>1.7</antrun-version>
 		<jacoco-version>0.8.6</jacoco-version>
-		
 		<sourcePhase>package</sourcePhase>
 
 		<!-- for junit -->
 		<capella-product-id>org.polarsys.capella.core.platform.sirius.ui.perspective.product</capella-product-id>
+		<capella-rcp-product-id>org.polarsys.capella.rcp.product</capella-rcp-product-id>
+		<capella-application-id>org.polarsys.capella.core.platform.sirius.ui.perspective.id</capella-application-id>
 		<tycho.testArgLine>-Xms256m -Xmx1024m</tycho.testArgLine>
 
 		<!-- for packaging -->
@@ -121,6 +122,9 @@
 		<profile>
 			<id>tests</id>
 			<modules>
+				<module>docgenhtml/features</module>
+				<module>docgenhtml/plugins</module>
+				<module>releng/org.polarsys.capella.docgen.site</module>
 				<module>tests/plugins</module>
 			</modules>
 		</profile>
