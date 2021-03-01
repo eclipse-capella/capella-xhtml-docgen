@@ -116,6 +116,12 @@
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
+		<profile>
+			<id>tests</id>
+			<modules>
+				<module>tests/plugins</module>
+			</modules>
+		</profile>
 	</profiles>
 
 	<build>
