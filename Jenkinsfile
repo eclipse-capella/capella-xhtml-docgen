@@ -1,4 +1,5 @@
 pipeline {
+<<<<<<< HEAD
 	agent { label 'migration' }
 
 	tools {
