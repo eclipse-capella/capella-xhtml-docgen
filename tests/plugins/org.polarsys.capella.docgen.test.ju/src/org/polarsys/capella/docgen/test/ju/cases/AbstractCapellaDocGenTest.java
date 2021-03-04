@@ -115,10 +115,10 @@ public abstract class AbstractCapellaDocGenTest extends BasicTestCase {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		super.setUp();
 
 		// This is the first launch so we generate documentation
 		if (getReporter() == null) {
+	        super.setUp();
 
 			getAirdFileForLoadedModel(getModelName());
 			getCapellaFileForLoadedModel(getModelName());
@@ -143,12 +143,11 @@ public abstract class AbstractCapellaDocGenTest extends BasicTestCase {
 			kitalphaDocgenPref.flush();
 			
 			launchDocumentationGeneration();
-			
-			System.out.println(GenerationGlobalScope.getInstance().getReferencesStrategy());
 		}
 	}
 
 	private void launchDocumentationGeneration() {
+	    System.out.println("[" + this.getName() + "] " + ">> begin documentation generation ");
 		setReporter();
 		// Launch docgen
 		Activity melodyLauncher = InvokeActivityHelper.getActivity(CAPELLA_TEST_LAUNCHER_URI);
@@ -157,6 +156,7 @@ public abstract class AbstractCapellaDocGenTest extends BasicTestCase {
 			XHTMLDocumentationGenerationLauncher.gen(getProjectName(), OUTPUT_FOLDER_PATH, factoryComponent,
 					getSemanticModelURI(), reporter);
 		}
+		System.out.println("[" + this.getName() + "] " + ">> end documentation generation ");
 	}
 
 	@AfterClass
