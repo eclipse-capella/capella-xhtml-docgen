@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.sirius.business.api.dialect.DialectManager;
-import org.eclipse.sirius.business.api.query.DRepresentationQuery;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
@@ -40,7 +39,6 @@ import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
-import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 public class CapellaServices {
 	public static final String BOLD_BEGIN = "<b>";
@@ -404,11 +402,7 @@ public class CapellaServices {
 		builder.append("\" src=\""); //$NON-NLS-1$
 		builder.append(generatedFolder);
 		builder.append("/"); //$NON-NLS-1$
-        DRepresentationQuery rep2descQuery = new DRepresentationQuery(diagram);
-        DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
-    	String representationName = (result == null) ? diagram.getUid() : result.getName();
-
-		String validFileName = DocGenHtmlUtil.getValidFileName(representationName);
+		String validFileName = DocGenHtmlUtil.getValidFileName(DiagramSessionHelper.getID(diagram));
 		builder.append(validFileName);
 		builder.append(".jpg\" alt=\"").append(validFileName).append("\"/>"); //$NON-NLS-1$
 		builder.append("</a>"); //$NON-NLS-1$
