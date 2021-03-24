@@ -15,12 +15,12 @@ include "https://raw.githubusercontent.com/eclipse/capella/master/releng/plugins
 
 with source, requirements
 
-location capella-master "https://download.eclipse.org/capella/core/updates/releases/5.0.0-R20201202-123401/org.polarsys.capella.rcp.site/" {
+location capella-master "https://download.eclipse.org/capella/core/updates/stable/5.1.0-S20210302-221222/org.polarsys.capella.rcp.site/" {
 	org.polarsys.capella.rcp.feature.group lazy
 	org.polarsys.capella.core.re.feature.feature.group lazy
 }
 
-location kitalpha-runtime "https://download.eclipse.org/kitalpha/updates/stable/runtime/5.0.1-S202102121036/" {
+location kitalpha-runtime "https://ci.eclipse.org/kitalpha/job/Kitalpha/job/PR-647/4/artifact/releng/plugins/org.polarsys.kitalpha.releng.sdk.updatesite/target/repository/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 }
 
