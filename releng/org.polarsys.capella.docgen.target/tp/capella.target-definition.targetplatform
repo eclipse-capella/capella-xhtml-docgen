@@ -20,10 +20,9 @@ location capella-master "https://download.eclipse.org/capella/core/updates/stabl
 	org.polarsys.capella.core.re.feature.feature.group lazy
 }
 
-location kitalpha-runtime "https://ci.eclipse.org/kitalpha/job/Kitalpha/job/PR-647/4/artifact/releng/plugins/org.polarsys.kitalpha.releng.sdk.updatesite/target/repository/" {
+location kitalpha-sdk "https://ci.eclipse.org/kitalpha/job/Kitalpha/job/master/43/artifact/releng/plugins/org.polarsys.kitalpha.releng.sdk.updatesite/target/repository/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 }
-
 
 location eclipse_2020_06 "https://download.eclipse.org/releases/2020-06/" {
 	org.eclipse.emf.query.feature.group lazy
