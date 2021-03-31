@@ -20,7 +20,7 @@ location capella-master "https://download.eclipse.org/capella/core/updates/stabl
 	org.polarsys.capella.core.re.feature.feature.group lazy
 }
 
-location kitalpha-sdk "https://ci.eclipse.org/kitalpha/job/Kitalpha/job/master/43/artifact/releng/plugins/org.polarsys.kitalpha.releng.sdk.updatesite/target/repository/" {
+location kitalpha-sdk "https://download.eclipse.org/kitalpha/updates/stable/sdk/5.1.0-S202103301208/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 }
 
