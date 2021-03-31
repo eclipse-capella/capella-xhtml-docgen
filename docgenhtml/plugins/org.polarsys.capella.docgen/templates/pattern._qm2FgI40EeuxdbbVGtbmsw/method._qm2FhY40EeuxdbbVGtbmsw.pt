@@ -1,0 +1,10 @@
+<%
+Collection<String> involvingFunctionalChains = FunctionHelper.getInvolvingFunctionalChains(projectNameParameter, outputFolderParameter, parameter);
+if(involvingFunctionalChains.size() > 0 ) {
+	String title = "Involving Functional Chains";
+	Integer level = 2;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollection" args="involvingFunctionalChains:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+}
+%>

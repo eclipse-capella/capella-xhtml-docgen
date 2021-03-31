@@ -1,0 +1,10 @@
+<%
+Collection<String> allocatingComponents = FunctionHelper.getAllocatingComponents(projectNameParameter, outputFolderParameter, parameter);
+if(allocatingComponents.size() > 0 ) {
+	String title = "Allocating Component";
+	Integer level = 2;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollection" args="allocatingComponents:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+}
+%>

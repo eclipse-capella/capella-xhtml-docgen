@@ -1,0 +1,11 @@
+<table>
+<tr>
+<%
+Collection<String> columns = (Collection<String>) tableColumnsListParameter; 
+for (String column : columns) {
+%>
+<th><%=column%></th>
+<%
+}
+%>
+</tr>
