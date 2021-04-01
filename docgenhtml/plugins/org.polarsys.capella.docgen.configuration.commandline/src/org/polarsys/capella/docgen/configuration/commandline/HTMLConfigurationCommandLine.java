@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES and others.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -127,7 +127,8 @@ public class HTMLConfigurationCommandLine extends AbstractCommandLine {
 		URI uri = URI.createURI(fileURI);
 
 		URI semanticResourceURI = uri;
-
+		boolean status = true;
+		
 		if (uri.lastSegment().endsWith(".aird")) {//$NON-NLS-1$
 
 			DiagramSessionHelper.setAirdUri(uri);
@@ -148,19 +149,21 @@ public class HTMLConfigurationCommandLine extends AbstractCommandLine {
 				Resource semanticResource = rootSemanticElement.eResource();
 				semanticResourceURI = semanticResource.getURI();
 
-				boolean status = executeEGFActivity(htmlGenerator, argHelper.getOutputFolder(), semanticResourceURI);
+				status = executeEGFActivity(htmlGenerator, argHelper.getOutputFolder(), semanticResourceURI);
 
 				if (status) {
 					logInfo(Messages.generation_done + argHelper.getOutputFolder());
 				}
 			} else {
+				status = false;
 				logError(Messages.no_root_semantic_element);
 			}
 		} else {
+			status = false;
 			logError(Messages.filepath_point_to_aird);
 		}
 
-		return true;
+		return status;
 	}
 
 	/**
