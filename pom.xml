@@ -45,7 +45,9 @@
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.jacoco.reportPath>${project.basedir}/../../target/jacoco.exec</sonar.jacoco.reportPath>
 		<sonar.jacoco.itReportPath>${project.basedir}/../../target/jacoco-it.exec</sonar.jacoco.itReportPath>
-		<sonar.exclusions>${project.basedir}/docgenhtml/plugins/org.polarsys.capella.docgen/generated/**/*</sonar.exclusions>
+		
+	  	<sonar.exclusions>**/generated/**/*.java,**/src-gen/**/*.java</sonar.exclusions>
+	  	<sonar.test.exclusions>**/tests/**/*.java,**/test/**/*.java</sonar.test.exclusions>
 	</properties>
 
 	<profiles>
