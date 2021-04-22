@@ -210,6 +210,8 @@
 						<feature id="org.polarsys.capella.docgen.configuration.feature"/>
 						<feature id="org.polarsys.capella.docgen.feature"/>
 						<feature id="org.polarsys.capella.docgen.package.feature"/>
+						<feature id="org.polarsys.kitalpha.doc.gen.business.core.feature"/>
+						<feature id="org.eclipse.egf.feature"/>
 					</excludes>
 				</configuration>
 				<executions>
