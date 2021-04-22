@@ -10,7 +10,8 @@
   Contributors:
        Thales - initial API and implementation
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -45,9 +46,9 @@
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.jacoco.reportPath>${project.basedir}/../../target/jacoco.exec</sonar.jacoco.reportPath>
 		<sonar.jacoco.itReportPath>${project.basedir}/../../target/jacoco-it.exec</sonar.jacoco.itReportPath>
-		
-	  	<sonar.exclusions>**/generated/**/*.java,**/src-gen/**/*.java</sonar.exclusions>
-	  	<sonar.test.exclusions>**/tests/**/*.java,**/test/**/*.java</sonar.test.exclusions>
+
+		<sonar.exclusions>**/generated/**/*.java,**/src-gen/**/*.java</sonar.exclusions>
+		<sonar.test.exclusions>**/tests/**/*.java,**/test/**/*.java</sonar.test.exclusions>
 	</properties>
 
 	<profiles>
@@ -89,32 +90,32 @@
 							</execution>
 						</executions>
 					</plugin>
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-p2-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<executions>
-						<execution>
-							<id>default-p2-metadata-default</id>
-							<configuration>
-								<attachP2Metadata>false</attachP2Metadata>
-							</configuration>
-						</execution>
-						<execution>
-							<id>attach-p2-metadata</id>
-							<phase>package</phase>
-							<goals>
-								<goal>p2-metadata</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<defaultP2Metadata>false</defaultP2Metadata>
-					</configuration>
-				</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-p2-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>default-p2-metadata-default</id>
+								<configuration>
+									<attachP2Metadata>false</attachP2Metadata>
+								</configuration>
+							</execution>
+							<execution>
+								<id>attach-p2-metadata</id>
+								<phase>package</phase>
+								<goals>
+									<goal>p2-metadata</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<defaultP2Metadata>false</defaultP2Metadata>
+						</configuration>
+					</plugin>
 				</plugins>
 			</build>
-	
+
 			<pluginRepositories>
 				<pluginRepository>
 					<id>cbi</id>
@@ -206,20 +207,10 @@
 				</executions>
 			</plugin>
 			<!-- enable source feature generation -->
-			<!--plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
-				<executions>
-					<execution>
-						<id>source-feature</id>
-						<phase>package</phase>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin-->
+			<!--plugin> <groupId>org.eclipse.tycho.extras</groupId> <artifactId>tycho-source-feature-plugin</artifactId> 
+				<version>${tycho-extras-version}</version> <executions> <execution> <id>source-feature</id> 
+				<phase>package</phase> <goals> <goal>source-feature</goal> </goals> </execution> 
+				</executions> </plugin -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
@@ -314,7 +305,10 @@
 								<goal>eclipse-run</goal>
 							</goals>
 							<configuration>
-								<appArgLine>-application org.eclipse.equinox.p2.repository.repo2runnable -source file:${project.build.directory}/repository -destination ${project.build.directory}/${packagedAddonName}/eclipse</appArgLine>
+								<appArgLine>-application
+									org.eclipse.equinox.p2.repository.repo2runnable -source
+									file:${project.build.directory}/repository -destination
+									${project.build.directory}/${packagedAddonName}/eclipse</appArgLine>
 							</configuration>
 						</execution>
 					</executions>
