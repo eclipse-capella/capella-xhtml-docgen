@@ -67,9 +67,4 @@ pipeline {
 			}
 		}
 	}
-	post {
-		always {
-			archiveArtifacts artifacts: '**/*.log,**/*.layout'
-		}
-	}
 }
