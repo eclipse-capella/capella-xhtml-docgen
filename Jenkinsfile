@@ -6,9 +6,7 @@ pipeline {
 		jdk 'openjdk-jdk14-latest'
 	}
 	environment {
-	    JACOCO_VERSION = "0.8.6"
-	    MVN_QUALITY_PROFILES = '-P full -P test'
-	    JACOCO_EXEC_FILE_PATH = '${WORKSPACE}/jacoco.exec'
+	    MVN_QUALITY_PROFILES = '-P full'
 	}
 	stages {
 		stage('Generate TP') {
@@ -16,9 +14,9 @@ pipeline {
 				sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
 			}
 		}
-		stage('Package docgen addon') {
+		stage('Package DocGen addon') {
 			steps {
-				sh 'mvn clean install -P full -P sign -e -f pom.xml'
+				sh 'mvn clean verify -P full -P sign -e -f pom.xml'
 			}
 		}
 		stage('Archive artifacts') {
@@ -47,6 +45,31 @@ pipeline {
 					'''
 				}
 			}
+		}
+		stage('Perform Sonar analysis') {
+			environment {
+			    PROJECT_NAME = 'capella-xhtml-docgen'
+	    		SONARCLOUD_TOKEN = credentials('sonar-token-$PROJECT_NAME')
+			    SONAR_PROJECT_KEY = 'eclipse_$PROJECT_NAME'
+			}
+			steps {
+				withEnv(['MAVEN_OPTS=-Xmx4g']) {
+					script {
+						def sonarExclusions = "-Dsonar.exclusions='**/generated/**/*.java,**/src-gen/**/*.java' "
+						def javaVersion = "8"
+						def sonarCommon = "sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.organization=eclipse -Dsonar.host.url=https://sonarcloud.io -Dsonar.login='$SONARCLOUD_TOKEN' -Dsonar.skipDesign=true -Dsonar.java.source=${javaVersion} -Dsonar.scanner.force-deprecated-java-version=true "
+						def sonarBranchAnalysis = "-Dsonar.branch.name=${BRANCH_NAME}"
+						def sonarPullRequestAnalysis = ("${BRANCH_NAME}".contains('PR-') ? "-Dsonar.pullrequest.provider=GitHub -Dsonar.pullrequest.github.repository=eclipse/$PROJECT_NAME -Dsonar.pullrequest.key=${CHANGE_ID} -Dsonar.pullrequest.branch=${CHANGE_BRANCH}" : "" )
+						def sonar = sonarCommon + sonarExclusions + ("${BRANCH_NAME}".contains('PR-') ? sonarPullRequestAnalysis : sonarBranchAnalysis)
+						sh "mvn ${sonar} $MVN_QUALITY_PROFILES -e -f pom.xml"
+					}
+				}
+			}
+		}
+	}
+	post {
+		always {
+			archiveArtifacts artifacts: '**/*.log,**/*.layout'
 		}
 	}
 }
