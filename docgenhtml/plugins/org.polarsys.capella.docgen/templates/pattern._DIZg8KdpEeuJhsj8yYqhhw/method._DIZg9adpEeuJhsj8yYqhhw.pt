@@ -1,0 +1,33 @@
+<%
+Collection<String> extendedCapabilities = CapellaCapabilityHelper.INSTANCE.getExtendedCapabilities(projectNameParameter, outputFolderParameter, parameter);
+Collection<String> includedCapabilities = CapellaCapabilityHelper.INSTANCE.getIncludedCapabilities(projectNameParameter, outputFolderParameter, parameter);
+Collection<String> superCapabilities = CapellaCapabilityHelper.INSTANCE.getParentCapabilities(projectNameParameter, outputFolderParameter, parameter);
+if((extendedCapabilities.size() > 0) || (includedCapabilities.size() > 0) || (superCapabilities.size() > 0)) {
+	String title = "Relationships with other Capabilities";
+	Integer level = 2;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TitleSection" args="title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+	if(extendedCapabilities.size() > 0) {
+		title = "Extended Capabilities";
+		level = 3;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollection" args="extendedCapabilities:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+	}
+	if(includedCapabilities.size() > 0) {
+		title = "Included Capabilities";
+		level = 3;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollection" args="includedCapabilities:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+	}
+	if(superCapabilities.size() > 0) {
+		title = "Super";
+		level = 3;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollection" args="superCapabilities:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+	}
+}
+%>

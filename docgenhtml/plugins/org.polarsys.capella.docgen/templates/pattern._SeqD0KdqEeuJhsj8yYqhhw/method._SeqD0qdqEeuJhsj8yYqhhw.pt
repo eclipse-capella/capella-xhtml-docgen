@@ -4,4 +4,5 @@ org.eclipse.egf.model.pattern.*
 org.eclipse.egf.pattern.execution.*
 org.eclipse.egf.pattern.query.*
 org.polarsys.capella.core.data.ctx.Capability
+org.polarsys.capella.docgen.util.pattern.helper.CapellaCapabilityHelper
 " %>
