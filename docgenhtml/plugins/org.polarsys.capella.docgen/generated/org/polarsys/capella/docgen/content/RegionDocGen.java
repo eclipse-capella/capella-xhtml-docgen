@@ -7,9 +7,7 @@ import java.util.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
-import org.polarsys.capella.core.data.capellacommon.Region;
 import org.polarsys.capella.core.data.capellacommon.StateTransition;
-import org.polarsys.capella.docgen.util.CapellaElementService;
 import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.RegionHelper;
 import org.polarsys.capella.common.data.behavior.AbstractEvent;
@@ -26,7 +24,7 @@ public class RegionDocGen extends org.polarsys.capella.docgen.foundations.NamedE
 	}
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Modes and States</h2>";
+	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
 	protected final String TEXT_3 = NL + "<h2>Owned Transitions</h2>" + NL + "<table max-width=\"screen.width\">" + NL
 			+ "   <thead> " + NL + "       <tr>" + NL + "           <th>Transition</th>" + NL
@@ -120,14 +118,23 @@ public class RegionDocGen extends org.polarsys.capella.docgen.foundations.NamedE
 
 		super.method_content(new StringBuffer(), ctx);
 
-		Collection<String> states = RegionHelper.getState(projectName, outputFolder, (Region) element);
+		stringBuffer.append(TEXT_1);
+		stringBuffer.append(TEXT_2);
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.region.Region_ModesAndStates" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
 
-		if (states.size() > 0) {
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
 
-			stringBuffer.append(TEXT_1);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(states));
-
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("parameter", parameter);
+			callParameters.put("projectNameParameter", projectName);
+			callParameters.put("outputFolderParameter", outputFolder);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_stiNoKg9Eeu7bOcPHGGhcQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
 		}
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;

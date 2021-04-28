@@ -1,13 +1,5 @@
 <%
-super.method_content(new StringBuffer(), ctx); 
+super.method_content(new StringBuffer(), ctx);
+%>
 
-Collection<String> states = RegionHelper.getState(projectName,
-			outputFolder,(Region) element);
-			
-			if(states.size() > 0) {
-%>
-<h2>Modes and States</h2>
-<%=StringUtil.stringListToBulette(states)%>
-<%
-}
-%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.region.Region_ModesAndStates" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
