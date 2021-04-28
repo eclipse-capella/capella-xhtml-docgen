@@ -1,98 +1,30 @@
 <%
 super.method_content(new StringBuffer(), ctx);
-String projectName= ctx.getValue("projectName").toString();
-String outputFolder = ctx.getValue("outputFolder").toString();
 
 // Exchange Categories
 if (element instanceof ExchangeCategory) {
-	ExchangeCategory category = (ExchangeCategory) element;
-	if (category.getExchanges().size() > 0) {
-		// Display Title
-		%>
-		<h2>Involved Functional Exchanges</h2>
-		<%
-		// Create table header
-		%>
-		<table>
-			<tr>
-				<th>Functional Exchange</th>
-				<th>Source Function</th>
-				<th>Target Function</th>
-				<th>Description</th>
-			</tr>
-		<%
-		// Create each line
-		for (FunctionalExchange fe : category.getExchanges()) {
-			%>
-			<%=CapellaCategoryServices.edgeToTableLine(fe, projectName, outputFolder)%>
-			<%
-		}
-		// Create table footer
-		%>
-		</table>
-		<%
-	}
+%>
+
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.category.ExchangeCategory_InvolvedFunctionalExchanges" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
+
+<%
 }
 
 // Component Exchange Categories
 if (element instanceof ComponentExchangeCategory) {
-	ComponentExchangeCategory category = (ComponentExchangeCategory) element;
-	if (category.getExchanges().size() > 0) {
-		// Display Title
-		%>
-		<h2>Involved Component Exchanges</h2>
-		<%
-		// Create table header
-		%>
-		<table>
-			<tr>
-				<th>Component Exchange</th>
-				<th>Source Component</th>
-				<th>Target Component</th>
-				<th>Description</th>
-			</tr>
-		<%
-		// Create each line
-		for (ComponentExchange ce : category.getExchanges()) {
-			%>
-			<%=CapellaCategoryServices.edgeToTableLine(ce, projectName, outputFolder)%>
-			<%
-		}
-		// Create table footer
-		%>
-		</table>
-		<%
-	}
+%>
+
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.category.ComponentExchangeCategory_InvolvedComponentExchanges" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
+
+<%
 }
 
 // Physical Link Categories
 if (element instanceof PhysicalLinkCategory) {
-	PhysicalLinkCategory category = (PhysicalLinkCategory) element;
-	if (category.getLinks().size() > 0) {
-		// Display Title
-		%>
-		<h2>Involved Physical Links</h2>
-		<%
-		// Create table header
-		%>
-		<table>
-			<tr>
-				<th>Physical Link</th>
-				<th>Source Component</th>
-				<th>Target Component</th>
-				<th>Description</th>
-			</tr>
-		<%
-		// Create each line
-		for (PhysicalLink pl : category.getLinks()) {
-			%>
-			<%=CapellaCategoryServices.edgeToTableLine(pl, projectName, outputFolder)%>
-			<%
-		}
-		// Create table footer
-		%>
-		</table>
-		<%
-	}
+%>
+
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.category.PhysicalLinkCategory_InvolvedPhysicalLinks" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
+
+<%
 }
 %>

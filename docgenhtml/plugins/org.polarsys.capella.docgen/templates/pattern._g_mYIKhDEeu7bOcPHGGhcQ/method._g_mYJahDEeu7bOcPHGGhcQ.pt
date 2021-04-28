@@ -1,0 +1,17 @@
+<%
+if (parameter.getExchanges().size() > 0) {
+	String title = "Involved Functional Exchanges";
+	Integer level = 2;
+	String[] columns = {"Functional Exchange", "Source Function", "Target Function", "Description"};
+	Collection<String> tableColumnList = Arrays.asList(columns);
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableHeaderFromListColumn" args="tableColumnList:tableColumnsListParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+	for (FunctionalExchange fe : parameter.getExchanges()) {
+		%>
+		<%=CapellaCategoryServices.edgeToTableLine(fe, projectNameParameter, outputFolderParameter)%>
+		<%
+	}
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableFooter"%>
+<%}%>
