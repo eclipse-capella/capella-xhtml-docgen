@@ -1,24 +1,6 @@
 <%
-super.method_content(new StringBuffer(), ctx); 
-String projectName = ctx.getValue("projectName").toString();
-String outputFolder = ctx.getValue("outputFolder").toString();
-Collection<String> involvedComponent = CapellaCapabilityHelper.INSTANCE.getInvolvedComponent(projectName,
-			outputFolder,(CapabilityRealization) parameter);
-			
-			if(involvedComponent.size() > 0) {
+super.method_content(new StringBuffer(), ctx);
 %>
-<h2>Involved Components</h2>
-<%=StringUtil.stringListToBulette(involvedComponent)%>
-<%
-}
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capability.CapabilityRealization_InvolvedComponents" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
 
-Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectName,
-			outputFolder,(CapabilityRealization) parameter);
-			
-			if(involvedFunctions.size() > 0) {
-%>
-<h2>Related Functions</h2>
-<%=StringUtil.stringListToBulette(involvedFunctions)%>
-<%
-}
-%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capability.CapabilityRealization_RelatedFunctions" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
