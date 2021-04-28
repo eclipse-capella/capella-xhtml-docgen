@@ -1,9 +1,7 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.content;
 
-import org.eclipse.egf.common.helper.*;
 import java.util.*;
-import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
@@ -23,20 +21,19 @@ public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundatio
 	}
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Realized Elements</h2>" + NL;
+	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "<h2>Realizing Elements </h2>" + NL;
-	protected final String TEXT_4 = NL + NL + "<h2>Sequence Messages</h2>" + NL + "" + NL
+	protected final String TEXT_3 = NL + NL + "<h2>Sequence Messages</h2>" + NL + "" + NL
 			+ "<table max-width=\"screen.width\">" + NL + "   <thead> " + NL + "       <tr>" + NL
 			+ "           <th>Invoked Exchange</th>" + NL + "           <th>Source element of the Exchange</th>" + NL
 			+ "           <th>Target element of the Exchange</th>" + NL
 			+ "           <th>Description of the Sequence Message <br /> <i>(and not the one of the invoked exchange)</i></th>"
 			+ NL + "       </tr>" + NL + "   </thead>" + NL + "   <tbody>" + NL;
-	protected final String TEXT_5 = NL + "\t\t<tr>" + NL + "           <td>";
-	protected final String TEXT_6 = "</td>" + NL + "           <td>";
-	protected final String TEXT_7 = "</td>" + NL + "       </tr>";
-	protected final String TEXT_8 = NL + "   </tbody>" + NL + "</table>";
-	protected final String TEXT_9 = NL + "</div>";
+	protected final String TEXT_4 = NL + "\t\t<tr>" + NL + "           <td>";
+	protected final String TEXT_5 = "</td>" + NL + "           <td>";
+	protected final String TEXT_6 = "</td>" + NL + "       </tr>";
+	protected final String TEXT_7 = NL + "   </tbody>" + NL + "</table>";
+	protected final String TEXT_8 = NL + "</div>";
 
 	public CapellaScenarioDocGen() {
 		//Here is the constructor
@@ -92,6 +89,18 @@ public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundatio
 		return null;
 	}
 
+	protected java.lang.String projectName = null;
+
+	public void set_projectName(java.lang.String object) {
+		this.projectName = object;
+	}
+
+	protected java.lang.String outputFolder = null;
+
+	public void set_outputFolder(java.lang.String object) {
+		this.outputFolder = object;
+	}
+
 	protected org.polarsys.capella.core.data.interaction.Scenario parameter = null;
 
 	public void set_parameter(org.polarsys.capella.core.data.interaction.Scenario object) {
@@ -108,37 +117,47 @@ public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundatio
 			throws Exception {
 
 		element = parameter;
+		outputFolder = ctx.getValue("outputFolder").toString();
+		projectName = ctx.getValue("projectName").toString();
+
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
 	}
 
 	protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		// Realized Elements 
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capellaelement.CapellaElement_RealizedElements" args="parameter:parameter"%>
 
-		String outputFolder = ctx.getValue("outputFolder").toString();
-		String projectName = ctx.getValue("projectName").toString();
-		Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName,
-				outputFolder);
-		if (allocations.size() > 0) {
-			stringBuffer.append(TEXT_1);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(allocations));
-			stringBuffer.append(TEXT_2);
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
+
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("parameter", parameter);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_yfHS4KgKEeu7bOcPHGGhcQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
 		}
+
+		stringBuffer.append(TEXT_1);
 		stringBuffer.append(TEXT_2);
-		// Realizing Elements 
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capellaelement.CapellaElement_RealizingElements" args="parameter:parameter"%>
 
-		//String outputFolder = ctx.getValue("outputFolder").toString();
-		//String projectName = ctx.getValue("projectName").toString();
-		Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName,
-				outputFolder);
-		if (allocations2.size() > 0) {
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(allocations2));
-			stringBuffer.append(TEXT_2);
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
+
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("parameter", parameter);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_6IqBsKgLEeu7bOcPHGGhcQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
 		}
+
 		stringBuffer.append(TEXT_2);
 		// owned diagrams
 		stringBuffer.append(TEXT_2);
@@ -163,7 +182,7 @@ public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundatio
 
 		stringBuffer.append(TEXT_2);
 		if (orderedMessagesList.size() > 0) {
-			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_3);
 			for (SequenceMessage sMessage : orderedMessagesList) {
 
 				String source = "";
@@ -182,19 +201,19 @@ public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundatio
 				description = StringUtil.transformAREFString(sMessage, description, projectName, outputFolder);
 				if (description == null || description.trim().length() == 0)
 					description = "No description";
-				stringBuffer.append(TEXT_5);
+				stringBuffer.append(TEXT_4);
 				stringBuffer.append(name);
-				stringBuffer.append(TEXT_6);
+				stringBuffer.append(TEXT_5);
 				stringBuffer.append(source);
-				stringBuffer.append(TEXT_6);
+				stringBuffer.append(TEXT_5);
 				stringBuffer.append(target);
-				stringBuffer.append(TEXT_6);
+				stringBuffer.append(TEXT_5);
 				stringBuffer.append(description);
-				stringBuffer.append(TEXT_7);
+				stringBuffer.append(TEXT_6);
 			}
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_7);
 		}
-		stringBuffer.append(TEXT_9);
+		stringBuffer.append(TEXT_8);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
 	}

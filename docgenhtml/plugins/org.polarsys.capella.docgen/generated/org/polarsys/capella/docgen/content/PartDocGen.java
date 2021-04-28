@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -121,7 +121,7 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 		String elementType = "<span class=\"elementMetaClass\">" + EscapeChars.forHTML(element.eClass().getName())
 				+ "</span>";
 		EObject type = ((Part) element).getType();
-		String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder);
+		String logo = ImageHelper.getTypePng(element, projectName, outputFolder);
 		String documentTitle = elementName;
 		stringBuffer.append(TEXT_1);
 		stringBuffer.append(logo);
@@ -254,14 +254,14 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 			}
 			stringBuffer.append(TEXT_9);
 			{
-				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="type:element"%>
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="type:parameter"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
 				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
-				callParameters.put("element", type);
+				callParameters.put("parameter", type);
 				CallHelper.executeWithParameterInjection(
 						"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_H6iekavLEeCas-LHcur3rg",
 						new ExecutionContext((InternalPatternContext) ctx), callParameters);

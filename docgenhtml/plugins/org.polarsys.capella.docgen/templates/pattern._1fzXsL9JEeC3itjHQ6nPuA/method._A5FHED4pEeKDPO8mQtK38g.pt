@@ -1,26 +1,6 @@
-<% // Realized Elements %>
-<%
-String outputFolder = ctx.getValue("outputFolder").toString();
-String projectName = ctx.getValue("projectName").toString();
-Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName, outputFolder);
-if(allocations.size() > 0) {%>
-<h2>Realized Elements</h2>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capellaelement.CapellaElement_RealizedElements" args="parameter:parameter"%>
 
-<%=StringUtil.stringListToBulette(allocations)%>
-
-<%}%>
-
-<% // Realizing Elements %>
-<%
-//String outputFolder = ctx.getValue("outputFolder").toString();
-//String projectName = ctx.getValue("projectName").toString();
-Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName, outputFolder);
-if(allocations2.size() > 0) {%>
-<h2>Realizing Elements </h2>
-
-<%=StringUtil.stringListToBulette(allocations2)%>
-
-<%}%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capellaelement.CapellaElement_RealizingElements" args="parameter:parameter"%>
 
 <% // owned diagrams%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>

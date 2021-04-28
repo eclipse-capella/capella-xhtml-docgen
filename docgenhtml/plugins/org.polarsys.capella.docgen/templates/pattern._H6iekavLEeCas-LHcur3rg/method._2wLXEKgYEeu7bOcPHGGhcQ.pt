@@ -1,5 +1,4 @@
 <%
-element = parameter;
 outputFolder = ctx.getValue("outputFolder").toString();
 projectName = ctx.getValue("projectName").toString();
 %>

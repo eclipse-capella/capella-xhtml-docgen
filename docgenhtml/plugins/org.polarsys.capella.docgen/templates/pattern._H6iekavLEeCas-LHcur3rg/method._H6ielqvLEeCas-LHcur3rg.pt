@@ -1,43 +1,22 @@
-<% // Realized Elements %>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capellaelement.CapellaElement_RealizedElements" args="parameter:parameter"%>
 
-<%
-String outputFolder = ctx.getValue("outputFolder").toString();
-String projectName = ctx.getValue("projectName").toString();
-Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName, outputFolder);
-if(allocations.size() > 0) {%>
-<h2>Realized Elements</h2>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capellaelement.CapellaElement_RealizingElements" args="parameter:parameter"%>
 
-<%=StringUtil.stringListToBulette(allocations)%>
-
-<%}%>
-
-<% // Realizing Elements %>
-<%
-//String outputFolder = ctx.getValue("outputFolder").toString();
-//String projectName = ctx.getValue("projectName").toString();
-Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName, outputFolder);
-if(allocations2.size() > 0) {%>
-<h2>Realizing Elements </h2>
-
-<%=StringUtil.stringListToBulette(allocations2)%>
-
-<%}%>
-
-<%if (element.getOwnedConstraints().isEmpty() == false){%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="element:parameter"%>
+<%if (parameter.getOwnedConstraints().isEmpty() == false){%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="parameter:parameter"%>
 <%}%>
 
 <% // Presented in diagrams generation%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="parameter:element, outputFolder:outputFolder, projectName:projectName"%>
 
 <% // owned diagrams%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="parameter:element"%>
 
 <% // Presented in diagrams generation%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PresentedDiagrmsGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PresentedDiagrmsGeneration" args="parameter:element"%>
 
 <%// Interested diagram in this model element %>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.InterestedDiagrmsGeneration" args="element:element"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.InterestedDiagrmsGeneration" args="parameter:element"%>
 
 <% // Diagrams navigation tree%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramNavigationTree" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramNavigationTree" args="parameter:element, outputFolder:outputFolder, projectName:projectName"%>

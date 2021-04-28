@@ -3,8 +3,6 @@ java.util.*
 org.eclipse.egf.model.pattern.*
 org.eclipse.egf.pattern.execution.*
 org.eclipse.egf.pattern.query.*
-org.polarsys.capella.core.data.interaction.Scenario
-org.polarsys.capella.core.data.interaction.SequenceMessage
+org.polarsys.capella.core.data.capellacore.CapellaElement
 org.polarsys.capella.docgen.util.CapellaElementService
-org.polarsys.capella.docgen.util.StringUtil
 " %>
