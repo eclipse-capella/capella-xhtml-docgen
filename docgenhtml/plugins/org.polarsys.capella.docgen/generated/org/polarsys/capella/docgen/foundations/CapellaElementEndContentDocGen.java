@@ -23,7 +23,6 @@ public class CapellaElementEndContentDocGen {
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL;
 
 	public CapellaElementEndContentDocGen() {
 		//Here is the constructor
@@ -241,9 +240,9 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		// Diagrams navigation tree
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		{
 			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramNavigationTree" args="parameter:element, outputFolder:outputFolder, projectName:projectName"%>
 
@@ -261,7 +260,7 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}

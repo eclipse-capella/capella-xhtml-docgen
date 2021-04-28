@@ -23,17 +23,7 @@ public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundatio
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + NL + "<h2>Sequence Messages</h2>" + NL + "" + NL
-			+ "<table max-width=\"screen.width\">" + NL + "   <thead> " + NL + "       <tr>" + NL
-			+ "           <th>Invoked Exchange</th>" + NL + "           <th>Source element of the Exchange</th>" + NL
-			+ "           <th>Target element of the Exchange</th>" + NL
-			+ "           <th>Description of the Sequence Message <br /> <i>(and not the one of the invoked exchange)</i></th>"
-			+ NL + "       </tr>" + NL + "   </thead>" + NL + "   <tbody>" + NL;
-	protected final String TEXT_4 = NL + "\t\t<tr>" + NL + "           <td>";
-	protected final String TEXT_5 = "</td>" + NL + "           <td>";
-	protected final String TEXT_6 = "</td>" + NL + "       </tr>";
-	protected final String TEXT_7 = NL + "   </tbody>" + NL + "</table>";
-	protected final String TEXT_8 = NL + "</div>";
+	protected final String TEXT_3 = NL + "</div>";
 
 	public CapellaScenarioDocGen() {
 		//Here is the constructor
@@ -177,43 +167,25 @@ public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundatio
 		}
 
 		stringBuffer.append(TEXT_2);
-		// Trier les messages
-		List<SequenceMessage> orderedMessagesList = ((Scenario) parameter).getOwnedMessages();
-
 		stringBuffer.append(TEXT_2);
-		if (orderedMessagesList.size() > 0) {
-			stringBuffer.append(TEXT_3);
-			for (SequenceMessage sMessage : orderedMessagesList) {
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.scenario.Scenario_SequenceMessages" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
 
-				String source = "";
-				String target = "";
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
 
-				if (sMessage.getSendingEnd() != null && sMessage.getSendingEnd().getCovered() != null
-						&& sMessage.getSendingEnd().getCovered().getRepresentedInstance() != null)
-					source = sMessage.getSendingEnd().getCovered().getRepresentedInstance().getName();
-
-				if (sMessage.getReceivingEnd() != null && sMessage.getReceivingEnd().getCovered() != null
-						&& sMessage.getReceivingEnd().getCovered().getRepresentedInstance() != null)
-					target = sMessage.getReceivingEnd().getCovered().getRepresentedInstance().getName();
-
-				String name = sMessage.getName();
-				String description = sMessage.getDescription();
-				description = StringUtil.transformAREFString(sMessage, description, projectName, outputFolder);
-				if (description == null || description.trim().length() == 0)
-					description = "No description";
-				stringBuffer.append(TEXT_4);
-				stringBuffer.append(name);
-				stringBuffer.append(TEXT_5);
-				stringBuffer.append(source);
-				stringBuffer.append(TEXT_5);
-				stringBuffer.append(target);
-				stringBuffer.append(TEXT_5);
-				stringBuffer.append(description);
-				stringBuffer.append(TEXT_6);
-			}
-			stringBuffer.append(TEXT_7);
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("parameter", parameter);
+			callParameters.put("projectNameParameter", projectName);
+			callParameters.put("outputFolderParameter", outputFolder);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_KEGRQKg5Eeu7bOcPHGGhcQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
 		}
-		stringBuffer.append(TEXT_8);
+
+		stringBuffer.append(TEXT_3);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
 	}

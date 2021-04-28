@@ -1264,6 +1264,27 @@
                 called="#_qAQNBagGEeu7bOcPHGGhcQ"/>
           </elements>
         </libraries>
+        <libraries xmi:id="_F1aDQKg5Eeu7bOcPHGGhcQ" name="org.polarsys.capella.docgen.sections.scenario">
+          <elements xmi:id="_KEGRQKg5Eeu7bOcPHGGhcQ" name="Scenario_SequenceMessages"
+              headerMethod="#_KEGRQqg5Eeu7bOcPHGGhcQ" conditionMethod="#_KEGRRKg5Eeu7bOcPHGGhcQ"
+              initMethod="#_KEGRQ6g5Eeu7bOcPHGGhcQ" footerMethod="#_KEGRRqg5Eeu7bOcPHGGhcQ">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_KEGRQag5Eeu7bOcPHGGhcQ"
+                name="JET"/>
+            <methods xmi:id="_KEGRQqg5Eeu7bOcPHGGhcQ" name="header" patternFilePath="templates/pattern._KEGRQKg5Eeu7bOcPHGGhcQ/method._KEGRQqg5Eeu7bOcPHGGhcQ.pt"/>
+            <methods xmi:id="_KEGRQ6g5Eeu7bOcPHGGhcQ" name="init" patternFilePath="templates/pattern._KEGRQKg5Eeu7bOcPHGGhcQ/method._KEGRQ6g5Eeu7bOcPHGGhcQ.pt"/>
+            <methods xmi:id="_KEGRRKg5Eeu7bOcPHGGhcQ" name="preCondition" patternFilePath="templates/pattern._KEGRQKg5Eeu7bOcPHGGhcQ/method._KEGRRKg5Eeu7bOcPHGGhcQ.pt"/>
+            <methods xmi:id="_KEGRRag5Eeu7bOcPHGGhcQ" name="body" patternFilePath="templates/pattern._KEGRQKg5Eeu7bOcPHGGhcQ/method._KEGRRag5Eeu7bOcPHGGhcQ.pt"/>
+            <methods xmi:id="_KEGRRqg5Eeu7bOcPHGGhcQ" name="footer" patternFilePath="templates/pattern._KEGRQKg5Eeu7bOcPHGGhcQ/method._KEGRRqg5Eeu7bOcPHGGhcQ.pt"/>
+            <parameters xmi:id="_KEGRR6g5Eeu7bOcPHGGhcQ" name="parameter" type="org.polarsys.capella.core.data.interaction.Scenario"/>
+            <parameters xmi:id="_KEGRSKg5Eeu7bOcPHGGhcQ" name="projectNameParameter"
+                type="java.lang.String"/>
+            <parameters xmi:id="_KEGRSag5Eeu7bOcPHGGhcQ" name="outputFolderParameter"
+                type="java.lang.String"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_KEGRTKg5Eeu7bOcPHGGhcQ"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_KEGRTag5Eeu7bOcPHGGhcQ"
+                called="#_KEGRRag5Eeu7bOcPHGGhcQ"/>
+          </elements>
+        </libraries>
         <libraries xmi:id="_DxDxQKgKEeu7bOcPHGGhcQ" name="org.polarsys.capella.docgen.sections.capellaelement">
           <elements xmi:id="_yfHS4KgKEeu7bOcPHGGhcQ" name="CapellaElement_RealizedElements"
               headerMethod="#_yfHS4qgKEeu7bOcPHGGhcQ" conditionMethod="#_yfHS5KgKEeu7bOcPHGGhcQ"

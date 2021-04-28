@@ -5,49 +5,5 @@
 <% // owned diagrams%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
-<%// Trier les messages
-List<SequenceMessage> orderedMessagesList = ((Scenario)parameter).getOwnedMessages();
-%>
-
-<%if (orderedMessagesList.size()>0){%>
-
-<h2>Sequence Messages</h2>
-
-<table max-width="screen.width">
-   <thead> 
-       <tr>
-           <th>Invoked Exchange</th>
-           <th>Source element of the Exchange</th>
-           <th>Target element of the Exchange</th>
-           <th>Description of the Sequence Message <br /> <i>(and not the one of the invoked exchange)</i></th>
-       </tr>
-   </thead>
-   <tbody>
-
-<%for (SequenceMessage sMessage : orderedMessagesList) {
-
-String source = "";
-String target = "";
-
-if (sMessage.getSendingEnd() != null && sMessage.getSendingEnd().getCovered() != null && sMessage.getSendingEnd().getCovered().getRepresentedInstance() != null)
-	source = sMessage.getSendingEnd().getCovered().getRepresentedInstance().getName();
-	
-if (sMessage.getReceivingEnd() != null && sMessage.getReceivingEnd().getCovered() != null && sMessage.getReceivingEnd().getCovered().getRepresentedInstance() != null)
-	target = sMessage.getReceivingEnd().getCovered().getRepresentedInstance().getName();
-	
-String name = sMessage.getName();
-String description = sMessage.getDescription();
-description = StringUtil.transformAREFString(sMessage, description, projectName, outputFolder);
-if (description == null || description.trim().length() == 0)
-	description = "No description";%>
-		<tr>
-           <td><%=name%></td>
-           <td><%=source%></td>
-           <td><%=target%></td>
-           <td><%=description%></td>
-       </tr>
-<%}%>
-   </tbody>
-</table>
-<%}%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.scenario.Scenario_SequenceMessages" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
 </div>
