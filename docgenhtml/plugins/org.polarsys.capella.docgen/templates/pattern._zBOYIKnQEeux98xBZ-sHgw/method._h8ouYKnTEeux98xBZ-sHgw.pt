@@ -1,0 +1,7 @@
+<%
+if (sectionTitleParameter == null) {
+	sectionTitleParameter = Character.toString(structuralFeatureNameParameter.charAt(0)).toUpperCase() + structuralFeatureNameParameter.substring(1);
+}
+super.method_title(new StringBuffer(), ctx);
+%>
+<p>

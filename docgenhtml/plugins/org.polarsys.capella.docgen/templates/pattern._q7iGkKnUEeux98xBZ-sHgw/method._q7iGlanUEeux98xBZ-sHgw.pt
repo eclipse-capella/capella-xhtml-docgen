@@ -1,0 +1,13 @@
+<%
+Collection<String> features = CapellaClassServices.getClassFeatures(parameter);
+if(features.size() > 0) {
+	String title = "Features";
+	Integer level = 2;
+	String structuralFeatureName = title;
+%>
+
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollectionWithDescriptionFromStructuralFeature" args="features:parameterListParameter, parameter:parameter, structuralFeatureName:structuralFeatureNameParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+
+<%
+}
+%>

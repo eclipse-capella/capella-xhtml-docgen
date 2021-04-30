@@ -1,0 +1,15 @@
+<p>
+<%
+EClass eClass = parameter.eClass();
+EStructuralFeature eStructuralFeature = eClass.getEStructuralFeature(structuralFeatureNameParameter);
+if (eStructuralFeature != null) {
+	Object value = parameter.eGet(eStructuralFeature);
+	String description = null;
+	if (value != null && value.toString().length() > 0) {
+		description = value.toString();
+	} else {
+		description = "No " + structuralFeatureNameParameter;
+	}%>
+<%=EscapeChars.replaceSpecialCharacters(description)%>
+<%}%>
+</p>

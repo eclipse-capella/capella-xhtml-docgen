@@ -1,0 +1,5 @@
+<%
+super.method_setCapellaContext(new StringBuffer(), ctx);
+projectName = ctx.getValue("projectName").toString();
+outputFolder = ctx.getValue("outputFolder").toString();
+%>
