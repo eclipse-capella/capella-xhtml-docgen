@@ -1,0 +1,10 @@
+<%
+Collection<String> states = RegionHelper.getState(projectNameParameter, outputFolderParameter, parameter);
+if(states.size() > 0) {
+	String title = "Modes and States";
+	Integer level = 2;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollection" args="states:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+}
+%>

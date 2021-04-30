@@ -193,14 +193,14 @@ public class CapellaElementDocGen extends org.polarsys.kitalpha.doc.gen.business
 	protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="element:element"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="element:parameter"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
-			callParameters.put("element", element);
+			callParameters.put("parameter", element);
 			CallHelper.executeWithParameterInjection(
 					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_H6iekavLEeCas-LHcur3rg",
 					new ExecutionContext((InternalPatternContext) ctx), callParameters);

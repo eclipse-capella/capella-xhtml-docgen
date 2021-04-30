@@ -1,16 +1,10 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.content;
 
-import org.polarsys.capella.docgen.util.CapellaCategoryServices;
-import org.polarsys.capella.core.data.cs.PhysicalLink;
 import org.polarsys.capella.core.data.cs.PhysicalLinkCategory;
-import org.polarsys.capella.core.data.fa.ComponentExchange;
-import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.fa.ExchangeCategory;
 import org.polarsys.capella.core.data.fa.ComponentExchangeCategory;
-import org.eclipse.egf.common.helper.*;
 import java.util.*;
-import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
@@ -26,21 +20,8 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 	}
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "\t\t<h2>Involved Functional Exchanges</h2>" + NL + "\t\t";
-	protected final String TEXT_2 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Functional Exchange</th>"
-			+ NL + "\t\t\t\t<th>Source Function</th>" + NL + "\t\t\t\t<th>Target Function</th>" + NL
-			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
-	protected final String TEXT_3 = NL + "\t\t\t";
-	protected final String TEXT_4 = NL + "\t\t</table>" + NL + "\t\t";
-	protected final String TEXT_5 = NL + "\t\t<h2>Involved Component Exchanges</h2>" + NL + "\t\t";
-	protected final String TEXT_6 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Component Exchange</th>"
-			+ NL + "\t\t\t\t<th>Source Component</th>" + NL + "\t\t\t\t<th>Target Component</th>" + NL
-			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
-	protected final String TEXT_7 = NL + "\t\t<h2>Involved Physical Links</h2>" + NL + "\t\t";
-	protected final String TEXT_8 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Physical Link</th>" + NL
-			+ "\t\t\t\t<th>Source Component</th>" + NL + "\t\t\t\t<th>Target Component</th>" + NL
-			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
-	protected final String TEXT_9 = NL;
+	protected final String TEXT_1 = "";
+	protected final String TEXT_2 = NL;
 
 	public CategoriesDocGen() {
 		//Here is the constructor
@@ -76,8 +57,8 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_9);
-		stringBuffer.append(TEXT_9);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 
@@ -96,6 +77,18 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 		return null;
 	}
 
+	protected java.lang.String projectName = null;
+
+	public void set_projectName(java.lang.String object) {
+		this.projectName = object;
+	}
+
+	protected java.lang.String outputFolder = null;
+
+	public void set_outputFolder(java.lang.String object) {
+		this.outputFolder = object;
+	}
+
 	protected org.polarsys.capella.core.data.capellacore.NamedElement parameter = null;
 
 	public void set_parameter(org.polarsys.capella.core.data.capellacore.NamedElement object) {
@@ -112,6 +105,8 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 			throws Exception {
 
 		element = parameter;
+		projectName = ctx.getValue("projectName").toString();
+		outputFolder = ctx.getValue("outputFolder").toString();
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
@@ -120,88 +115,83 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
 		super.method_content(new StringBuffer(), ctx);
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
 
 		// Exchange Categories
 		if (element instanceof ExchangeCategory) {
-			ExchangeCategory category = (ExchangeCategory) element;
-			if (category.getExchanges().size() > 0) {
-				// Display Title
 
-				stringBuffer.append(TEXT_1);
+			stringBuffer.append(TEXT_1);
+			stringBuffer.append(TEXT_2);
+			{
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.category.ExchangeCategory_InvolvedFunctionalExchanges" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
 
-				// Create table header
+				InternalPatternContext ictx = (InternalPatternContext) ctx;
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+				stringBuffer.setLength(0);
 
-				stringBuffer.append(TEXT_2);
-
-				// Create each line
-				for (FunctionalExchange fe : category.getExchanges()) {
-
-					stringBuffer.append(TEXT_3);
-					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(fe, projectName, outputFolder));
-					stringBuffer.append(TEXT_3);
-
-				}
-				// Create table footer
-
-				stringBuffer.append(TEXT_4);
-
+				final Map<String, Object> callParameters = new HashMap<String, Object>();
+				callParameters.put("parameter", parameter);
+				callParameters.put("projectNameParameter", projectName);
+				callParameters.put("outputFolderParameter", outputFolder);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_g_mYIKhDEeu7bOcPHGGhcQ",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
+				stringBuffer.setLength(0);
 			}
+
+			stringBuffer.append(TEXT_2);
+
 		}
 
 		// Component Exchange Categories
 		if (element instanceof ComponentExchangeCategory) {
-			ComponentExchangeCategory category = (ComponentExchangeCategory) element;
-			if (category.getExchanges().size() > 0) {
-				// Display Title
 
-				stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_2);
+			stringBuffer.append(TEXT_2);
+			{
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.category.ComponentExchangeCategory_InvolvedComponentExchanges" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
 
-				// Create table header
+				InternalPatternContext ictx = (InternalPatternContext) ctx;
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+				stringBuffer.setLength(0);
 
-				stringBuffer.append(TEXT_6);
-
-				// Create each line
-				for (ComponentExchange ce : category.getExchanges()) {
-
-					stringBuffer.append(TEXT_3);
-					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(ce, projectName, outputFolder));
-					stringBuffer.append(TEXT_3);
-
-				}
-				// Create table footer
-
-				stringBuffer.append(TEXT_4);
-
+				final Map<String, Object> callParameters = new HashMap<String, Object>();
+				callParameters.put("parameter", parameter);
+				callParameters.put("projectNameParameter", projectName);
+				callParameters.put("outputFolderParameter", outputFolder);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_6K7isKhEEeu7bOcPHGGhcQ",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
+				stringBuffer.setLength(0);
 			}
+
+			stringBuffer.append(TEXT_2);
+
 		}
 
 		// Physical Link Categories
 		if (element instanceof PhysicalLinkCategory) {
-			PhysicalLinkCategory category = (PhysicalLinkCategory) element;
-			if (category.getLinks().size() > 0) {
-				// Display Title
 
-				stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_2);
+			stringBuffer.append(TEXT_2);
+			{
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.category.PhysicalLinkCategory_InvolvedPhysicalLinks" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter"%>
 
-				// Create table header
+				InternalPatternContext ictx = (InternalPatternContext) ctx;
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+				stringBuffer.setLength(0);
 
-				stringBuffer.append(TEXT_8);
-
-				// Create each line
-				for (PhysicalLink pl : category.getLinks()) {
-
-					stringBuffer.append(TEXT_3);
-					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(pl, projectName, outputFolder));
-					stringBuffer.append(TEXT_3);
-
-				}
-				// Create table footer
-
-				stringBuffer.append(TEXT_4);
-
+				final Map<String, Object> callParameters = new HashMap<String, Object>();
+				callParameters.put("parameter", parameter);
+				callParameters.put("projectNameParameter", projectName);
+				callParameters.put("outputFolderParameter", outputFolder);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_eeiesKhFEeu7bOcPHGGhcQ",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
+				stringBuffer.setLength(0);
 			}
+
+			stringBuffer.append(TEXT_2);
+
 		}
 
 		InternalPatternContext ictx = (InternalPatternContext) ctx;

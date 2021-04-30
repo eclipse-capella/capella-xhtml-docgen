@@ -1,0 +1,10 @@
+<%
+Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectNameParameter, outputFolderParameter, parameter);
+if(involvedFunctions.size() > 0) {
+	String title = "Related Functions";
+	Integer level = 2;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollection" args="involvedFunctions:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+}
+%>

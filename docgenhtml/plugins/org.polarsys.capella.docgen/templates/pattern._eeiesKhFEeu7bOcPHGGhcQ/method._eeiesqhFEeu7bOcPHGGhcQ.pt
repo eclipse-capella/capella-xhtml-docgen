@@ -1,0 +1,9 @@
+<%@ jet package="PACKAGE" class="CLASS" imports="
+java.util.*
+org.eclipse.egf.model.pattern.*
+org.eclipse.egf.pattern.execution.*
+org.eclipse.egf.pattern.query.*
+org.polarsys.capella.core.data.cs.PhysicalLinkCategory
+org.polarsys.capella.docgen.util.CapellaCategoryServices
+org.polarsys.capella.core.data.cs.PhysicalLink
+" %>

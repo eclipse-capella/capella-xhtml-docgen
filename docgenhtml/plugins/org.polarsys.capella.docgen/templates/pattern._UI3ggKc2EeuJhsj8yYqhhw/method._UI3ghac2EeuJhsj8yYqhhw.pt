@@ -1,0 +1,10 @@
+<%
+EList<OutputPin> outgoingPorts = parameter.getOutputs();
+if(outgoingPorts.size() > 0) {
+	String title = "Outgoing Functional Ports";
+	Integer level = 2;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromEList" args="outgoingPorts:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+}
+%>

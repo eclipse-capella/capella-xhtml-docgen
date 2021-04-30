@@ -1,0 +1,23 @@
+<%
+Collection<FunctionalExchange> incomingInternalFunctionalExchanges = CapellaFunctionServices.getIncomingInternalFunctionalExchanges(parameter);
+if(incomingInternalFunctionalExchanges.size() > 0) {
+	String title = "Incoming Internal Functional Exchanges";
+	Integer level = 2;
+	String[] columns = {"Exchange", "Involving functional chains", "Allocating component Exchanges", "Distant Port", "Source", "Target", "Description", "Allocated Exchange Items", "Realized Functional Exchange", "Realizing Functional Exchange"};
+	Collection<String> tableColumnList = Arrays.asList(columns);	
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableHeaderFromListColumn" args="tableColumnList:tableColumnsListParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+
+<%
+for(FunctionalExchange functionalExchange : incomingInternalFunctionalExchanges) { 
+%>
+<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectNameParameter, outputFolderParameter)%>
+<%
+}
+%>
+
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableFooter"%>
+
+<%
+}
+%>

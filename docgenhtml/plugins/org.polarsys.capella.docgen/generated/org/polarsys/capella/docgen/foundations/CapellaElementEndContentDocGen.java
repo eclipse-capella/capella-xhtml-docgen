@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -22,10 +22,7 @@ public class CapellaElementEndContentDocGen {
 
 	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 	protected final String TEXT_1 = "";
-	protected final String TEXT_2 = NL + "<h2>Realized Elements</h2>" + NL;
-	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL + "<h2>Realizing Elements </h2>" + NL;
-	protected final String TEXT_5 = NL;
+	protected final String TEXT_2 = NL;
 
 	public CapellaElementEndContentDocGen() {
 		//Here is the constructor
@@ -43,12 +40,12 @@ public class CapellaElementEndContentDocGen {
 		IQuery.ParameterDescription paramDesc = null;
 		Node.Container currentNode = ctx.getNode();
 
-		List<Object> elementList = null;
+		List<Object> parameterList = null;
 		//this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-		for (Object elementParameter : elementList) {
+		for (Object parameterParameter : parameterList) {
 
-			this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
+			this.parameter = (org.polarsys.capella.core.data.capellacore.CapellaElement) parameterParameter;
 
 			if (preCondition(ctx)) {
 				ctx.setNode(new Node.Container(currentNode, getClass()));
@@ -61,19 +58,21 @@ public class CapellaElementEndContentDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_3);
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
 		return stringBuffer.toString();
 	}
 
 	public String orchestration(PatternContext ctx) throws Exception {
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 
+		method_setContext(new StringBuffer(), ictx);
+
 		method_body(new StringBuffer(), ictx);
 
 		if (ictx.useReporter()) {
 			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("element", this.element);
+			parameterValues.put("parameter", this.parameter);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
 			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
@@ -81,58 +80,85 @@ public class CapellaElementEndContentDocGen {
 		return null;
 	}
 
-	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+	protected java.lang.String outputFolder = null;
 
-	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-		this.element = object;
+	public void set_outputFolder(java.lang.String object) {
+		this.outputFolder = object;
+	}
+
+	protected java.lang.String projectName = null;
+
+	public void set_projectName(java.lang.String object) {
+		this.projectName = object;
+	}
+
+	protected org.polarsys.capella.core.data.capellacore.CapellaElement parameter = null;
+
+	public void set_parameter(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+		this.parameter = object;
 	}
 
 	public Map<String, Object> getParameters() {
 		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("element", this.element);
+		parameters.put("parameter", this.parameter);
 		return parameters;
+	}
+
+	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+		outputFolder = ctx.getValue("outputFolder").toString();
+		projectName = ctx.getValue("projectName").toString();
+
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
 	}
 
 	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		// Realized Elements 
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capellaelement.CapellaElement_RealizedElements" args="parameter:parameter"%>
+
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
+
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("parameter", parameter);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_yfHS4KgKEeu7bOcPHGGhcQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
+		}
+
 		stringBuffer.append(TEXT_1);
+		stringBuffer.append(TEXT_2);
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.capellaelement.CapellaElement_RealizingElements" args="parameter:parameter"%>
 
-		String outputFolder = ctx.getValue("outputFolder").toString();
-		String projectName = ctx.getValue("projectName").toString();
-		Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName,
-				outputFolder);
-		if (allocations.size() > 0) {
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
+
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("parameter", parameter);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_6IqBsKgLEeu7bOcPHGGhcQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
+		}
+
+		stringBuffer.append(TEXT_2);
+		if (parameter.getOwnedConstraints().isEmpty() == false) {
 			stringBuffer.append(TEXT_2);
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(StringUtil.stringListToBulette(allocations));
-			stringBuffer.append(TEXT_3);
-		}
-		stringBuffer.append(TEXT_3);
-		// Realizing Elements 
-
-		//String outputFolder = ctx.getValue("outputFolder").toString();
-		//String projectName = ctx.getValue("projectName").toString();
-		Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName,
-				outputFolder);
-		if (allocations2.size() > 0) {
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(StringUtil.stringListToBulette(allocations2));
-			stringBuffer.append(TEXT_3);
-		}
-		stringBuffer.append(TEXT_3);
-		if (element.getOwnedConstraints().isEmpty() == false) {
-			stringBuffer.append(TEXT_3);
 			{
-				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="element:parameter"%>
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="parameter:parameter"%>
 
 				InternalPatternContext ictx = (InternalPatternContext) ctx;
 				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 				stringBuffer.setLength(0);
 
 				final Map<String, Object> callParameters = new HashMap<String, Object>();
-				callParameters.put("parameter", element);
+				callParameters.put("parameter", parameter);
 				CallHelper.executeWithParameterInjection(
 						"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_F9HPoVcEEeWXKstRBeKifA",
 						new ExecutionContext((InternalPatternContext) ctx), callParameters);
@@ -140,18 +166,18 @@ public class CapellaElementEndContentDocGen {
 			}
 
 		}
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		// Presented in diagrams generation
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="parameter:element, outputFolder:outputFolder, projectName:projectName"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
-			callParameters.put("element", element);
+			callParameters.put("element", parameter);
 			callParameters.put("outputFolder", outputFolder);
 			callParameters.put("projectName", projectName);
 			CallHelper.executeWithParameterInjection(
@@ -160,72 +186,72 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		// owned diagrams
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="parameter:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
-			callParameters.put("element", element);
+			callParameters.put("element", parameter);
 			CallHelper.executeWithParameterInjection(
 					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
 					new ExecutionContext((InternalPatternContext) ctx), callParameters);
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		// Presented in diagrams generation
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PresentedDiagrmsGeneration" args="element:element"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PresentedDiagrmsGeneration" args="parameter:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
-			callParameters.put("element", element);
+			callParameters.put("element", parameter);
 			CallHelper.executeWithParameterInjection(
 					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_wWwgkErlEeCvqtVx_IKrqA",
 					new ExecutionContext((InternalPatternContext) ctx), callParameters);
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		// Interested diagram in this model element 
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_2);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.InterestedDiagrmsGeneration" args="element:element"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.InterestedDiagrmsGeneration" args="parameter:element"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
-			callParameters.put("element", element);
+			callParameters.put("element", parameter);
 			CallHelper.executeWithParameterInjection(
 					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_mGFhcAHoEemzNsJkc2kajg",
 					new ExecutionContext((InternalPatternContext) ctx), callParameters);
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_2);
 		// Diagrams navigation tree
-		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_2);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramNavigationTree" args="element:element, outputFolder:outputFolder, projectName:projectName"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramNavigationTree" args="parameter:element, outputFolder:outputFolder, projectName:projectName"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
 			stringBuffer.setLength(0);
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
-			callParameters.put("element", element);
+			callParameters.put("element", parameter);
 			callParameters.put("outputFolder", outputFolder);
 			callParameters.put("projectName", projectName);
 			CallHelper.executeWithParameterInjection(
@@ -234,7 +260,7 @@ public class CapellaElementEndContentDocGen {
 			stringBuffer.setLength(0);
 		}
 
-		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_2);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
 	}

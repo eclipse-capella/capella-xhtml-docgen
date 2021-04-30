@@ -1,1 +1,13 @@
-<%@ jet package="PACKAGE" class="CLASS" imports="org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput org.polarsys.capella.core.data.capellacore.Constraint java.util.* org.eclipse.egf.model.pattern.* org.eclipse.egf.pattern.execution.* org.eclipse.egf.pattern.query.* org.polarsys.capella.core.data.capellacommon.Region org.polarsys.capella.core.data.capellacommon.StateTransition org.polarsys.capella.docgen.util.CapellaElementService org.polarsys.capella.docgen.util.StringUtil org.polarsys.capella.docgen.util.pattern.helper.RegionHelper org.polarsys.capella.common.data.behavior.AbstractEvent org.eclipse.emf.common.util.EList"  %>
+<%@ jet package="PACKAGE" class="CLASS" imports="
+org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput
+org.polarsys.capella.core.data.capellacore.Constraint
+java.util.*
+org.eclipse.egf.model.pattern.*
+org.eclipse.egf.pattern.execution.*
+org.eclipse.egf.pattern.query.*
+org.polarsys.capella.core.data.capellacommon.StateTransition
+org.polarsys.capella.docgen.util.StringUtil
+org.polarsys.capella.docgen.util.pattern.helper.RegionHelper
+org.polarsys.capella.common.data.behavior.AbstractEvent
+org.eclipse.emf.common.util.EList
+" %>

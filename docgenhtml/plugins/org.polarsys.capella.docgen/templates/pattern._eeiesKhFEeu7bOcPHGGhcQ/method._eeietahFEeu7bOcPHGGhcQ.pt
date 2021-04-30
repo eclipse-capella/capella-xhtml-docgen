@@ -1,0 +1,17 @@
+<%
+if (parameter.getLinks().size() > 0) {
+	String title = "Involved Physical Links";
+	Integer level = 2;
+	String[] columns = {"Physical Link", "Source Component", "Target Component", "Description"};
+	Collection<String> tableColumnList = Arrays.asList(columns);
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableHeaderFromListColumn" args="tableColumnList:tableColumnsListParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+	for (PhysicalLink pl : parameter.getLinks()) {
+		%>
+		<%=CapellaCategoryServices.edgeToTableLine(pl, projectNameParameter, outputFolderParameter)%>
+		<%
+	}
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableFooter"%>
+<%}%>

@@ -1,0 +1,17 @@
+<%
+if (parameter.getExchanges().size() > 0) {
+	String title = "Involved Component Exchanges";
+	Integer level = 2;
+	String[] columns = {"Component Exchange", "Source Component", "Target Component", "Description"};
+	Collection<String> tableColumnList = Arrays.asList(columns);
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableHeaderFromListColumn" args="tableColumnList:tableColumnsListParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+	for (ComponentExchange ce : parameter.getExchanges()) {
+		%>
+		<%=CapellaCategoryServices.edgeToTableLine(ce, projectNameParameter, outputFolderParameter)%>
+		<%
+	}
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableFooter"%>
+<%}%>

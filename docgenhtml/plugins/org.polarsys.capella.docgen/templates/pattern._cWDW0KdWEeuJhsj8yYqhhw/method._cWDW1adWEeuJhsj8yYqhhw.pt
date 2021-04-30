@@ -1,0 +1,23 @@
+<%
+Collection<FunctionalExchange> outgoingInternalInteractions = CapellaFunctionServices.getOutgoingInternalFunctionalExchanges(parameter);
+if(outgoingInternalInteractions.size() > 0) {
+	String title = "Outgoing Internal Interactions";
+	Integer level = 2;
+	String[] columns = {"Interaction", "Involving Operational Processes", "Source", "Target", "Description", "Allocated Exchange Items", "Realized Functional Exchange", "Realizing Functional Exchange"};
+	Collection<String> tableColumnList = Arrays.asList(columns);	
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableHeaderFromListColumn" args="tableColumnList:tableColumnsListParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+
+<%
+for(FunctionalExchange activityEdge : outgoingInternalInteractions) { 
+%>
+<%=CapellaFunctionServices.externalInteractionToTableLine(activityEdge, projectNameParameter, outputFolderParameter)%>
+<%
+}
+%>
+
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableFooter"%>
+
+<%
+}
+%>

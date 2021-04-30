@@ -1,0 +1,42 @@
+<%// Sort messages
+List<SequenceMessage> orderedMessagesList = parameter.getOwnedMessages();
+%>
+
+<%
+if (orderedMessagesList.size()>0) {
+	String title = "Sequence Messages";
+	Integer level = 2;
+	String[] columns = {"Invoked Exchange", "Source element of the Exchange", "Target element of the Exchange", "Description of the Sequence Message <br /> <i>(and not the one of the invoked exchange)</i>"};
+	Collection<String> tableColumnList = Arrays.asList(columns);	
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableHeaderFromListColumn" args="tableColumnList:tableColumnsListParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+
+<%
+	for (SequenceMessage sMessage : orderedMessagesList) {
+
+		String source = "";
+		String target = "";
+	
+		if (sMessage.getSendingEnd() != null && sMessage.getSendingEnd().getCovered() != null && sMessage.getSendingEnd().getCovered().getRepresentedInstance() != null)
+			source = sMessage.getSendingEnd().getCovered().getRepresentedInstance().getName();
+	
+		if (sMessage.getReceivingEnd() != null && sMessage.getReceivingEnd().getCovered() != null && sMessage.getReceivingEnd().getCovered().getRepresentedInstance() != null)
+			target = sMessage.getReceivingEnd().getCovered().getRepresentedInstance().getName();
+	
+		String name = sMessage.getName();
+		String description = sMessage.getDescription();
+		description = StringUtil.transformAREFString(sMessage, description, projectNameParameter, outputFolderParameter);
+		if (description == null || description.trim().length() == 0)
+			description = "No description";
+%>
+<tr>
+	<td><%=name%></td>
+	<td><%=source%></td>
+	<td><%=target%></td>
+	<td><%=description%></td>
+</tr>
+<%	}%>
+
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.TableFooter"%>
+
+<%}%>

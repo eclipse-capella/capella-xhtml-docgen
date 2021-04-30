@@ -1,3 +1,7 @@
 <%
 	element = parameter;
+	elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
+	elementType = EscapeChars.forHTML(element.eClass().getName());
+	projectName= ctx.getValue("projectName").toString();
+	outputFolder = ctx.getValue("outputFolder").toString();
 %>

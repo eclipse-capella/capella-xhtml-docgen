@@ -1,0 +1,10 @@
+<%
+Collection<String> actors = CapellaCapabilityHelper.INSTANCE.getInvolvedActors(projectNameParameter, outputFolderParameter, parameter);
+if(actors.size() > 0 ) {
+	String title = "Involved Actors";
+	Integer level = 2;
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.display.BuletteListFromStringCollection" args="actors:parameterListParameter, projectNameParameter:projectNameParameter, outputFolderParameter:outputFolderParameter, title:sectionTitleParameter, level:sectionLevelParameter"%>
+<%
+}
+%>

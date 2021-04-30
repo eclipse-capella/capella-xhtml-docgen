@@ -1,238 +1,30 @@
 <%
 super.method_content(new StringBuffer(), ctx);
-String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
-String elementType = EscapeChars.forHTML(element.eClass().getName());
-String projectName= ctx.getValue("projectName").toString();
-String outputFolder = ctx.getValue("outputFolder").toString();
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_InvolvingFunctionalChains" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-Collection<String> involvingFunctionalChains = FunctionHelper.getInvolvingFunctionalChains(projectName, outputFolder, (AbstractFunction)element);
-if(involvingFunctionalChains.size() > 0 ) {
-	if (!(element instanceof OperationalActivity)) {
-%>
-<h2>Involving Functional Chains</h2>
-<%
-	} else {
-	%>
-<h2>Involving Operational Processes</h2>
-<%
-}
-%>
-<%=StringUtil.stringListToBulette(involvingFunctionalChains)%>
-<%
-}
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_InvolvingOperationalProcesses" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-Collection<String> allocatingComponents = FunctionHelper.getAllocatingComponents(projectName, outputFolder, (AbstractFunction)element);
-if(allocatingComponents.size() > 0 ) {
-%>
-<h2>Allocating Component</h2>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_AllocatingComponents" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-<%=StringUtil.stringListToBulette(allocatingComponents)%>
-<%
-}
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_IncomingFunctionalPorts" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-EList<InputPin> incomingPorts = ((AbstractFunction) element).getInputs();
-if(incomingPorts.size() > 0) {
-%>
-<h2>Incoming Functional Ports</h2>
-<%=StringUtil.stringListToBulette(incomingPorts, projectName, outputFolder)%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_OutgoingFunctionalPorts" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-<%
-}
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_IncomingInternalFunctionalExchanges" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-EList<OutputPin> outgoingPorts = ((AbstractFunction) element).getOutputs();
-if(outgoingPorts.size() > 0) {
-%>
-<h2>Outgoing Functional Ports</h2>
-<%=StringUtil.stringListToBulette(outgoingPorts, projectName, outputFolder)%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_OutgoingInternalFunctionalExchanges" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-<%
-}
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_IncomingFunctionalExchanges" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-if(!(element instanceof OperationalActivity)) {
-Collection<FunctionalExchange> incomingInternalFunctionalExchanges = CapellaFunctionServices.getIncomingInternalFunctionalExchanges((AbstractFunction)element);
-if(incomingInternalFunctionalExchanges.size() > 0) {
-%>
-    <h2>Incoming Internal Functional Exchanges</h2>
-    
-    
-   <table>
-	<tr>
-		<th>Exchange</th>
-		<th>Involving functional chains</th>
-		<th>Allocating component Exchanges</th>
-		<th>Distant Port</th>
-		<th>Source</th>
-		<th>Target</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-		<th>Realized Functional Exchange</th>
-		<th>Realizing Functional Exchange</th>
-	</tr>
-<% for(FunctionalExchange functionalExchange : incomingInternalFunctionalExchanges) {%>
-	<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
-<% }%>
-</table>
-  <%
-}
-Collection<FunctionalExchange> outgoingInternalFunctionalExchanges = CapellaFunctionServices.getOutgoingInternalFunctionalExchanges((AbstractFunction)element);
-if(outgoingInternalFunctionalExchanges.size() > 0) {
-%>
- <h2>Outgoing Internal Functional Exchanges</h2>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_OutgoingFunctionalExchanges" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-    <table>
-	<tr>
-		<th>Exchange</th>
-		<th>Involving functional chains</th>
-		<th>Allocating component Exchanges</th>
-		<th>Distant Port</th>
-		<th>Source</th>
-		<th>Target</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-		<th>Realized Functional Exchange</th>
-		<th>Realizing Functional Exchange</th>
-	</tr>
-<% for(FunctionalExchange functionalExchange : outgoingInternalFunctionalExchanges) {%>
-	<%=CapellaFunctionServices.externalFunctionalExchangeToTableLine(functionalExchange, projectName, outputFolder)%>
-<% }%>
-</table>
-  <%
-}
-	Collection<FunctionalExchange> incomingFunctionalExchanges = CapellaFunctionServices.getIncomingFunctionalExchanges((AbstractFunction) element);
-	if (incomingFunctionalExchanges.size() > 0) {
-%>
-	<h2>Incoming Functional Exchanges</h2>
-	<table>
-	<tr>
-		<th>Exchange</th>
-		<th>Involving functional chains</th>
-		<th>Allocating component Exchanges</th>
-		<th>Distant Port</th>
-		<th>Source</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-		<th>Realized Functional Exchange</th>
-		<th>Realizing Functional Exchange</th>
-	</tr>
-<% for(FunctionalExchange ae : incomingFunctionalExchanges) {%>
-	<%=CapellaFunctionServices.incomingFunctionalExchangeToTableLine(ae, projectName, outputFolder)%>
-<% }%>
-</table>
-<%
-	}
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_IncomingInternalInteractions" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-	Collection<FunctionalExchange> outgoingFunctionalExchanges = CapellaFunctionServices.getOutgoingFunctionalExchanges((AbstractFunction) element);
-	if (outgoingFunctionalExchanges.size() > 0) {
-%>
-	<h2>Outgoing Functional Exchanges</h2>
-	<table>
-	<tr>
-		<th>Exchange</th>
-		<th>Involving functional chains</th>
-		<th>Allocating component Exchanges</th>
-		<th>Distant Port</th>
-		<th>Target</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-		<th>Realized Functional Exchange</th>
-		<th>Realizing Functional Exchange</th>
-	</tr>
-<% for(FunctionalExchange ae : outgoingFunctionalExchanges) {%>
-	<%=CapellaFunctionServices.outgoingFunctionalExchangeToTableLine(ae, projectName, outputFolder)%>
-<% }%>
-</table>
-<%
-}
-} else {
-Collection<FunctionalExchange> incomingInternalInteractions = CapellaFunctionServices.getIncomingInternalFunctionalExchanges((AbstractFunction)element);
-if(incomingInternalInteractions.size() > 0) {
-%>
-    <h2>Incoming Internal Interactions</h2>
-        
-   <table>
-	<tr>
-		<th>Interaction</th>
-		<th>Involving Operational Processes</th>
-		<th>Source</th>
-		<th>Target</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-		<th>Realized Functional Exchange</th>
-		<th>Realizing Functional Exchange</th>
-	</tr>
-<% for(FunctionalExchange activityEdge : incomingInternalInteractions) {%>
-	<%=CapellaFunctionServices.externalInteractionToTableLine(activityEdge, projectName, outputFolder)%>
-<% }%>
-</table>
-  <%
-}
-Collection<FunctionalExchange> outgoingInternalInteractions = CapellaFunctionServices.getOutgoingInternalFunctionalExchanges((AbstractFunction)element);
-if(outgoingInternalInteractions.size() > 0) {
-%>
- <h2>Outgoing Internal Interactions</h2>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_OutgoingInternalInteractions" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-    <table>
-	<tr>
-		<th>Interaction</th>
-		<th>Involving Operational Processes</th>
-		<th>Source</th>
-		<th>Target</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-		<th>Realized Functional Exchange</th>
-		<th>Realizing Functional Exchange</th>
-	</tr>
-<% for(FunctionalExchange activityEdge : outgoingInternalInteractions) {%>
-	<%=CapellaFunctionServices.externalInteractionToTableLine(activityEdge, projectName, outputFolder)%>
-<% }%>
-</table>
-  <%
-}
-  
-	Collection<FunctionalExchange> incomingInteractions = CapellaFunctionServices.getIncomingFunctionalExchanges((AbstractFunction) element);
-	if (incomingInteractions.size() > 0) {
-%>
-	<h2>Incoming Interactions</h2>
-	<table>
-	<tr>
-		<th>Interaction</th>
-		<th>Source</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-	</tr>
-<% for(FunctionalExchange ae : incomingInteractions) {%>
-	<%=CapellaFunctionServices.incomingInteractionToTableLine(ae, projectName, outputFolder)%>
-<% }%>
-</table>
-<%
-	}
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_IncomingInteractions" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-	Collection<FunctionalExchange> outgoingInteractions = CapellaFunctionServices.getOutgoingFunctionalExchanges((AbstractFunction) element);
-	if (outgoingInteractions.size() > 0) {
-%>
-	<h2>Outgoing Interactions</h2>
-	<table>
-	<tr>
-		<th>Interaction</th>
-		<th>Target</th>
-		<th>Description</th>
-		<th>Allocated Exchange Items</th>
-	</tr>
-<% for(FunctionalExchange ae : outgoingInteractions) {%>
-	<%=CapellaFunctionServices.outgoingInteractionToTableLine(ae, projectName, outputFolder)%>
-<% }%>
-</table>
-<%
-}
-}
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_OutgoingInteractions" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
 
-Collection<String> availableModeAndState = CapellaFunctionServices.getAvailableModeAndState(projectName,
-			outputFolder, (AbstractFunction)element);
-			
-			if(availableModeAndState.size() > 0) {
-%>
-<h2>Modes and States</h2>
-<%=StringUtil.stringListToBulette(availableModeAndState)%>
-<%
-}
-%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.sections.abstractfunction.AbstractFunction_ModesAndStates" args="parameter:parameter, projectName:projectNameParameter, outputFolder:outputFolderParameter, elementName:elementNameParameter, elementType:elementTypeParameter"%>
