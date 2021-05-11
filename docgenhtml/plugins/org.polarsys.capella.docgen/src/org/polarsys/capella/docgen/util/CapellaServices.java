@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -41,6 +41,9 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.DocGenHtmlUtil;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 
 public class CapellaServices {
+	
+	private CapellaServices() {}
+	
 	public static final String BOLD_BEGIN = "<b>";
 	public static final String BOLD_END = "</b>";
 	public static final String ITALIC_BEGIN = "<i>";
@@ -58,6 +61,14 @@ public class CapellaServices {
 	public static final String UL_OPEN_WITH_BORDER = "<ul class=\"generatedListWithBorder\">";
 	public static final String UL_OPEN_SIMPLE = "<ul>";
 	public static final String UL_CLOSE = "</ul>";
+	
+	public static final String TD_OPEN = "<td>";
+	public static final String TD_CLOSE = "</td>";
+	
+	public static final String TD_STYLE_MAX_WIDTH_100_BORDER_0PX = "<td style=\"max-width:100%; border:0px\">";
+	
+	public static final String TR_OPEN = "<tr>";
+	public static final String TR_CLOSE = "</tr>";
 
 	public static final String NONE = "None";
 	

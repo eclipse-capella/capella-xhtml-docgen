@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -34,100 +34,100 @@ public class CapellaCapabilityHelper {
 	}
 
 	public Collection<String> getExploitingMissions(String projectName, String outputFolder, Capability capability) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (Mission m : CapabilityExt.getPurposeMissions(capability)) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(m, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(m));
-			ret.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(m, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(m));
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}
 
 	public Collection<String> getInvolvedActors(String projectName, String outputFolder, Capability capability) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (SystemComponent currentSystemComponent : CapabilityExt.getInvolvedSystemComponents(capability)) {
 			if (currentSystemComponent.isActor()) {
-				StringBuffer buffer = new StringBuffer();
-				buffer.append(CapellaServices.getImageLinkFromElement(currentSystemComponent, projectName, outputFolder));
-				buffer.append(" ");
-				buffer.append(CapellaServices.getHyperlinkFromElement(currentSystemComponent));
-				ret.add(buffer.toString());
+				StringBuilder stringBuilder = new StringBuilder();
+				stringBuilder.append(CapellaServices.getImageLinkFromElement(currentSystemComponent, projectName, outputFolder));
+				stringBuilder.append(" ");
+				stringBuilder.append(CapellaServices.getHyperlinkFromElement(currentSystemComponent));
+				ret.add(stringBuilder.toString());
 			}
 		}
 		return ret;
 	}
 
 	public Collection<String> getExtendedCapabilities(String projectName, String outputFolder, Capability capability) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (AbstractCapability currentCapability : capability.getExtendedAbstractCapabilities()) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(currentCapability, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(currentCapability));
-			ret.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(currentCapability, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(currentCapability));
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}
 
 	public Collection<String> getIncludedCapabilities(String projectName, String outputFolder, Capability capability) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (AbstractCapability currentCapability : capability.getIncludedAbstractCapabilities()) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(currentCapability, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(currentCapability));
-			ret.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(currentCapability, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(currentCapability));
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}
 
 	public Collection<String> getParentCapabilities(String projectName, String outputFolder, Capability capability) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (AbstractCapability currentCapability : capability.getSuper()) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(currentCapability, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(currentCapability));
-			ret.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(currentCapability, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(currentCapability));
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}
 
 	public Collection<String> getInvolvedFunctions(String projectName, String outputFolder, AbstractCapability capability) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (AbstractFunctionAbstractCapabilityInvolvement currentCapabilityInvolvement : capability.getOwnedAbstractFunctionAbstractCapabilityInvolvements()) {
 			InvolvedElement involvedElement = currentCapabilityInvolvement.getInvolved();
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(involvedElement, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(involvedElement));
-			ret.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(involvedElement, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(involvedElement));
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}
 
 	public Collection<String> getAvailableModeAndState(String projectName, String outputFolder, Capability capability) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (State currentStateMode : capability.getAvailableInStates()) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(currentStateMode, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(currentStateMode));
-			ret.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(currentStateMode, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(currentStateMode));
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}
 
 	public Collection<String> getInvolvedComponent(String projectName, String outputFolder, CapabilityRealization capability) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (CapabilityRealizationInvolvedElement involvedElement : capability.getInvolvedComponents()) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(involvedElement, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(involvedElement));
-			ret.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(involvedElement, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(involvedElement));
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -88,7 +88,7 @@ public class CapellaPropertyServices {
 	 */
 	public static String getPropertyValueInformation(EnumerationPropertyValue prop_p) {
 		// Test If the type and the value are defined
-		if (null != prop_p.getType() && null != prop_p.getValue() && CapellaServices.EMPTY.equals(prop_p.getValue())) {
+		if (null != prop_p.getType() && null != prop_p.getValue() && CapellaServices.EMPTY.equals(prop_p.getValue().toString())) {
 			// Return the name, the type and the value
 			return (CapellaServices.getHyperlinkFromElement(prop_p) + CapellaServices.VALUE_PRESENTER + prop_p.getType().getName() + "." + prop_p.getValue());
 		}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -54,7 +54,7 @@ public class CapellaDomainHelper extends LoadableDomainHelper {
 			}
 		}
 
-		return null;
+		throw new IllegalArgumentException("URI parameter does not allow for transactional editing domain resolution"); //$NON-NLS-1$
 	}
 
 	@Override
@@ -83,10 +83,10 @@ public class CapellaDomainHelper extends LoadableDomainHelper {
 					Activator.getDefault().logWarning(Messages.bind(Messages.Load_EMFDomain_error1, domain.getName()));
 					return true;
 				}
-
-				ResourceSet set = getResourcesSet(myDomain.getUri());
+				
 				Resource domainResource = null;
 				try {
+					ResourceSet set = getResourcesSet(myDomain.getUri());
 					domainResource = set.getResource(uri, true);
 				} catch (Exception e) {
 					throw new DomainException(e);

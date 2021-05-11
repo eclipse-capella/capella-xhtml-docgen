@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -107,39 +107,31 @@ public class ImageHelper {
 
 	private void createFoldersHierarchy(File outputFile) {
 		File parentFile = outputFile.getParentFile();
-		if (!parentFile.exists()) {
-			if (!parentFile.mkdirs()) {
-				org.polarsys.capella.docgen.Activator.getDefault().getLog()
-						.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-								FOLDER_HIERARCHY_CREATION_ERROR + ": \"" + outputFile.getAbsolutePath() + "\""));
-			}
+		if (!parentFile.exists() && !parentFile.mkdirs()) {
+			org.polarsys.capella.docgen.Activator.getDefault().getLog()
+					.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+							FOLDER_HIERARCHY_CREATION_ERROR + ": \"" + outputFile.getAbsolutePath() + "\""));
 		}
 	}
 
 	private void copyFile(File sourceFile, File destFile) throws IOException {
-		InputStream inputStr = null;
-		OutputStream outputStr = null;
-		try {
-			inputStr = new FileInputStream(sourceFile);
-			outputStr = new FileOutputStream(destFile);
+		try (
+				InputStream inputStr = new FileInputStream(sourceFile);
+				OutputStream outputStr = new FileOutputStream(destFile);
+			) {
 			byte[] buf = new byte[1024];
 			int bytesRead;
 			while ((bytesRead = inputStr.read(buf)) > 0) {
 				outputStr.write(buf, 0, bytesRead);
 			}
-		} finally {
-			inputStr.close();
-			outputStr.close();
 		}
 	}
 
 	/**
 	 * Do copy file(s) from src to dest folder
 	 * 
-	 * @param src
-	 *            maybe a file or directory
-	 * @param dest
-	 *            destination folder. It is created if the folder does not exists
+	 * @param src  maybe a file or directory
+	 * @param dest destination folder. It is created if the folder does not exists
 	 * @throws IOException
 	 */
 	public void doCopy(File src, File dest) throws IOException {
@@ -169,7 +161,7 @@ public class ImageHelper {
 		String simpleFileName = CapellaUIResourcesPlugin.getDefault().getCustomizedImageName(eObject);
 		final IFolder iconFolder = getIconFolder(projectName, folderName);
 		IFile iconFile = iconFolder.getFile(simpleFileName + ".png");
-		if (iconFile.exists() == false) {
+		if (!iconFile.exists()) {
 			String withoutFileExtension = iconFile.getLocation().toString()
 					.replace(iconFile.getLocation().getFileExtension(), "");
 
@@ -194,7 +186,7 @@ public class ImageHelper {
 		final IContainer parent = ResourcesPlugin.getWorkspace().getRoot().getFolder(path).getParent();
 		final IPath iconPath = parent.getFullPath().append(ICON_FOLDER_NAME);
 		final IFolder iconFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(iconPath);
-		if (iconFolder == null || iconFolder.exists() == false) {
+		if (!iconFolder.exists()) {
 			try {
 				FileHelper.createContainers(MONITOR, iconFolder);
 				iconFolder.create(true, true, MONITOR);
@@ -275,10 +267,8 @@ public class ImageHelper {
 	 * {@code imageFileNameWithoutExtension}+{@code DOC_GEN_GENERATED}+X. X is a
 	 * decimal value.
 	 * 
-	 * @param imageFileName
-	 *            The original file name without extension
-	 * @param usedImageFileNames
-	 *            The file names that are already used
+	 * @param imageFileName      The original file name without extension
+	 * @param usedImageFileNames The file names that are already used
 	 * @return A unique file name value. Adds the returned value to collection
 	 *         {@code usedImageFileNames}
 	 */

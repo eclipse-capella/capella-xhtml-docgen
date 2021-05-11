@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -34,21 +34,23 @@ import org.polarsys.capella.core.data.information.datavalue.DataValue;
  * 
  */
 public class CapellaClassServices {
+	
+	private CapellaClassServices() {}
 
 	/**
 	 * <b>Get the state of features of a class</b>
 	 * <p>
 	 * Get the state of features isAbstract and isPrimitive of a class
 	 * 
-	 * @param eObject_p
+	 * @param eObject
 	 * @return
 	 */
-	public static List<String> getClassFeatures(EObject eObject_p) {
+	public static List<String> getClassFeatures(EObject eObject) {
 		// Create the list to return
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 
-		if (eObject_p instanceof Class) {
-			Class eClass = (Class) eObject_p;
+		if (eObject instanceof Class) {
+			Class eClass = (Class) eObject;
 			// Add the features to the list
 			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ABSTRACT
 					+ CapellaServices.BOLD_END + eClass.isAbstract());
@@ -63,63 +65,73 @@ public class CapellaClassServices {
 	 * <p>
 	 * Get the informations of class properties
 	 * 
-	 * @param eObject_p
+	 * @param eObject
 	 * @return
 	 */
-	public static List<String> getClassProperties(EObject eObject_p,
+	public static List<String> getClassProperties(EObject eObject,
 			String projectName, String outputFolder) {
 
 		Property minProperty = null;
 		Property maxProperty = null;
 		// Create the list to return
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 
+		if (!(eObject instanceof Class)) {
+			return ret;
+		}
 		// If the Object is a Class
-		if (eObject_p instanceof Class) 
+		EList<Property> properties = getClassProperties((Class) eObject);
+		
+		if (properties != null)
 		{
-			EList<Property> properties = null;
-			if (eObject_p instanceof Union )
+			// For each properties of the Class
+			for (Property prop : properties) 
 			{
-				properties = new BasicEList<Property>(((Union)eObject_p).getContainedUnionProperties());
-			}
-			else
-			{
-				properties = ((Class) eObject_p).getContainedProperties();
-			}
-			
-			if (properties != null && properties.isEmpty() == false)
-			{
-				// For each properties of the Class
-				for (Property prop : properties) 
+				if (prop.getName().equals("min")) 
+					minProperty = prop;
+				else
 				{
-					if (prop.getName().equals("min")) 
-						minProperty = prop;
-					else
+					if (prop.getName().equals("max")) 
 					{
-						if (prop.getName().equals("max")) 
-						{
-							maxProperty = prop;
-						}
-						else 
-						{
-							// Add the information of the property to the list
-							String info = CapellaPropertyServices.getInformationFromProperty(prop, projectName, outputFolder);
-							ret.add(info);
-						}
+						maxProperty = prop;
+					}
+					else 
+					{
+						// Add the information of the property to the list
+						String info = CapellaPropertyServices.getInformationFromProperty(prop, projectName, outputFolder);
+						ret.add(info);
 					}
 				}
 			}
-			
-			if (maxProperty != null) 
-			{
-				ret.add(0, CapellaPropertyServices.getInformationFromProperty(maxProperty, projectName, outputFolder));
-			}
-			if (minProperty != null) 
-			{
-				ret.add(0, CapellaPropertyServices.getInformationFromProperty(minProperty, projectName, outputFolder));
-			}
+		}
+		
+		if (maxProperty != null) 
+		{
+			ret.add(0, CapellaPropertyServices.getInformationFromProperty(maxProperty, projectName, outputFolder));
+		}
+		if (minProperty != null) 
+		{
+			ret.add(0, CapellaPropertyServices.getInformationFromProperty(minProperty, projectName, outputFolder));
 		}
 		return ret;
+	}
+
+	/**
+	 * Get all properties of a Class object
+	 * @param clazz
+	 * @return The Class properties. If object contained properties getter returns null or empty it will return null.
+	 */
+	private static EList<Property> getClassProperties(Class clazz) {
+		EList<Property> properties = null;
+		if (clazz instanceof Union) {
+			properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties());
+		} else {
+			properties = clazz.getContainedProperties();
+		}
+		if (properties.isEmpty()) {
+			return null;
+		}
+		return properties;
 	}
 
 	/**
@@ -127,17 +139,17 @@ public class CapellaClassServices {
 	 * <p>
 	 * Get the Data values information of a class
 	 * 
-	 * @param eObject_p
+	 * @param eObject
 	 * @return
 	 */
-	public static List<String> getClassDataValues(EObject eObject_p,
+	public static List<String> getClassDataValues(EObject eObject,
 			String projectName, String outputFolder) {
 		// Create the list to return
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 
 		// If the Object is a Class
-		if (eObject_p instanceof Class) {
-			List<DataValue> dataValueList = ((Class) eObject_p)
+		if (eObject instanceof Class) {
+			List<DataValue> dataValueList = ((Class) eObject)
 					.getOwnedDataValues();
 			// For each Data Value
 			for (DataValue dataValue : dataValueList) {
@@ -154,16 +166,16 @@ public class CapellaClassServices {
 	 * <p>
 	 * Get the realisation information of a class
 	 * 
-	 * @param eObject_p
+	 * @param eObject
 	 * @return
 	 */
-	public static List<String> getClassRealizeInformation(EObject eObject_p) {
+	public static List<String> getClassRealizeInformation(EObject eObject) {
 		// Create the list to return
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 
 		// If the Object is a Class
-		if (eObject_p instanceof Class) {
-			List<InformationRealization> listReal = ((Class) eObject_p)
+		if (eObject instanceof Class) {
+			List<InformationRealization> listReal = ((Class) eObject)
 					.getOwnedInformationRealizations();
 			for (InformationRealization realization : listReal) {
 				if (realization.getTargetElement() != null)
@@ -180,17 +192,17 @@ public class CapellaClassServices {
 	 * <p>
 	 * Get the operatin informations of a class
 	 * 
-	 * @param eObject_p
+	 * @param eObject
 	 * @return
 	 */
-	public static List<String> getClassOperation(EObject eObject_p) {
+	public static List<String> getClassOperation(EObject eObject) {
 		// Create the list to return
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 
 		// If the Object is a Class
-		if (eObject_p instanceof Class) {
+		if (eObject instanceof Class) {
 			// For each operation of the Class
-			for (Operation ope : ((Class) eObject_p).getContainedOperations()) {
+			for (Operation ope : ((Class) eObject).getContainedOperations()) {
 				// Add the information of the operation to the list
 				ret.add(getInformationFromOperation(ope));
 			}
@@ -203,34 +215,34 @@ public class CapellaClassServices {
 	 * <p>
 	 * Get the information detail of an operation
 	 * 
-	 * @param ope_p
+	 * @param ope
 	 * @return
 	 */
-	private static String getInformationFromOperation(Operation ope_p) {
+	private static String getInformationFromOperation(Operation ope) {
 		// Buffer declaration
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder stringBuilder = new StringBuilder();
 		// Bold tag open
-		buffer.append(CapellaServices.BOLD_BEGIN);
+		stringBuilder.append(CapellaServices.BOLD_BEGIN);
 		// If property is abstract
-		if (ope_p.isIsAbstract()) {
+		if (ope.isIsAbstract()) {
 			// Add this information to the buffer
-			buffer.append(CapellaServices.PROP_ABSTRACT);
+			stringBuilder.append(CapellaServices.PROP_ABSTRACT);
 		}
 		// If property is static
-		if (ope_p.isIsStatic()) {
+		if (ope.isIsStatic()) {
 			// Add this information to the buffer
-			buffer.append(CapellaServices.PROP_STATIC);
+			stringBuilder.append(CapellaServices.PROP_STATIC);
 		}
 		// Bold tag close
-		buffer.append(CapellaServices.BOLD_END);
+		stringBuilder.append(CapellaServices.BOLD_END);
 		// Add the name of the property to the buffer
-		buffer.append(CapellaServices.getHyperlinkFromElement(ope_p));
+		stringBuilder.append(CapellaServices.getHyperlinkFromElement(ope));
 		// Add the parameters to the buffer
-		buffer.append(CapellaServices.PAR_OPEN);
-		for (Parameter param : ope_p.getOwnedParameters()) {
+		stringBuilder.append(CapellaServices.PAR_OPEN);
+		for (Parameter param : ope.getOwnedParameters()) {
 			// Add the hyper link of the parameter type
 			if (param.getType() != null){
-				buffer.append(CapellaServices.getHyperlinkFromElement(param
+				stringBuilder.append(CapellaServices.getHyperlinkFromElement(param
 						.getType()));
 			}
 			if (param.getName().length() > 0){
@@ -238,12 +250,12 @@ public class CapellaClassServices {
 				if (param.getType() == null){
 					paramStr += " : &lt;undefined&gt;";
 				}
-				buffer.append(CapellaServices.SPACE + paramStr);
+				stringBuilder.append(CapellaServices.SPACE + paramStr);
 			}
 			
 		}
-		buffer.append(CapellaServices.PAR_CLOSE);
-		return buffer.toString();
+		stringBuilder.append(CapellaServices.PAR_CLOSE);
+		return stringBuilder.toString();
 	}
 
 	/**
@@ -255,18 +267,45 @@ public class CapellaClassServices {
 	 */
 	public static List<String> getPartOf(Class theClass, String projectName,
 			String outputFolder) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		Collection<TypedElement> typedElements = theClass.getTypedElements();
 		for (TypedElement typedElement : typedElements) {
-			if (typedElement instanceof Property) {
-				if (((Property) typedElement).getAggregationKind().getValue() == AggregationKind.COMPOSITION_VALUE) {
+			if (typedElement instanceof Property && ((Property) typedElement).getAggregationKind().getValue() == AggregationKind.COMPOSITION_VALUE) {
+				String currentStringValue = CapellaServices
+						.getImageLinkFromElement(typedElement.eContainer(),
+								projectName, outputFolder)
+						+ " "
+						+ CapellaServices
+								.getFullDataPkgHierarchyLink(typedElement
+										.eContainer());
+				if (!ret.contains(currentStringValue))
+					ret.add(currentStringValue);
+			}
+		}
+		return ret;
+	}
+
+	/**
+	 * 
+	 * @param theClass
+	 * @param projectName
+	 * @param outputFolder
+	 * @return
+	 */
+	public static List<String> getReferencedBy(Class theClass,
+			String projectName, String outputFolder) {
+		List<String> ret = new ArrayList<>();
+		Collection<TypedElement> typedElements = theClass.getTypedElements();
+		for (TypedElement typedElement : typedElements) {
+			if (typedElement instanceof Property && ((Property) typedElement).getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE) {
+				EObject container = typedElement.eContainer();
+				if (container instanceof Class) {
 					String currentStringValue = CapellaServices
-							.getImageLinkFromElement(typedElement.eContainer(),
+							.getImageLinkFromElement(container,
 									projectName, outputFolder)
 							+ " "
 							+ CapellaServices
-									.getFullDataPkgHierarchyLink(typedElement
-											.eContainer());
+									.getFullDataPkgHierarchyLink(container);
 					if (!ret.contains(currentStringValue))
 						ret.add(currentStringValue);
 				}
@@ -282,45 +321,14 @@ public class CapellaClassServices {
 	 * @param outputFolder
 	 * @return
 	 */
-	public static List<String> getReferencedBy(Class theClass,
-			String projectName, String outputFolder) {
-		List<String> ret = new ArrayList<String>();
-		Collection<TypedElement> typedElements = theClass.getTypedElements();
-		for (TypedElement typedElement : typedElements) {
-			if (typedElement instanceof Property) {
-				if (((Property) typedElement).getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE) {
-					EObject container = typedElement.eContainer();
-					if (container instanceof Class) {
-						String currentStringValue = CapellaServices
-								.getImageLinkFromElement(container,
-										projectName, outputFolder)
-								+ " "
-								+ CapellaServices
-										.getFullDataPkgHierarchyLink(container);
-						if (!ret.contains(currentStringValue))
-							ret.add(currentStringValue);
-					}
-				}
-			}
-		}
-		return ret;
-	}
-
-	/**
-	 * 
-	 * @param theClass
-	 * @param projectName
-	 * @param outputFolder
-	 * @return
-	 */
 	public static List<String> getParameterOf(Class theClass,
 			String projectName, String outputFolder) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		Collection<TypedElement> typedElements = theClass.getTypedElements();
 		for (TypedElement typedElement : typedElements) {
 			if (typedElement instanceof ExchangeItemElement) {
 				EObject exchangeItem = typedElement.eContainer();
-				if(null!=exchangeItem && exchangeItem instanceof ExchangeItem){
+				if(exchangeItem instanceof ExchangeItem){
 				String currentStringValue = CapellaServices
 						.getImageLinkFromElement(exchangeItem, projectName,
 								outputFolder)

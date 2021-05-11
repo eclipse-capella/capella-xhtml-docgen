@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2019, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -19,17 +19,21 @@ import org.polarsys.capella.core.data.fa.FunctionalExchange;
 
 public class CapellaCategoryServices {
 	
+	private static final String TD_TD = "</td><td>";
+
+	private CapellaCategoryServices() {}
+	
 	public static String edgeToTableLine(NamedElement edge, String projectName, String outputFolder) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("<tr>");
-		buffer.append("<td id=\"" + CapellaServices.getAnchorId(edge) + "\">");
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("<tr>");
+		stringBuilder.append("<td id=\"" + CapellaServices.getAnchorId(edge) + "\">");
 		
 		// provide element name
-		buffer.append(CapellaServices.getImageLinkFromElement(edge, projectName, outputFolder));
-		buffer.append(" ");
-		NamedElement ne = (NamedElement) edge;
-		buffer.append(ne.getName());
-		buffer.append("</td><td>");
+		stringBuilder.append(CapellaServices.getImageLinkFromElement(edge, projectName, outputFolder));
+		stringBuilder.append(" ");
+		NamedElement ne = edge;
+		stringBuilder.append(ne.getName());
+		stringBuilder.append(TD_TD);
 		
 		// get source & target elements
 		EObject source = null;
@@ -49,24 +53,24 @@ public class CapellaCategoryServices {
 		}
 		
 		// display source element
-		buffer.append(CapellaServices.getImageLinkFromElement(source, projectName, outputFolder));
-		buffer.append(" ");
-		buffer.append(CapellaServices.getHyperlinkFromElement(source));
-		buffer.append("</td><td>");
+		stringBuilder.append(CapellaServices.getImageLinkFromElement(source, projectName, outputFolder));
+		stringBuilder.append(" ");
+		stringBuilder.append(CapellaServices.getHyperlinkFromElement(source));
+		stringBuilder.append(TD_TD);
 		
 		// display target element
-		buffer.append(CapellaServices.getImageLinkFromElement(target, projectName, outputFolder));
-		buffer.append(" ");
-		buffer.append(CapellaServices.getHyperlinkFromElement(target));
-		buffer.append("</td><td>");
+		stringBuilder.append(CapellaServices.getImageLinkFromElement(target, projectName, outputFolder));
+		stringBuilder.append(" ");
+		stringBuilder.append(CapellaServices.getHyperlinkFromElement(target));
+		stringBuilder.append(TD_TD);
 		
 		// provide description
 		if (edge.getDescription() != null) {
-			buffer.append(StringUtil.transformAREFString(edge, edge.getDescription(), projectName, outputFolder));
+			stringBuilder.append(StringUtil.transformAREFString(edge, edge.getDescription(), projectName, outputFolder));
 		} else {
-			buffer.append("");
+			stringBuilder.append("");
 		}
-		buffer.append("</td></tr>");
-		return buffer.toString();
+		stringBuilder.append("</td></tr>");
+		return stringBuilder.toString();
 	}
 }

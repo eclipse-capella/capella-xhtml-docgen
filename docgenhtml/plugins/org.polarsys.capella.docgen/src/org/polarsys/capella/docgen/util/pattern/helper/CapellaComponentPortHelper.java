@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -26,6 +26,9 @@ import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.capella.docgen.util.StringUtil;
 
 public class CapellaComponentPortHelper {
+	
+	private CapellaComponentPortHelper() {}
+	
 	/**
 	 * Get the provided interfaces of a ComponentPort as html
 	 * 
@@ -36,7 +39,7 @@ public class CapellaComponentPortHelper {
 	 */
 	public static Map<String, String> getProvidedInterfaces(ComponentPort component, String projectName,
 	    String outputFolder) {
-		final Map<String, String> providedInterfaces = new HashMap<String, String>();
+		final Map<String, String> providedInterfaces = new HashMap<>();
 		for (Interface modelInterface : component.getProvidedInterfaces()) {
 			String interfaceString = CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, modelInterface);
 			String interfaceExchangeItems = getInterfaceExchangeItemsAsList(modelInterface, projectName, outputFolder);
@@ -55,7 +58,7 @@ public class CapellaComponentPortHelper {
 	 */
 	public static Map<String, String> getRequiredInterfaces(ComponentPort component, String projectName,
 	    String outputFolder) {
-		final Map<String, String> requiredInterfaces = new HashMap<String, String>();
+		final Map<String, String> requiredInterfaces = new HashMap<>();
 		for (Interface modelInterface : component.getRequiredInterfaces()) {
 			String interfaceString = CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, modelInterface);
 			String interfaceExchangeItems = getInterfaceExchangeItemsAsList(modelInterface, projectName, outputFolder);
@@ -75,7 +78,7 @@ public class CapellaComponentPortHelper {
 	private static String getInterfaceExchangeItemsAsList(Interface modelInterface, String projectName,
 	    String outputFolder) {
 		StringBuilder buffer = new StringBuilder();
-		if (modelInterface.getExchangeItems().size() > 0) {
+		if (!modelInterface.getExchangeItems().isEmpty()) {
 			buffer.append(CapellaServices.UL_OPEN);
 			for (ExchangeItem exchangeItem : modelInterface.getExchangeItems()) {
 				buffer.append("<li>");
@@ -95,6 +98,20 @@ public class CapellaComponentPortHelper {
 	 * @param outputFolder
 	 * @return the exchanges
 	 */
+	public static Collection<ComponentExchange> getComponentPortExchanges(ComponentPort componentPort) {
+		return getComponentPortExchanges(componentPort, null, null);
+	}
+
+	/**
+	 * Get the componentExchanges of a ComponentPort as HTML
+	 * 
+	 * @param modelInterface
+	 * @deprecated @param projectName
+	 * @deprecated @param outputFolder
+	 * @return the exchanges
+	 * @deprecated Will be removed in a future release to simplify its interface. Prefer {@linkplain CapellaComponentPortHelper.getComponentPortExchanges(ComponentPort)}.
+	 */
+	@Deprecated
 	public static Collection<ComponentExchange> getComponentPortExchanges(ComponentPort componentPort, String projectName,
 	    String outputFolder) {
 		return deleteDelegations(componentPort.getComponentExchanges());
@@ -108,6 +125,20 @@ public class CapellaComponentPortHelper {
 	 * @param outputFolder
 	 * @return the delegations
 	 */
+	public static Collection<ComponentExchange> getComponentPortDelegations(ComponentPort componentPort) {
+		return getComponentPortDelegations(componentPort, null, null);
+	}
+
+	/**
+	 * Get the component Delegations of a ComponentPort as HTML
+	 * 
+	 * @param modelInterface
+	 * @deprecated @param projectName
+	 * @deprecated @param outputFolder
+	 * @return the delegations
+	 * @deprecated Will be removed in a future release to simplify its interface. Prefer {@linkplain CapellaComponentPortHelper.getComponentPortExchanges(ComponentPort)}.
+	 */
+	@Deprecated
 	public static Collection<ComponentExchange> getComponentPortDelegations(ComponentPort componentPort,
 	    String projectName, String outputFolder) {
 		return extractDelegations(componentPort.getComponentExchanges());
@@ -119,32 +150,32 @@ public class CapellaComponentPortHelper {
 
 	public static String componentExchangeToTableLine(ComponentPort currentComponentPort,
 	    ComponentExchange componentExchange, String projectName, String outputFolder) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("<tr>");
-		buffer.append("<td id=\"" + CapellaServices.getAnchorId(componentExchange) + "\">");
-		buffer.append(CapellaServices.getImageLinkFromElement(componentExchange, projectName, outputFolder));
-		buffer.append(" ");
-		buffer.append(CapellaServices.getHyperlinkFromElement(componentExchange));
-		buffer.append("</td>");
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(CapellaServices.TR_OPEN);
+		stringBuilder.append("<td id=\"" + CapellaServices.getAnchorId(componentExchange) + "\">");
+		stringBuilder.append(CapellaServices.getImageLinkFromElement(componentExchange, projectName, outputFolder));
+		stringBuilder.append(" ");
+		stringBuilder.append(CapellaServices.getHyperlinkFromElement(componentExchange));
+		stringBuilder.append(CapellaServices.TD_CLOSE);
 
 		ModelElement sourceTargetComponentPort = getOppositeComponentPort(currentComponentPort, componentExchange);
 		if (sourceTargetComponentPort != null) {
 			ModelElement sourceTargetComponent = (ModelElement) sourceTargetComponentPort.eContainer();
-			buffer.append("<td>");
-			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, sourceTargetComponentPort));
-			buffer.append("</td>");
+			stringBuilder.append(CapellaServices.TD_OPEN);
+			stringBuilder.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, sourceTargetComponentPort));
+			stringBuilder.append(CapellaServices.TD_CLOSE);
 			if (sourceTargetComponent != null) {
-				buffer.append("<td>");
-				buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, sourceTargetComponent));
-				buffer.append("</td>");
+				stringBuilder.append(CapellaServices.TD_OPEN);
+				stringBuilder.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, sourceTargetComponent));
+				stringBuilder.append(CapellaServices.TD_CLOSE);
 			}
 		}
 
-		buffer.append("<td>");
-		buffer.append(getDescription(componentExchange, projectName, outputFolder));
-		buffer.append("</td>");
-		buffer.append("</tr>");
-		return buffer.toString();
+		stringBuilder.append(CapellaServices.TD_OPEN);
+		stringBuilder.append(getDescription(componentExchange, projectName, outputFolder));
+		stringBuilder.append(CapellaServices.TD_CLOSE);
+		stringBuilder.append(CapellaServices.TR_CLOSE);
+		return stringBuilder.toString();
 	}
 
 	/**
@@ -154,7 +185,7 @@ public class CapellaComponentPortHelper {
 	 * @return list containing no delegation
 	 */
 	private static Collection<ComponentExchange> deleteDelegations(Collection<ComponentExchange> componentExchanges) {
-		final Collection<ComponentExchange> newComponentExchanges = new ArrayList<ComponentExchange>(componentExchanges);
+		final Collection<ComponentExchange> newComponentExchanges = new ArrayList<>(componentExchanges);
 		for (ComponentExchange currentComponentExchange : componentExchanges) {
 			if (currentComponentExchange.getKind().getValue() == ComponentExchangeKind.DELEGATION_VALUE) {
 				newComponentExchanges.remove(currentComponentExchange);
@@ -170,7 +201,7 @@ public class CapellaComponentPortHelper {
 	 * @return list containing only delegations
 	 */
 	private static Collection<ComponentExchange> extractDelegations(Collection<ComponentExchange> componentExchanges) {
-		final Collection<ComponentExchange> newComponentExchanges = new ArrayList<ComponentExchange>(componentExchanges);
+		final Collection<ComponentExchange> newComponentExchanges = new ArrayList<>(componentExchanges);
 		for (ComponentExchange currentComponentExchange : componentExchanges) {
 			if (currentComponentExchange.getKind().getValue() != ComponentExchangeKind.DELEGATION_VALUE) {
 				newComponentExchanges.remove(currentComponentExchange);

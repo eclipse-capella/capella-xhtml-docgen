@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 Obeo.
+ * Copyright (c) 2017, 2021 Obeo.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.dialogs.ContainerCheckedTreeViewer;
 import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.BrowserElementWrapper;
+import org.polarsys.capella.docgen.configuration.ui.Activator;
 
 /**
  * Check box tree viewer for XHTML generation. Adapt element/ widget mapping to
@@ -36,6 +37,8 @@ import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.B
  *
  */
 public class GenerationContainerCheckedTreeViewer extends ContainerCheckedTreeViewer {
+	private static final String IMPOSSIBLE_TO_GET_ELEMENT_FROM_MAP = "Impossible to get element from map";
+	private static final String REMOVE = "remove";
 	private static final String VIRTUAL_DISPOSE_KEY = Policy.JFACE + ".DISPOSE_LISTENER"; //$NON-NLS-1$
 
 	/**
@@ -105,50 +108,52 @@ public class GenerationContainerCheckedTreeViewer extends ContainerCheckedTreeVi
 	protected void mapElement(Object element, final Widget item) {
 
 		Optional<Object> value = ReflectionHelper.getFieldValueWithoutException(this, "elementMap"); //$NON-NLS-1$
-		if (value.isPresent()) {
-			if (value.get() != null) {
-				Object widgetOrWidgets = getElementMap(value.get(), element);
-				if (widgetOrWidgets == null) {
-					putElementMap(value.get(), element, item);
-				} else if (widgetOrWidgets instanceof Widget) {
-					if (widgetOrWidgets != item) {
-						putElementMap(value.get(), element, new Widget[] { (Widget) widgetOrWidgets, item });
-					}
-				} else {
-					Widget[] widgets = (Widget[]) widgetOrWidgets;
-					int indexOfItem = Arrays.asList(widgets).indexOf(item);
-					if (indexOfItem == -1) {
-						int length = widgets.length;
-						System.arraycopy(widgets, 0, widgets = new Widget[length + 1], 0, length);
-						widgets[length] = item;
-						putElementMap(value.get(), element, widgets);
-					}
+		if (!value.isPresent()) {
+			return;
+		}
+		if (value.get() != null) {
+			Object widgetOrWidgets = getElementMap(value.get(), element);
+			if (widgetOrWidgets == null) {
+				putElementMap(value.get(), element, item);
+			} else if (widgetOrWidgets instanceof Widget) {
+				if (widgetOrWidgets != item) {
+					putElementMap(value.get(), element, new Widget[] { (Widget) widgetOrWidgets, item });
+				}
+			} else {
+				Widget[] widgets = (Widget[]) widgetOrWidgets;
+				int indexOfItem = Arrays.asList(widgets).indexOf(item);
+				if (indexOfItem == -1) {
+					int length = widgets.length;
+					System.arraycopy(widgets, 0, widgets = new Widget[length + 1], 0, length);
+					widgets[length] = item;
+					putElementMap(value.get(), element, widgets);
 				}
 			}
+		}
 
-			// make sure to unmap elements if the tree is virtual
-			if ((getTree().getStyle() & SWT.VIRTUAL) != 0) {
-				// only add a dispose listener if item hasn't
-				// already on
-				// assigned
-				// because it is reused
-				if (item.getData(VIRTUAL_DISPOSE_KEY) == null) {
-					item.setData(VIRTUAL_DISPOSE_KEY, Boolean.TRUE);
-					item.addDisposeListener(new DisposeListener() {
-						@Override
-						public void widgetDisposed(DisposeEvent e) {
-							Optional<Object> treeIsDisposed = ReflectionHelper.getFieldValueWithoutException(this,
-									"treeIsDisposed"); //$NON-NLS-1$
-							if (!((Boolean) treeIsDisposed.get())) {
-								Object data = item.getData();
-								if (usingElementMap() && data != null) {
-									unmapElement(data, item);
-								}
-							}
+		unmapItemsOnTree(item);
+	}
+
+	/**
+	 * unmap elements if the tree is virtual
+	 * @param item
+	 */
+	private void unmapItemsOnTree(final Widget item) {
+		if (((getTree().getStyle() & SWT.VIRTUAL) != 0) && (item.getData(VIRTUAL_DISPOSE_KEY) == null)) {
+			item.setData(VIRTUAL_DISPOSE_KEY, Boolean.TRUE);
+			item.addDisposeListener(new DisposeListener() {
+				@Override
+				public void widgetDisposed(DisposeEvent e) {
+					Optional<Object> treeIsDisposed = ReflectionHelper.getFieldValueWithoutException(this,
+							"treeIsDisposed"); //$NON-NLS-1$
+					if (treeIsDisposed.isPresent() && !((Boolean) treeIsDisposed.get())) {
+						Object data = item.getData();
+						if (usingElementMap() && data != null) {
+							unmapElement(data, item);
 						}
-					});
+					}
 				}
-			}
+			});
 		}
 	}
 
@@ -174,42 +179,35 @@ public class GenerationContainerCheckedTreeViewer extends ContainerCheckedTreeVi
 
 	private Object getElementMap(Object elementMap, Object element) {
 		try {
-			Object getterResult = ReflectionHelper.invokeMethod(elementMap, elementMap.getClass(), "get", //$NON-NLS-1$
+			return ReflectionHelper.invokeMethod(elementMap, elementMap.getClass(), "get", //$NON-NLS-1$
 					new Class<?>[] { Object.class }, new Object[] { element }, true);
-			return getterResult;
 		} catch (SecurityException e) {
+			Activator.getDefault().getLog().error(IMPOSSIBLE_TO_GET_ELEMENT_FROM_MAP, e);
 		} catch (NoSuchMethodException e) {
+			Activator.getDefault().getLog().error(IMPOSSIBLE_TO_GET_ELEMENT_FROM_MAP, e);
 		} catch (IllegalArgumentException e) {
+			Activator.getDefault().getLog().error(IMPOSSIBLE_TO_GET_ELEMENT_FROM_MAP, e);
 		} catch (IllegalAccessException e) {
+			Activator.getDefault().getLog().error(IMPOSSIBLE_TO_GET_ELEMENT_FROM_MAP, e);
 		} catch (InvocationTargetException e) {
+			Activator.getDefault().getLog().error(IMPOSSIBLE_TO_GET_ELEMENT_FROM_MAP, e);
 		}
 		return null;
 	}
 
 	private void removeElementMap(Object elementMap, Object element) {
-		ReflectionHelper.invokeMethodWithoutException(elementMap, elementMap.getClass(), "remove", //$NON-NLS-1$
+		ReflectionHelper.invokeMethodWithoutException(elementMap, elementMap.getClass(), REMOVE, //$NON-NLS-1$
 				new Class<?>[] { Object.class }, new Object[] { element }, true);
 		if (element instanceof BrowserElementWrapper) {
-			ReflectionHelper.invokeMethodWithoutException(elementMap, elementMap.getClass(), "remove", //$NON-NLS-1$
+			ReflectionHelper.invokeMethodWithoutException(elementMap, elementMap.getClass(), REMOVE, //$NON-NLS-1$
 					new Class<?>[] { Object.class }, new Object[] { ((BrowserElementWrapper) element).getElement() },
 					true);
 		}
 		if (element instanceof DRepresentationDescriptor) {
-			ReflectionHelper.invokeMethodWithoutException(elementMap, elementMap.getClass(), "remove", //$NON-NLS-1$
+			ReflectionHelper.invokeMethodWithoutException(elementMap, elementMap.getClass(), REMOVE, //$NON-NLS-1$
 					new Class<?>[] { Object.class },
 					new Object[] { ((DRepresentationDescriptor) element).getRepresentation() }, true);
 		}
-	}
-
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.viewers.StructuredViewer#unmapElement(java.lang.Object)
-	 */
-	@Override
-	protected void unmapElement(Object element) {
-		super.unmapElement(element);
-
 	}
 
 	/**
@@ -224,36 +222,34 @@ public class GenerationContainerCheckedTreeViewer extends ContainerCheckedTreeVi
 		// before
 		// unmapping it
 		Optional<Object> value = ReflectionHelper.getFieldValueWithoutException(this, "elementMap"); //$NON-NLS-1$
-		if (value.isPresent()) {
-			Object widgetOrWidgets = getElementMap(value.get(), element);
-			if (widgetOrWidgets == null) {
-				// item was not mapped, return
+		if (!value.isPresent()) {
+			return;
+		}
+		Object widgetOrWidgets = getElementMap(value.get(), element);
+		if (widgetOrWidgets instanceof Widget) {
+			if (item == widgetOrWidgets) {
+				removeElementMap(value.get(), element);
+			}
+		} else if (widgetOrWidgets != null) {
+			Widget[] widgets = (Widget[]) widgetOrWidgets;
+			int indexOfItem = Arrays.asList(widgets).indexOf(item);
+			if (indexOfItem == -1) {
 				return;
-			} else if (widgetOrWidgets instanceof Widget) {
-				if (item == widgetOrWidgets) {
+			}
+			int length = widgets.length;
+			if (indexOfItem == 0) {
+				if (length == 1) {
 					removeElementMap(value.get(), element);
-				}
-			} else {
-				Widget[] widgets = (Widget[]) widgetOrWidgets;
-				int indexOfItem = Arrays.asList(widgets).indexOf(item);
-				if (indexOfItem == -1) {
-					return;
-				}
-				int length = widgets.length;
-				if (indexOfItem == 0) {
-					if (length == 1) {
-						removeElementMap(value.get(), element);
-					} else {
-						Widget[] updatedWidgets = new Widget[length - 1];
-						System.arraycopy(widgets, 1, updatedWidgets, 0, length - 1);
-						putElementMap(value.get(), element, updatedWidgets);
-					}
 				} else {
 					Widget[] updatedWidgets = new Widget[length - 1];
-					System.arraycopy(widgets, 0, updatedWidgets, 0, indexOfItem);
-					System.arraycopy(widgets, indexOfItem + 1, updatedWidgets, indexOfItem, length - indexOfItem - 1);
+					System.arraycopy(widgets, 1, updatedWidgets, 0, length - 1);
 					putElementMap(value.get(), element, updatedWidgets);
 				}
+			} else {
+				Widget[] updatedWidgets = new Widget[length - 1];
+				System.arraycopy(widgets, 0, updatedWidgets, 0, indexOfItem);
+				System.arraycopy(widgets, indexOfItem + 1, updatedWidgets, indexOfItem, length - indexOfItem - 1);
+				putElementMap(value.get(), element, updatedWidgets);
 			}
 		}
 	}

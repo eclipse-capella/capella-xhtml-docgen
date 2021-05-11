@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES and others.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -34,11 +34,14 @@ import org.polarsys.capella.docgen.configuration.ui.Activator;
  * or on Description model element attribute.
  */
 public class CapellaNavigatorPatternFilter extends CapellaCommonNavigatorPatternFilter {
-	  private String pattern;
+	  private static final String IMPOSSIBLE_TO_CLEAR_CACHE = "Impossible to clear cache";
+	private static final String IMPOSSIBLE_TO_ACTIVATE_CACHE = "Impossible to activate cache";
+	private String pattern;
 	  private Pattern matchingPattern;
 
 	  private boolean caseSensitiveEnabled = false;
 
+	  @Override
 	  protected String getText(Viewer viewer, Object element) {
 	    return ((ILabelProvider) ((StructuredViewer) viewer).getLabelProvider()).getText(element);
 	  }
@@ -61,7 +64,7 @@ public class CapellaNavigatorPatternFilter extends CapellaCommonNavigatorPattern
 	      int flags = 0;
 	      if (!patternString.endsWith(" ")) {
 	    	  // So that if search for "Air", the results will include texts containing "Aircraft" or "Airplane"
-	    	  flags |= Pattern.DOTALL;//patternString += ".*";
+	    	  flags |= Pattern.DOTALL;
 	      }
 	      if (!caseSensitiveEnabled) {
 	    	  flags |= Pattern.CASE_INSENSITIVE;
@@ -78,6 +81,7 @@ public class CapellaNavigatorPatternFilter extends CapellaCommonNavigatorPattern
 	    }
 	  }
 
+	  @Override
 	  public String getPattern() {
 	    return pattern;
 	  }
@@ -95,6 +99,7 @@ public class CapellaNavigatorPatternFilter extends CapellaCommonNavigatorPattern
 	    return matchingPattern.matcher(text).find();
 	  }
 
+	  @Override
 	  public void setCaseSensitiveEnabled(boolean caseSensitiveEnabled) {
 	    this.caseSensitiveEnabled = caseSensitiveEnabled;
 	  }
@@ -110,6 +115,7 @@ public class CapellaNavigatorPatternFilter extends CapellaCommonNavigatorPattern
 	   * @see https://jira.appcelerator.org/browse/APSTUD-1074
 	   * @see PatternFilter#setUseCache()
 	   */
+	  @Override
 	  public void doSetUseCache(boolean useCache) {
 	    try {
 	      // As we are not using the default NotifyingTreeViewer of FilteredTree, the cache is not activated.
@@ -118,15 +124,15 @@ public class CapellaNavigatorPatternFilter extends CapellaCommonNavigatorPattern
 	      setUseCacheMethod.setAccessible(true);
 	      setUseCacheMethod.invoke(this, useCache);
 	    } catch (IllegalAccessException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_ACTIVATE_CACHE, e);
 	    } catch (IllegalArgumentException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_ACTIVATE_CACHE, e);
 	    } catch (InvocationTargetException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_ACTIVATE_CACHE, e);
 	    } catch (NoSuchMethodException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_ACTIVATE_CACHE, e);
 	    } catch (SecurityException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_ACTIVATE_CACHE, e);
 	    }
 	  }
 
@@ -135,21 +141,22 @@ public class CapellaNavigatorPatternFilter extends CapellaCommonNavigatorPattern
 	   * 
 	   * @see PatternFilter#clearCaches()
 	   */
+	  @Override
 	  public void doClearCaches() {
 	    try {
 	      Method clearCachesMethod = PatternFilter.class.getDeclaredMethod("clearCaches");
 	      clearCachesMethod.setAccessible(true);
 	      clearCachesMethod.invoke(this);
 	    } catch (NoSuchMethodException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_CLEAR_CACHE, e);
 	    } catch (SecurityException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_CLEAR_CACHE, e);
 	    } catch (IllegalAccessException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_CLEAR_CACHE, e);
 	    } catch (IllegalArgumentException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_CLEAR_CACHE, e);
 	    } catch (InvocationTargetException e) {
-	      e.printStackTrace();
+	    	Activator.getDefault().getLog().error(IMPOSSIBLE_TO_CLEAR_CACHE, e);
 	    }
 	  }
 	}

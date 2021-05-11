@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -59,11 +59,7 @@ public class CapellaDataValueServices {
 		buffer.append(CapellaServices.BOLD_END);
 
 		// Test if the type of the data value is defined
-		AbstractType abstractType;
-		if (dataValue_p.getAbstractType() != null)
-			abstractType = dataValue_p.getAbstractType();
-		else
-			abstractType = dataValue_p.getAbstractType();
+		AbstractType abstractType = dataValue_p.getAbstractType();
 		if (displayType && abstractType != null) {
 			buffer.append(CapellaServices.VALUE_PRESENTER);
 			// Add the Hyper link of type of the value to the buffer

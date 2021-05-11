@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -22,21 +22,24 @@ import org.polarsys.capella.core.data.information.datavalue.DataValue;
  * 
  */
 public class CapellaBooleanTypeService {
+	
+	private CapellaBooleanTypeService() {}
+	
 	/**
 	 * <b>Get the literal list</b>
 	 * <p>
 	 * Get the list of literal value of a BooleanType
 	 * 
-	 * @param eObj_p
+	 * @param eObject
 	 * @return
 	 */
-	public static List<String> getLiterals(EObject eObj_p, String projectName,
+	public static List<String> getLiterals(EObject eObject, String projectName,
 			String outputFolder) {
 		// Initialize a String list
-		List<String> ret = new ArrayList<String>();
-		if (eObj_p instanceof BooleanType) {
+		List<String> ret = new ArrayList<>();
+		if (eObject instanceof BooleanType) {
 			// For each Literal values
-			for (DataValue dataValue : ((BooleanType) eObj_p)
+			for (DataValue dataValue : ((BooleanType) eObject)
 					.getOwnedLiterals()) {
 				// Add the information of the literal value to the list
 				ret.add(CapellaDataValueServices.getDataValueInformation(
