@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -41,6 +41,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.sirius.business.api.session.resource.AirdResource;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
@@ -55,11 +56,9 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
-	// private static final String REGEX =
-	// "<[\\s]*a[\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>[\\s]*(.+?)[\\s]*<[\\s]*/[\\s]*a[\\s]*>";
 	private static final String REGEX = "<[\\s]*[aA][\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>(.*?)<[\\s]*/[\\s]*[aA][\\s]*>";
 	private static final String REGEX_IMG = "<[\\s]*img[^>]*?src[\\s]*=[\\s]*\"([^>\"]+?)\"[^>]*?/[\\s]*>";
-	private static final String REGEX_FilePATH = "<[aA][\\s]+href=\"(.+?)\">";
+	private static final String REGEX_FILEPATH = "<[aA][\\s]+href=\"(.+?)\">";
 	private static final String ERROR_CPY = "Error during project relative file copy: {0}";
 	private static final String ERROR_COPY_PART_2 = " referenced in the description of the element: {0} "; //$NON-NLS-1$
 	private static final String ERROR_DECODE_FILE_LOCATION = "Error while decoding file location: {0}";
@@ -178,7 +177,7 @@ public class StringUtil {
 			return input;
 		}
 
-		Pattern pattern = Pattern.compile(REGEX_FilePATH, Pattern.DOTALL);
+		Pattern pattern = Pattern.compile(REGEX_FILEPATH, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(input);
 		final IPath parentSrcFolder = new Path(eObject.eResource().getURI().segment(1));
 		final IPath parentTargetFolderPath = new Path(projectName).append(outputFolder);
@@ -187,52 +186,58 @@ public class StringUtil {
 			// a link to URL, model element, diagram...
 			String firstMatchGroup = matcher.group(1);
 			if (firstMatchGroup.startsWith("file://") || firstMatchGroup.startsWith("local://")) {
-
-				final ILog loger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
-				String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
-				id = id.replace("-", "");
-
-				// Use an inline creation of HTMLDocument to get correct html content
-				String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, loger);
-
-				IPath patha = new Path(decodedFirstMatchGroup.replaceAll("%20", " "));
-				String iconName = id + "/" + patha.lastSegment();
-				StringBuilder iconSourcePath = new StringBuilder();
-				// if absolute path
-				if (decodedFirstMatchGroup.startsWith("file://")) {
-					for (String segment : patha.segments()) {
-						iconSourcePath.append("/").append(segment);
-					}
-				} else {
-					// relative path. We need to remove "local://" from matcher.group(1) => we
-					// starts with character n°8
-					IPath path = parentSrcFolder
-							.append(decodedFirstMatchGroup.substring(8, decodedFirstMatchGroup.length()));
-					IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-					if (iconFile.exists()) {
-						iconSourcePath.append(iconFile.getLocationURI().getPath());
-					} else {
-						loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-								getResourceCopyError(eObject, path.toString())));
-						continue;
-					}
-				}
-
-				IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
-				input = input.replace(firstMatchGroup, "./files/" + iconName + "\"");
-				try {
-					ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath.toString(),
-							parentTargetFolder.getLocationURI().getPath() + "/files/" + iconName);
-				} catch (IOException e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-							getResourceCopyError(eObject, iconSourcePath.toString()), e));
-				} catch (Exception e) {
-					loger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-							getResourceCopyError(eObject, iconSourcePath.toString()), e));
-				}
+				input = manageFileLink(eObject, input, parentSrcFolder, parentTargetFolderPath, firstMatchGroup);
 			}
 		}
 
+		return input;
+	}
+
+	private static String manageFileLink(EObject eObject, String input, final IPath parentSrcFolder,
+			final IPath parentTargetFolderPath, String firstMatchGroup) {
+		final ILog logger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
+
+		String id = eObject.eGet(eObject.eClass().getEStructuralFeature("id")).toString();
+		id = id.replace("-", "");
+		
+		// Use an inline creation of HTMLDocument to get correct html content
+		String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, logger);
+		if (decodedFirstMatchGroup == null) {
+			return input;
+		}
+
+		IPath patha = new Path(decodedFirstMatchGroup.replaceAll("%20", " "));
+		String iconName = id + "/" + patha.lastSegment();
+		StringBuilder iconSourcePath = new StringBuilder();
+		// if absolute path
+		if (decodedFirstMatchGroup.startsWith("file://")) {
+			for (String segment : patha.segments()) {
+				iconSourcePath.append("/").append(segment);
+			}
+		} else {
+			// relative path. We need to remove "local://" from matcher.group(1) => we
+			// starts with character n°8
+			IPath path = parentSrcFolder
+					.append(decodedFirstMatchGroup.substring(8, decodedFirstMatchGroup.length()));
+			IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+			if (iconFile.exists()) {
+				iconSourcePath.append(iconFile.getLocationURI().getPath());
+			} else {
+				logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+						getResourceCopyError(eObject, path.toString())));
+				return input;
+			}
+		}
+
+		IFolder parentTargetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(parentTargetFolderPath);
+		input = input.replace(firstMatchGroup, "./files/" + iconName + "\"");
+		try {
+			ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath.toString(),
+					parentTargetFolder.getLocationURI().getPath() + "/files/" + iconName);
+		} catch (Exception e) {
+			logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+					getResourceCopyError(eObject, iconSourcePath.toString()), e));
+		}
 		return input;
 	}
 
@@ -275,14 +280,7 @@ public class StringUtil {
 				// As we do a replace all, we may have already serialized/copied some files so
 				// we check to avoid work duplication
 				if (input.contains(firstMatchGroup)) {
-					// Use an inline creation of HTMLDocument to get correct html content
-					String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, logger);
-
-					IPath patha = new Path(decodedFirstMatchGroup);
-					String lastSegmentFileName = patha.removeFileExtension().lastSegment();
-					String iconName = id + "/" + lastSegmentFileName;
-					String iconSourcePath = "";
-
+					String iconName = "";
 					boolean isDataImage = firstMatchGroup.startsWith(ImageHelper.DATA_IMAGE_PREFIX);
 					if (isDataImage) {
 						// Serialize image in target folder: "[dogen_output]/object_id/folder
@@ -297,6 +295,17 @@ public class StringUtil {
 									new Exception()));
 						}
 					} else {
+						// Use an inline creation of HTMLDocument to get correct html content
+						String decodedFirstMatchGroup = decodeHtmlFilePath(firstMatchGroup, logger);
+						if (decodedFirstMatchGroup == null) {
+							continue;
+						}
+						
+						IPath patha = new Path(decodedFirstMatchGroup);
+						String lastSegmentFileName = patha.removeFileExtension().lastSegment();
+						iconName = id + "/" + lastSegmentFileName;
+						String iconSourcePath = "";
+
 						if (decodedFirstMatchGroup.startsWith("http") || decodedFirstMatchGroup.startsWith("https")) {
 							logger.log(new Status(IStatus.WARNING, Activator.PLUGIN_ID,
 									MessageFormat.format(WARNING_NETWORK_IMAGE_NO_TREATMENT, decodedFirstMatchGroup,
@@ -336,12 +345,9 @@ public class StringUtil {
 							// Copy file
 							ImageHelper.INSTANCE.copyProjectImageToSystemLocation(iconSourcePath,
 									parentTargetFolder.getLocationURI().getPath() + IMAGES_FOLDER + iconName);
-						} catch (IOException e) {
-							logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-									getResourceCopyError(eObject, iconSourcePath.toString()), e));
 						} catch (Exception e) {
 							logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-									getResourceCopyError(eObject, iconSourcePath.toString()), e));
+									getResourceCopyError(eObject, iconSourcePath), e));
 						}
 					}
 
@@ -415,61 +421,58 @@ public class StringUtil {
 		 */
 		Pattern pattern = Pattern.compile(ELEMENT_LINK_REGEX);
 		Matcher matcher = pattern.matcher(group);
-		StringBuffer buffer = new StringBuffer();
+		String id = null; 
+		
 		if (matcher.find() && matcher.groupCount() == 1) {
-			String id = matcher.group(1);
+			id = matcher.group(1);
 			if (id != null && id.trim().length() > 0 && id.contains("/")) {
 				id = id.substring(0, id.length() - 1);
 			}
-
-			EObject eObject = resource.getEObject(id);
-			// If the object is not found in the current resource, we look for
-			// it in all loaded resources of the ResourceSet
-			if (eObject == null) {
-				ResourceSet rs = resource.getResourceSet();
-				for (Resource iResource : rs.getResources()) {
-					// Case of model element
-					if (iResource instanceof CapellamodellerResourceImpl) {
-						eObject = iResource.getEObject(id);
-						if (eObject != null) {
-							break;
-						}
-					}
-
-					// Case of diagram element
-					if (iResource instanceof AirdResource) {
-						eObject = iResource.getEObject(id);
-						if (eObject != null) {
-							break;
-						}
-					}
-				}
-			}
-
-			// If the object is still not found, so we use the Capella API.
-			if (eObject == null) {
-				final ResourceSet rs = resource.getResourceSet();
-				eObject = IdManager.getInstance().getEObject(id, new IScope() {
-					@Override
-					public List<Resource> getResources() {
-						return rs.getResources();
-					}
-				});
-			}
-
-			if (eObject != null) {
-				if (eObject instanceof DSemanticDiagram) {
-					buffer.append(CapellaServices.getPathFromElement(((DSemanticDiagram) eObject).getTarget()));
-					buffer.append("#");
-					buffer.append(CapellaServices.getDiagramUid((DSemanticDiagram) eObject));
-				} else {
-					buffer.append(CapellaServices.getPathFromElement(eObject));
-				}
-				return buffer.toString();
-			}
+		}
+		
+		if (id != null) {
+			return buildResourceRepresentationString(resource, id);
 		}
 
 		return group;
+	}
+
+	private static String buildResourceRepresentationString(Resource resource, String id) {
+		StringBuilder stringBuilder = new StringBuilder();
+		EObject eObject = resource.getEObject(id);
+		// If the object is not found in the current resource, we look for
+		// it in all loaded resources of the ResourceSet
+		if (eObject == null) {
+			ResourceSet rs = resource.getResourceSet();
+			final String searchId = id;
+			eObject = rs.getResources().stream().filter(iResource -> {
+				EObject eObj = null;
+				if (iResource instanceof CapellamodellerResourceImpl || iResource instanceof AirdResource) {
+					eObj = iResource.getEObject(searchId);
+				}
+				return eObj != null;
+			}).findAny().orElse(new ResourceImpl()).getEObject(id);
+		}
+
+		// If the object is still not found, so we use the Capella API.
+		if (eObject == null) {
+			final ResourceSet rs = resource.getResourceSet();
+			eObject = IdManager.getInstance().getEObject(id, new IScope() {
+				@Override
+				public List<Resource> getResources() {
+					return rs.getResources();
+				}
+			});
+		}
+
+		if (eObject instanceof DSemanticDiagram) {
+			stringBuilder.append(CapellaServices.getPathFromElement(((DSemanticDiagram) eObject).getTarget()));
+			stringBuilder.append("#");
+			stringBuilder.append(CapellaServices.getDiagramUid((DSemanticDiagram) eObject));
+		} else {
+			stringBuilder.append(CapellaServices.getPathFromElement(eObject));
+		}
+		return stringBuilder.toString();
 	}
 
 	protected static String getPath(Resource resource, String id) {
@@ -478,9 +481,8 @@ public class StringUtil {
 		if (eObject != null) {
 			String fileName = DocGenHtmlCapellaUtil.SERVICE.getFileName(eObject);
 			String modelName = DocGenHtmlUtil.getModelName(eObject);
-			String validFileName = "../" + modelName + "/" + DocGenHtmlUtil.getValidFileName(fileName) + "."
+			return "../" + modelName + "/" + DocGenHtmlUtil.getValidFileName(fileName) + "."
 					+ DocGenHtmlConstants.HTML_FILE_EXTENSION;
-			return validFileName;
 		}
 		return "#";
 	}
@@ -496,47 +498,47 @@ public class StringUtil {
 	 */
 	public static String stringListToBulette(Collection<String> list_p) {
 		// Buffer declaration
-		StringBuffer buffer = new StringBuffer();
-		if (list_p.size() < 1) {
-			buffer.append(CapellaServices.NONE);
+		StringBuilder stringBuilder = new StringBuilder();
+		if (list_p.isEmpty()) {
+			stringBuilder.append(CapellaServices.NONE);
 		} else {
-			buffer.append(CapellaServices.UL_OPEN);
+			stringBuilder.append(CapellaServices.UL_OPEN);
 			// For each element of the list
 			for (String str : list_p) {
-				buletteItem(buffer, str);
+				buletteItem(stringBuilder, str);
 			}
-			buffer.append(CapellaServices.UL_CLOSE);
+			stringBuilder.append(CapellaServices.UL_CLOSE);
 		}
 		// Return the buffer
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 
 	public static String stringListToBulette(EList<? extends AbstractNamedElement> list_elts, String projectName,
 			String outputFolder) {
 		// Buffer declaration
-		StringBuffer buffer = new StringBuffer();
-		if (list_elts.size() < 1) {
-			buffer.append(CapellaServices.NONE);
+		StringBuilder stringBuilder = new StringBuilder();
+		if (list_elts.isEmpty()) {
+			stringBuilder.append(CapellaServices.NONE);
 		} else {
-			buffer.append(CapellaServices.UL_OPEN);
+			stringBuilder.append(CapellaServices.UL_OPEN);
 			// For each element of the list
 			for (AbstractNamedElement elt : list_elts) {
 				// Add the open bullet tag to the buffer
-				buffer.append(CapellaServices.LI_OPEN);
+				stringBuilder.append(CapellaServices.LI_OPEN);
 				// Add the content of the bullet to the buffer
-				buffer.append(CapellaServices.getImageLinkFromElement(elt, projectName, outputFolder));
-				buffer.append(CapellaServices.SPACE);
-				buffer.append(CapellaServices.getHyperlinkFromElement(elt));
+				stringBuilder.append(CapellaServices.getImageLinkFromElement(elt, projectName, outputFolder));
+				stringBuilder.append(CapellaServices.SPACE);
+				stringBuilder.append(CapellaServices.getHyperlinkFromElement(elt));
 				// Add the close bullet tag to the buffer
-				buffer.append(CapellaServices.LI_CLOSE);
+				stringBuilder.append(CapellaServices.LI_CLOSE);
 			}
-			buffer.append(CapellaServices.UL_CLOSE);
+			stringBuilder.append(CapellaServices.UL_CLOSE);
 		}
 		// Return the buffer
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 
-	private static void buletteItem(StringBuffer buffer, String str) {
+	private static void buletteItem(StringBuilder buffer, String str) {
 		// Add the open bullet tag to the buffer
 		buffer.append(CapellaServices.LI_OPEN);
 		// Add the content of the bullet to the buffer
@@ -566,26 +568,26 @@ public class StringUtil {
 		firstColTitle = firstColTitle == null ? "" : firstColTitle;
 		secondColTitle = secondColTitle == null ? "" : secondColTitle;
 
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("<table>"); //$NON-NLS-1$
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("<table>"); //$NON-NLS-1$
 		if (generateTableHeader) {
-			buffer.append("<tr>").append("<th>"); //$NON-NLS-1$ //$NON-NLS-2$
-			buffer.append(firstColTitle).append("</th>"); // End first col //$NON-NLS-1$
+			stringBuilder.append("<tr>").append("<th>"); //$NON-NLS-1$ //$NON-NLS-2$
+			stringBuilder.append(firstColTitle).append("</th>"); // End first col //$NON-NLS-1$
 
-			buffer.append("<th>"); //$NON-NLS-1$
-			buffer.append(secondColTitle);
-			buffer.append("</th></tr>"); // End second col and the first row //$NON-NLS-1$
+			stringBuilder.append("<th>"); //$NON-NLS-1$
+			stringBuilder.append(secondColTitle);
+			stringBuilder.append("</th></tr>"); // End second col and the first row //$NON-NLS-1$
 		}
 
 		// Generate the table content
 		for (Entry<String, String> e : map.entrySet()) {
-			buffer.append("<tr>"); //$NON-NLS-1$
-			buffer.append("<td>").append(e.getKey()).append("</td><td>").append(e.getValue()).append("</td>"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			buffer.append("</tr>"); //$NON-NLS-1$
+			stringBuilder.append("<tr>"); //$NON-NLS-1$
+			stringBuilder.append("<td>").append(e.getKey()).append("</td><td>").append(e.getValue()).append("</td>"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			stringBuilder.append("</tr>"); //$NON-NLS-1$
 		}
-		buffer.append("</table>"); //$NON-NLS-1$
+		stringBuilder.append("</table>"); //$NON-NLS-1$
 
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 
 	/**

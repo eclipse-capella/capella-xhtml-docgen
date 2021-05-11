@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -30,58 +30,62 @@ import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.NumericValue;
 
 public class CapellaDataTypeService {
+	
+	private CapellaDataTypeService() {}
 
-	public static List<String> getFeatures(EObject eObj_p) {
-		List<String> ret = new ArrayList<String>();
-		if (eObj_p instanceof DataType) {
-			DataType dataType = (DataType) eObj_p;
-			// Add boolean Features information
-			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ABSTRACT + CapellaServices.BOLD_END + dataType.isAbstract());
-			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_DISCRETE + CapellaServices.BOLD_END + dataType.isDiscrete());
-
-			DataValue minValue = getMinValue(dataType);
-			if (minValue != null) {
-				ret.add(CapellaServices.BOLD_BEGIN
-						+ "Min Value: "
-						+ CapellaServices.BOLD_END
-						+ CapellaDataValueServices.getSimpleValueOfDataValue(minValue)
-						+ ((minValue instanceof NumericValue && null != ((NumericValue) minValue).getUnit()) ? CapellaServices.SPACE
-								+ CapellaDataValueServices.getUnitOfNumericValue((NumericValue) minValue) : CapellaServices.EMPTY));
-			}
-
-			DataValue minLength = getMinLength(dataType);
-			if (minLength != null) {
-				ret.add(CapellaServices.BOLD_BEGIN + "Min Length: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(minLength));
-			}
-
-			DataValue maxValue = getMaxValue(dataType);
-			if (maxValue != null) {
-				ret.add(CapellaServices.BOLD_BEGIN
-						+ "Max Value: "
-						+ CapellaServices.BOLD_END
-						+ CapellaDataValueServices.getSimpleValueOfDataValue(maxValue)
-						+ ((maxValue instanceof NumericValue && null != ((NumericValue) maxValue).getUnit()) ? CapellaServices.SPACE
-								+ CapellaDataValueServices.getUnitOfNumericValue((NumericValue) maxValue) : CapellaServices.EMPTY));
-			}
-
-			DataValue maxLength = getMaxLength(dataType);
-			if (maxLength != null) {
-				ret.add(CapellaServices.BOLD_BEGIN + "Max Length: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(maxLength));
-			}
-			if (dataType.getDefaultValue() != null) {
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
-						+ CapellaDataValueServices.getValueOfDataValue(dataType.getDefaultValue()));
-			}
-			DataValue nullValue = getNullValue(dataType);
-			if (nullValue != null) {
-				ret.add(CapellaServices.BOLD_BEGIN + "Null Value: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(nullValue));
-			}
-
-			// Add the no boolean Features information if is not null
-			if (null != dataType.getPattern())
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.PATTERN + CapellaServices.BOLD_END + dataType.getPattern());
-
+	public static List<String> getFeatures(EObject eObject) {
+		List<String> ret = new ArrayList<>();
+		if (!(eObject instanceof DataType)) {
+			return ret;
 		}
+
+		DataType dataType = (DataType) eObject;
+		// Add boolean Features information
+		ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ABSTRACT + CapellaServices.BOLD_END + dataType.isAbstract());
+		ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_DISCRETE + CapellaServices.BOLD_END + dataType.isDiscrete());
+
+		DataValue minValue = getMinValue(dataType);
+		if (minValue != null) {
+			ret.add(CapellaServices.BOLD_BEGIN
+					+ "Min Value: "
+					+ CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getSimpleValueOfDataValue(minValue)
+					+ ((minValue instanceof NumericValue && null != ((NumericValue) minValue).getUnit()) ? CapellaServices.SPACE
+							+ CapellaDataValueServices.getUnitOfNumericValue((NumericValue) minValue) : CapellaServices.EMPTY));
+		}
+
+		DataValue minLength = getMinLength(dataType);
+		if (minLength != null) {
+			ret.add(CapellaServices.BOLD_BEGIN + "Min Length: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(minLength));
+		}
+
+		DataValue maxValue = getMaxValue(dataType);
+		if (maxValue != null) {
+			ret.add(CapellaServices.BOLD_BEGIN
+					+ "Max Value: "
+					+ CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getSimpleValueOfDataValue(maxValue)
+					+ ((maxValue instanceof NumericValue && null != ((NumericValue) maxValue).getUnit()) ? CapellaServices.SPACE
+							+ CapellaDataValueServices.getUnitOfNumericValue((NumericValue) maxValue) : CapellaServices.EMPTY));
+		}
+
+		DataValue maxLength = getMaxLength(dataType);
+		if (maxLength != null) {
+			ret.add(CapellaServices.BOLD_BEGIN + "Max Length: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(maxLength));
+		}
+		if (dataType.getDefaultValue() != null) {
+			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getValueOfDataValue(dataType.getDefaultValue()));
+		}
+		DataValue nullValue = getNullValue(dataType);
+		if (nullValue != null) {
+			ret.add(CapellaServices.BOLD_BEGIN + "Null Value: " + CapellaServices.BOLD_END + CapellaDataValueServices.getSimpleValueOfDataValue(nullValue));
+		}
+
+		// Add the no boolean Features information if is not null
+		if (null != dataType.getPattern())
+			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.PATTERN + CapellaServices.BOLD_END + dataType.getPattern());
+
 		return ret;
 	}
 
@@ -93,37 +97,27 @@ public class CapellaDataTypeService {
 	 * @return
 	 */
 	public static Collection<String> getTypeOf(DataType dataType, String projectName, String outputFolder) {
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 		Collection<TypedElement> typedElements = dataType.getTypedElements();
-
-		for (TypedElement typedElement : typedElements) {
-			if (typedElement instanceof ExchangeItemElement) {
-				EObject exchangeItem = typedElement.eContainer();
-				if (null != exchangeItem && exchangeItem instanceof ExchangeItem) {
-					String currentStringValue = CapellaServices.getImageLinkFromElement(exchangeItem, projectName, outputFolder) + CapellaServices.SPACE
-							+ CapellaServices.getHyperlinkFromElement(exchangeItem);
-					if (!ret.contains(currentStringValue))
-						ret.add(currentStringValue);
-				}
+	
+		typedElements.stream().filter(tE -> tE instanceof ExchangeItemElement || tE instanceof Property).forEach(elem -> {
+			EObject container = elem.eContainer();
+			boolean exchangeItemOK = (elem instanceof ExchangeItemElement) && (container instanceof ExchangeItem);
+			boolean propertyOK = (elem instanceof Property) && (container instanceof Class);
+			if (exchangeItemOK || propertyOK) {
+				String currentStringValue = CapellaServices.getImageLinkFromElement(container, projectName, outputFolder) + CapellaServices.SPACE
+						+ CapellaServices.getHyperlinkFromElement(container);
+				if (!ret.contains(currentStringValue))
+					ret.add(currentStringValue);
 			}
-			if (typedElement instanceof Property) {
-				Property prop = (Property) typedElement;
-				EObject eContainer = prop.eContainer();
-				if (null != eContainer && eContainer instanceof Class) {
-					String currentValue = CapellaServices.getImageLinkFromElement(eContainer, projectName, outputFolder) + CapellaServices.SPACE
-							+ CapellaServices.getHyperlinkFromElement(eContainer);
-					if (!ret.contains(currentValue))
-						ret.add(currentValue);
-				}
-			}
+		});
 
-		}
 		return ret;
 	}
 
 	public static Collection<String> getLiterals(CapellaElement element, String projectName, String outputFolder) {
-		Collection<String> literals = new ArrayList<String>();
-		Collection<DataValue> dataValues = new ArrayList<DataValue>();
+		Collection<String> literals = new ArrayList<>();
+		Collection<DataValue> dataValues = new ArrayList<>();
 		if (element instanceof BooleanType) {
 			dataValues.addAll(((BooleanType) element).getOwnedLiterals());
 

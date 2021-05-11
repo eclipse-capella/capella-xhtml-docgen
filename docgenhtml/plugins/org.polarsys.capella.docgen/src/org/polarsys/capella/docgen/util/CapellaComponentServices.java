@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -39,129 +39,120 @@ import org.polarsys.capella.core.model.helpers.InterfaceExt;
 
 public class CapellaComponentServices {
 
+	private CapellaComponentServices() {}
+	
 	public static Collection<ComponentExchange> getIncomingComponentExchanges(Component element) {
-		Collection<ComponentExchange> componentExchanges = new ArrayList<ComponentExchange>();
+		Collection<ComponentExchange> componentExchanges = new ArrayList<>();
 		for (Feature currentFeature : element.getOwnedFeatures()) {
-			if (currentFeature instanceof ComponentPort) {
-
-				if (((ComponentPort) currentFeature).getOrientation().getValue() == OrientationPortKind.IN_VALUE)
-					componentExchanges.addAll(((ComponentPort) currentFeature).getComponentExchanges());
-			}
+			if (currentFeature instanceof ComponentPort && ((ComponentPort) currentFeature).getOrientation().getValue() == OrientationPortKind.IN_VALUE)
+				componentExchanges.addAll(((ComponentPort) currentFeature).getComponentExchanges());
 		}
 		return deleteDelegations(componentExchanges);
 	}
 
 	public static Collection<ComponentExchange> getOutgoingComponentExchanges(Component element) {
-		Collection<ComponentExchange> componentExchanges = new ArrayList<ComponentExchange>();
+		Collection<ComponentExchange> componentExchanges = new ArrayList<>();
 		for (Feature currentFeature : element.getOwnedFeatures()) {
-			if (currentFeature instanceof ComponentPort) {
-
-				if (((ComponentPort) currentFeature).getOrientation().getValue() == OrientationPortKind.OUT_VALUE) {
-					componentExchanges.addAll(((ComponentPort) currentFeature).getComponentExchanges());
-				}
+			if (currentFeature instanceof ComponentPort && ((ComponentPort) currentFeature).getOrientation().getValue() == OrientationPortKind.OUT_VALUE) {
+				componentExchanges.addAll(((ComponentPort) currentFeature).getComponentExchanges());
 			}
 		}
 		return deleteDelegations(componentExchanges);
 	}
 
 	public static Collection<ComponentExchange> getInOutComponentExchanges(Component element) {
-		Collection<ComponentExchange> componentExchanges = new ArrayList<ComponentExchange>();
+		Collection<ComponentExchange> componentExchanges = new ArrayList<>();
 		for (Feature currentFeature : element.getOwnedFeatures()) {
-			if (currentFeature instanceof ComponentPort) {
-
-				if (((ComponentPort) currentFeature).getOrientation().getValue() == OrientationPortKind.INOUT_VALUE) {
-					componentExchanges.addAll(((ComponentPort) currentFeature).getComponentExchanges());
-				}
+			if (currentFeature instanceof ComponentPort && ((ComponentPort) currentFeature).getOrientation().getValue() == OrientationPortKind.INOUT_VALUE) {
+				componentExchanges.addAll(((ComponentPort) currentFeature).getComponentExchanges());
 			}
 		}
 		return deleteDelegations(componentExchanges);
 	}
 
 	public static String componentExchangeToTableLine(Component currentComponent, ComponentExchange componentExchange, String projectName, String outputFolder) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("<tr>");
+		StringBuilder buffer = new StringBuilder();
+		buffer.append(CapellaServices.TR_OPEN);
 		buffer.append("<td id=\"" + CapellaServices.getAnchorId(componentExchange) + "\">");
 		buffer.append(CapellaServices.getImageLinkFromElement(componentExchange, projectName, outputFolder));
 		buffer.append(" ");
 		buffer.append(CapellaServices.getHyperlinkFromElement(componentExchange));
-		buffer.append("</td>");
+		buffer.append(CapellaServices.TD_CLOSE);
 
 		ModelElement sourceTargetComponent;
 		sourceTargetComponent = getOppositeComponent(currentComponent, componentExchange);
 		if (sourceTargetComponent != null) {
-			// for (ActivityNode currentFunction : activityNodes) {
-			buffer.append("<td>");
+			buffer.append(CapellaServices.TD_OPEN);
 			buffer.append(CapellaServices.getImageLinkFromElement(sourceTargetComponent, projectName, outputFolder));
 			buffer.append(" ");
 			buffer.append(CapellaServices.getHyperlinkFromElement(sourceTargetComponent));
-			// }
-			buffer.append("</td>");
+			buffer.append(CapellaServices.TD_CLOSE);
 		}
 
-		buffer.append("<td>");
+		buffer.append(CapellaServices.TD_OPEN);
 		buffer.append(getDescription(componentExchange, projectName, outputFolder));
-		buffer.append("</td>");
-		buffer.append("<td>");
+		buffer.append(CapellaServices.TD_CLOSE);
+		buffer.append(CapellaServices.TD_OPEN);
 		EList<FunctionalExchange> functionalExchanges = componentExchange.getAllocatedFunctionalExchanges();
-		if (functionalExchanges.size() > 0) {
+		if (!functionalExchanges.isEmpty()) {
 			buffer.append(CapellaServices.UL_OPEN);
 
 			for (FunctionalExchange currentItem : functionalExchanges) {
-				buffer.append("<li>");
+				buffer.append(CapellaServices.LI_OPEN);
 				buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
 				buffer.append(" ");
 				buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
-				buffer.append("</li>");
+				buffer.append(CapellaServices.LI_CLOSE);
 			}
 			buffer.append(CapellaServices.UL_CLOSE);
 		}
-		buffer.append("</td>");
-		buffer.append("<td>");
-		if (componentExchange.getConvoyedInformations().size() > 0) {
+		buffer.append(CapellaServices.TD_CLOSE);
+		buffer.append(CapellaServices.TD_OPEN);
+		if (!componentExchange.getConvoyedInformations().isEmpty()) {
 			buffer.append(CapellaServices.UL_OPEN);
 			for (AbstractExchangeItem currentItem : componentExchange.getConvoyedInformations()) {
-				buffer.append("<li>");
+				buffer.append(CapellaServices.LI_OPEN);
 				buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
 				buffer.append(" ");
 				buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
-				buffer.append("</li>");
+				buffer.append(CapellaServices.LI_CLOSE);
 			}
 			buffer.append(CapellaServices.UL_CLOSE);
 		}
-		buffer.append("</td>");
+		buffer.append(CapellaServices.TD_CLOSE);
 		
 		EList<ComponentExchange> realizedComponentExchanges = componentExchange.getRealizedComponentExchanges();
-		buffer.append("<td>");
+		buffer.append(CapellaServices.TD_OPEN);
 		buffer.append(CapellaServices.UL_OPEN);
 		for (ComponentExchange realizedComponentExchange : realizedComponentExchanges) {
-			buffer.append("<li>");
+			buffer.append(CapellaServices.LI_OPEN);
 			buffer.append(CapellaServices.getImageLinkFromElement(realizedComponentExchange, projectName, outputFolder));
 			buffer.append(" ");
 			buffer.append(CapellaServices.getHyperlinkFromElement(realizedComponentExchange));
-			buffer.append("</li>");
+			buffer.append(CapellaServices.LI_CLOSE);
 		}
 		buffer.append(CapellaServices.UL_CLOSE);
-		buffer.append("</td>");
-		buffer.append("<td>");
+		buffer.append(CapellaServices.TD_CLOSE);
+		buffer.append(CapellaServices.TD_OPEN);
 		
 		EList<ComponentExchange> realizingComponentExchanges = componentExchange.getRealizingComponentExchanges();
 		buffer.append(CapellaServices.UL_OPEN);
 		for (ComponentExchange realizingComponentExchange : realizingComponentExchanges) {
-			buffer.append("<li>");
+			buffer.append(CapellaServices.LI_OPEN);
 			buffer.append(CapellaServices.getImageLinkFromElement(realizingComponentExchange, projectName, outputFolder));
 			buffer.append(" ");
 			buffer.append(CapellaServices.getHyperlinkFromElement(realizingComponentExchange));
-			buffer.append("</li>");
+			buffer.append(CapellaServices.LI_CLOSE);
 		}
 		buffer.append(CapellaServices.UL_CLOSE);
-		buffer.append("</td>");
-		buffer.append("</tr>");
+		buffer.append(CapellaServices.TD_CLOSE);
+		buffer.append(CapellaServices.TR_CLOSE);
 
 		return buffer.toString();
 	}
 
 	private static Collection<ComponentExchange> deleteDelegations(Collection<ComponentExchange> componentExchanges) {
-		final Collection<ComponentExchange> newComponentExchanges = new ArrayList<ComponentExchange>(componentExchanges);
+		final Collection<ComponentExchange> newComponentExchanges = new ArrayList<>(componentExchanges);
 		for (ComponentExchange currentComponentExchange : componentExchanges) {
 			if (currentComponentExchange.getKind().getValue() == ComponentExchangeKind.DELEGATION_VALUE) {
 				newComponentExchanges.remove(currentComponentExchange);
@@ -207,10 +198,10 @@ public class CapellaComponentServices {
 	 * @return
 	 */
 	public static Collection<String> getAllocatedFunctionsInformation(Component component, String projectName, String outputFolder) {
-		final Collection<String> functionsString = new ArrayList<String>();
+		final Collection<String> functionsString = new ArrayList<>();
 
 		for (AbstractFunction currentAbstractFunction : component.getAllocatedFunctions()) {
-			final StringBuffer buffer = new StringBuffer();
+			final StringBuilder buffer = new StringBuilder();
 			buffer.append(CapellaServices.getImageLinkFromElement(currentAbstractFunction, projectName, outputFolder));
 			buffer.append(CapellaServices.SPACE);
 			buffer.append(CapellaServices.getHyperlinkFromElement(currentAbstractFunction));
@@ -228,13 +219,13 @@ public class CapellaComponentServices {
 	 * @return
 	 */
 	public static Collection<String> getImplementedInterfaces(Component component, String projectName, String outputFolder) {
-		final Collection<String> implementedInterfaces = new ArrayList<String>();
+		final Collection<String> implementedInterfaces = new ArrayList<>();
 		for (Interface currenInterface : component.getImplementedInterfaces()) {
-			final StringBuffer buffer = new StringBuffer();
+			final StringBuilder buffer = new StringBuilder();
 			buffer.append(interfaceToSingleLineDescription(projectName, outputFolder, currenInterface));
 			final Collection<Component> userAndRequiringComponents = getUserAndRequiringComponents(currenInterface);
 
-			if (userAndRequiringComponents.size() > 0) {
+			if (!userAndRequiringComponents.isEmpty()) {
 				buffer.append("\n<br />");
 				buffer.append(CapellaServices.UL_OPEN);
 				buffer.append(CapellaServices.LI_OPEN);
@@ -251,7 +242,7 @@ public class CapellaComponentServices {
 	}
 
 	private static String interfaceToSingleLineDescription(String projectName, String outputFolder, Interface currenInterface) {
-		final StringBuffer buffer = new StringBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		buffer.append(CapellaServices.getImageLinkFromElement(currenInterface, projectName, outputFolder));
 		buffer.append(" ");
 		buffer.append(CapellaServices.getFullDataPkgHierarchyLink(currenInterface));
@@ -263,7 +254,7 @@ public class CapellaComponentServices {
 	}
 
 	private static Set<Component> getUserAndRequiringComponents(Interface currenInterface) {
-		final Set<Component> userAndRequiringComponents = new HashSet<Component>();
+		final Set<Component> userAndRequiringComponents = new HashSet<>();
 
 		userAndRequiringComponents.addAll(currenInterface.getUserComponents());
 		userAndRequiringComponents.addAll(InterfaceExt.getRequireComponent(currenInterface));
@@ -271,7 +262,7 @@ public class CapellaComponentServices {
 	}
 
 	private static Set<Component> getImplementorAndProviderComponents(Interface currenInterface) {
-		final Set<Component> implementorAndProviderComponents = new HashSet<Component>();
+		final Set<Component> implementorAndProviderComponents = new HashSet<>();
 
 		implementorAndProviderComponents.addAll(currenInterface.getImplementorComponents());
 		implementorAndProviderComponents.addAll(InterfaceExt.getProviderComponent(currenInterface));
@@ -279,7 +270,7 @@ public class CapellaComponentServices {
 	}
 
 	private static String componentsToSingleLineList(String projectName, String outputFolder, final Collection<Component> userAndRequiringComponents) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		Iterator<Component> userAndRequiringComponentsIterator = userAndRequiringComponents.iterator();
 		while (userAndRequiringComponentsIterator.hasNext()) {
 			Component currentComponent = userAndRequiringComponentsIterator.next();
@@ -301,26 +292,26 @@ public class CapellaComponentServices {
 	 * @return
 	 */
 	public static Collection<String> getProvidedInterfaces(Component component, String projectName, String outputFolder) {
-		final Collection<String> providedInterfaces = new ArrayList<String>();
+		final Collection<String> providedInterfaces = new ArrayList<>();
 		for (Interface currentInterface : component.getProvidedInterfaces()) {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append(interfaceToSingleLineDescription(projectName, outputFolder, currentInterface));
 
 			if (currentInterface instanceof Interface) {
-				final Collection<Component> userAndRequiringComponents = getUserAndRequiringComponents((Interface) currentInterface);
+				final Collection<Component> userAndRequiringComponents = getUserAndRequiringComponents(currentInterface);
 				buffer.append(CapellaServices.UL_OPEN);
 				buffer.append(CapellaServices.LI_OPEN);
 				buffer.append("<table style=\"border:0px;\">");
-				if (userAndRequiringComponents.size() > 0) {
-					buffer.append("<tr>");
+				if (!userAndRequiringComponents.isEmpty()) {
+					buffer.append(CapellaServices.TR_OPEN);
 					buffer.append("<td style=\"border:0px\"><strong>For</strong> </td>");
-					buffer.append("<td style=\"max-width:100%; border:0px\">");
+					buffer.append(CapellaServices.TD_STYLE_MAX_WIDTH_100_BORDER_0PX);
 					buffer.append(componentsToSingleLineList(projectName, outputFolder, userAndRequiringComponents));
-					buffer.append("</td>");
-					buffer.append("</tr>");
+					buffer.append(CapellaServices.TD_CLOSE);
+					buffer.append(CapellaServices.TR_CLOSE);
 
 				}
-				ComponentPort port = getCorrespondingParentPort(component, InterfaceExt.getProvidedByPorts((Interface) currentInterface));
+				ComponentPort port = getCorrespondingParentPort(component, InterfaceExt.getProvidedByPorts(currentInterface));
 				if (port != null) {
 					buffer.append(portToSingleLine(projectName, outputFolder, port));
 				}
@@ -342,14 +333,14 @@ public class CapellaComponentServices {
 	 * @return
 	 */
 	public static Collection<String> getUsedInterfaces(Component component, String projectName, String outputFolder) {
-		final Collection<String> usedInterfaces = new ArrayList<String>();
+		final Collection<String> usedInterfaces = new ArrayList<>();
 		for (Interface currenInterface : component.getUsedInterfaces()) {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append(interfaceToSingleLineDescription(projectName, outputFolder, currenInterface));
 			if (currenInterface instanceof Interface) {
-				final Collection<Component> implementorAndProviderComponents = getImplementorAndProviderComponents((Interface) currenInterface);
+				final Collection<Component> implementorAndProviderComponents = getImplementorAndProviderComponents(currenInterface);
 
-				if (implementorAndProviderComponents.size() > 0) {
+				if (!implementorAndProviderComponents.isEmpty()) {
 					buffer.append("\n<br />");
 					buffer.append(CapellaServices.UL_OPEN);
 					buffer.append(CapellaServices.LI_OPEN);
@@ -373,52 +364,52 @@ public class CapellaComponentServices {
 	 * @return
 	 */
 	public static Collection<String> getRequiredInterfaces(Component component, String projectName, String outputFolder) {
-		final Collection<String> requiredInterfaces = new ArrayList<String>();
+		final Collection<String> requiredInterfaces = new ArrayList<>();
 		for (Interface currentInterface : component.getRequiredInterfaces()) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(interfaceToSingleLineDescription(projectName, outputFolder, currentInterface));
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(interfaceToSingleLineDescription(projectName, outputFolder, currentInterface));
 
 			if (currentInterface instanceof Interface) {
-				final Collection<Component> implementorAndProviderComponents = getImplementorAndProviderComponents((Interface) currentInterface);
-				buffer.append(CapellaServices.UL_OPEN);
-				buffer.append(CapellaServices.LI_OPEN);
-				buffer.append("<table style=\"border:0px;\">");
-				if (implementorAndProviderComponents.size() > 0) {
+				final Collection<Component> implementorAndProviderComponents = getImplementorAndProviderComponents(currentInterface);
+				stringBuilder.append(CapellaServices.UL_OPEN);
+				stringBuilder.append(CapellaServices.LI_OPEN);
+				stringBuilder.append("<table style=\"border:0px;\">");
+				if (!implementorAndProviderComponents.isEmpty()) {
 
-					buffer.append("<tr>");
-					buffer.append("<td style=\"border:0px\"><strong>From</strong> </td>");
-					buffer.append("<td style=\"max-width:100%; border:0px\">");
-					buffer.append(componentsToSingleLineList(projectName, outputFolder, implementorAndProviderComponents));
-					buffer.append("</td>");
-					buffer.append("</tr>");
+					stringBuilder.append(CapellaServices.TR_OPEN);
+					stringBuilder.append("<td style=\"border:0px\"><strong>From</strong> </td>");
+					stringBuilder.append(CapellaServices.TD_STYLE_MAX_WIDTH_100_BORDER_0PX);
+					stringBuilder.append(componentsToSingleLineList(projectName, outputFolder, implementorAndProviderComponents));
+					stringBuilder.append(CapellaServices.TD_CLOSE);
+					stringBuilder.append(CapellaServices.TR_CLOSE);
 
 				}
-				ComponentPort port = getCorrespondingParentPort(component, InterfaceExt.getRequiredByPorts((Interface) currentInterface));
+				ComponentPort port = getCorrespondingParentPort(component, InterfaceExt.getRequiredByPorts(currentInterface));
 				if (port != null) {
-					buffer.append(portToSingleLine(projectName, outputFolder, port));
+					stringBuilder.append(portToSingleLine(projectName, outputFolder, port));
 				}
-				buffer.append("</table>");
-				buffer.append(CapellaServices.LI_CLOSE);
-				buffer.append(CapellaServices.UL_CLOSE);
+				stringBuilder.append("</table>");
+				stringBuilder.append(CapellaServices.LI_CLOSE);
+				stringBuilder.append(CapellaServices.UL_CLOSE);
 			}
-			requiredInterfaces.add(buffer.toString());
+			requiredInterfaces.add(stringBuilder.toString());
 		}
 
 		return requiredInterfaces;
 	}
 
 	private static String portToSingleLine(String projectName, String outputFolder, ComponentPort port) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("\n");
-		buffer.append("<tr>");
-		buffer.append("<td style=\"border:0px\"><strong>Through</strong> </td>");
-		buffer.append("<td style=\"max-width:100%; border:0px\">");
-		buffer.append(CapellaServices.getImageLinkFromElement(port, projectName, outputFolder));
-		buffer.append(" ");
-		buffer.append(CapellaServices.getHyperlinkFromElement(port));
-		buffer.append("</td>");
-		buffer.append("</tr>");
-		return buffer.toString();
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("\n");
+		stringBuilder.append(CapellaServices.TR_OPEN);
+		stringBuilder.append("<td style=\"border:0px\"><strong>Through</strong> </td>");
+		stringBuilder.append(CapellaServices.TD_STYLE_MAX_WIDTH_100_BORDER_0PX);
+		stringBuilder.append(CapellaServices.getImageLinkFromElement(port, projectName, outputFolder));
+		stringBuilder.append(" ");
+		stringBuilder.append(CapellaServices.getHyperlinkFromElement(port));
+		stringBuilder.append(CapellaServices.TD_CLOSE);
+		stringBuilder.append(CapellaServices.TR_CLOSE);
+		return stringBuilder.toString();
 	}
 
 	private static ComponentPort getCorrespondingParentPort(Component component, List<ComponentPort> requiredByPorts) {
@@ -431,13 +422,13 @@ public class CapellaComponentServices {
 	}
 
 	public static Collection<String> getPorts(Component component, String projectName, String outputFolder) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		for (Port port : ComponentExt.getOwnedPort(component)) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(port, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(port));
-			ret.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(port, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(port));
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}
@@ -453,7 +444,7 @@ public class CapellaComponentServices {
 	 * @return A list of {@code <feature_name>:<feature_value>} strings
 	 */
 	public static Collection<String> getFeatures(Component component) {
-		Collection<String> ret = new ArrayList<String>();
+		Collection<String> ret = new ArrayList<>();
 		ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ACTOR + CapellaServices.BOLD_END + component.isActor());
 		ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_HUMAN + CapellaServices.BOLD_END + component.isHuman());
 		ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ABSTRACT + CapellaServices.BOLD_END + component.isAbstract());

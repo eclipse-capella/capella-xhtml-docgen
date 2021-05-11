@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -20,21 +20,24 @@ import org.polarsys.capella.core.data.information.datatype.DataType;
 import org.polarsys.capella.core.data.information.datavalue.NumericValue;
 
 public class CapellaCollectionService {
+	
+	private CapellaCollectionService() {}
+	
 	/**
 	 * <b>Get the state of features of a collection</b>
 	 * <p>
 	 * Get the state of features isAbstract, isPrimitive, isOrdered, isUnique,
 	 * min, max, default and null of a class
 	 * 
-	 * @param eObject_p
+	 * @param eObject
 	 * @return
 	 */
-	public static List<String> getCollectionFeatures(EObject eObject_p) {
+	public static List<String> getCollectionFeatures(EObject eObject) {
 		// Create the list to return
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 
-		if (eObject_p instanceof Collection) {
-			Collection eCollection = (Collection) eObject_p;
+		if (eObject instanceof Collection) {
+			Collection eCollection = (Collection) eObject;
 			// Add the boolean Features information
 			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.IS_ABSTRACT + CapellaServices.BOLD_END + eCollection.isAbstract());
 			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.PROP_STATIC + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END + eCollection.isIsPrimitive());
@@ -64,40 +67,40 @@ public class CapellaCollectionService {
 	 * @param element
 	 * @return
 	 */
-	public static List<String> getCollectionElements(EObject eObject_p) {
+	public static List<String> getCollectionElements(EObject eObject) {
 		// Create the list to return
-		List<String> ret = new ArrayList<String>();
+		List<String> ret = new ArrayList<>();
 
-		if (eObject_p instanceof Collection) {
-			Collection eCollection = (Collection) eObject_p;
-			StringBuffer buffer = new StringBuffer();
+		if (eObject instanceof Collection) {
+			Collection eCollection = (Collection) eObject;
+			StringBuilder stringBuilder = new StringBuilder();
 			// Add the cardinalities information to the buffer
 			final NumericValue ownedMinCard = eCollection.getOwnedMinCard();
 			if (ownedMinCard != null)
-				buffer.append(CapellaServices.getHyperlinkFromElement(ownedMinCard));
+				stringBuilder.append(CapellaServices.getHyperlinkFromElement(ownedMinCard));
 			else
-				buffer.append("<undefined>");
+				stringBuilder.append("<undefined>");
 
-			buffer.append(CapellaServices.SPACE + "\n");
+			stringBuilder.append(CapellaServices.SPACE + "\n");
 			final NumericValue ownedMaxCard = eCollection.getOwnedMaxCard();
 			if (ownedMaxCard != null)
-				buffer.append(CapellaServices.getHyperlinkFromElement(ownedMaxCard));
+				stringBuilder.append(CapellaServices.getHyperlinkFromElement(ownedMaxCard));
 			else
-				buffer.append("<undefined>");
+				stringBuilder.append("<undefined>");
 
-			ret.add(buffer.toString());
+			ret.add(stringBuilder.toString());
 		}
 		return ret;
 	}
 
 	public static List<String> getIndexedBy(Collection collection, String projectName, String outputFolder) {
-		List<String> informations = new ArrayList<String>();
+		List<String> informations = new ArrayList<>();
 		for (DataType currentDataType : collection.getIndex()) {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(CapellaServices.getImageLinkFromElement(collection, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getFullDataPkgHierarchyLink(currentDataType));
-			informations.add(buffer.toString());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(CapellaServices.getImageLinkFromElement(collection, projectName, outputFolder));
+			stringBuilder.append(" ");
+			stringBuilder.append(CapellaServices.getFullDataPkgHierarchyLink(currentDataType));
+			informations.add(stringBuilder.toString());
 		}
 		return informations;
 	}
