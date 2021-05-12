@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -63,6 +63,7 @@ public class CapellaServices {
 	public static final String NONE = "None";
 	
 	public static final String NO_NAME = "<i>[No Name]</i>";
+	public static final String NO_NAME_SIMPLE = "[No Name]";
 
 	public static final String SPACE = " ";
 

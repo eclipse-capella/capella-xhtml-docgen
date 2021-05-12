@@ -4,9 +4,10 @@
 <table style="width: 100%" border="1">
 	<tbody>
         <tr>
-			<td style="font-weight: bold; text-align: center; width: 20%"> Name and Description</td>
-			<td style="font-weight: bold; text-align: center; width: 60%"> Owned specification</td>
-			<td style="font-weight: bold; text-align: center; width: 20%"> Constrained elements<br /></td>
+			<td style="font-weight: bold; text-align: center; width: 15%"> Name and Description</td>
+			<td style="font-weight: bold; text-align: center; width: 55%"> Owned specification</td>
+			<td style="font-weight: bold; text-align: center; width: 15%"> Constrained elements<br /></td>
+			
         </tr>
 <%String projectName = (String) ctx.getValue("projectName");
 String outputFolder = (String) ctx.getValue("outputFolder");%>
@@ -16,21 +17,53 @@ String outputFolder = (String) ctx.getValue("outputFolder");%>
 	{
 		Constraint constraint = (Constraint) abstractConstraint;
 		String constraintName = constraint.getName();
-		if (constraintName == null || (constraintName != null && constraintName.isEmpty()))
-			constraintName = CapellaServices.NO_NAME;%>  
+		if (constraintName == null || (constraintName != null && constraintName.isEmpty())) {
+			constraintName = CapellaServices.NO_NAME;
+		} 
+%>
         <tr>
-			<td>
+<%
+		
+		EList<AbstractPropertyValue> appliedPVList = constraint.getAppliedPropertyValues();
+		EList<PropertyValueGroup> appliedPVGList = constraint.getAppliedPropertyValueGroups();
+		EList<AbstractPropertyValue> ownedPVList = constraint.getOwnedPropertyValues();
+		EList<PropertyValueGroup> ownedPVGList = constraint.getOwnedPropertyValueGroups();
+		Boolean hasAppliedPVorPVGs = !appliedPVList.isEmpty() || !appliedPVGList.isEmpty() || !ownedPVList.isEmpty() || !ownedPVGList.isEmpty();
+		if (hasAppliedPVorPVGs) { 
+%>			<td rowspan="3">
+<%		} else { 
+%>        	<td>
+<%		} 
+%>
 <b><%=constraintName%> </b>
 <%  // Summary and description generation%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.SummaryAndDescriptionGeneration" args="constraint:element"%>
 			</td>
-			<td> 
+			<td>
 <%=ConstraintsService.getValueSpecification(constraint.getOwnedSpecification(), projectName, outputFolder)%>				
 			</td>
 			<td>  
 <%=ConstraintsService.getConstrainedElement(constraint, projectName, outputFolder)%>			
 			</td>
         </tr>
-<%	}%>
+<%
+		if (hasAppliedPVorPVGs) {
+			int sectionLevel = 4;
+			boolean displayAsRowParameter = true;
+%>
+		<tr>
+			<th colspan="2">
+			Applied and Contained Property Values
+			</th>
+		</tr>
+		<tr>
+			<td colspan="2">
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="constraint:element,outputFolder:outputFolder,projectName:projectName,sectionLevel:sectionLevelParameter,displayAsRowParameter:displayAsRowParameter"%>
+			</td>
+		</tr>
+<%
+		}
+	}
+%>
 	</tbody>
 </table>
