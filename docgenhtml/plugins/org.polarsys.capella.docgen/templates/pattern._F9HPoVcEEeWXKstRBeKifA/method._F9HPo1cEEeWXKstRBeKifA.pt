@@ -1,1 +1,13 @@
-<%@ jet package="PACKAGE" class="CLASS" imports="org.eclipse.egf.common.helper.* java.util.* org.eclipse.emf.ecore.* org.eclipse.egf.model.pattern.* org.eclipse.egf.pattern.execution.* org.eclipse.egf.pattern.query.* org.polarsys.capella.docgen.util.ConstraintsService org.polarsys.capella.docgen.util.CapellaServices  org.polarsys.capella.common.data.modellingcore.AbstractConstraint org.polarsys.capella.core.data.capellacore.Constraint"  %>
+<%@ jet package="PACKAGE" class="CLASS" imports="
+java.util.*
+org.eclipse.egf.model.pattern.*
+org.eclipse.egf.pattern.execution.*
+org.eclipse.egf.pattern.query.*
+org.polarsys.capella.docgen.util.ConstraintsService
+org.polarsys.capella.docgen.util.CapellaServices
+org.polarsys.capella.common.data.modellingcore.AbstractConstraint
+org.polarsys.capella.core.data.capellacore.Constraint
+org.eclipse.emf.common.util.EList
+org.polarsys.capella.core.data.capellacore.AbstractPropertyValue
+org.polarsys.capella.core.data.capellacore.PropertyValueGroup
+" %>

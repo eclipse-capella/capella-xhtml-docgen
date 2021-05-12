@@ -1,1 +1,10 @@
-<%@ jet package="PACKAGE" class="CLASS" imports="org.eclipse.egf.common.helper.* java.util.* org.eclipse.emf.ecore.* org.eclipse.egf.model.pattern.* org.eclipse.egf.pattern.execution.* org.eclipse.egf.pattern.query.* org.eclipse.emf.common.util.* org.polarsys.capella.core.data.capellacore.AbstractPropertyValue org.polarsys.capella.core.data.capellacore.PropertyValueGroup org.polarsys.capella.docgen.util.CapellaServices org.polarsys.capella.docgen.util.StringUtil org.polarsys.capella.docgen.util.pattern.helper.PropertyValueHelper"  %>
+<%@ jet package="PACKAGE" class="CLASS" imports="
+java.util.*
+org.eclipse.egf.model.pattern.*
+org.eclipse.egf.pattern.execution.*
+org.eclipse.egf.pattern.query.*
+org.eclipse.emf.common.util.*
+org.polarsys.capella.core.data.capellacore.AbstractPropertyValue
+org.polarsys.capella.core.data.capellacore.PropertyValueGroup
+org.polarsys.capella.docgen.util.pattern.helper.PropertyValueHelper
+" %>

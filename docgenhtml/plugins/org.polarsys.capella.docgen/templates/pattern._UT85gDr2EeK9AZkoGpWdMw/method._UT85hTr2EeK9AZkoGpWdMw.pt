@@ -1,11 +1,23 @@
 <%
+int sectionLevel = 2;
+if (sectionLevelParameter != null) {
+	sectionLevel = sectionLevelParameter;
+};
 // We get the list of applied and owned PV
 EList<AbstractPropertyValue> applied_list = element.getAppliedPropertyValues();
 EList<AbstractPropertyValue> owned_list = element.getOwnedPropertyValues();
 
+// If we want to display both tables horizontally
+if (displayAsRowParameter != null && displayAsRowParameter) {
+	%>
+	<table style="border:none">
+		<tr style="border:none">
+			<td style="border:none; vertical-align:top">
+	<%
+}
 if ((applied_list != null && applied_list.size() > 0) || (owned_list != null && owned_list.size() > 0)) {
 	%>
-	<h2>Property Values</h2>
+	<h<%=sectionLevel%>>Property Values</h<%=sectionLevel%>>
 	<table max-width=screen.width>
 	   <thead> 
 	       <tr>
@@ -23,6 +35,12 @@ if ((applied_list != null && applied_list.size() > 0) || (owned_list != null && 
 	</tbody>
 	</table>
 	<%
+if (displayAsRowParameter != null && displayAsRowParameter) {
+	%>
+			</td>
+			<td style="border:none; vertical-align:top">
+	<%
+}
 }
 
 // We get the list of applied and owned PVG
@@ -31,7 +49,7 @@ EList<PropertyValueGroup> ownedgroup_list = element.getOwnedPropertyValueGroups(
 
 if ((appliedgroup_list != null && appliedgroup_list.size() > 0) || (ownedgroup_list != null && ownedgroup_list.size() > 0)) {
 	%>
-	<h2>Property Value Groups</h2>
+	<h<%=sectionLevel%>>Property Value Groups</h<%=sectionLevel%>>
 	<table max-width=screen.width>
 	   <thead> 
 	       <tr>
@@ -47,6 +65,13 @@ if ((appliedgroup_list != null && appliedgroup_list.size() > 0) || (ownedgroup_l
 	%>
 	<%=table%>
 	</tbody>
+	</table>
+	<%
+}
+if (displayAsRowParameter != null && displayAsRowParameter) {
+	%>
+			</td>
+		</tr>
 	</table>
 	<%
 }
