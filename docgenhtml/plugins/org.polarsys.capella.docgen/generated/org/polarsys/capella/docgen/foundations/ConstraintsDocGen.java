@@ -1,9 +1,7 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
-import org.eclipse.egf.common.helper.*;
 import java.util.*;
-import org.eclipse.emf.ecore.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
@@ -11,6 +9,9 @@ import org.polarsys.capella.docgen.util.ConstraintsService;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.capella.common.data.modellingcore.AbstractConstraint;
 import org.polarsys.capella.core.data.capellacore.Constraint;
+import org.eclipse.emf.common.util.EList;
+import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
+import org.polarsys.capella.core.data.capellacore.PropertyValueGroup;
 
 public class ConstraintsDocGen {
 	protected static String nl;
@@ -26,17 +27,24 @@ public class ConstraintsDocGen {
 	protected final String TEXT_1 = "";
 	protected final String TEXT_2 = NL + NL + "<table style=\"width: 100%\" border=\"1\">" + NL + "\t<tbody>" + NL
 			+ "        <tr>" + NL
-			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 20%\"> Name and Description</td>" + NL
-			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 60%\"> Owned specification</td>" + NL
-			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 20%\"> Constrained elements<br /></td>"
-			+ NL + "        </tr>";
+			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 15%\"> Name and Description</td>" + NL
+			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 55%\"> Owned specification</td>" + NL
+			+ "\t\t\t<td style=\"font-weight: bold; text-align: center; width: 15%\"> Constrained elements<br /></td>"
+			+ NL + "\t\t\t" + NL + "        </tr>";
 	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = "  " + NL + "        <tr>" + NL + "\t\t\t<td>" + NL + "<b>";
-	protected final String TEXT_5 = " </b>";
-	protected final String TEXT_6 = NL + "\t\t\t</td>" + NL + "\t\t\t<td> ";
-	protected final String TEXT_7 = "\t\t\t\t" + NL + "\t\t\t</td>" + NL + "\t\t\t<td>  ";
-	protected final String TEXT_8 = "\t\t\t" + NL + "\t\t\t</td>" + NL + "        </tr>";
-	protected final String TEXT_9 = NL + "\t</tbody>" + NL + "</table>";
+	protected final String TEXT_4 = NL + "        <tr>";
+	protected final String TEXT_5 = "\t\t\t<td rowspan=\"3\">";
+	protected final String TEXT_6 = "        \t<td>";
+	protected final String TEXT_7 = NL + "<b>";
+	protected final String TEXT_8 = " </b>";
+	protected final String TEXT_9 = NL + "\t\t\t</td>" + NL + "\t\t\t<td>";
+	protected final String TEXT_10 = "\t\t\t\t" + NL + "\t\t\t</td>" + NL + "\t\t\t<td>  ";
+	protected final String TEXT_11 = "\t\t\t" + NL + "\t\t\t</td>" + NL + "        </tr>";
+	protected final String TEXT_12 = NL + "\t\t<tr>" + NL + "\t\t\t<th colspan=\"2\">" + NL
+			+ "\t\t\tApplied and Contained Property Values" + NL + "\t\t\t</th>" + NL + "\t\t</tr>" + NL + "\t\t<tr>"
+			+ NL + "\t\t\t<td colspan=\"2\">";
+	protected final String TEXT_13 = NL + "\t\t\t</td>" + NL + "\t\t</tr>";
+	protected final String TEXT_14 = NL + "\t</tbody>" + NL + "</table>" + NL;
 
 	public ConstraintsDocGen() {
 		//Here is the constructor
@@ -132,11 +140,29 @@ public class ConstraintsDocGen {
 		for (AbstractConstraint abstractConstraint : ownedConstraints) {
 			Constraint constraint = (Constraint) abstractConstraint;
 			String constraintName = constraint.getName();
-			if (constraintName == null || (constraintName != null && constraintName.isEmpty()))
+			if (constraintName == null || (constraintName != null && constraintName.isEmpty())) {
 				constraintName = CapellaServices.NO_NAME;
+			}
+
 			stringBuffer.append(TEXT_4);
+
+			EList<AbstractPropertyValue> appliedPVList = constraint.getAppliedPropertyValues();
+			EList<PropertyValueGroup> appliedPVGList = constraint.getAppliedPropertyValueGroups();
+			EList<AbstractPropertyValue> ownedPVList = constraint.getOwnedPropertyValues();
+			EList<PropertyValueGroup> ownedPVGList = constraint.getOwnedPropertyValueGroups();
+			Boolean hasAppliedPVorPVGs = !appliedPVList.isEmpty() || !appliedPVGList.isEmpty() || !ownedPVList.isEmpty()
+					|| !ownedPVGList.isEmpty();
+			if (hasAppliedPVorPVGs) {
+
+				stringBuffer.append(TEXT_5);
+			} else {
+
+				stringBuffer.append(TEXT_6);
+			}
+
+			stringBuffer.append(TEXT_7);
 			stringBuffer.append(constraintName);
-			stringBuffer.append(TEXT_5);
+			stringBuffer.append(TEXT_8);
 			// Summary and description generation
 			stringBuffer.append(TEXT_3);
 			{
@@ -154,16 +180,46 @@ public class ConstraintsDocGen {
 				stringBuffer.setLength(0);
 			}
 
-			stringBuffer.append(TEXT_6);
+			stringBuffer.append(TEXT_9);
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(ConstraintsService.getValueSpecification(constraint.getOwnedSpecification(),
 					projectName, outputFolder));
-			stringBuffer.append(TEXT_7);
+			stringBuffer.append(TEXT_10);
 			stringBuffer.append(TEXT_3);
 			stringBuffer.append(ConstraintsService.getConstrainedElement(constraint, projectName, outputFolder));
-			stringBuffer.append(TEXT_8);
+			stringBuffer.append(TEXT_11);
+
+			if (hasAppliedPVorPVGs) {
+				int sectionLevel = 4;
+				boolean displayAsRowParameter = true;
+
+				stringBuffer.append(TEXT_12);
+				stringBuffer.append(TEXT_3);
+				{
+					//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.PropertyValueGen" args="constraint:element,outputFolder:outputFolder,projectName:projectName,sectionLevel:sectionLevelParameter,displayAsRowParameter:displayAsRowParameter"%>
+
+					InternalPatternContext ictx = (InternalPatternContext) ctx;
+					new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+					stringBuffer.setLength(0);
+
+					final Map<String, Object> callParameters = new HashMap<String, Object>();
+					callParameters.put("element", constraint);
+					callParameters.put("outputFolder", outputFolder);
+					callParameters.put("projectName", projectName);
+					callParameters.put("sectionLevelParameter", sectionLevel);
+					callParameters.put("displayAsRowParameter", displayAsRowParameter);
+					CallHelper.executeWithParameterInjection(
+							"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_UT85gDr2EeK9AZkoGpWdMw",
+							new ExecutionContext((InternalPatternContext) ctx), callParameters);
+					stringBuffer.setLength(0);
+				}
+
+				stringBuffer.append(TEXT_13);
+
+			}
 		}
-		stringBuffer.append(TEXT_9);
+
+		stringBuffer.append(TEXT_14);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
 		new Node.DataLeaf(ictx.getNode(), getClass(), "genConstraints", stringBuffer.toString());
 	}

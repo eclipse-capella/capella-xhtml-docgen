@@ -73,6 +73,7 @@ public class CapellaServices {
 	public static final String NONE = "None";
 	
 	public static final String NO_NAME = "<i>[No Name]</i>";
+	public static final String NO_NAME_SIMPLE = "[No Name]";
 
 	public static final String SPACE = " ";
 

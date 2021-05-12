@@ -15,6 +15,7 @@ import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacommon.Region;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.capellacore.Constraint;
 import org.polarsys.capella.core.data.capellacore.GeneralClass;
 import org.polarsys.capella.core.data.capellacore.Structure;
 import org.polarsys.capella.core.data.cs.Component;
@@ -70,6 +71,7 @@ public class DocGenHtmlCapellaControl {
 		return (
 				element instanceof AbstractState 
 				|| element instanceof StateMachine
+				|| element instanceof Constraint
 				|| element instanceof Structure
 				|| element instanceof AbstractFunction
 				|| element instanceof Part 

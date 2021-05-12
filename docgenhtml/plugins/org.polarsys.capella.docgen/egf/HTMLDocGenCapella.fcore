@@ -2,7 +2,8 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:domain="http://www.eclipse.org/egf/1.0.0/domain"
     xmlns:fcore="http://www.eclipse.org/egf/1.0.0/fcore" xmlns:fprod="http://www.eclipse.org/egf/1.0.0/fprod"
     xmlns:ftask="http://www.eclipse.org/egf/1.0.0/ftask" xmlns:jetpattern="http://www.eclipse.org/egf/1.0.0/jetpattern"
-    xmlns:pattern="http://www.eclipse.org/egf/1.0.0/pattern" xmlns:types="http://www.eclipse.org/egf/1.0.0/types">
+    xmlns:pattern="http://www.eclipse.org/egf/1.0.0/pattern" xmlns:types="http://www.eclipse.org/egf/1.0.0/types"
+   >
   <fcore:FactoryComponent xmi:id="_0NRc8Nz5Ed-Vzvs7Wt1vzQ" name="HTMLDocGenCapella">
     <contractContainer xmi:id="_2HmpYNz-Ed-Vzvs7Wt1vzQ">
       <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_60tqgN43Ed-Qav1YnqlO9A"
@@ -226,6 +227,10 @@
             <parameters xmi:id="_cFBpIDr2EeK9AZkoGpWdMw" name="element" type="http://www.polarsys.org/capella/core/core/5.0.0#//CapellaElement"/>
             <parameters xmi:id="_W2690Dr8EeK9AZkoGpWdMw" name="outputFolder" type="java.lang.String"/>
             <parameters xmi:id="_ZAJ7MDr8EeK9AZkoGpWdMw" name="projectName" type="java.lang.String"/>
+            <parameters xmi:id="_9HDB0LcnEeunS_LL9mf3jw" name="sectionLevelParameter"
+                type="java.lang.Integer"/>
+            <parameters xmi:id="_bxmxsLiIEeunS_LL9mf3jw" name="displayAsRowParameter"
+                type="java.lang.Boolean"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_UT85hzr2EeK9AZkoGpWdMw"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_wzzG0DsNEeKas6f-rR5zEA"
                 called="#_UT85hTr2EeK9AZkoGpWdMw"/>
