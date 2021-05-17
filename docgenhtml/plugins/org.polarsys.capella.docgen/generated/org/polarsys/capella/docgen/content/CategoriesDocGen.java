@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.content;
 
 import org.polarsys.capella.docgen.util.CapellaCategoryServices;
@@ -209,7 +209,7 @@ public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.Na
 	}
 
 	public boolean preCondition(PatternContext ctx) throws Exception {
-		return element instanceof ExchangeCategory || element instanceof ComponentExchangeCategory
-				|| element instanceof PhysicalLinkCategory;
+		return parameter instanceof ExchangeCategory || parameter instanceof ComponentExchangeCategory
+				|| parameter instanceof PhysicalLinkCategory;
 	}
 }

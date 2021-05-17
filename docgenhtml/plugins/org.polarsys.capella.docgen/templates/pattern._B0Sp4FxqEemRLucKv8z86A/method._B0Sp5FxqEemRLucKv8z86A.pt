@@ -1,1 +1,1 @@
-return element instanceof ExchangeCategory || element instanceof ComponentExchangeCategory || element instanceof PhysicalLinkCategory;
+return parameter instanceof ExchangeCategory || parameter instanceof ComponentExchangeCategory || parameter instanceof PhysicalLinkCategory;
