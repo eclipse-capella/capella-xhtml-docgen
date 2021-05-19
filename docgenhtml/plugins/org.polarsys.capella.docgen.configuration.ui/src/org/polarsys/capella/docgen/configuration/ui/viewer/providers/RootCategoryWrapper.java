@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 Obeo.
+ * Copyright (c) 2017, 2021 Obeo.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -41,8 +41,19 @@ public class RootCategoryWrapper extends BrowserElementWrapper {
 	 * 
 	 * @see org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.BrowserElementWrapper#equals(java.lang.Object)
 	 */
+	@Override
 	public boolean equals(final Object object) {
 		return (this == object);
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.BrowserElementWrapper#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 
 	/**

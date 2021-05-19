@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 Obeo.
+ * Copyright (c) 2017, 2021 Obeo.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.egf.model.domain.Domain;
 import org.eclipse.egf.model.domain.DomainViewpoint;
 import org.eclipse.egf.model.domain.EMFDomain;
@@ -207,14 +208,14 @@ public class HTMLDocumentationConfigurationGenerationAction extends BaseSelectio
 							while (iterator.hasNext()) {
 								Resource next = iterator.next();
 								URI uri2 = next.getURI();
-								if (uri2.lastSegment().endsWith(".afm")) { //$NON-NLS-1$
+								if (uri2 == null || uri2.lastSegment().endsWith(".afm")) { //$NON-NLS-1$
 									continue;
 								}
 								// Keeping the aird URI if the semantic resource
 								// uri is
 								// null (i.e., the semantic
 								// model doesn't exist)
-								semanticResourceURI = uri2 == null ? semanticResourceURI : uri2;
+								semanticResourceURI = uri2;
 								break;
 							}
 
@@ -237,12 +238,12 @@ public class HTMLDocumentationConfigurationGenerationAction extends BaseSelectio
 						ScopeElementStrategy.ELEMENT);
 
 				// Initialize scope.
-				if (selectedModelElements != null && false == selectedModelElements.isEmpty()) {
+				if (selectedModelElements != null && !selectedModelElements.isEmpty()) {
 					for (EObject eObject : selectedModelElements) {
 						try {
 							GenerationGlobalScope.getInstance().addToScope(eObject);
 						} catch (ScopeException e) {
-							e.printStackTrace();
+							Activator.getDefault().getLog().log(new Status(Status.ERROR, Activator.PLUGIN_ID, e.getMessage()));
 						}
 					}
 				}

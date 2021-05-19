@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.osgi.util.NLS;
 import org.polarsys.capella.common.data.behavior.TimeExpression;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.common.data.modellingcore.ValueSpecification;
@@ -24,12 +25,15 @@ import org.polarsys.capella.core.data.capellacore.Constraint;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.OpaqueExpression;
 import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
-import org.polarsys.capella.core.linkedtext.ui.CapellaLinkedTextConstants;
+import org.polarsys.capella.core.model.helpers.ConstraintExt;
+import org.polarsys.capella.docgen.Messages;
 
 /**
  * @author Boubekeur Zendagui
  */
 public class ConstraintsService {
+	
+	private ConstraintsService() {}
 
 	/**
 	 * Transforms elements of the {@link Constraint#getConstrainedElements()} to an HTML list 
@@ -40,7 +44,7 @@ public class ConstraintsService {
 	 */
 	public static String getConstrainedElement(Constraint constraint, String projectName, String outputFolder){
 		final EList<ModelElement> constrainedElements = constraint.getConstrainedElements();
-		final List<String> result = new ArrayList<String>();
+		final List<String> result = new ArrayList<>();
 		for (ModelElement modelElement : constrainedElements) 
 		{
 			final String imageLinkFromElement = CapellaServices.getImageLinkFromElement(modelElement, projectName, outputFolder);
@@ -49,7 +53,7 @@ public class ConstraintsService {
 		}
 		
 		final String result_s = StringUtil.stringListToBulette(result);
-		return result_s.isEmpty() == false ? result_s : "No constrained elements";
+		return !result_s.isEmpty() ? result_s : "No constrained elements";
 	}
 	
 	/**
@@ -65,42 +69,51 @@ public class ConstraintsService {
 		
 		if (valueSpecification instanceof DataValue)
 		{// Generate Data value
-			DataValue dataValue_p = (DataValue) valueSpecification;
-			return CapellaDataValueServices.getDataValueInformation(dataValue_p, projectName, outputFolder);
+			DataValue dataValue = (DataValue) valueSpecification;
+			return CapellaDataValueServices.getDataValueInformation(dataValue, projectName, outputFolder);
 		}
 		
 		if (valueSpecification instanceof OpaqueExpression)
 		{// Generate Data value
-			String result = "";
 			OpaqueExpression expression = (OpaqueExpression) valueSpecification;
-			final EList<String> languages = expression.getLanguages();
-			if (languages.isEmpty() == false)
-			{
-				for (int i = 0; i < languages.size(); i++) 
-				{
-					final String language = languages.get(i);
-					result += CapellaServices.BOLD_BEGIN;
-					result += language.equals(CapellaLinkedTextConstants.OPAQUE_EXPRESSION_LINKED_TEXT) ? "LinkedText" : language;
-					result += CapellaServices.VALUE_PRESENTER;
-					result += CapellaServices.BOLD_END;
-					result += CapellaServices.NEW_LINE;
-					result += getOpaqueExpressionValue(expression, i);
-					if (i+1 < languages.size())
-						result += CapellaServices.NEW_LINE;
-				}
-			}
-			
-			return result;
+			return getOpaqueExpressionInformation(expression);
 		}
 		
 		if (valueSpecification instanceof TimeExpression)
 		{// Generate Data value
-			String result = "";
-			
-			return result;
+			// TimeExpression interface has no implementation.
+			Logger.logWarning(NLS.bind(Messages.elementTypeNotHandled, "TimeExpression"), null);
+			return "";
 		}
 		
 		return "[Unknown value specification]";
+	}
+
+	/**
+	 * Returns a string representation for a {@link OpaqueExpression}. 
+	 * @param expression The expression to extract
+	 * @return Whole expression string representation
+	 */
+	private static String getOpaqueExpressionInformation(OpaqueExpression expression) {
+		StringBuilder result = new StringBuilder();
+		final EList<String> languages = expression.getLanguages();
+		if (!languages.isEmpty())
+		{
+			for (int i = 0; i < languages.size(); i++) 
+			{
+				final String language = languages.get(i);
+				result.append(CapellaServices.BOLD_BEGIN);
+				result.append(language.equals(ConstraintExt.OPAQUE_EXPRESSION_LINKED_TEXT) ? "LinkedText" : language);
+				result.append(CapellaServices.VALUE_PRESENTER);
+				result.append(CapellaServices.BOLD_END);
+				result.append(CapellaServices.NEW_LINE);
+				result.append(getOpaqueExpressionValue(expression, i));
+				if (i+1 < languages.size())
+					result.append(CapellaServices.NEW_LINE);
+			}
+		}
+		
+		return result.toString();
 	}
 	
 	/**
@@ -111,7 +124,7 @@ public class ConstraintsService {
 	 */
 	private static String getOpaqueExpressionValue(OpaqueExpression exp, int index){
 		String result = "<pre>";
-		if (CapellaLinkedTextConstants.OPAQUE_EXPRESSION_LINKED_TEXT.equals(exp.getLanguages().get(index))) 
+		if (ConstraintExt.OPAQUE_EXPRESSION_LINKED_TEXT.equals(exp.getLanguages().get(index))) 
 		{
 			CapellaEmbeddedLinkedTextEditorInput input = new CapellaEmbeddedLinkedTextEditorInput.Readonly(exp, exp.getBodies().get(index));
 			result += LinkedTextDocument.load(input).get();

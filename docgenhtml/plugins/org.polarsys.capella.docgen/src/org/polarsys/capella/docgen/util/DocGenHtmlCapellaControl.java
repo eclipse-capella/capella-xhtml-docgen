@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -15,7 +15,6 @@ import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacommon.Region;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.core.data.capellacore.Constraint;
 import org.polarsys.capella.core.data.capellacore.GeneralClass;
 import org.polarsys.capella.core.data.capellacore.Structure;
 import org.polarsys.capella.core.data.cs.Component;
@@ -48,6 +47,8 @@ import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.extension.page.PageExtensionRegistry;
 
 public class DocGenHtmlCapellaControl {
+	
+	private DocGenHtmlCapellaControl() {}
 
 	/**
 	 * check if the page can be optional
@@ -71,7 +72,6 @@ public class DocGenHtmlCapellaControl {
 		return (
 				element instanceof AbstractState 
 				|| element instanceof StateMachine
-				|| element instanceof Constraint
 				|| element instanceof Structure
 				|| element instanceof AbstractFunction
 				|| element instanceof Part 
