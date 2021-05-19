@@ -73,7 +73,6 @@ public class CapellaServices {
 	public static final String NONE = "None";
 	
 	public static final String NO_NAME = "<i>[No Name]</i>";
-	public static final String NO_NAME_SIMPLE = "[No Name]";
 
 	public static final String SPACE = " ";
 
@@ -130,10 +129,10 @@ public class CapellaServices {
 	public static final String CHEV_OPEN = "&lt";
 	public static final String CHEV_CLOSE = "&gt";
 
-	protected final static String HYPERLINK_OPEN = "<a href=\"";
-	protected final static String HYPERLINK_SEPARATOR = "/";
-	protected final static String HYPERLINK_COMPLETE = "\">";
-	protected final static String HYPERLINK_CLOSE = "</a>";
+	protected static final String HYPERLINK_OPEN = "<a href=\"";
+	protected static final String HYPERLINK_SEPARATOR = "/";
+	protected static final String HYPERLINK_COMPLETE = "\">";
+	protected static final String HYPERLINK_CLOSE = "</a>";
 	private static final Object PATH_OPEN = "../";
 	private static final Object PATH_COMPLETE = ".html";
 
@@ -146,29 +145,29 @@ public class CapellaServices {
 		String text = label;
 		// Format representation name with html rules
 		text = EscapeChars.forHTML(text);
-		// Initialize Buffer
-		StringBuffer buffer = new StringBuffer();
+		// Initialize string builder
+		StringBuilder stringBuilder = new StringBuilder();
 		if (linked != -1) {
 			// Add the opening href tag to the buffer
-			buffer.append(HYPERLINK_OPEN);
+			stringBuilder.append(HYPERLINK_OPEN);
 			// Add the preoject root ressource to the buffer
 			if (linked == 1) {
-				buffer.append(getPathFromElement(element.eContainer()));
-				buffer.append("#");
-				buffer.append(getAnchorId(element));
+				stringBuilder.append(getPathFromElement(element.eContainer()));
+				stringBuilder.append("#");
+				stringBuilder.append(getAnchorId(element));
 			} else
-				buffer.append(getPathFromElement(element));
+				stringBuilder.append(getPathFromElement(element));
 			// Add the href tag completion to the buffer
-			buffer.append(HYPERLINK_COMPLETE);
+			stringBuilder.append(HYPERLINK_COMPLETE);
 		}
 		// Add the name to present to the buffer
-		buffer.append(text);
+		stringBuilder.append(text);
 		if (linked != -1) {
 			// Add the close href tag to the buffer
-			buffer.append(HYPERLINK_CLOSE);
+			stringBuilder.append(HYPERLINK_CLOSE);
 		}
 		// return the buffer
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 	/**
 	 * 
@@ -182,29 +181,29 @@ public class CapellaServices {
 		String text = label;
 		// Format representation name with html rules
 		text = EscapeChars.forHTML(text);
-		// Initialize Buffer
-		StringBuffer buffer = new StringBuffer();
+		// Initialize string builder
+		StringBuilder stringBuilder = new StringBuilder();
 		if (linked != -1) {
 			// Add the opening href tag to the buffer
-			buffer.append(HYPERLINK_OPEN);
+			stringBuilder.append(HYPERLINK_OPEN);
 			// Add the preoject root ressource to the buffer
 			if (linked == 1) {
-				buffer.append(getIndexPathFromElement(element.eContainer()));
-				buffer.append("#");
-				buffer.append(getAnchorId(element));
+				stringBuilder.append(getIndexPathFromElement(element.eContainer()));
+				stringBuilder.append("#");
+				stringBuilder.append(getAnchorId(element));
 			} else
-				buffer.append(getIndexPathFromElement(element));
+				stringBuilder.append(getIndexPathFromElement(element));
 			// Add the href tag completion to the buffer
-			buffer.append(HYPERLINK_COMPLETE);
+			stringBuilder.append(HYPERLINK_COMPLETE);
 		}
 		// Add the name to present to the buffer
-		buffer.append(text);
+		stringBuilder.append(text);
 		if (linked != -1) {
 			// Add the close href tag to the buffer
-			buffer.append(HYPERLINK_CLOSE);
+			stringBuilder.append(HYPERLINK_CLOSE);
 		}
 		// return the buffer
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 
 	/**
@@ -233,20 +232,16 @@ public class CapellaServices {
 	 * @return 0 if element has page, 1 if parent element has page, otherwise -1
 	 */
 	public static int isLinkable(EObject element) {
-		if ((! GenerationGlobalScope.getInstance().inScope(element, true)))
+		if ((! GenerationGlobalScope.getInstance().inScope(element, true)) || !(element instanceof CapellaElement))
 			return -1;
 		
-		if (element instanceof CapellaElement) {
-			if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
-				return 0;
-			else {
-				if (! DocGenHtmlCapellaControl.isPageOptional((CapellaElement) element)) {
-					EObject parent = element.eContainer();
-					if (parent instanceof CapellaElement) {
-						if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
-							return 1;
-						}
-					}
+		if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
+			return 0;
+		else {
+			if (! DocGenHtmlCapellaControl.isPageOptional((CapellaElement) element)) {
+				EObject parent = element.eContainer();
+				if (parent instanceof CapellaElement && DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
+					return 1;
 				}
 			}
 		}
@@ -258,21 +253,17 @@ public class CapellaServices {
 	 * @return 0 if element has page, 1 if parent element has page, otherwise -1
 	 */
 	public static int isLinkableWithoutScope(EObject element) {
-		if (element instanceof CombinedFragment || element instanceof  InteractionOperand) {
+		if (element instanceof CombinedFragment || element instanceof  InteractionOperand || !(element instanceof CapellaElement)) {
 			return -1;
 		}
 		
-		if (element instanceof CapellaElement) {
-			if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
-				return 0;
-			else {
-				if (! DocGenHtmlCapellaControl.isPageOptional((CapellaElement) element)) {
-					EObject parent = element.eContainer();
-					if (parent instanceof CapellaElement) {
-						if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
-							return 1;
-						}
-					}
+		if (DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) element))
+			return 0;
+		else {
+			if (! DocGenHtmlCapellaControl.isPageOptional((CapellaElement) element)) {
+				EObject parent = element.eContainer();
+				if (parent instanceof CapellaElement && DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) parent)) {
+					return 1;
 				}
 			}
 		}
@@ -280,17 +271,17 @@ public class CapellaServices {
 	}
 
 	public static String getPathFromElement(EObject element) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(PATH_OPEN);
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(PATH_OPEN);
 		// Add the project root resource to the buffer
-		buffer.append(DocGenHtmlUtil.getModelName(element));
+		stringBuilder.append(DocGenHtmlUtil.getModelName(element));
 		// Add the Separator to the buffer
-		buffer.append(HYPERLINK_SEPARATOR);
+		stringBuilder.append(HYPERLINK_SEPARATOR);
 		// Add the file name to the buffer
-		buffer.append(DocGenHtmlCapellaUtil.SERVICE.getFileName(element));
+		stringBuilder.append(DocGenHtmlCapellaUtil.SERVICE.getFileName(element));
 		// Add the href tag completion to the buffer
-		buffer.append(PATH_COMPLETE);
-		return buffer.toString();
+		stringBuilder.append(PATH_COMPLETE);
+		return stringBuilder.toString();
 	}
 	
 	/**
@@ -299,17 +290,17 @@ public class CapellaServices {
 	 * @return the path of the element to be reachable from the index
 	 */
 	public static String getIndexPathFromElement(EObject element) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(PATH_OPEN).append(PATH_OPEN); //Index is located one level deeper
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(PATH_OPEN).append(PATH_OPEN); //Index is located one level deeper
 		// Add the project root resource to the buffer
-		buffer.append(DocGenHtmlUtil.getModelName(element));
+		stringBuilder.append(DocGenHtmlUtil.getModelName(element));
 		// Add the Separator to the buffer
-		buffer.append(HYPERLINK_SEPARATOR);
+		stringBuilder.append(HYPERLINK_SEPARATOR);
 		// Add the file name to the buffer
-		buffer.append(DocGenHtmlCapellaUtil.SERVICE.getFileName(element));
+		stringBuilder.append(DocGenHtmlCapellaUtil.SERVICE.getFileName(element));
 		// Add the href tag completion to the buffer
-		buffer.append(PATH_COMPLETE);
-		return buffer.toString();
+		stringBuilder.append(PATH_COMPLETE);
+		return stringBuilder.toString();
 	}
 
 	private static String getHyperlinkFromDiagram(DSemanticDiagram diagram) {
@@ -317,28 +308,27 @@ public class CapellaServices {
 		String text = CapellaLabelProviderHelper.getText(diagram);
 		// Format representation name with html rules
 		text = EscapeChars.forHTML(text);
-		// Initialize Buffer
-		StringBuffer buffer = new StringBuffer();
+		// Initialize string builder
+		StringBuilder stringBuilder = new StringBuilder();
 		// Add the opening href tag to the buffer
-		buffer.append(HYPERLINK_OPEN);
+		stringBuilder.append(HYPERLINK_OPEN);
 		// Add the project root resource to the buffer
-		buffer.append(getPathFromElement(getRepresentationTarget(diagram)));
+		stringBuilder.append(getPathFromElement(getRepresentationTarget(diagram)));
 		// Add diagram fragment id as link anchor
-		buffer.append("#");
-		buffer.append(getDiagramUid(diagram));
+		stringBuilder.append("#");
+		stringBuilder.append(getDiagramUid(diagram));
 		// Add the href tag completion to the buffer
-		buffer.append(HYPERLINK_COMPLETE);
+		stringBuilder.append(HYPERLINK_COMPLETE);
 		// Add the name to present to the buffer
-		buffer.append(text);
+		stringBuilder.append(text);
 		// Add the close href tag to the buffer
-		buffer.append(HYPERLINK_CLOSE);
+		stringBuilder.append(HYPERLINK_CLOSE);
 		// return the buffer
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 
 	public static String getAnchorId(EObject element) {
-		String id = "id" + EcoreUtil.getURI(element).fragment();
-		return id;
+		return "id" + EcoreUtil.getURI(element).fragment();
 	}
 
 	/**
@@ -366,8 +356,8 @@ public class CapellaServices {
 
 	public static String getImageLinkFromElement(EObject element, String projectName, String outputFolder) {
 		String imageFileName = CapellaLabelProviderHelper.getImageFileName(element, projectName, outputFolder);
-		StringBuffer buffer = new StringBuffer();
-		return appendRelativePath(element, imageFileName, buffer, "../icon/");
+		StringBuilder stringBuilder = new StringBuilder();
+		return appendRelativePath(element, imageFileName, stringBuilder, "../icon/");
 	}
 	
 	/**
@@ -379,18 +369,18 @@ public class CapellaServices {
 	 */
 	public static String getIndexImageLinkFromElement(EObject element, String projectName, String outputFolder) {
 		String imageFileName = CapellaLabelProviderHelper.getImageFileName(element, projectName, outputFolder);
-		StringBuffer buffer = new StringBuffer();
-		return appendRelativePath(element, imageFileName, buffer, "../../icon/");
+		StringBuilder stringBuilder = new StringBuilder();
+		return appendRelativePath(element, imageFileName, stringBuilder, "../../icon/");
 	}
 	
-	private static String appendRelativePath(EObject element, String imageFileName, StringBuffer buffer, String relativePath) {
-		buffer.append("<img src=\"");
-		buffer.append(relativePath);
-		buffer.append(imageFileName);
-		buffer.append("\" alt=\"");
-		buffer.append(element.eClass().getName());
-		buffer.append("\" />");
-		return buffer.toString();
+	private static String appendRelativePath(EObject element, String imageFileName, StringBuilder stringBuilder, String relativePath) {
+		stringBuilder.append("<img src=\"");
+		stringBuilder.append(relativePath);
+		stringBuilder.append(imageFileName);
+		stringBuilder.append("\" alt=\"");
+		stringBuilder.append(element.eClass().getName());
+		stringBuilder.append("\" />");
+		return stringBuilder.toString();
 	}
 	
 	/**
@@ -400,26 +390,26 @@ public class CapellaServices {
 	 * @return valid img HTML tag
 	 */
 	public static String getImageLinkForDiagram(String generatedFolder, DSemanticDiagram diagram) {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder();
 		
 		String fileName = DocGenHtmlCapellaUtil.getCapellaElementFileName((CapellaElement)diagram.getTarget());
 		
-		builder.append("<a href=\""); //$NON-NLS-1$
-		builder.append(fileName);
-		builder.append("#"); //$NON-NLS-1$
-		builder.append(DiagramSessionHelper.getID(diagram));
-		builder.append("\">"); //$NON-NLS-1$
-		builder.append("<img id=\""); //$NON-NLS-1$
-		builder.append(diagram.hashCode());
-		builder.append("\" src=\""); //$NON-NLS-1$
-		builder.append(generatedFolder);
-		builder.append("/"); //$NON-NLS-1$
+		stringBuilder.append(HYPERLINK_OPEN); //$NON-NLS-1$
+		stringBuilder.append(fileName);
+		stringBuilder.append("#"); //$NON-NLS-1$
+		stringBuilder.append(DiagramSessionHelper.getID(diagram));
+		stringBuilder.append("\">"); //$NON-NLS-1$
+		stringBuilder.append("<img id=\""); //$NON-NLS-1$
+		stringBuilder.append(diagram.hashCode());
+		stringBuilder.append("\" src=\""); //$NON-NLS-1$
+		stringBuilder.append(generatedFolder);
+		stringBuilder.append("/"); //$NON-NLS-1$
 		String validFileName = DocGenHtmlUtil.getValidFileName(DiagramSessionHelper.getID(diagram));
-		builder.append(validFileName);
-		builder.append(".jpg\" alt=\"").append(validFileName).append("\"/>"); //$NON-NLS-1$
-		builder.append("</a>"); //$NON-NLS-1$
+		stringBuilder.append(validFileName);
+		stringBuilder.append(".jpg\" alt=\"").append(validFileName).append("\"/>"); //$NON-NLS-1$
+		stringBuilder.append("</a>"); //$NON-NLS-1$
 		
-		return builder.toString();
+		return stringBuilder.toString();
 	}
 
 	/**
@@ -439,17 +429,17 @@ public class CapellaServices {
 	 * @return
 	 */
 	public static String getFullDataPkgHierarchyLink(EObject elt, boolean linkedLastElement) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder stringBuilder = new StringBuilder();
 		for (EObject pkg : getPackageElementPath(elt)) {
-			buffer.append(CapellaServices.getHyperlinkFromElement(pkg));
-			buffer.append(".");
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(pkg));
+			stringBuilder.append(".");
 		}
 		if (linkedLastElement)
-			buffer.append(CapellaServices.getHyperlinkFromElement(elt));
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(elt));
 		else {
-			buffer.append(CapellaLabelProviderHelper.getText(elt));
+			stringBuilder.append(CapellaLabelProviderHelper.getText(elt));
 		}
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 
 	/**
@@ -458,19 +448,19 @@ public class CapellaServices {
 	 * @return
 	 */
 	public static String getElementPath(EObject element) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<EObject> iterator = getFullElementPath(element).iterator();
 		while (iterator.hasNext()) {
-			buffer.append(CapellaServices.getHyperlinkFromElement(iterator.next()));
+			stringBuilder.append(CapellaServices.getHyperlinkFromElement(iterator.next()));
 			if (iterator.hasNext()) {
-				buffer.append(" > ");
+				stringBuilder.append(" > ");
 			}
 		}
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 
 	private static List<EObject> getFullElementPath(EObject element) {
-		List<EObject> eObjects = new ArrayList<EObject>();
+		List<EObject> eObjects = new ArrayList<>();
 		EObject parent = element.eContainer();
 		if (parent instanceof EObject) {
 			eObjects.addAll(getFullElementPath(parent));
@@ -488,68 +478,68 @@ public class CapellaServices {
 	}
 
 	private static List<EObject> getPkgTree(EObject pkg) {
-		List<EObject> pkgs = new ArrayList<EObject>();
+		List<EObject> pkgs = new ArrayList<>();
 		pkgs.add(pkg);
 		EObject parent = pkg.eContainer();
 		if (parent instanceof AbstractDependenciesPkg) {
-			pkgs.addAll(0, getPkgTree((AbstractDependenciesPkg) parent));
+			pkgs.addAll(0, getPkgTree(parent));
 		}
 		return pkgs;
 	}
 
 	public static List<EObject> removeDuplicates(List<EObject> list) {
-		Set<EObject> set = new HashSet<EObject>(list);
+		Set<EObject> set = new HashSet<>(list);
 		list.clear();
 		list.addAll(set);
 		return list;
 	}
 
 	public static String buildHyperlinkWithIcon(String projectName, String outputFolder, EObject object) {
-		StringBuffer hyperLinkBuffer = new StringBuffer();
-		hyperLinkBuffer.append(getImageLinkFromElement(object, projectName, outputFolder));
-		hyperLinkBuffer.append(" "); //$NON-NLS-1$
-		hyperLinkBuffer.append(getHyperlinkFromElement(object));
-		return hyperLinkBuffer.toString();
+		StringBuilder hyperLinkStringBuilder = new StringBuilder();
+		hyperLinkStringBuilder.append(getImageLinkFromElement(object, projectName, outputFolder));
+		hyperLinkStringBuilder.append(" "); //$NON-NLS-1$
+		hyperLinkStringBuilder.append(getHyperlinkFromElement(object));
+		return hyperLinkStringBuilder.toString();
 	}
 
 	public static String buildNameWithIcon(String projectName, String outputFolder, CapellaElement object) {
-		StringBuffer hyperLinkBuffer = new StringBuffer();
-		hyperLinkBuffer.append(getImageLinkFromElement(object, projectName, outputFolder));
-		hyperLinkBuffer.append(" "); //$NON-NLS-1$
-		hyperLinkBuffer.append(((CapellaElement) object).getLabel());
-		return hyperLinkBuffer.toString();
+		StringBuilder hyperLinkStringBuilder = new StringBuilder();
+		hyperLinkStringBuilder.append(getImageLinkFromElement(object, projectName, outputFolder));
+		hyperLinkStringBuilder.append(" "); //$NON-NLS-1$
+		hyperLinkStringBuilder.append(object.getLabel());
+		return hyperLinkStringBuilder.toString();
 	}
 
 	public static String getRequirementPathHyperLinkWithIcon(String projectName, String outputFolder, EObject element) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<EObject> iterator = getFullRequirementPath(element).iterator();
 		while (iterator.hasNext()) {
-			buffer.append(CapellaLabelProviderHelper.getText(iterator.next()));
+			stringBuilder.append(CapellaLabelProviderHelper.getText(iterator.next()));
 			if (iterator.hasNext()) {
-				buffer.append(" > ");
+				stringBuilder.append(" > ");
 			}
 		}
-		StringBuffer hyperLinkBuffer = new StringBuffer();
-		hyperLinkBuffer.append(getImageLinkFromElement(element, projectName, outputFolder));
-		hyperLinkBuffer.append(" "); //$NON-NLS-1$
-		hyperLinkBuffer.append(getHyperlinkFromElement(element, buffer.toString()));
-		return hyperLinkBuffer.toString();
+		StringBuilder hyperLinkStringBuilder = new StringBuilder();
+		hyperLinkStringBuilder.append(getImageLinkFromElement(element, projectName, outputFolder));
+		hyperLinkStringBuilder.append(" "); //$NON-NLS-1$
+		hyperLinkStringBuilder.append(getHyperlinkFromElement(element, stringBuilder.toString()));
+		return hyperLinkStringBuilder.toString();
 	}
 	
 	public static String getRequirementPath(EObject element) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<EObject> iterator = getFullRequirementPath(element).iterator();
 		while (iterator.hasNext()) {
-			buffer.append(CapellaLabelProviderHelper.getText(iterator.next()));
+			stringBuilder.append(CapellaLabelProviderHelper.getText(iterator.next()));
 			if (iterator.hasNext()) {
-				buffer.append(" > ");
+				stringBuilder.append(" > ");
 			}
 		}
-		return buffer.toString();
+		return stringBuilder.toString();
 	}
 
 	private static List<EObject> getFullRequirementPath(EObject element) {
-		List<EObject> eObjects = new ArrayList<EObject>();
+		List<EObject> eObjects = new ArrayList<>();
 		EObject parent = element.eContainer();
 		if (parent instanceof RequirementsPkg) {
 			eObjects.addAll(getFullRequirementPath(parent));
@@ -575,7 +565,7 @@ public class CapellaServices {
 		}
 		if (target == null) {
 			// Message is logged as warning without exception to avoid unnecessary overhead
-			Logger.logWarning(NLS.bind(Messages.DOCGEN__DIAGRAM_TARGET_NULL, representation), null);
+			Logger.logWarning(NLS.bind(Messages.docgenDiagramTargetNull, representation), null);
 		}
 		return target;
 	}

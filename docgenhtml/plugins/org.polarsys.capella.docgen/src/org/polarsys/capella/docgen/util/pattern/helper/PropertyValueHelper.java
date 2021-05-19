@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -13,6 +13,7 @@
 package org.polarsys.capella.docgen.util.pattern.helper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -32,12 +33,14 @@ import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.capella.docgen.util.StringUtil;
 
 public class PropertyValueHelper {
+	
+	private PropertyValueHelper() {}
+	
 	public static String getStringValue(AbstractPropertyValue propertyValue) {
 		String value = "";
 
-		if (propertyValue instanceof EnumerationPropertyValue) {
-			if (((EnumerationPropertyValue) propertyValue).getValue() != null)
-				value = ((EnumerationPropertyValue) propertyValue).getValue().getName();
+		if ((propertyValue instanceof EnumerationPropertyValue) && (((EnumerationPropertyValue) propertyValue).getValue() != null)) {
+			value = ((EnumerationPropertyValue) propertyValue).getValue().getName();
 		}
 
 		if (propertyValue instanceof BooleanPropertyValue)
@@ -56,38 +59,27 @@ public class PropertyValueHelper {
 	}
 
 	public static String getPVTable(CapellaElement element, int level, String projectName, String outputFolder) {
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 
 		// We get the list of applied and owned PV
-		EList<AbstractPropertyValue> applied_list = element.getAppliedPropertyValues();
-		EList<AbstractPropertyValue> owned_list = element.getOwnedPropertyValues();
+		EList<AbstractPropertyValue> appliedList = element.getAppliedPropertyValues();
+		EList<AbstractPropertyValue> ownedList = element.getOwnedPropertyValues();
 
 		// We sum up those two lists in one while removing duplication
-		EList<AbstractPropertyValue> allpv_list = new BasicEList<AbstractPropertyValue>();
-		for (AbstractPropertyValue pv : applied_list) {
-			// we check that PV are stored whithin SystemEngineering model element (to get
-			// rid of PVMT definitions stored outside of SystemEngineering)
-			if (isInSystemEngineering(pv)) {
-				allpv_list.add(pv);
-			} else if (isInExternalPVPackage(element)) {
-				allpv_list.add(pv);
-			}
-		}
-		for (AbstractPropertyValue pv : owned_list) {
-			if (!allpv_list.contains(pv)) {
-				// we check that PV are stored whithin SystemEngineering model element (to get
-				// rid of PVMT definitions stored outside of SystemEngineering)
-				if (isInSystemEngineering(pv)) {
-					allpv_list.add(pv);
-				} else if (isInExternalPVPackage(element)) {
-					allpv_list.add(pv);
-				}
-			}
-		}
-
-		for (AbstractPropertyValue propertyValue : allpv_list) {
+		EList<AbstractPropertyValue> allPVList = new BasicEList<>();
+		
+		
+		// we check that PVG are stored whithin SystemEngineering model element (to get
+		// rid of PVMT definitions stored outside of SystemEngineering)
+		allPVList.addAll(appliedList.stream().filter(pv -> isInSystemEngineering(pv) || isInExternalPVPackage(pv)).collect(Collectors.toList()));
+		
+		// we check that PVG are stored whithin SystemEngineering model element (to get
+		// rid of PVMT definitions stored outside of SystemEngineering)
+		allPVList.addAll(ownedList.stream().filter(pv -> !allPVList.contains(pv)).filter(pv -> isInSystemEngineering(pv) || isInExternalPVPackage(pv)).collect(Collectors.toList()));
+		
+		for (AbstractPropertyValue propertyValue : allPVList) {
 			String basicname = propertyValue.getName();
-			StringBuffer name = new StringBuffer();
+			StringBuilder name = new StringBuilder();
 			for (int i = 0; i < level; i++) {
 				name.append("&emsp;");
 			}
@@ -99,9 +91,9 @@ public class PropertyValueHelper {
 			description = StringUtil.transformAREFString(propertyValue, description, projectName, outputFolder);
 
 			String relation = "";
-			if (owned_list.contains(propertyValue)) {
+			if (ownedList.contains(propertyValue)) {
 				relation += "Contained";
-				if (applied_list.contains(propertyValue)) {
+				if (appliedList.contains(propertyValue)) {
 					relation += " &amp; Applied";
 				}
 			} else {
@@ -114,46 +106,34 @@ public class PropertyValueHelper {
 	}
 
 	public static String getPVGTable(CapellaElement element, int level, String projectName, String outputFolder) {
-		BasicEList<CapellaElement> emptyList = new BasicEList<CapellaElement>();
+		BasicEList<CapellaElement> emptyList = new BasicEList<>();
 		return getPVGTable(element, level, projectName, outputFolder, emptyList);
 	}
 
 	public static String getPVGTable(CapellaElement element, int level, String projectName, String outputFolder,
 			List<CapellaElement> alreadyGeneratedElements) {
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 
 		// We get the list of applied and owned PVG
-		EList<PropertyValueGroup> appliedgroup_list = element.getAppliedPropertyValueGroups();
-		EList<PropertyValueGroup> ownedgroup_list = element.getOwnedPropertyValueGroups();
+		EList<PropertyValueGroup> appliedGroupList = element.getAppliedPropertyValueGroups();
+		EList<PropertyValueGroup> ownedGroupList = element.getOwnedPropertyValueGroups();
 
 		// We sum up those two lists in one while removing duplication
-		EList<PropertyValueGroup> allgroup_list = new BasicEList<PropertyValueGroup>();
-		for (PropertyValueGroup group : appliedgroup_list) {
-			// we check that PVG are stored whithin SystemEngineering model element (to get
-			// rid of PVMT definitions stored outside of SystemEngineering)
-			if (isInSystemEngineering(group)) {
-				allgroup_list.add(group);
-			} else if (isInExternalPVPackage(element)) {
-				allgroup_list.add(group);
-			}
-		}
-		for (PropertyValueGroup group : ownedgroup_list) {
-			if (!allgroup_list.contains(group)) {
-				// we check that PVG are stored whithin SystemEngineering model element (to get
-				// rid of PVMT definitions stored outside of SystemEngineering)
-				if (isInSystemEngineering(group)) {
-					allgroup_list.add(group);
-				} else if (isInExternalPVPackage(element)) {
-					allgroup_list.add(group);
-				}
-			}
-		}
-
-		for (PropertyValueGroup group : allgroup_list) {
+		EList<PropertyValueGroup> allGroupList = new BasicEList<>();
+		
+		// we check that PVG are stored whithin SystemEngineering model element (to get
+		// rid of PVMT definitions stored outside of SystemEngineering)
+		allGroupList.addAll(appliedGroupList.stream().filter(group -> isInSystemEngineering(group) || isInExternalPVPackage(group)).collect(Collectors.toList()));
+		
+		// we check that PVG are stored whithin SystemEngineering model element (to get
+		// rid of PVMT definitions stored outside of SystemEngineering)
+		allGroupList.addAll(ownedGroupList.stream().filter(group -> !allGroupList.contains(group)).filter(group -> isInSystemEngineering(group) || isInExternalPVPackage(group)).collect(Collectors.toList()));
+		
+		for (PropertyValueGroup group : allGroupList) {
 
 			// We deal with the Property Value Group itself
 			String name = group.getName();
-			StringBuffer gname = new StringBuffer();
+			StringBuilder gname = new StringBuilder();
 			for (int i = 0; i < level; i++) {
 				gname.append("&emsp;");
 			}
@@ -165,9 +145,9 @@ public class PropertyValueHelper {
 			gdescription = StringUtil.transformAREFString(group, gdescription, projectName, outputFolder);
 
 			String grelation = "";
-			if (ownedgroup_list.contains(group)) {
+			if (ownedGroupList.contains(group)) {
 				grelation += "Contained";
-				if (appliedgroup_list.contains(group)) {
+				if (appliedGroupList.contains(group)) {
 					grelation += " &amp; Applied";
 				}
 			} else {
@@ -178,14 +158,13 @@ public class PropertyValueHelper {
 
 			alreadyGeneratedElements.add(element);
 
-			CapellaElement subelement = (CapellaElement) group;
-			if (!alreadyGeneratedElements.contains(subelement)) {
+			if (!alreadyGeneratedElements.contains(group)) {
 				// We deal with its owned / applied Property Values
-				String tablePV = PropertyValueHelper.getPVTable(subelement, level + 1, projectName, outputFolder);
+				String tablePV = PropertyValueHelper.getPVTable(group, level + 1, projectName, outputFolder);
 				result.append(tablePV);
 
 				// We deal with its owned / applied Property Value Groups
-				String tablePVG = PropertyValueHelper.getPVGTable(subelement, level + 1, projectName, outputFolder,
+				String tablePVG = PropertyValueHelper.getPVGTable(group, level + 1, projectName, outputFolder,
 						alreadyGeneratedElements);
 				result.append(tablePVG);
 			}
@@ -193,29 +172,29 @@ public class PropertyValueHelper {
 		return result.toString();
 	}
 
-	private static String getPVRow(String relation, StringBuffer name, String value, String description) {
-		StringBuffer result = new StringBuffer();
-		result.append("<tr>");
-		result.append("<td><i>");
+	private static String getPVRow(String relation, StringBuilder name, String value, String description) {
+		StringBuilder result = new StringBuilder();
+		result.append(CapellaServices.TR_OPEN);
+		result.append(CapellaServices.TD_OPEN + CapellaServices.ITALIC_BEGIN);
 		result.append(relation);
-		result.append("</i></td>");
-		result.append("<td>");
+		result.append(CapellaServices.ITALIC_END + CapellaServices.TD_CLOSE);
+		result.append(CapellaServices.TD_OPEN);
 		result.append(name);
-		result.append("</td>");
-		result.append("<td>");
+		result.append(CapellaServices.TD_CLOSE);
+		result.append(CapellaServices.TD_OPEN);
 		result.append(value);
-		result.append("</td>");
-		result.append("<td>");
+		result.append(CapellaServices.TD_CLOSE);
+		result.append(CapellaServices.TD_OPEN);
 		result.append(description);
-		result.append("</td>");
-		result.append("</tr>");
+		result.append(CapellaServices.TD_CLOSE);
+		result.append(CapellaServices.TR_CLOSE);
 		return result.toString();
 	}
 
 	private static boolean isInSystemEngineering(EObject elem) {
 		EObject container = elem.eContainer();
 		if (container != null) {
-			return container instanceof SystemEngineering ? true : isInSystemEngineering(container);
+			return container instanceof SystemEngineering || isInSystemEngineering(container);
 		}
 		return false;
 	}

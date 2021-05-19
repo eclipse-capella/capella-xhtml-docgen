@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 Obeo.
+ * Copyright (c) 2020, 2021 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -7,7 +7,7 @@
  * SPDX-License-Identifier: EPL-2.0
  *  
  * Contributors:
- *    Obeo - initial API and implementation
+ *    THALES GLOBAL SERVICES - initial API and implementation
  *******************************************************************************/
 package org.polarsys.capella.docgen.util;
 
@@ -16,6 +16,8 @@ import org.eclipse.core.runtime.Status;
 import org.polarsys.capella.docgen.Activator;
 
 public class Logger {
+	
+	private Logger() {}
 	
 	public static void logInfo(String message, Exception exception) {
 		log(IStatus.INFO, message, exception);
