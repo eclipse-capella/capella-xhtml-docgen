@@ -29,6 +29,8 @@
 		<tycho-version>2.0.0</tycho-version>
 		<tycho-extras-version>2.0.0</tycho-extras-version>
 		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<antrun-version>1.7</antrun-version>
 		<jacoco-version>0.8.6</jacoco-version>
 		
@@ -134,6 +136,8 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
+					<targetDefinitionIncludeSource>honor</targetDefinitionIncludeSource>
+					<pomDependencies>consider</pomDependencies>
 					<target>
 						<artifact>
 							<groupId>org.polarsys</groupId>
@@ -207,10 +211,6 @@
 					</archive>
 					<excludes>
 						<plugin id="org.polarsys.capella.docgen.doc"/>
-						<feature id="org.polarsys.capella.docgen.configuration.feature"/>
-						<feature id="org.polarsys.capella.docgen.feature"/>
-						<feature id="org.polarsys.capella.docgen.package.feature"/>
-						<feature id="org.polarsys.kitalpha.doc.gen.business.core.feature"/>
 						<feature id="org.eclipse.egf.feature"/>
 					</excludes>
 				</configuration>
@@ -241,10 +241,10 @@
 					<execution>
 						<!-- Do attach metadata after the source-feature execution. -->
 						<id>attach-p2-metadata</id>
+						<phase>${sourcePhase}</phase>
 						<goals>
 							<goal>p2-metadata</goal>
 						</goals>
-						<phase>package</phase>
 					</execution>
 				</executions>
 			</plugin>
