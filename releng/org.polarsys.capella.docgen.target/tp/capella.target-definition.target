@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1620831305">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1621439944">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="0.0.0"/>
@@ -113,6 +113,7 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
+      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group" version="0.0.0"/>
       <repository id="kitalpha-sdk" location="https://download.eclipse.org/kitalpha/updates/stable/sdk/5.1.0-S202105111408/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">

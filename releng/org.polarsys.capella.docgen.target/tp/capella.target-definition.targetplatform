@@ -22,6 +22,7 @@ location capella-master "https://download.eclipse.org/capella/core/updates/stabl
 
 location kitalpha-sdk "https://download.eclipse.org/kitalpha/updates/stable/sdk/5.1.0-S202105111408/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
+	org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group lazy
 }
 
 location eclipse_2020_06 "https://download.eclipse.org/releases/2020-06/" {
