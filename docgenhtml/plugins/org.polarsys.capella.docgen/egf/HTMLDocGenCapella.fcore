@@ -2,8 +2,7 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:domain="http://www.eclipse.org/egf/1.0.0/domain"
     xmlns:fcore="http://www.eclipse.org/egf/1.0.0/fcore" xmlns:fprod="http://www.eclipse.org/egf/1.0.0/fprod"
     xmlns:ftask="http://www.eclipse.org/egf/1.0.0/ftask" xmlns:jetpattern="http://www.eclipse.org/egf/1.0.0/jetpattern"
-    xmlns:pattern="http://www.eclipse.org/egf/1.0.0/pattern" xmlns:types="http://www.eclipse.org/egf/1.0.0/types"
-   >
+    xmlns:pattern="http://www.eclipse.org/egf/1.0.0/pattern" xmlns:types="http://www.eclipse.org/egf/1.0.0/types">
   <fcore:FactoryComponent xmi:id="_0NRc8Nz5Ed-Vzvs7Wt1vzQ" name="HTMLDocGenCapella">
     <contractContainer xmi:id="_2HmpYNz-Ed-Vzvs7Wt1vzQ">
       <contracts xmi:type="fcore:FactoryComponentContract" xmi:id="_60tqgN43Ed-Qav1YnqlO9A"
@@ -245,10 +244,28 @@
             <methods xmi:id="_F9HPpVcEEeWXKstRBeKifA" name="preCondition" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPpVcEEeWXKstRBeKifA.pt"/>
             <methods xmi:id="_F9HPplcEEeWXKstRBeKifA" name="genConstraints" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPplcEEeWXKstRBeKifA.pt"/>
             <methods xmi:id="_F9HPp1cEEeWXKstRBeKifA" name="footer" patternFilePath="templates/pattern._F9HPoVcEEeWXKstRBeKifA/method._F9HPp1cEEeWXKstRBeKifA.pt"/>
-            <parameters xmi:id="_KfYg8FcEEeWXKstRBeKifA" name="parameter" type="http://www.polarsys.org/capella/core/core/5.0.0#//NamedElement"/>
+            <parameters xmi:id="_KfYg8FcEEeWXKstRBeKifA" name="parameter" type="org.polarsys.capella.core.data.capellacore.CapellaElement"/>
+            <parameters xmi:id="_Zn7Y8MILEeu7XfnfLZ0e8g" name="constraintsList" type="java.util.List"/>
+            <parameters xmi:id="_uSTWQMILEeu7XfnfLZ0e8g" name="constraintSectionTitle"
+                type="java.lang.String"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_F9HPqFcEEeWXKstRBeKifA"/>
             <orchestration xmi:type="pattern:MethodCall" xmi:id="_fqM44FcEEeWXKstRBeKifA"
                 called="#_F9HPplcEEeWXKstRBeKifA"/>
+          </elements>
+          <elements xmi:id="_MribAMILEeu7XfnfLZ0e8g" name="AllConstraintsDocGen" headerMethod="#_MribAsILEeu7XfnfLZ0e8g"
+              conditionMethod="#_MribBMILEeu7XfnfLZ0e8g" initMethod="#_MribA8ILEeu7XfnfLZ0e8g"
+              footerMethod="#_MribBsILEeu7XfnfLZ0e8g">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_MribAcILEeu7XfnfLZ0e8g"
+                name="JET"/>
+            <methods xmi:id="_MribAsILEeu7XfnfLZ0e8g" name="header" patternFilePath="templates/pattern._MribAMILEeu7XfnfLZ0e8g/method._MribAsILEeu7XfnfLZ0e8g.pt"/>
+            <methods xmi:id="_MribA8ILEeu7XfnfLZ0e8g" name="init" patternFilePath="templates/pattern._MribAMILEeu7XfnfLZ0e8g/method._MribA8ILEeu7XfnfLZ0e8g.pt"/>
+            <methods xmi:id="_MribBMILEeu7XfnfLZ0e8g" name="preCondition" patternFilePath="templates/pattern._MribAMILEeu7XfnfLZ0e8g/method._MribBMILEeu7XfnfLZ0e8g.pt"/>
+            <methods xmi:id="_MribBcILEeu7XfnfLZ0e8g" name="genConstraints" patternFilePath="templates/pattern._MribAMILEeu7XfnfLZ0e8g/method._MribBcILEeu7XfnfLZ0e8g.pt"/>
+            <methods xmi:id="_MribBsILEeu7XfnfLZ0e8g" name="footer" patternFilePath="templates/pattern._MribAMILEeu7XfnfLZ0e8g/method._MribBsILEeu7XfnfLZ0e8g.pt"/>
+            <parameters xmi:id="_MribB8ILEeu7XfnfLZ0e8g" name="parameter" type="org.polarsys.capella.core.data.capellacore.CapellaElement"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_MribCMILEeu7XfnfLZ0e8g"/>
+            <orchestration xmi:type="pattern:MethodCall" xmi:id="_MribCcILEeu7XfnfLZ0e8g"
+                called="#_MribBcILEeu7XfnfLZ0e8g"/>
           </elements>
           <elements xmi:id="_mGFhcAHoEemzNsJkc2kajg" name="InterestedDiagrmsGeneration"
               headerMethod="#_mGFhcgHoEemzNsJkc2kajg" conditionMethod="#_mGFhdAHoEemzNsJkc2kajg"
