@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -190,6 +190,14 @@ public class PropertyValueHelper {
 			}
 		}
 		return result.toString();
+	}
+	
+	public static boolean hasAppliedOrOwnedPropertyValues(CapellaElement element) {
+		EList<AbstractPropertyValue> appliedPVList = element.getAppliedPropertyValues();
+		EList<PropertyValueGroup> appliedPVGList = element.getAppliedPropertyValueGroups();
+		EList<AbstractPropertyValue> ownedPVList = element.getOwnedPropertyValues();
+		EList<PropertyValueGroup> ownedPVGList = element.getOwnedPropertyValueGroups();
+		return !appliedPVList.isEmpty() || !appliedPVGList.isEmpty() || !ownedPVList.isEmpty() || !ownedPVGList.isEmpty();
 	}
 
 	private static String getPVRow(String relation, StringBuffer name, String value, String description) {

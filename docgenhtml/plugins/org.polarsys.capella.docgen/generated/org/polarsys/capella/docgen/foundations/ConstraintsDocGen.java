@@ -5,13 +5,9 @@ import java.util.*;
 import org.eclipse.egf.model.pattern.*;
 import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
-import org.polarsys.capella.docgen.util.ConstraintsService;
-import org.polarsys.capella.docgen.util.CapellaServices;
-import org.polarsys.capella.common.data.modellingcore.AbstractConstraint;
 import org.polarsys.capella.core.data.capellacore.Constraint;
-import org.eclipse.emf.common.util.EList;
-import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
-import org.polarsys.capella.core.data.capellacore.PropertyValueGroup;
+import org.polarsys.capella.docgen.util.ConstraintsService;
+import org.polarsys.capella.docgen.util.pattern.helper.PropertyValueHelper;
 
 public class ConstraintsDocGen {
 	protected static String nl;
@@ -64,16 +60,26 @@ public class ConstraintsDocGen {
 
 		List<Object> parameterList = null;
 		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+		List<Object> constraintsListList = null;
+		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+		List<Object> constraintSectionTitleList = null;
+		//this pattern can only be called by another (i.e. it's not an entry point in execution)
 
 		for (Object parameterParameter : parameterList) {
+			for (Object constraintsListParameter : constraintsListList) {
+				for (Object constraintSectionTitleParameter : constraintSectionTitleList) {
 
-			this.parameter = (org.polarsys.capella.core.data.capellacore.NamedElement) parameterParameter;
+					this.parameter = (org.polarsys.capella.core.data.capellacore.CapellaElement) parameterParameter;
+					this.constraintsList = (java.util.List) constraintsListParameter;
+					this.constraintSectionTitle = (java.lang.String) constraintSectionTitleParameter;
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
+					if (preCondition(ctx)) {
+						ctx.setNode(new Node.Container(currentNode, getClass()));
+						orchestration(ctx);
+					}
+
+				}
 			}
-
 		}
 		ctx.setNode(currentNode);
 		if (ctx.useReporter()) {
@@ -93,6 +99,8 @@ public class ConstraintsDocGen {
 		if (ictx.useReporter()) {
 			Map<String, Object> parameterValues = new HashMap<String, Object>();
 			parameterValues.put("parameter", this.parameter);
+			parameterValues.put("constraintsList", this.constraintsList);
+			parameterValues.put("constraintSectionTitle", this.constraintSectionTitle);
 			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
 			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
 			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
@@ -100,24 +108,45 @@ public class ConstraintsDocGen {
 		return null;
 	}
 
-	protected org.polarsys.capella.core.data.capellacore.NamedElement parameter = null;
+	protected org.polarsys.capella.core.data.capellacore.CapellaElement parameter = null;
 
-	public void set_parameter(org.polarsys.capella.core.data.capellacore.NamedElement object) {
+	public void set_parameter(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
 		this.parameter = object;
+	}
+
+	protected java.util.List constraintsList = null;
+
+	public void set_constraintsList(java.util.List object) {
+		this.constraintsList = object;
+	}
+
+	protected java.lang.String constraintSectionTitle = null;
+
+	public void set_constraintSectionTitle(java.lang.String object) {
+		this.constraintSectionTitle = object;
 	}
 
 	public Map<String, Object> getParameters() {
 		final Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("parameter", this.parameter);
+		parameters.put("constraintsList", this.constraintsList);
+		parameters.put("constraintSectionTitle", this.constraintSectionTitle);
 		return parameters;
 	}
 
 	protected void method_genConstraints(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		String constraintTitle = "Constraints";
+		// Fallback to default behavior
+		if (constraintSectionTitle == null || constraintSectionTitle.trim().equals("")) {
+			constraintSectionTitle = "Constraints";
+		}
+		if (constraintsList == null || constraintsList.isEmpty()) {
+			constraintsList = parameter.getOwnedConstraints();
+		}
+
 		stringBuffer.append(TEXT_1);
 		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="parameter:eObject,constraintTitle:property"%>
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="parameter:eObject,constraintSectionTitle:property"%>
 
 			InternalPatternContext ictx = (InternalPatternContext) ctx;
 			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
@@ -125,7 +154,7 @@ public class ConstraintsDocGen {
 
 			final Map<String, Object> callParameters = new HashMap<String, Object>();
 			callParameters.put("eObject", parameter);
-			callParameters.put("property", constraintTitle);
+			callParameters.put("property", constraintSectionTitle);
 			CallHelper.executeWithParameterInjection(
 					"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
 					new ExecutionContext((InternalPatternContext) ctx), callParameters);
@@ -136,22 +165,15 @@ public class ConstraintsDocGen {
 		String projectName = (String) ctx.getValue("projectName");
 		String outputFolder = (String) ctx.getValue("outputFolder");
 		stringBuffer.append(TEXT_3);
-		List<AbstractConstraint> ownedConstraints = parameter.getOwnedConstraints();
-		for (AbstractConstraint abstractConstraint : ownedConstraints) {
-			Constraint constraint = (Constraint) abstractConstraint;
-			String constraintName = constraint.getName();
-			if (constraintName == null || (constraintName != null && constraintName.isEmpty())) {
-				constraintName = CapellaServices.NO_NAME;
-			}
+
+		List<?> constraints = constraintsList;
+		constraints.stream().filter(Constraint.class::isInstance).forEach(c -> {
+			Constraint constraint = (Constraint) c;
+			String constraintName = ConstraintsService.getConstraintName(constraint);
 
 			stringBuffer.append(TEXT_4);
 
-			EList<AbstractPropertyValue> appliedPVList = constraint.getAppliedPropertyValues();
-			EList<PropertyValueGroup> appliedPVGList = constraint.getAppliedPropertyValueGroups();
-			EList<AbstractPropertyValue> ownedPVList = constraint.getOwnedPropertyValues();
-			EList<PropertyValueGroup> ownedPVGList = constraint.getOwnedPropertyValueGroups();
-			Boolean hasAppliedPVorPVGs = !appliedPVList.isEmpty() || !appliedPVGList.isEmpty() || !ownedPVList.isEmpty()
-					|| !ownedPVGList.isEmpty();
+			Boolean hasAppliedPVorPVGs = PropertyValueHelper.hasAppliedOrOwnedPropertyValues(constraint);
 			if (hasAppliedPVorPVGs) {
 
 				stringBuffer.append(TEXT_5);
@@ -217,7 +239,7 @@ public class ConstraintsDocGen {
 				stringBuffer.append(TEXT_13);
 
 			}
-		}
+		});
 
 		stringBuffer.append(TEXT_14);
 		InternalPatternContext ictx = (InternalPatternContext) ctx;
