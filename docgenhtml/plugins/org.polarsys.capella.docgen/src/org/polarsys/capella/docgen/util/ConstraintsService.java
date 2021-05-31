@@ -14,13 +14,16 @@ package org.polarsys.capella.docgen.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.osgi.util.NLS;
 import org.polarsys.capella.common.data.behavior.TimeExpression;
+import org.polarsys.capella.common.data.modellingcore.AbstractConstraint;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.common.data.modellingcore.ValueSpecification;
 import org.polarsys.capella.common.linkedtext.ui.LinkedTextDocument;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.Constraint;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.OpaqueExpression;
@@ -35,6 +38,32 @@ public class ConstraintsService {
 	
 	private ConstraintsService() {}
 
+	/**
+	 * Get the constraints applied on {@code element} that are not contained in {@code element}.
+	 * @param element
+	 * @return
+	 */
+	public static List<AbstractConstraint> getAppliedAndNotOwnedConstraints(CapellaElement element) {
+		List<AbstractConstraint> ownedConstraints = element.getOwnedConstraints();
+		return element.getConstraints().stream().filter(c -> !ownedConstraints.contains(c)).collect(Collectors.toList());
+	}
+	
+	/**
+	 * Get the constraint name. Defaults to {@linkplain CapellaServices.NO_NAME} when null or empty name content.
+	 * @param constraint
+	 * @return
+	 */
+	public static String getConstraintName(AbstractConstraint constraint) {
+		String constraintName = "";
+		if (constraint instanceof Constraint) {
+			constraintName = ((Constraint)constraint).getName();
+		}
+		if (constraintName == null || constraintName.isEmpty()) {
+			constraintName = CapellaServices.NO_NAME;
+		}
+		return constraintName;
+	}
+	
 	/**
 	 * Transforms elements of the {@link Constraint#getConstrainedElements()} to an HTML list 
 	 * @param constraint the concerned {@link Constraint}

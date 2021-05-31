@@ -171,6 +171,14 @@ public class PropertyValueHelper {
 		}
 		return result.toString();
 	}
+	
+	public static boolean hasAppliedOrOwnedPropertyValues(CapellaElement element) {
+		EList<AbstractPropertyValue> appliedPVList = element.getAppliedPropertyValues();
+		EList<PropertyValueGroup> appliedPVGList = element.getAppliedPropertyValueGroups();
+		EList<AbstractPropertyValue> ownedPVList = element.getOwnedPropertyValues();
+		EList<PropertyValueGroup> ownedPVGList = element.getOwnedPropertyValueGroups();
+		return !appliedPVList.isEmpty() || !appliedPVGList.isEmpty() || !ownedPVList.isEmpty() || !ownedPVGList.isEmpty();
+	}
 
 	private static String getPVRow(String relation, StringBuilder name, String value, String description) {
 		StringBuilder result = new StringBuilder();

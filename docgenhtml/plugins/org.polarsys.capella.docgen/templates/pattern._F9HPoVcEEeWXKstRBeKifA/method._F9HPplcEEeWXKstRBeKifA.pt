@@ -1,5 +1,13 @@
-<%String constraintTitle = "Constraints";%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="parameter:eObject,constraintTitle:property"%>
+<%
+// Fallback to default behavior
+if (constraintSectionTitle == null || constraintSectionTitle.trim().equals("")) {
+	constraintSectionTitle = "Constraints";
+}
+if (constraintsList == null || constraintsList.isEmpty()) {
+	constraintsList = parameter.getOwnedConstraints();
+}
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="parameter:eObject,constraintSectionTitle:property"%>
 
 <table style="width: 100%" border="1">
 	<tbody>
@@ -12,28 +20,21 @@
 <%String projectName = (String) ctx.getValue("projectName");
 String outputFolder = (String) ctx.getValue("outputFolder");%>
 
-<%  List<AbstractConstraint> ownedConstraints = parameter.getOwnedConstraints();
-	for (AbstractConstraint abstractConstraint: ownedConstraints)
+<%  
+	List<?> constraints = constraintsList;
+	constraints.stream().filter(Constraint.class::isInstance).forEach(c ->
 	{
-		Constraint constraint = (Constraint) abstractConstraint;
-		String constraintName = constraint.getName();
-		if (constraintName == null || (constraintName != null && constraintName.isEmpty())) {
-			constraintName = CapellaServices.NO_NAME;
-		} 
+		Constraint constraint = (Constraint) c;
+		String constraintName = ConstraintsService.getConstraintName(constraint);
 %>
         <tr>
 <%
-		
-		EList<AbstractPropertyValue> appliedPVList = constraint.getAppliedPropertyValues();
-		EList<PropertyValueGroup> appliedPVGList = constraint.getAppliedPropertyValueGroups();
-		EList<AbstractPropertyValue> ownedPVList = constraint.getOwnedPropertyValues();
-		EList<PropertyValueGroup> ownedPVGList = constraint.getOwnedPropertyValueGroups();
-		Boolean hasAppliedPVorPVGs = !appliedPVList.isEmpty() || !appliedPVGList.isEmpty() || !ownedPVList.isEmpty() || !ownedPVGList.isEmpty();
+		Boolean hasAppliedPVorPVGs = PropertyValueHelper.hasAppliedOrOwnedPropertyValues(constraint);
 		if (hasAppliedPVorPVGs) { 
 %>			<td rowspan="3">
 <%		} else { 
 %>        	<td>
-<%		} 
+<%		}
 %>
 <b><%=constraintName%> </b>
 <%  // Summary and description generation%>
@@ -63,7 +64,7 @@ String outputFolder = (String) ctx.getValue("outputFolder");%>
 		</tr>
 <%
 		}
-	}
+	});
 %>
 	</tbody>
 </table>
