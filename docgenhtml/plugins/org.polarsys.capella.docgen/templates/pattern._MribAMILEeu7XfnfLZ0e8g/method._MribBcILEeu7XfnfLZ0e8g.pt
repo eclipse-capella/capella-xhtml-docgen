@@ -1,0 +1,19 @@
+<%
+List<AbstractConstraint> ownedConstraintsList = parameter.getOwnedConstraints();
+if (!ownedConstraintsList.isEmpty()) {
+	String title = "Owned Constraints";
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="parameter:parameter, ownedConstraintsList:constraintsList, title:constraintSectionTitle"%>
+<%
+}
+%>
+
+<%
+List<AbstractConstraint> appledConstraintsList = ConstraintsService.getAppliedAndNotOwnedConstraints(parameter);
+if (!appledConstraintsList.isEmpty()) {
+	String title = "Applied Constraints";
+%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.ConstraintsDocGen" args="parameter:parameter, appledConstraintsList:constraintsList, title:constraintSectionTitle"%>
+<%
+}
+%>
