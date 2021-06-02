@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (c) 2017, 2020 THALES GLOBAL SERVICES.
+  Copyright (c) 2017, 2021 THALES GLOBAL SERVICES.
   All rights reserved. This program and the accompanying materials
   are made available under the terms of the Eclipse Public License v1.0
   which accompanies this distribution, and is available at
@@ -20,7 +20,7 @@
 	<name>Capella XHTML DocGen Add-on</name>
 	<groupId>org.polarsys</groupId>
 	<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-	<version>1.4.4-SNAPSHOT</version>
+	<version>1.4.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -90,7 +90,7 @@
 						<artifact>
 							<groupId>org.polarsys</groupId>
 							<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-							<version>1.4.4-SNAPSHOT</version>
+							<version>1.4.5-SNAPSHOT</version>
 							<classifier>releng/org.polarsys.capella.docgen.target/tp/capella.target-definition</classifier>
 						</artifact>
 					</target>
