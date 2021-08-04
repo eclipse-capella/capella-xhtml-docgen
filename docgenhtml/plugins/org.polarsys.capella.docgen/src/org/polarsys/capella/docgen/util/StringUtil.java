@@ -67,6 +67,7 @@ public class StringUtil {
 	private static final String WARNING_NETWORK_IMAGE_NO_TREATMENT = "Network images are left as is and not copied to the generated documentation: {0}. Element id: {1}";
 	private static final String ERROR_STRING_PATH_URI_UNENCODE = "String to URI unencode failed with string: {0}";
 	private static final String IMAGES_FOLDER = "/images/";
+	private static final String ERROR_HYPERLINK_OBJECT_UNREACHABLE = "Hyperlink to object {0} in {1} cannot be reached";
 
 	/**
 	 * Transform all links added in an model element description to Html links
@@ -110,17 +111,7 @@ public class StringUtil {
 	protected static String getResourceCopyError(EObject element, String resourcePath) {
 		StringBuilder result = new StringBuilder();
 		if (element != null) {
-			StringBuilder elementFQN = new StringBuilder();
-			String elementLabel = LabelProviderHelper.getText(element);
-			if (!EObjectLabelProviderHelper.EMPTY_STRING.equals(elementLabel)) {
-				elementFQN.append(elementLabel);
-				EObject currentElement = element;
-				while (currentElement.eContainer() != null) {
-					currentElement = currentElement.eContainer();
-					elementFQN.insert(0, "::"); //$NON-NLS-1$
-					elementFQN.insert(0, LabelProviderHelper.getText(currentElement));
-				}
-			}
+			StringBuilder elementFQN = getElementFQN(element);
 			String part1 = MessageFormat.format(ERROR_CPY, resourcePath);
 			String part2 = MessageFormat.format(ERROR_COPY_PART_2, elementFQN);
 			result.append(part1);
@@ -129,6 +120,21 @@ public class StringUtil {
 			result.insert(0, ERROR_CPY);
 		}
 		return result.toString();
+	}
+
+	private static StringBuilder getElementFQN(EObject element) {
+		StringBuilder elementFQN = new StringBuilder();
+		String elementLabel = LabelProviderHelper.getText(element);
+		if (!EObjectLabelProviderHelper.EMPTY_STRING.equals(elementLabel)) {
+			elementFQN.append(elementLabel);
+			EObject currentElement = element;
+			while (currentElement.eContainer() != null) {
+				currentElement = currentElement.eContainer();
+				elementFQN.insert(0, "::"); //$NON-NLS-1$
+				elementFQN.insert(0, LabelProviderHelper.getText(currentElement));
+			}
+		}
+		return elementFQN;
 	}
 
 	/**
@@ -150,7 +156,7 @@ public class StringUtil {
 			if (matcher.groupCount() == 2) {
 				final String akB = "<a href=\"";
 				final String akE = "</a>";
-				final String link = akB + switchToDocPath(matcher.group(1), eObject.eResource()) + "\">"
+				final String link = akB + switchToDocPath(matcher.group(1), eObject) + "\">"
 						+ matcher.group(2) + akE;
 				input = input.replace(matcher.group(0), link);
 			}
@@ -410,12 +416,12 @@ public class StringUtil {
 	 * 
 	 * @param group
 	 *            text containing a link to handle
-	 * @param resource
-	 *            capella resource
+	 * @param object
+	 *            capella object
 	 * @return <code>group</code> with links to model elements replaced by html
 	 *         links
 	 */
-	private static String switchToDocPath(String group, Resource resource) {
+	private static String switchToDocPath(String group, EObject object) {
 		/**
 		 * Handle links to model or diagram elements
 		 */
@@ -431,14 +437,15 @@ public class StringUtil {
 		}
 		
 		if (id != null) {
-			return buildResourceRepresentationString(resource, id);
+			return buildResourceRepresentationString(object, id);
 		}
 
 		return group;
 	}
 
-	private static String buildResourceRepresentationString(Resource resource, String id) {
+	private static String buildResourceRepresentationString(EObject object, String id) {
 		StringBuilder stringBuilder = new StringBuilder();
+		Resource resource = object.eResource();
 		EObject eObject = resource.getEObject(id);
 		// If the object is not found in the current resource, we look for
 		// it in all loaded resources of the ResourceSet
@@ -465,12 +472,18 @@ public class StringUtil {
 			});
 		}
 
-		if (eObject instanceof DSemanticDiagram) {
-			stringBuilder.append(CapellaServices.getPathFromElement(((DSemanticDiagram) eObject).getTarget()));
-			stringBuilder.append("#");
-			stringBuilder.append(CapellaServices.getDiagramUid((DSemanticDiagram) eObject));
+		if (eObject != null) {
+    		if (eObject instanceof DSemanticDiagram) {
+    			stringBuilder.append(CapellaServices.getPathFromElement(((DSemanticDiagram) eObject).getTarget()));
+    			stringBuilder.append("#");
+    			stringBuilder.append(CapellaServices.getDiagramUid((DSemanticDiagram) eObject));
+    		} else {
+    			stringBuilder.append(CapellaServices.getPathFromElement(eObject));
+    		} 
 		} else {
-			stringBuilder.append(CapellaServices.getPathFromElement(eObject));
+		    final ILog logger = org.polarsys.capella.docgen.Activator.getDefault().getLog();
+		    StringBuilder elementLabel = getElementFQN(object);
+		    logger.log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, MessageFormat.format(ERROR_HYPERLINK_OBJECT_UNREACHABLE, id, elementLabel)));
 		}
 		return stringBuilder.toString();
 	}
