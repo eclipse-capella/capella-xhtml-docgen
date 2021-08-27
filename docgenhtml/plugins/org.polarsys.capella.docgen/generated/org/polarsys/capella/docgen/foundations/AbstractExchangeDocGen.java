@@ -61,6 +61,7 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
 			+ NL + "\t\t$(\"#";
 	protected final String TEXT_13 = "\").treeview({ collapsed: false, animated: \"fast\", unique: false, control: \"#treecontrol\"});"
 			+ NL + "\t</script>" + NL + "   </body>" + NL + "</html>";
+	protected final String TEXT_14 = NL;
 
 	public AbstractExchangeDocGen() {
 		//Here is the constructor
@@ -88,8 +89,8 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_14);
+		stringBuffer.append(TEXT_14);
 		return stringBuffer.toString();
 	}
 

@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.2.202001031546
+//Generated with EGF 1.6.1.201906060805
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -121,7 +121,7 @@ public class PartDocGen extends org.polarsys.capella.docgen.foundations.NamedEle
 		String elementType = "<span class=\"elementMetaClass\">" + EscapeChars.forHTML(element.eClass().getName())
 				+ "</span>";
 		EObject type = ((Part) element).getType();
-		String logo = ImageHelper.getTypePng(element, projectName, outputFolder);
+		String logo = ImageHelper.INSTANCE.getTypePng(element, projectName, outputFolder);
 		String documentTitle = elementName;
 		stringBuffer.append(TEXT_1);
 		stringBuffer.append(logo);

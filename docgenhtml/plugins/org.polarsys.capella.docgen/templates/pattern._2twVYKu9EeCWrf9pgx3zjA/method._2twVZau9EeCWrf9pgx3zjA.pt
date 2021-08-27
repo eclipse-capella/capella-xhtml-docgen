@@ -25,8 +25,6 @@ org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactor
 org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactory.newDocGenExtensionEngine().apply("CAPELLA_ELEMENT_EXTENSION", ctx, getParameters(), stringBuffer);
 %>
 
-
-
 <% // requirements%>
 <%
 EList<Requirement> appliedReq = element.getAppliedRequirements();
