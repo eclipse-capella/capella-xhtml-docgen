@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.2.202001031546
 package org.polarsys.capella.docgen.foundations;
 
 import java.util.*;
@@ -178,7 +178,10 @@ public class CapellaElementContentDocGen {
 		org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactory.newDocGenExtensionEngine()
 				.apply("CAPELLA_REQUIREMENTS_EXTENSION", ctx, getParameters(), stringBuffer);
 
-		stringBuffer.append(TEXT_8);
+		org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactory.newDocGenExtensionEngine()
+				.apply("CAPELLA_ELEMENT_EXTENSION", ctx, getParameters(), stringBuffer);
+
+		stringBuffer.append(TEXT_7);
 		// requirements
 
 		EList<Requirement> appliedReq = element.getAppliedRequirements();
