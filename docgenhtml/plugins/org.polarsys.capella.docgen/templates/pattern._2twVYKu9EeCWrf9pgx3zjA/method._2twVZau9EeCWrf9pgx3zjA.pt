@@ -21,7 +21,9 @@ String logo = ImageHelper.getTypePng(element, projectName, outputFolder);
 <%
 org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactory.newDocGenExtensionEngine().apply("CAPELLA_REQUIREMENTS_EXTENSION", ctx, getParameters(), stringBuffer);
 %>
-
+<%
+org.polarsys.kitalpha.doc.gen.business.core.extension.intf.DocGenExtensionFactory.newDocGenExtensionEngine().apply("CAPELLA_ELEMENT_EXTENSION", ctx, getParameters(), stringBuffer);
+%>
 
 
 

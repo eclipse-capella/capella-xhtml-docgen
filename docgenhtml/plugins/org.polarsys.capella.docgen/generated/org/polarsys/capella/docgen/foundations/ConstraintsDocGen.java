@@ -41,6 +41,7 @@ public class ConstraintsDocGen {
 			+ NL + "\t\t\t<td colspan=\"2\">";
 	protected final String TEXT_13 = NL + "\t\t\t</td>" + NL + "\t\t</tr>";
 	protected final String TEXT_14 = NL + "\t</tbody>" + NL + "</table>" + NL;
+	protected final String TEXT_15 = NL;
 
 	public ConstraintsDocGen() {
 		//Here is the constructor
@@ -86,8 +87,8 @@ public class ConstraintsDocGen {
 			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
 		}
 
-		stringBuffer.append(TEXT_3);
-		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_15);
+		stringBuffer.append(TEXT_15);
 		return stringBuffer.toString();
 	}
 
