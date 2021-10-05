@@ -22,7 +22,7 @@
 	<name>Capella XHTML DocGen Add-on</name>
 	<groupId>org.polarsys</groupId>
 	<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-	<version>5.1.1-SNAPSHOT</version>
+	<version>6.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -44,7 +44,7 @@
 		<platform-name>oxygen/201803211000</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
-		<capellaVersion>5.1.0</capellaVersion>
+		<capellaVersion>6.0.0</capellaVersion>
 	</properties>
 
 	<profiles>
@@ -142,7 +142,7 @@
 						<artifact>
 							<groupId>org.polarsys</groupId>
 							<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-							<version>5.1.1-SNAPSHOT</version>
+							<version>6.0.0-SNAPSHOT</version>
 							<classifier>releng/org.polarsys.capella.docgen.target/tp/capella.target-definition</classifier>
 						</artifact>
 					</target>
