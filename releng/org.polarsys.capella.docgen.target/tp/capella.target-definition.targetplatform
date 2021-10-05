@@ -11,16 +11,16 @@
  *******************************************************************************/
 target "CapellaXHTMLDocGenAddon"
 
-include "https://download.eclipse.org/capella/core/updates/nightly/master-6.0-PR-2212-2/targets/capella.target-definition.targetplatform"
+include "https://raw.githubusercontent.com/eclipse/capella/master-6.0/releng/plugins/org.polarsys.capella.targets/full/capella.target-definition.targetplatform"
 
 with source, requirements
 
-location capella-master "https://download.eclipse.org/capella/core/updates/nightly/master-6.0-PR-2212-2/org.polarsys.capella.rcp.site/" {
+location capella-master "https://download.eclipse.org/capella/core/updates/stable/6.0.0-S20210922-085001/org.polarsys.capella.rcp.site/" {
 	org.polarsys.capella.rcp.feature.group lazy
 	org.polarsys.capella.core.re.feature.feature.group lazy
 }
 
-location kitalpha-sdk-master "https://ci.eclipse.org/kitalpha/job/Kitalpha/job/master-6.0/7/artifact/releng/plugins/org.polarsys.kitalpha.releng.sdk.updatesite/target/repository/" {
+location kitalpha-sdk-master "https://download.eclipse.org/kitalpha/updates/stable/sdk/6.0.0-S202109200942/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 	org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group lazy
 }
