@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.2.202001031546
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -13,95 +13,97 @@ import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 
 public class NamedElementDocGen extends org.polarsys.capella.docgen.foundations.CapellaElementDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized NamedElementDocGen create(String lineSeparator) {
-		nl = lineSeparator;
-		NamedElementDocGen result = new NamedElementDocGen();
-		nl = null;
-		return result;
-	}
+    public static synchronized NamedElementDocGen create(String lineSeparator) {
+        nl = lineSeparator;
+        NamedElementDocGen result = new NamedElementDocGen();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = NL;
-	protected final String TEXT_2 = NL;
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public NamedElementDocGen() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = NL;
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL;
 
-	}
+    public NamedElementDocGen() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    }
 
-		if (preCondition(ctx)) {
-			ctx.setNode(new Node.Container(currentNode, getClass()));
-			orchestration(ctx);
-		}
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
-		return stringBuffer.toString();
-	}
+        if (preCondition(ctx)) {
+            ctx.setNode(new Node.Container(currentNode, getClass()));
+            orchestration(ctx);
+        }
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-		super.orchestration(new SuperOrchestrationContext(ictx));
+        stringBuffer.append(TEXT_2);
+        stringBuffer.append(TEXT_2);
+        return stringBuffer.toString();
+    }
 
-		return null;
-	}
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		return parameters;
-	}
+        super.orchestration(new SuperOrchestrationContext(ictx));
 
-	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        return null;
+    }
 
-		String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
-		String elementType = EscapeChars.forHTML(element.eClass().getName());
-		/*NamedElement namedElement = ((NamedElement) element);
-		
-		StringBuffer buffer = new StringBuffer (namedElement.getName());
-		
-		buffer
-			.append (" [")
-			.append (namedElement.eClass().getName())
-			.append ("]");
-		*/
-		title = "Capella - " + DocGenHtmlUtil.getModelName(element) + " - " + elementType + " " + elementName;
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        return parameters;
+    }
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
-	}
+    protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-	protected void method_setFileName(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
+        String elementType = EscapeChars.forHTML(element.eClass().getName());
+        /*NamedElement namedElement = ((NamedElement) element);
+        
+        StringBuffer buffer = new StringBuffer (namedElement.getName());
+        
+        buffer
+        	.append (" [")
+        	.append (namedElement.eClass().getName())
+        	.append ("]");
+        */
+        title = "Capella - " + DocGenHtmlUtil.getModelName(element) + " - " + elementType + " " + elementName;
 
-		fileName = DocGenHtmlCapellaUtil.getNamedElementRootFileName(element);
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
+    }
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileName", stringBuffer.toString());
-	}
+    protected void method_setFileName(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        fileName = DocGenHtmlCapellaUtil.getNamedElementRootFileName(element);
 
-		super.method_content(new StringBuffer(), ctx);
-		stringBuffer.append(TEXT_1);
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-	}
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "setFileName", stringBuffer.toString());
+    }
+
+    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        super.method_content(new StringBuffer(), ctx);
+        stringBuffer.append(TEXT_1);
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+    }
 }

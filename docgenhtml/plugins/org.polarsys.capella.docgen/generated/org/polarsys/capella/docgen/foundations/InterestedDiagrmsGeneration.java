@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.2.202001031546
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.sirius.viewpoint.DRepresentationDescriptor;
@@ -33,153 +33,160 @@ import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 
 public class InterestedDiagrmsGeneration {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized InterestedDiagrmsGeneration create(String lineSeparator) {
-		nl = lineSeparator;
-		InterestedDiagrmsGeneration result = new InterestedDiagrmsGeneration();
-		nl = null;
-		return result;
-	}
+    public static synchronized InterestedDiagrmsGeneration create(String lineSeparator) {
+        nl = lineSeparator;
+        InterestedDiagrmsGeneration result = new InterestedDiagrmsGeneration();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "";
-	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "\t<h2>Diagrams interesting for \"";
-	protected final String TEXT_4 = "\"</h2>" + NL + "\t";
-	protected final String TEXT_5 = NL + "\t\t<div>" + NL + "\t\t\t";
-	protected final String TEXT_6 = NL + "\t\t\t<p class=\"diagram-name\" id=\"";
-	protected final String TEXT_7 = "\">";
-	protected final String TEXT_8 = "</p>" + NL + "\t\t\t<p class=\"diagram\">" + NL + "\t\t\t\t";
-	protected final String TEXT_9 = NL + "\t\t\t\t";
-	protected final String TEXT_10 = NL + "\t\t\t\t<br/>" + NL + "\t\t\t\t<br/>" + NL + "\t\t\t</p>" + NL + "\t\t</div>"
-			+ NL + "\t";
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public InterestedDiagrmsGeneration() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL;
 
-	}
+    protected final String TEXT_3 = NL + "\t<h2>Diagrams interesting for \"";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = "\"</h2>" + NL + "\t";
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL + "\t\t<div>" + NL + "\t\t\t";
 
-		List<Object> elementList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL + "\t\t\t<p class=\"diagram-name\" id=\"";
 
-		for (Object elementParameter : elementList) {
+    protected final String TEXT_7 = "\">";
 
-			this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
+    protected final String TEXT_8 = "</p>" + NL + "\t\t\t<p class=\"diagram\">" + NL + "\t\t\t\t";
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+    protected final String TEXT_9 = NL + "\t\t\t\t";
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    protected final String TEXT_10 = NL + "\t\t\t\t<br/>" + NL + "\t\t\t\t<br/>" + NL + "\t\t\t</p>" + NL + "\t\t</div>" + NL + "\t";
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
-		return stringBuffer.toString();
-	}
+    public InterestedDiagrmsGeneration() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		method_setContext(new StringBuffer(), ictx);
+    }
 
-		method_body(new StringBuffer(), ictx);
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("element", this.element);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-	protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
+        List<Object> elementList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-	public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
-		this.fileNameService = object;
-	}
+        for (Object elementParameter : elementList) {
 
-	protected org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper helper = null;
+            this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
 
-	public void set_helper(org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper object) {
-		this.helper = object;
-	}
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-		this.element = object;
-	}
+        stringBuffer.append(TEXT_2);
+        stringBuffer.append(TEXT_2);
+        return stringBuffer.toString();
+    }
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("element", this.element);
-		return parameters;
-	}
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        method_setContext(new StringBuffer(), ictx);
 
-		fileNameService = DocGenHtmlCapellaUtil.SERVICE;
-		helper = new CapellaDiagramHelper();
+        method_body(new StringBuffer(), ictx);
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
-	}
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("element", this.element);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+    protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
 
-		Collection<DDiagram> interestedDiagrams = CapellaHelper.getAllInterestedRepresentationsFor(element);
-		stringBuffer.append(TEXT_1);
-		List<DSemanticDiagram> exportableDiagrams = interestedDiagrams.parallelStream()
-				.filter(diagram -> diagram instanceof DSemanticDiagram).map(diagram -> (DSemanticDiagram) diagram)
-				.filter(diagram -> GenerationGlobalScope.getInstance().isCopyInScope(diagram.getTarget()))
-				.collect(Collectors.toList());
-		stringBuffer.append(TEXT_2);
-		if (!exportableDiagrams.isEmpty()) {
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(CapellaLabelProviderHelper.getText(element));
-			stringBuffer.append(TEXT_4);
-			exportableDiagrams.forEach(diagram -> {
-				stringBuffer.append(TEXT_5);
-				String id = DiagramSessionHelper.getID(diagram);
-				DRepresentationQuery rep2descQuery = new DRepresentationQuery(diagram);
-				DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
-				String name = (result == null) ? id : result.getName();
+    public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
+        this.fileNameService = object;
+    }
 
-				stringBuffer.append(TEXT_6);
-				stringBuffer.append(id);
-				stringBuffer.append(TEXT_7);
-				stringBuffer.append(EscapeChars.forHTML(name));
-				stringBuffer.append(TEXT_8);
-				String generatedFolder = fileNameService.getFileName(diagram.getTarget());
-				stringBuffer.append(TEXT_9);
-				stringBuffer.append(CapellaServices.getImageLinkForDiagram(generatedFolder, diagram));
-				stringBuffer.append(TEXT_10);
-			});
-		}
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
-	}
+    protected org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper helper = null;
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return true;
-	}
+    public void set_helper(org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper object) {
+        this.helper = object;
+    }
+
+    protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+
+    public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+        this.element = object;
+    }
+
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("element", this.element);
+        return parameters;
+    }
+
+    protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        fileNameService = DocGenHtmlCapellaUtil.SERVICE;
+        helper = new CapellaDiagramHelper();
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
+    }
+
+    protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        Collection<DDiagram> interestedDiagrams = CapellaHelper.getAllInterestedRepresentationsFor(element);
+        stringBuffer.append(TEXT_1);
+        List<DSemanticDiagram> exportableDiagrams = interestedDiagrams.parallelStream().filter(diagram -> diagram instanceof DSemanticDiagram).map(diagram -> (DSemanticDiagram) diagram)
+                .filter(diagram -> GenerationGlobalScope.getInstance().isCopyInScope(diagram.getTarget())).collect(Collectors.toList());
+        stringBuffer.append(TEXT_2);
+        if (!exportableDiagrams.isEmpty()) {
+            stringBuffer.append(TEXT_3);
+            stringBuffer.append(CapellaLabelProviderHelper.getText(element));
+            stringBuffer.append(TEXT_4);
+            exportableDiagrams.forEach(diagram -> {
+                stringBuffer.append(TEXT_5);
+                String id = DiagramSessionHelper.getID(diagram);
+                DRepresentationQuery rep2descQuery = new DRepresentationQuery(diagram);
+                DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
+                String name = (result == null) ? id : result.getName();
+
+                stringBuffer.append(TEXT_6);
+                stringBuffer.append(id);
+                stringBuffer.append(TEXT_7);
+                stringBuffer.append(EscapeChars.forHTML(name));
+                stringBuffer.append(TEXT_8);
+                String generatedFolder = fileNameService.getFileName(diagram.getTarget());
+                stringBuffer.append(TEXT_9);
+                stringBuffer.append(CapellaServices.getImageLinkForDiagram(generatedFolder, diagram));
+                stringBuffer.append(TEXT_10);
+            });
+        }
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return true;
+    }
 }

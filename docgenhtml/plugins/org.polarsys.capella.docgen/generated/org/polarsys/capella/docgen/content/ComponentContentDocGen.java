@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.2.202001031546
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -17,272 +17,270 @@ import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.capella.core.data.oa.Entity;
 
 public class ComponentContentDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized ComponentContentDocGen create(String lineSeparator) {
-		nl = lineSeparator;
-		ComponentContentDocGen result = new ComponentContentDocGen();
-		nl = null;
-		return result;
-	}
+    public static synchronized ComponentContentDocGen create(String lineSeparator) {
+        nl = lineSeparator;
+        ComponentContentDocGen result = new ComponentContentDocGen();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Features</h2>";
-	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "\t<h2>Allocated Activites</h2>" + NL + "\t";
-	protected final String TEXT_4 = NL + "<h2>Allocated Functions</h2>";
-	protected final String TEXT_5 = NL + "<h2>Implemented Interfaces</h2>";
-	protected final String TEXT_6 = NL + "<h2>Provided Interfaces</h2>";
-	protected final String TEXT_7 = NL + "<h2>Used Interfaces</h2>";
-	protected final String TEXT_8 = NL + "<h2>Required Interfaces</h2>";
-	protected final String TEXT_9 = NL + "<h2>Incoming Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
-			+ "\t\t<th>Realized Component Exchanges</th>" + NL + "\t\t<th>Realizing Component Exchanges</th>" + NL
-			+ "\t</tr>" + NL + "\t";
-	protected final String TEXT_10 = NL + "\t";
-	protected final String TEXT_11 = NL + "</table>";
-	protected final String TEXT_12 = NL + "<h2>Outgoing Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
-			+ "\t\t<th>Realized Component Exchanges</th>" + NL + "\t\t<th>Realizing Component Exchanges</th>" + NL
-			+ "\t</tr>" + NL + "\t";
-	protected final String TEXT_13 = NL + "<h2>In/Out Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL
-			+ "\t\t<th>Realized Component Exchanges</th>" + NL + "\t\t<th>Realizing Component Exchanges</th>" + NL
-			+ "\t</tr>" + NL + "\t";
-	protected final String TEXT_14 = NL + "<h2>Ports</h2>";
-	protected final String TEXT_15 = NL + "<h2>State Machines</h2>";
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public ComponentContentDocGen() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "<h2>Features</h2>";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL;
 
-	}
+    protected final String TEXT_3 = NL + "\t<h2>Allocated Activites</h2>" + NL + "\t";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL + "<h2>Allocated Functions</h2>";
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL + "<h2>Implemented Interfaces</h2>";
 
-		List<Object> elementList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
-		List<Object> projectNameList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
-		List<Object> outputFolderList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL + "<h2>Provided Interfaces</h2>";
 
-		for (Object elementParameter : elementList) {
-			for (Object projectNameParameter : projectNameList) {
-				for (Object outputFolderParameter : outputFolderList) {
+    protected final String TEXT_7 = NL + "<h2>Used Interfaces</h2>";
 
-					this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
-					this.projectName = (java.lang.String) projectNameParameter;
-					this.outputFolder = (java.lang.String) outputFolderParameter;
+    protected final String TEXT_8 = NL + "<h2>Required Interfaces</h2>";
 
-					if (preCondition(ctx)) {
-						ctx.setNode(new Node.Container(currentNode, getClass()));
-						orchestration(ctx);
-					}
+    protected final String TEXT_9 = NL + "<h2>Incoming Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Source</th>" + NL
+            + "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL + "\t\t<th>Realized Component Exchanges</th>" + NL
+            + "\t\t<th>Realizing Component Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
 
-				}
-			}
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    protected final String TEXT_10 = NL + "\t";
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
-		return stringBuffer.toString();
-	}
+    protected final String TEXT_11 = NL + "</table>";
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+    protected final String TEXT_12 = NL + "<h2>Outgoing Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL
+            + "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL + "\t\t<th>Realized Component Exchanges</th>" + NL
+            + "\t\t<th>Realizing Component Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
 
-		method_body(new StringBuffer(), ictx);
+    protected final String TEXT_13 = NL + "<h2>In/Out Component Exchanges</h2>" + NL + "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Target</th>" + NL
+            + "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t\t<th>Allocated Exchange Items</th>" + NL + "\t\t<th>Realized Component Exchanges</th>" + NL
+            + "\t\t<th>Realizing Component Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("element", this.element);
-			parameterValues.put("projectName", this.projectName);
-			parameterValues.put("outputFolder", this.outputFolder);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+    protected final String TEXT_14 = NL + "<h2>Ports</h2>";
 
-	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+    protected final String TEXT_15 = NL + "<h2>State Machines</h2>";
 
-	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-		this.element = object;
-	}
+    public ComponentContentDocGen() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-	protected java.lang.String projectName = null;
+        // add initialisation of the pattern variables (declaration has been already done).
 
-	public void set_projectName(java.lang.String object) {
-		this.projectName = object;
-	}
+    }
 
-	protected java.lang.String outputFolder = null;
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-	public void set_outputFolder(java.lang.String object) {
-		this.outputFolder = object;
-	}
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("element", this.element);
-		parameters.put("projectName", this.projectName);
-		parameters.put("outputFolder", this.outputFolder);
-		return parameters;
-	}
+        List<Object> elementList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
+        List<Object> projectNameList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
+        List<Object> outputFolderList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        for (Object elementParameter : elementList) {
+            for (Object projectNameParameter : projectNameList) {
+                for (Object outputFolderParameter : outputFolderList) {
 
-		String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
-		String elementType = EscapeChars.forHTML(element.eClass().getName());
-		Collection<String> componentFeatures = CapellaComponentServices.getFeatures((Component) element);
-		if (componentFeatures.size() > 0) {
+                    this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
+                    this.projectName = (java.lang.String) projectNameParameter;
+                    this.outputFolder = (java.lang.String) outputFolderParameter;
 
-			stringBuffer.append(TEXT_1);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(componentFeatures));
+                    if (preCondition(ctx)) {
+                        ctx.setNode(new Node.Container(currentNode, getClass()));
+                        orchestration(ctx);
+                    }
 
-		}
+                }
+            }
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-		Collection<String> allocatedFunctionsInformations = CapellaComponentServices
-				.getAllocatedFunctionsInformation((Component) element, projectName, outputFolder);
-		if (allocatedFunctionsInformations.size() > 0) {
-			if (element instanceof Entity) {
+        stringBuffer.append(TEXT_2);
+        stringBuffer.append(TEXT_2);
+        return stringBuffer.toString();
+    }
 
-				stringBuffer.append(TEXT_3);
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-			} else {
+        method_body(new StringBuffer(), ictx);
 
-				stringBuffer.append(TEXT_4);
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("element", this.element);
+            parameterValues.put("projectName", this.projectName);
+            parameterValues.put("outputFolder", this.outputFolder);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-			}
+    protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(allocatedFunctionsInformations));
+    public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+        this.element = object;
+    }
 
-		}
-		Collection<String> implementedInterfaces = CapellaComponentServices
-				.getImplementedInterfaces((Component) element, projectName, outputFolder);
-		if (implementedInterfaces.size() > 0) {
-			stringBuffer.append(TEXT_5);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(implementedInterfaces));
+    protected java.lang.String projectName = null;
 
-		}
+    public void set_projectName(java.lang.String object) {
+        this.projectName = object;
+    }
 
-		Collection<String> providedInterfaces = CapellaComponentServices.getProvidedInterfaces((Component) element,
-				projectName, outputFolder);
-		if (providedInterfaces.size() > 0) {
-			stringBuffer.append(TEXT_6);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(providedInterfaces));
+    protected java.lang.String outputFolder = null;
 
-		}
+    public void set_outputFolder(java.lang.String object) {
+        this.outputFolder = object;
+    }
 
-		Collection<String> usedInterfaces = CapellaComponentServices.getUsedInterfaces((Component) element, projectName,
-				outputFolder);
-		if (usedInterfaces.size() > 0) {
-			stringBuffer.append(TEXT_7);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(usedInterfaces));
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("element", this.element);
+        parameters.put("projectName", this.projectName);
+        parameters.put("outputFolder", this.outputFolder);
+        return parameters;
+    }
 
-		}
+    protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		Collection<String> requiredInterfaces = CapellaComponentServices.getRequiredInterfaces((Component) element,
-				projectName, outputFolder);
-		if (requiredInterfaces.size() > 0) {
-			stringBuffer.append(TEXT_8);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(requiredInterfaces));
+        String elementName = EscapeChars.forHTML(CapellaLabelProviderHelper.getText(element));
+        String elementType = EscapeChars.forHTML(element.eClass().getName());
+        Collection<String> componentFeatures = CapellaComponentServices.getFeatures((Component) element);
+        if (componentFeatures.size() > 0) {
 
-		}
+            stringBuffer.append(TEXT_1);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(componentFeatures));
 
-		Collection<ComponentExchange> incomingComponentExchanges = CapellaComponentServices
-				.getIncomingComponentExchanges((Component) element);
-		if (incomingComponentExchanges.size() > 0) {
+        }
 
-			stringBuffer.append(TEXT_9);
-			for (ComponentExchange componentExchange : incomingComponentExchanges) {
+        Collection<String> allocatedFunctionsInformations = CapellaComponentServices.getAllocatedFunctionsInformation((Component) element, projectName, outputFolder);
+        if (allocatedFunctionsInformations.size() > 0) {
+            if (element instanceof Entity) {
 
-				stringBuffer.append(TEXT_10);
-				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
-						componentExchange, projectName, outputFolder));
-				stringBuffer.append(TEXT_10);
+                stringBuffer.append(TEXT_3);
 
-			}
-			stringBuffer.append(TEXT_11);
+            } else {
 
-		}
-		Collection<ComponentExchange> outgoingComponentExchanges = CapellaComponentServices
-				.getOutgoingComponentExchanges((Component) element);
-		if (outgoingComponentExchanges.size() > 0) {
+                stringBuffer.append(TEXT_4);
 
-			stringBuffer.append(TEXT_12);
-			for (ComponentExchange componentExchange : outgoingComponentExchanges) {
+            }
 
-				stringBuffer.append(TEXT_10);
-				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
-						componentExchange, projectName, outputFolder));
-				stringBuffer.append(TEXT_10);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(allocatedFunctionsInformations));
 
-			}
-			stringBuffer.append(TEXT_11);
+        }
+        Collection<String> implementedInterfaces = CapellaComponentServices.getImplementedInterfaces((Component) element, projectName, outputFolder);
+        if (implementedInterfaces.size() > 0) {
+            stringBuffer.append(TEXT_5);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(implementedInterfaces));
 
-		}
+        }
 
-		Collection<ComponentExchange> inoutComponentExchanges = CapellaComponentServices
-				.getInOutComponentExchanges((Component) element);
-		if (inoutComponentExchanges.size() > 0) {
+        Collection<String> providedInterfaces = CapellaComponentServices.getProvidedInterfaces((Component) element, projectName, outputFolder);
+        if (providedInterfaces.size() > 0) {
+            stringBuffer.append(TEXT_6);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(providedInterfaces));
 
-			stringBuffer.append(TEXT_13);
-			for (ComponentExchange componentExchange : inoutComponentExchanges) {
+        }
 
-				stringBuffer.append(TEXT_10);
-				stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element,
-						componentExchange, projectName, outputFolder));
-				stringBuffer.append(TEXT_10);
+        Collection<String> usedInterfaces = CapellaComponentServices.getUsedInterfaces((Component) element, projectName, outputFolder);
+        if (usedInterfaces.size() > 0) {
+            stringBuffer.append(TEXT_7);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(usedInterfaces));
 
-			}
-			stringBuffer.append(TEXT_11);
+        }
 
-		}
+        Collection<String> requiredInterfaces = CapellaComponentServices.getRequiredInterfaces((Component) element, projectName, outputFolder);
+        if (requiredInterfaces.size() > 0) {
+            stringBuffer.append(TEXT_8);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(requiredInterfaces));
 
-		Collection<String> ports = CapellaComponentServices.getPorts((Component) element, projectName, outputFolder);
-		if (ports.size() > 0) {
-			stringBuffer.append(TEXT_14);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(ports));
-		}
+        }
 
-		Collection<String> stateMachines = BlockHelper.getStateMachine(projectName, outputFolder, (Component) element);
-		if (stateMachines.size() > 0) {
-			stringBuffer.append(TEXT_15);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(stateMachines));
-		}
+        Collection<ComponentExchange> incomingComponentExchanges = CapellaComponentServices.getIncomingComponentExchanges((Component) element);
+        if (incomingComponentExchanges.size() > 0) {
 
-		stringBuffer.append(TEXT_2);
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
-	}
+            stringBuffer.append(TEXT_9);
+            for (ComponentExchange componentExchange : incomingComponentExchanges) {
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return true;
-	}
+                stringBuffer.append(TEXT_10);
+                stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element, componentExchange, projectName, outputFolder));
+                stringBuffer.append(TEXT_10);
+
+            }
+            stringBuffer.append(TEXT_11);
+
+        }
+        Collection<ComponentExchange> outgoingComponentExchanges = CapellaComponentServices.getOutgoingComponentExchanges((Component) element);
+        if (outgoingComponentExchanges.size() > 0) {
+
+            stringBuffer.append(TEXT_12);
+            for (ComponentExchange componentExchange : outgoingComponentExchanges) {
+
+                stringBuffer.append(TEXT_10);
+                stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element, componentExchange, projectName, outputFolder));
+                stringBuffer.append(TEXT_10);
+
+            }
+            stringBuffer.append(TEXT_11);
+
+        }
+
+        Collection<ComponentExchange> inoutComponentExchanges = CapellaComponentServices.getInOutComponentExchanges((Component) element);
+        if (inoutComponentExchanges.size() > 0) {
+
+            stringBuffer.append(TEXT_13);
+            for (ComponentExchange componentExchange : inoutComponentExchanges) {
+
+                stringBuffer.append(TEXT_10);
+                stringBuffer.append(CapellaComponentServices.componentExchangeToTableLine((Component) element, componentExchange, projectName, outputFolder));
+                stringBuffer.append(TEXT_10);
+
+            }
+            stringBuffer.append(TEXT_11);
+
+        }
+
+        Collection<String> ports = CapellaComponentServices.getPorts((Component) element, projectName, outputFolder);
+        if (ports.size() > 0) {
+            stringBuffer.append(TEXT_14);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(ports));
+        }
+
+        Collection<String> stateMachines = BlockHelper.getStateMachine(projectName, outputFolder, (Component) element);
+        if (stateMachines.size() > 0) {
+            stringBuffer.append(TEXT_15);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(stateMachines));
+        }
+
+        stringBuffer.append(TEXT_2);
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return true;
+    }
 }

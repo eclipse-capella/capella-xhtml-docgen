@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -10,104 +10,105 @@ import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.core.data.oa.Entity;
 
 public class EntityDocGen extends org.polarsys.capella.docgen.content.LogicalComponentDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized EntityDocGen create(String lineSeparator) {
-		nl = lineSeparator;
-		EntityDocGen result = new EntityDocGen();
-		nl = null;
-		return result;
-	}
+    public static synchronized EntityDocGen create(String lineSeparator) {
+        nl = lineSeparator;
+        EntityDocGen result = new EntityDocGen();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "";
-	protected final String TEXT_2 = NL;
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public EntityDocGen() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL;
 
-	}
+    public EntityDocGen() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    }
 
-		List<Object> parameterList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-		for (Object parameterParameter : parameterList) {
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-			this.parameter = (org.polarsys.capella.core.data.cs.Component) parameterParameter;
+        List<Object> parameterList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+        for (Object parameterParameter : parameterList) {
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+            this.parameter = (org.polarsys.capella.core.data.cs.Component) parameterParameter;
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
-		return stringBuffer.toString();
-	}
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-		super.orchestration(new SuperOrchestrationContext(ictx));
+        stringBuffer.append(TEXT_2);
+        stringBuffer.append(TEXT_2);
+        return stringBuffer.toString();
+    }
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("parameter", this.parameter);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("parameter", this.parameter);
-		return parameters;
-	}
+        super.orchestration(new SuperOrchestrationContext(ictx));
 
-	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("parameter", this.parameter);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-		super.method_content(new StringBuffer(), ctx);
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("parameter", this.parameter);
+        return parameters;
+    }
 
-		stringBuffer.append(TEXT_1);
-		{
-			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.EntityContentDocGen" args="element:element"%>
+    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-			InternalPatternContext ictx = (InternalPatternContext) ctx;
-			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
-			stringBuffer.setLength(0);
+        super.method_content(new StringBuffer(), ctx);
 
-			final Map<String, Object> callParameters = new HashMap<String, Object>();
-			callParameters.put("element", element);
-			CallHelper.executeWithParameterInjection(
-					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_XX5iAaxbEeCYVYqpiRcXMA",
-					new ExecutionContext((InternalPatternContext) ctx), callParameters);
-			stringBuffer.setLength(0);
-		}
+        stringBuffer.append(TEXT_1);
+        {
+            //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.EntityContentDocGen" args="element:element"%>
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-	}
+            InternalPatternContext ictx = (InternalPatternContext) ctx;
+            new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+            stringBuffer.setLength(0);
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return parameter instanceof Entity;
-	}
+            final Map<String, Object> callParameters = new HashMap<String, Object>();
+            callParameters.put("element", element);
+            CallHelper.executeWithParameterInjection("platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_XX5iAaxbEeCYVYqpiRcXMA",
+                    new ExecutionContext((InternalPatternContext) ctx), callParameters);
+            stringBuffer.setLength(0);
+        }
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return parameter instanceof Entity;
+    }
 }

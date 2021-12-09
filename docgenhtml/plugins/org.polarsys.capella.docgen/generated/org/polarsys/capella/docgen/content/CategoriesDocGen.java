@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.2.202001031546
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.content;
 
 import org.polarsys.capella.docgen.util.CapellaCategoryServices;
@@ -16,200 +16,204 @@ import org.eclipse.egf.pattern.execution.*;
 import org.eclipse.egf.pattern.query.*;
 
 public class CategoriesDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized CategoriesDocGen create(String lineSeparator) {
-		nl = lineSeparator;
-		CategoriesDocGen result = new CategoriesDocGen();
-		nl = null;
-		return result;
-	}
+    public static synchronized CategoriesDocGen create(String lineSeparator) {
+        nl = lineSeparator;
+        CategoriesDocGen result = new CategoriesDocGen();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "\t\t<h2>Involved Functional Exchanges</h2>" + NL + "\t\t";
-	protected final String TEXT_2 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Functional Exchange</th>"
-			+ NL + "\t\t\t\t<th>Source Function</th>" + NL + "\t\t\t\t<th>Target Function</th>" + NL
-			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
-	protected final String TEXT_3 = NL + "\t\t\t";
-	protected final String TEXT_4 = NL + "\t\t</table>" + NL + "\t\t";
-	protected final String TEXT_5 = NL + "\t\t<h2>Involved Component Exchanges</h2>" + NL + "\t\t";
-	protected final String TEXT_6 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Component Exchange</th>"
-			+ NL + "\t\t\t\t<th>Source Component</th>" + NL + "\t\t\t\t<th>Target Component</th>" + NL
-			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
-	protected final String TEXT_7 = NL + "\t\t<h2>Involved Physical Links</h2>" + NL + "\t\t";
-	protected final String TEXT_8 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Physical Link</th>" + NL
-			+ "\t\t\t\t<th>Source Component</th>" + NL + "\t\t\t\t<th>Target Component</th>" + NL
-			+ "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
-	protected final String TEXT_9 = NL;
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public CategoriesDocGen() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "\t\t<h2>Involved Functional Exchanges</h2>" + NL + "\t\t";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Functional Exchange</th>" + NL + "\t\t\t\t<th>Source Function</th>" + NL
+            + "\t\t\t\t<th>Target Function</th>" + NL + "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
 
-	}
+    protected final String TEXT_3 = NL + "\t\t\t";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL + "\t\t</table>" + NL + "\t\t";
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL + "\t\t<h2>Involved Component Exchanges</h2>" + NL + "\t\t";
 
-		List<Object> parameterList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Component Exchange</th>" + NL + "\t\t\t\t<th>Source Component</th>" + NL
+            + "\t\t\t\t<th>Target Component</th>" + NL + "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
 
-		for (Object parameterParameter : parameterList) {
+    protected final String TEXT_7 = NL + "\t\t<h2>Involved Physical Links</h2>" + NL + "\t\t";
 
-			this.parameter = (org.polarsys.capella.core.data.capellacore.NamedElement) parameterParameter;
+    protected final String TEXT_8 = NL + "\t\t<table>" + NL + "\t\t\t<tr>" + NL + "\t\t\t\t<th>Physical Link</th>" + NL + "\t\t\t\t<th>Source Component</th>" + NL + "\t\t\t\t<th>Target Component</th>"
+            + NL + "\t\t\t\t<th>Description</th>" + NL + "\t\t\t</tr>" + NL + "\t\t";
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+    protected final String TEXT_9 = NL;
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    public CategoriesDocGen() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-		stringBuffer.append(TEXT_9);
-		stringBuffer.append(TEXT_9);
-		return stringBuffer.toString();
-	}
+        // add initialisation of the pattern variables (declaration has been already done).
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+    }
 
-		super.orchestration(new SuperOrchestrationContext(ictx));
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("parameter", this.parameter);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-	protected org.polarsys.capella.core.data.capellacore.NamedElement parameter = null;
+        List<Object> parameterList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-	public void set_parameter(org.polarsys.capella.core.data.capellacore.NamedElement object) {
-		this.parameter = object;
-	}
+        for (Object parameterParameter : parameterList) {
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("parameter", this.parameter);
-		return parameters;
-	}
+            this.parameter = (org.polarsys.capella.core.data.capellacore.NamedElement) parameterParameter;
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
-			throws Exception {
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-		element = parameter;
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
-	}
+        stringBuffer.append(TEXT_9);
+        stringBuffer.append(TEXT_9);
+        return stringBuffer.toString();
+    }
 
-	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-		super.method_content(new StringBuffer(), ctx);
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
+        super.orchestration(new SuperOrchestrationContext(ictx));
 
-		// Exchange Categories
-		if (element instanceof ExchangeCategory) {
-			ExchangeCategory category = (ExchangeCategory) element;
-			if (category.getExchanges().size() > 0) {
-				// Display Title
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("parameter", this.parameter);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-				stringBuffer.append(TEXT_1);
+    protected org.polarsys.capella.core.data.capellacore.NamedElement parameter = null;
 
-				// Create table header
+    public void set_parameter(org.polarsys.capella.core.data.capellacore.NamedElement object) {
+        this.parameter = object;
+    }
 
-				stringBuffer.append(TEXT_2);
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("parameter", this.parameter);
+        return parameters;
+    }
 
-				// Create each line
-				for (FunctionalExchange fe : category.getExchanges()) {
+    protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-					stringBuffer.append(TEXT_3);
-					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(fe, projectName, outputFolder));
-					stringBuffer.append(TEXT_3);
+        element = parameter;
 
-				}
-				// Create table footer
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
+    }
 
-				stringBuffer.append(TEXT_4);
+    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-			}
-		}
+        super.method_content(new StringBuffer(), ctx);
+        String projectName = ctx.getValue("projectName").toString();
+        String outputFolder = ctx.getValue("outputFolder").toString();
 
-		// Component Exchange Categories
-		if (element instanceof ComponentExchangeCategory) {
-			ComponentExchangeCategory category = (ComponentExchangeCategory) element;
-			if (category.getExchanges().size() > 0) {
-				// Display Title
+        // Exchange Categories
+        if (element instanceof ExchangeCategory) {
+            ExchangeCategory category = (ExchangeCategory) element;
+            if (category.getExchanges().size() > 0) {
+                // Display Title
 
-				stringBuffer.append(TEXT_5);
+                stringBuffer.append(TEXT_1);
 
-				// Create table header
+                // Create table header
 
-				stringBuffer.append(TEXT_6);
+                stringBuffer.append(TEXT_2);
 
-				// Create each line
-				for (ComponentExchange ce : category.getExchanges()) {
+                // Create each line
+                for (FunctionalExchange fe : category.getExchanges()) {
 
-					stringBuffer.append(TEXT_3);
-					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(ce, projectName, outputFolder));
-					stringBuffer.append(TEXT_3);
+                    stringBuffer.append(TEXT_3);
+                    stringBuffer.append(CapellaCategoryServices.edgeToTableLine(fe, projectName, outputFolder));
+                    stringBuffer.append(TEXT_3);
 
-				}
-				// Create table footer
+                }
+                // Create table footer
 
-				stringBuffer.append(TEXT_4);
+                stringBuffer.append(TEXT_4);
 
-			}
-		}
+            }
+        }
 
-		// Physical Link Categories
-		if (element instanceof PhysicalLinkCategory) {
-			PhysicalLinkCategory category = (PhysicalLinkCategory) element;
-			if (category.getLinks().size() > 0) {
-				// Display Title
+        // Component Exchange Categories
+        if (element instanceof ComponentExchangeCategory) {
+            ComponentExchangeCategory category = (ComponentExchangeCategory) element;
+            if (category.getExchanges().size() > 0) {
+                // Display Title
 
-				stringBuffer.append(TEXT_7);
+                stringBuffer.append(TEXT_5);
 
-				// Create table header
+                // Create table header
 
-				stringBuffer.append(TEXT_8);
+                stringBuffer.append(TEXT_6);
 
-				// Create each line
-				for (PhysicalLink pl : category.getLinks()) {
+                // Create each line
+                for (ComponentExchange ce : category.getExchanges()) {
 
-					stringBuffer.append(TEXT_3);
-					stringBuffer.append(CapellaCategoryServices.edgeToTableLine(pl, projectName, outputFolder));
-					stringBuffer.append(TEXT_3);
+                    stringBuffer.append(TEXT_3);
+                    stringBuffer.append(CapellaCategoryServices.edgeToTableLine(ce, projectName, outputFolder));
+                    stringBuffer.append(TEXT_3);
 
-				}
-				// Create table footer
+                }
+                // Create table footer
 
-				stringBuffer.append(TEXT_4);
+                stringBuffer.append(TEXT_4);
 
-			}
-		}
+            }
+        }
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-	}
+        // Physical Link Categories
+        if (element instanceof PhysicalLinkCategory) {
+            PhysicalLinkCategory category = (PhysicalLinkCategory) element;
+            if (category.getLinks().size() > 0) {
+                // Display Title
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return parameter instanceof ExchangeCategory || parameter instanceof ComponentExchangeCategory
-				|| parameter instanceof PhysicalLinkCategory;
-	}
+                stringBuffer.append(TEXT_7);
+
+                // Create table header
+
+                stringBuffer.append(TEXT_8);
+
+                // Create each line
+                for (PhysicalLink pl : category.getLinks()) {
+
+                    stringBuffer.append(TEXT_3);
+                    stringBuffer.append(CapellaCategoryServices.edgeToTableLine(pl, projectName, outputFolder));
+                    stringBuffer.append(TEXT_3);
+
+                }
+                // Create table footer
+
+                stringBuffer.append(TEXT_4);
+
+            }
+        }
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return parameter instanceof ExchangeCategory || parameter instanceof ComponentExchangeCategory || parameter instanceof PhysicalLinkCategory;
+    }
 }
