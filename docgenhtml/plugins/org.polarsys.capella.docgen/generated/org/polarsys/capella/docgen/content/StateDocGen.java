@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -12,194 +12,199 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.pattern.helper.CapellaStateHelper;
 
 public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized StateDocGen create(String lineSeparator) {
-		nl = lineSeparator;
-		StateDocGen result = new StateDocGen();
-		nl = null;
-		return result;
-	}
+    public static synchronized StateDocGen create(String lineSeparator) {
+        nl = lineSeparator;
+        StateDocGen result = new StateDocGen();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Properties</h2>" + NL + "<p><strong>Do Activity:</strong> ";
-	protected final String TEXT_2 = "</p>";
-	protected final String TEXT_3 = NL + "<h2>Modes and States</h2>";
-	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = NL + "<h3>Referenced</h3>";
-	protected final String TEXT_6 = NL + "<h2>Previous States / Modes</h2>";
-	protected final String TEXT_7 = NL + "<h2>Following States / Modes</h2>";
-	protected final String TEXT_8 = NL + "<h2>Functions</h2>";
-	protected final String TEXT_9 = NL + "<h2>Functional Chains</h2>";
-	protected final String TEXT_10 = NL + "<h2>Capabilities</h2>";
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public StateDocGen() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "<h2>Properties</h2>" + NL + "<p><strong>Do Activity:</strong> ";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = "</p>";
 
-	}
+    protected final String TEXT_3 = NL + "<h2>Modes and States</h2>";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL;
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL + "<h3>Referenced</h3>";
 
-		List<Object> parameterList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL + "<h2>Previous States / Modes</h2>";
 
-		for (Object parameterParameter : parameterList) {
+    protected final String TEXT_7 = NL + "<h2>Following States / Modes</h2>";
 
-			this.parameter = (org.polarsys.capella.core.data.capellacommon.State) parameterParameter;
+    protected final String TEXT_8 = NL + "<h2>Functions</h2>";
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+    protected final String TEXT_9 = NL + "<h2>Functional Chains</h2>";
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    protected final String TEXT_10 = NL + "<h2>Capabilities</h2>";
 
-		stringBuffer.append(TEXT_4);
-		stringBuffer.append(TEXT_4);
-		return stringBuffer.toString();
-	}
+    public StateDocGen() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		super.orchestration(new SuperOrchestrationContext(ictx));
+    }
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("parameter", this.parameter);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-	protected org.polarsys.capella.core.data.capellacommon.State parameter = null;
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-	public void set_parameter(org.polarsys.capella.core.data.capellacommon.State object) {
-		this.parameter = object;
-	}
+        List<Object> parameterList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("parameter", this.parameter);
-		return parameters;
-	}
+        for (Object parameterParameter : parameterList) {
 
-	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+            this.parameter = (org.polarsys.capella.core.data.capellacommon.State) parameterParameter;
 
-		super.method_content(new StringBuffer(), ctx);
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-		String doActivity = CapellaStateHelper.getDoActivity(projectName, outputFolder, (State) element);
-		if (doActivity != "") {
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-			stringBuffer.append(TEXT_1);
-			stringBuffer.append(doActivity);
-			stringBuffer.append(TEXT_2);
+        stringBuffer.append(TEXT_4);
+        stringBuffer.append(TEXT_4);
+        return stringBuffer.toString();
+    }
 
-		}
-		Collection<String> ownedReferencedStatesModes = CapellaStateHelper.getOwnedReferencedStatesModes(projectName,
-				outputFolder, (State) element);
-		Collection<String> referencedStatesModes = CapellaStateHelper.getReferencedStatesModes(projectName,
-				outputFolder, (State) element);
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-		if (ownedReferencedStatesModes.size() > 0 || referencedStatesModes.size() > 0) {
+        super.orchestration(new SuperOrchestrationContext(ictx));
 
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil.stringListToBulette(ownedReferencedStatesModes));
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("parameter", this.parameter);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-		}
+    protected org.polarsys.capella.core.data.capellacommon.State parameter = null;
 
-		if (referencedStatesModes.size() > 0) {
+    public void set_parameter(org.polarsys.capella.core.data.capellacommon.State object) {
+        this.parameter = object;
+    }
 
-			stringBuffer.append(TEXT_5);
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil.stringListToBulette(referencedStatesModes));
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("parameter", this.parameter);
+        return parameters;
+    }
 
-		}
-		/*
-		Collection<String> previousStatesModes = CapellaStateHelper.getPreviousStatesModes(projectName,
-					outputFolder,(State) element);
-					
-					if(previousStatesModes.size() > 0) {
-		
-		    stringBuffer.append(TEXT_6);
-		    stringBuffer.append(TEXT_4);
-		    stringBuffer.append(StringUtil.stringListToBulette(previousStatesModes));
-		    
-		}
-		
-		
-		Collection<String> followingStatesModes = CapellaStateHelper.getFollowingStatesModes(projectName,
-					outputFolder,(State) element);
-					
-					if(followingStatesModes.size() > 0) {
-		
-		    stringBuffer.append(TEXT_7);
-		    stringBuffer.append(TEXT_4);
-		    stringBuffer.append(StringUtil.stringListToBulette(followingStatesModes));
-		    
-		}
-		
-		*/
-		Collection<String> functions = CapellaStateHelper.getFunctions(projectName, outputFolder, (State) element);
+    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		if (functions.size() > 0) {
+        super.method_content(new StringBuffer(), ctx);
+        String projectName = ctx.getValue("projectName").toString();
+        String outputFolder = ctx.getValue("outputFolder").toString();
 
-			stringBuffer.append(TEXT_8);
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil.stringListToBulette(functions));
+        String doActivity = CapellaStateHelper.getDoActivity(projectName, outputFolder, (State) element);
+        if (doActivity != "") {
 
-		}
+            stringBuffer.append(TEXT_1);
+            stringBuffer.append(doActivity);
+            stringBuffer.append(TEXT_2);
 
-		Collection<String> functionalChain = CapellaStateHelper.getFunctionalChain(projectName, outputFolder,
-				(State) element);
+        }
+        Collection<String> ownedReferencedStatesModes = CapellaStateHelper.getOwnedReferencedStatesModes(projectName, outputFolder, (State) element);
+        Collection<String> referencedStatesModes = CapellaStateHelper.getReferencedStatesModes(projectName, outputFolder, (State) element);
 
-		if (functionalChain.size() > 0) {
+        if (ownedReferencedStatesModes.size() > 0 || referencedStatesModes.size() > 0) {
 
-			stringBuffer.append(TEXT_9);
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil.stringListToBulette(functionalChain));
+            stringBuffer.append(TEXT_3);
+            stringBuffer.append(TEXT_4);
+            stringBuffer.append(StringUtil.stringListToBulette(ownedReferencedStatesModes));
 
-		}
+        }
 
-		Collection<String> capabilities = CapellaStateHelper.getCapabilities(projectName, outputFolder,
-				(State) element);
+        if (referencedStatesModes.size() > 0) {
 
-		if (capabilities.size() > 0) {
+            stringBuffer.append(TEXT_5);
+            stringBuffer.append(TEXT_4);
+            stringBuffer.append(StringUtil.stringListToBulette(referencedStatesModes));
 
-			stringBuffer.append(TEXT_10);
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(StringUtil.stringListToBulette(capabilities));
+        }
+        /*
+        Collection<String> previousStatesModes = CapellaStateHelper.getPreviousStatesModes(projectName,
+        			outputFolder,(State) element);
+        			
+        			if(previousStatesModes.size() > 0) {
+        
+            stringBuffer.append(TEXT_6);
+            stringBuffer.append(TEXT_4);
+            stringBuffer.append(StringUtil.stringListToBulette(previousStatesModes));
+            
+        }
+        
+        
+        Collection<String> followingStatesModes = CapellaStateHelper.getFollowingStatesModes(projectName,
+        			outputFolder,(State) element);
+        			
+        			if(followingStatesModes.size() > 0) {
+        
+            stringBuffer.append(TEXT_7);
+            stringBuffer.append(TEXT_4);
+            stringBuffer.append(StringUtil.stringListToBulette(followingStatesModes));
+            
+        }
+        
+        */
+        Collection<String> functions = CapellaStateHelper.getFunctions(projectName, outputFolder, (State) element);
 
-		}
+        if (functions.size() > 0) {
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-	}
+            stringBuffer.append(TEXT_8);
+            stringBuffer.append(TEXT_4);
+            stringBuffer.append(StringUtil.stringListToBulette(functions));
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
-			throws Exception {
+        }
 
-		element = parameter;
+        Collection<String> functionalChain = CapellaStateHelper.getFunctionalChain(projectName, outputFolder, (State) element);
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
-	}
+        if (functionalChain.size() > 0) {
+
+            stringBuffer.append(TEXT_9);
+            stringBuffer.append(TEXT_4);
+            stringBuffer.append(StringUtil.stringListToBulette(functionalChain));
+
+        }
+
+        Collection<String> capabilities = CapellaStateHelper.getCapabilities(projectName, outputFolder, (State) element);
+
+        if (capabilities.size() > 0) {
+
+            stringBuffer.append(TEXT_10);
+            stringBuffer.append(TEXT_4);
+            stringBuffer.append(StringUtil.stringListToBulette(capabilities));
+
+        }
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+    }
+
+    protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        element = parameter;
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
+    }
 }

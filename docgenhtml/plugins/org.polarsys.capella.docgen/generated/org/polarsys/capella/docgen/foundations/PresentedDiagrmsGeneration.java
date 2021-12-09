@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.2.202001031546
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -19,147 +19,153 @@ import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 
 public class PresentedDiagrmsGeneration {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized PresentedDiagrmsGeneration create(String lineSeparator) {
-		nl = lineSeparator;
-		PresentedDiagrmsGeneration result = new PresentedDiagrmsGeneration();
-		nl = null;
-		return result;
-	}
+    public static synchronized PresentedDiagrmsGeneration create(String lineSeparator) {
+        nl = lineSeparator;
+        PresentedDiagrmsGeneration result = new PresentedDiagrmsGeneration();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Diagrams displaying \"";
-	protected final String TEXT_2 = "\"</h2>" + NL + "<ul>";
-	protected final String TEXT_3 = NL + "<li>";
-	protected final String TEXT_4 = NL;
-	protected final String TEXT_5 = " ";
-	protected final String TEXT_6 = NL + "</li>";
-	protected final String TEXT_7 = NL + "</ul>";
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public PresentedDiagrmsGeneration() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "<h2>Diagrams displaying \"";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = "\"</h2>" + NL + "<ul>";
 
-	}
+    protected final String TEXT_3 = NL + "<li>";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL;
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = " ";
 
-		List<Object> elementList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL + "</li>";
 
-		for (Object elementParameter : elementList) {
+    protected final String TEXT_7 = NL + "</ul>";
 
-			this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
+    public PresentedDiagrmsGeneration() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    }
 
-		stringBuffer.append(TEXT_4);
-		stringBuffer.append(TEXT_4);
-		return stringBuffer.toString();
-	}
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-		method_setContext(new StringBuffer(), ictx);
+        List<Object> elementList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-		method_body(new StringBuffer(), ictx);
+        for (Object elementParameter : elementList) {
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("element", this.element);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+            this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
 
-	protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-	public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
-		this.fileNameService = object;
-	}
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-	protected org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper helper = null;
+        stringBuffer.append(TEXT_4);
+        stringBuffer.append(TEXT_4);
+        return stringBuffer.toString();
+    }
 
-	public void set_helper(org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper object) {
-		this.helper = object;
-	}
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+        method_setContext(new StringBuffer(), ictx);
 
-	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-		this.element = object;
-	}
+        method_body(new StringBuffer(), ictx);
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("element", this.element);
-		return parameters;
-	}
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("element", this.element);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+    protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
 
-		fileNameService = DocGenHtmlCapellaUtil.SERVICE;
-		helper = new CapellaDiagramHelper();
+    public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
+        this.fileNameService = object;
+    }
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
-	}
+    protected org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper helper = null;
 
-	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+    public void set_helper(org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper object) {
+        this.helper = object;
+    }
 
-		Set<DSemanticDiagram> diagramSet = CapellaHelper.getDiagramContainingObject(element);
-		if (diagramSet.size() >= 1) {
-			stringBuffer.append(TEXT_1);
-			stringBuffer.append(CapellaLabelProviderHelper.getText(element));
-			stringBuffer.append(TEXT_2);
-			for (DSemanticDiagram diagram : diagramSet) {
-				EObject eObject = diagram.getTarget();
-				if (eObject == null) {
-					//The diagram could not be exported
-					continue;
-				}
-				String generatedFolder = fileNameService.getFileName(eObject);
-				stringBuffer.append(TEXT_3);
-				if (eObject instanceof NamedElement
-						&& DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) eObject)) {
-					stringBuffer.append(TEXT_4);
-					stringBuffer.append(CapellaServices.getHyperlinkFromElement(diagram));
-					stringBuffer.append(TEXT_5);
-				} else {
-					stringBuffer.append(TEXT_4);
-					stringBuffer.append(CapellaLabelProviderHelper.getText(eObject));
-				}
-				stringBuffer.append(TEXT_6);
+    protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-			}
-			stringBuffer.append(TEXT_7);
-		}
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
-	}
+    public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+        this.element = object;
+    }
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return DocgenDiagramPreferencesHelper.getExportDiagram();
-	}
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("element", this.element);
+        return parameters;
+    }
+
+    protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        fileNameService = DocGenHtmlCapellaUtil.SERVICE;
+        helper = new CapellaDiagramHelper();
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
+    }
+
+    protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        Set<DSemanticDiagram> diagramSet = CapellaHelper.getDiagramContainingObject(element);
+        if (diagramSet.size() >= 1) {
+            stringBuffer.append(TEXT_1);
+            stringBuffer.append(CapellaLabelProviderHelper.getText(element));
+            stringBuffer.append(TEXT_2);
+            for (DSemanticDiagram diagram : diagramSet) {
+                EObject eObject = diagram.getTarget();
+                if (eObject == null) {
+                    //The diagram could not be exported
+                    continue;
+                }
+                String generatedFolder = fileNameService.getFileName(eObject);
+                stringBuffer.append(TEXT_3);
+                if (eObject instanceof NamedElement && DocGenHtmlCapellaControl.isPageCandidate((CapellaElement) eObject)) {
+                    stringBuffer.append(TEXT_4);
+                    stringBuffer.append(CapellaServices.getHyperlinkFromElement(diagram));
+                    stringBuffer.append(TEXT_5);
+                } else {
+                    stringBuffer.append(TEXT_4);
+                    stringBuffer.append(CapellaLabelProviderHelper.getText(eObject));
+                }
+                stringBuffer.append(TEXT_6);
+
+            }
+            stringBuffer.append(TEXT_7);
+        }
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return DocgenDiagramPreferencesHelper.getExportDiagram();
+    }
 }

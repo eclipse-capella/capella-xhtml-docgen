@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.2.202001031546
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.foundations;
 
 import java.util.*;
@@ -11,170 +11,171 @@ import org.polarsys.capella.docgen.diagram.CapellaHelper;
 import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 
 public class DiagramNavigationTree {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized DiagramNavigationTree create(String lineSeparator) {
-		nl = lineSeparator;
-		DiagramNavigationTree result = new DiagramNavigationTree();
-		nl = null;
-		return result;
-	}
+    public static synchronized DiagramNavigationTree create(String lineSeparator) {
+        nl = lineSeparator;
+        DiagramNavigationTree result = new DiagramNavigationTree();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "\t<h2>Diagrams</h2>" + NL + "\t";
-	protected final String TEXT_2 = NL + "\t<br>" + NL + "\t" + NL + "\t";
-	protected final String TEXT_3 = NL + "\t";
-	protected final String TEXT_4 = NL;
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public DiagramNavigationTree() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "\t<h2>Diagrams</h2>" + NL + "\t";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL + "\t<br>" + NL + "\t" + NL + "\t";
 
-	}
+    protected final String TEXT_3 = NL + "\t";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL;
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    public DiagramNavigationTree() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-		List<Object> elementList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
-		List<Object> outputFolderList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
-		List<Object> projectNameList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		for (Object elementParameter : elementList) {
-			for (Object outputFolderParameter : outputFolderList) {
-				for (Object projectNameParameter : projectNameList) {
+    }
 
-					this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
-					this.outputFolder = (java.lang.String) outputFolderParameter;
-					this.projectName = (java.lang.String) projectNameParameter;
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-					if (preCondition(ctx)) {
-						ctx.setNode(new Node.Container(currentNode, getClass()));
-						orchestration(ctx);
-					}
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-				}
-			}
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+        List<Object> elementList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
+        List<Object> outputFolderList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
+        List<Object> projectNameList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-		stringBuffer.append(TEXT_4);
-		stringBuffer.append(TEXT_4);
-		return stringBuffer.toString();
-	}
+        for (Object elementParameter : elementList) {
+            for (Object outputFolderParameter : outputFolderList) {
+                for (Object projectNameParameter : projectNameList) {
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+                    this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
+                    this.outputFolder = (java.lang.String) outputFolderParameter;
+                    this.projectName = (java.lang.String) projectNameParameter;
 
-		method_body(new StringBuffer(), ictx);
+                    if (preCondition(ctx)) {
+                        ctx.setNode(new Node.Container(currentNode, getClass()));
+                        orchestration(ctx);
+                    }
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("element", this.element);
-			parameterValues.put("outputFolder", this.outputFolder);
-			parameterValues.put("projectName", this.projectName);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+                }
+            }
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+        stringBuffer.append(TEXT_4);
+        stringBuffer.append(TEXT_4);
+        return stringBuffer.toString();
+    }
 
-	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-		this.element = object;
-	}
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-	protected java.lang.String outputFolder = null;
+        method_body(new StringBuffer(), ictx);
 
-	public void set_outputFolder(java.lang.String object) {
-		this.outputFolder = object;
-	}
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("element", this.element);
+            parameterValues.put("outputFolder", this.outputFolder);
+            parameterValues.put("projectName", this.projectName);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-	protected java.lang.String projectName = null;
+    protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-	public void set_projectName(java.lang.String object) {
-		this.projectName = object;
-	}
+    public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+        this.element = object;
+    }
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("element", this.element);
-		parameters.put("outputFolder", this.outputFolder);
-		parameters.put("projectName", this.projectName);
-		return parameters;
-	}
+    protected java.lang.String outputFolder = null;
 
-	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+    public void set_outputFolder(java.lang.String object) {
+        this.outputFolder = object;
+    }
 
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
-		String treeID = TreeServices.DIAGRAMS_TREE_ID;
+    protected java.lang.String projectName = null;
 
-		if (element instanceof BlockArchitecture) {
-			if (CapellaHelper.hostDiagrams((BlockArchitecture) element)) {
+    public void set_projectName(java.lang.String object) {
+        this.projectName = object;
+    }
 
-				stringBuffer.append(TEXT_1);
-				{
-					//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlHeader" args="element:parameter, treeID:treeID"%>
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("element", this.element);
+        parameters.put("outputFolder", this.outputFolder);
+        parameters.put("projectName", this.projectName);
+        return parameters;
+    }
 
-					InternalPatternContext ictx = (InternalPatternContext) ctx;
-					new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
-					stringBuffer.setLength(0);
+    protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-					final Map<String, Object> callParameters = new HashMap<String, Object>();
-					callParameters.put("parameter", element);
-					callParameters.put("treeID", treeID);
-					CallHelper.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_V6ybEJ52EemYav3Xat9ApA",
-							new ExecutionContext((InternalPatternContext) ctx), callParameters);
-					stringBuffer.setLength(0);
-				}
+        String projectName = ctx.getValue("projectName").toString();
+        String outputFolder = ctx.getValue("outputFolder").toString();
+        String treeID = TreeServices.DIAGRAMS_TREE_ID;
 
-				stringBuffer.append(TEXT_2);
-				stringBuffer
-						.append(TreeServices.getDiagramsTree((BlockArchitecture) element, projectName, outputFolder));
-				stringBuffer.append(TEXT_3);
-				{
-					//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlFooter" args="element:parameter, treeID:treeID, false:collapsed"%>
+        if (element instanceof BlockArchitecture) {
+            if (CapellaHelper.hostDiagrams((BlockArchitecture) element)) {
 
-					InternalPatternContext ictx = (InternalPatternContext) ctx;
-					new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
-					stringBuffer.setLength(0);
+                stringBuffer.append(TEXT_1);
+                {
+                    //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlHeader" args="element:parameter, treeID:treeID"%>
 
-					final Map<String, Object> callParameters = new HashMap<String, Object>();
-					callParameters.put("parameter", element);
-					callParameters.put("treeID", treeID);
-					callParameters.put("collapsed", false);
-					CallHelper.executeWithParameterInjection(
-							"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_-tPnEJ8dEemYav3Xat9ApA",
-							new ExecutionContext((InternalPatternContext) ctx), callParameters);
-					stringBuffer.setLength(0);
-				}
+                    InternalPatternContext ictx = (InternalPatternContext) ctx;
+                    new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+                    stringBuffer.setLength(0);
 
-				stringBuffer.append(TEXT_3);
+                    final Map<String, Object> callParameters = new HashMap<String, Object>();
+                    callParameters.put("parameter", element);
+                    callParameters.put("treeID", treeID);
+                    CallHelper.executeWithParameterInjection("platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_V6ybEJ52EemYav3Xat9ApA",
+                            new ExecutionContext((InternalPatternContext) ctx), callParameters);
+                    stringBuffer.setLength(0);
+                }
 
-			}
-		}
+                stringBuffer.append(TEXT_2);
+                stringBuffer.append(TreeServices.getDiagramsTree((BlockArchitecture) element, projectName, outputFolder));
+                stringBuffer.append(TEXT_3);
+                {
+                    //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlFooter" args="element:parameter, treeID:treeID, false:collapsed"%>
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
-	}
+                    InternalPatternContext ictx = (InternalPatternContext) ctx;
+                    new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+                    stringBuffer.setLength(0);
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return element instanceof BlockArchitecture && CapellaDocgenPreferenceHelper.isExportDiagramTree();
-	}
+                    final Map<String, Object> callParameters = new HashMap<String, Object>();
+                    callParameters.put("parameter", element);
+                    callParameters.put("treeID", treeID);
+                    callParameters.put("collapsed", false);
+                    CallHelper.executeWithParameterInjection("platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_-tPnEJ8dEemYav3Xat9ApA",
+                            new ExecutionContext((InternalPatternContext) ctx), callParameters);
+                    stringBuffer.setLength(0);
+                }
+
+                stringBuffer.append(TEXT_3);
+
+            }
+        }
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return element instanceof BlockArchitecture && CapellaDocgenPreferenceHelper.isExportDiagramTree();
+    }
 }

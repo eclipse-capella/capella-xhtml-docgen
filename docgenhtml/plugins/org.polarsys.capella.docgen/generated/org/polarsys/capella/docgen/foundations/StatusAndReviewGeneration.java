@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -15,143 +15,148 @@ import org.polarsys.capella.core.data.capellacore.EnumerationPropertyType;
 import org.polarsys.capella.core.model.handler.helpers.CapellaProjectHelper;
 
 public class StatusAndReviewGeneration {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized StatusAndReviewGeneration create(String lineSeparator) {
-		nl = lineSeparator;
-		StatusAndReviewGeneration result = new StatusAndReviewGeneration();
-		nl = null;
-		return result;
-	}
+    public static synchronized StatusAndReviewGeneration create(String lineSeparator) {
+        nl = lineSeparator;
+        StatusAndReviewGeneration result = new StatusAndReviewGeneration();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "\t<h2> Status and Review</h2>" + NL + "\t";
-	protected final String TEXT_2 = NL + "\t\t<p><b>Status:</b> ";
-	protected final String TEXT_3 = "</p>" + NL + "\t";
-	protected final String TEXT_4 = NL + "\t\t<p><b>Review:</b> </p>" + NL + "\t\t";
-	protected final String TEXT_5 = NL + "\t\t<p>";
-	protected final String TEXT_6 = NL;
-	protected final String TEXT_7 = NL + "<h2>Progress Overview</h2>";
-	protected final String TEXT_8 = NL + "No Progress information in this project";
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public StatusAndReviewGeneration() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "\t<h2> Status and Review</h2>" + NL + "\t";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL + "\t\t<p><b>Status:</b> ";
 
-	}
+    protected final String TEXT_3 = "</p>" + NL + "\t";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL + "\t\t<p><b>Review:</b> </p>" + NL + "\t\t";
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL + "\t\t<p>";
 
-		List<Object> elementList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL;
 
-		for (Object elementParameter : elementList) {
+    protected final String TEXT_7 = NL + "<h2>Progress Overview</h2>";
 
-			this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
+    protected final String TEXT_8 = NL + "No Progress information in this project";
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+    public StatusAndReviewGeneration() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		stringBuffer.append(TEXT_6);
-		stringBuffer.append(TEXT_6);
-		return stringBuffer.toString();
-	}
+    }
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-		method_genStatusAndReview(new StringBuffer(), ictx);
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-		method_genProgressOverview(new StringBuffer(), ictx);
+        List<Object> elementList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("element", this.element);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+        for (Object elementParameter : elementList) {
 
-	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+            this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
 
-	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-		this.element = object;
-	}
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("element", this.element);
-		return parameters;
-	}
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-	protected void method_genStatusAndReview(final StringBuffer stringBuffer, final PatternContext ctx)
-			throws Exception {
+        stringBuffer.append(TEXT_6);
+        stringBuffer.append(TEXT_6);
+        return stringBuffer.toString();
+    }
 
-		EnumerationPropertyLiteral status = element.getStatus();
-		String review = element.getReview();
-		if (status != null || (review != null && !review.isEmpty())) {
-			stringBuffer.append(TEXT_1);
-			if (status != null) {
-				String name = status.getName();
-				stringBuffer.append(TEXT_2);
-				stringBuffer.append(name);
-				stringBuffer.append(TEXT_3);
-			}
-			if (review != null && !review.isEmpty()) {
-				stringBuffer.append(TEXT_4);
-				review = review.replace("\n", "").replace("\r", "</br>");
-				stringBuffer.append(TEXT_5);
-				stringBuffer.append(review);
-				stringBuffer.append(TEXT_3);
-			}
-		}
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-		stringBuffer.append(TEXT_6);
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "genStatusAndReview", stringBuffer.toString());
-	}
+        method_genStatusAndReview(new StringBuffer(), ictx);
 
-	protected void method_genProgressOverview(final StringBuffer stringBuffer, final PatternContext ctx)
-			throws Exception {
+        method_genProgressOverview(new StringBuffer(), ictx);
 
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("element", this.element);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-		stringBuffer.append(TEXT_6);
-		if (element instanceof Project) {
-			stringBuffer.append(TEXT_7);
-			EnumerationPropertyType progressStatus = CapellaProjectHelper.getEnumerationPropertyType(element,
-					CapellaProjectHelper.PROGRESS_STATUS_KEYWORD);
-			if (progressStatus != null) {
-				stringBuffer.append(TEXT_6);
-				stringBuffer.append(new ProgressHelper(projectName, outputFolder).generateProgressTable(element));
-			} else {
-				stringBuffer.append(TEXT_8);
-			}
-		}
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "genProgressOverview", stringBuffer.toString());
-	}
+    protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return CapellaDocgenPreferenceHelper.isExportStatusAndReview();
-	}
+    public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+        this.element = object;
+    }
+
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("element", this.element);
+        return parameters;
+    }
+
+    protected void method_genStatusAndReview(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        EnumerationPropertyLiteral status = element.getStatus();
+        String review = element.getReview();
+        if (status != null || (review != null && !review.isEmpty())) {
+            stringBuffer.append(TEXT_1);
+            if (status != null) {
+                String name = status.getName();
+                stringBuffer.append(TEXT_2);
+                stringBuffer.append(name);
+                stringBuffer.append(TEXT_3);
+            }
+            if (review != null && !review.isEmpty()) {
+                stringBuffer.append(TEXT_4);
+                review = review.replace("\n", "").replace("\r", "</br>");
+                stringBuffer.append(TEXT_5);
+                stringBuffer.append(review);
+                stringBuffer.append(TEXT_3);
+            }
+        }
+
+        stringBuffer.append(TEXT_6);
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "genStatusAndReview", stringBuffer.toString());
+    }
+
+    protected void method_genProgressOverview(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        String projectName = ctx.getValue("projectName").toString();
+        String outputFolder = ctx.getValue("outputFolder").toString();
+
+        stringBuffer.append(TEXT_6);
+        if (element instanceof Project) {
+            stringBuffer.append(TEXT_7);
+            EnumerationPropertyType progressStatus = CapellaProjectHelper.getEnumerationPropertyType(element, CapellaProjectHelper.PROGRESS_STATUS_KEYWORD);
+            if (progressStatus != null) {
+                stringBuffer.append(TEXT_6);
+                stringBuffer.append(new ProgressHelper(projectName, outputFolder).generateProgressTable(element));
+            } else {
+                stringBuffer.append(TEXT_8);
+            }
+        }
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "genProgressOverview", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return CapellaDocgenPreferenceHelper.isExportStatusAndReview();
+    }
 }
