@@ -17,6 +17,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.egf.core.producer.InvocationException;
 import org.eclipse.egf.core.producer.MissingExtensionException;
@@ -40,6 +41,7 @@ import org.polarsys.capella.core.commandline.core.AbstractCommandLine;
 import org.polarsys.capella.core.commandline.core.CommandLineException;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
+import org.polarsys.kitalpha.doc.gen.business.core.exceptions.DocgenRuntimeException;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelper;
 
@@ -147,7 +149,7 @@ public class HTMLCommandLine extends AbstractCommandLine {
 
 	private boolean executeEGFActivity(Activity capellaLauncher, final String outputFolder, final URI uri) {
 
-		boolean success = false;
+		boolean success = true;
 		String prefix = Messages.exec_pb;
 
 		// create output folder in the project
@@ -159,11 +161,11 @@ public class HTMLCommandLine extends AbstractCommandLine {
 			} catch (CoreException e) {
 				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
 				logError(message.toString());
-				return false;
+				success = false;
 			}
 		}
 
-		if (capellaLauncher instanceof FactoryComponent) {
+		if (success && capellaLauncher instanceof FactoryComponent) {
 			String relativeFilePath = getRelativeFilePath(outputFolder);
 			String projectName = getProjectName(outputFolder);
 
@@ -172,29 +174,15 @@ public class HTMLCommandLine extends AbstractCommandLine {
 			setContract(factoryComponent, "outputFolder", relativeFilePath + "/output"); //$NON-NLS-1$ //$NON-NLS-2$
 			setDomain(factoryComponent, uri);
 
-			// run the activity
-			try {
-				InvokeActivityHelper.invokeOutOfUIThread(factoryComponent);
-				success = true;
-
-			} catch (MissingExtensionException e) {
-				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-				logError(message.toString());
-				return false;
-
-			} catch (InvocationException e) {
-				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-				logError(message.toString());
-				return false;
-
-			} catch (CoreException e) {
-				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-				logError(message.toString());
-				return false;
-			}
-
-		} else {
-			success = false;
+            // run the activity
+            try {
+                InvokeActivityHelper.invokeOutOfUIThread(factoryComponent);
+                success = true;
+            } catch (DocgenRuntimeException | MissingExtensionException | InvocationException | CoreException e) {
+                StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
+                logError(message.toString());
+                success = false;
+            }
 		}
 		return success;
 	}

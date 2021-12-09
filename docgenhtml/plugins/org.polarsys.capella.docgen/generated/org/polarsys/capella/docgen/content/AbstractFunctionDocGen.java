@@ -82,7 +82,7 @@ public class AbstractFunctionDocGen extends org.polarsys.capella.docgen.foundati
     protected final String TEXT_18 = NL + "<h2>Modes and States</h2>";
 
     public AbstractFunctionDocGen() {
-        // Here is the constructor
+        //Here is the constructor
         StringBuffer stringBuffer = new StringBuffer();
 
         // add initialisation of the pattern variables (declaration has been already done).
@@ -99,7 +99,7 @@ public class AbstractFunctionDocGen extends org.polarsys.capella.docgen.foundati
         Node.Container currentNode = ctx.getNode();
 
         List<Object> parameterList = null;
-        // this pattern can only be called by another (i.e. it's not an entry point in execution)
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
         for (Object parameterParameter : parameterList) {
 

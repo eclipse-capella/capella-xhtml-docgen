@@ -18,6 +18,8 @@ public class Messages extends NLS {
 	
 	public static String docgenDiagramTargetNull;
 	public static String elementTypeNotHandled;
+	public static String capellaVersionMismatch;
+	public static String docgenVersionNotFound;
 	
 	static {
 		// initialize resource bundle
