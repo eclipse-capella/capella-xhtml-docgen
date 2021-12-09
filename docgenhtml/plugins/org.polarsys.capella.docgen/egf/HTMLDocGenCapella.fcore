@@ -809,6 +809,7 @@
       </viewpoints>
     </viewpointContainer>
     <orchestration xmi:type="fprod:ProductionPlan" xmi:id="_BcMYgNz-Ed-Vzvs7Wt1vzQ">
+      <invocations xmi:id="_9aMU0Fy-EeyWat65PgDwjg" name="Check Capella version" invokedActivity="#_uP6GgFy_EeyWat65PgDwjg"/>
       <invocations xmi:id="_3X7gIJ2NEemJ2K-s0Y7hRg" name="Initi runtime parameters (File name service)"
           invokedActivity="#_UQifoJ2NEemJ2K-s0Y7hRg"/>
       <invocations xmi:id="_3X87AJi7EemmGrHrkYlNKg" name="Load page extensions" invokedActivity="ftask:Task platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_QF8EsJgtEemmGrHrkYlNKg">
@@ -950,6 +951,8 @@
       </invocations>
     </orchestration>
   </fcore:FactoryComponent>
+  <ftask:Task xmi:id="_uP6GgFy_EeyWat65PgDwjg" name="CheckCapellaVersion" kind="java"
+      implementation="org.polarsys.capella.docgen.task.CheckCapellaVersionTask"/>
   <ftask:Task xmi:id="_MtkCwUsFEeSfyeTEy5zUcw" name="Update.Documentation.Branding.Data"
       kind="java" implementation="org.polarsys.capella.docgen.task.UpdateCapellaDocGenBrandingData">
     <contractContainer xmi:id="_Q1dsQEsFEeSfyeTEy5zUcw">

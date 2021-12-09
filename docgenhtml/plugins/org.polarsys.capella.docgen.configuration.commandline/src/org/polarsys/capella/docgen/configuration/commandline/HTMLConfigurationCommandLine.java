@@ -13,7 +13,6 @@
 
 package org.polarsys.capella.docgen.configuration.commandline;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFolder;
@@ -48,6 +47,7 @@ import org.polarsys.capella.core.commandline.core.CommandLineException;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
 import org.polarsys.capella.docgen.configuration.ui.utils.ConfigurationUtils;
+import org.polarsys.kitalpha.doc.gen.business.core.exceptions.DocgenRuntimeException;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeElementStrategy;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.ScopeException;
@@ -231,7 +231,7 @@ public class HTMLConfigurationCommandLine extends AbstractCommandLine {
 
 	private boolean executeEGFActivity(Activity capellaLauncher, final String outputFolder, final URI uri) {
 
-		boolean success = false;
+		boolean success = true;
 		String prefix = Messages.exec_pb;
 
 		// create output folder in the project
@@ -243,11 +243,11 @@ public class HTMLConfigurationCommandLine extends AbstractCommandLine {
 			} catch (CoreException e) {
 				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
 				logError(message.toString());
-				return false;
+				success = false;
 			}
 		}
 
-		if (capellaLauncher instanceof FactoryComponent) {
+		if (success && capellaLauncher instanceof FactoryComponent) {
 			String relativeFilePath = getRelativeFilePath(outputFolder);
 			String projectName = getProjectName(outputFolder);
 
@@ -257,25 +257,14 @@ public class HTMLConfigurationCommandLine extends AbstractCommandLine {
 			setDomain(factoryComponent, uri);
 
 			// run the activity
-			try {
-				InvokeActivityHelper.invokeOutOfUIThread(factoryComponent);
-				success = true;
-
-			} catch (MissingExtensionException e) {
-				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-				logError(message.toString());
-				return false;
-
-			} catch (InvocationException e) {
-				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-				logError(message.toString());
-				return false;
-
-			} catch (CoreException e) {
-				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-				logError(message.toString());
-				return false;
-			}
+            try {
+                InvokeActivityHelper.invokeOutOfUIThread(factoryComponent);
+                success = true;
+            } catch (DocgenRuntimeException | MissingExtensionException | InvocationException | CoreException e) {
+                StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
+                logError(message.toString());
+                success = false;
+            }
 
 		} else {
 			success = false;
