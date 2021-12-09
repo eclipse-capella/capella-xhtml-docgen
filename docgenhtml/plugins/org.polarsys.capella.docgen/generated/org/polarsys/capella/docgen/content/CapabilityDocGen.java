@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -12,178 +12,181 @@ import org.polarsys.capella.docgen.util.pattern.helper.CapellaCapabilityHelper;
 import org.polarsys.capella.core.data.ctx.Capability;
 
 public class CapabilityDocGen extends org.polarsys.capella.docgen.content.packageDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized CapabilityDocGen create(String lineSeparator) {
-		nl = lineSeparator;
-		CapabilityDocGen result = new CapabilityDocGen();
-		nl = null;
-		return result;
-	}
+    public static synchronized CapabilityDocGen create(String lineSeparator) {
+        nl = lineSeparator;
+        CapabilityDocGen result = new CapabilityDocGen();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = NL + "<h2>Exploiting Missions</h2>";
-	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "<h2>Involved Actors</h2>";
-	protected final String TEXT_4 = NL + "<h2>Relationships with other Capabilities</h2>";
-	protected final String TEXT_5 = NL + "<h3>Extended Capabilities</h3>";
-	protected final String TEXT_6 = NL + "<h3>Included Capabilities</h3>";
-	protected final String TEXT_7 = NL + NL + "<h3>Super</h3>";
-	protected final String TEXT_8 = NL + "<h2>Related Functions</h2>";
-	protected final String TEXT_9 = NL + "<h2>Modes and States</h2>";
-	protected final String TEXT_10 = NL + NL + NL;
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public CapabilityDocGen() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = NL + "<h2>Exploiting Missions</h2>";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL;
 
-	}
+    protected final String TEXT_3 = NL + "<h2>Involved Actors</h2>";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL + "<h2>Relationships with other Capabilities</h2>";
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL + "<h3>Extended Capabilities</h3>";
 
-		List<Object> parameterList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL + "<h3>Included Capabilities</h3>";
 
-		for (Object parameterParameter : parameterList) {
+    protected final String TEXT_7 = NL + NL + "<h3>Super</h3>";
 
-			this.parameter = (org.polarsys.capella.core.data.capellacore.Structure) parameterParameter;
+    protected final String TEXT_8 = NL + "<h2>Related Functions</h2>";
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+    protected final String TEXT_9 = NL + "<h2>Modes and States</h2>";
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    protected final String TEXT_10 = NL + NL + NL;
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
-		return stringBuffer.toString();
-	}
+    public CapabilityDocGen() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		super.orchestration(new SuperOrchestrationContext(ictx));
+    }
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("parameter", this.parameter);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("parameter", this.parameter);
-		return parameters;
-	}
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        List<Object> parameterList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-		super.method_content(new StringBuffer(), ctx);
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
+        for (Object parameterParameter : parameterList) {
 
-		Collection<String> exploitingMissions = CapellaCapabilityHelper.INSTANCE.getExploitingMissions(projectName,
-				outputFolder, (Capability) parameter);
+            this.parameter = (org.polarsys.capella.core.data.capellacore.Structure) parameterParameter;
 
-		if (exploitingMissions.size() > 0) {
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-			stringBuffer.append(TEXT_1);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(exploitingMissions));
-			stringBuffer.append(TEXT_2);
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-		}
-		Collection<String> actors = CapellaCapabilityHelper.INSTANCE.getInvolvedActors(projectName, outputFolder,
-				(Capability) parameter);
+        stringBuffer.append(TEXT_2);
+        stringBuffer.append(TEXT_2);
+        return stringBuffer.toString();
+    }
 
-		if (actors.size() > 0) {
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(actors));
+        super.orchestration(new SuperOrchestrationContext(ictx));
 
-		}
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("parameter", this.parameter);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-		Collection<String> extendedCapabilities = CapellaCapabilityHelper.INSTANCE.getExtendedCapabilities(projectName,
-				outputFolder, (Capability) parameter);
-		Collection<String> includedCapabilities = CapellaCapabilityHelper.INSTANCE.getIncludedCapabilities(projectName,
-				outputFolder, (Capability) parameter);
-		Collection<String> superCapabilities = CapellaCapabilityHelper.INSTANCE.getParentCapabilities(projectName,
-				outputFolder, (Capability) parameter);
-		if ((extendedCapabilities.size() > 0) || (includedCapabilities.size() > 0) || (superCapabilities.size() > 0)) {
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("parameter", this.parameter);
+        return parameters;
+    }
 
-			stringBuffer.append(TEXT_4);
+    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		}
-		if (extendedCapabilities.size() > 0) {
+        super.method_content(new StringBuffer(), ctx);
+        String projectName = ctx.getValue("projectName").toString();
+        String outputFolder = ctx.getValue("outputFolder").toString();
 
-			stringBuffer.append(TEXT_5);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(extendedCapabilities));
+        Collection<String> exploitingMissions = CapellaCapabilityHelper.INSTANCE.getExploitingMissions(projectName, outputFolder, (Capability) parameter);
 
-		}
+        if (exploitingMissions.size() > 0) {
 
-		if (includedCapabilities.size() > 0) {
+            stringBuffer.append(TEXT_1);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(exploitingMissions));
+            stringBuffer.append(TEXT_2);
 
-			stringBuffer.append(TEXT_6);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(includedCapabilities));
+        }
+        Collection<String> actors = CapellaCapabilityHelper.INSTANCE.getInvolvedActors(projectName, outputFolder, (Capability) parameter);
 
-		}
+        if (actors.size() > 0) {
 
-		if (superCapabilities.size() > 0) {
+            stringBuffer.append(TEXT_3);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(actors));
 
-			stringBuffer.append(TEXT_7);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(superCapabilities));
-			stringBuffer.append(TEXT_2);
+        }
 
-		}
-		Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectName,
-				outputFolder, (Capability) parameter);
+        Collection<String> extendedCapabilities = CapellaCapabilityHelper.INSTANCE.getExtendedCapabilities(projectName, outputFolder, (Capability) parameter);
+        Collection<String> includedCapabilities = CapellaCapabilityHelper.INSTANCE.getIncludedCapabilities(projectName, outputFolder, (Capability) parameter);
+        Collection<String> superCapabilities = CapellaCapabilityHelper.INSTANCE.getParentCapabilities(projectName, outputFolder, (Capability) parameter);
+        if ((extendedCapabilities.size() > 0) || (includedCapabilities.size() > 0) || (superCapabilities.size() > 0)) {
 
-		if (involvedFunctions.size() > 0) {
+            stringBuffer.append(TEXT_4);
 
-			stringBuffer.append(TEXT_8);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(involvedFunctions));
+        }
+        if (extendedCapabilities.size() > 0) {
 
-		}
+            stringBuffer.append(TEXT_5);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(extendedCapabilities));
 
-		Collection<String> availableModeAndState = CapellaCapabilityHelper.INSTANCE
-				.getAvailableModeAndState(projectName, outputFolder, (Capability) parameter);
+        }
 
-		if (availableModeAndState.size() > 0) {
+        if (includedCapabilities.size() > 0) {
 
-			stringBuffer.append(TEXT_9);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
+            stringBuffer.append(TEXT_6);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(includedCapabilities));
 
-		}
+        }
 
-		stringBuffer.append(TEXT_10);
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-	}
+        if (superCapabilities.size() > 0) {
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return (this.parameter instanceof Capability);
-	}
+            stringBuffer.append(TEXT_7);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(superCapabilities));
+            stringBuffer.append(TEXT_2);
+
+        }
+        Collection<String> involvedFunctions = CapellaCapabilityHelper.INSTANCE.getInvolvedFunctions(projectName, outputFolder, (Capability) parameter);
+
+        if (involvedFunctions.size() > 0) {
+
+            stringBuffer.append(TEXT_8);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(involvedFunctions));
+
+        }
+
+        Collection<String> availableModeAndState = CapellaCapabilityHelper.INSTANCE.getAvailableModeAndState(projectName, outputFolder, (Capability) parameter);
+
+        if (availableModeAndState.size() > 0) {
+
+            stringBuffer.append(TEXT_9);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
+
+        }
+
+        stringBuffer.append(TEXT_10);
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return (this.parameter instanceof Capability);
+    }
 }

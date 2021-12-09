@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.content;
 
 import java.util.*;
@@ -11,156 +11,156 @@ import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.oa.OperationalProcess;
 
 public class FunctionalChainGenDoc extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized FunctionalChainGenDoc create(String lineSeparator) {
-		nl = lineSeparator;
-		FunctionalChainGenDoc result = new FunctionalChainGenDoc();
-		nl = null;
-		return result;
-	}
+    public static synchronized FunctionalChainGenDoc create(String lineSeparator) {
+        nl = lineSeparator;
+        FunctionalChainGenDoc result = new FunctionalChainGenDoc();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Modes and States</h2>";
-	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "<h2>Involved activities</h2>";
-	protected final String TEXT_4 = NL + "<h2>Involved functions</h2>";
-	protected final String TEXT_5 = NL + "<h2>Involved interactions</h2>";
-	protected final String TEXT_6 = NL + "<h2>Involved functional exchanges</h2>";
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public FunctionalChainGenDoc() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "<h2>Modes and States</h2>";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL;
 
-	}
+    protected final String TEXT_3 = NL + "<h2>Involved activities</h2>";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL + "<h2>Involved functions</h2>";
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL + "<h2>Involved interactions</h2>";
 
-		List<Object> parameterList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL + "<h2>Involved functional exchanges</h2>";
 
-		for (Object parameterParameter : parameterList) {
+    public FunctionalChainGenDoc() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-			this.parameter = (org.polarsys.capella.core.data.fa.FunctionalChain) parameterParameter;
+        // add initialisation of the pattern variables (declaration has been already done).
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+    }
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
-		return stringBuffer.toString();
-	}
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+        List<Object> parameterList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-		super.orchestration(new SuperOrchestrationContext(ictx));
+        for (Object parameterParameter : parameterList) {
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("parameter", this.parameter);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+            this.parameter = (org.polarsys.capella.core.data.fa.FunctionalChain) parameterParameter;
 
-	protected org.polarsys.capella.core.data.fa.FunctionalChain parameter = null;
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-	public void set_parameter(org.polarsys.capella.core.data.fa.FunctionalChain object) {
-		this.parameter = object;
-	}
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("parameter", this.parameter);
-		return parameters;
-	}
+        stringBuffer.append(TEXT_2);
+        stringBuffer.append(TEXT_2);
+        return stringBuffer.toString();
+    }
 
-	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-		super.method_content(new StringBuffer(), ctx);
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
+        super.orchestration(new SuperOrchestrationContext(ictx));
 
-		Collection<String> availableModeAndState = FunctionalChainHelper.getAvailableModeAndState(projectName,
-				outputFolder, (FunctionalChain) parameter);
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("parameter", this.parameter);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-		if (availableModeAndState.size() > 0) {
+    protected org.polarsys.capella.core.data.fa.FunctionalChain parameter = null;
 
-			stringBuffer.append(TEXT_1);
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
+    public void set_parameter(org.polarsys.capella.core.data.fa.FunctionalChain object) {
+        this.parameter = object;
+    }
 
-		}
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("parameter", this.parameter);
+        return parameters;
+    }
 
-		Map<String, String> functionAndDesc = FunctionalChainHelper
-				.getAvailableFunctionWithInvolvementDescription(projectName, outputFolder, (FunctionalChain) parameter);
+    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		if (functionAndDesc.size() > 0) {
-			if (parameter instanceof OperationalProcess) {
+        super.method_content(new StringBuffer(), ctx);
+        String projectName = ctx.getValue("projectName").toString();
+        String outputFolder = ctx.getValue("outputFolder").toString();
 
-				stringBuffer.append(TEXT_3);
-				stringBuffer.append(TEXT_2);
-				stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Activity", "Involvement Description"));
+        Collection<String> availableModeAndState = FunctionalChainHelper.getAvailableModeAndState(projectName, outputFolder, (FunctionalChain) parameter);
 
-			} else {
+        if (availableModeAndState.size() > 0) {
 
-				stringBuffer.append(TEXT_4);
-				stringBuffer.append(TEXT_2);
-				stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description"));
+            stringBuffer.append(TEXT_1);
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(StringUtil.stringListToBulette(availableModeAndState));
 
-			}
-		}
+        }
 
-		Map<String, String> functionalExchangesAndDesc = FunctionalChainHelper
-				.getInvolvedFunctionalExchanges(projectName, outputFolder, (FunctionalChain) parameter);
+        Map<String, String> functionAndDesc = FunctionalChainHelper.getAvailableFunctionWithInvolvementDescription(projectName, outputFolder, (FunctionalChain) parameter);
 
-		if (functionalExchangesAndDesc.size() > 0) {
-			if (parameter instanceof OperationalProcess) {
+        if (functionAndDesc.size() > 0) {
+            if (parameter instanceof OperationalProcess) {
 
-				stringBuffer.append(TEXT_5);
-				stringBuffer.append(TEXT_2);
-				stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Interaction",
-						"Involvement Description"));
+                stringBuffer.append(TEXT_3);
+                stringBuffer.append(TEXT_2);
+                stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Activity", "Involvement Description"));
 
-			} else {
+            } else {
 
-				stringBuffer.append(TEXT_6);
-				stringBuffer.append(TEXT_2);
-				stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange",
-						"Involvement Description"));
+                stringBuffer.append(TEXT_4);
+                stringBuffer.append(TEXT_2);
+                stringBuffer.append(StringUtil.mapToHTMLTable(functionAndDesc, "Function", "Involvement Description"));
 
-			}
-		}
+            }
+        }
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-	}
+        Map<String, String> functionalExchangesAndDesc = FunctionalChainHelper.getInvolvedFunctionalExchanges(projectName, outputFolder, (FunctionalChain) parameter);
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
-			throws Exception {
+        if (functionalExchangesAndDesc.size() > 0) {
+            if (parameter instanceof OperationalProcess) {
 
-		element = parameter;
+                stringBuffer.append(TEXT_5);
+                stringBuffer.append(TEXT_2);
+                stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Interaction", "Involvement Description"));
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
-	}
+            } else {
+
+                stringBuffer.append(TEXT_6);
+                stringBuffer.append(TEXT_2);
+                stringBuffer.append(StringUtil.mapToHTMLTable(functionalExchangesAndDesc, "Functional Exchange", "Involvement Description"));
+
+            }
+        }
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+    }
+
+    protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        element = parameter;
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
+    }
 }

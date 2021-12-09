@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.2.202001031546
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -18,161 +18,160 @@ import org.polarsys.capella.docgen.util.pattern.helper.CapellaComponentPortHelpe
 import org.polarsys.capella.core.data.fa.ComponentPort;
 
 public class ComponentPortDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized ComponentPortDocGen create(String lineSeparator) {
-		nl = lineSeparator;
-		ComponentPortDocGen result = new ComponentPortDocGen();
-		nl = null;
-		return result;
-	}
+    public static synchronized ComponentPortDocGen create(String lineSeparator) {
+        nl = lineSeparator;
+        ComponentPortDocGen result = new ComponentPortDocGen();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "";
-	protected final String TEXT_2 = NL + "<h2>Provided Interfaces</h2>";
-	protected final String TEXT_3 = NL;
-	protected final String TEXT_4 = NL + "<h2>Required Interfaces</h2>";
-	protected final String TEXT_5 = NL + "<h2>Component Exchanges</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Exchange</th>" + NL + "\t\t<th>Opposite Port</th>" + NL + "\t\t<th>Opposite Component</th>" + NL
-			+ "\t\t<th>Description</th>" + NL + "\t</tr>" + NL + "\t";
-	protected final String TEXT_6 = NL + "\t";
-	protected final String TEXT_7 = NL + "</table>";
-	protected final String TEXT_8 = NL + "<h2>Component Delegations</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>"
-			+ NL + "\t\t<th>Delegation</th>" + NL + "\t\t<th>Opposite Port</th>" + NL
-			+ "\t\t<th>Opposite Component</th>" + NL + "\t\t<th>Description</th>" + NL + "\t</tr>" + NL + "\t";
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public ComponentPortDocGen() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL + "<h2>Provided Interfaces</h2>";
 
-	}
+    protected final String TEXT_3 = NL;
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL + "<h2>Required Interfaces</h2>";
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL + "<h2>Component Exchanges</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Exchange</th>" + NL + "\t\t<th>Opposite Port</th>" + NL
+            + "\t\t<th>Opposite Component</th>" + NL + "\t\t<th>Description</th>" + NL + "\t</tr>" + NL + "\t";
 
-		List<Object> parameterList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    protected final String TEXT_6 = NL + "\t";
 
-		for (Object parameterParameter : parameterList) {
+    protected final String TEXT_7 = NL + "</table>";
 
-			this.parameter = (org.polarsys.capella.core.data.fa.ComponentPort) parameterParameter;
+    protected final String TEXT_8 = NL + "<h2>Component Delegations</h2>" + NL + "" + NL + "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Delegation</th>" + NL + "\t\t<th>Opposite Port</th>" + NL
+            + "\t\t<th>Opposite Component</th>" + NL + "\t\t<th>Description</th>" + NL + "\t</tr>" + NL + "\t";
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+    public ComponentPortDocGen() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+        // add initialisation of the pattern variables (declaration has been already done).
 
-		stringBuffer.append(TEXT_3);
-		stringBuffer.append(TEXT_3);
-		return stringBuffer.toString();
-	}
+    }
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-		super.orchestration(new SuperOrchestrationContext(ictx));
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("parameter", this.parameter);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+        List<Object> parameterList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-	protected org.polarsys.capella.core.data.fa.ComponentPort parameter = null;
+        for (Object parameterParameter : parameterList) {
 
-	public void set_parameter(org.polarsys.capella.core.data.fa.ComponentPort object) {
-		this.parameter = object;
-	}
+            this.parameter = (org.polarsys.capella.core.data.fa.ComponentPort) parameterParameter;
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("parameter", this.parameter);
-		return parameters;
-	}
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-		super.method_content(new StringBuffer(), ctx);
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
+        stringBuffer.append(TEXT_3);
+        stringBuffer.append(TEXT_3);
+        return stringBuffer.toString();
+    }
 
-		stringBuffer.append(TEXT_1);
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-		Map<String, String> providedInterfaces = CapellaComponentPortHelper.getProvidedInterfaces(parameter,
-				projectName, outputFolder);
-		if (providedInterfaces.size() > 0) {
+        super.orchestration(new SuperOrchestrationContext(ictx));
 
-			stringBuffer.append(TEXT_2);
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(StringUtil.mapToHTMLTable(providedInterfaces, "Interface", "Exchange Items"));
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("parameter", this.parameter);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-		}
-		Map<String, String> requiredInterfaces = CapellaComponentPortHelper.getRequiredInterfaces(parameter,
-				projectName, outputFolder);
-		if (requiredInterfaces.size() > 0) {
-			stringBuffer.append(TEXT_4);
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(StringUtil.mapToHTMLTable(requiredInterfaces, "Interface", "Exchange Items"));
+    protected org.polarsys.capella.core.data.fa.ComponentPort parameter = null;
 
-		}
-		Collection<ComponentExchange> componentExchanges = CapellaComponentPortHelper
-				.getComponentPortExchanges(parameter, projectName, outputFolder);
-		if (componentExchanges.size() > 0) {
+    public void set_parameter(org.polarsys.capella.core.data.fa.ComponentPort object) {
+        this.parameter = object;
+    }
 
-			stringBuffer.append(TEXT_5);
-			for (ComponentExchange componentExchange : componentExchanges) {
-				stringBuffer.append(TEXT_6);
-				stringBuffer.append(CapellaComponentPortHelper.componentExchangeToTableLine(parameter,
-						componentExchange, projectName, outputFolder));
-				stringBuffer.append(TEXT_6);
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("parameter", this.parameter);
+        return parameters;
+    }
 
-			}
-			stringBuffer.append(TEXT_7);
+    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		}
-		Collection<ComponentExchange> componentDelegations = CapellaComponentPortHelper
-				.getComponentPortDelegations(parameter, projectName, outputFolder);
-		if (componentDelegations.size() > 0) {
+        super.method_content(new StringBuffer(), ctx);
+        String projectName = ctx.getValue("projectName").toString();
+        String outputFolder = ctx.getValue("outputFolder").toString();
 
-			stringBuffer.append(TEXT_8);
-			for (ComponentExchange componentDelegation : componentDelegations) {
-				stringBuffer.append(TEXT_6);
-				stringBuffer.append(CapellaComponentPortHelper.componentExchangeToTableLine(parameter,
-						componentDelegation, projectName, outputFolder));
-				stringBuffer.append(TEXT_6);
+        stringBuffer.append(TEXT_1);
 
-			}
-			stringBuffer.append(TEXT_7);
+        Map<String, String> providedInterfaces = CapellaComponentPortHelper.getProvidedInterfaces(parameter, projectName, outputFolder);
+        if (providedInterfaces.size() > 0) {
 
-		}
+            stringBuffer.append(TEXT_2);
+            stringBuffer.append(TEXT_3);
+            stringBuffer.append(StringUtil.mapToHTMLTable(providedInterfaces, "Interface", "Exchange Items"));
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-	}
+        }
+        Map<String, String> requiredInterfaces = CapellaComponentPortHelper.getRequiredInterfaces(parameter, projectName, outputFolder);
+        if (requiredInterfaces.size() > 0) {
+            stringBuffer.append(TEXT_4);
+            stringBuffer.append(TEXT_3);
+            stringBuffer.append(StringUtil.mapToHTMLTable(requiredInterfaces, "Interface", "Exchange Items"));
 
-	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
-			throws Exception {
+        }
+        Collection<ComponentExchange> componentExchanges = CapellaComponentPortHelper.getComponentPortExchanges(parameter, projectName, outputFolder);
+        if (componentExchanges.size() > 0) {
 
-		element = parameter;
+            stringBuffer.append(TEXT_5);
+            for (ComponentExchange componentExchange : componentExchanges) {
+                stringBuffer.append(TEXT_6);
+                stringBuffer.append(CapellaComponentPortHelper.componentExchangeToTableLine(parameter, componentExchange, projectName, outputFolder));
+                stringBuffer.append(TEXT_6);
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
-	}
+            }
+            stringBuffer.append(TEXT_7);
+
+        }
+        Collection<ComponentExchange> componentDelegations = CapellaComponentPortHelper.getComponentPortDelegations(parameter, projectName, outputFolder);
+        if (componentDelegations.size() > 0) {
+
+            stringBuffer.append(TEXT_8);
+            for (ComponentExchange componentDelegation : componentDelegations) {
+                stringBuffer.append(TEXT_6);
+                stringBuffer.append(CapellaComponentPortHelper.componentExchangeToTableLine(parameter, componentDelegation, projectName, outputFolder));
+                stringBuffer.append(TEXT_6);
+
+            }
+            stringBuffer.append(TEXT_7);
+
+        }
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+    }
+
+    protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+
+        element = parameter;
+
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
+    }
 }

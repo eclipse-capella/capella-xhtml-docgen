@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.1.201906060805
+//Generated with EGF 1.6.3.202110291409
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -11,131 +11,132 @@ import org.polarsys.capella.core.data.oa.Entity;
 import org.polarsys.capella.docgen.util.pattern.helper.CapellaEntityHelper;
 
 public class EntityContentDocGen {
-	protected static String nl;
+    protected static String nl;
 
-	public static synchronized EntityContentDocGen create(String lineSeparator) {
-		nl = lineSeparator;
-		EntityContentDocGen result = new EntityContentDocGen();
-		nl = null;
-		return result;
-	}
+    public static synchronized EntityContentDocGen create(String lineSeparator) {
+        nl = lineSeparator;
+        EntityContentDocGen result = new EntityContentDocGen();
+        nl = null;
+        return result;
+    }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "<h2>Incoming Communication Means</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Source</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
-	protected final String TEXT_2 = NL + "\t";
-	protected final String TEXT_3 = NL + "</table>";
-	protected final String TEXT_4 = NL + "<h2>Outgoing Communication Means</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
-			+ "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Target</th>" + NL + "\t\t<th>Description</th>" + NL
-			+ "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
-	protected final String TEXT_5 = NL;
+    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
 
-	public EntityContentDocGen() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_1 = "<h2>Incoming Communication Means</h2>" + NL + "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Source</th>" + NL
+            + "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    protected final String TEXT_2 = NL + "\t";
 
-	}
+    protected final String TEXT_3 = NL + "</table>";
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+    protected final String TEXT_4 = NL + "<h2>Outgoing Communication Means</h2>" + NL + "<table>" + NL + "\t<tr>" + NL + "\t\t<th>Communication Means</th>" + NL + "\t\t<th>Target</th>" + NL
+            + "\t\t<th>Description</th>" + NL + "\t\t<th>Allocated Functional Exchanges</th>" + NL + "\t</tr>" + NL + "\t";
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    protected final String TEXT_5 = NL;
 
-		List<Object> elementList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    public EntityContentDocGen() {
+        //Here is the constructor
+        StringBuffer stringBuffer = new StringBuffer();
 
-		for (Object elementParameter : elementList) {
+        // add initialisation of the pattern variables (declaration has been already done).
 
-			this.element = (org.polarsys.capella.core.data.oa.Entity) elementParameter;
+    }
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+    public String generate(Object argument) throws Exception {
+        final StringBuffer stringBuffer = new StringBuffer();
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+        InternalPatternContext ctx = (InternalPatternContext) argument;
+        Map<String, String> queryCtx = null;
+        IQuery.ParameterDescription paramDesc = null;
+        Node.Container currentNode = ctx.getNode();
 
-		stringBuffer.append(TEXT_5);
-		stringBuffer.append(TEXT_5);
-		return stringBuffer.toString();
-	}
+        List<Object> elementList = null;
+        //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+        for (Object elementParameter : elementList) {
 
-		method_body(new StringBuffer(), ictx);
+            this.element = (org.polarsys.capella.core.data.oa.Entity) elementParameter;
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("element", this.element);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+            if (preCondition(ctx)) {
+                ctx.setNode(new Node.Container(currentNode, getClass()));
+                orchestration(ctx);
+            }
 
-	protected org.polarsys.capella.core.data.oa.Entity element = null;
+        }
+        ctx.setNode(currentNode);
+        if (ctx.useReporter()) {
+            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+        }
 
-	public void set_element(org.polarsys.capella.core.data.oa.Entity object) {
-		this.element = object;
-	}
+        stringBuffer.append(TEXT_5);
+        stringBuffer.append(TEXT_5);
+        return stringBuffer.toString();
+    }
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("element", this.element);
-		return parameters;
-	}
+    public String orchestration(PatternContext ctx) throws Exception {
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+        method_body(new StringBuffer(), ictx);
 
-		String projectName = ctx.getValue("projectName").toString();
-		String outputFolder = ctx.getValue("outputFolder").toString();
+        if (ictx.useReporter()) {
+            Map<String, Object> parameterValues = new HashMap<String, Object>();
+            parameterValues.put("element", this.element);
+            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+        }
+        return null;
+    }
 
-		Collection<String> incomingCommunicationMeans = CapellaEntityHelper
-				.getIncomingCommunicationMeansLines((Entity) element, projectName, outputFolder);
-		if (incomingCommunicationMeans.size() > 0) {
+    protected org.polarsys.capella.core.data.oa.Entity element = null;
 
-			stringBuffer.append(TEXT_1);
-			for (String communicationMean : incomingCommunicationMeans) {
+    public void set_element(org.polarsys.capella.core.data.oa.Entity object) {
+        this.element = object;
+    }
 
-				stringBuffer.append(TEXT_2);
-				stringBuffer.append(communicationMean);
-				stringBuffer.append(TEXT_2);
+    public Map<String, Object> getParameters() {
+        final Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("element", this.element);
+        return parameters;
+    }
 
-			}
-			stringBuffer.append(TEXT_3);
-		}
+    protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		Collection<String> outgoingCommunicationMeans = CapellaEntityHelper
-				.getOutgoingCommunicationMeansLines((Entity) element, projectName, outputFolder);
-		if (outgoingCommunicationMeans.size() > 0) {
+        String projectName = ctx.getValue("projectName").toString();
+        String outputFolder = ctx.getValue("outputFolder").toString();
 
-			stringBuffer.append(TEXT_4);
-			for (String communicationMean : outgoingCommunicationMeans) {
+        Collection<String> incomingCommunicationMeans = CapellaEntityHelper.getIncomingCommunicationMeansLines((Entity) element, projectName, outputFolder);
+        if (incomingCommunicationMeans.size() > 0) {
 
-				stringBuffer.append(TEXT_2);
-				stringBuffer.append(communicationMean);
-				stringBuffer.append(TEXT_2);
+            stringBuffer.append(TEXT_1);
+            for (String communicationMean : incomingCommunicationMeans) {
 
-			}
-			stringBuffer.append(TEXT_3);
-		}
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
-	}
+                stringBuffer.append(TEXT_2);
+                stringBuffer.append(communicationMean);
+                stringBuffer.append(TEXT_2);
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return true;
-	}
+            }
+            stringBuffer.append(TEXT_3);
+        }
+
+        Collection<String> outgoingCommunicationMeans = CapellaEntityHelper.getOutgoingCommunicationMeansLines((Entity) element, projectName, outputFolder);
+        if (outgoingCommunicationMeans.size() > 0) {
+
+            stringBuffer.append(TEXT_4);
+            for (String communicationMean : outgoingCommunicationMeans) {
+
+                stringBuffer.append(TEXT_2);
+                stringBuffer.append(communicationMean);
+                stringBuffer.append(TEXT_2);
+
+            }
+            stringBuffer.append(TEXT_3);
+        }
+        InternalPatternContext ictx = (InternalPatternContext) ctx;
+        new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+    }
+
+    public boolean preCondition(PatternContext ctx) throws Exception {
+        return true;
+    }
 }
