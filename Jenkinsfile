@@ -16,7 +16,7 @@ pipeline {
 				sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
 			}
 		}
-		stage('Package DocGen addon') {
+		stage('Build DocGen addon') {
 			steps {
 				script {
 					def jacocoPrepareAgent = "-Djacoco.destFile=$JACOCO_EXEC_FILE_PATH -Djacoco.append=true org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:prepare-agent"
@@ -35,19 +35,27 @@ pipeline {
 			}
 			steps {
 				sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
-					sh '''
-						PROMOTED_SRC="releng/org.polarsys.capella.docgen.site/target/repository/*"
-						PROMOTED_DST="/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/updates/nightly/master/"
-						ssh genie.capella@projects-storage.eclipse.org rm -fr $PROMOTED_DST
-						ssh genie.capella@projects-storage.eclipse.org mkdir -p $PROMOTED_DST
-						scp -r $PROMOTED_SRC genie.capella@projects-storage.eclipse.org:$PROMOTED_DST
+					script {
+						def VERSION = BRANCH_NAME
+						if (VERSION.matches("v\\d\\.\\d\\.x")) {
+							VERSION = VERSION.substring(1)
+						}
 	
-						PROMOTED_SRC="releng/org.polarsys.capella.docgen.site/target/*-dropins.zip"
-						PROMOTED_DST="/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/dropins/nightly/master/"
-						ssh genie.capella@projects-storage.eclipse.org rm -fr $PROMOTED_DST
-						ssh genie.capella@projects-storage.eclipse.org mkdir -p $PROMOTED_DST
-						scp -r $PROMOTED_SRC genie.capella@projects-storage.eclipse.org:$PROMOTED_DST
-					'''
+						def DEST_UPDATESITE_DIR='/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/updates/nightly/'+VERSION
+						def DEST_DROPINS_DIR='/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/dropins/nightly/'+VERSION
+						
+						sh '''
+							PROMOTED_SRC="releng/org.polarsys.capella.docgen.site/target/repository/*"
+							ssh genie.capella@projects-storage.eclipse.org rm -fr ${DEST_UPDATESITE_DIR}
+							ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_UPDATESITE_DIR}
+							scp -r $PROMOTED_SRC genie.capella@projects-storage.eclipse.org:${DEST_UPDATESITE_DIR}
+		
+							PROMOTED_SRC="releng/org.polarsys.capella.docgen.site/target/*-dropins.zip"
+							ssh genie.capella@projects-storage.eclipse.org rm -fr ${DEST_DROPINS_DIR}
+							ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_DROPINS_DIR}
+							scp -r $PROMOTED_SRC genie.capella@projects-storage.eclipse.org:${DEST_DROPINS_DIR}
+						'''
+					}
 				}
 			}
 		}
