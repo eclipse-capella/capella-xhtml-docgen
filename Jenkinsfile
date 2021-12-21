@@ -44,17 +44,15 @@ pipeline {
 						def DEST_UPDATESITE_DIR='/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/updates/nightly/'+VERSION
 						def DEST_DROPINS_DIR='/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/dropins/nightly/'+VERSION
 						
-						sh '''
-							PROMOTED_SRC="releng/org.polarsys.capella.docgen.site/target/repository/*"
-							ssh genie.capella@projects-storage.eclipse.org rm -fr ${DEST_UPDATESITE_DIR}
-							ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_UPDATESITE_DIR}
-							scp -r $PROMOTED_SRC genie.capella@projects-storage.eclipse.org:${DEST_UPDATESITE_DIR}
-		
-							PROMOTED_SRC="releng/org.polarsys.capella.docgen.site/target/*-dropins.zip"
-							ssh genie.capella@projects-storage.eclipse.org rm -fr ${DEST_DROPINS_DIR}
-							ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_DROPINS_DIR}
-							scp -r $PROMOTED_SRC genie.capella@projects-storage.eclipse.org:${DEST_DROPINS_DIR}
-						'''
+						sh "echo 'deploy update site'"
+						sh "ssh genie.capella@projects-storage.eclipse.org rm -rf ${DEST_UPDATESITE_DIR}"
+						sh "ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_UPDATESITE_DIR}"
+						sh "scp -r releng/org.polarsys.capella.docgen.site/target/repository/* genie.capella@projects-storage.eclipse.org:${DEST_UPDATESITE_DIR}"
+
+						sh "echo 'deploy product'"
+						sh "ssh genie.capella@projects-storage.eclipse.org rm -rf ${DEST_DROPINS_DIR}"
+						sh "ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_DROPINS_DIR}"
+						sh "scp -r releng/org.polarsys.capella.docgen.site/target/*-dropins.zip genie.capella@projects-storage.eclipse.org:${DEST_DROPINS_DIR}"
 					}
 				}
 			}
