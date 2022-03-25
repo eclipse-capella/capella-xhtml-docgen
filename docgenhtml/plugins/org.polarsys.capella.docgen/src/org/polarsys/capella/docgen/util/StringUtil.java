@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.sirius.business.api.image.ImageManager;
 import org.eclipse.sirius.business.api.session.resource.AirdResource;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
@@ -57,7 +58,6 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 public class StringUtil {
 	private static final String ELEMENT_LINK_REGEX = "hlink://(.+)";
 	private static final String REGEX = "<[\\s]*[aA][\\s]+href[\\s]*=[\\s]*\"([^>]+)\"[\\s]*>(.*?)<[\\s]*/[\\s]*[aA][\\s]*>";
-	private static final String REGEX_IMG = "<[\\s]*img[^>]*?src[\\s]*=[\\s]*\"([^>\"]+?)\"[^>]*?/[\\s]*>";
 	private static final String REGEX_FILEPATH = "<[aA][\\s]+href=\"(.+?)\">";
 	private static final String ERROR_CPY = "Error during project relative file copy: {0}";
 	private static final String ERROR_COPY_PART_2 = " referenced in the description of the element: {0} "; //$NON-NLS-1$
@@ -267,7 +267,7 @@ public class StringUtil {
 			return input;
 		}
 		// Pattern to match <img[...]> html content
-		Pattern pattern = Pattern.compile(REGEX_IMG, Pattern.DOTALL);
+		Pattern pattern = Pattern.compile(ImageManager.HTML_IMAGE_PATH_PATTERN, Pattern.DOTALL);
 		Matcher matcher = pattern.matcher(input);
 
 		final IPath parentSrcFolder = new Path(eObject.eResource().getURI().segment(1));
@@ -333,8 +333,13 @@ public class StringUtil {
 							iconSourcePath = unencodeURIString(iconSourcePath, logger);
 							iconName = unencodeURIString(iconName, logger);
 						} else {
-							IPath path = parentSrcFolder.append(decodedFirstMatchGroup);
-							IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+						    IPath path = new Path(decodedFirstMatchGroup);
+						    // Check if the path is a workspace path
+                            IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+						    if (!iconFile.exists()) {
+						        path = parentSrcFolder.append(decodedFirstMatchGroup);
+						        iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+						    }
 							if (iconFile.exists()) {
 								iconSourcePath = iconFile.getLocationURI().getPath();
 							} else {
