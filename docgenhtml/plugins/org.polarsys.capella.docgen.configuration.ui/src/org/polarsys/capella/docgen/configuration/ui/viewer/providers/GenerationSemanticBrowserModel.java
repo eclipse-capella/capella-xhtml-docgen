@@ -141,4 +141,16 @@ public class GenerationSemanticBrowserModel implements ISemanticBrowserModel {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+    @Override
+    public boolean doesLexicographicSortTree() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public void setLexicographicSortTree(boolean lexicographicSortTree) {
+        // TODO Auto-generated method stub
+        
+    }
 }

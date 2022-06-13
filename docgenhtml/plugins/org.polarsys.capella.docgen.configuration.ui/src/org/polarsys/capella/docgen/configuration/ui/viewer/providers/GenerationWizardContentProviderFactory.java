@@ -13,6 +13,7 @@
 package org.polarsys.capella.docgen.configuration.ui.viewer.providers;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
@@ -65,7 +66,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			 */
 			@Override
 			protected void getCategoryChildren(ICategory category, BrowserElementWrapper wrapper,
-					Set<Object> gatheredElements) {
+			        LinkedHashSet<Object> gatheredElements) {
 				// lookup for the element that we need to query on.
 				EObject elementToQuery = lookUpModelElement(wrapper);
 				if (elementToQuery == null) {
@@ -118,7 +119,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						}
 						// retrieve referenced element by the wrapper.
 						Object element = ((BrowserElementWrapper) parentElement).getElement();
-						Set<Object> gatheredElements = new HashSet<Object>(0);
+						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<Object>(0);
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
@@ -158,7 +159,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 									if (!model.doesShowCategory((ICategory) gatherElement)) {
 										shouldRemovedEmptyCategoryWrapper = true;
 									} else {
-										Set<Object> categoryChildren = new HashSet<Object>(0);
+									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<Object>(0);
 										// Compute category children, if no
 										// child, remove this category from
 										// displayed elements.
@@ -233,7 +234,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			 */
 			@Override
 			protected void getCategoryChildren(ICategory category, BrowserElementWrapper wrapper,
-					Set<Object> gatheredElements) {
+			        LinkedHashSet<Object> gatheredElements) {
 				// lookup for the element that we need to query on.
 				EObject elementToQuery = lookUpModelElement(wrapper);
 				if (elementToQuery == null) {
@@ -288,7 +289,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						}
 						// retrieve referenced element by the wrapper.
 						Object element = ((BrowserElementWrapper) parentElement).getElement();
-						Set<Object> gatheredElements = new HashSet<Object>(0);
+						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<Object>(0);
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
@@ -326,7 +327,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 									if (!model.doesShowCategory((ICategory) gatherElement)) {
 										shouldRemovedEmptyCategoryWrapper = true;
 									} else {
-										Set<Object> categoryChildren = new HashSet<Object>(0);
+									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<Object>(0);
 										// Compute category children, if no
 										// child, remove this category from
 										// displayed elements.
@@ -401,7 +402,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			 */
 			@Override
 			protected void getCategoryChildren(ICategory category, BrowserElementWrapper wrapper,
-					Set<Object> gatheredElements_p) {
+			        LinkedHashSet<Object> gatheredElements_p) {
 				// lookup for the element that we need to query on.
 				EObject elementToQuery = lookUpModelElement(wrapper);
 				if (elementToQuery == null) {
@@ -457,7 +458,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						}
 						// retrieve referenced element by the wrapper.
 						Object element = ((BrowserElementWrapper) parentElement).getElement();
-						Set<Object> gatheredElements = new HashSet<Object>(0);
+						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<Object>(0);
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
@@ -495,7 +496,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 									if (!model.doesShowCategory((ICategory) gatherElement)) {
 										shouldRemovedEmptyCategoryWrapper = true;
 									} else {
-										Set<Object> categoryChildren = new HashSet<Object>(0);
+									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<Object>(0);
 										// Compute category children, if no
 										// child, remove this category from
 										// displayed elements.
