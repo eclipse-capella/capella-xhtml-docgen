@@ -44,7 +44,6 @@
 		<platform-name>oxygen/201803211000</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
-		<capellaVersion>6.0.0</capellaVersion>
 	</properties>
 
 	<profiles>
@@ -331,7 +330,7 @@
 											includes="**/META-INF/**" />
 									</delete>
 									<zip
-										destfile="${project.build.directory}/${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersion}-dropins.zip">
+										destfile="${project.build.directory}/${packagedAddonName}-dropins-${unqualifiedVersion}.${buildQualifier}.zip">
 										<fileset dir="${project.build.directory}">
 											<include name="${packagedAddonName}/**" />
 										</fileset>
@@ -354,7 +353,7 @@
 								<goal>archive-repository</goal>
 							</goals>
 							<configuration>
-								<finalName>${packagedAddonName}-${unqualifiedVersion}.${buildQualifier}-Capella-${capellaVersion}-updateSite</finalName>
+								<finalName>${packagedAddonName}-updateSite-${unqualifiedVersion}.${buildQualifier}</finalName>
 							</configuration>
 						</execution>
 					</executions>
