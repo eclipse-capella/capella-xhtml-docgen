@@ -52,7 +52,7 @@ pipeline {
 						sh "echo 'deploy product'"
 						sh "ssh genie.capella@projects-storage.eclipse.org rm -rf ${DEST_DROPINS_DIR}"
 						sh "ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_DROPINS_DIR}"
-						sh "scp -r releng/org.polarsys.capella.docgen.site/target/*-dropins.zip genie.capella@projects-storage.eclipse.org:${DEST_DROPINS_DIR}"
+						sh "scp -r releng/org.polarsys.capella.docgen.site/target/*-dropins-*.zip genie.capella@projects-storage.eclipse.org:${DEST_DROPINS_DIR}"
 					}
 				}
 			}
