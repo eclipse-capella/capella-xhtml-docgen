@@ -399,9 +399,7 @@ public class CapellaServices {
 		stringBuilder.append("#"); //$NON-NLS-1$
 		stringBuilder.append(DiagramSessionHelper.getID(diagram));
 		stringBuilder.append("\">"); //$NON-NLS-1$
-		stringBuilder.append("<img id=\""); //$NON-NLS-1$
-		stringBuilder.append(diagram.hashCode());
-		stringBuilder.append("\" src=\""); //$NON-NLS-1$
+		stringBuilder.append("<img src=\""); //$NON-NLS-1$
 		stringBuilder.append(generatedFolder);
 		stringBuilder.append("/"); //$NON-NLS-1$
 		String validFileName = DocGenHtmlUtil.getValidFileName(DiagramSessionHelper.getID(diagram));
