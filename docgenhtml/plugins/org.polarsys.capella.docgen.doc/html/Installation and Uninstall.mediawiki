@@ -1,0 +1,25 @@
+<!--
+  Copyright (c) 2022 THALES GLOBAL SERVICES.
+  
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0
+  
+  SPDX-License-Identifier: EPL-2.0
+  
+  Contributors:
+       Thales - initial API and implementation
+-->
+=Installation and Uninstallation=
+
+Minimal requirements: Capella. Install Capella as described [[../help/topic/org.polarsys.capella.ui.doc/html/Installation%20Guide/How%20to%20install%20Capella%20and%20Addons.html | here]]<span class="github-link">[[https://github.com/eclipse/capella/blob/master/doc/plugins/org.polarsys.capella.ui.doc/html/Installation%20Guide/How%20to%20install%20Capella%20and%20Addons.mediawiki|(online documentation)]]</span>.
+
+There are two options to install the Add-On:
+
+* '''''Dropins:''''' Unzip the file and copy it in the dropins folder of your Capella installation and restart Capella. To uninstall, just remove it from the dropins folder.
+* '''''Update site:''''' '''Help -&gt; Install new software'''. Then''' Add '''a new repository location and click '''Archive''' to select the update site zip file. Select a name and follow the installation wizard. Uncheck '''Group by category''' to see the feature to install. To uninstall, click '''Help -&gt; About Capella '''and then '''Installation Details'''. Find and select the Add-On in the '''Installed Software''' tab and click '''Uninstall'''.
+To check that the Add-On is correctly installed, click on '''Help -&gt; About Capella -&gt; Installation Details'''
+
+Check that the '''Capella Filtering''' is installed as below.
+
+<center>[[Image:common/img/install_features.png]]</center>

@@ -1,3 +1,0 @@
-= Resources =
-
-[https://github.com/eclipse/capella-xhtml-docgen/issues Issues] can be raised on the project's [https://github.com/eclipse/capella-xhtml-docgen/ Github repository].

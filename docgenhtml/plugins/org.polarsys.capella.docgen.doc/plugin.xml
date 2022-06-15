@@ -22,6 +22,10 @@ Contributors:
             file="capella-docgen-commandline.xml"
             primary="false">
       </toc>
+      <toc
+            file="html/User Manual/Functionalities-toc.xml"
+            primary="false">
+      </toc>
    </extension>
 
 </plugin>

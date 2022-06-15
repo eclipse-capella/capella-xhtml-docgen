@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<toc label="HTML production" link_to="PLUGINS_ROOT/org.polarsys.capella.commandline.doc/toc.xml#contribution" topic="html/common/capella-docgen-commandline.html">
-   <topic href="html/common/capella-docgen-commandline.html" label="HTML production">
+<toc label="HTML production" link_to="PLUGINS_ROOT/org.polarsys.capella.commandline.doc/toc.xml#contribution" topic="html/common/capella-docgen-commandline-support.html">
+   <topic href="html/common/capella-docgen-commandline-support.html" label="HTML production">
    </topic>
 </toc>

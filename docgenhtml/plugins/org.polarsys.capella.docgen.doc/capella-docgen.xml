@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<toc label="HTML DocGen Addon" link_to="PLUGINS_ROOT/org.polarsys.capella.doc/toc.xml#contribution" topic="html/capella-docgen.html">
- 	<topic href="html/capella-docgen.html" label="HTML Documentation Generation Addon">
-     <topic href="html/common/capella-docgen-launch.html" label="Launch the documentation generation">
-        <topic href="html/common/capella-docgen-launch-complete.html" label="Complete documentation generation">
-        </topic>
-        <topic href="html/common/capella-docgen-launch-selective.html" label="Selective documentation generation">
-        </topic>
-        <topic href="html/common/capella-docgen-launch-partial.html" label="Partial documentation generation">
-        </topic>
-        <topic href="html/common/capella-docgen-commandline.html" label="Command line use">
-        </topic>
-     </topic>
-     <topic href="html/common/capella-docgen-preferences.html" label="Preferences">
-     </topic>
-     <topic href="../org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/kitalpha-docgen-technology.html" label="Technology">
-     </topic>
-     <topic href="html/common/capella-docgen-resources.html" label="Resources">
-     </topic>
-     <topic href="html/common/capella-docgen-extensions.html" label="Extensions">
-        <topic href="../org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/kitalpha-docgen-extensibility.html" label="Extensibility">
-        </topic>
-     </topic>
-     <topic href="html/common/capella-docgen-knownissues.html" label="Known issues">
-        <topic href="../org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/kitalpha-docgen-knownissues.html" label="Core DocGen Known Issues">
-        </topic>
-     </topic>
-   </topic>
+<toc label="HTML DocGen Guide">
+	<topic label="Release Notes">
+		<topic href="html/Release Notes/Whatsnew.html" label="What&apos;s New">
+		</topic>
+		<topic href="html/Release Notes/KnownIssues.html" label="Known Issues">
+			<topic href="../org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/kitalpha-docgen-knownissues.html" label="Core DocGen Known Issues">
+	        </topic>
+		</topic>
+	</topic>
+
+    <topic href="html/Installation and Uninstall.html" label="Installation and Uninstallation">
+    </topic>
+    
+	<topic label="User Manual">
+		<topic href="html/User Manual/Introduction.html" label="Introduction">
+		</topic>
+		<link toc="html/User Manual/Functionalities-toc.xml"/>
+		<topic label="Appendix">
+			<topic href="../org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/kitalpha-docgen-technology.html" label="Technology">
+			</topic>
+			<topic href="html/common/capella-docgen-extensions.html" label="Extensions">
+				<topic href="../org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/kitalpha-docgen-extensibility.html" label="Extensibility">
+				</topic>
+			</topic>
+    	</topic>
+		<topic href="html/common/capella-docgen-commandline-support.html" label="Command Line Support">
+		</topic>
+    </topic>
+
+	<anchor id="contribution"/>
+	
 </toc>
