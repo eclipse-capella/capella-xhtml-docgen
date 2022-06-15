@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 Obeo.
+ * Copyright (c) 2017, 2022 Obeo.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -132,25 +132,21 @@ public class GenerationSemanticBrowserModel implements ISemanticBrowserModel {
 
 	@Override
 	public void setListeningToPageSelectionEvents(boolean value) {
-		// TODO Auto-generated method stub
-		
+	     // Nothing is done here as the value of isListeningToPageSelectionEvents is always 'false'
 	}
 
 	@Override
 	public boolean isListeningToPageSelectionEvents() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
     @Override
     public boolean doesLexicographicSortTree() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public void setLexicographicSortTree(boolean lexicographicSortTree) {
-        // TODO Auto-generated method stub
-        
+        // Nothing is done here as the value of setLexicographicSortTree is always 'false'
     }
 }
