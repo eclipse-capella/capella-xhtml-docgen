@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES and others.
+ * Copyright (c) 2006, 2022 THALES GLOBAL SERVICES and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -119,7 +119,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						}
 						// retrieve referenced element by the wrapper.
 						Object element = ((BrowserElementWrapper) parentElement).getElement();
-						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<Object>(0);
+						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<>(0);
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
@@ -159,7 +159,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 									if (!model.doesShowCategory((ICategory) gatherElement)) {
 										shouldRemovedEmptyCategoryWrapper = true;
 									} else {
-									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<Object>(0);
+									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<>(0);
 										// Compute category children, if no
 										// child, remove this category from
 										// displayed elements.
@@ -289,7 +289,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						}
 						// retrieve referenced element by the wrapper.
 						Object element = ((BrowserElementWrapper) parentElement).getElement();
-						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<Object>(0);
+						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<>(0);
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
@@ -327,7 +327,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 									if (!model.doesShowCategory((ICategory) gatherElement)) {
 										shouldRemovedEmptyCategoryWrapper = true;
 									} else {
-									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<Object>(0);
+									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<>(0);
 										// Compute category children, if no
 										// child, remove this category from
 										// displayed elements.
@@ -402,7 +402,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 			 */
 			@Override
 			protected void getCategoryChildren(ICategory category, BrowserElementWrapper wrapper,
-			        LinkedHashSet<Object> gatheredElements_p) {
+			        LinkedHashSet<Object> gatheredElements) {
 				// lookup for the element that we need to query on.
 				EObject elementToQuery = lookUpModelElement(wrapper);
 				if (elementToQuery == null) {
@@ -411,8 +411,8 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 
 				// Gather subCategories & compute queries attached to the
 				// category.
-				gatheredElements_p.addAll(category.compute(elementToQuery));
-				gatheredElements_p.addAll(
+				gatheredElements.addAll(category.compute(elementToQuery));
+				gatheredElements.addAll(
 						CategoryRegistry.getInstance().gatherSubCategories(getBrowserId(), elementToQuery, category));
 
 			}
@@ -458,7 +458,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 						}
 						// retrieve referenced element by the wrapper.
 						Object element = ((BrowserElementWrapper) parentElement).getElement();
-						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<Object>(0);
+						LinkedHashSet<Object> gatheredElements = new LinkedHashSet<>(0);
 						if (wrapper instanceof EObjectWrapper) {
 							// Provide the root element to the CurrentElement
 							// Browser in purpose to display it.
@@ -496,7 +496,7 @@ public class GenerationWizardContentProviderFactory extends DefaultContentProvid
 									if (!model.doesShowCategory((ICategory) gatherElement)) {
 										shouldRemovedEmptyCategoryWrapper = true;
 									} else {
-									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<Object>(0);
+									    LinkedHashSet<Object> categoryChildren = new LinkedHashSet<>(0);
 										// Compute category children, if no
 										// child, remove this category from
 										// displayed elements.
