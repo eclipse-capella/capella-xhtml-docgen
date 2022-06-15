@@ -1,6 +1,23 @@
-= HTML Production using command line =
+= Command Line Support =
 
-== Simple use case ==
+== Overview ==
+
+The HTML DocGen add-on provides the capacity to launch the documentation generation from the command line.
+
+Please visit the [[../help/topic/org.polarsys.capella.commandline.doc/html/19.%20Command%20Line%20Support/19.1.%20Core%20Mechanism%20and%20Applications.html | Capella Command Line]] documentation section in order to learn more about this aspect.
+
+			
+The HTML DocGen Command Line relies only on parameters from the Capella CommandLine core mechanism parameters.
+
+You can use the '''-help''' argument to see all of the applicable arguments for the command line.
+
+
+== Command Line Application Examples ==
+For all the examples bellow we assume the existence of:
+
+* A Capella model (name: EOLE_AF) already imported in the workspace
+
+=== Simple use case ===
 
 <pre>
 <CapellaInstallationPath>/capellac.exe -nosplash
@@ -12,11 +29,11 @@
 -forceoutputfoldercreation
 </pre>
 
-This command will generate ''HTML'' report from the EOLE-AF aird file specified to the output folder '''''HTML''''' present into '''''Doc project'''''.
+This command will generate ''HTML'' report from the EOLE-AF aird file specified to the output folder '''''HTML''''' present into '''''DocProject'''''.
 
-== Complex use cases ==
+=== Complex use cases ===
 
-=== Import Capella project and generate inside it ===
+<u>'''Import Capella project and generate inside it'''</u>
 
 <pre>
 <CapellaInstallationPath>/capellac.exe -nosplash
@@ -26,12 +43,12 @@ This command will generate ''HTML'' report from the EOLE-AF aird file specified 
 -import <absolutePath>/EOLE_AF
 -input /EOLE_AF/EOLE_AF.aird
 -outputfolder /EOLE_AF/HTML
--logfile D:/CommandLineLog/log.html
+-logfile <absolutePath>/log.html
 </pre>
 
 This command will import the EOLE_AF project from ''&lt;absolutePath&gt;'' workspace into ''&lt;targetWorkspacePath&gt; ''workspace before generating the HTML report inside it.
 
-=== Import Capella project and generate inside a new project ===
+<u>'''Import Capella project and generate inside a new project'''</u>
 
 <pre>
 <CapellaInstallationPath>/capellac.exe -nosplash
@@ -41,12 +58,12 @@ This command will import the EOLE_AF project from ''&lt;absolutePath&gt;'' works
 -import <absolutePath>/EOLE_AF
 -input /EOLE_AF/EOLE_AF.aird
 -outputfolder /DocProject/HTML
--logfile D:/CommandLineLog/log.html
+-logfile <absolutePath>/log.html
 </pre>
 
 This command will import the EOLE_AF project from ''&lt;absolutePath&gt;'' workspace into ''&lt;targetWorkspacePath&gt; ''workspace and create the DocProject to generate the HTML report inside it.
 
-=== Import Capella project and a Doc project to generate inside it ===
+<u>'''Import Capella project and a Doc project to generate inside it'''</u>
 
 <pre>
 <CapellaInstallationPath>/capellac.exe -nosplash
@@ -56,7 +73,7 @@ This command will import the EOLE_AF project from ''&lt;absolutePath&gt;'' works
 -import "<absolutePath>/EOLE_AF | <absolutePath>/DocProject"
 -input /EOLE_AF/EOLE_AF.aird
 -outputfolder /DocProject/HTML
--logfile D:/CommandLineLog/log.html
+-logfile <absolutePath>/log.html
 </pre>
 
 This command will import two projects (EOLE_AF and DocProject) from ''&lt;absolutePath&gt;'' workspace into ''&lt;targetWorkspacePath&gt; ''workspace before generating the HTML report inside the DocProject.

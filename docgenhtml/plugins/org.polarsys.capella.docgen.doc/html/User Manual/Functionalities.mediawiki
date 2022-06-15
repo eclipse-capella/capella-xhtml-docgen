@@ -6,8 +6,8 @@ Once this is setup, calling the contextual menu on the ''aird'' file of a Capell
 * Complete documentation generation accessible through the '''HTML Documentation Generation''' menu element.
 * Selective documentation generation (choose which elements to generate) accessible through the '''HTML Documentation Generation on selected elements...''' menu element.
 
-[[Image:img/docgen_contextual.png|thumb|none|600px]]
+[[Image:../common/img/docgen_contextual.png|thumb|none|600px]]
 
 * Partial documentation generation (choose an element) accessible through the '''HTML Documentation Generation''' menu element while calling the contextual menu on an element of the model in the project explorer tree.
 
-[[Image:img/docgen_contextual_partial.png|thumb|none|600px]]
+[[Image:../common/img/docgen_contextual_partial.png|thumb|none|600px]]

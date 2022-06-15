@@ -25,11 +25,11 @@
 	</path>
 	<taskdef classpathref="wikitext.classpath" resource="org/eclipse/mylyn/wikitext/ant/tasks.properties" />
 	<target name="generate-html" description="Generate HTML from textile source">
-		<wikitext-to-html markupLanguage="MediaWiki" defaultAbsoluteLinkTarget="_blank">
+		<wikitext-to-html markupLanguage="MediaWiki" formatOutput="true" defaultAbsoluteLinkTarget="_blank">
 			<fileset dir="${basedir}">
 				<include name="**/*.mediawiki"/>
 			</fileset>
-			<stylesheet url="PLUGINS_ROOT/org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/style/style.css"/>
+			<stylesheet url="PLUGINS_ROOT/org.polarsys.capella.doc/html/styles.css"/>
 		</wikitext-to-html>
 	</target>
 </project>
