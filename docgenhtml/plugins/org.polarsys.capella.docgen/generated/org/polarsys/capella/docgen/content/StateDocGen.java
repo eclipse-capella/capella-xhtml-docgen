@@ -116,7 +116,7 @@ public class StateDocGen extends org.polarsys.capella.docgen.foundations.NamedEl
         String outputFolder = ctx.getValue("outputFolder").toString();
 
         String doActivity = CapellaStateHelper.getDoActivity(projectName, outputFolder, (State) element);
-        if (doActivity != "") {
+        if (doActivity != null && !doActivity.equals("")) {
 
             stringBuffer.append(TEXT_1);
             stringBuffer.append(doActivity);
