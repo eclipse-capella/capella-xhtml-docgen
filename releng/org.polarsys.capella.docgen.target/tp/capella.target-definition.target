@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1656408257">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1656408464">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="0.0.0"/>
@@ -129,7 +129,7 @@
       <repository id="eclipse_2020_06" location="https://download.eclipse.org/releases/2021-06/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.capella.test.framework" version="0.0.0"/>
+      <unit id="org.polarsys.capella.test.feature.feature.group" version="0.0.0"/>
       <repository id="capella-test" location="https://download.eclipse.org/capella/core/updates/nightly/master/org.polarsys.capella.test.site/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">

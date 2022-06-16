@@ -4,10 +4,10 @@ Bundle-Name: Capella XHTML DocGen Generation JU Tests
 Bundle-SymbolicName: org.polarsys.capella.docgen.test.ju;singleton:=true
 Bundle-Version: 6.0.0.qualifier
 Require-Bundle: org.junit,
- org.polarsys.capella.docgen;bundle-version="5.0.0",
+ org.polarsys.capella.docgen,
  org.eclipse.debug.ui;bundle-version="3.14.500",
  org.polarsys.kitalpha.doc.gen.business.core.ui,
- org.polarsys.capella.docgen.ui;bundle-version="5.0.0",
+ org.polarsys.capella.docgen.ui,
  org.eclipse.ui.workbench,
  org.eclipse.ui.ide;bundle-version="3.17.100",
  org.eclipse.sirius,
