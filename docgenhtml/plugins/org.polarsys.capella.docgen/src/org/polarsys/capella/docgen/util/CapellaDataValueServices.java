@@ -66,7 +66,7 @@ public class CapellaDataValueServices {
 			buffer.append(CapellaServices.getHyperlinkFromElement(abstractType) + CapellaServices.SPACE);
 		}
 		String valueString = getValueOfDataValue(dataValue_p);
-		if (valueString != "") {
+		if (!valueString.equals("")) {
 			buffer.append(CapellaServices.VALUE_EQUAL);
 			// Add the value of data value to the buffer
 			buffer.append(valueString);
@@ -74,7 +74,7 @@ public class CapellaDataValueServices {
 		if (dataValue_p instanceof NumericValue) {
 			if (null != ((NumericValue) dataValue_p).getUnit()) {
 				String unitString = getUnitOfNumericValue((NumericValue) dataValue_p);
-				if (unitString != "") {
+				if (!unitString.equals("")) {
 					buffer.append(CapellaServices.SPACE);
 					buffer.append(unitString);
 				}
