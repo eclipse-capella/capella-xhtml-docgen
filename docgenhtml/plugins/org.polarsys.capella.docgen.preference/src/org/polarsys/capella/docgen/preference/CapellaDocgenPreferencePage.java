@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2020 Thales Global Services S.A.S.
+ * Copyright (c) 2019, 2022 Thales Global Services S.A.S.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -36,6 +36,7 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 	private BooleanFieldEditor useExportFunctionalExchange;
 	private BooleanFieldEditor useExportPhysicalLink;
 	private BooleanFieldEditor useExportDiagramTree;
+    private BooleanFieldEditor useExportAssociation;
 	
 	/*
 	 * (non-Javadoc)
@@ -53,6 +54,7 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 		addField(useExportFunctionalExchange);
 		addField(useExportComponentExchange);
 		addField(useExportPhysicalLink);
+        addField(useExportAssociation);
 	}
 	
 	/**
@@ -82,6 +84,9 @@ public class CapellaDocgenPreferencePage  extends AbstractDocgenPreferencePage {
 		
 		useExportPhysicalLink = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK, 
 				 Messages.EXPORT__PHYSICAL_LINK_FIELD_LABEL, composite);
+        
+        useExportAssociation = new BooleanFieldEditor(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__ASSOCIATION, 
+                 Messages.EXPORT__ASSOCIATION_FIELD_LABEL, composite);
 	}
 	
 	/*
