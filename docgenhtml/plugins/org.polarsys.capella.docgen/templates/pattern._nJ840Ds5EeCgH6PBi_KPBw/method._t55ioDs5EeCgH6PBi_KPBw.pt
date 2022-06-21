@@ -20,12 +20,22 @@ String outputFolder = ctx.getValue("outputFolder").toString();
 <%}%>
 
 <% 
-Collection<String> propertiesCollection = CapellaClassServices.getClassProperties(element, projectName, outputFolder);
+Collection<String> propertiesCollection = CapellaClassServices.getClassProperties(element, projectName, outputFolder, false);
 if(propertiesCollection.size() >= 1){%>
 <div title="Properties">
 <%String properties = "Properties";%>
 <%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,properties:property"%>
 <%= StringUtil.stringListToBulette(propertiesCollection) %>
+</div>
+<%}%>
+
+<% 
+Collection<String> associationsCollection = CapellaClassServices.getClassProperties(element, projectName, outputFolder, true);
+if(associationsCollection.size() >= 1){%>
+<div title="Associations">
+<%String properties = "Associations";%>
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,properties:property"%>
+<%= StringUtil.stringListToBulette(associationsCollection) %>
 </div>
 <%}%>
  

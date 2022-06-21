@@ -38,17 +38,19 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 
     protected final String TEXT_6 = NL + "<div title=\"Properties\">";
 
-    protected final String TEXT_7 = NL + " ";
+    protected final String TEXT_7 = NL + "<div title=\"Associations\">";
 
-    protected final String TEXT_8 = NL + " <div title=\"Operations\">";
+    protected final String TEXT_8 = NL + " ";
 
-    protected final String TEXT_9 = NL + "<div title=\"Data Values\">";
+    protected final String TEXT_9 = NL + " <div title=\"Operations\">";
 
-    protected final String TEXT_10 = NL + "<h2>Part Of</h2>";
+    protected final String TEXT_10 = NL + "<div title=\"Data Values\">";
 
-    protected final String TEXT_11 = NL + "<h2>Referenced By</h2>";
+    protected final String TEXT_11 = NL + "<h2>Part Of</h2>";
 
-    protected final String TEXT_12 = NL + "<h2>Parameter Of</h2>";
+    protected final String TEXT_12 = NL + "<h2>Referenced By</h2>";
+
+    protected final String TEXT_13 = NL + "<h2>Parameter Of</h2>";
 
     public ClassDocGen() {
         //Here is the constructor
@@ -166,7 +168,7 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
         }
         stringBuffer.append(TEXT_3);
 
-        Collection<String> propertiesCollection = CapellaClassServices.getClassProperties(element, projectName, outputFolder);
+        Collection<String> propertiesCollection = CapellaClassServices.getClassProperties(element, projectName, outputFolder, false);
         if (propertiesCollection.size() >= 1) {
             stringBuffer.append(TEXT_6);
             String properties = "Properties";
@@ -190,9 +192,35 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
             stringBuffer.append(StringUtil.stringListToBulette(propertiesCollection));
             stringBuffer.append(TEXT_4);
         }
-        stringBuffer.append(TEXT_7);
+        stringBuffer.append(TEXT_3);
+
+        Collection<String> associationsCollection = CapellaClassServices.getClassProperties(element, projectName, outputFolder, true);
+        if (associationsCollection.size() >= 1) {
+            stringBuffer.append(TEXT_7);
+            String properties = "Associations";
+            stringBuffer.append(TEXT_3);
+            {
+                //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,properties:property"%>
+
+                InternalPatternContext ictx = (InternalPatternContext) ctx;
+                new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+                stringBuffer.setLength(0);
+
+                final Map<String, Object> callParameters = new HashMap<String, Object>();
+                callParameters.put("eObject", element);
+                callParameters.put("property", properties);
+                CallHelper.executeWithParameterInjection("platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+                        new ExecutionContext((InternalPatternContext) ctx), callParameters);
+                stringBuffer.setLength(0);
+            }
+
+            stringBuffer.append(TEXT_3);
+            stringBuffer.append(StringUtil.stringListToBulette(associationsCollection));
+            stringBuffer.append(TEXT_4);
+        }
+        stringBuffer.append(TEXT_8);
         if (CapellaClassServices.getClassOperation(element).size() > 0) {
-            stringBuffer.append(TEXT_8);
+            stringBuffer.append(TEXT_9);
             String operation = "Operations";
             stringBuffer.append(TEXT_3);
             {
@@ -218,7 +246,7 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
 
         Collection<String> dataValuesCollection = CapellaClassServices.getClassDataValues(element, projectName, outputFolder);
         if (dataValuesCollection.size() >= 1) {
-            stringBuffer.append(TEXT_9);
+            stringBuffer.append(TEXT_10);
             String dataValue = "Data Values";
             stringBuffer.append(TEXT_3);
             {
@@ -243,21 +271,21 @@ public class ClassDocGen extends org.polarsys.capella.docgen.content.ClassifierD
         stringBuffer.append(TEXT_3);
         Collection<String> partofCollection = CapellaClassServices.getPartOf((Class) element, projectName, outputFolder);
         if (partofCollection.size() > 0) {
-            stringBuffer.append(TEXT_10);
+            stringBuffer.append(TEXT_11);
             stringBuffer.append(TEXT_3);
             stringBuffer.append(StringUtil.stringListToBulette(partofCollection));
         }
 
         Collection<String> referencedByCollection = CapellaClassServices.getReferencedBy((Class) element, projectName, outputFolder);
         if (referencedByCollection.size() > 0) {
-            stringBuffer.append(TEXT_11);
+            stringBuffer.append(TEXT_12);
             stringBuffer.append(TEXT_3);
             stringBuffer.append(StringUtil.stringListToBulette(referencedByCollection));
         }
 
         Collection<String> parameterOfCollection = CapellaClassServices.getParameterOf((Class) element, projectName, outputFolder);
         if (parameterOfCollection.size() > 0) {
-            stringBuffer.append(TEXT_12);
+            stringBuffer.append(TEXT_13);
             stringBuffer.append(TEXT_3);
             stringBuffer.append(StringUtil.stringListToBulette(parameterOfCollection));
         }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2022 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -32,6 +32,7 @@ import org.polarsys.capella.core.data.fa.ExchangeCategory;
 import org.polarsys.capella.core.data.fa.FunctionPort;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
+import org.polarsys.capella.core.data.information.Association;
 import org.polarsys.capella.core.data.information.Collection;
 import org.polarsys.capella.core.data.information.ExchangeItem;
 import org.polarsys.capella.core.data.information.ExchangeItemElement;
@@ -99,6 +100,7 @@ public class DocGenHtmlCapellaControl {
 				|| (element instanceof FunctionalExchange 	&& CapellaDocgenPreferenceHelper.isExportFunctionalExchange())
 				|| (element instanceof ComponentExchange 	&& CapellaDocgenPreferenceHelper.isExportComponentExchange())
 				|| (element instanceof PhysicalLink 		&& CapellaDocgenPreferenceHelper.isExportPhysialLink()))
+		        || (element instanceof Association          && CapellaDocgenPreferenceHelper.isExportAssociation())
 				|| PageExtensionRegistry.getInstance().isPageCandidate(element, "capella");
 	}
 
