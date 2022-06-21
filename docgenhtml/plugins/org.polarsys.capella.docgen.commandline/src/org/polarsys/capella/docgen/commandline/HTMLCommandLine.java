@@ -148,22 +148,24 @@ public class HTMLCommandLine extends DefaultCommandLine {
     }
 
     public static void startFakeWorkbench() {
-        Display display = PlatformUI.createDisplay();
-        PlatformUI.createAndRunWorkbench(display, new WorkbenchAdvisor() {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public boolean openWindows() {
-                return false;
-            }
-
-            @Override
-            public String getInitialWindowPerspectiveId() {
-                return null;
-            }
-        });
+        if (!PlatformUI.isWorkbenchRunning()) {
+            Display display = PlatformUI.createDisplay();
+            PlatformUI.createAndRunWorkbench(display, new WorkbenchAdvisor() {
+    
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
+                public boolean openWindows() {
+                    return false;
+                }
+    
+                @Override
+                public String getInitialWindowPerspectiveId() {
+                    return null;
+                }
+            });
+        }
     }
 
     private boolean executeEGFActivity(Activity capellaLauncher, final String outputFolder, final URI uri) {
