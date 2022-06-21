@@ -12,12 +12,14 @@
 
 package org.polarsys.capella.docgen.commandline;
 
+import java.util.List;
+
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.egf.core.producer.InvocationException;
 import org.eclipse.egf.core.producer.MissingExtensionException;
@@ -37,8 +39,9 @@ import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.WorkbenchAdvisor;
-import org.polarsys.capella.core.commandline.core.AbstractCommandLine;
+import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.commandline.core.CommandLineException;
+import org.polarsys.capella.core.commandline.core.DefaultCommandLine;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.exceptions.DocgenRuntimeException;
@@ -48,7 +51,7 @@ import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelpe
 /**
  * 
  */
-public class HTMLCommandLine extends AbstractCommandLine {
+public class HTMLCommandLine extends DefaultCommandLine {
 
 	private static final String FCORE_URI = "/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA"; //$NON-NLS-1$
 	private static final URI CAPELLA_LAUNCHER_URI = URI.createURI("platform:/plugin" + FCORE_URI); //$NON-NLS-1$
@@ -62,7 +65,7 @@ public class HTMLCommandLine extends AbstractCommandLine {
 
 	@Override
 	public void printHelp() {
-		System.out.println("Capella HTML Command Line"); //$NON-NLS-1$
+		System.out.println("*** Capella HTML Command Line"); //$NON-NLS-1$
 		super.printHelp();
 	}
 
@@ -83,39 +86,48 @@ public class HTMLCommandLine extends AbstractCommandLine {
 		startFakeWorkbench();
 
 		// load the AIRD
-		String fileURI = Messages.resource_prefix + argHelper.getFilePath();
-		URI uri = URI.createURI(fileURI);
-
-		// init the EGF activity
-		Activity htmlGenerator = InvokeActivityHelper.getActivity(CAPELLA_LAUNCHER_URI);
-
-		URI semanticResourceURI = uri;
-
-		if (uri.lastSegment().endsWith(".aird")) {//$NON-NLS-1$
-
-			DiagramSessionHelper.setAirdUri(uri);
-			Session session = DiagramSessionHelper.initSession();
-
-			session.open(new NullProgressMonitor());
-
-			Project rootSemanticElement = SessionHelper.getCapellaProject(session);
-			if (rootSemanticElement != null) {
-				Resource semanticResource = rootSemanticElement.eResource();
-				semanticResourceURI = semanticResource.getURI();
-
-				boolean status = executeEGFActivity(htmlGenerator, argHelper.getOutputFolder(), semanticResourceURI);
-
-				if (status) {
-					logInfo(Messages.generation_done + argHelper.getOutputFolder());
-				}
-			} else {
-				logError(Messages.no_root_semantic_element);	
-			}
-		} else {
-			logError(Messages.filepath_point_to_aird);
+		List<IFile> airdFilesFromInput = getAirdFilesFromInput();
+        boolean status = true;
+		if (!airdFilesFromInput.isEmpty()) {    
+    		URI uri = EcoreUtil2.getURI(airdFilesFromInput.get(0));
+    		// init the EGF activity
+    		Activity htmlGenerator = InvokeActivityHelper.getActivity(CAPELLA_LAUNCHER_URI);
+    
+    		URI semanticResourceURI = uri;
+    
+    		if (uri.lastSegment().endsWith(".aird")) {//$NON-NLS-1$
+    
+    			DiagramSessionHelper.setAirdUri(uri);
+    			Session session = DiagramSessionHelper.initSession();
+    
+    			session.open(new NullProgressMonitor());
+    
+    			Project rootSemanticElement = SessionHelper.getCapellaProject(session);
+    			if (rootSemanticElement != null) {
+    				Resource semanticResource = rootSemanticElement.eResource();
+    				semanticResourceURI = semanticResource.getURI();
+    
+                    try {
+                        String outputFolderString = getOrCreateOutputFolder().getFullPath().toString();
+                        status = executeEGFActivity(htmlGenerator, outputFolderString, semanticResourceURI);
+                        if (status) {
+                            logInfo(Messages.generation_done + outputFolderString);
+                        }
+                    } catch (CommandLineException e) {
+                        status = false;
+                        logError(e.getMessage());
+                    }
+    			} else {
+    			    status = false;
+    				logError(Messages.no_root_semantic_element);	
+    			}
+    		} else {
+    		    status = false;
+    			logError(Messages.filepath_point_to_aird);
+    		}
 		}
 
-		return true;
+		return status;
 	}
 
 	/**
