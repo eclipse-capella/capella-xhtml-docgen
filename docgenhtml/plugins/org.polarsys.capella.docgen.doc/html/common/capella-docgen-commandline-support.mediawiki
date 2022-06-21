@@ -24,9 +24,8 @@ For all the examples bellow we assume the existence of:
 -application org.polarsys.capella.core.commandline.core
 -appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
 -data <workspacePath>
--filepath /EOLE_AF/EOLE_AF.aird
+-input /EOLE_AF/EOLE_AF.aird
 -outputfolder /DocProject/HTML
--forceoutputfoldercreation
 </pre>
 
 This command will generate ''HTML'' report from the EOLE-AF aird file specified to the output folder '''''HTML''''' present into '''''DocProject'''''.
