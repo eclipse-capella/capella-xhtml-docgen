@@ -53,60 +53,61 @@ import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelpe
  */
 public class HTMLCommandLine extends DefaultCommandLine {
 
-	private static final String FCORE_URI = "/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA"; //$NON-NLS-1$
-	private static final URI CAPELLA_LAUNCHER_URI = URI.createURI("platform:/plugin" + FCORE_URI); //$NON-NLS-1$
+    private static final String FCORE_URI = "/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA"; //$NON-NLS-1$
 
-	/**
-   * 
-   */
-	public HTMLCommandLine() {
-		super();
-	}
+    private static final URI CAPELLA_LAUNCHER_URI = URI.createURI("platform:/plugin" + FCORE_URI); //$NON-NLS-1$
 
-	@Override
-	public void printHelp() {
-		System.out.println("*** Capella HTML Command Line"); //$NON-NLS-1$
-		super.printHelp();
-	}
+    /**
+    * 
+    */
+    public HTMLCommandLine() {
+        super();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void checkArgs(IApplicationContext context_p) throws CommandLineException {
-		super.checkArgs(context_p);
-	}
+    @Override
+    public void printHelp() {
+        System.out.println("*** Capella HTML Command Line"); //$NON-NLS-1$
+        super.printHelp();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean execute(IApplicationContext context_p) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void checkArgs(IApplicationContext context_p) throws CommandLineException {
+        super.checkArgs(context_p);
+    }
 
-		startFakeWorkbench();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean execute(IApplicationContext context_p) {
 
-		// load the AIRD
-		List<IFile> airdFilesFromInput = getAirdFilesFromInput();
+        startFakeWorkbench();
+
+        // load the AIRD
+        List<IFile> airdFilesFromInput = getAirdFilesFromInput();
         boolean status = true;
-		if (!airdFilesFromInput.isEmpty()) {    
-    		URI uri = EcoreUtil2.getURI(airdFilesFromInput.get(0));
-    		// init the EGF activity
-    		Activity htmlGenerator = InvokeActivityHelper.getActivity(CAPELLA_LAUNCHER_URI);
-    
-    		URI semanticResourceURI = uri;
-    
-    		if (uri.lastSegment().endsWith(".aird")) {//$NON-NLS-1$
-    
-    			DiagramSessionHelper.setAirdUri(uri);
-    			Session session = DiagramSessionHelper.initSession();
-    
-    			session.open(new NullProgressMonitor());
-    
-    			Project rootSemanticElement = SessionHelper.getCapellaProject(session);
-    			if (rootSemanticElement != null) {
-    				Resource semanticResource = rootSemanticElement.eResource();
-    				semanticResourceURI = semanticResource.getURI();
-    
+        if (!airdFilesFromInput.isEmpty()) {
+            URI uri = EcoreUtil2.getURI(airdFilesFromInput.get(0));
+            // init the EGF activity
+            Activity htmlGenerator = InvokeActivityHelper.getActivity(CAPELLA_LAUNCHER_URI);
+
+            URI semanticResourceURI = uri;
+
+            if (uri.lastSegment().endsWith(".aird")) {//$NON-NLS-1$
+
+                DiagramSessionHelper.setAirdUri(uri);
+                Session session = DiagramSessionHelper.initSession();
+
+                session.open(new NullProgressMonitor());
+
+                Project rootSemanticElement = SessionHelper.getCapellaProject(session);
+                if (rootSemanticElement != null) {
+                    Resource semanticResource = rootSemanticElement.eResource();
+                    semanticResourceURI = semanticResource.getURI();
+
                     try {
                         String outputFolderString = getOrCreateOutputFolder().getFullPath().toString();
                         status = executeEGFActivity(htmlGenerator, outputFolderString, semanticResourceURI);
@@ -117,74 +118,74 @@ public class HTMLCommandLine extends DefaultCommandLine {
                         status = false;
                         logError(e.getMessage());
                     }
-    			} else {
-    			    status = false;
-    				logError(Messages.no_root_semantic_element);	
-    			}
-    		} else {
-    		    status = false;
-    			logError(Messages.filepath_point_to_aird);
-    		}
-		}
+                } else {
+                    status = false;
+                    logError(Messages.no_root_semantic_element);
+                }
+            } else {
+                status = false;
+                logError(Messages.filepath_point_to_aird);
+            }
+        }
 
-		return status;
-	}
+        return status;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @throws CommandLineException
-	 */
-	@Override
-	public void prepare(IApplicationContext context_p) throws CommandLineException {
-		super.prepare(context_p);
-	}
+    /**
+     * {@inheritDoc}
+     * 
+     * @throws CommandLineException
+     */
+    @Override
+    public void prepare(IApplicationContext context_p) throws CommandLineException {
+        super.prepare(context_p);
+    }
 
-	public static void startFakeWorkbench() {
-		Display display = PlatformUI.createDisplay();
-		PlatformUI.createAndRunWorkbench(display, new WorkbenchAdvisor() {
+    public static void startFakeWorkbench() {
+        Display display = PlatformUI.createDisplay();
+        PlatformUI.createAndRunWorkbench(display, new WorkbenchAdvisor() {
 
-			/**
-			 * {@inheritDoc}
-			 */
-			@Override
-			public boolean openWindows() {
-				return false;
-			}
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public boolean openWindows() {
+                return false;
+            }
 
-			@Override
-			public String getInitialWindowPerspectiveId() {
-				return null;
-			}
-		});
-	}
+            @Override
+            public String getInitialWindowPerspectiveId() {
+                return null;
+            }
+        });
+    }
 
-	private boolean executeEGFActivity(Activity capellaLauncher, final String outputFolder, final URI uri) {
+    private boolean executeEGFActivity(Activity capellaLauncher, final String outputFolder, final URI uri) {
 
-		boolean success = true;
-		String prefix = Messages.exec_pb;
+        boolean success = true;
+        String prefix = Messages.exec_pb;
 
-		// create output folder in the project
-		IPath path = new Path(outputFolder);
-		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(path.append("output")); //$NON-NLS-1$
-		if (!folder.exists()) {
-			try {
-				folder.create(true, true, new NullProgressMonitor());
-			} catch (CoreException e) {
-				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-				logError(message.toString());
-				success = false;
-			}
-		}
+        // create output folder in the project
+        IPath path = new Path(outputFolder);
+        IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(path.append("output")); //$NON-NLS-1$
+        if (!folder.exists()) {
+            try {
+                folder.create(true, true, new NullProgressMonitor());
+            } catch (CoreException e) {
+                StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
+                logError(message.toString());
+                success = false;
+            }
+        }
 
-		if (success && capellaLauncher instanceof FactoryComponent) {
-			String relativeFilePath = getRelativeFilePath(outputFolder);
-			String projectName = getProjectName(outputFolder);
+        if (success && capellaLauncher instanceof FactoryComponent) {
+            String relativeFilePath = getRelativeFilePath(outputFolder);
+            String projectName = getProjectName(outputFolder);
 
-			final FactoryComponent factoryComponent = (FactoryComponent) capellaLauncher;
-			setContract(factoryComponent, "projectName", projectName); //$NON-NLS-1$
-			setContract(factoryComponent, "outputFolder", relativeFilePath + "/output"); //$NON-NLS-1$ //$NON-NLS-2$
-			setDomain(factoryComponent, uri);
+            final FactoryComponent factoryComponent = (FactoryComponent) capellaLauncher;
+            setContract(factoryComponent, "projectName", projectName); //$NON-NLS-1$
+            setContract(factoryComponent, "outputFolder", relativeFilePath + "/output"); //$NON-NLS-1$ //$NON-NLS-2$
+            setDomain(factoryComponent, uri);
 
             // run the activity
             try {
@@ -195,31 +196,31 @@ public class HTMLCommandLine extends DefaultCommandLine {
                 logError(message.toString());
                 success = false;
             }
-		}
-		return success;
-	}
+        }
+        return success;
+    }
 
-	private void setDomain(FactoryComponent factoryComponent, URI uri) {
-		Viewpoint viewpoint = factoryComponent.getViewpointContainer().getViewpoint(DomainViewpoint.class);
-		if (viewpoint instanceof DomainViewpoint) {
-			DomainViewpoint domainViewpoint = (DomainViewpoint) viewpoint;
-			Domain domain = domainViewpoint.getDomains().get(0);
-			if (domain instanceof EMFDomain) {
-				EMFDomain domainURI = (EMFDomain) domain;
-				domainURI.setUri(uri);
-			}
-		}
-	}
+    private void setDomain(FactoryComponent factoryComponent, URI uri) {
+        Viewpoint viewpoint = factoryComponent.getViewpointContainer().getViewpoint(DomainViewpoint.class);
+        if (viewpoint instanceof DomainViewpoint) {
+            DomainViewpoint domainViewpoint = (DomainViewpoint) viewpoint;
+            Domain domain = domainViewpoint.getDomains().get(0);
+            if (domain instanceof EMFDomain) {
+                EMFDomain domainURI = (EMFDomain) domain;
+                domainURI.setUri(uri);
+            }
+        }
+    }
 
-	private void setContract(FactoryComponent factoryComponent, String contractName, String value) {
-		Contract invokedContract = factoryComponent.getContract(contractName);
+    private void setContract(FactoryComponent factoryComponent, String contractName, String value) {
+        Contract invokedContract = factoryComponent.getContract(contractName);
 
-		Type type = invokedContract.getType();
-		if (type instanceof TypeString) {
-			TypeString typeString = (TypeString) type;
-			typeString.setValue(value);
-		}
+        Type type = invokedContract.getType();
+        if (type instanceof TypeString) {
+            TypeString typeString = (TypeString) type;
+            typeString.setValue(value);
+        }
 
-	}
+    }
 
 }

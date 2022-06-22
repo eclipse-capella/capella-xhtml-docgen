@@ -58,74 +58,75 @@ import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSe
 import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelper;
 
 /**
- * Command line for HTML generation with configuration. From
- * org.polarsys.capella.docgen.commandline.HTMLCommandLine. Update execute
- * method to launch generation on configuration file elements.
+ * Command line for HTML generation with configuration. From org.polarsys.capella.docgen.commandline.HTMLCommandLine.
+ * Update execute method to launch generation on configuration file elements.
  */
 public class HTMLConfigurationCommandLine extends DefaultCommandLine {
 
-	private static final String FCORE_URI = "/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA";
-	private static final URI CAPELLA_LAUNCHER_URI = URI.createURI("platform:/plugin" + FCORE_URI); //$NON-NLS-1$
+    private static final String FCORE_URI = "/org.polarsys.capella.docgen.ui/egf/capellalauncher.fcore#_zup7kAkdEeCBJtEcjZDVOA";
 
-	/**
-	 * Configuration file parameter
-	 */
-	private String configurationFile;
-	public static final String CONFIGURATION = "-configurationfile"; //$NON-NLS-1$
+    private static final URI CAPELLA_LAUNCHER_URI = URI.createURI("platform:/plugin" + FCORE_URI); //$NON-NLS-1$
 
-	/**
-	 * Constructor.
-	 */
-	public HTMLConfigurationCommandLine() {
-		super();
-	}
+    /**
+     * Configuration file parameter
+     */
+    private String configurationFile;
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see org.polarsys.capella.core.commandline.core.AbstractCommandLine#printHelp()
-	 */
-	@Override
-	public void printHelp() {
-		System.out.println("*** Capella HTML with Configuration Command Line"); //$NON-NLS-1$
-		super.printHelp();
-		System.out.println("-configurationFile value : defines the path to the configuration file");
-	}
+    public static final String CONFIGURATION = "-configurationfile"; //$NON-NLS-1$
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see org.polarsys.capella.core.commandline.core.AbstractCommandLine#checkArgs(org.eclipse.equinox.app.IApplicationContext)
-	 */
-	@Override
-	public void checkArgs(IApplicationContext context_p) throws CommandLineException {
-		super.checkArgs(context_p);
+    /**
+     * Constructor.
+     */
+    public HTMLConfigurationCommandLine() {
+        super();
+    }
 
-		// check mandatory configuration file
-		String[] args = CommandLineArgumentHelper.parseContext(context_p);
-		for (int i = 0; i < args.length; i++) {
-			String arg = args[i].toLowerCase();
-			if (CONFIGURATION.equals(arg)) {
-				configurationFile = args[++i];
-			}
-		}
-		// is configuration empty ?
-		if (isEmtyOrNull(configurationFile)) {
-			logErrorAndThrowException(Messages.configuration_mandatory);
-		}
-	}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.polarsys.capella.core.commandline.core.AbstractCommandLine#printHelp()
+     */
+    @Override
+    public void printHelp() {
+        System.out.println("*** Capella HTML with Configuration Command Line"); //$NON-NLS-1$
+        super.printHelp();
+        System.out.println("-configurationFile value : defines the path to the configuration file");
+    }
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see org.polarsys.capella.core.commandline.core.AbstractCommandLine#execute(org.eclipse.equinox.app.IApplicationContext)
-	 */
-	@Override
-	public boolean execute(IApplicationContext context_p) {
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.polarsys.capella.core.commandline.core.AbstractCommandLine#checkArgs(org.eclipse.equinox.app.IApplicationContext)
+     */
+    @Override
+    public void checkArgs(IApplicationContext context_p) throws CommandLineException {
+        super.checkArgs(context_p);
 
-		startFakeWorkbench();
+        // check mandatory configuration file
+        String[] args = CommandLineArgumentHelper.parseContext(context_p);
+        for (int i = 0; i < args.length; i++) {
+            String arg = args[i].toLowerCase();
+            if (CONFIGURATION.equals(arg)) {
+                configurationFile = args[++i];
+            }
+        }
+        // is configuration empty ?
+        if (isEmtyOrNull(configurationFile)) {
+            logErrorAndThrowException(Messages.configuration_mandatory);
+        }
+    }
 
-		// load the AIRD
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.polarsys.capella.core.commandline.core.AbstractCommandLine#execute(org.eclipse.equinox.app.IApplicationContext)
+     */
+    @Override
+    public boolean execute(IApplicationContext context_p) {
+
+        startFakeWorkbench();
+
+        // load the AIRD
         List<IFile> airdFilesFromInput = getAirdFilesFromInput();
         boolean status = true;
         if (!airdFilesFromInput.isEmpty()) {
@@ -172,100 +173,96 @@ public class HTMLConfigurationCommandLine extends DefaultCommandLine {
             }
         }
 
-		return status;
-	}
+        return status;
+    }
 
-	/**
-	 * Initialise generation scope with ScopeReferencesStrategy and scope
-	 * elements.
-	 * 
-	 * @param session_p
-	 *            Session
-	 */
-	private boolean initializeScope(Session session_p) {
-		// Clean old scope data.
-		GenerationGlobalScope.getInstance().cleanScope();
+    /**
+     * Initialise generation scope with ScopeReferencesStrategy and scope elements.
+     * 
+     * @param session_p
+     *            Session
+     */
+    private boolean initializeScope(Session session_p) {
+        // Clean old scope data.
+        GenerationGlobalScope.getInstance().cleanScope();
 
-		// Initialize scope strategies
-		GenerationGlobalScope.getInstance().setReferencesStrategy(ScopeReferencesStrategy.DONT_EXPORT);
-		ReflectionHelper.setFieldValueWithoutException(GenerationGlobalScope.getInstance(), "elementStrategy",
-				ScopeElementStrategy.ELEMENT);
+        // Initialize scope strategies
+        GenerationGlobalScope.getInstance().setReferencesStrategy(ScopeReferencesStrategy.DONT_EXPORT);
+        ReflectionHelper.setFieldValueWithoutException(GenerationGlobalScope.getInstance(), "elementStrategy", ScopeElementStrategy.ELEMENT);
 
-		// Initialize scope.
-		List<EObject> selectedModelElements = ConfigurationUtils.getInstance()
-				.getElementsFromConfigurationFile(configurationFile, session_p, new NullProgressMonitor());
-		if (selectedModelElements.isEmpty() && ConfigurationUtils.getInstance().getMessage() != null
-				&& ConfigurationUtils.getInstance().getMessage() != "") {
-			logError(ConfigurationUtils.getInstance().getMessage());
-			return false;
-		}
-		for (EObject eObject : selectedModelElements) {
-			try {
-				GenerationGlobalScope.getInstance().addToScope(eObject);
-			} catch (ScopeException e) {
-				logError(e.getMessage());
-			}
-		}
-		return true;
-	}
+        // Initialize scope.
+        List<EObject> selectedModelElements = ConfigurationUtils.getInstance().getElementsFromConfigurationFile(configurationFile, session_p, new NullProgressMonitor());
+        if (selectedModelElements.isEmpty() && ConfigurationUtils.getInstance().getMessage() != null && ConfigurationUtils.getInstance().getMessage() != "") {
+            logError(ConfigurationUtils.getInstance().getMessage());
+            return false;
+        }
+        for (EObject eObject : selectedModelElements) {
+            try {
+                GenerationGlobalScope.getInstance().addToScope(eObject);
+            } catch (ScopeException e) {
+                logError(e.getMessage());
+            }
+        }
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @throws CommandLineException
-	 */
-	@Override
-	public void prepare(IApplicationContext context_p) throws CommandLineException {
-		super.prepare(context_p);
-	}
+    /**
+     * {@inheritDoc}
+     * 
+     * @throws CommandLineException
+     */
+    @Override
+    public void prepare(IApplicationContext context_p) throws CommandLineException {
+        super.prepare(context_p);
+    }
 
-	public static void startFakeWorkbench() {
-		Display display = PlatformUI.createDisplay();
-		PlatformUI.createAndRunWorkbench(display, new WorkbenchAdvisor() {
+    public static void startFakeWorkbench() {
+        Display display = PlatformUI.createDisplay();
+        PlatformUI.createAndRunWorkbench(display, new WorkbenchAdvisor() {
 
-			/**
-			 * {@inheritDoc}
-			 */
-			@Override
-			public boolean openWindows() {
-				return false;
-			}
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public boolean openWindows() {
+                return false;
+            }
 
-			@Override
-			public String getInitialWindowPerspectiveId() {
-				return null;
-			}
-		});
-	}
+            @Override
+            public String getInitialWindowPerspectiveId() {
+                return null;
+            }
+        });
+    }
 
-	private boolean executeEGFActivity(Activity capellaLauncher, final String outputFolder, final URI uri) {
+    private boolean executeEGFActivity(Activity capellaLauncher, final String outputFolder, final URI uri) {
 
-		boolean success = true;
-		String prefix = Messages.exec_pb;
+        boolean success = true;
+        String prefix = Messages.exec_pb;
 
-		// create output folder in the project
-		IPath path = new Path(outputFolder);
-		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(path.append("output"));
-		if (!folder.exists()) {
-			try {
-				folder.create(true, true, new NullProgressMonitor());
-			} catch (CoreException e) {
-				StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-				logError(message.toString());
-				success = false;
-			}
-		}
+        // create output folder in the project
+        IPath path = new Path(outputFolder);
+        IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(path.append("output"));
+        if (!folder.exists()) {
+            try {
+                folder.create(true, true, new NullProgressMonitor());
+            } catch (CoreException e) {
+                StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
+                logError(message.toString());
+                success = false;
+            }
+        }
 
-		if (success && capellaLauncher instanceof FactoryComponent) {
-			String relativeFilePath = getRelativeFilePath(outputFolder);
-			String projectName = getProjectName(outputFolder);
+        if (success && capellaLauncher instanceof FactoryComponent) {
+            String relativeFilePath = getRelativeFilePath(outputFolder);
+            String projectName = getProjectName(outputFolder);
 
-			final FactoryComponent factoryComponent = (FactoryComponent) capellaLauncher;
-			setContract(factoryComponent, "projectName", projectName); //$NON-NLS-1$
-			setContract(factoryComponent, "outputFolder", relativeFilePath + "/output"); //$NON-NLS-1$
-			setDomain(factoryComponent, uri);
+            final FactoryComponent factoryComponent = (FactoryComponent) capellaLauncher;
+            setContract(factoryComponent, "projectName", projectName); //$NON-NLS-1$
+            setContract(factoryComponent, "outputFolder", relativeFilePath + "/output"); //$NON-NLS-1$
+            setDomain(factoryComponent, uri);
 
-			// run the activity
+            // run the activity
             try {
                 InvokeActivityHelper.invokeOutOfUIThread(factoryComponent);
                 success = true;
@@ -275,33 +272,33 @@ public class HTMLConfigurationCommandLine extends DefaultCommandLine {
                 success = false;
             }
 
-		} else {
-			success = false;
-		}
-		return success;
-	}
+        } else {
+            success = false;
+        }
+        return success;
+    }
 
-	private void setDomain(FactoryComponent factoryComponent, URI uri) {
-		Viewpoint viewpoint = factoryComponent.getViewpointContainer().getViewpoint(DomainViewpoint.class);
-		if (viewpoint instanceof DomainViewpoint) {
-			DomainViewpoint domainViewpoint = (DomainViewpoint) viewpoint;
-			Domain domain = domainViewpoint.getDomains().get(0);
-			if (domain instanceof EMFDomain) {
-				EMFDomain domainURI = (EMFDomain) domain;
-				domainURI.setUri(uri);
-			}
-		}
-	}
+    private void setDomain(FactoryComponent factoryComponent, URI uri) {
+        Viewpoint viewpoint = factoryComponent.getViewpointContainer().getViewpoint(DomainViewpoint.class);
+        if (viewpoint instanceof DomainViewpoint) {
+            DomainViewpoint domainViewpoint = (DomainViewpoint) viewpoint;
+            Domain domain = domainViewpoint.getDomains().get(0);
+            if (domain instanceof EMFDomain) {
+                EMFDomain domainURI = (EMFDomain) domain;
+                domainURI.setUri(uri);
+            }
+        }
+    }
 
-	private void setContract(FactoryComponent factoryComponent, String contractName, String value) {
-		Contract invokedContract = factoryComponent.getContract(contractName);
+    private void setContract(FactoryComponent factoryComponent, String contractName, String value) {
+        Contract invokedContract = factoryComponent.getContract(contractName);
 
-		Type type = invokedContract.getType();
-		if (type instanceof TypeString) {
-			TypeString typeString = (TypeString) type;
-			typeString.setValue(value);
-		}
+        Type type = invokedContract.getType();
+        if (type instanceof TypeString) {
+            TypeString typeString = (TypeString) type;
+            typeString.setValue(value);
+        }
 
-	}
+    }
 
 }
