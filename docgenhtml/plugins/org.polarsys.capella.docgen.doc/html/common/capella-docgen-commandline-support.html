@@ -12,7 +12,21 @@
 		<p>Please visit the 
 			<a href="/wiki/../help/topic/org.polarsys.capella.commandline.doc/html/19.%20Command%20Line%20Support/19.1.%20Core%20Mechanism%20and%20Applications.html" title="../help/topic/org.polarsys.capella.commandline.doc/html/19.%20Command%20Line%20Support/19.1.%20Core%20Mechanism%20and%20Applications.html">Capella Command Line</a> documentation section in order to learn more about this aspect.
 		</p>
-		<p>The HTML DocGen Command Line relies only on parameters from the Capella CommandLine core mechanism parameters.</p>
+		<p>The HTML DocGen Command Line relies on parameters from the Capella CommandLine core mechanism parameters with the addition of the following parameter.</p>
+		<table id="configurationParameter">
+			<tr>
+				<th>Name</th>
+				<th>Category</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>configurationFile</td>
+				<td>optional</td>
+				<td>defines the workspace or absolute path to a configuration file (see 
+					<a href="/wiki/../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html" title="../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html">Selective Documentation Generation option</a>)
+				</td>
+			</tr>
+		</table>
 		<p>You can use the 
 			<b>-help</b> argument to see all of the applicable arguments for the command line.
 		</p>
@@ -21,7 +35,7 @@
 		<ul>
 			<li>A Capella model (name: EOLE_AF) already imported in the workspace</li>
 		</ul>
-		<h3 id="Simple_use_case">Simple use case</h3>
+		<h3 id="Simple_use_cases">Simple use cases</h3>
 		<pre>
 &lt;CapellaInstallationPath&gt;/capellac.exe -nosplash
 -application org.polarsys.capella.core.commandline.core
@@ -39,6 +53,25 @@
 				<i>DocProject</i>
 			</b>.
 		</p>
+		<p><u>
+			<b>Use a configuration file</b></u>
+		</p>
+		<p>It is also possible to use the 
+			<a href="/wiki/../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html" title="../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html">Selective Documentation Generation option</a> from commandline.
+			This is done by relying on the alternative 
+			<b>appid</b> parameter value 
+			<b>org.polarsys.kitalpha.doc.conf.gen.business.capella.commandline</b> and the 
+			<b>configurationfile</b> parameter: 
+		</p>
+		<pre>
+&lt;CapellaInstallationPath&gt;/capellac.exe -nosplash
+-application org.polarsys.capella.core.commandline.core
+-appid org.polarsys.kitalpha.doc.conf.gen.business.capella.commandline
+-data &lt;workspacePath&gt;
+-input /EOLE_AF/EOLE_AF.aird
+-outputfolder /DocProject/HTML
+-configurationfile &lt;workspace or absolute path to a .configuration file&gt;
+</pre>
 		<h3 id="Complex_use_cases">Complex use cases</h3>
 		<p><u>
 			<b>Import Capella project and generate inside it</b></u>
