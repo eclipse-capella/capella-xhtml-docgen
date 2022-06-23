@@ -6,18 +6,26 @@ The HTML DocGen add-on provides the capacity to launch the documentation generat
 
 Please visit the [[../help/topic/org.polarsys.capella.commandline.doc/html/19.%20Command%20Line%20Support/19.1.%20Core%20Mechanism%20and%20Applications.html | Capella Command Line]] documentation section in order to learn more about this aspect.
 
-			
-The HTML DocGen Command Line relies only on parameters from the Capella CommandLine core mechanism parameters.
+The HTML DocGen Command Line relies on parameters from the Capella CommandLine core mechanism parameters with the addition of the following parameter.
+
+{| id="configurationParameter"
+!Name
+!Category
+!Description
+|-
+|configurationFile
+|optional
+|defines the workspace or absolute path to a configuration file (see [[../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html | Selective Documentation Generation option]])
+|}
 
 You can use the '''-help''' argument to see all of the applicable arguments for the command line.
-
 
 == Command Line Application Examples ==
 For all the examples bellow we assume the existence of:
 
 * A Capella model (name: EOLE_AF) already imported in the workspace
 
-=== Simple use case ===
+=== Simple use cases ===
 
 <pre>
 <CapellaInstallationPath>/capellac.exe -nosplash
@@ -29,6 +37,21 @@ For all the examples bellow we assume the existence of:
 </pre>
 
 This command will generate ''HTML'' report from the EOLE-AF aird file specified to the output folder '''''HTML''''' present into '''''DocProject'''''.
+
+<u>'''Use a configuration file'''</u>
+
+It is also possible to use the [[../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html | Selective Documentation Generation option]] from commandline.
+This is done by relying on the alternative '''appid''' parameter value '''org.polarsys.kitalpha.doc.conf.gen.business.capella.commandline''' and the '''configurationfile''' parameter: 
+
+<pre>
+<CapellaInstallationPath>/capellac.exe -nosplash
+-application org.polarsys.capella.core.commandline.core
+-appid org.polarsys.kitalpha.doc.conf.gen.business.capella.commandline
+-data <workspacePath>
+-input /EOLE_AF/EOLE_AF.aird
+-outputfolder /DocProject/HTML
+-configurationfile <workspace or absolute path to a .configuration file>
+</pre>
 
 === Complex use cases ===
 
@@ -78,3 +101,5 @@ This command will import the EOLE_AF project from ''&lt;absolutePath&gt;'' works
 This command will import two projects (EOLE_AF and DocProject) from ''&lt;absolutePath&gt;'' workspace into ''&lt;targetWorkspacePath&gt; ''workspace before generating the HTML report inside the DocProject.
 
 '''NOTE''': The source and target workspaces have to be different.
+
+
