@@ -1,0 +1,26 @@
+<% super.method_content(new StringBuffer(), ctx); 
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+%>
+
+<% 
+	List<String> ownedMembers = CapellaAssociationService.getInformationForAssociationOwnedMembers((Association)element, projectName, outputFolder);
+	if(ownedMembers.size() >= 1){
+%>
+<%String sectionName = "Source";%>
+<div title="<%=sectionName%>">
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,sectionName:property"%>
+<%= StringUtil.stringListToBulette(ownedMembers) %>
+</div>
+<%}%>
+
+<% 
+	List<String> navigableMembers = CapellaAssociationService.getInformationForAssociationNavigableMembers((Association)element, projectName, outputFolder);
+	if(navigableMembers.size() >= 1){
+%>
+<%String sectionName = "Target";%>
+<div title="<%=sectionName%>">
+<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,sectionName:property"%>
+<%= StringUtil.stringListToBulette(navigableMembers) %>
+</div>
+<%}%>

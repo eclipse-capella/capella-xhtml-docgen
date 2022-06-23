@@ -1,0 +1,4 @@
+<%
+		String type = element.eClass().getName();
+		documentTitle = CapellaServices.getHyperlinkFromElement(element);
+%>

@@ -390,6 +390,20 @@
             <methods xmi:id="_6VITkHvMEeCAr9zliRjheA" name="setTitle" patternFilePath="templates/pattern._nJ840Ds5EeCgH6PBi_KPBw/method._6VITkHvMEeCAr9zliRjheA.pt"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_nJ841zs5EeCgH6PBi_KPBw"/>
           </elements>
+          <elements xmi:id="_nJ840Ds5EeCgH6PBj_KPBw" name="AssociationDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
+              headerMethod="#_nJ840js5EeCgH6PBj_KPBw" conditionMethod="#_nJ841Ds5EeCgH6PBj_KPBw"
+              initMethod="#_nJ840zs5EeCgH6PBj_KPBw" footerMethod="#_nJ841js5EeCgH6PBj_KPBw">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_nJ840Ts5EeCgH6PBj_KPBw"
+                name="JET"/>
+            <methods xmi:id="_nJ840js5EeCgH6PBj_KPBw" name="header" patternFilePath="templates/pattern._nJ840Ds5EeCgH6PBj_KPBw/method._nJ840js5EeCgH6PBj_KPBw.pt"/>
+            <methods xmi:id="_nJ840zs5EeCgH6PBj_KPBw" name="init" patternFilePath="templates/pattern._nJ840Ds5EeCgH6PBj_KPBw/method._nJ840zs5EeCgH6PBj_KPBw.pt"/>
+            <methods xmi:id="_nJ841Ds5EeCgH6PBj_KPBw" name="preCondition" patternFilePath="templates/pattern._nJ840Ds5EeCgH6PBj_KPBw/method._nJ841Ds5EeCgH6PBj_KPBw.pt"/>
+            <methods xmi:id="_nJ841js5EeCgH6PBj_KPBw" name="footer" patternFilePath="templates/pattern._nJ840Ds5EeCgH6PBj_KPBw/method._nJ841js5EeCgH6PBj_KPBw.pt"/>
+            <methods xmi:id="_t55ioDs5EeCgH6PBj_KPBw" name="content" patternFilePath="templates/pattern._nJ840Ds5EeCgH6PBj_KPBw/method._t55ioDs5EeCgH6PBj_KPBw.pt"/>
+            <methods xmi:id="_Ubo3sPLfEeyo_b26W4vfFw" name="setCapellaContext" patternFilePath="templates/pattern._nJ840Ds5EeCgH6PBj_KPBw/method._Ubo3sPLfEeyo_b26W4vfFw.pt"/>
+            <parameters xmi:id="_vzyxEPLeEeyo_b26W4vfFw" name="parameter" type="org.polarsys.capella.core.data.information.Association"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_n2gm4PLdEeyo_b26W4vfFw"/>
+          </elements>
           <elements xmi:id="_j_CXYEV-EeCvqtVx_IKrqA" name="CollectionDocGen" superPattern="#_JPU-gDtBEeCgH6PBi_KPBw"
               headerMethod="#_j_CXYkV-EeCvqtVx_IKrqA" conditionMethod="#_j_CXZEV-EeCvqtVx_IKrqA"
               initMethod="#_j_CXY0V-EeCvqtVx_IKrqA" footerMethod="#_j_CXZUV-EeCvqtVx_IKrqA">
@@ -855,7 +869,7 @@
         <invocationContractContainer xmi:id="_xHdBoW8PEeSjPIMKP6Xr0g">
           <invocationContracts xmi:id="_xHdBom8PEeSjPIMKP6Xr0g" invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g">
             <type xmi:type="pattern:TypePatternList" xmi:id="_oacDMN4ZEd-Qav1YnqlO9A"
-                elements="#_x_LwcGwiEeCUvpJOFjr3FQ #_hW854N47Ed-Qav1YnqlO9A #_nJ840Ds5EeCgH6PBi_KPBw #_j_CXYEV-EeCvqtVx_IKrqA #_fQhPcEWiEeCvqtVx_IKrqA #_HyNjwN0cEd-Vzvs7Wt1vzQ #_6RU6oXGlEeC8GrKepiiiTw #_Axl3MH1uEeCIgcTVWxVnzQ #_WWJkYYBZEeCN8Jbz-bJe6w #_MdyuQYLBEeCjNOKMEA2WFg #_sGmFIZdTEeCvReB7msXe8Q #_6uVm4JwPEeCWeuBXIFCRXA #_bikDsb0GEeC7JNoAKQ1P0g #_qz8z8b3TEeCFqqET0yrG_w #_Pq5FgL3fEeCFqqET0yrG_w #_sRl5kb52EeCw5MDUpv1shw #_a126IL6EEeCw5MDUpv1shw #_ZXf8Ib88EeC3itjHQ6nPuA #_1fzXsL9JEeC3itjHQ6nPuA #_TIBLoDlmEeKfl43CFVnoFw #_WnyP8OzGEeSAVbCPYCI8cQ #_u-tmELXYEeiyaM1QyFX3Jg #_EC31ALXcEeiyaM1QyFX3Jg #_a6_HILXaEeiyaM1QyFX3Jg #_B0Sp4FxqEemRLucKv8z86A #_QKJzAIFHEemoWLDLVaBCIQ #_x6M3kIuDEemoWLDLVaBCIQ"/>
+                elements="#_x_LwcGwiEeCUvpJOFjr3FQ #_hW854N47Ed-Qav1YnqlO9A #_nJ840Ds5EeCgH6PBi_KPBw #_j_CXYEV-EeCvqtVx_IKrqA #_fQhPcEWiEeCvqtVx_IKrqA #_HyNjwN0cEd-Vzvs7Wt1vzQ #_6RU6oXGlEeC8GrKepiiiTw #_Axl3MH1uEeCIgcTVWxVnzQ #_WWJkYYBZEeCN8Jbz-bJe6w #_MdyuQYLBEeCjNOKMEA2WFg #_sGmFIZdTEeCvReB7msXe8Q #_6uVm4JwPEeCWeuBXIFCRXA #_bikDsb0GEeC7JNoAKQ1P0g #_qz8z8b3TEeCFqqET0yrG_w #_Pq5FgL3fEeCFqqET0yrG_w #_sRl5kb52EeCw5MDUpv1shw #_a126IL6EEeCw5MDUpv1shw #_ZXf8Ib88EeC3itjHQ6nPuA #_1fzXsL9JEeC3itjHQ6nPuA #_TIBLoDlmEeKfl43CFVnoFw #_WnyP8OzGEeSAVbCPYCI8cQ #_u-tmELXYEeiyaM1QyFX3Jg #_EC31ALXcEeiyaM1QyFX3Jg #_a6_HILXaEeiyaM1QyFX3Jg #_B0Sp4FxqEemRLucKv8z86A #_QKJzAIFHEemoWLDLVaBCIQ #_x6M3kIuDEemoWLDLVaBCIQ #_nJ840Ds5EeCgH6PBj_KPBw"/>
           </invocationContracts>
           <invocationContracts xmi:id="_xHdBo28PEeSjPIMKP6Xr0g" factoryComponentContract="#_gCg58G8PEeSjPIMKP6Xr0g"
               invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>

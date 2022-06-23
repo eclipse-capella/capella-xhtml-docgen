@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2022 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -14,14 +14,12 @@ package org.polarsys.capella.docgen.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.capellacore.TypedElement;
 import org.polarsys.capella.core.data.information.AggregationKind;
-import org.polarsys.capella.core.data.information.Association;
 import org.polarsys.capella.core.data.information.Class;
 import org.polarsys.capella.core.data.information.ExchangeItem;
 import org.polarsys.capella.core.data.information.ExchangeItemElement;
@@ -31,7 +29,6 @@ import org.polarsys.capella.core.data.information.Parameter;
 import org.polarsys.capella.core.data.information.Property;
 import org.polarsys.capella.core.data.information.Union;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
-import org.polarsys.capella.core.model.helpers.PropertyExt;
 
 /**
  * 
@@ -124,72 +121,6 @@ public class CapellaClassServices {
 		return ret;
 	}
 
-    /**
-     * <b>Get the properties of a Class</b>
-     * <p>
-     * Get the informations of class properties
-     * 
-     * @param eObject
-     * @return
-     */
-    public static List<String> getClassAssociations(EObject eObject,
-            String projectName, String outputFolder) {
-
-        Property minProperty = null;
-        Property maxProperty = null;
-        // Create the list to return
-        List<String> ret = new ArrayList<>();
-
-        if (!(eObject instanceof Class)) {
-            return ret;
-        }
-        // If the Object is a Class
-        EList<Property> properties = getClassProperties((Class) eObject);
-        
-        if (properties != null)
-        {
-            // For each properties of the Class
-            for (Property prop : properties) 
-            {
-                if (prop.getName().equals("min")) 
-                    minProperty = prop;
-                else
-                {
-                    if (prop.getName().equals("max")) 
-                    {
-                        maxProperty = prop;
-                    }
-                    else 
-                    {
-                        // Add the information of the property to the list
-                        String info = CapellaPropertyServices.getInformationFromProperty(prop, projectName, outputFolder);
-                        ret.add(info);
-                    }
-                }
-            }
-        }
-        
-        if (maxProperty != null) 
-        {
-            ret.add(0, CapellaPropertyServices.getInformationFromProperty(maxProperty, projectName, outputFolder));
-        }
-        if (minProperty != null) 
-        {
-            ret.add(0, CapellaPropertyServices.getInformationFromProperty(minProperty, projectName, outputFolder));
-        }
-        return ret;
-    }
-    
-    /**
-     * A predicate to filter Association Properties from the other properties
-     */
-    private final static Predicate<Property> isAssociationPredicate = new Predicate<Property>() {
-        @Override
-        public boolean test(Property p) {
-            return p.getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE;
-        }
-    };
-
 	/**
 	 * Get all properties of a Class object
 	 * @param clazz
@@ -198,9 +129,9 @@ public class CapellaClassServices {
 	private static EList<Property> getClassProperties(Class clazz) {
 		EList<Property> properties = null;
 		if (clazz instanceof Union) {
-			properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties().stream().filter(isAssociationPredicate.negate()).toList());
+			properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate.negate()).toList());
 		} else {
-			properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(isAssociationPredicate.negate()).toList());
+			properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate.negate()).toList());
 		}
 		if (properties.isEmpty()) {
 			return null;
@@ -216,9 +147,9 @@ public class CapellaClassServices {
     private static EList<Property> getClassAssociations(Class clazz) {
         EList<Property> properties = null;
         if (clazz instanceof Union) {
-            properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties().stream().filter(isAssociationPredicate).toList());
+            properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate).toList());
         } else {
-            properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(isAssociationPredicate).toList());
+            properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate).toList());
         }
         if (properties.isEmpty()) {
             return null;
@@ -389,20 +320,20 @@ public class CapellaClassServices {
 		List<String> ret = new ArrayList<>();
 		Collection<TypedElement> typedElements = theClass.getTypedElements();
 		for (TypedElement typedElement : typedElements) {
-			if (typedElement instanceof Property && ((Property) typedElement).getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE) {
+			if (typedElement instanceof Property && CapellaPropertyServices.isAssociationPropertyPredicate.test((Property) typedElement)) {
 				EObject container = typedElement.eContainer();
 				if (container instanceof Class) {
-			        Association regardingAssociation = PropertyExt.getRegardingAssociation(typedElement);
-			        String associationImageLink = CapellaServices
-                    .getHyperlinkFromElement(regardingAssociation,
-                            regardingAssociation.getLabel());
-					String currentStringValue = CapellaServices
-							.getImageLinkFromElement(container,
-									projectName, outputFolder)
-							+ " "
-							+ CapellaServices
-									.getFullDataPkgHierarchyLink(container)
-					        + " through " + associationImageLink;
+				    StringBuffer buffer = new StringBuffer();
+				    
+                    buffer.append(CapellaServices.getImageLinkFromElement(container, projectName, outputFolder));
+                    buffer.append(CapellaServices.SPACE);
+                    buffer.append(CapellaServices.getFullDataPkgHierarchyLink(container));
+                    
+                    // Add related association information
+//                    buffer.append(" through ");
+//                    buffer.append(CapellaPropertyServices.getAssociationImageAndHyperlink((Property) typedElement, projectName, outputFolder));
+                    
+                    String currentStringValue = buffer.toString();
 					if (!ret.contains(currentStringValue))
 						ret.add(currentStringValue);
 				}
