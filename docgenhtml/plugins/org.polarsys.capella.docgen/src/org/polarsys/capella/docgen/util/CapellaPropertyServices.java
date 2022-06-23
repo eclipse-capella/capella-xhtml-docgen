@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2022 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -14,6 +14,7 @@ package org.polarsys.capella.docgen.util;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Predicate;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -21,6 +22,7 @@ import org.polarsys.capella.common.mdsofa.common.constant.ICommonConstants;
 import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
 import org.polarsys.capella.core.data.capellacore.EnumerationPropertyValue;
 import org.polarsys.capella.core.data.information.AggregationKind;
+import org.polarsys.capella.core.data.information.Association;
 import org.polarsys.capella.core.data.information.CollectionValueReference;
 import org.polarsys.capella.core.data.information.Property;
 import org.polarsys.capella.core.data.information.UnionProperty;
@@ -31,6 +33,7 @@ import org.polarsys.capella.core.data.information.datavalue.EnumerationReference
 import org.polarsys.capella.core.data.information.datavalue.NumericReference;
 import org.polarsys.capella.core.data.information.datavalue.StringReference;
 import org.polarsys.capella.core.data.information.datavalue.ValuePart;
+import org.polarsys.capella.core.model.helpers.PropertyExt;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EObjectLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.LabelProviderHelper;
 
@@ -96,60 +99,86 @@ public class CapellaPropertyServices {
 		return (CapellaServices.getHyperlinkFromElement(prop_p));
 
 	}
+	
+    /**
+     * Get the information details of a property and includes the related Association informations if {@code property} is
+     * navigable from an association.
+     * 
+     * @param property The property from which information is generated
+     * @param projectName The name of the project from which the documentation is generated
+     * @param outputFolder The target folder of the documentation generation
+     * @return
+     */
+    public static String getInformationFromPropertyIncludingAssociation(Property property, String projectName, String outputFolder) {
+        StringBuffer buffer = new StringBuffer();
+        if (isAssociationPropertyPredicate.test(property)) {
+            buffer.append(getAssociationImageAndHyperlink(property, projectName, outputFolder));
+            buffer.append(CapellaServices.UL_OPEN);
+            buffer.append(CapellaServices.LI_OPEN);
+        }
+        
+        buffer.append(getInformationFromProperty(property, projectName, outputFolder));
+
+        if (isAssociationPropertyPredicate.test(property)) {
+            buffer.append(CapellaServices.LI_CLOSE);
+            buffer.append(CapellaServices.UL_CLOSE);
+        }
+        return buffer.toString();
+    }
 
 	/**
 	 * <b>Get the information of a property</b>
 	 * <p>
 	 * Get the information detail of a property
 	 * 
-	 * @param prop_p
+	 * @param property
 	 * @return
 	 */
-	public static String getInformationFromProperty(Property prop_p, String projectName, String outputFolder) {
+	public static String getInformationFromProperty(Property property, String projectName, String outputFolder) {
 		// Buffer declaration
 		StringBuffer buffer = new StringBuffer();
-
-		buffer.append(CapellaServices.getImageLinkFromElement(prop_p, projectName, outputFolder));
+		
+		buffer.append(CapellaServices.getImageLinkFromElement(property, projectName, outputFolder));
 		buffer.append(" ");
 		// Bold tag open
 		buffer.append(CapellaServices.BOLD_BEGIN);
 		// If property is abstract
-		if (prop_p.isIsAbstract()) {
+		if (property.isIsAbstract()) {
 			// Add this information to the buffer
 			buffer.append(CapellaServices.PROP_CRO_ABSTRACT);
 		}
 		// If property is static
-		if (prop_p.isIsStatic()) {
+		if (property.isIsStatic()) {
 			// Add this information to the buffer
 			buffer.append(CapellaServices.PROP_CRO_STATIC);
 		}
 		// If property is key
-		if (prop_p.isIsPartOfKey()) {
+		if (property.isIsPartOfKey()) {
 			// Add this information to the buffer
 			buffer.append(CapellaServices.PROP_CRO_KEY);
 		}
 		// If property is key
-		if (prop_p.getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE) {
+		if (property.getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE) {
 			// Add this information to the buffer
 			buffer.append("{ref}  ");
 		}
 		// If property is derived
-		if (prop_p.isIsDerived()) {
+		if (property.isIsDerived()) {
 			// Add this information to the buffer
 			buffer.append(CapellaServices.PROP_CRO_DERIVED);
 		}
 		// If property is read only
-		if (prop_p.isIsReadOnly()) {
+		if (property.isIsReadOnly()) {
 			// Add this information to the buffer
 			buffer.append(CapellaServices.PROP_CRO_READONLY);
 		}
 		// If property is ordered
-		if (prop_p.isOrdered()) {
+		if (property.isOrdered()) {
 			// Add this information to the buffer
 			buffer.append(CapellaServices.PROP_CRO_ORDERED);
 		}
 		// If property is unique
-		if (prop_p.isUnique()) {
+		if (property.isUnique()) {
 			// Add this information to the buffer
 			buffer.append(CapellaServices.PROP_CRO_UNIQUE);
 		}
@@ -160,34 +189,34 @@ public class CapellaPropertyServices {
 		// Bold tag open
 		buffer.append(CapellaServices.BOLD_BEGIN);
 		// Add the name of the property to the buffer
-		buffer.append(prop_p.getName());
+		buffer.append(property.getName());
 
 		// Add the cardinalities hyper link to the buffer
-		if (null != prop_p.getOwnedMinCard() && null != prop_p.getOwnedMaxCard()) {
+		if (null != property.getOwnedMinCard() && null != property.getOwnedMaxCard()) {
 			// Add the min cardinality to the buffer
 			buffer.append(CapellaServices.CRO_OPEN);
-			buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(prop_p.getOwnedMinCard()));
+			buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(property.getOwnedMinCard()));
 			buffer.append(", ");
 			// Add the max cardinality to the buffer
-			buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(prop_p.getOwnedMaxCard()));
+			buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(property.getOwnedMaxCard()));
 			buffer.append(CapellaServices.CRO_CLOSE);
 		}
 		// Bold tag close
 		buffer.append(CapellaServices.BOLD_END);
 		// Add the hyper link of the type of the property to the buffer
 		buffer.append(CapellaServices.VALUE_PRESENTER);
-		if (prop_p.getType() != null)
-			buffer.append(CapellaServices.getFullDataPkgHierarchyLink(prop_p.getType()));
+		if (property.getType() != null)
+			buffer.append(CapellaServices.getFullDataPkgHierarchyLink(property.getType()));
 
 		// Display UnionProperties Qualifiers
-		if (prop_p instanceof UnionProperty) {
-			String qualifier = computeUnionPropertyLabelWithQualifier((UnionProperty) prop_p);
+		if (property instanceof UnionProperty) {
+			String qualifier = computeUnionPropertyLabelWithQualifier((UnionProperty) property);
 			buffer.append(qualifier);
 		}
 
-		if (null != prop_p.getDescription()) {
+		if (null != property.getDescription()) {
 			buffer.append("<p>");
-			buffer.append(StringUtil.transformAREFString(prop_p, prop_p.getDescription(), projectName, outputFolder));
+			buffer.append(StringUtil.transformAREFString(property, property.getDescription(), projectName, outputFolder));
 			buffer.append("</p>");
 		}
 		// features and property-values
@@ -195,41 +224,53 @@ public class CapellaPropertyServices {
 		// features
 		Collection<String> features = new ArrayList<String>();
 
-		if (prop_p.getOwnedMinValue() != null)
+		if (property.getOwnedMinValue() != null)
 			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MIN_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedMinValue()));
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMinValue()));
 
-		if (prop_p.getOwnedMaxValue() != null)
+		if (property.getOwnedMaxValue() != null)
 			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAX_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedMaxValue()));
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMaxValue()));
 
-		if (prop_p.getOwnedMinLength() != null)
+		if (property.getOwnedMinLength() != null)
 			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MINLENGTH_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedMinLength()));
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMinLength()));
 
-		if (prop_p.getOwnedMaxLength() != null)
+		if (property.getOwnedMaxLength() != null)
 			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAXLENGTH_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedMaxLength()));
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMaxLength()));
 
-		if (prop_p.getOwnedDefaultValue() != null)
+		if (property.getOwnedDefaultValue() != null)
 			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedDefaultValue()));
-		if (prop_p.getOwnedNullValue() != null)
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedDefaultValue()));
+		if (property.getOwnedNullValue() != null)
 			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.NULL_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(prop_p.getOwnedNullValue()));
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedNullValue()));
 
 		buffer.append(CapellaServices.UL_OPEN);
 
 		for (String featureString : features)
 			buffer.append(CapellaServices.LI_OPEN + featureString + CapellaServices.LI_CLOSE);
 
-		String propertyValues = getPropertyValues(prop_p.getOwnedPropertyValues(), projectName, outputFolder);
+		String propertyValues = getPropertyValues(property.getOwnedPropertyValues(), projectName, outputFolder);
 		if (propertyValues != null && propertyValues.length() > 0)
 			buffer.append(propertyValues);
 
 		buffer.append(CapellaServices.UL_CLOSE);
+		
 		return buffer.toString();
 	}
+
+	/**
+	 * Build {@code property} regarding association string representation 
+	 * @param property The property from which the regarding association string shall be build
+	 * @param projectName
+	 * @param outputFolder
+	 */
+    public static String getAssociationImageAndHyperlink(Property property, String projectName, String outputFolder) {
+        Association regardingAssociation = PropertyExt.getRegardingAssociation(property);
+        return CapellaAssociationService.getInformationFromAssociation(regardingAssociation, projectName, outputFolder);
+    }
 
 	/**
 	 * Unify export of property values to Html with this method Get the property
@@ -259,6 +300,16 @@ public class CapellaPropertyServices {
 
 		return buffer.toString();
 	}
+    
+    /**
+     * A predicate to filter Association Properties from the other properties
+     */
+    public final static Predicate<Property> isAssociationPropertyPredicate = new Predicate<Property>() {
+        @Override
+        public boolean test(Property p) {
+            return p.getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE;
+        }
+    };
 
 	private static String computeUnionPropertyLabelWithQualifier(UnionProperty property_p) {
 		String result = ICommonConstants.EMPTY_STRING;
