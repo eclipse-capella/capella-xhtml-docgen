@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES and others.
+ * Copyright (c) 2006, 2022 THALES GLOBAL SERVICES and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -90,7 +90,7 @@ public class HTMLConfigurationCommandLine extends DefaultCommandLine {
     public void printHelp() {
         System.out.println("*** Capella HTML with Configuration Command Line"); //$NON-NLS-1$
         super.printHelp();
-        System.out.println("-configurationFile value : defines the path to the configuration file");
+        System.out.println("-configurationfile value : defines the workspace or absolute path to the configuration file");
     }
 
     /**
@@ -131,7 +131,6 @@ public class HTMLConfigurationCommandLine extends DefaultCommandLine {
         boolean status = true;
         if (!airdFilesFromInput.isEmpty()) {
             URI uri = EcoreUtil2.getURI(airdFilesFromInput.get(0));
-            URI semanticResourceURI = uri;
 
             if (uri.lastSegment().endsWith(".aird")) {//$NON-NLS-1$
 
@@ -145,34 +144,41 @@ public class HTMLConfigurationCommandLine extends DefaultCommandLine {
                     return true;
                 }
 
-                // init the EGF activity
-                Activity htmlGenerator = InvokeActivityHelper.getActivity(CAPELLA_LAUNCHER_URI);
-
-                Project rootSemanticElement = SessionHelper.getCapellaProject(session);
-                if (rootSemanticElement != null) {
-                    Resource semanticResource = rootSemanticElement.eResource();
-                    semanticResourceURI = semanticResource.getURI();
-
-                    try {
-                        String outputFolderString = getOrCreateOutputFolder().getFullPath().toString();
-                        status = executeEGFActivity(htmlGenerator, outputFolderString, semanticResourceURI);
-                        if (status) {
-                            logInfo(Messages.generation_done + outputFolderString);
-                        }
-                    } catch (CommandLineException e) {
-                        status = false;
-                        logError(e.getMessage());
-                    }
-                } else {
-                    status = false;
-                    logError(Messages.no_root_semantic_element);
-                }
+                status = executeGeneration(session);
             } else {
                 status = false;
                 logError(Messages.filepath_point_to_aird);
             }
         }
 
+        return status;
+    }
+
+    private boolean executeGeneration(Session session) {
+        boolean status;
+        URI semanticResourceURI;
+        // init the EGF activity
+        Activity htmlGenerator = InvokeActivityHelper.getActivity(CAPELLA_LAUNCHER_URI);
+
+        Project rootSemanticElement = SessionHelper.getCapellaProject(session);
+        if (rootSemanticElement != null) {
+            Resource semanticResource = rootSemanticElement.eResource();
+            semanticResourceURI = semanticResource.getURI();
+
+            try {
+                String outputFolderString = getOrCreateOutputFolder().getFullPath().toString();
+                status = executeEGFActivity(htmlGenerator, outputFolderString, semanticResourceURI);
+                if (status) {
+                    logInfo(Messages.generation_done + outputFolderString);
+                }
+            } catch (CommandLineException e) {
+                status = false;
+                logError(e.getMessage());
+            }
+        } else {
+            status = false;
+            logError(Messages.no_root_semantic_element);
+        }
         return status;
     }
 

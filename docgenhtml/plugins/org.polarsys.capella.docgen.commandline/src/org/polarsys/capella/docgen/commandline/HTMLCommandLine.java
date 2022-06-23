@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2022 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -91,10 +91,6 @@ public class HTMLCommandLine extends DefaultCommandLine {
         boolean status = true;
         if (!airdFilesFromInput.isEmpty()) {
             URI uri = EcoreUtil2.getURI(airdFilesFromInput.get(0));
-            // init the EGF activity
-            Activity htmlGenerator = InvokeActivityHelper.getActivity(CAPELLA_LAUNCHER_URI);
-
-            URI semanticResourceURI = uri;
 
             if (uri.lastSegment().endsWith(".aird")) {//$NON-NLS-1$
 
@@ -103,31 +99,41 @@ public class HTMLCommandLine extends DefaultCommandLine {
 
                 session.open(new NullProgressMonitor());
 
-                Project rootSemanticElement = SessionHelper.getCapellaProject(session);
-                if (rootSemanticElement != null) {
-                    Resource semanticResource = rootSemanticElement.eResource();
-                    semanticResourceURI = semanticResource.getURI();
-
-                    try {
-                        String outputFolderString = getOrCreateOutputFolder().getFullPath().toString();
-                        status = executeEGFActivity(htmlGenerator, outputFolderString, semanticResourceURI);
-                        if (status) {
-                            logInfo(Messages.generation_done + outputFolderString);
-                        }
-                    } catch (CommandLineException e) {
-                        status = false;
-                        logError(e.getMessage());
-                    }
-                } else {
-                    status = false;
-                    logError(Messages.no_root_semantic_element);
-                }
+                status = executeGeneration(session);
             } else {
                 status = false;
                 logError(Messages.filepath_point_to_aird);
             }
         }
 
+        return status;
+    }
+
+    private boolean executeGeneration(Session session) {
+        boolean status = true;
+        URI semanticResourceURI;
+        // init the EGF activity
+        Activity htmlGenerator = InvokeActivityHelper.getActivity(CAPELLA_LAUNCHER_URI);
+        
+        Project rootSemanticElement = SessionHelper.getCapellaProject(session);
+        if (rootSemanticElement != null) {
+            Resource semanticResource = rootSemanticElement.eResource();
+            semanticResourceURI = semanticResource.getURI();
+
+            try {
+                String outputFolderString = getOrCreateOutputFolder().getFullPath().toString();
+                status = executeEGFActivity(htmlGenerator, outputFolderString, semanticResourceURI);
+                if (status) {
+                    logInfo(Messages.generation_done + outputFolderString);
+                }
+            } catch (CommandLineException e) {
+                status = false;
+                logError(e.getMessage());
+            }
+        } else {
+            status = false;
+            logError(Messages.no_root_semantic_element);
+        }
         return status;
     }
 
@@ -196,6 +202,8 @@ public class HTMLCommandLine extends DefaultCommandLine {
                 logError(message.toString());
                 success = false;
             }
+        } else {
+            success = false;
         }
         return success;
     }
