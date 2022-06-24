@@ -25,3 +25,7 @@ Select whether or not to generate pages for ''Functional Exchange'' elements.
 === Physical Link ===
 
 Select whether or not to generate pages for ''Physical link'' elements.
+
+== Association ===
+
+Select whether or not to generate pages for ''Association'' elements.
