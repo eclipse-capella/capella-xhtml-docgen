@@ -15,6 +15,6 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core.ui,
  org.polarsys.capella.core.sirius.ui
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.polarsys.capella.docgen.commandline
 Bundle-Localization: plugin

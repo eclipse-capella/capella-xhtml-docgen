@@ -14,6 +14,7 @@ package org.polarsys.capella.docgen.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -129,9 +130,9 @@ public class CapellaClassServices {
 	private static EList<Property> getClassProperties(Class clazz) {
 		EList<Property> properties = null;
 		if (clazz instanceof Union) {
-			properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate.negate()).toList());
+			properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate.negate()).collect(Collectors.toList()));
 		} else {
-			properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate.negate()).toList());
+			properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate.negate()).collect(Collectors.toList()));
 		}
 		if (properties.isEmpty()) {
 			return null;
@@ -147,9 +148,9 @@ public class CapellaClassServices {
     private static EList<Property> getClassAssociations(Class clazz) {
         EList<Property> properties = null;
         if (clazz instanceof Union) {
-            properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate).toList());
+            properties = new BasicEList<>(((Union) clazz).getContainedUnionProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate).collect(Collectors.toList()));
         } else {
-            properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate).toList());
+            properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate).collect(Collectors.toList()));
         }
         if (properties.isEmpty()) {
             return null;
