@@ -1,21 +1,20 @@
-package org.polarsys.capella.docgen.test.ju.suite;
+package org.polarsys.capella.docgen.test.ju.suites;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.polarsys.capella.docgen.test.ju.cases.CommandLineTest;
-import org.polarsys.capella.docgen.test.ju.cases.IFETestCase;
 import org.polarsys.capella.test.framework.api.BasicTestArtefact;
 import org.polarsys.capella.test.framework.api.BasicTestSuite;
 
 import junit.framework.Test;
 
-public class ContentTestSuite extends BasicTestSuite {
+public class CommandLineTestSuite extends BasicTestSuite {
 
   @Override
   protected List<BasicTestArtefact> getTests() {
     List<BasicTestArtefact> tests = new ArrayList<>();
-    tests.add(new IFETestCase());
+    tests.add(new CommandLineTest());
     return tests;
   }
   
@@ -25,7 +24,7 @@ public class ContentTestSuite extends BasicTestSuite {
    * @return
    */
   public static Test suite() {
-    return new ContentTestSuite();
+    return new CommandLineTestSuite();
   }
 
 }
