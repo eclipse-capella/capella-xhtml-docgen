@@ -51,6 +51,7 @@ public class CapellaDocGenHtmlDomainElementReporter extends DocGenHtmlReporter {
 			CapellaElement cElement = (CapellaElement) element;
 
 			String id = cElement.getId();
+			String fullLabel = cElement.getFullLabel();
 			String type = cElement.getClass().getName();
 			String htmlContent = output;
 
@@ -58,7 +59,7 @@ public class CapellaDocGenHtmlDomainElementReporter extends DocGenHtmlReporter {
 				InternalPatternContext ipContext = (InternalPatternContext) context;
 				String patternClass = ipContext.getNode().getPatternClass();
 
-				testResult = new CapellaDocGenTestResult(id, type, patternClass, fileName, htmlContent);
+				testResult = new CapellaDocGenTestResult(id, fullLabel, type, patternClass, fileName, htmlContent);
 			}
 		}
 		return testResult;
@@ -94,6 +95,7 @@ public class CapellaDocGenHtmlDomainElementReporter extends DocGenHtmlReporter {
 		output = CapellaDocGenTestUtil.formatDocGenOutput(output);
 		
 		CapellaDocGenTestResult testData = getTestData(output, context, parameterValues, fileName);
+		System.out.println(testData.getUsedPatternClass() + ";" + testData.getElementFullLabel() + ";" + testData.getElementID());
 
 		if (testData != null) {
 			getTestResults().put(testData.getClassifierId(), testData.getGeneratedHTMLContent());

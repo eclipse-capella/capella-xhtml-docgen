@@ -3,6 +3,7 @@ package org.polarsys.capella.docgen.test.ju.reporter;
 public class CapellaDocGenTestResult implements Comparable<CapellaDocGenTestResult> {
 		
 	private String elementID;
+	private String fullLabel;
 	private String elementType;
 	private String usedPatternClass;
 	private String fileName;
@@ -11,6 +12,10 @@ public class CapellaDocGenTestResult implements Comparable<CapellaDocGenTestResu
 	public String getElementID() {
 		return elementID;
 	}
+	
+	public String getElementFullLabel() {
+        return fullLabel;
+    }
 	
 	public String getElementType() {
 		return elementType;
@@ -29,11 +34,12 @@ public class CapellaDocGenTestResult implements Comparable<CapellaDocGenTestResu
 	}
 	
 	public String getClassifierId() {
-		return getElementID() + ":" + getFileName() + ":" + getElementType() + ":" + getUsedPatternClass();
+		return getElementID() + "\n" + getElementFullLabel() + "\n" + getFileName() + "\n" + getElementType() + "\n" + getUsedPatternClass();
 	}
 	
-	public CapellaDocGenTestResult(String elementID, String elementType, String usedPatternClass, String fileName, String generatedHTMLContent) {
+	public CapellaDocGenTestResult(String elementID, String fullLabel, String elementType, String usedPatternClass, String fileName, String generatedHTMLContent) {
 		this.elementID = elementID;
+		this.fullLabel = fullLabel;
 		this.elementType = elementType;
 		this.usedPatternClass = usedPatternClass;
 		this.generatedHTMLContent = generatedHTMLContent;
