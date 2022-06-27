@@ -1,7 +1,6 @@
-package org.polarsys.capella.docgen.test.ju.cases;
+package org.polarsys.capella.docgen.test.ju.suites;
 
 import java.util.Collection;
-import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.Path;
 import org.junit.Test;
@@ -9,11 +8,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.polarsys.capella.docgen.test.ju.cases.AbstractCapellaDocGenTest;
 import org.polarsys.capella.docgen.test.ju.reporter.CapellaDocGenHtmlDomainElementReporter;
 import org.polarsys.capella.docgen.test.ju.util.CapellaDocGenTestUtil;
 
 @RunWith(Parameterized.class)
-public class IFETestCase extends AbstractCapellaDocGenTest {
+public class IFETestSuite extends AbstractCapellaDocGenTest {
 
 	private static String NAME = "IFE";
 
