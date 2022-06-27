@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -53,6 +54,8 @@ public abstract class AbstractCapellaDocGenTest extends BasicTestCase {
 		throw new NotImplementedException("Method \"getModelName\" should be implemented for this test case.");
 	}
 
+	protected static List<String> evaluatedModelElementIDs = Arrays.asList();
+
 	public String getPathPrefix() {
 		return "/" + getProjectName() + "/" + getModelName() + ".";
 	}
@@ -73,7 +76,7 @@ public abstract class AbstractCapellaDocGenTest extends BasicTestCase {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected static Collection<Object[]> getTestParameters(Path path) {
+	protected static Collection<Object[]> getTestParameters(Path path, List<String> evaluatedModelElementIDs) {
 		Bundle bundle = Platform.getBundle("org.polarsys.capella.docgen.test.ju");
 		URL fileURL = FileLocator.find(bundle, path, null);
 		Collection<Object[]> data = new ArrayList<Object[]>();
@@ -85,10 +88,12 @@ public abstract class AbstractCapellaDocGenTest extends BasicTestCase {
 				Map<?, ?> mapRes = (Map<?, ?>) res;
 				boolean typeMatch = mapRes.values().stream().anyMatch(elem -> elem instanceof String);
 				if (typeMatch) {
-					data = ((Map<String, String>) res).entrySet().stream().map(entry -> {
-						String[] table = { entry.getKey(), entry.getValue() };
-						return table;
-					}).collect(Collectors.toList());
+                    data = ((Map<String, String>) res).entrySet().stream().filter(entry -> {
+                        return evaluatedModelElementIDs == null || evaluatedModelElementIDs.isEmpty() || evaluatedModelElementIDs.stream().anyMatch(val -> entry.getKey().startsWith(val));
+                    }).map(entry -> {
+                        String[] table = { entry.getKey(), entry.getValue() };
+                        return table;
+                    }).collect(Collectors.toList());
 				}
 			}
 			in.close();
@@ -134,6 +139,7 @@ public abstract class AbstractCapellaDocGenTest extends BasicTestCase {
 			IEclipsePreferences docgenPref = InstanceScope.INSTANCE.getNode("org.polarsys.capella.docgen.preference");
 			docgenPref.put("DocgenExportComponentExchange", "true");
 			docgenPref.put("DocgenExportPhysicalLink", "true");
+			docgenPref.put("DocgenExportFunctionalExchange", "true");
 //			docgenPref.put("DocgenExportStatusAndReview", "true");
 			docgenPref.flush();
 			
