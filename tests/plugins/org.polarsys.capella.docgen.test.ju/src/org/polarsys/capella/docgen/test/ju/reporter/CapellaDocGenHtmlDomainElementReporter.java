@@ -95,7 +95,6 @@ public class CapellaDocGenHtmlDomainElementReporter extends DocGenHtmlReporter {
 		output = CapellaDocGenTestUtil.formatDocGenOutput(output);
 		
 		CapellaDocGenTestResult testData = getTestData(output, context, parameterValues, fileName);
-		System.out.println(testData.getUsedPatternClass() + ";" + testData.getElementFullLabel() + ";" + testData.getElementID());
 
 		if (testData != null) {
 			getTestResults().put(testData.getClassifierId(), testData.getGeneratedHTMLContent());
