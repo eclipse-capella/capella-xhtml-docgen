@@ -47,7 +47,7 @@ public class CapellaPropertyServices {
 	 * @return
 	 */
 	public static String getPropertyValueInformation(AbstractPropertyValue prop_p, String projectName, String outputFolder) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(CapellaServices.getImageLinkFromElement(prop_p, projectName, outputFolder));
 		buffer.append(CapellaServices.SPACE);
 		buffer.append(CapellaServices.BOLD_BEGIN);
@@ -66,7 +66,7 @@ public class CapellaPropertyServices {
 	 * @return
 	 */
 	public static String getValuePartInformation(ValuePart valuepart_p, String projectName, String outputFolder) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(CapellaServices.getImageLinkFromElement(valuepart_p, projectName, outputFolder));
 		buffer.append(CapellaServices.SPACE);
 		buffer.append(CapellaServices.BOLD_BEGIN);
@@ -110,7 +110,7 @@ public class CapellaPropertyServices {
      * @return
      */
     public static String getInformationFromPropertyIncludingAssociation(Property property, String projectName, String outputFolder) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         if (isAssociationPropertyPredicate.test(property)) {
             buffer.append(getAssociationImageAndHyperlink(property, projectName, outputFolder));
             buffer.append(CapellaServices.UL_OPEN);
@@ -136,7 +136,7 @@ public class CapellaPropertyServices {
 	 */
 	public static String getInformationFromProperty(Property property, String projectName, String outputFolder) {
 		// Buffer declaration
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		
 		buffer.append(CapellaServices.getImageLinkFromElement(property, projectName, outputFolder));
 		buffer.append(" ");
@@ -285,7 +285,7 @@ public class CapellaPropertyServices {
 	 * @return an html content of the the property values
 	 */
 	public static String getPropertyValues(EList<AbstractPropertyValue> ownedPropertyValues, String projectName, String outputFolder) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		Collection<String> propertiesValues = new ArrayList<String>();
 		for (AbstractPropertyValue currentAbstractPropertyValue : ownedPropertyValues) {
 			propertiesValues.add(CapellaPropertyServices.getPropertyValueInformation(currentAbstractPropertyValue, projectName, outputFolder));
@@ -304,12 +304,7 @@ public class CapellaPropertyServices {
     /**
      * A predicate to filter Association Properties from the other properties
      */
-    public final static Predicate<Property> isAssociationPropertyPredicate = new Predicate<Property>() {
-        @Override
-        public boolean test(Property p) {
-            return p.getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE;
-        }
-    };
+    public static final Predicate<Property> isAssociationPropertyPredicate = property -> property.getAggregationKind().getValue() == AggregationKind.ASSOCIATION_VALUE;
 
 	private static String computeUnionPropertyLabelWithQualifier(UnionProperty property_p) {
 		String result = ICommonConstants.EMPTY_STRING;
