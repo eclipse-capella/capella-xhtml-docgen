@@ -45,10 +45,12 @@ public class CapellaCollectionService {
 			ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.PROP_UNIQUE + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END + eCollection.isUnique());
 
 			// Add the no boolean Features information if their are not null
-			if (null != eCollection.getOwnedMaxValue())
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.MIN + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END + eCollection.getOwnedMaxValue());
-			if (null != eCollection.getOwnedMinValue())
-				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAX + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END + eCollection.getOwnedMinValue());
+            if (null != eCollection.getOwnedMaxValue())
+                ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.MIN + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END
+                        + CapellaDataValueServices.getValueOfDataValue(eCollection.getOwnedMaxValue()));
+            if (null != eCollection.getOwnedMinValue())
+                ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAX + CapellaServices.VALUE_PRESENTER + CapellaServices.BOLD_END
+                        + CapellaDataValueServices.getValueOfDataValue(eCollection.getOwnedMinValue()));
 			if (null != eCollection.getOwnedDefaultValue())
 				ret.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
 						+ CapellaDataValueServices.getValueOfDataValue(eCollection.getOwnedDefaultValue()));
