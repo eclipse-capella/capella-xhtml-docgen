@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -28,10 +27,11 @@ import org.eclipse.sirius.business.api.session.SessionManager;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.osgi.framework.Bundle;
+import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceConstant;
 import org.polarsys.capella.docgen.test.ju.launch.XHTMLDocumentationGenerationLauncher;
 import org.polarsys.capella.docgen.test.ju.reporter.CapellaDocGenHtmlDomainElementReporter;
 import org.polarsys.capella.test.framework.api.BasicTestCase;
-import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
+import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenPreferenceConstant;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelper;
 
@@ -137,15 +137,15 @@ public abstract class AbstractCapellaDocGenTest extends BasicTestCase {
 			SessionManager.INSTANCE.add(sessionForTestModel);
 
 			IEclipsePreferences docgenPref = InstanceScope.INSTANCE.getNode("org.polarsys.capella.docgen.preference");
-			docgenPref.put("DocgenExportComponentExchange", "true");
-			docgenPref.put("DocgenExportPhysicalLink", "true");
-			docgenPref.put("DocgenExportFunctionalExchange", "true");
-//			docgenPref.put("DocgenExportStatusAndReview", "true");
+			docgenPref.put(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__COMPONENT_EXCHANGE, "true");
+			docgenPref.put(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__PHYSICAL_LINK, "true");
+			docgenPref.put(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__FUNCTIONAL_EXCHANGE, "true");
+            docgenPref.put(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__ASSOCIATION, "true");
+//            docgenPref.put(CapellaDocgenPreferenceConstant.DOCGEN_EXPORT__STATUS_AND_REVIEW, "true");
 			docgenPref.flush();
-			
 
 			IEclipsePreferences kitalphaDocgenPref = InstanceScope.INSTANCE.getNode("org.polarsys.kitalpha.doc.gen.business.core.preference");
-			kitalphaDocgenPref.put("ExportDiagrams", "true");
+			kitalphaDocgenPref.put(DocgenPreferenceConstant.DOCGEN_DIAGRAMS_EXPORT, "true");
 			kitalphaDocgenPref.flush();
 			
 			launchDocumentationGeneration();
