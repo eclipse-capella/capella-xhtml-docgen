@@ -72,8 +72,6 @@ public class CapellaClassServices {
 	public static List<String> getClassProperties(EObject eObject,
 			String projectName, String outputFolder, boolean associations) {
 
-		Property minProperty = null;
-		Property maxProperty = null;
 		// Create the list to return
 		List<String> ret = new ArrayList<>();
 
@@ -87,7 +85,15 @@ public class CapellaClassServices {
 		} else {
 		    properties = getClassAssociations((Class) eObject);
 		}
-		
+
+        ret = getInformationFromProperties(properties, projectName, outputFolder);
+		return ret;
+	}
+
+    private static List<String> getInformationFromProperties(EList<Property> properties, String projectName, String outputFolder) {
+        List<String> ret = new ArrayList<>();
+        Property minProperty = null;
+        Property maxProperty = null;
 		if (properties != null)
 		{
 			// For each properties of the Class
@@ -120,7 +126,7 @@ public class CapellaClassServices {
 			ret.add(0, CapellaPropertyServices.getInformationFromProperty(minProperty, projectName, outputFolder));
 		}
 		return ret;
-	}
+    }
 
 	/**
 	 * Get all properties of a Class object
@@ -135,7 +141,7 @@ public class CapellaClassServices {
 			properties = new BasicEList<>(clazz.getContainedProperties().stream().filter(CapellaPropertyServices.isAssociationPropertyPredicate.negate()).collect(Collectors.toList()));
 		}
 		if (properties.isEmpty()) {
-			return null;
+			return new BasicEList<>();
 		}
 		return properties;
 	}
@@ -324,15 +330,11 @@ public class CapellaClassServices {
 			if (typedElement instanceof Property && CapellaPropertyServices.isAssociationPropertyPredicate.test((Property) typedElement)) {
 				EObject container = typedElement.eContainer();
 				if (container instanceof Class) {
-				    StringBuffer buffer = new StringBuffer();
+				    StringBuilder buffer = new StringBuilder();
 				    
                     buffer.append(CapellaServices.getImageLinkFromElement(container, projectName, outputFolder));
                     buffer.append(CapellaServices.SPACE);
                     buffer.append(CapellaServices.getFullDataPkgHierarchyLink(container));
-                    
-                    // Add related association information
-//                    buffer.append(" through ");
-//                    buffer.append(CapellaPropertyServices.getAssociationImageAndHyperlink((Property) typedElement, projectName, outputFolder));
                     
                     String currentStringValue = buffer.toString();
 					if (!ret.contains(currentStringValue))

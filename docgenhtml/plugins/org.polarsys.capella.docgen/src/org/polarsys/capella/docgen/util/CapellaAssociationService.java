@@ -19,7 +19,15 @@ import org.polarsys.capella.core.data.information.Association;
 import org.polarsys.capella.core.data.information.Property;
 import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 
+/**
+ * Service Class to get information from {@code Association} CapellaElement.
+ * @author <a href="mailto:arnaud.dieumegard@obeo.fr">Arnaud Dieumegard</a>
+ */
 public class CapellaAssociationService {
+    
+    CapellaAssociationService() {
+        // Prevent instanciation
+    }
     
     /**
      * Generate HTML part for documentation of the NAvigableMembers feature content for {@code association}. Each
@@ -64,7 +72,7 @@ public class CapellaAssociationService {
      * @return HTML formatted String content
      */
     public static String getInformationFromAssociation(Association association, String projectName, String outputFolder) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append(CapellaServices.getImageLinkFromElement(association, projectName, outputFolder));
         buffer.append(CapellaServices.SPACE);
         if (CapellaDocgenPreferenceHelper.isExportAssociation()) {
