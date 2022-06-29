@@ -62,11 +62,28 @@ public class CapellaClassServices {
 	}
 
 	/**
+     * <b>Get the properties of a Class</b>
+     * <p>
+     * Get the informations of class properties
+     * 
+     * @param eObject The Class object on which the Property element information are to be extracted
+     * @return
+     */
+    public static List<String> getClassProperties(EObject eObject,
+            String projectName, String outputFolder) {
+        List<String> ret = new ArrayList<>();
+        ret.addAll(getClassProperties(eObject, projectName, outputFolder, false));
+        ret.addAll(getClassProperties(eObject, projectName, outputFolder, true));
+        return ret;
+    }
+    
+	/**
 	 * <b>Get the properties of a Class</b>
 	 * <p>
 	 * Get the informations of class properties
 	 * 
-	 * @param eObject
+	 * @param eObject The Class object on which the Property element information are to be extracted
+	 * @param associations If true extract only Property elements for which AggregationKind is Association, if false extract only Property elements for which AggragationKind is not Association 
 	 * @return
 	 */
 	public static List<String> getClassProperties(EObject eObject,
