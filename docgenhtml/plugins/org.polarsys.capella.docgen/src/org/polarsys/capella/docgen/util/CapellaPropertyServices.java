@@ -139,9 +139,99 @@ public class CapellaPropertyServices {
 		StringBuilder buffer = new StringBuilder();
 		
 		buffer.append(CapellaServices.getImageLinkFromElement(property, projectName, outputFolder));
-		buffer.append(" ");
-		// Bold tag open
+		buffer.append(CapellaServices.SPACE);
+		
+		// Attributes
+		getAttributesInformationFromProperty(property, buffer);
+
+		buffer.append(CapellaServices.SPACE);
+		
+		getNameAndValueInformationFromProperty(property, buffer);
+
+		// Display UnionProperties Qualifiers
+		if (property instanceof UnionProperty) {
+			String qualifier = computeUnionPropertyLabelWithQualifier((UnionProperty) property);
+			buffer.append(qualifier);
+		}
+
+		if (null != property.getDescription()) {
+			buffer.append("<p>");
+			buffer.append(StringUtil.transformAREFString(property, property.getDescription(), projectName, outputFolder));
+			buffer.append("</p>");
+		}
+		// features and property-values
+
+		// Features
+		getFeaturesInformationFromProperty(property, buffer);
+
+		String propertyValues = getPropertyValues(property.getOwnedPropertyValues(), projectName, outputFolder);
+		if (propertyValues != null && propertyValues.length() > 0)
+			buffer.append(propertyValues);
+
+		buffer.append(CapellaServices.UL_CLOSE);
+		
+		return buffer.toString();
+	}
+
+    private static void getNameAndValueInformationFromProperty(Property property, StringBuilder buffer) {
+        // Bold tag open
 		buffer.append(CapellaServices.BOLD_BEGIN);
+		// Add the name of the property to the buffer
+		buffer.append(property.getName());
+
+		// Add the cardinalities hyper link to the buffer
+		if (null != property.getOwnedMinCard() && null != property.getOwnedMaxCard()) {
+			// Add the min cardinality to the buffer
+			buffer.append(CapellaServices.CRO_OPEN);
+			buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(property.getOwnedMinCard()));
+			buffer.append(", ");
+			// Add the max cardinality to the buffer
+			buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(property.getOwnedMaxCard()));
+			buffer.append(CapellaServices.CRO_CLOSE);
+		}
+		// Bold tag close
+		buffer.append(CapellaServices.BOLD_END);
+		// Add the hyper link of the type of the property to the buffer
+		buffer.append(CapellaServices.VALUE_PRESENTER);
+		if (property.getType() != null)
+			buffer.append(CapellaServices.getFullDataPkgHierarchyLink(property.getType()));
+    }
+
+    private static void getFeaturesInformationFromProperty(Property property, StringBuilder buffer) {
+        Collection<String> features = new ArrayList<String>();
+
+		if (property.getOwnedMinValue() != null)
+			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MIN_FEATURE + CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMinValue()));
+
+		if (property.getOwnedMaxValue() != null)
+			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAX_FEATURE + CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMaxValue()));
+
+		if (property.getOwnedMinLength() != null)
+			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MINLENGTH_FEATURE + CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMinLength()));
+
+		if (property.getOwnedMaxLength() != null)
+			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAXLENGTH_FEATURE + CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMaxLength()));
+
+		if (property.getOwnedDefaultValue() != null)
+			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedDefaultValue()));
+		if (property.getOwnedNullValue() != null)
+			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.NULL_FEATURE + CapellaServices.BOLD_END
+					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedNullValue()));
+
+		buffer.append(CapellaServices.UL_OPEN);
+
+		for (String featureString : features)
+			buffer.append(CapellaServices.LI_OPEN + featureString + CapellaServices.LI_CLOSE);
+    }
+
+    private static void getAttributesInformationFromProperty(Property property, StringBuilder buffer) {
+        // Bold tag open
+        buffer.append(CapellaServices.BOLD_BEGIN);
 		// If property is abstract
 		if (property.isIsAbstract()) {
 			// Add this information to the buffer
@@ -184,82 +274,7 @@ public class CapellaPropertyServices {
 		}
 		// Bold tag close
 		buffer.append(CapellaServices.BOLD_END);
-
-		buffer.append(CapellaServices.SPACE);
-		// Bold tag open
-		buffer.append(CapellaServices.BOLD_BEGIN);
-		// Add the name of the property to the buffer
-		buffer.append(property.getName());
-
-		// Add the cardinalities hyper link to the buffer
-		if (null != property.getOwnedMinCard() && null != property.getOwnedMaxCard()) {
-			// Add the min cardinality to the buffer
-			buffer.append(CapellaServices.CRO_OPEN);
-			buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(property.getOwnedMinCard()));
-			buffer.append(", ");
-			// Add the max cardinality to the buffer
-			buffer.append(CapellaDataValueServices.getSimpleValueOfDataValue(property.getOwnedMaxCard()));
-			buffer.append(CapellaServices.CRO_CLOSE);
-		}
-		// Bold tag close
-		buffer.append(CapellaServices.BOLD_END);
-		// Add the hyper link of the type of the property to the buffer
-		buffer.append(CapellaServices.VALUE_PRESENTER);
-		if (property.getType() != null)
-			buffer.append(CapellaServices.getFullDataPkgHierarchyLink(property.getType()));
-
-		// Display UnionProperties Qualifiers
-		if (property instanceof UnionProperty) {
-			String qualifier = computeUnionPropertyLabelWithQualifier((UnionProperty) property);
-			buffer.append(qualifier);
-		}
-
-		if (null != property.getDescription()) {
-			buffer.append("<p>");
-			buffer.append(StringUtil.transformAREFString(property, property.getDescription(), projectName, outputFolder));
-			buffer.append("</p>");
-		}
-		// features and property-values
-
-		// features
-		Collection<String> features = new ArrayList<String>();
-
-		if (property.getOwnedMinValue() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MIN_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMinValue()));
-
-		if (property.getOwnedMaxValue() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAX_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMaxValue()));
-
-		if (property.getOwnedMinLength() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MINLENGTH_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMinLength()));
-
-		if (property.getOwnedMaxLength() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.MAXLENGTH_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedMaxLength()));
-
-		if (property.getOwnedDefaultValue() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.DEFAULT_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedDefaultValue()));
-		if (property.getOwnedNullValue() != null)
-			features.add(CapellaServices.BOLD_BEGIN + CapellaServices.NULL_FEATURE + CapellaServices.BOLD_END
-					+ CapellaDataValueServices.getValueOfDataValue(property.getOwnedNullValue()));
-
-		buffer.append(CapellaServices.UL_OPEN);
-
-		for (String featureString : features)
-			buffer.append(CapellaServices.LI_OPEN + featureString + CapellaServices.LI_CLOSE);
-
-		String propertyValues = getPropertyValues(property.getOwnedPropertyValues(), projectName, outputFolder);
-		if (propertyValues != null && propertyValues.length() > 0)
-			buffer.append(propertyValues);
-
-		buffer.append(CapellaServices.UL_CLOSE);
-		
-		return buffer.toString();
-	}
+    }
 
 	/**
 	 * Build {@code property} regarding association string representation 
