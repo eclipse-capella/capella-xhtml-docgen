@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1656408464">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1656409554">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="0.0.0"/>
@@ -96,10 +96,6 @@
       <repository id="amalgam" location="https://download.eclipse.org/modeling/amalgam/updates/stable/1.13.0-S20220524/capella/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.egf.sdk.feature.source.feature.group" version="1.6.3.202110291409"/>
-      <repository id="egf" location="https://download.eclipse.org/egf/updates/stable/1.6.3/2021-06/"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.nebula.widgets.nattable.core.feature.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.nebula.widgets.nattable.extension.glazedlists.feature.feature.group" version="0.0.0"/>
       <repository id="Nattable" location="https://download.eclipse.org/nattable/releases/2.0.1/repository/"/>
@@ -134,11 +130,12 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.diffmerge.patterns.templates.gen" version="0.0.0"/>
-      <repository id="diffmerge-pattern" location="https://download.eclipse.org/diffmerge/releases/0.13.0/edm-patterns-site/"/>
+      <repository id="diffmerge-pattern" location="https://download.eclipse.org/diffmerge/stable/0.14.0-S20220613/edm-patterns-site/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.egf.feature.feature.group" version="0.0.0"/>
-      <repository id="egf-producer" location="https://download.eclipse.org/egf/updates/1.6.2/2019-06"/>
+      <unit id="org.eclipse.egf.sdk.feature.source.feature.group" version="1.6.3.202110291409"/>
+      <repository id="egf" location="https://download.eclipse.org/egf/updates/stable/1.6.3/2021-06/"/>
     </location>
   </locations>
 </target>
