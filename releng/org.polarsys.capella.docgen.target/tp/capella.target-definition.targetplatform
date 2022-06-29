@@ -33,10 +33,10 @@ location capella-test "https://download.eclipse.org/capella/core/updates/nightly
 	org.polarsys.capella.test.feature.feature.group lazy
 }
 
-location diffmerge-pattern "https://download.eclipse.org/diffmerge/releases/0.13.0/edm-patterns-site/" {
+location diffmerge-pattern "https://download.eclipse.org/diffmerge/stable/0.14.0-S20220613/edm-patterns-site/" {
 	org.eclipse.emf.diffmerge.patterns.templates.gen lazy
 }
 
-location egf-producer "https://download.eclipse.org/egf/updates/1.6.2/2019-06" {
+location egf "https://download.eclipse.org/egf/updates/stable/1.6.3/2021-06/" {
 	org.eclipse.egf.feature.feature.group lazy
 }
