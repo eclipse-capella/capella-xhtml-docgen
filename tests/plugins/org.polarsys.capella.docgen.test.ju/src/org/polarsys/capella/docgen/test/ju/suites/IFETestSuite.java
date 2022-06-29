@@ -123,8 +123,17 @@ public class IFETestSuite extends AbstractCapellaDocGenTest {
                 // Class - Pattern: org.polarsys.capella.docgen.content.ClassDocGen
                 "0c17402c-e5e4-44d4-9692-efc4bfb8ab2a",
                 "8a3c3a57-1ff3-4d9e-845e-0e142c1ca7dc",
+                "6c858859-acc3-4f31-a6fc-0aee4f8c07d8",
+                "2a07f10a-8c7b-4065-8d35-bf2b540c8348",
+                "0ba002c1-c0d9-4e1e-98cf-60e55d02ecfd",
+                "44f6d074-c280-4d8d-83e0-ced6ba8d5cf9",
                 // DataType - Pattern: org.polarsys.capella.docgen.content.DataTypeDocGen
-                "bce10ead-3069-45e2-8ce1-e801648c7e99"
+                "bce10ead-3069-45e2-8ce1-e801648c7e99",
+                // Associations - Pattern: org.polarsys.capella.docgen.content.AssociationDocGen
+                "8768d20a-5360-480b-939b-0d9ad037e869",
+                "5c672ee8-f8e2-46ab-bf2c-e1f05ce3c965",
+                "b6b905e5-aa94-4612-ae68-02e956e5fd0a",
+                "500cc79a-f76d-499e-83ae-8a869d381cc6"
 	    );
 		Collection<Object[]> testParameters = getTestParameters(path, evaluatedModelElementIDs);
 		assertFalse("Test parameters shall not be empty", testParameters.isEmpty());
