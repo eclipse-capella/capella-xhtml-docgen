@@ -1,8 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2022 THALES GLOBAL SERVICES.
+ * 
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ * 
+ * Contributors:
+ *    Thales - initial API and implementation
+ *******************************************************************************/
 package org.polarsys.capella.docgen.test.ju.cases;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -17,10 +27,8 @@ public class CommandLineTest extends CommandLineHTMLTest {
   @Override
   public void test() throws Exception {
 
-    File projectFolder = getFolderInTestModelRepository("empty");
-    
     IFile capellaFileForLoadedModel = getCapellaFileForLoadedModel("empty");
-    IPath fullPath = capellaFileForLoadedModel.getProject().getFullPath();
+    IPath fullPath = capellaFileForLoadedModel.getProject().getParent().getLocation();
     IProject emptyProject = capellaFileForLoadedModel.getProject();
     
     // Simulated migration command line with a zip
@@ -38,6 +46,7 @@ public class CommandLineTest extends CommandLineHTMLTest {
     launchApplication(mockApplicationContext, htmlCommandLine);
     
     assertTrue("", emptyProject.getFolder("HTML").exists());
+    assertTrue("", emptyProject.getFolder("HTML").getFolder("output").exists());
   }
   
   @Override
