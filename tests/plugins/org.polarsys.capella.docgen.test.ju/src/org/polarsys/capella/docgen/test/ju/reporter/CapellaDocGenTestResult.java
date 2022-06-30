@@ -1,5 +1,23 @@
+/*******************************************************************************
+ * Copyright (c) 2022 THALES GLOBAL SERVICES.
+ * 
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ * 
+ * Contributors:
+ *    Thales - initial API and implementation
+ *******************************************************************************/
 package org.polarsys.capella.docgen.test.ju.reporter;
 
+/**
+ * This object is used to store the generated HTML content for Capella objects. These objects are the one that are
+ * serialized as expected test results.
+ * 
+ * @author <a href="mailto:arnaud.dieumegard@obeo.fr">Arnaud Dieumegard</a>
+ */
 public class CapellaDocGenTestResult implements Comparable<CapellaDocGenTestResult> {
 		
 	private String elementID;

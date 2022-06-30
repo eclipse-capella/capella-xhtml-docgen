@@ -27,5 +27,6 @@ Require-Bundle: org.junit,
  org.polarsys.capella.core.commandline.core,
  org.polarsys.capella.docgen.commandline,
  org.polarsys.capella.docgen.preference,
- org.polarsys.kitalpha.doc.gen.business.core.preference
+ org.polarsys.kitalpha.doc.gen.business.core.preference,
+ org.polarsys.capella.docgen.configuration.commandline
 Export-Package: org.polarsys.capella.docgen.test.ju.cases

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="ASCII"?>
+<configuration:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:configuration="http://www.polarsys.org/kitalpha/docgen/configuration/1.0.0">
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#5d8f4c9b-2fa7-4b99-8204-dc2cbe866816"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#988b2220-1344-4ddf-8b08-1846540351b1"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#62ac97cc-23c0-4b83-bb6b-ff5695674227"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#22d2dbe7-cb58-49c3-8665-15afbe4a8aaa"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#7e4bb671-01a1-4ffe-aa73-577919bd9f86"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#998e86fc-50f3-4f3a-9da3-3e40623a8860"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#7abad3c8-fd9f-4286-8c26-865f01c024b5"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#eec6e118-c769-4c29-8863-1835c6271820"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#21c0fc0c-8265-428b-ae17-76ffc03230aa"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#6d0b122f-bf6d-4478-929d-16869f2cd585"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#d1577656-6604-47bc-8130-b4cef5a4cc55"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#f5a3d239-2b3b-48d4-a430-a8e9377e3b27"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#609874fc-8011-4fd4-985c-a2de959dca68"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#52fc2ab2-495d-419e-bda0-bb9b8ee02caa"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#740ccc59-70d4-4ef9-b8c1-047e945b4f71"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#658df1f3-7e27-43cb-8b89-58a333bc8b0c"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#0740f513-dd2a-4537-b06f-5b360537c000"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#6fe50fb5-d16c-46b3-9766-7bb4a296da2e"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#1eeb83d4-89c5-4f36-a468-be8fe6bbc7f8"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#971facd0-54a8-4c72-aecd-33f720f3531b"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#d9f1092a-c017-4308-827b-07b379c78de6"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#842b548c-a1bd-4a1a-a0ad-9e4c68fa0d47"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#0d7b3c19-19a8-4e4e-83dc-4bf389729033"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#4df3a45e-9825-43c6-9e89-9ca2e5e1d9d0"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#678f66c2-722b-476e-992f-ba48bfbb0c13"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#32792243-71c1-4f69-940a-3b5e697e652a"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#8215329f-2f94-4650-bdeb-364dae9d0008"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#9d3114d5-64c8-41e1-a81d-9876c7449343"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#40236f6f-d3dc-4738-b9ca-b92d36535c31"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#55d0e17b-c5c2-43c2-baad-c51a89b73c7f"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#2e04391b-5635-45c1-adff-c3e4d9992d47"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#61567b6a-a3ac-47ef-ba7d-8086ed45f531"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#0466e06f-3890-455e-9f73-63d825282226"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#45bde886-f65e-439b-82c1-709eb2197e76"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#ac778ff2-a8fd-409c-a40f-43319f98b963"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#3dc5b661-471e-4927-ba8c-ed2106056668"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#954d40db-2040-4cae-82b1-613ac8768d37"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#f336473e-64a8-4b72-808d-f87527ab3ecd"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#0b9a88ca-1b67-4254-8cc3-8652b106d267"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#25c66f5f-d3ae-4e51-827a-c79c67779970"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#c56d049a-88f2-443a-acd6-c2ab179c2316"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#b459e25b-9a0b-4ecb-9c7d-10af6f5317f1"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#32813791-fd74-4ce7-a8f4-bebe9e61b47e"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#a2d7f213-fb48-498d-9421-80625c792241"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.aird#_ZYlCoPhMEey6iIOHW45W1w"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#24043802-9bc0-44e3-a1da-c08ff0b2591c"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#19e93b34-ef89-416b-82dd-c0defe07511e"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#49333fe3-7ccf-471e-95de-e107d685a351"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#8fa0a1c8-fdfd-47e6-82d7-9a4530d04239"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#062aa765-ed1c-466d-ab12-70a4300ff7eb"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#46ffa874-15a3-4c57-89f7-1b3cf8e05174"/>
+  </configurationElements>
+  <configurationElements>
+    <reference href="platform:/resource/doc_configuration/doc_configuration.capella#f4597ba0-172f-4da0-87fc-6ea880d84500"/>
+  </configurationElements>
+</configuration:Configuration>
