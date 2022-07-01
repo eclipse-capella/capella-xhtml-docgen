@@ -57,39 +57,54 @@ pipeline {
 				}
 			}
         }
-    stage('Run tests') {
-      steps {
-      	wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
-        	sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
-        }
-      }
-    }
-	stage('Publish results') {
-		steps {
-			junit allowEmptyResults: true, testResults: '*.xml,**/target/surefire-reports/*.xml'
-			sh "mvn -Djacoco.dataFile=$JACOCO_EXEC_FILE_PATH org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:report $MVN_QUALITY_PROFILES -e -f pom.xml"
+	    stage('Run tests') {
+	      steps {
+	      	wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
+	      		script {
+		      		def IFE_sample_path = 'https://raw.githubusercontent.com/eclipse/capella/master/samples/In-Flight%20Entertainment%20System/'
+		      		def IFE_file_prefix = 'In-Flight%20Entertainment%20System.'
+		      		def IFE_target_path_local = 'tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/'
+		      		def IFE_file_prefix_local = 'In-Flight Entertainment System.'
+		      		
+		      		// Download IFE sample content
+		      		["afm", "aird", "capella"].each {
+	      				def file =  IFE_sample_path + IFE_file_prefix + it
+	      				def file_target = IFE_target_path_local + IFE_file_prefix_local + it
+	      				sh "curl ${file} > '${file_target}'"
+	      			}
+	      			
+	      			// Launch test
+		        	sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
+	        	}
+	        }
+	      }
+	    }
+		stage('Publish results') {
+			steps {
+				junit allowEmptyResults: true, testResults: '*.xml,**/target/surefire-reports/*.xml'
+				sh "mvn -Djacoco.dataFile=$JACOCO_EXEC_FILE_PATH org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:report $MVN_QUALITY_PROFILES -e -f pom.xml"
+			}
 		}
-	}
-	stage('Perform Sonar analysis') {
-		environment {
-			PROJECT_NAME = 'capella-xhtml-docgen'
-			SONARCLOUD_TOKEN = credentials('sonar-token-capella-xhtml-docgen')
-			SONAR_PROJECT_KEY = 'eclipse_capella-xhtml-docgen'
-		}
-		steps {
-			withEnv(['MAVEN_OPTS=-Xmx4g']) {
-				script {
-					def jacocoParameters = "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml -Dsonar.java.coveragePlugin=jacoco -Dsonar.core.codeCoveragePlugin=jacoco "
-					def sonarExclusions = "-Dsonar.exclusions='**/generated/**/*.java,**/src-gen/**/*.java' "
-					def javaVersion = "8"
-					def sonarCommon = "sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.organization=eclipse -Dsonar.host.url=https://sonarcloud.io -Dsonar.login='$SONARCLOUD_TOKEN' -Dsonar.skipDesign=true -Dsonar.java.source=${javaVersion} -Dsonar.scanner.force-deprecated-java-version=true "
-					def sonarBranchAnalysis = "-Dsonar.branch.name=${BRANCH_NAME}"
-					def sonarPullRequestAnalysis = ("${BRANCH_NAME}".contains('PR-') ? "-Dsonar.pullrequest.provider=GitHub -Dsonar.pullrequest.github.repository=eclipse/$PROJECT_NAME -Dsonar.pullrequest.key=${CHANGE_ID} -Dsonar.pullrequest.branch=${CHANGE_BRANCH}" : "" )
-					def sonar = sonarCommon + jacocoParameters + sonarExclusions + ("${BRANCH_NAME}".contains('PR-') ? sonarPullRequestAnalysis : sonarBranchAnalysis)
-					sh "mvn ${sonar} $MVN_QUALITY_PROFILES -e -f pom.xml"
+		stage('Perform Sonar analysis') {
+			environment {
+				PROJECT_NAME = 'capella-xhtml-docgen'
+				SONARCLOUD_TOKEN = credentials('sonar-token-capella-xhtml-docgen')
+				SONAR_PROJECT_KEY = 'eclipse_capella-xhtml-docgen'
+			}
+			steps {
+				withEnv(['MAVEN_OPTS=-Xmx4g']) {
+					script {
+						def jacocoParameters = "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml -Dsonar.java.coveragePlugin=jacoco -Dsonar.core.codeCoveragePlugin=jacoco "
+						def sonarExclusions = "-Dsonar.exclusions='**/generated/**/*.java,**/src-gen/**/*.java' "
+						def javaVersion = "8"
+						def sonarCommon = "sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.organization=eclipse -Dsonar.host.url=https://sonarcloud.io -Dsonar.login='$SONARCLOUD_TOKEN' -Dsonar.skipDesign=true -Dsonar.java.source=${javaVersion} -Dsonar.scanner.force-deprecated-java-version=true "
+						def sonarBranchAnalysis = "-Dsonar.branch.name=${BRANCH_NAME}"
+						def sonarPullRequestAnalysis = ("${BRANCH_NAME}".contains('PR-') ? "-Dsonar.pullrequest.provider=GitHub -Dsonar.pullrequest.github.repository=eclipse/$PROJECT_NAME -Dsonar.pullrequest.key=${CHANGE_ID} -Dsonar.pullrequest.branch=${CHANGE_BRANCH}" : "" )
+						def sonar = sonarCommon + jacocoParameters + sonarExclusions + ("${BRANCH_NAME}".contains('PR-') ? sonarPullRequestAnalysis : sonarBranchAnalysis)
+						sh "mvn ${sonar} $MVN_QUALITY_PROFILES -e -f pom.xml"
+					}
 				}
 			}
 		}
 	}
-}
 }
