@@ -1,0 +1,19 @@
+<!--
+	Copyright (c) 2022 THALES GLOBAL SERVICES.
+	
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	http://www.eclipse.org/legal/epl-2.0
+	
+	SPDX-License-Identifier: EPL-2.0
+	
+	Contributors:
+	   Thales - initial API and implementation
+-->
+= Limitations =
+
+== CDO images references ==
+
+The documentation generation does not export images located on a distant server and will trigger an error (''Image source file doesn't exists'') while trying to do so. 
+
+'''Workaround''': Export the content of the distant model including the images and to do a documentation generation from this local copy of the project.

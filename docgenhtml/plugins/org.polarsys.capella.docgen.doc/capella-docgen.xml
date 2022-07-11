@@ -7,6 +7,8 @@
 			<topic href="../org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/kitalpha-docgen-knownissues.html" label="Core DocGen Known Issues">
 	        </topic>
 		</topic>
+		<topic href="html/Release Notes/Limitations.html" label="Limitations">
+		</topic>
 	</topic>
 
     <topic href="html/Installation and Uninstall.html" label="Installation and Uninstallation">
