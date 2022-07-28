@@ -17,10 +17,9 @@ with source, requirements
 
 location capella-master "https://download.eclipse.org/capella/core/updates/nightly/master/org.polarsys.capella.rcp.site/" {
 	org.polarsys.capella.rcp.feature.group lazy
-	org.polarsys.capella.core.re.feature.feature.group lazy
 }
 
-location kitalpha-sdk-master "https://download.eclipse.org/kitalpha/updates/stable/sdk/6.0.0.S202205250955/" {
+location kitalpha-sdk-master "https://download.eclipse.org/kitalpha/updates/stable/sdk/6.0.0.S202207261909/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 	org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group lazy
 }
@@ -31,10 +30,6 @@ location eclipse_2020_06 "https://download.eclipse.org/releases/2021-06/" {
 
 location capella-test "https://download.eclipse.org/capella/core/updates/nightly/master/org.polarsys.capella.test.site/" {
 	org.polarsys.capella.test.feature.feature.group lazy
-}
-
-location diffmerge-pattern "https://download.eclipse.org/diffmerge/stable/0.14.0-S20220613/edm-patterns-site/" {
-	org.eclipse.emf.diffmerge.patterns.templates.gen lazy
 }
 
 location egf "https://download.eclipse.org/egf/updates/stable/1.6.3/2021-06/" {
