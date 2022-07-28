@@ -19,7 +19,7 @@ location capella-master "https://download.eclipse.org/capella/core/updates/night
 	org.polarsys.capella.rcp.feature.group lazy
 }
 
-location kitalpha-sdk-master "https://download.eclipse.org/kitalpha/updates/stable/sdk/6.0.0.S202207261909/" {
+location kitalpha-sdk-master "https://download.eclipse.org/kitalpha/updates/stable/sdk/6.0.0.S202208031010/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 	org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group lazy
 }
