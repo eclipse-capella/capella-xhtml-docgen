@@ -13,9 +13,10 @@ pipeline {
 	stages {
 		stage('Generate TP') {
 			steps {
-				sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
+	      		sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
 			}
 		}
+
 		stage('Build DocGen addon') {
 			steps {
 				script {
@@ -61,19 +62,11 @@ pipeline {
 	      steps {
 	      	wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
 	      		script {
-		      		def IFE_sample_path = 'https://raw.githubusercontent.com/eclipse/capella/master/samples/In-Flight%20Entertainment%20System/'
-		      		def IFE_file_prefix = 'In-Flight%20Entertainment%20System.'
-		      		def IFE_target_path_local = 'tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/'
-		      		def IFE_file_prefix_local = 'In-Flight Entertainment System.'
-		      		
-		      		// Download IFE sample content
-		      		["afm", "aird", "capella"].each {
-	      				def file =  IFE_sample_path + IFE_file_prefix + it
-	      				def file_target = IFE_target_path_local + IFE_file_prefix_local + it
-	      				sh "curl ${file} > '${file_target}'"
-	      			}
-	      			
-	      			// Launch test
+		      		// Retrieve the IFE sample from capella repository
+	      			sh "git clone --filter=blob:none --no-checkout -b master --sparse \"https://github.com/eclipse/capella.git\" capella; cd capella; git sparse-checkout add samples; git checkout; cd .."
+                	sh "cp capella/samples/In-Flight\\ Entertainment\\ System/* \"tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/\""
+                	
+                	// Launch test
 		        	sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
 	        	}
 	        }
