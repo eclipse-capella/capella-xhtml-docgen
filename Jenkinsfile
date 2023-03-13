@@ -9,11 +9,12 @@ pipeline {
 	    JACOCO_VERSION = "0.8.6"
 	    MVN_QUALITY_PROFILES = '-P full'
 	    JACOCO_EXEC_FILE_PATH = '${WORKSPACE}/jacoco.exec'
+		BUILD_KEY = (github.isPullRequest() ? CHANGE_TARGET : BRANCH_NAME).replaceFirst(/^v/, '')
 	}
 	stages {
 		stage('Generate TP') {
 			steps {
-	      		sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
+				sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
 			}
 		}
 
@@ -31,52 +32,59 @@ pipeline {
       		}
    		}
 	    stage('Deploy') {
-	  		when {
-				not { changeRequest() }
-			}
 			steps {
-				sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
-            		script {
-						def VERSION = BRANCH_NAME
-						if (VERSION.matches("v\\d\\.\\d\\.x")) {
-							VERSION = VERSION.substring(1)
-						}
-	
-						def DEST_UPDATESITE_DIR='/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/updates/nightly/'+VERSION
-						def DEST_DROPINS_DIR='/home/data/httpd/download.eclipse.org/capella/addons/xhtmldocgen/dropins/nightly/'+VERSION
+				script {
+					def deploymentDirName = 
+						(github.isPullRequest() ? "${BUILD_KEY}-${BRANCH_NAME}-${BUILD_ID}" : "${BRANCH_NAME}-${BUILD_ID}")
+						.replaceAll('/','-')
+					
+					deployer.addonNightlyDropins("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/*-dropins-*.zip", deploymentDirName)
+					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/repository/*", deploymentDirName)	
+					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/*-updateSite-*.zip", deploymentDirName)					
+					
+					currentBuild.description = "${deploymentDirName} - <a href=\"https://download.eclipse.org/capella/addons/xhtmldocgen/dropins/nightly/${deploymentDirName}\">drop-in</a> - <a href=\"https://download.eclipse.org/capella/addons/xhtmldocgen/updates/nightly/${deploymentDirName}\">update-site</a>"
+				}
+			}
+		}
+	    stage('Deploy as nightly') {
+			steps {
+				script {
+					def nightlyDirName = 
+						(github.isPullRequest() ? "${BUILD_KEY}-${BRANCH_NAME}" : "${BRANCH_NAME}")
+						.replaceAll('/','-')
+					deployer.cleanAddonNightlyArtefacts(nightlyDirName)
+					deployer.addonNightlyDropins("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/*-dropins-*.zip", nightlyDirName)
+					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/repository/*", nightlyDirName)	
+					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/*-updateSite-*.zip", nightlyDirName)	
+				}
+			}
+		}
+		stage('Run tests') {
+			steps {
+				wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
+					script {
+						// Retrieve the IFE sample from capella repository
+						checkout([$class: 'GitSCM', 
+							branches: [[name: '*/master']], 
+							extensions: [[$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'samples']]], 
+										[$class: 'RelativeTargetDirectory', relativeTargetDir: 'capella']], 
+							userRemoteConfigs: [[credentialsId: '0dea5761-867c-44db-92fa-9304c81a8653', url: 'https://github.com/eclipse/capella']]
+						])
 						
-						sh "echo 'deploy update site'"
-						sh "ssh genie.capella@projects-storage.eclipse.org rm -rf ${DEST_UPDATESITE_DIR}"
-						sh "ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_UPDATESITE_DIR}"
-						sh "scp -r releng/org.polarsys.capella.docgen.site/target/repository/* genie.capella@projects-storage.eclipse.org:${DEST_UPDATESITE_DIR}"
-
-						sh "echo 'deploy product'"
-						sh "ssh genie.capella@projects-storage.eclipse.org rm -rf ${DEST_DROPINS_DIR}"
-						sh "ssh genie.capella@projects-storage.eclipse.org mkdir -p ${DEST_DROPINS_DIR}"
-						sh "scp -r releng/org.polarsys.capella.docgen.site/target/*-dropins-*.zip genie.capella@projects-storage.eclipse.org:${DEST_DROPINS_DIR}"
+						sh "cp -r capella/samples/In-Flight\\ Entertainment\\ System/* \"tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/\""
+						
+						// Launch test
+						sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
 					}
 				}
 			}
-        }
-	    stage('Run tests') {
-	      steps {
-	      	wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
-	      		script {
-		      		// Retrieve the IFE sample from capella repository
-	      			sh "git clone --filter=blob:none --no-checkout -b master --sparse \"https://github.com/eclipse/capella.git\" capella; cd capella; git sparse-checkout add samples; git checkout; cd .."
-                	sh "cp capella/samples/In-Flight\\ Entertainment\\ System/* \"tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/\""
-                	
-                	// Launch test
-		        	sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
-	        	}
-	        }
-	      }
-	    }
+		}
 		stage('Publish results') {
 			steps {
 				junit allowEmptyResults: true, testResults: '*.xml,**/target/surefire-reports/*.xml'
 				sh "mvn -Djacoco.dataFile=$JACOCO_EXEC_FILE_PATH org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:report $MVN_QUALITY_PROFILES -e -f pom.xml"
-			}
+				archiveArtifacts artifacts: 'tests/**/*.ser'
+      		}
 		}
 		stage('Perform Sonar analysis') {
 			environment {
