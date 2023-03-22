@@ -44,7 +44,6 @@ import org.polarsys.capella.core.commandline.core.CommandLineException;
 import org.polarsys.capella.core.commandline.core.DefaultCommandLine;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
-import org.polarsys.kitalpha.doc.gen.business.core.exceptions.DocgenRuntimeException;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.ui.helper.InvokeActivityHelper;
 
@@ -195,12 +194,20 @@ public class HTMLCommandLine extends DefaultCommandLine {
 
             // run the activity
             try {
-                InvokeActivityHelper.invokeOutOfUIThread(factoryComponent);
-                success = true;
-            } catch (DocgenRuntimeException | MissingExtensionException | InvocationException | CoreException e) {
-                StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
-                logError(message.toString());
-                success = false;
+              InvokeActivityHelper.invokeOutOfUIThread(factoryComponent);
+              success = true;
+            } catch (MissingExtensionException e) {
+              StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
+              logError(message.toString());
+              success = false;
+            } catch (InvocationException e) {
+              StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
+              logError(message.toString());
+              success = false;
+            } catch (CoreException e) {
+              StringBuilder message = new StringBuilder(prefix).append(e.getMessage());
+              logError(message.toString());
+              success = false;
             }
         } else {
             success = false;
