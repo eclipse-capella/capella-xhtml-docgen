@@ -13,7 +13,7 @@ Contributors:
 <feature
       id="org.polarsys.capella.docgen.feature"
       label="%featureName"
-      version="5.1.1.qualifier"
+      version="5.2.0.qualifier"
       provider-name="%providerName">
 
    <description>

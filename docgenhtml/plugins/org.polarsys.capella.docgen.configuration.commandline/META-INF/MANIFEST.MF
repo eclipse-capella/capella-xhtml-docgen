@@ -11,11 +11,11 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core.ui,
  org.eclipse.egf.core.producer,
  org.eclipse.egf.model,
  org.polarsys.capella.docgen.configuration.ui,
- org.polarsys.capella.core.sirius.ui,
+ org.polarsys.capella.core.sirius.ui
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Version: 5.1.1.qualifier
+Bundle-Version: 5.2.0.qualifier
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-ManifestVersion: 2
