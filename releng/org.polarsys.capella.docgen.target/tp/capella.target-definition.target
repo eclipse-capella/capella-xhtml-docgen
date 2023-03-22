@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1630918091">
+<target name="CapellaXHTMLDocGenAddon" sequenceNumber="1679482210">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="0.0.0"/>
@@ -11,6 +11,22 @@
       <unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.gmf.runtime.thirdparty.feature.group" version="0.0.0"/>
       <repository id="GMF-Runtime-1.13.0" location="http://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/R202004160913"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.polarsys.capella.rcp.feature.group" version="0.0.0"/>
+      <unit id="org.polarsys.capella.core.re.feature.feature.group" version="0.0.0"/>
+      <repository id="capella-master" location="https://download.eclipse.org/capella/core/updates/releases/5.1.0-R20210615-075512/org.polarsys.capella.rcp.site/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
+      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group" version="0.0.0"/>
+      <unit id="org.polarsys.kitalpha.doc.feature.feature.group" version="5.1.0.202106140930"/>
+      <unit id="org.polarsys.kitalpha.emde.sdk.feature.source.feature.group" version="5.1.0.202106140930"/>
+      <repository id="kitalpha-sdk" location="https://download.eclipse.org/kitalpha/updates/releases/sdk/5.1.0"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.query.feature.group" version="0.0.0"/>
+      <repository id="eclipse_2020_06" location="https://download.eclipse.org/releases/2020-06/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sdk.feature.group" version="4.16.0.v20200604-0951"/>
@@ -75,12 +91,7 @@
       <unit id="org.polarsys.kitalpha.richtext.widget.feature.source.feature.group" version="5.1.0.202106140930"/>
       <unit id="org.polarsys.kitalpha.richtext.widget.ext.feature.source.feature.group" version="5.1.0.202106140930"/>
       <unit id="org.polarsys.kitalpha.transposer.feature.source.feature.group" version="5.1.0.202106140930"/>
-      <repository id="kitalpha-runtime-core-master" location="https://download.eclipse.org/kitalpha/updates/stable/runtime/5.1.0-S202106140930"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.doc.feature.feature.group" version="5.1.0.202106140930"/>
-      <unit id="org.polarsys.kitalpha.emde.sdk.feature.source.feature.group" version="5.1.0.202106140930"/>
-      <repository id="kitalpha-sdk-master" location="https://download.eclipse.org/kitalpha/updates/stable/sdk/5.1.0-S202106140930"/>
+      <repository id="kitalpha-runtime-core-master" location="https://download.eclipse.org/kitalpha/updates/releases/runtime/5.1.0"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.diffmerge.feature.source.feature.group" version="0.13.1.202105110718"/>
@@ -105,20 +116,6 @@
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.license.feature.group" version="0.0.0"/>
       <repository id="eclipse-shared-license" location="http://download.eclipse.org/cbi/updates/license"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.capella.rcp.feature.group" version="0.0.0"/>
-      <unit id="org.polarsys.capella.core.re.feature.feature.group" version="0.0.0"/>
-      <repository id="capella-master" location="https://download.eclipse.org/capella/core/updates/releases/5.1.0-R20210615-075512/org.polarsys.capella.rcp.site/"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group" version="0.0.0"/>
-      <unit id="org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group" version="0.0.0"/>
-      <repository id="kitalpha-sdk" location="https://download.eclipse.org/kitalpha/updates/release/sdk/5.1.0/"/>
-    </location>
-    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.query.feature.group" version="0.0.0"/>
-      <repository id="eclipse_2020_06" location="https://download.eclipse.org/releases/2020-06/"/>
     </location>
   </locations>
 </target>
