@@ -1,12 +1,82 @@
-<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>capella-docgen-commandline</title><link type="text/css" rel="stylesheet" href="PLUGINS_ROOT/org.polarsys.kitalpha.doc.gen.business.core.doc/html/common/style/style.css"/></head><body><h1 id="HTML_Production_using_command_line">HTML Production using command line</h1><h2 id="Simple_use_case">Simple use case</h2><pre>
+<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>capella-docgen-commandline-support</title>
+		<link type="text/css" rel="stylesheet" href="PLUGINS_ROOT/org.polarsys.capella.doc/html/styles.css"/>
+	</head>
+	<body>
+		<h1 id="Command_Line_Support">Command Line Support</h1>
+		<h2 id="Overview">Overview</h2>
+		<p>The HTML DocGen add-on provides the capacity to launch the documentation generation from the command line.</p>
+		<p>Please visit the 
+			<a href="/wiki/../help/topic/org.polarsys.capella.commandline.doc/html/19.%20Command%20Line%20Support/19.1.%20Core%20Mechanism%20and%20Applications.html" title="../help/topic/org.polarsys.capella.commandline.doc/html/19.%20Command%20Line%20Support/19.1.%20Core%20Mechanism%20and%20Applications.html">Capella Command Line</a> documentation section in order to learn more about this aspect.
+		</p>
+		<p>The HTML DocGen Command Line relies on parameters from the Capella CommandLine core mechanism parameters with the addition of the following parameter.</p>
+		<table id="configurationParameter">
+			<tr>
+				<th>Name</th>
+				<th>Category</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>configurationFile</td>
+				<td>optional</td>
+				<td>defines the workspace or absolute path to a configuration file (see 
+					<a href="/wiki/../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html" title="../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html">Selective Documentation Generation option</a>)
+				</td>
+			</tr>
+		</table>
+		<p>You can use the 
+			<b>-help</b> argument to see all of the applicable arguments for the command line.
+		</p>
+		<h2 id="Command_Line_Application_Examples">Command Line Application Examples</h2>
+		<p>For all the examples bellow we assume the existence of:</p>
+		<ul>
+			<li>A Capella model (name: EOLE_AF) already imported in the workspace</li>
+		</ul>
+		<h3 id="Simple_use_cases">Simple use cases</h3>
+		<pre>
 &lt;CapellaInstallationPath&gt;/capellac.exe -nosplash
 -application org.polarsys.capella.core.commandline.core
 -appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
 -data &lt;workspacePath&gt;
--filepath /EOLE_AF/EOLE_AF.aird
+-input /EOLE_AF/EOLE_AF.aird
 -outputfolder /DocProject/HTML
--forceoutputfoldercreation
-</pre><p>This command will generate <i>HTML</i> report from the EOLE-AF aird file specified to the output folder <b><i>HTML</i></b> present into <b><i>Doc project</i></b>.</p><h2 id="Complex_use_cases">Complex use cases</h2><h3 id="Import_Capella_project_and_generate_inside_it">Import Capella project and generate inside it</h3><pre>
+</pre>
+		<p>This command will generate 
+			<i>HTML</i> report from the EOLE-AF aird file specified to the output folder 
+			<b>
+				<i>HTML</i>
+			</b> present into 
+			<b>
+				<i>DocProject</i>
+			</b>.
+		</p>
+		<p><u>
+			<b>Use a configuration file</b></u>
+		</p>
+		<p>It is also possible to use the 
+			<a href="/wiki/../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html" title="../help/topic/org.polarsys.capella.docgen.doc/html/common/capella-docgen-launch-selective.html">Selective Documentation Generation option</a> from commandline.
+			This is done by relying on the alternative 
+			<b>appid</b> parameter value 
+			<b>org.polarsys.kitalpha.doc.conf.gen.business.capella.commandline</b> and the 
+			<b>configurationfile</b> parameter: 
+		</p>
+		<pre>
+&lt;CapellaInstallationPath&gt;/capellac.exe -nosplash
+-application org.polarsys.capella.core.commandline.core
+-appid org.polarsys.kitalpha.doc.conf.gen.business.capella.commandline
+-data &lt;workspacePath&gt;
+-input /EOLE_AF/EOLE_AF.aird
+-outputfolder /DocProject/HTML
+-configurationfile &lt;workspace or absolute path to a .configuration file&gt;
+</pre>
+		<h3 id="Complex_use_cases">Complex use cases</h3>
+		<p><u>
+			<b>Import Capella project and generate inside it</b></u>
+		</p>
+		<pre>
 &lt;CapellaInstallationPath&gt;/capellac.exe -nosplash
 -application org.polarsys.capella.core.commandline.core
 -appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
@@ -14,8 +84,16 @@
 -import &lt;absolutePath&gt;/EOLE_AF
 -input /EOLE_AF/EOLE_AF.aird
 -outputfolder /EOLE_AF/HTML
--logfile D:/CommandLineLog/log.html
-</pre><p>This command will import the EOLE_AF project from <i>&lt;absolutePath&gt;</i> workspace into <i>&lt;targetWorkspacePath&gt; </i>workspace before generating the HTML report inside it.</p><h3 id="Import_Capella_project_and_generate_inside_a_new_project">Import Capella project and generate inside a new project</h3><pre>
+-logfile &lt;absolutePath&gt;/log.html
+</pre>
+		<p>This command will import the EOLE_AF project from 
+			<i>&lt;absolutePath&gt;</i> workspace into 
+			<i>&lt;targetWorkspacePath&gt; </i>workspace before generating the HTML report inside it.
+		</p>
+		<p><u>
+			<b>Import Capella project and generate inside a new project</b></u>
+		</p>
+		<pre>
 &lt;CapellaInstallationPath&gt;/capellac.exe -nosplash
 -application org.polarsys.capella.core.commandline.core
 -appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
@@ -23,8 +101,16 @@
 -import &lt;absolutePath&gt;/EOLE_AF
 -input /EOLE_AF/EOLE_AF.aird
 -outputfolder /DocProject/HTML
--logfile D:/CommandLineLog/log.html
-</pre><p>This command will import the EOLE_AF project from <i>&lt;absolutePath&gt;</i> workspace into <i>&lt;targetWorkspacePath&gt; </i>workspace and create the DocProject to generate the HTML report inside it.</p><h3 id="Import_Capella_project_and_a_Doc_project_to_generate_inside_it">Import Capella project and a Doc project to generate inside it</h3><pre>
+-logfile &lt;absolutePath&gt;/log.html
+</pre>
+		<p>This command will import the EOLE_AF project from 
+			<i>&lt;absolutePath&gt;</i> workspace into 
+			<i>&lt;targetWorkspacePath&gt; </i>workspace and create the DocProject to generate the HTML report inside it.
+		</p>
+		<p><u>
+			<b>Import Capella project and a Doc project to generate inside it</b></u>
+		</p>
+		<pre>
 &lt;CapellaInstallationPath&gt;/capellac.exe -nosplash
 -application org.polarsys.capella.core.commandline.core
 -appid org.polarsys.kitalpha.doc.gen.business.capella.commandline
@@ -32,5 +118,14 @@
 -import "&lt;absolutePath&gt;/EOLE_AF | &lt;absolutePath&gt;/DocProject"
 -input /EOLE_AF/EOLE_AF.aird
 -outputfolder /DocProject/HTML
--logfile D:/CommandLineLog/log.html
-</pre><p>This command will import two projects (EOLE_AF and DocProject) from <i>&lt;absolutePath&gt;</i> workspace into <i>&lt;targetWorkspacePath&gt; </i>workspace before generating the HTML report inside the DocProject.</p><p><b>NOTE</b>: The source and target workspaces have to be different.</p></body></html>
+-logfile &lt;absolutePath&gt;/log.html
+</pre>
+		<p>This command will import two projects (EOLE_AF and DocProject) from 
+			<i>&lt;absolutePath&gt;</i> workspace into 
+			<i>&lt;targetWorkspacePath&gt; </i>workspace before generating the HTML report inside the DocProject.
+		</p>
+		<p>
+			<b>NOTE</b>: The source and target workspaces have to be different.
+		</p>
+	</body>
+</html>
