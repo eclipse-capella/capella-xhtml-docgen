@@ -26,11 +26,11 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>2.2.0</tycho-version>
-		<tycho-extras-version>2.2.0</tycho-extras-version>
+		<tycho-version>2.7.5</tycho-version>
+		<tycho-extras-version>2.7.5</tycho-extras-version>
 		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
 		<antrun-version>1.7</antrun-version>
-		<jacoco-version>0.8.6</jacoco-version>
+		<jacoco-version>0.8.8</jacoco-version>
 		<sourcePhase>package</sourcePhase>
 
 		<!-- for junit -->
@@ -40,7 +40,7 @@
 		<tycho.testArgLine>-Xms256m -Xmx1024m</tycho.testArgLine>
 
 		<!-- for packaging -->
-		<platform-name>oxygen/201803211000</platform-name>
+		<platform-name>2023-03/202303151000</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
 	</properties>
