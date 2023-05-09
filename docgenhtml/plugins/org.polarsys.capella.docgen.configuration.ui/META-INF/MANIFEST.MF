@@ -20,7 +20,7 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core.ui,
  org.eclipse.sirius.table
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 6.1.0.qualifier
+Bundle-Version: 7.0.0.qualifier
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-Activator: org.polarsys.capella.docgen.configuration.ui.Activator
