@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.polarsys.capella.configuration.provider.ConfigurationEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.polarsys.capella.configuration.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.docgen.configuration;visibility:=reexport,
