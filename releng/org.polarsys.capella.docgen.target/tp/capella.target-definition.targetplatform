@@ -19,12 +19,12 @@ location capella-master "https://download.eclipse.org/capella/core/updates/night
 	org.polarsys.capella.rcp.feature.group lazy
 }
 
-location kitalpha-docgen-master "https://download.eclipse.org/kitalpha/updates/nightly/sdk/master/" {
+location kitalpha-docgen-master "https://download.eclipse.org/kitalpha/updates/stable/sdk/7.0.0.20230504/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 	org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group lazy
 }
 
-location eclipse_2020_06 "https://download.eclipse.org/releases/2021-06/" {
+location eclipse_2023_03 "https://download.eclipse.org/releases/2023-03/" {
 	org.eclipse.emf.query.feature.group lazy
 }
 
