@@ -11,24 +11,26 @@
  *******************************************************************************/
 target "CapellaXHTMLDocGenAddon"
 
-include "https://download.eclipse.org/capella/core/updates/nightly/master/targets/capella.target-definition.targetplatform"
+include "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20230613/targets/capella.target-definition.targetplatform"
 
 with source, requirements
 
-location capella-master "https://download.eclipse.org/capella/core/updates/nightly/master/org.polarsys.capella.rcp.site/" {
+location capella-master "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20230613/org.polarsys.capella.rcp.site/" {
 	org.polarsys.capella.rcp.feature.group lazy
 }
 
-location kitalpha-docgen-master "https://download.eclipse.org/kitalpha/updates/stable/sdk/7.0.0.20230504/" {
+location kitalpha-docgen-master "https://download.eclipse.org/kitalpha/updates/stable/sdk/7.0.0.20230607/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 	org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group lazy
 }
 
 location eclipse_2023_03 "https://download.eclipse.org/releases/2023-03/" {
 	org.eclipse.emf.query.feature.group lazy
+	org.eclipse.emf.query.source.feature.group lazy
+	org.apache.felix.scr lazy
 }
 
-location capella-test "https://download.eclipse.org/capella/core/updates/nightly/master/org.polarsys.capella.test.site/" {
+location capella-test "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20230613/org.polarsys.capella.test.site/" {
 	org.polarsys.capella.test.feature.feature.group lazy
 }
 

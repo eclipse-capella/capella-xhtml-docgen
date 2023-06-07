@@ -65,14 +65,15 @@ pipeline {
 					script {
 						// Retrieve the IFE sample from capella repository
 						checkout([$class: 'GitSCM', 
-							branches: [[name: '*/master']], 
+							branches: [[name: 'pr/2646']], 
 							extensions: [[$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'samples']]], 
 										[$class: 'RelativeTargetDirectory', relativeTargetDir: 'capella']], 
 							userRemoteConfigs: [[credentialsId: '0dea5761-867c-44db-92fa-9304c81a8653', url: 'https://github.com/eclipse/capella']]
 						])
 						
 						sh "cp -r capella/samples/In-Flight\\ Entertainment\\ System/* \"tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/\""
-						
+						sh "mkdir tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/doc"
+						sh "mkdir tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/doc/output"
 						// Launch test
 						sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
 					}
