@@ -30,17 +30,17 @@
 		<tycho-extras-version>2.7.5</tycho-extras-version>
 		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
 		<antrun-version>1.7</antrun-version>
-		<jacoco-version>0.8.8</jacoco-version>
+		<jacoco-version>0.8.10</jacoco-version>
 		<sourcePhase>package</sourcePhase>
 
 		<!-- for junit -->
 		<capella-product-id>org.polarsys.capella.core.platform.sirius.ui.perspective.product</capella-product-id>
 		<capella-rcp-product-id>org.polarsys.capella.rcp.product</capella-rcp-product-id>
 		<capella-application-id>org.polarsys.capella.core.platform.sirius.ui.perspective.id</capella-application-id>
-		<tycho.testArgLine>-Xms256m -Xmx1024m</tycho.testArgLine>
+		<tycho.testArgLine>-Xms256m -Xmx3000m</tycho.testArgLine>
 
 		<!-- for packaging -->
-		<platform-name>2023-03/202303151000</platform-name>
+		<platform-name>2023-03</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
 	</properties>
@@ -332,11 +332,10 @@
 								<type>eclipse-feature</type>
 							</dependency>
 							<dependency>
-								<artifactId>org.eclipse.equinox.ds</artifactId>
+								<artifactId>org.apache.felix.scr</artifactId>
 								<type>eclipse-plugin</type>
 							</dependency>
 						</dependencies>
-						<executionEnvironment>JavaSE-1.8</executionEnvironment>
 					</configuration>
 					<executions>
 						<execution>

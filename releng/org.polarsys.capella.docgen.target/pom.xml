@@ -33,12 +33,12 @@
 	</licenses>
 
 	<properties>
-		<tycho-version>1.0.0</tycho-version>
-		<tycho-extras-version>1.0.0</tycho-extras-version>
-		<platform-name>oxygen</platform-name>
-		<targetPlatform.repository>http://pdulth.github.io/fr.obeo.releng.targetplatform/p2/latest</targetPlatform.repository>
+		<tycho-version>2.7.5</tycho-version>
+		<tycho-extras-version>2.7.5</tycho-extras-version>
+		<platform-name>2023-03</platform-name>
+		<targetPlatform.repository>https://download.eclipse.org/cbi/updates/tpd/nightly/latest</targetPlatform.repository>
 		<targetPlatform.name>capella.target-definition.targetplatform</targetPlatform.name>
-		<converterApplication.name>fr.obeo.releng.targetplatform.targetPlatform.converter</converterApplication.name>
+		<converterApplication.name>org.eclipse.cbi.targetplatform.tpd.converter</converterApplication.name>
 	</properties>
 
 	<build>
@@ -50,20 +50,20 @@
 				<configuration>
 					<repositories>
 						<repository>
-							<id>${platform-name}</id>
+							<id>targetplatform-tp</id>
 							<layout>p2</layout>
-							<url>http://download.eclipse.org/releases/${platform-name}</url>
+							<url>https://download.eclipse.org/releases/2023-03</url>
 						</repository>
 						<repository>
 							<id>targetplatform</id>
 							<layout>p2</layout>
-							<url>${targetPlatform.repository}</url>
+							<url>https://download.eclipse.org/cbi/updates/tpd/nightly/latest</url>
 						</repository>
 					</repositories>
 					<!-- Set dependencies to launch the application -->
 					<dependencies>
 						<dependency>
-							<artifactId>fr.obeo.releng.targetplatform-feature</artifactId>
+							<artifactId>org.eclipse.cbi.targetplatform.feature</artifactId>
 							<type>eclipse-feature</type>
 						</dependency>
 						<dependency>
@@ -71,13 +71,14 @@
 							<type>eclipse-feature</type>
 						</dependency>
 					</dependencies>
+					<executionEnvironment>JavaSE-17</executionEnvironment>
 				</configuration>
 				<executions>
 					<execution>
 						<id>generate.target</id>
 						<phase>validate</phase>
 						<configuration>
-							<executionEnvironment>JavaSE-1.8</executionEnvironment>
+							<executionEnvironment>JavaSE-17</executionEnvironment>
 							<applicationsArgs>
 								<args>-application ${converterApplication.name} tp/${targetPlatform.name}</args>
 							</applicationsArgs>
