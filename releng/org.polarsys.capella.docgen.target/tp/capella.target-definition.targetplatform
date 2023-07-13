@@ -15,7 +15,7 @@ include "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S2023061
 
 with source, requirements
 
-location capella-master "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20230613/org.polarsys.capella.rcp.site/" {
+location capella-master "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20230717/org.polarsys.capella.rcp.site/" {
 	org.polarsys.capella.rcp.feature.group lazy
 }
 
@@ -30,7 +30,7 @@ location eclipse_2023_03 "https://download.eclipse.org/releases/2023-03/" {
 	org.apache.felix.scr lazy
 }
 
-location capella-test "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20230613/org.polarsys.capella.test.site/" {
+location capella-test "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20230717/org.polarsys.capella.test.site/" {
 	org.polarsys.capella.test.feature.feature.group lazy
 }
 
