@@ -24,8 +24,7 @@ Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core;visibility:=reexport
  org.polarsys.capella.core.explorer.activity.ui,
  org.polarsys.capella.docgen.preference,
  org.eclipse.sirius.table,
- org.polarsys.capella.core.ui.metric,
- javax.xml.bind;bundle-version="2.2.0"
+ org.polarsys.capella.core.ui.metric
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin

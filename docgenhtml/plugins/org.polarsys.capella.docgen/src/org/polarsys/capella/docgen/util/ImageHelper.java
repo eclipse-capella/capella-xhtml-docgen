@@ -20,9 +20,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
-
-import javax.xml.bind.DatatypeConverter;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -246,7 +245,7 @@ public class ImageHelper {
 		}
 
 		// Serialize image
-		byte[] parseBase64Binary = DatatypeConverter.parseBase64Binary(imageDatas[1]);
+    byte[] parseBase64Binary = Base64.getDecoder().decode(imageDatas[1]);
 		String targetFilePath = targetFolderPath + outputImageFileName;
 		File imageFile = new File(targetFilePath);
 		createFoldersHierarchy(imageFile);
