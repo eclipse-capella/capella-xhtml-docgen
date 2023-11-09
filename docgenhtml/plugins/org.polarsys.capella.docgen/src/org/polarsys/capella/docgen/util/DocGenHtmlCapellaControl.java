@@ -42,7 +42,6 @@ import org.polarsys.capella.core.data.interaction.AbstractCapability;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.oa.Entity;
 import org.polarsys.capella.core.data.oa.Role;
-import org.polarsys.capella.core.data.requirement.Requirement;
 import org.polarsys.capella.core.semantic.queries.basic.queries.FunctionalExchangeCategory;
 import org.polarsys.capella.docgen.preference.CapellaDocgenPreferenceHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.extension.page.PageExtensionRegistry;
@@ -92,7 +91,6 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof ExchangeItem
 				|| element instanceof DataType 
 				|| element instanceof Unit
-				|| element instanceof Requirement 
 				|| element instanceof Region
 				|| element instanceof FunctionalExchangeCategory 
 				|| element instanceof ComponentExchangeCategory 
@@ -125,7 +123,6 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof org.polarsys.capella.core.data.information.Class 
 				|| element instanceof Collection 
 				|| element instanceof DataType
-				|| element instanceof Requirement
 				|| element instanceof Interface
 				|| element instanceof ExchangeItem
 				|| element instanceof Structure
