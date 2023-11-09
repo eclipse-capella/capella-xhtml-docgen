@@ -22,7 +22,6 @@ import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
 import org.polarsys.capella.core.data.capellacore.Allocation;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.ctx.SystemAnalysis;
-import org.polarsys.capella.core.data.requirement.Requirement;
 import org.polarsys.capella.core.model.utils.CapellaLayerCheckingExt;
 
 public class CapellaElementService {
@@ -50,47 +49,6 @@ public class CapellaElementService {
 		return ret;
 	}
 
-	/**
-	 * 
-	 * @param element
-	 * @param projectName
-	 * @param outputFolder
-	 * @return
-	 */
-	public static Collection<String> getRequirementsToLine(CapellaElement element, String projectName, String outputFolder) {
-		Collection<String> ret = new ArrayList<String>();
-		for (AbstractTrace trace : element.getOutgoingTraces()) {
-			TraceableElement targetElement = trace.getTargetElement();
-			if (targetElement instanceof Requirement) {
-				Requirement requirement = (Requirement) targetElement;
-				StringBuffer buffer = new StringBuffer();
-				buffer.append("<tr>");
-
-				buffer.append("<td>");
-				buffer.append(CapellaServices.getImageLinkFromElement(requirement, projectName, outputFolder));
-				buffer.append(" ");
-				buffer.append(CapellaServices.HYPERLINK_OPEN);
-				buffer.append(CapellaServices.getPathFromElement(requirement));
-				buffer.append(CapellaServices.HYPERLINK_COMPLETE);
-				buffer.append(requirement.getRequirementId());
-				buffer.append(CapellaServices.HYPERLINK_CLOSE);
-				buffer.append("</td>");
-
-				buffer.append("<td>");
-				buffer.append(requirement.getName());
-				buffer.append("</td>");
-
-				buffer.append("<td>");
-				buffer.append(StringUtil.transformAREFString(requirement, requirement.getDescription(), projectName, outputFolder));
-				buffer.append("</td>");
-
-				buffer.append("</tr>");
-
-				ret.add(buffer.toString());
-			}
-		}
-		return ret;
-	}
 
 	public static Collection<String> getOutGoingAllocation(CapellaElement element, String projectName, String outputFolder) {
 		Collection<String> ret = new ArrayList<String>();

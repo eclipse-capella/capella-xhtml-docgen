@@ -33,7 +33,6 @@ import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.Classifier;
 import org.polarsys.capella.core.data.interaction.CombinedFragment;
 import org.polarsys.capella.core.data.interaction.InteractionOperand;
-import org.polarsys.capella.core.data.requirement.RequirementsPkg;
 import org.polarsys.capella.docgen.Messages;
 import org.polarsys.kitalpha.doc.gen.business.core.scope.GenerationGlobalScope;
 import org.polarsys.kitalpha.doc.gen.business.core.sirius.util.session.DiagramSessionHelper;
@@ -506,44 +505,6 @@ public class CapellaServices {
 		hyperLinkStringBuilder.append(" "); //$NON-NLS-1$
 		hyperLinkStringBuilder.append(object.getLabel());
 		return hyperLinkStringBuilder.toString();
-	}
-
-	public static String getRequirementPathHyperLinkWithIcon(String projectName, String outputFolder, EObject element) {
-		StringBuilder stringBuilder = new StringBuilder();
-		Iterator<EObject> iterator = getFullRequirementPath(element).iterator();
-		while (iterator.hasNext()) {
-			stringBuilder.append(CapellaLabelProviderHelper.getText(iterator.next()));
-			if (iterator.hasNext()) {
-				stringBuilder.append(" > ");
-			}
-		}
-		StringBuilder hyperLinkStringBuilder = new StringBuilder();
-		hyperLinkStringBuilder.append(getImageLinkFromElement(element, projectName, outputFolder));
-		hyperLinkStringBuilder.append(" "); //$NON-NLS-1$
-		hyperLinkStringBuilder.append(getHyperlinkFromElement(element, stringBuilder.toString()));
-		return hyperLinkStringBuilder.toString();
-	}
-	
-	public static String getRequirementPath(EObject element) {
-		StringBuilder stringBuilder = new StringBuilder();
-		Iterator<EObject> iterator = getFullRequirementPath(element).iterator();
-		while (iterator.hasNext()) {
-			stringBuilder.append(CapellaLabelProviderHelper.getText(iterator.next()));
-			if (iterator.hasNext()) {
-				stringBuilder.append(" > ");
-			}
-		}
-		return stringBuilder.toString();
-	}
-
-	private static List<EObject> getFullRequirementPath(EObject element) {
-		List<EObject> eObjects = new ArrayList<>();
-		EObject parent = element.eContainer();
-		if (parent instanceof RequirementsPkg) {
-			eObjects.addAll(getFullRequirementPath(parent));
-		}
-		eObjects.add(element);
-		return eObjects;
 	}
 
 	/**
