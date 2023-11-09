@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.3.202110291409
+//Generated with EGF 1.6.4.202309201142
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -14,204 +14,214 @@ import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.docgen.diagram.CapellaHelper;
 
 public class CapellaElementDocGen extends org.polarsys.kitalpha.doc.gen.business.core.doccontent.ElementDocContent {
-    protected static String nl;
+	protected static String nl;
 
-    public static synchronized CapellaElementDocGen create(String lineSeparator) {
-        nl = lineSeparator;
-        CapellaElementDocGen result = new CapellaElementDocGen();
-        nl = null;
-        return result;
-    }
+	public static synchronized CapellaElementDocGen create(String lineSeparator) {
+		nl = lineSeparator;
+		CapellaElementDocGen result = new CapellaElementDocGen();
+		nl = null;
+		return result;
+	}
 
-    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" + NL
+			+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"" + NL
+			+ "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" + NL
+			+ "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">" + NL + "" + NL + "\t<head>"
+			+ NL + "\t\t<meta name=\"copyright\" content=\"";
+	protected final String TEXT_2 = "\" />" + NL
+			+ "\t\t<meta http-equiv=\"content-type\" content=\"text/html;charset=ISO-8859-1\" />" + NL
+			+ "\t\t<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />" + NL + "" + NL + "\t\t<title>";
+	protected final String TEXT_3 = "</title>" + NL
+			+ "\t\t<link rel=\"stylesheet\" href=\"../../scripts/jquery-treeview/jquery.treeview.css\" />" + NL
+			+ "  \t\t<script src=\"../../scripts/jquery-treeview/lib/jquery-1.11.1.js\" type=\"text/javascript\"></script>"
+			+ NL
+			+ "  \t\t<script src=\"../../scripts/jquery-treeview/jquery.treeview.js\" type=\"text/javascript\"></script>"
+			+ NL + "\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../css/simpletree.css\" />\t\t" + NL
+			+ "\t\t<link title=\"default\" rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" href=\"../../css/content.css\"></link>"
+			+ NL + "\t\t<script type=\"text/javascript\">" + NL
+			+ "\t\t\tif(parent.location.href == self.location.href) {" + NL
+			+ "\t\t\t\twindow.location.href = 'index.html?";
+	protected final String TEXT_4 = "' + '#' + self.location.href.substring(self.location.href.lastIndexOf(\"#\")+1);"
+			+ NL + "\t\t\t}" + NL + "\t\t</script>" + NL + "\t\t" + NL + "\t\t<style>" + NL + "\t\t\tbody {" + NL
+			+ "\t\t\t\tbackground: white;" + NL + "\t\t\t\tfont-family: Arial;" + NL + "\t\t\t}" + NL
+			+ "\t\t\t.treeview {" + NL + "\t\t\t\tbackground-color: white ;" + NL + "\t\t\t}" + NL + "\t" + NL
+			+ "\t\t\t.treeview ul{ /*CSS for Simple Tree Menu*/" + NL + "\t\t\t\tbackground-color: white;" + NL
+			+ "\t\t\t\tfont-size: 12px;" + NL + "\t\t\t}" + NL + "\t" + NL
+			+ "\t\t\t.treeview li{ /*Style for LI elements in general (excludes an LI that contains sub lists)*/" + NL
+			+ "\t\t\t\tbackground-color: white;" + NL + "\t\t\t}" + NL + "\t\t</style>" + NL + "\t\t" + NL + "\t</head>"
+			+ NL + "\t" + NL + "\t<body>\t";
+	protected final String TEXT_5 = NL;
 
-    protected final String TEXT_1 = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" + NL + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"" + NL
-            + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" + NL + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">" + NL + "" + NL + "\t<head>" + NL
-            + "\t\t<meta name=\"copyright\" content=\"";
+	public CapellaElementDocGen() {
+		//Here is the constructor
+		StringBuffer stringBuffer = new StringBuffer();
 
-    protected final String TEXT_2 = "\" />" + NL + "\t\t<meta http-equiv=\"content-type\" content=\"text/html;charset=ISO-8859-1\" />" + NL
-            + "\t\t<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />" + NL + "" + NL + "\t\t<title>";
+		// add initialisation of the pattern variables (declaration has been already done).
 
-    protected final String TEXT_3 = "</title>" + NL + "\t\t<link rel=\"stylesheet\" href=\"../../scripts/jquery-treeview/jquery.treeview.css\" />" + NL
-            + "  \t\t<script src=\"../../scripts/jquery-treeview/lib/jquery-1.11.1.js\" type=\"text/javascript\"></script>" + NL
-            + "  \t\t<script src=\"../../scripts/jquery-treeview/jquery.treeview.js\" type=\"text/javascript\"></script>" + NL
-            + "\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../css/simpletree.css\" />\t\t" + NL
-            + "\t\t<link title=\"default\" rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" href=\"../../css/content.css\"></link>" + NL + "\t\t<script type=\"text/javascript\">" + NL
-            + "\t\t\tif(parent.location.href == self.location.href) {" + NL + "\t\t\t\twindow.location.href = 'index.html?";
+	}
 
-    protected final String TEXT_4 = "' + '#' + self.location.href.substring(self.location.href.lastIndexOf(\"#\")+1);" + NL + "\t\t\t}" + NL + "\t\t</script>" + NL + "\t\t" + NL + "\t\t<style>" + NL
-            + "\t\t\tbody {" + NL + "\t\t\t\tbackground: white;" + NL + "\t\t\t\tfont-family: Arial;" + NL + "\t\t\t}" + NL + "\t\t\t.treeview {" + NL + "\t\t\t\tbackground-color: white ;" + NL
-            + "\t\t\t}" + NL + "\t" + NL + "\t\t\t.treeview ul{ /*CSS for Simple Tree Menu*/" + NL + "\t\t\t\tbackground-color: white;" + NL + "\t\t\t\tfont-size: 12px;" + NL + "\t\t\t}" + NL + "\t"
-            + NL + "\t\t\t.treeview li{ /*Style for LI elements in general (excludes an LI that contains sub lists)*/" + NL + "\t\t\t\tbackground-color: white;" + NL + "\t\t\t}" + NL + "\t\t</style>"
-            + NL + "\t\t" + NL + "\t</head>" + NL + "\t" + NL + "\t<body>\t";
+	public String generate(Object argument) throws Exception {
+		final StringBuffer stringBuffer = new StringBuffer();
 
-    protected final String TEXT_5 = NL;
+		InternalPatternContext ctx = (InternalPatternContext) argument;
+		Map<String, String> queryCtx = null;
+		IQuery.ParameterDescription paramDesc = null;
+		Node.Container currentNode = ctx.getNode();
 
-    public CapellaElementDocGen() {
-        //Here is the constructor
-        StringBuffer stringBuffer = new StringBuffer();
+		if (preCondition(ctx)) {
+			ctx.setNode(new Node.Container(currentNode, getClass()));
+			orchestration(ctx);
+		}
 
-        // add initialisation of the pattern variables (declaration has been already done).
+		ctx.setNode(currentNode);
+		if (ctx.useReporter()) {
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+		}
 
-    }
+		stringBuffer.append(TEXT_5);
+		stringBuffer.append(TEXT_5);
+		return stringBuffer.toString();
+	}
 
-    public String generate(Object argument) throws Exception {
-        final StringBuffer stringBuffer = new StringBuffer();
+	public String orchestration(PatternContext ctx) throws Exception {
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-        InternalPatternContext ctx = (InternalPatternContext) argument;
-        Map<String, String> queryCtx = null;
-        IQuery.ParameterDescription paramDesc = null;
-        Node.Container currentNode = ctx.getNode();
+		method_setCapellaContext(new StringBuffer(), ictx);
 
-        if (preCondition(ctx)) {
-            ctx.setNode(new Node.Container(currentNode, getClass()));
-            orchestration(ctx);
-        }
+		method_setTitle(new StringBuffer(), ictx);
 
-        ctx.setNode(currentNode);
-        if (ctx.useReporter()) {
-            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-        }
+		method_setPath(new StringBuffer(), ictx);
 
-        stringBuffer.append(TEXT_5);
-        stringBuffer.append(TEXT_5);
-        return stringBuffer.toString();
-    }
+		method_setFileName(new StringBuffer(), ictx);
+		super.orchestration(new SuperOrchestrationContext(ictx));
 
-    public String orchestration(PatternContext ctx) throws Exception {
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
+		return null;
+	}
 
-        method_setCapellaContext(new StringBuffer(), ictx);
+	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-        method_setTitle(new StringBuffer(), ictx);
+	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+		this.element = object;
+	}
 
-        method_setPath(new StringBuffer(), ictx);
+	protected java.lang.String documentTitle = null;
 
-        method_setFileName(new StringBuffer(), ictx);
-        super.orchestration(new SuperOrchestrationContext(ictx));
+	public void set_documentTitle(java.lang.String object) {
+		this.documentTitle = object;
+	}
 
-        return null;
-    }
+	protected java.lang.String elementPath = null;
 
-    protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+	public void set_elementPath(java.lang.String object) {
+		this.elementPath = object;
+	}
 
-    public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-        this.element = object;
-    }
+	public Map<String, Object> getParameters() {
+		final Map<String, Object> parameters = new HashMap<String, Object>();
+		return parameters;
+	}
 
-    protected java.lang.String documentTitle = null;
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
-    public void set_documentTitle(java.lang.String object) {
-        this.documentTitle = object;
-    }
+		element = null;
 
-    protected java.lang.String elementPath = null;
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
+	}
 
-    public void set_elementPath(java.lang.String object) {
-        this.elementPath = object;
-    }
+	protected void method_setTitle(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-    public Map<String, Object> getParameters() {
-        final Map<String, Object> parameters = new HashMap<String, Object>();
-        return parameters;
-    }
+		String elementName = CapellaServices.getHyperlinkFromElement(element);
+		/*
+		String elementType = EscapeChars.forHTML(element.eClass().getName());
+		String projectName= ctx.getValue("projectName").toString();
+		*/
+		documentTitle = elementName;
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle", stringBuffer.toString());
+	}
 
-    protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+	protected void method_setPath(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-        element = null;
+		elementPath = CapellaServices.getElementPath(element);
 
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
-    }
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setPath", stringBuffer.toString());
+	}
 
-    protected void method_setTitle(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+	protected void method_setFileName(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-        String elementName = CapellaServices.getHyperlinkFromElement(element);
-        /*
-        String elementType = EscapeChars.forHTML(element.eClass().getName());
-        String projectName= ctx.getValue("projectName").toString();
-        */
-        documentTitle = elementName;
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "setTitle", stringBuffer.toString());
-    }
+		fileName = DocGenHtmlCapellaUtil.getCapellaElementRootFileName(element);
 
-    protected void method_setPath(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileName", stringBuffer.toString());
+	}
 
-        elementPath = CapellaServices.getElementPath(element);
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "setPath", stringBuffer.toString());
-    }
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementContentDocGen" args="element:element, documentTitle:documentTitle"%>
 
-    protected void method_setFileName(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
 
-        fileName = DocGenHtmlCapellaUtil.getCapellaElementRootFileName(element);
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("element", element);
+			callParameters.put("documentTitle", documentTitle);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_2twVYKu9EeCWrf9pgx3zjA",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
+		}
 
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "setFileName", stringBuffer.toString());
-    }
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+	}
 
-    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+	protected void method_setFileNameService(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
-        {
-            //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementContentDocGen" args="element:element, documentTitle:documentTitle"%>
+		fileNameService = DocGenHtmlCapellaUtil.SERVICE;
 
-            InternalPatternContext ictx = (InternalPatternContext) ctx;
-            new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
-            stringBuffer.setLength(0);
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setFileNameService", stringBuffer.toString());
+	}
 
-            final Map<String, Object> callParameters = new HashMap<String, Object>();
-            callParameters.put("element", element);
-            callParameters.put("documentTitle", documentTitle);
-            CallHelper.executeWithParameterInjection("platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_2twVYKu9EeCWrf9pgx3zjA",
-                    new ExecutionContext((InternalPatternContext) ctx), callParameters);
-            stringBuffer.setLength(0);
-        }
+	protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-    }
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="element:element"%>
 
-    protected void method_setFileNameService(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
 
-        fileNameService = DocGenHtmlCapellaUtil.SERVICE;
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("element", element);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_H6iekavLEeCas-LHcur3rg",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
+		}
 
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "setFileNameService", stringBuffer.toString());
-    }
+		super.method_endContent(new StringBuffer(), ctx);
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
+	}
 
-    protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+	protected void method_docHeader(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-        {
-            //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.CapellaElementEndContentDocGen" args="element:element"%>
-
-            InternalPatternContext ictx = (InternalPatternContext) ctx;
-            new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
-            stringBuffer.setLength(0);
-
-            final Map<String, Object> callParameters = new HashMap<String, Object>();
-            callParameters.put("element", element);
-            CallHelper.executeWithParameterInjection("platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_H6iekavLEeCas-LHcur3rg",
-                    new ExecutionContext((InternalPatternContext) ctx), callParameters);
-            stringBuffer.setLength(0);
-        }
-
-        super.method_endContent(new StringBuffer(), ctx);
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
-    }
-
-    protected void method_docHeader(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
-
-        stringBuffer.append(TEXT_1);
-        stringBuffer.append(copyright);
-        stringBuffer.append(TEXT_2);
-        stringBuffer.append(title);
-        stringBuffer.append(TEXT_3);
-        stringBuffer.append(fileName);
-        stringBuffer.append(TEXT_4);
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "docHeader", stringBuffer.toString());
-    }
+		stringBuffer.append(TEXT_1);
+		stringBuffer.append(copyright);
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(title);
+		stringBuffer.append(TEXT_3);
+		stringBuffer.append(fileName);
+		stringBuffer.append(TEXT_4);
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "docHeader", stringBuffer.toString());
+	}
 }

@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.3.202110291409
+//Generated with EGF 1.6.4.202309201142
 package org.polarsys.capella.docgen.foundations;
 
 import org.eclipse.egf.common.helper.*;
@@ -10,118 +10,113 @@ import org.eclipse.egf.pattern.query.*;
 import org.polarsys.capella.docgen.util.StringUtil;
 
 public class SummaryAndDescriptionGeneration {
-    protected static String nl;
+	protected static String nl;
 
-    public static synchronized SummaryAndDescriptionGeneration create(String lineSeparator) {
-        nl = lineSeparator;
-        SummaryAndDescriptionGeneration result = new SummaryAndDescriptionGeneration();
-        nl = null;
-        return result;
-    }
+	public static synchronized SummaryAndDescriptionGeneration create(String lineSeparator) {
+		nl = lineSeparator;
+		SummaryAndDescriptionGeneration result = new SummaryAndDescriptionGeneration();
+		nl = null;
+		return result;
+	}
 
-    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "<em style=\"margin-top:5px;\">";
+	protected final String TEXT_2 = "</em>";
+	protected final String TEXT_3 = NL + "<p>";
+	protected final String TEXT_4 = NL;
+	protected final String TEXT_5 = NL + "No description.";
+	protected final String TEXT_6 = NL + "</p>";
 
-    protected final String TEXT_1 = "<em style=\"margin-top:5px;\">";
+	public SummaryAndDescriptionGeneration() {
+		//Here is the constructor
+		StringBuffer stringBuffer = new StringBuffer();
 
-    protected final String TEXT_2 = "</em>";
+		// add initialisation of the pattern variables (declaration has been already done).
 
-    protected final String TEXT_3 = NL + "<p>";
+	}
 
-    protected final String TEXT_4 = NL;
+	public String generate(Object argument) throws Exception {
+		final StringBuffer stringBuffer = new StringBuffer();
 
-    protected final String TEXT_5 = NL + "No description.";
+		InternalPatternContext ctx = (InternalPatternContext) argument;
+		Map<String, String> queryCtx = null;
+		IQuery.ParameterDescription paramDesc = null;
+		Node.Container currentNode = ctx.getNode();
 
-    protected final String TEXT_6 = NL + "</p>";
+		List<Object> elementList = null;
+		//this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-    public SummaryAndDescriptionGeneration() {
-        //Here is the constructor
-        StringBuffer stringBuffer = new StringBuffer();
+		for (Object elementParameter : elementList) {
 
-        // add initialisation of the pattern variables (declaration has been already done).
+			this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
 
-    }
+			if (preCondition(ctx)) {
+				ctx.setNode(new Node.Container(currentNode, getClass()));
+				orchestration(ctx);
+			}
 
-    public String generate(Object argument) throws Exception {
-        final StringBuffer stringBuffer = new StringBuffer();
+		}
+		ctx.setNode(currentNode);
+		if (ctx.useReporter()) {
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+		}
 
-        InternalPatternContext ctx = (InternalPatternContext) argument;
-        Map<String, String> queryCtx = null;
-        IQuery.ParameterDescription paramDesc = null;
-        Node.Container currentNode = ctx.getNode();
+		stringBuffer.append(TEXT_4);
+		stringBuffer.append(TEXT_4);
+		return stringBuffer.toString();
+	}
 
-        List<Object> elementList = null;
-        //this pattern can only be called by another (i.e. it's not an entry point in execution)
+	public String orchestration(PatternContext ctx) throws Exception {
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-        for (Object elementParameter : elementList) {
+		method_body(new StringBuffer(), ictx);
 
-            this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
+		if (ictx.useReporter()) {
+			Map<String, Object> parameterValues = new HashMap<String, Object>();
+			parameterValues.put("element", this.element);
+			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+		}
+		return null;
+	}
 
-            if (preCondition(ctx)) {
-                ctx.setNode(new Node.Container(currentNode, getClass()));
-                orchestration(ctx);
-            }
+	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-        }
-        ctx.setNode(currentNode);
-        if (ctx.useReporter()) {
-            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-        }
+	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+		this.element = object;
+	}
 
-        stringBuffer.append(TEXT_4);
-        stringBuffer.append(TEXT_4);
-        return stringBuffer.toString();
-    }
+	public Map<String, Object> getParameters() {
+		final Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("element", this.element);
+		return parameters;
+	}
 
-    public String orchestration(PatternContext ctx) throws Exception {
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
+	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-        method_body(new StringBuffer(), ictx);
+		String projectName = ctx.getValue("projectName").toString();
+		String outputFolder = ctx.getValue("outputFolder").toString();
+		if (element.getSummary() != null && element.getSummary().length() > 0) {
+			stringBuffer.append(TEXT_1);
+			stringBuffer.append(element.getSummary());
+			stringBuffer.append(TEXT_2);
+		}
+		stringBuffer.append(TEXT_3);
+		if (element.getDescription() != null && element.getDescription().length() > 0) {
+			stringBuffer.append(TEXT_4);
+			stringBuffer.append(TEXT_4);
+			stringBuffer.append(
+					StringUtil.transformAREFString(element, element.getDescription(), projectName, outputFolder));
+		} else {
+			stringBuffer.append(TEXT_5);
+		}
+		stringBuffer.append(TEXT_6);
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+	}
 
-        if (ictx.useReporter()) {
-            Map<String, Object> parameterValues = new HashMap<String, Object>();
-            parameterValues.put("element", this.element);
-            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-        }
-        return null;
-    }
-
-    protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
-
-    public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-        this.element = object;
-    }
-
-    public Map<String, Object> getParameters() {
-        final Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("element", this.element);
-        return parameters;
-    }
-
-    protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
-
-        String projectName = ctx.getValue("projectName").toString();
-        String outputFolder = ctx.getValue("outputFolder").toString();
-        if (element.getSummary() != null && element.getSummary().length() > 0) {
-            stringBuffer.append(TEXT_1);
-            stringBuffer.append(element.getSummary());
-            stringBuffer.append(TEXT_2);
-        }
-        stringBuffer.append(TEXT_3);
-        if (element.getDescription() != null && element.getDescription().length() > 0) {
-            stringBuffer.append(TEXT_4);
-            stringBuffer.append(TEXT_4);
-            stringBuffer.append(StringUtil.transformAREFString(element, element.getDescription(), projectName, outputFolder));
-        } else {
-            stringBuffer.append(TEXT_5);
-        }
-        stringBuffer.append(TEXT_6);
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
-    }
-
-    public boolean preCondition(PatternContext ctx) throws Exception {
-        return true;
-    }
+	public boolean preCondition(PatternContext ctx) throws Exception {
+		return true;
+	}
 }

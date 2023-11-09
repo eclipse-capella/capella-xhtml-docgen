@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.3.202110291409
+//Generated with EGF 1.6.4.202309201142
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -11,121 +11,119 @@ import org.polarsys.capella.docgen.util.StringUtil;
 import org.polarsys.capella.docgen.util.DataValuePkgService;
 
 public class DataValueContainerPkg extends org.polarsys.capella.docgen.content.packageDocGen {
-    protected static String nl;
+	protected static String nl;
 
-    public static synchronized DataValueContainerPkg create(String lineSeparator) {
-        nl = lineSeparator;
-        DataValueContainerPkg result = new DataValueContainerPkg();
-        nl = null;
-        return result;
-    }
+	public static synchronized DataValueContainerPkg create(String lineSeparator) {
+		nl = lineSeparator;
+		DataValueContainerPkg result = new DataValueContainerPkg();
+		nl = null;
+		return result;
+	}
 
-    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "";
+	protected final String TEXT_2 = NL + "<div title=\"Data Values\">";
+	protected final String TEXT_3 = NL;
+	protected final String TEXT_4 = NL + "</div>";
 
-    protected final String TEXT_1 = "";
+	public DataValueContainerPkg() {
+		//Here is the constructor
+		StringBuffer stringBuffer = new StringBuffer();
 
-    protected final String TEXT_2 = NL + "<div title=\"Data Values\">";
+		// add initialisation of the pattern variables (declaration has been already done).
 
-    protected final String TEXT_3 = NL;
+	}
 
-    protected final String TEXT_4 = NL + "</div>";
+	public String generate(Object argument) throws Exception {
+		final StringBuffer stringBuffer = new StringBuffer();
 
-    public DataValueContainerPkg() {
-        //Here is the constructor
-        StringBuffer stringBuffer = new StringBuffer();
+		InternalPatternContext ctx = (InternalPatternContext) argument;
+		Map<String, String> queryCtx = null;
+		IQuery.ParameterDescription paramDesc = null;
+		Node.Container currentNode = ctx.getNode();
 
-        // add initialisation of the pattern variables (declaration has been already done).
+		List<Object> parameterList = null;
+		//this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-    }
+		for (Object parameterParameter : parameterList) {
 
-    public String generate(Object argument) throws Exception {
-        final StringBuffer stringBuffer = new StringBuffer();
+			this.parameter = (org.polarsys.capella.core.data.capellacore.Structure) parameterParameter;
 
-        InternalPatternContext ctx = (InternalPatternContext) argument;
-        Map<String, String> queryCtx = null;
-        IQuery.ParameterDescription paramDesc = null;
-        Node.Container currentNode = ctx.getNode();
+			if (preCondition(ctx)) {
+				ctx.setNode(new Node.Container(currentNode, getClass()));
+				orchestration(ctx);
+			}
 
-        List<Object> parameterList = null;
-        //this pattern can only be called by another (i.e. it's not an entry point in execution)
+		}
+		ctx.setNode(currentNode);
+		if (ctx.useReporter()) {
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+		}
 
-        for (Object parameterParameter : parameterList) {
+		stringBuffer.append(TEXT_3);
+		stringBuffer.append(TEXT_3);
+		return stringBuffer.toString();
+	}
 
-            this.parameter = (org.polarsys.capella.core.data.capellacore.Structure) parameterParameter;
+	public String orchestration(PatternContext ctx) throws Exception {
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-            if (preCondition(ctx)) {
-                ctx.setNode(new Node.Container(currentNode, getClass()));
-                orchestration(ctx);
-            }
+		super.orchestration(new SuperOrchestrationContext(ictx));
 
-        }
-        ctx.setNode(currentNode);
-        if (ctx.useReporter()) {
-            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-        }
+		if (ictx.useReporter()) {
+			Map<String, Object> parameterValues = new HashMap<String, Object>();
+			parameterValues.put("parameter", this.parameter);
+			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+		}
+		return null;
+	}
 
-        stringBuffer.append(TEXT_3);
-        stringBuffer.append(TEXT_3);
-        return stringBuffer.toString();
-    }
+	public Map<String, Object> getParameters() {
+		final Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("parameter", this.parameter);
+		return parameters;
+	}
 
-    public String orchestration(PatternContext ctx) throws Exception {
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
+	protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-        super.orchestration(new SuperOrchestrationContext(ictx));
+		super.method_content(new StringBuffer(), ctx);
+		stringBuffer.append(TEXT_1);
 
-        if (ictx.useReporter()) {
-            Map<String, Object> parameterValues = new HashMap<String, Object>();
-            parameterValues.put("parameter", this.parameter);
-            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-        }
-        return null;
-    }
+		String projectName = ctx.getValue("projectName").toString();
+		String outputFolder = ctx.getValue("outputFolder").toString();
 
-    public Map<String, Object> getParameters() {
-        final Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("parameter", this.parameter);
-        return parameters;
-    }
+		if (DataValuePkgService.getDataValues(element, projectName, outputFolder).size() >= 1) {
+			stringBuffer.append(TEXT_2);
+			String dataValue = "Data Values";
+			stringBuffer.append(TEXT_3);
+			{
+				//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,dataValue:property"%>
 
-    protected void method_content(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+				InternalPatternContext ictx = (InternalPatternContext) ctx;
+				new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+				stringBuffer.setLength(0);
 
-        super.method_content(new StringBuffer(), ctx);
-        stringBuffer.append(TEXT_1);
+				final Map<String, Object> callParameters = new HashMap<String, Object>();
+				callParameters.put("eObject", element);
+				callParameters.put("property", dataValue);
+				CallHelper.executeWithParameterInjection(
+						"platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
+						new ExecutionContext((InternalPatternContext) ctx), callParameters);
+				stringBuffer.setLength(0);
+			}
 
-        String projectName = ctx.getValue("projectName").toString();
-        String outputFolder = ctx.getValue("outputFolder").toString();
+			stringBuffer.append(TEXT_3);
+			stringBuffer.append(StringUtil
+					.stringListToBulette(DataValuePkgService.getDataValues(element, projectName, outputFolder)));
+			stringBuffer.append(TEXT_4);
+		}
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
+	}
 
-        if (DataValuePkgService.getDataValues(element, projectName, outputFolder).size() >= 1) {
-            stringBuffer.append(TEXT_2);
-            String dataValue = "Data Values";
-            stringBuffer.append(TEXT_3);
-            {
-                //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.generic.ElementGenerateByPropterty" args="element:eObject,dataValue:property"%>
-
-                InternalPatternContext ictx = (InternalPatternContext) ctx;
-                new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
-                stringBuffer.setLength(0);
-
-                final Map<String, Object> callParameters = new HashMap<String, Object>();
-                callParameters.put("eObject", element);
-                callParameters.put("property", dataValue);
-                CallHelper.executeWithParameterInjection("platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#_cWGxMONUEd-euK0PeLuaMA",
-                        new ExecutionContext((InternalPatternContext) ctx), callParameters);
-                stringBuffer.setLength(0);
-            }
-
-            stringBuffer.append(TEXT_3);
-            stringBuffer.append(StringUtil.stringListToBulette(DataValuePkgService.getDataValues(element, projectName, outputFolder)));
-            stringBuffer.append(TEXT_4);
-        }
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "content", stringBuffer.toString());
-    }
-
-    public boolean preCondition(PatternContext ctx) throws Exception {
-        return (parameter instanceof org.polarsys.capella.core.data.information.DataPkg);
-    }
+	public boolean preCondition(PatternContext ctx) throws Exception {
+		return (parameter instanceof org.polarsys.capella.core.data.information.DataPkg);
+	}
 }
