@@ -1,4 +1,4 @@
-//Generated with EGF 1.6.3.202110291409
+//Generated with EGF 1.6.4.202309201142
 package org.polarsys.capella.docgen.content;
 
 import org.eclipse.egf.common.helper.*;
@@ -13,189 +13,189 @@ import org.polarsys.capella.docgen.util.CapellaElementService;
 import org.polarsys.capella.docgen.util.StringUtil;
 
 public class CapellaScenarioDocGen extends org.polarsys.capella.docgen.foundations.NamedElementDocGen {
-    protected static String nl;
+	protected static String nl;
 
-    public static synchronized CapellaScenarioDocGen create(String lineSeparator) {
-        nl = lineSeparator;
-        CapellaScenarioDocGen result = new CapellaScenarioDocGen();
-        nl = null;
-        return result;
-    }
+	public static synchronized CapellaScenarioDocGen create(String lineSeparator) {
+		nl = lineSeparator;
+		CapellaScenarioDocGen result = new CapellaScenarioDocGen();
+		nl = null;
+		return result;
+	}
 
-    public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+	protected final String TEXT_1 = "<h2>Realized Elements</h2>" + NL;
+	protected final String TEXT_2 = NL;
+	protected final String TEXT_3 = NL + "<h2>Realizing Elements </h2>" + NL;
+	protected final String TEXT_4 = NL + NL + "<h2>Sequence Messages</h2>" + NL + "" + NL
+			+ "<table max-width=\"screen.width\">" + NL + "   <thead> " + NL + "       <tr>" + NL
+			+ "           <th>Invoked Exchange</th>" + NL + "           <th>Source element of the Exchange</th>" + NL
+			+ "           <th>Target element of the Exchange</th>" + NL
+			+ "           <th>Description of the Sequence Message <br /> <i>(and not the one of the invoked exchange)</i></th>"
+			+ NL + "       </tr>" + NL + "   </thead>" + NL + "   <tbody>" + NL;
+	protected final String TEXT_5 = NL + "\t\t<tr>" + NL + "           <td>";
+	protected final String TEXT_6 = "</td>" + NL + "           <td>";
+	protected final String TEXT_7 = "</td>" + NL + "       </tr>";
+	protected final String TEXT_8 = NL + "   </tbody>" + NL + "</table>";
+	protected final String TEXT_9 = NL + "</div>";
 
-    protected final String TEXT_1 = "<h2>Realized Elements</h2>" + NL;
+	public CapellaScenarioDocGen() {
+		//Here is the constructor
+		StringBuffer stringBuffer = new StringBuffer();
 
-    protected final String TEXT_2 = NL;
+		// add initialisation of the pattern variables (declaration has been already done).
 
-    protected final String TEXT_3 = NL + "<h2>Realizing Elements </h2>" + NL;
+	}
 
-    protected final String TEXT_4 = NL + NL + "<h2>Sequence Messages</h2>" + NL + "" + NL + "<table max-width=\"screen.width\">" + NL + "   <thead> " + NL + "       <tr>" + NL
-            + "           <th>Invoked Exchange</th>" + NL + "           <th>Source element of the Exchange</th>" + NL + "           <th>Target element of the Exchange</th>" + NL
-            + "           <th>Description of the Sequence Message <br /> <i>(and not the one of the invoked exchange)</i></th>" + NL + "       </tr>" + NL + "   </thead>" + NL + "   <tbody>" + NL;
+	public String generate(Object argument) throws Exception {
+		final StringBuffer stringBuffer = new StringBuffer();
 
-    protected final String TEXT_5 = NL + "\t\t<tr>" + NL + "           <td>";
+		InternalPatternContext ctx = (InternalPatternContext) argument;
+		Map<String, String> queryCtx = null;
+		IQuery.ParameterDescription paramDesc = null;
+		Node.Container currentNode = ctx.getNode();
 
-    protected final String TEXT_6 = "</td>" + NL + "           <td>";
+		List<Object> parameterList = null;
+		//this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-    protected final String TEXT_7 = "</td>" + NL + "       </tr>";
+		for (Object parameterParameter : parameterList) {
 
-    protected final String TEXT_8 = NL + "   </tbody>" + NL + "</table>";
+			this.parameter = (org.polarsys.capella.core.data.interaction.Scenario) parameterParameter;
 
-    protected final String TEXT_9 = NL + "</div>";
+			if (preCondition(ctx)) {
+				ctx.setNode(new Node.Container(currentNode, getClass()));
+				orchestration(ctx);
+			}
 
-    public CapellaScenarioDocGen() {
-        //Here is the constructor
-        StringBuffer stringBuffer = new StringBuffer();
+		}
+		ctx.setNode(currentNode);
+		if (ctx.useReporter()) {
+			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+		}
 
-        // add initialisation of the pattern variables (declaration has been already done).
+		stringBuffer.append(TEXT_2);
+		stringBuffer.append(TEXT_2);
+		return stringBuffer.toString();
+	}
 
-    }
+	public String orchestration(PatternContext ctx) throws Exception {
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-    public String generate(Object argument) throws Exception {
-        final StringBuffer stringBuffer = new StringBuffer();
+		super.orchestration(new SuperOrchestrationContext(ictx));
 
-        InternalPatternContext ctx = (InternalPatternContext) argument;
-        Map<String, String> queryCtx = null;
-        IQuery.ParameterDescription paramDesc = null;
-        Node.Container currentNode = ctx.getNode();
+		if (ictx.useReporter()) {
+			Map<String, Object> parameterValues = new HashMap<String, Object>();
+			parameterValues.put("parameter", this.parameter);
+			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+		}
+		return null;
+	}
 
-        List<Object> parameterList = null;
-        //this pattern can only be called by another (i.e. it's not an entry point in execution)
+	protected org.polarsys.capella.core.data.interaction.Scenario parameter = null;
 
-        for (Object parameterParameter : parameterList) {
+	public void set_parameter(org.polarsys.capella.core.data.interaction.Scenario object) {
+		this.parameter = object;
+	}
 
-            this.parameter = (org.polarsys.capella.core.data.interaction.Scenario) parameterParameter;
+	public Map<String, Object> getParameters() {
+		final Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("parameter", this.parameter);
+		return parameters;
+	}
 
-            if (preCondition(ctx)) {
-                ctx.setNode(new Node.Container(currentNode, getClass()));
-                orchestration(ctx);
-            }
+	protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx)
+			throws Exception {
 
-        }
-        ctx.setNode(currentNode);
-        if (ctx.useReporter()) {
-            ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-        }
+		element = parameter;
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
+	}
 
-        stringBuffer.append(TEXT_2);
-        stringBuffer.append(TEXT_2);
-        return stringBuffer.toString();
-    }
+	protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-    public String orchestration(PatternContext ctx) throws Exception {
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
+		// Realized Elements 
 
-        super.orchestration(new SuperOrchestrationContext(ictx));
+		String outputFolder = ctx.getValue("outputFolder").toString();
+		String projectName = ctx.getValue("projectName").toString();
+		Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName,
+				outputFolder);
+		if (allocations.size() > 0) {
+			stringBuffer.append(TEXT_1);
+			stringBuffer.append(TEXT_2);
+			stringBuffer.append(StringUtil.stringListToBulette(allocations));
+			stringBuffer.append(TEXT_2);
+		}
+		stringBuffer.append(TEXT_2);
+		// Realizing Elements 
 
-        if (ictx.useReporter()) {
-            Map<String, Object> parameterValues = new HashMap<String, Object>();
-            parameterValues.put("parameter", this.parameter);
-            String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-            String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-            ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-        }
-        return null;
-    }
+		//String outputFolder = ctx.getValue("outputFolder").toString();
+		//String projectName = ctx.getValue("projectName").toString();
+		Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName,
+				outputFolder);
+		if (allocations2.size() > 0) {
+			stringBuffer.append(TEXT_3);
+			stringBuffer.append(TEXT_2);
+			stringBuffer.append(StringUtil.stringListToBulette(allocations2));
+			stringBuffer.append(TEXT_2);
+		}
+		stringBuffer.append(TEXT_2);
+		// owned diagrams
+		stringBuffer.append(TEXT_2);
+		{
+			//<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
 
-    protected org.polarsys.capella.core.data.interaction.Scenario parameter = null;
+			InternalPatternContext ictx = (InternalPatternContext) ctx;
+			new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
+			stringBuffer.setLength(0);
 
-    public void set_parameter(org.polarsys.capella.core.data.interaction.Scenario object) {
-        this.parameter = object;
-    }
+			final Map<String, Object> callParameters = new HashMap<String, Object>();
+			callParameters.put("element", element);
+			CallHelper.executeWithParameterInjection(
+					"platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
+					new ExecutionContext((InternalPatternContext) ctx), callParameters);
+			stringBuffer.setLength(0);
+		}
 
-    public Map<String, Object> getParameters() {
-        final Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("parameter", this.parameter);
-        return parameters;
-    }
+		stringBuffer.append(TEXT_2);
+		// Trier les messages
+		List<SequenceMessage> orderedMessagesList = ((Scenario) parameter).getOwnedMessages();
 
-    protected void method_setCapellaContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+		stringBuffer.append(TEXT_2);
+		if (orderedMessagesList.size() > 0) {
+			stringBuffer.append(TEXT_4);
+			for (SequenceMessage sMessage : orderedMessagesList) {
 
-        element = parameter;
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "setCapellaContext", stringBuffer.toString());
-    }
+				String source = "";
+				String target = "";
 
-    protected void method_endContent(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+				if (sMessage.getSendingEnd() != null && sMessage.getSendingEnd().getCovered() != null
+						&& sMessage.getSendingEnd().getCovered().getRepresentedInstance() != null)
+					source = sMessage.getSendingEnd().getCovered().getRepresentedInstance().getName();
 
-        // Realized Elements 
+				if (sMessage.getReceivingEnd() != null && sMessage.getReceivingEnd().getCovered() != null
+						&& sMessage.getReceivingEnd().getCovered().getRepresentedInstance() != null)
+					target = sMessage.getReceivingEnd().getCovered().getRepresentedInstance().getName();
 
-        String outputFolder = ctx.getValue("outputFolder").toString();
-        String projectName = ctx.getValue("projectName").toString();
-        Collection<String> allocations = CapellaElementService.getOutGoingAllocation(element, projectName, outputFolder);
-        if (allocations.size() > 0) {
-            stringBuffer.append(TEXT_1);
-            stringBuffer.append(TEXT_2);
-            stringBuffer.append(StringUtil.stringListToBulette(allocations));
-            stringBuffer.append(TEXT_2);
-        }
-        stringBuffer.append(TEXT_2);
-        // Realizing Elements 
-
-        //String outputFolder = ctx.getValue("outputFolder").toString();
-        //String projectName = ctx.getValue("projectName").toString();
-        Collection<String> allocations2 = CapellaElementService.getIncomingAllocation(element, projectName, outputFolder);
-        if (allocations2.size() > 0) {
-            stringBuffer.append(TEXT_3);
-            stringBuffer.append(TEXT_2);
-            stringBuffer.append(StringUtil.stringListToBulette(allocations2));
-            stringBuffer.append(TEXT_2);
-        }
-        stringBuffer.append(TEXT_2);
-        // owned diagrams
-        stringBuffer.append(TEXT_2);
-        {
-            //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.foundations.DiagramsGeneration" args="element:element"%>
-
-            InternalPatternContext ictx = (InternalPatternContext) ctx;
-            new Node.DataLeaf(ictx.getNode(), getClass(), null, stringBuffer.toString());
-            stringBuffer.setLength(0);
-
-            final Map<String, Object> callParameters = new HashMap<String, Object>();
-            callParameters.put("element", element);
-            CallHelper.executeWithParameterInjection("platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#_PVePETXrEeCNvtb1bUM2fQ",
-                    new ExecutionContext((InternalPatternContext) ctx), callParameters);
-            stringBuffer.setLength(0);
-        }
-
-        stringBuffer.append(TEXT_2);
-        // Trier les messages
-        List<SequenceMessage> orderedMessagesList = ((Scenario) parameter).getOwnedMessages();
-
-        stringBuffer.append(TEXT_2);
-        if (orderedMessagesList.size() > 0) {
-            stringBuffer.append(TEXT_4);
-            for (SequenceMessage sMessage : orderedMessagesList) {
-
-                String source = "";
-                String target = "";
-
-                if (sMessage.getSendingEnd() != null && sMessage.getSendingEnd().getCovered() != null && sMessage.getSendingEnd().getCovered().getRepresentedInstance() != null)
-                    source = sMessage.getSendingEnd().getCovered().getRepresentedInstance().getName();
-
-                if (sMessage.getReceivingEnd() != null && sMessage.getReceivingEnd().getCovered() != null && sMessage.getReceivingEnd().getCovered().getRepresentedInstance() != null)
-                    target = sMessage.getReceivingEnd().getCovered().getRepresentedInstance().getName();
-
-                String name = sMessage.getName();
-                String description = sMessage.getDescription();
-                description = StringUtil.transformAREFString(sMessage, description, projectName, outputFolder);
-                if (description == null || description.trim().length() == 0)
-                    description = "No description";
-                stringBuffer.append(TEXT_5);
-                stringBuffer.append(name);
-                stringBuffer.append(TEXT_6);
-                stringBuffer.append(source);
-                stringBuffer.append(TEXT_6);
-                stringBuffer.append(target);
-                stringBuffer.append(TEXT_6);
-                stringBuffer.append(description);
-                stringBuffer.append(TEXT_7);
-            }
-            stringBuffer.append(TEXT_8);
-        }
-        stringBuffer.append(TEXT_9);
-        InternalPatternContext ictx = (InternalPatternContext) ctx;
-        new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
-    }
+				String name = sMessage.getName();
+				String description = sMessage.getDescription();
+				description = StringUtil.transformAREFString(sMessage, description, projectName, outputFolder);
+				if (description == null || description.trim().length() == 0)
+					description = "No description";
+				stringBuffer.append(TEXT_5);
+				stringBuffer.append(name);
+				stringBuffer.append(TEXT_6);
+				stringBuffer.append(source);
+				stringBuffer.append(TEXT_6);
+				stringBuffer.append(target);
+				stringBuffer.append(TEXT_6);
+				stringBuffer.append(description);
+				stringBuffer.append(TEXT_7);
+			}
+			stringBuffer.append(TEXT_8);
+		}
+		stringBuffer.append(TEXT_9);
+		InternalPatternContext ictx = (InternalPatternContext) ctx;
+		new Node.DataLeaf(ictx.getNode(), getClass(), "endContent", stringBuffer.toString());
+	}
 }
