@@ -2,6 +2,8 @@
 
 We try here to list known work extending Capella's documentation generation.
 
+* [https://github.com/eclipse/capella-basic-vp/tree/master/plugins/org.polarsys.capella.basic.requirement.docgen Basic-Requirements viewpoint].
+* Capella's [https://github.com/eclipse/capella-cybersecurity/tree/master/plugins/org.polarsys.capella.cybersecurity.docgen Cybersecurity viewpoint].
 * Capella's [https://github.com/eclipse/capella-requirements-vp/tree/master/plugins/org.polarsys.kitalpha.vp.requirements.docgen Requirements viewpoint].
 
 == Contributing to this list ==
