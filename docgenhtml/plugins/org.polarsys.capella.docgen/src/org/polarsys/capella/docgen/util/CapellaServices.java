@@ -128,10 +128,10 @@ public class CapellaServices {
 	public static final String CHEV_OPEN = "&lt";
 	public static final String CHEV_CLOSE = "&gt";
 
-	protected static final String HYPERLINK_OPEN = "<a href=\"";
-	protected static final String HYPERLINK_SEPARATOR = "/";
-	protected static final String HYPERLINK_COMPLETE = "\">";
-	protected static final String HYPERLINK_CLOSE = "</a>";
+  public static final String HYPERLINK_OPEN = "<a href=\"";
+  public static final String HYPERLINK_SEPARATOR = "/";
+  public static final String HYPERLINK_COMPLETE = "\">";
+  public static final String HYPERLINK_CLOSE = "</a>";
 	private static final Object PATH_OPEN = "../";
 	private static final Object PATH_COMPLETE = ".html";
 
