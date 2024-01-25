@@ -18,6 +18,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.sirius.viewpoint.DRepresentationElement;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.polarsys.capella.common.ui.toolkit.browser.content.provider.wrapper.TechnicalCategoryWrapper;
 import org.polarsys.capella.common.ui.toolkit.browser.label.provider.factory.AbstractLabelProviderFactory;
 import org.polarsys.capella.core.platform.sirius.ui.navigator.viewer.CapellaNavigatorLabelProvider;
 import org.polarsys.capella.docgen.configuration.ui.utils.ConfigurationUtils;
@@ -91,7 +92,7 @@ public class DetailsLabelProvider extends CapellaNavigatorLabelProvider implemen
 	public Image getImage(Object object) {
 		if (object instanceof DRepresentationElement) {
 			return referencedCapellaNavigatorLabelProvider.getImage(((DRepresentationElement) object).getTarget());
-		}
+    }
 		return referencedCapellaNavigatorLabelProvider.getImage(object);
 	}
 
@@ -104,6 +105,8 @@ public class DetailsLabelProvider extends CapellaNavigatorLabelProvider implemen
 	public String getText(Object object) {
 		if (object instanceof DRepresentationElement) {
 			return referencedCapellaNavigatorLabelProvider.getText(((DRepresentationElement) object).getTarget());
+		} else if (object instanceof RootCategoryWrapper || object instanceof TechnicalCategoryWrapper) {
+			return object.toString();
 		}
 		return referencedCapellaNavigatorLabelProvider.getText(object);
 	}
