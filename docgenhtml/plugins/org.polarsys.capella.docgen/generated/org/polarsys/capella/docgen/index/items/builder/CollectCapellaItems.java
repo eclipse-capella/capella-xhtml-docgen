@@ -15,132 +15,131 @@ import org.polarsys.kitalpha.doc.gen.business.core.util.DefaultFileNameService;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 
 public class CollectCapellaItems {
-	protected static String nl;
+  protected static String nl;
 
-	public static synchronized CollectCapellaItems create(String lineSeparator) {
-		nl = lineSeparator;
-		CollectCapellaItems result = new CollectCapellaItems();
-		nl = null;
-		return result;
-	}
+  public static synchronized CollectCapellaItems create(String lineSeparator) {
+    nl = lineSeparator;
+    CollectCapellaItems result = new CollectCapellaItems();
+    nl = null;
+    return result;
+  }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "";
-	protected final String TEXT_2 = NL;
+  public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+  protected final String TEXT_1 = "";
+  protected final String TEXT_2 = NL;
 
-	public CollectCapellaItems() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+  public CollectCapellaItems() {
+    //Here is the constructor
+    StringBuffer stringBuffer = new StringBuffer();
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    // add initialisation of the pattern variables (declaration has been already done).
 
-	}
+  }
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+  public String generate(Object argument) throws Exception {
+    final StringBuffer stringBuffer = new StringBuffer();
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    InternalPatternContext ctx = (InternalPatternContext) argument;
+    Map<String, String> queryCtx = null;
+    IQuery.ParameterDescription paramDesc = null;
+    Node.Container currentNode = ctx.getNode();
 
-		List<Object> parameterList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    List<Object> parameterList = null;
+    //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-		for (Object parameterParameter : parameterList) {
+    for (Object parameterParameter : parameterList) {
 
-			this.parameter = (org.eclipse.emf.ecore.EObject) parameterParameter;
+      this.parameter = (org.eclipse.emf.ecore.EObject) parameterParameter;
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+      if (preCondition(ctx)) {
+        ctx.setNode(new Node.Container(currentNode, getClass()));
+        orchestration(ctx);
+      }
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    }
+    ctx.setNode(currentNode);
+    if (ctx.useReporter()) {
+      ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+    }
 
-		stringBuffer.append(TEXT_1);
-		stringBuffer.append(TEXT_2);
-		return stringBuffer.toString();
-	}
+    stringBuffer.append(TEXT_1);
+    stringBuffer.append(TEXT_2);
+    return stringBuffer.toString();
+  }
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+  public String orchestration(PatternContext ctx) throws Exception {
+    InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-		method_setContext(new StringBuffer(), ictx);
+    method_setContext(new StringBuffer(), ictx);
 
-		method_body(new StringBuffer(), ictx);
+    method_body(new StringBuffer(), ictx);
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("parameter", this.parameter);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+    if (ictx.useReporter()) {
+      Map<String, Object> parameterValues = new HashMap<String, Object>();
+      parameterValues.put("parameter", this.parameter);
+      String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+      String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+      ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+    }
+    return null;
+  }
 
-	protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
+  protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
 
-	public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
-		this.fileNameService = object;
-	}
+  public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
+    this.fileNameService = object;
+  }
 
-	protected org.eclipse.emf.ecore.EObject parameter = null;
+  protected org.eclipse.emf.ecore.EObject parameter = null;
 
-	public void set_parameter(org.eclipse.emf.ecore.EObject object) {
-		this.parameter = object;
-	}
+  public void set_parameter(org.eclipse.emf.ecore.EObject object) {
+    this.parameter = object;
+  }
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("parameter", this.parameter);
-		return parameters;
-	}
+  public Map<String, Object> getParameters() {
+    final Map<String, Object> parameters = new HashMap<String, Object>();
+    parameters.put("parameter", this.parameter);
+    return parameters;
+  }
 
-	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+  protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		fileNameService = DocGenHtmlCapellaUtil.SERVICE;
+    fileNameService = DocGenHtmlCapellaUtil.SERVICE;
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
-	}
+    InternalPatternContext ictx = (InternalPatternContext) ctx;
+    new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
+  }
 
-	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+  protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		List<IConceptsHelper> conceptsHelperList = ExtensionService.INSTANCE.getConceptsHelpersList();
+    List<IConceptsHelper> conceptsHelperList = ExtensionService.INSTANCE.getConceptsHelpersList();
 
-		String projectName = (String) ctx.getValue("projectName");
-		String outputFolder = (String) ctx.getValue("outputFolder");
+    String projectName = (String) ctx.getValue("projectName");
+    String outputFolder = (String) ctx.getValue("outputFolder");
 
-		for (IConceptsHelper iConceptsHelper : conceptsHelperList) {
-			if (iConceptsHelper.accept(parameter)) {
-				String conceptLabel = iConceptsHelper.getConceptLabel(parameter);
-				String linkTagTowardPageElement = CapellaServices.getIndexHyperlinkFromElement(parameter);
-				String iconTagOfElement = CapellaServices.getIndexImageLinkFromElement(parameter, projectName,
-						outputFolder);
-				String fileName = DocGenHtmlCapellaUtil.SERVICE.getFileName(parameter);
-				IndexItem item = new IndexItem(conceptLabel, parameter.eClass().getName(), iconTagOfElement,
-						linkTagTowardPageElement, fileName);
-				// Check if the default indexer have already indexed the element
-				String defaultFileName = DefaultFileNameService.INSTANCE.getFileName(parameter);
-				if (IndexerService.INSTANCE.getElementsToIndexItems().get(defaultFileName) != null) {
-					IndexerService.INSTANCE.getElementsToIndexItems().remove(defaultFileName);
-				}
-				IndexerService.INSTANCE.getElementsToIndexItems().put(fileName, item);
-				break;
-			}
-		}
+    for (IConceptsHelper iConceptsHelper : conceptsHelperList) {
+      if (iConceptsHelper.accept(parameter)) {
+        String conceptLabel = iConceptsHelper.getConceptLabel(parameter);
+        String linkTagTowardPageElement = CapellaServices.getIndexHyperlinkFromElement(parameter);
+        String iconTagOfElement = CapellaServices.getIndexImageLinkFromElement(parameter, projectName, outputFolder);
+        String fileName = DocGenHtmlCapellaUtil.SERVICE.getFileName(parameter);
+        IndexItem item = new IndexItem(conceptLabel, parameter.eClass().getName(), iconTagOfElement,
+            linkTagTowardPageElement, fileName);
+        // Check if the default indexer have already indexed the element
+        String defaultFileName = DefaultFileNameService.INSTANCE.getFileName(parameter);
+        if (IndexerService.INSTANCE.getElementsToIndexItems().get(defaultFileName) != null) {
+          IndexerService.INSTANCE.getElementsToIndexItems().remove(defaultFileName);
+        }
+        IndexerService.INSTANCE.getElementsToIndexItems().put(fileName, item);
+        break;
+      }
+    }
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
-	}
+    InternalPatternContext ictx = (InternalPatternContext) ctx;
+    new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+  }
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return parameter instanceof ModelElement;
-	}
+  public boolean preCondition(PatternContext ctx) throws Exception {
+    return parameter instanceof ModelElement;
+  }
 }
