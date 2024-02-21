@@ -33,153 +33,153 @@ import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.preference.helper.DocgenDiagramPreferencesHelper;
 
 public class InterestedDiagrmsGeneration {
-	protected static String nl;
+  protected static String nl;
 
-	public static synchronized InterestedDiagrmsGeneration create(String lineSeparator) {
-		nl = lineSeparator;
-		InterestedDiagrmsGeneration result = new InterestedDiagrmsGeneration();
-		nl = null;
-		return result;
-	}
+  public static synchronized InterestedDiagrmsGeneration create(String lineSeparator) {
+    nl = lineSeparator;
+    InterestedDiagrmsGeneration result = new InterestedDiagrmsGeneration();
+    nl = null;
+    return result;
+  }
 
-	public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-	protected final String TEXT_1 = "";
-	protected final String TEXT_2 = NL;
-	protected final String TEXT_3 = NL + "\t<h2>Diagrams interesting for \"";
-	protected final String TEXT_4 = "\"</h2>" + NL + "\t";
-	protected final String TEXT_5 = NL + "\t\t<div>" + NL + "\t\t\t";
-	protected final String TEXT_6 = NL + "\t\t\t<p class=\"diagram-name\" id=\"";
-	protected final String TEXT_7 = "\">";
-	protected final String TEXT_8 = "</p>" + NL + "\t\t\t<p class=\"diagram\">" + NL + "\t\t\t\t";
-	protected final String TEXT_9 = NL + "\t\t\t\t";
-	protected final String TEXT_10 = NL + "\t\t\t\t<br/>" + NL + "\t\t\t\t<br/>" + NL + "\t\t\t</p>" + NL + "\t\t</div>"
-			+ NL + "\t";
+  public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+  protected final String TEXT_1 = "";
+  protected final String TEXT_2 = NL;
+  protected final String TEXT_3 = NL + "\t<h2>Diagrams interesting for \"";
+  protected final String TEXT_4 = "\"</h2>" + NL + "\t";
+  protected final String TEXT_5 = NL + "\t\t<div>" + NL + "\t\t\t";
+  protected final String TEXT_6 = NL + "\t\t\t<p class=\"diagram-name\" id=\"";
+  protected final String TEXT_7 = "\">";
+  protected final String TEXT_8 = "</p>" + NL + "\t\t\t<p class=\"diagram\">" + NL + "\t\t\t\t";
+  protected final String TEXT_9 = NL + "\t\t\t\t";
+  protected final String TEXT_10 = NL + "\t\t\t\t<br/>" + NL + "\t\t\t\t<br/>" + NL + "\t\t\t</p>" + NL + "\t\t</div>"
+      + NL + "\t";
 
-	public InterestedDiagrmsGeneration() {
-		//Here is the constructor
-		StringBuffer stringBuffer = new StringBuffer();
+  public InterestedDiagrmsGeneration() {
+    //Here is the constructor
+    StringBuffer stringBuffer = new StringBuffer();
 
-		// add initialisation of the pattern variables (declaration has been already done).
+    // add initialisation of the pattern variables (declaration has been already done).
 
-	}
+  }
 
-	public String generate(Object argument) throws Exception {
-		final StringBuffer stringBuffer = new StringBuffer();
+  public String generate(Object argument) throws Exception {
+    final StringBuffer stringBuffer = new StringBuffer();
 
-		InternalPatternContext ctx = (InternalPatternContext) argument;
-		Map<String, String> queryCtx = null;
-		IQuery.ParameterDescription paramDesc = null;
-		Node.Container currentNode = ctx.getNode();
+    InternalPatternContext ctx = (InternalPatternContext) argument;
+    Map<String, String> queryCtx = null;
+    IQuery.ParameterDescription paramDesc = null;
+    Node.Container currentNode = ctx.getNode();
 
-		List<Object> elementList = null;
-		//this pattern can only be called by another (i.e. it's not an entry point in execution)
+    List<Object> elementList = null;
+    //this pattern can only be called by another (i.e. it's not an entry point in execution)
 
-		for (Object elementParameter : elementList) {
+    for (Object elementParameter : elementList) {
 
-			this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
+      this.element = (org.polarsys.capella.core.data.capellacore.CapellaElement) elementParameter;
 
-			if (preCondition(ctx)) {
-				ctx.setNode(new Node.Container(currentNode, getClass()));
-				orchestration(ctx);
-			}
+      if (preCondition(ctx)) {
+        ctx.setNode(new Node.Container(currentNode, getClass()));
+        orchestration(ctx);
+      }
 
-		}
-		ctx.setNode(currentNode);
-		if (ctx.useReporter()) {
-			ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
-		}
+    }
+    ctx.setNode(currentNode);
+    if (ctx.useReporter()) {
+      ctx.getReporter().executionFinished(OutputManager.computeExecutionOutput(ctx), ctx);
+    }
 
-		stringBuffer.append(TEXT_2);
-		stringBuffer.append(TEXT_2);
-		return stringBuffer.toString();
-	}
+    stringBuffer.append(TEXT_2);
+    stringBuffer.append(TEXT_2);
+    return stringBuffer.toString();
+  }
 
-	public String orchestration(PatternContext ctx) throws Exception {
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
+  public String orchestration(PatternContext ctx) throws Exception {
+    InternalPatternContext ictx = (InternalPatternContext) ctx;
 
-		method_setContext(new StringBuffer(), ictx);
+    method_setContext(new StringBuffer(), ictx);
 
-		method_body(new StringBuffer(), ictx);
+    method_body(new StringBuffer(), ictx);
 
-		if (ictx.useReporter()) {
-			Map<String, Object> parameterValues = new HashMap<String, Object>();
-			parameterValues.put("element", this.element);
-			String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
-			String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
-			ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
-		}
-		return null;
-	}
+    if (ictx.useReporter()) {
+      Map<String, Object> parameterValues = new HashMap<String, Object>();
+      parameterValues.put("element", this.element);
+      String outputWithCallBack = OutputManager.computeLoopOutput(ictx);
+      String loop = OutputManager.computeLoopOutputWithoutCallback(ictx);
+      ictx.getReporter().loopFinished(loop, outputWithCallBack, ictx, parameterValues);
+    }
+    return null;
+  }
 
-	protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
+  protected org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService fileNameService = null;
 
-	public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
-		this.fileNameService = object;
-	}
+  public void set_fileNameService(org.polarsys.kitalpha.doc.gen.business.core.util.IFileNameService object) {
+    this.fileNameService = object;
+  }
 
-	protected org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper helper = null;
+  protected org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper helper = null;
 
-	public void set_helper(org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper object) {
-		this.helper = object;
-	}
+  public void set_helper(org.polarsys.kitalpha.doc.gen.business.core.util.IDiagramHelper object) {
+    this.helper = object;
+  }
 
-	protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
+  protected org.polarsys.capella.core.data.capellacore.CapellaElement element = null;
 
-	public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
-		this.element = object;
-	}
+  public void set_element(org.polarsys.capella.core.data.capellacore.CapellaElement object) {
+    this.element = object;
+  }
 
-	public Map<String, Object> getParameters() {
-		final Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("element", this.element);
-		return parameters;
-	}
+  public Map<String, Object> getParameters() {
+    final Map<String, Object> parameters = new HashMap<String, Object>();
+    parameters.put("element", this.element);
+    return parameters;
+  }
 
-	protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+  protected void method_setContext(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		fileNameService = DocGenHtmlCapellaUtil.SERVICE;
-		helper = new CapellaDiagramHelper();
+    fileNameService = DocGenHtmlCapellaUtil.SERVICE;
+    helper = new CapellaDiagramHelper();
 
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
-	}
+    InternalPatternContext ictx = (InternalPatternContext) ctx;
+    new Node.DataLeaf(ictx.getNode(), getClass(), "setContext", stringBuffer.toString());
+  }
 
-	protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
+  protected void method_body(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-		Collection<DDiagram> interestedDiagrams = CapellaHelper.getAllInterestedRepresentationsFor(element);
-		stringBuffer.append(TEXT_1);
-		List<DSemanticDiagram> exportableDiagrams = interestedDiagrams.parallelStream()
-				.filter(diagram -> diagram instanceof DSemanticDiagram).map(diagram -> (DSemanticDiagram) diagram)
-				.filter(diagram -> GenerationGlobalScope.getInstance().isCopyInScope(diagram.getTarget()))
-				.collect(Collectors.toList());
-		stringBuffer.append(TEXT_2);
-		if (!exportableDiagrams.isEmpty()) {
-			stringBuffer.append(TEXT_3);
-			stringBuffer.append(CapellaLabelProviderHelper.getText(element));
-			stringBuffer.append(TEXT_4);
-			exportableDiagrams.forEach(diagram -> {
-				stringBuffer.append(TEXT_5);
-				String id = DiagramSessionHelper.getID(diagram);
-				DRepresentationQuery rep2descQuery = new DRepresentationQuery(diagram);
-				DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
-				String name = (result == null) ? id : result.getName();
+    Collection<DDiagram> interestedDiagrams = CapellaHelper.getAllInterestedRepresentationsFor(element);
+    stringBuffer.append(TEXT_1);
+    List<DSemanticDiagram> exportableDiagrams = interestedDiagrams.parallelStream()
+        .filter(diagram -> diagram instanceof DSemanticDiagram).map(diagram -> (DSemanticDiagram) diagram)
+        .filter(diagram -> GenerationGlobalScope.getInstance().isCopyInScope(diagram.getTarget()))
+        .collect(Collectors.toList());
+    stringBuffer.append(TEXT_2);
+    if (!exportableDiagrams.isEmpty()) {
+      stringBuffer.append(TEXT_3);
+      stringBuffer.append(CapellaLabelProviderHelper.getText(element));
+      stringBuffer.append(TEXT_4);
+      exportableDiagrams.forEach(diagram -> {
+        stringBuffer.append(TEXT_5);
+        String id = DiagramSessionHelper.getID(diagram);
+        DRepresentationQuery rep2descQuery = new DRepresentationQuery(diagram);
+        DRepresentationDescriptor result = rep2descQuery.getRepresentationDescriptor();
+        String name = (result == null) ? id : result.getName();
 
-				stringBuffer.append(TEXT_6);
-				stringBuffer.append(id);
-				stringBuffer.append(TEXT_7);
-				stringBuffer.append(EscapeChars.forHTML(name));
-				stringBuffer.append(TEXT_8);
-				String generatedFolder = fileNameService.getFileName(diagram.getTarget());
-				stringBuffer.append(TEXT_9);
-				stringBuffer.append(CapellaServices.getImageLinkForDiagram(generatedFolder, diagram));
-				stringBuffer.append(TEXT_10);
-			});
-		}
-		InternalPatternContext ictx = (InternalPatternContext) ctx;
-		new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
-	}
+        stringBuffer.append(TEXT_6);
+        stringBuffer.append(id);
+        stringBuffer.append(TEXT_7);
+        stringBuffer.append(EscapeChars.forHTML(name));
+        stringBuffer.append(TEXT_8);
+        String generatedFolder = fileNameService.getFileName(diagram.getTarget());
+        stringBuffer.append(TEXT_9);
+        stringBuffer.append(CapellaServices.getImageLinkForDiagram(generatedFolder, diagram));
+        stringBuffer.append(TEXT_10);
+      });
+    }
+    InternalPatternContext ictx = (InternalPatternContext) ctx;
+    new Node.DataLeaf(ictx.getNode(), getClass(), "body", stringBuffer.toString());
+  }
 
-	public boolean preCondition(PatternContext ctx) throws Exception {
-		return true;
-	}
+  public boolean preCondition(PatternContext ctx) throws Exception {
+    return true;
+  }
 }
