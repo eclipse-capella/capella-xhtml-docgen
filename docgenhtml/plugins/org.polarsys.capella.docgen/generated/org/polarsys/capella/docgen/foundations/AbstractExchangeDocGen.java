@@ -29,13 +29,13 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
   protected final String TEXT_4 = NL + "\t<h2> Allocated Function Exchanges </h2>" + NL + "\t";
   protected final String TEXT_5 = NL + "\t\t<h2> Allocated Exchanges Items </h2>" + NL + "\t\t";
   protected final String TEXT_6 = NL + "\t<h2> Categories </h2>" + NL + "\t";
-  protected final String TEXT_7 = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" + NL
+  protected final String TEXT_7 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + NL
       + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"" + NL
       + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" + NL
       + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">" + NL + "" + NL + "\t<head>" + NL
       + "\t\t<meta name=\"copyright\" content=\"";
   protected final String TEXT_8 = "\" />" + NL
-      + "\t\t<meta http-equiv=\"content-type\" content=\"text/html;charset=ISO-8859-1\" />" + NL
+      + "\t\t<meta http-equiv=\"content-type\" content=\"text/html;charset=UTF-8\" />" + NL
       + "\t\t<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />" + NL + "" + NL + "\t\t<title>";
   protected final String TEXT_9 = "</title>" + NL
       + "\t\t<link rel=\"stylesheet\" href=\"../../scripts/jquery-treeview/jquery.treeview.css\" />" + NL
