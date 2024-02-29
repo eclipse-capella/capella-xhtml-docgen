@@ -37,6 +37,7 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
@@ -132,6 +133,8 @@ public class SelectElementsWizardPage extends WizardPage {
 	private GenerationContainerCheckedTreeViewer rightTreeViewer;
 	private Button buttonLoad;
 	private Button buttonSave;
+	
+	private ISelection initialSelection;
 
 	/**
 	 * Constructor for SelectElementsWizardPage.
@@ -144,6 +147,7 @@ public class SelectElementsWizardPage extends WizardPage {
 		setDescription(Messages.SelectElementsWizardPage_1);
 		setMessage(Messages.SelectElementsWizardPage_2, IMessageProvider.INFORMATION);
 		initSession(selection);
+		initialSelection=selection;
 	}
 
 	/**
@@ -185,6 +189,7 @@ public class SelectElementsWizardPage extends WizardPage {
 		// update wizard status
 		dialogChanged();
 		setControl(container);
+		
 	}
 
 	/**
@@ -408,6 +413,7 @@ public class SelectElementsWizardPage extends WizardPage {
 
 		});
 		
+		
 		rightTreeViewer = (GenerationContainerCheckedTreeViewer) createRightFilteredCheckBoxTreeViewer(
 				grpSelectElements);
 		
@@ -439,6 +445,7 @@ public class SelectElementsWizardPage extends WizardPage {
 				dialogChanged();
 			}
 		});
+		
 	}
 
 	/**
@@ -618,8 +625,22 @@ public class SelectElementsWizardPage extends WizardPage {
 	protected void initialize() {
 		if (session != null) {
 			leftTreeViewer.setInput(session);
-			rightTreeViewer.setInput(session);
-			leftTreeViewer.setSelection(new StructuredSelection(leftTreeViewer.getTree().getTopItem()));
+      rightTreeViewer.setInput(session);
+
+      // Initialize left viewer with initial selection
+      if (initialSelection != null) {
+        leftTreeViewer.setSelection(initialSelection, true);
+        TreeSelection selectionInTree = (TreeSelection) leftTreeViewer.getSelection();
+        for (TreePath path : selectionInTree.getPaths()) {
+          leftTreeViewer.setChecked(path.getLastSegment(), true);
+        }
+        // Update the right tree
+        checkRightOnLeftSelection();
+        dialogChanged();
+
+      } else {
+        leftTreeViewer.setSelection(new StructuredSelection(leftTreeViewer.getTree().getTopItem()));
+      }
 		}
 	}
 
@@ -883,4 +904,10 @@ public class SelectElementsWizardPage extends WizardPage {
 		}
 	}
 
+	@Override
+	public void dispose() {
+		buttonLoad.getImage().dispose();
+		buttonSave.getImage().dispose();
+		super.dispose();
+	}
 }
