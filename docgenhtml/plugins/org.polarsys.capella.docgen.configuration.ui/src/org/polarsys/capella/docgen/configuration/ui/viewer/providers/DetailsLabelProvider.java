@@ -80,7 +80,9 @@ public class DetailsLabelProvider extends CapellaNavigatorLabelProvider implemen
 	@Override
 	public void dispose() {
 		super.dispose();
-		referencedCapellaNavigatorLabelProvider.dispose();
+		//Do not dispose of any of the providers coming from semantic browser
+		//Each instance is unique and shared, it shall only be disposed by the semantic browser itself
+		//referencedCapellaNavigatorLabelProvider.dispose();
 	}
 
 	/**
