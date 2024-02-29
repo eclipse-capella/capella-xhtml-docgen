@@ -17,12 +17,16 @@ import java.util.List;
 
 import org.polarsys.capella.common.data.modellingcore.AbstractExchangeItem;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.cs.AbstractPhysicalLinkEnd;
 import org.polarsys.capella.core.data.cs.PhysicalLink;
 import org.polarsys.capella.core.data.cs.PhysicalLinkCategory;
+import org.polarsys.capella.core.data.cs.PhysicalLinkEnd;
+import org.polarsys.capella.core.data.cs.PhysicalPort;
 import org.polarsys.capella.core.data.fa.ComponentExchange;
 import org.polarsys.capella.core.data.fa.ComponentExchangeCategory;
 import org.polarsys.capella.core.data.fa.ExchangeCategory;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
+import org.polarsys.capella.core.data.helpers.cs.services.PhysicalLinkExt;
 import org.polarsys.capella.core.data.information.ExchangeItem;
 
 /**
@@ -73,6 +77,30 @@ public class ExchangesServices {
 			port = ((FunctionalExchange) element).getTargetFunctionInputPort();
 		}
 		return port != null ? getPort(port, projectName, outputFolder, false) : "";
+	}
+	
+	/**
+	 * 
+	 * @param link
+	 * @param projectName
+	 * @param outputFolder
+	 * @return
+	 */
+	public static String getLinkEndsWithContainer(PhysicalLink link, String projectName, String outputFolder) {
+		final StringBuilder buffer = new StringBuilder();
+		buffer.append(CapellaServices.UL_OPEN);
+		for (AbstractPhysicalLinkEnd end : link.getLinkEnds()) {
+			buffer.append(CapellaServices.LI_OPEN);
+			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, end));
+			buffer.append(CapellaServices.LI_CLOSE);
+			buffer.append(CapellaServices.UL_OPEN);
+			buffer.append(CapellaServices.LI_OPEN);
+			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, end.eContainer()));
+			buffer.append(CapellaServices.LI_CLOSE);
+			buffer.append(CapellaServices.UL_CLOSE);
+		}
+		buffer.append(CapellaServices.UL_CLOSE);
+		return buffer.toString();
 	}
 	
 	private static String getPort(CapellaElement port, String projectName, String outputFolder, boolean source) {

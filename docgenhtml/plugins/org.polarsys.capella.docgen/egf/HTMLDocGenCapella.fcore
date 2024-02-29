@@ -776,6 +776,20 @@
             <parameters xmi:id="_58mAsIuDEemoWLDLVaBCIQ" name="parameter" type="org.polarsys.capella.core.data.cs.PhysicalLink"/>
             <orchestration xmi:type="pattern:SuperCall" xmi:id="_x6M3l4uDEemoWLDLVaBCIQ"/>
           </elements>
+          <elements xmi:id="_WFdG4N-VEe6u6r0OcyN4IQ" name="PhysicalPortDocGen" superPattern="#_LUSfMN0jEd-Vzvs7Wt1vzQ"
+              headerMethod="#_WFdG4t-VEe6u6r0OcyN4IQ" conditionMethod="#_WFdG5N-VEe6u6r0OcyN4IQ"
+              initMethod="#_WFdG49-VEe6u6r0OcyN4IQ" footerMethod="#_WFdG5t-VEe6u6r0OcyN4IQ">
+            <nature xmi:type="jetpattern:JetNature" xmi:id="_WFdG4d-VEe6u6r0OcyN4IQ"
+                name="JET"/>
+            <methods xmi:id="_WFdG4t-VEe6u6r0OcyN4IQ" name="header" patternFilePath="templates/pattern._WFdG4N-VEe6u6r0OcyN4IQ/method._WFdG4t-VEe6u6r0OcyN4IQ.pt"/>
+            <methods xmi:id="_WFdG49-VEe6u6r0OcyN4IQ" name="init" patternFilePath="templates/pattern._WFdG4N-VEe6u6r0OcyN4IQ/method._WFdG49-VEe6u6r0OcyN4IQ.pt"/>
+            <methods xmi:id="_WFdG5N-VEe6u6r0OcyN4IQ" name="preCondition" patternFilePath="templates/pattern._WFdG4N-VEe6u6r0OcyN4IQ/method._WFdG5N-VEe6u6r0OcyN4IQ.pt"/>
+            <methods xmi:id="_WFdG5d-VEe6u6r0OcyN4IQ" name="content" patternFilePath="templates/pattern._WFdG4N-VEe6u6r0OcyN4IQ/method._WFdG5d-VEe6u6r0OcyN4IQ.pt"/>
+            <methods xmi:id="_WFdG5t-VEe6u6r0OcyN4IQ" name="footer" patternFilePath="templates/pattern._WFdG4N-VEe6u6r0OcyN4IQ/method._WFdG5t-VEe6u6r0OcyN4IQ.pt"/>
+            <methods xmi:id="_svs_UN-XEe6u6r0OcyN4IQ" name="setCapellaContext" patternFilePath="templates/pattern._WFdG4N-VEe6u6r0OcyN4IQ/method._svs_UN-XEe6u6r0OcyN4IQ.pt"/>
+            <parameters xmi:id="_WFdG6N-VEe6u6r0OcyN4IQ" name="parameter" type="org.polarsys.capella.core.data.cs.PhysicalPort"/>
+            <orchestration xmi:type="pattern:SuperCall" xmi:id="_WFdG6d-VEe6u6r0OcyN4IQ"/>
+          </elements>
         </libraries>
         <libraries xmi:id="_iEWbsN6ZEd-ZSZ6AN4Dlrg" name="org.polarsys.capella.docgen.sidebar">
           <elements xmi:id="_sJuJMN6ZEd-ZSZ6AN4Dlrg" name="AnyNamedElementSideBar"
@@ -875,7 +889,7 @@
         <invocationContractContainer xmi:id="_xHdBoW8PEeSjPIMKP6Xr0g">
           <invocationContracts xmi:id="_xHdBom8PEeSjPIMKP6Xr0g" invokedContract="#_FDa2QG8PEeSjPIMKP6Xr0g">
             <type xmi:type="pattern:TypePatternList" xmi:id="_oacDMN4ZEd-Qav1YnqlO9A"
-                elements="#_x_LwcGwiEeCUvpJOFjr3FQ #_hW854N47Ed-Qav1YnqlO9A #_nJ840Ds5EeCgH6PBi_KPBw #_j_CXYEV-EeCvqtVx_IKrqA #_fQhPcEWiEeCvqtVx_IKrqA #_HyNjwN0cEd-Vzvs7Wt1vzQ #_6RU6oXGlEeC8GrKepiiiTw #_WWJkYYBZEeCN8Jbz-bJe6w #_MdyuQYLBEeCjNOKMEA2WFg #_sGmFIZdTEeCvReB7msXe8Q #_6uVm4JwPEeCWeuBXIFCRXA #_bikDsb0GEeC7JNoAKQ1P0g #_qz8z8b3TEeCFqqET0yrG_w #_Pq5FgL3fEeCFqqET0yrG_w #_sRl5kb52EeCw5MDUpv1shw #_a126IL6EEeCw5MDUpv1shw #_ZXf8Ib88EeC3itjHQ6nPuA #_1fzXsL9JEeC3itjHQ6nPuA #_TIBLoDlmEeKfl43CFVnoFw #_WnyP8OzGEeSAVbCPYCI8cQ #_u-tmELXYEeiyaM1QyFX3Jg #_EC31ALXcEeiyaM1QyFX3Jg #_a6_HILXaEeiyaM1QyFX3Jg #_B0Sp4FxqEemRLucKv8z86A #_QKJzAIFHEemoWLDLVaBCIQ #_x6M3kIuDEemoWLDLVaBCIQ #_nJ840Ds5EeCgH6PBj_KPBw"/>
+                elements="#_x_LwcGwiEeCUvpJOFjr3FQ #_hW854N47Ed-Qav1YnqlO9A #_nJ840Ds5EeCgH6PBi_KPBw #_j_CXYEV-EeCvqtVx_IKrqA #_fQhPcEWiEeCvqtVx_IKrqA #_HyNjwN0cEd-Vzvs7Wt1vzQ #_6RU6oXGlEeC8GrKepiiiTw #_WWJkYYBZEeCN8Jbz-bJe6w #_MdyuQYLBEeCjNOKMEA2WFg #_sGmFIZdTEeCvReB7msXe8Q #_6uVm4JwPEeCWeuBXIFCRXA #_bikDsb0GEeC7JNoAKQ1P0g #_qz8z8b3TEeCFqqET0yrG_w #_Pq5FgL3fEeCFqqET0yrG_w #_sRl5kb52EeCw5MDUpv1shw #_a126IL6EEeCw5MDUpv1shw #_ZXf8Ib88EeC3itjHQ6nPuA #_1fzXsL9JEeC3itjHQ6nPuA #_TIBLoDlmEeKfl43CFVnoFw #_WnyP8OzGEeSAVbCPYCI8cQ #_u-tmELXYEeiyaM1QyFX3Jg #_EC31ALXcEeiyaM1QyFX3Jg #_a6_HILXaEeiyaM1QyFX3Jg #_B0Sp4FxqEemRLucKv8z86A #_QKJzAIFHEemoWLDLVaBCIQ #_x6M3kIuDEemoWLDLVaBCIQ #_nJ840Ds5EeCgH6PBj_KPBw #_WFdG4N-VEe6u6r0OcyN4IQ"/>
           </invocationContracts>
           <invocationContracts xmi:id="_xHdBo28PEeSjPIMKP6Xr0g" factoryComponentContract="#_gCg58G8PEeSjPIMKP6Xr0g"
               invokedContract="#_LE5QgG8PEeSjPIMKP6Xr0g"/>

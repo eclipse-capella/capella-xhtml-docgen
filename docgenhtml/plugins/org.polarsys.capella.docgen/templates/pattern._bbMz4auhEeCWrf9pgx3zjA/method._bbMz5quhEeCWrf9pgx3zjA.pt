@@ -135,4 +135,29 @@ if(stateMachines.size() > 0) {%>
 <h2>State Machines</h2>
 <%=StringUtil.stringListToBulette(stateMachines)%>
 <%}
+
+String projectName= ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+
+Collection<PhysicalLink> physicalLinks = CapellaComponentServices.getPhysicalLinks((Component)element);
+if(physicalLinks.size() > 0) {
+%>
+<h2>Physical Links</h2>
+<table>
+	<tr>
+		<th>Link</th>
+		<th>Ends</th>
+		<th>Description</th>
+		<th>Allocated Component Exchanges</th>
+		<th>Realized Physical Links </th>
+		<th>Realizing Physical Links</th>
+	</tr>
+	<% for (PhysicalLink physicalLink : physicalLinks) {   	
+%>
+	<%=CapellaComponentServices.physicalLinkToTableLine(physicalLink, projectName, outputFolder)%>
+	<% 	
+}%>
+</table>
+<%
+}
 %>

@@ -5,14 +5,19 @@
 String sourceContent = ExchangesServices.getSource(element, projectName, outputFolder);
 String targetContent = ExchangesServices.getTarget(element, projectName, outputFolder);
 
-if (!sourceContent.equals("")) {%>
-<h2> Source </h2>
-<%=sourceContent%>
-<%}
-if (!targetContent.equals("")) {%>
-<h2> Target </h2>
-<%=targetContent%>
-<%}%>
+if (element instanceof PhysicalLink) {%>
+<h2> Ends </h2>
+<%=ExchangesServices.getLinkEndsWithContainer((PhysicalLink) element, projectName, outputFolder)%>
+<%} else {
+	if (!sourceContent.equals("")) {%>
+	<h2> Source </h2>
+	<%=sourceContent%>
+	<%}
+	if (!targetContent.equals("")) {%>
+	<h2> Target </h2>
+	<%=targetContent%>
+	<%}%>
+	<%}%>
 
 <%if (ExchangesServices.genAllocatedFunctionExchanges(element)){ %>
 <%if (element instanceof ComponentExchange) {%>
