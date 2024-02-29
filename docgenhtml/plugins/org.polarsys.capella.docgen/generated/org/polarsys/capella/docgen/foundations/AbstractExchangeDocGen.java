@@ -23,21 +23,23 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
   }
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-  protected final String TEXT_1 = "<h2> Source </h2>";
+  protected final String TEXT_1 = "<h2> Ends </h2>";
   protected final String TEXT_2 = NL;
-  protected final String TEXT_3 = NL + "<h2> Target </h2>";
-  protected final String TEXT_4 = NL + "\t<h2> Allocated Function Exchanges </h2>" + NL + "\t";
-  protected final String TEXT_5 = NL + "\t\t<h2> Allocated Exchanges Items </h2>" + NL + "\t\t";
-  protected final String TEXT_6 = NL + "\t<h2> Categories </h2>" + NL + "\t";
-  protected final String TEXT_7 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + NL
+  protected final String TEXT_3 = NL + "\t<h2> Source </h2>" + NL + "\t";
+  protected final String TEXT_4 = NL + "\t";
+  protected final String TEXT_5 = NL + "\t<h2> Target </h2>" + NL + "\t";
+  protected final String TEXT_6 = NL + "\t<h2> Allocated Function Exchanges </h2>" + NL + "\t";
+  protected final String TEXT_7 = NL + "\t\t<h2> Allocated Exchanges Items </h2>" + NL + "\t\t";
+  protected final String TEXT_8 = NL + "\t<h2> Categories </h2>" + NL + "\t";
+  protected final String TEXT_9 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + NL
       + "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"" + NL
       + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" + NL
       + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">" + NL + "" + NL + "\t<head>" + NL
       + "\t\t<meta name=\"copyright\" content=\"";
-  protected final String TEXT_8 = "\" />" + NL
+  protected final String TEXT_10 = "\" />" + NL
       + "\t\t<meta http-equiv=\"content-type\" content=\"text/html;charset=UTF-8\" />" + NL
       + "\t\t<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />" + NL + "" + NL + "\t\t<title>";
-  protected final String TEXT_9 = "</title>" + NL
+  protected final String TEXT_11 = "</title>" + NL
       + "\t\t<link rel=\"stylesheet\" href=\"../../scripts/jquery-treeview/jquery.treeview.css\" />" + NL
       + "  \t\t<script src=\"../../scripts/jquery-treeview/lib/jquery-1.11.1.js\" type=\"text/javascript\"></script>"
       + NL + "  \t\t<script src=\"../../scripts/jquery-treeview/jquery.treeview.js\" type=\"text/javascript\"></script>"
@@ -45,7 +47,7 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
       + "\t\t<link title=\"default\" rel=\"stylesheet\" type=\"text/css\" media=\"screen, projection\" href=\"../../css/content.css\"></link>"
       + NL + "\t\t<script type=\"text/javascript\">" + NL + "\t\t\tif(parent.location.href == self.location.href) {"
       + NL + "\t\t\t\twindow.location.href = 'index.html?";
-  protected final String TEXT_10 = "' + '#' + self.location.href.substring(self.location.href.lastIndexOf(\"#\")+1);"
+  protected final String TEXT_12 = "' + '#' + self.location.href.substring(self.location.href.lastIndexOf(\"#\")+1);"
       + NL + "\t\t\t}" + NL + "\t\t</script>" + NL + "\t\t" + NL + "\t\t<style>" + NL + "\t\t\tbody {" + NL
       + "\t\t\t\tbackground: white;" + NL + "\t\t\t\tfont-family: Arial;" + NL + "\t\t\t}" + NL + "\t\t\t.treeview {"
       + NL + "\t\t\t\tbackground-color: white ;" + NL + "\t\t\t}" + NL + "\t" + NL
@@ -54,10 +56,10 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
       + "\t\t\t.treeview li{ /*Style for LI elements in general (excludes an LI that contains sub lists)*/" + NL
       + "\t\t\t\tbackground-color: white;" + NL + "\t\t\t}" + NL + "\t\t</style>" + NL + "\t\t" + NL + "\t</head>" + NL
       + "\t" + NL + "\t<body>";
-  protected final String TEXT_11 = "\t<script type=\"text/javascript\">" + NL + "\t\t$(\"#";
-  protected final String TEXT_12 = "\").treeview({ collapsed: false, animated: \"fast\", unique: false, control: \"#treecontrol\"});"
+  protected final String TEXT_13 = "\t<script type=\"text/javascript\">" + NL + "\t\t$(\"#";
+  protected final String TEXT_14 = "\").treeview({ collapsed: false, animated: \"fast\", unique: false, control: \"#treecontrol\"});"
       + NL + "\t\t$(\"#";
-  protected final String TEXT_13 = "\").treeview({ collapsed: false, animated: \"fast\", unique: false, control: \"#treecontrol\"});"
+  protected final String TEXT_15 = "\").treeview({ collapsed: false, animated: \"fast\", unique: false, control: \"#treecontrol\"});"
       + NL + "\t</script>" + NL + "   </body>" + NL + "</html>";
 
   public AbstractExchangeDocGen() {
@@ -113,20 +115,28 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
     String sourceContent = ExchangesServices.getSource(element, projectName, outputFolder);
     String targetContent = ExchangesServices.getTarget(element, projectName, outputFolder);
 
-    if (!sourceContent.equals("")) {
+    if (element instanceof PhysicalLink) {
       stringBuffer.append(TEXT_1);
       stringBuffer.append(TEXT_2);
-      stringBuffer.append(sourceContent);
-    }
-    if (!targetContent.equals("")) {
-      stringBuffer.append(TEXT_3);
-      stringBuffer.append(TEXT_2);
-      stringBuffer.append(targetContent);
+      stringBuffer
+          .append(ExchangesServices.getLinkEndsWithContainer((PhysicalLink) element, projectName, outputFolder));
+    } else {
+      if (!sourceContent.equals("")) {
+        stringBuffer.append(TEXT_3);
+        stringBuffer.append(sourceContent);
+        stringBuffer.append(TEXT_4);
+      }
+      if (!targetContent.equals("")) {
+        stringBuffer.append(TEXT_5);
+        stringBuffer.append(targetContent);
+        stringBuffer.append(TEXT_4);
+      }
+      stringBuffer.append(TEXT_4);
     }
     stringBuffer.append(TEXT_2);
     if (ExchangesServices.genAllocatedFunctionExchanges(element)) {
       if (element instanceof ComponentExchange) {
-        stringBuffer.append(TEXT_4);
+        stringBuffer.append(TEXT_6);
         stringBuffer.append(
             ExchangesServices.getAllocatedFunctionExchanges((ComponentExchange) element, projectName, outputFolder));
       }
@@ -134,7 +144,7 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
     stringBuffer.append(TEXT_2);
     if (ExchangesServices.genAllocatedComponentExchanges(element)) {
       if (element instanceof PhysicalLink) {
-        stringBuffer.append(TEXT_4);
+        stringBuffer.append(TEXT_6);
         stringBuffer.append(
             ExchangesServices.getAllocatedComponentExchanges((PhysicalLink) element, projectName, outputFolder));
       }
@@ -142,13 +152,13 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
     stringBuffer.append(TEXT_2);
     if (ExchangesServices.genAllocatedExchangeItems(element)) {
       if (element instanceof ComponentExchange || element instanceof FunctionalExchange) {
-        stringBuffer.append(TEXT_5);
+        stringBuffer.append(TEXT_7);
         stringBuffer.append(ExchangesServices.getAllocatedExchangeItems(element, projectName, outputFolder));
       }
     }
     stringBuffer.append(TEXT_2);
     if (ExchangesServices.genCategories(element)) {
-      stringBuffer.append(TEXT_6);
+      stringBuffer.append(TEXT_8);
       stringBuffer.append(ExchangesServices.getCategories(element, projectName, outputFolder));
     }
     InternalPatternContext ictx = (InternalPatternContext) ctx;
@@ -157,24 +167,24 @@ public class AbstractExchangeDocGen extends org.polarsys.capella.docgen.foundati
 
   protected void method_docHeader(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-    stringBuffer.append(TEXT_7);
-    stringBuffer.append(copyright);
-    stringBuffer.append(TEXT_8);
-    stringBuffer.append(title);
     stringBuffer.append(TEXT_9);
-    stringBuffer.append(fileName);
+    stringBuffer.append(copyright);
     stringBuffer.append(TEXT_10);
+    stringBuffer.append(title);
+    stringBuffer.append(TEXT_11);
+    stringBuffer.append(fileName);
+    stringBuffer.append(TEXT_12);
     InternalPatternContext ictx = (InternalPatternContext) ctx;
     new Node.DataLeaf(ictx.getNode(), getClass(), "docHeader", stringBuffer.toString());
   }
 
   protected void method_docFooter(final StringBuffer stringBuffer, final PatternContext ctx) throws Exception {
 
-    stringBuffer.append(TEXT_11);
-    stringBuffer.append(ExchangesServices.SOURCE_PORT_TREE_ID);
-    stringBuffer.append(TEXT_12);
-    stringBuffer.append(ExchangesServices.TARGET_PORT_TREE_ID);
     stringBuffer.append(TEXT_13);
+    stringBuffer.append(ExchangesServices.SOURCE_PORT_TREE_ID);
+    stringBuffer.append(TEXT_14);
+    stringBuffer.append(ExchangesServices.TARGET_PORT_TREE_ID);
+    stringBuffer.append(TEXT_15);
     InternalPatternContext ictx = (InternalPatternContext) ctx;
     new Node.DataLeaf(ictx.getNode(), getClass(), "docFooter", stringBuffer.toString());
   }

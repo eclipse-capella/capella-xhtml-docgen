@@ -23,6 +23,7 @@ import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalLink;
 import org.polarsys.capella.core.data.cs.PhysicalLinkCategory;
 import org.polarsys.capella.core.data.cs.PhysicalPath;
+import org.polarsys.capella.core.data.cs.PhysicalPort;
 import org.polarsys.capella.core.data.ctx.Mission;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.ComponentExchange;
@@ -79,6 +80,7 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof FunctionalChain
 				|| element instanceof FunctionPort
 				|| element instanceof ComponentPort
+				|| element instanceof PhysicalPort
 				|| element instanceof ExchangeCategory
 				|| element instanceof AbstractCapability
 				|| element instanceof Scenario 
@@ -130,6 +132,7 @@ public class DocGenHtmlCapellaControl {
 				|| element instanceof FunctionalChain
 				|| element instanceof FunctionPort
 				|| element instanceof ComponentPort
+				|| element instanceof PhysicalPort
 				|| element instanceof Scenario
 				|| element instanceof FunctionalExchange
 				|| element instanceof PhysicalLink

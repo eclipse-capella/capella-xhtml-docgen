@@ -20,12 +20,16 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.polarsys.capella.common.data.modellingcore.AbstractExchangeItem;
 import org.polarsys.capella.common.data.modellingcore.InformationsExchanger;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.capellacore.Feature;
+import org.polarsys.capella.core.data.cs.AbstractPhysicalLinkEnd;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Interface;
+import org.polarsys.capella.core.data.cs.PhysicalLink;
+import org.polarsys.capella.core.data.cs.PhysicalPort;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.ComponentExchange;
 import org.polarsys.capella.core.data.fa.ComponentExchangeEnd;
@@ -33,9 +37,12 @@ import org.polarsys.capella.core.data.fa.ComponentExchangeKind;
 import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.fa.OrientationPortKind;
+import org.polarsys.capella.core.data.helpers.cs.services.PhysicalLinkExt;
 import org.polarsys.capella.core.data.information.Port;
+import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.model.helpers.InterfaceExt;
+import org.polarsys.capella.core.model.helpers.PhysicalComponentExt;
 
 public class CapellaComponentServices {
 
@@ -49,7 +56,7 @@ public class CapellaComponentServices {
 		}
 		return deleteDelegations(componentExchanges);
 	}
-
+	
 	public static Collection<ComponentExchange> getOutgoingComponentExchanges(Component element) {
 		Collection<ComponentExchange> componentExchanges = new ArrayList<>();
 		for (Feature currentFeature : element.getOwnedFeatures()) {
@@ -69,23 +76,27 @@ public class CapellaComponentServices {
 		}
 		return deleteDelegations(componentExchanges);
 	}
+	
+	public static Collection<PhysicalLink> getPhysicalLinks(Component element) {
+		return PhysicalLinkExt.getAllRelatedPhysicalLinks(element);
+	}
 
+	public static Collection<PhysicalLink> getPhysicalLinks(PhysicalPort element) {
+		return PhysicalLinkExt.getAllRelatedPhysicalLinks(element);
+	}
+	
 	public static String componentExchangeToTableLine(Component currentComponent, ComponentExchange componentExchange, String projectName, String outputFolder) {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append(CapellaServices.TR_OPEN);
 		buffer.append("<td id=\"" + CapellaServices.getAnchorId(componentExchange) + "\">");
-		buffer.append(CapellaServices.getImageLinkFromElement(componentExchange, projectName, outputFolder));
-		buffer.append(" ");
-		buffer.append(CapellaServices.getHyperlinkFromElement(componentExchange));
+		buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, componentExchange));
 		buffer.append(CapellaServices.TD_CLOSE);
 
 		ModelElement sourceTargetComponent;
 		sourceTargetComponent = getOppositeComponent(currentComponent, componentExchange);
 		if (sourceTargetComponent != null) {
 			buffer.append(CapellaServices.TD_OPEN);
-			buffer.append(CapellaServices.getImageLinkFromElement(sourceTargetComponent, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(sourceTargetComponent));
+			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, sourceTargetComponent));
 			buffer.append(CapellaServices.TD_CLOSE);
 		}
 
@@ -99,9 +110,7 @@ public class CapellaComponentServices {
 
 			for (FunctionalExchange currentItem : functionalExchanges) {
 				buffer.append(CapellaServices.LI_OPEN);
-				buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
-				buffer.append(" ");
-				buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
+				buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, currentItem));
 				buffer.append(CapellaServices.LI_CLOSE);
 			}
 			buffer.append(CapellaServices.UL_CLOSE);
@@ -112,9 +121,7 @@ public class CapellaComponentServices {
 			buffer.append(CapellaServices.UL_OPEN);
 			for (AbstractExchangeItem currentItem : componentExchange.getConvoyedInformations()) {
 				buffer.append(CapellaServices.LI_OPEN);
-				buffer.append(CapellaServices.getImageLinkFromElement(currentItem, projectName, outputFolder));
-				buffer.append(" ");
-				buffer.append(CapellaServices.getHyperlinkFromElement(currentItem));
+				buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, currentItem));
 				buffer.append(CapellaServices.LI_CLOSE);
 			}
 			buffer.append(CapellaServices.UL_CLOSE);
@@ -126,9 +133,7 @@ public class CapellaComponentServices {
 		buffer.append(CapellaServices.UL_OPEN);
 		for (ComponentExchange realizedComponentExchange : realizedComponentExchanges) {
 			buffer.append(CapellaServices.LI_OPEN);
-			buffer.append(CapellaServices.getImageLinkFromElement(realizedComponentExchange, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(realizedComponentExchange));
+			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, realizedComponentExchange));
 			buffer.append(CapellaServices.LI_CLOSE);
 		}
 		buffer.append(CapellaServices.UL_CLOSE);
@@ -139,9 +144,7 @@ public class CapellaComponentServices {
 		buffer.append(CapellaServices.UL_OPEN);
 		for (ComponentExchange realizingComponentExchange : realizingComponentExchanges) {
 			buffer.append(CapellaServices.LI_OPEN);
-			buffer.append(CapellaServices.getImageLinkFromElement(realizingComponentExchange, projectName, outputFolder));
-			buffer.append(" ");
-			buffer.append(CapellaServices.getHyperlinkFromElement(realizingComponentExchange));
+			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, realizingComponentExchange));
 			buffer.append(CapellaServices.LI_CLOSE);
 		}
 		buffer.append(CapellaServices.UL_CLOSE);
@@ -150,7 +153,71 @@ public class CapellaComponentServices {
 
 		return buffer.toString();
 	}
+	
+	public static String physicalLinkToTableLine(PhysicalLink physicalLink, String projectName, String outputFolder) {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append(CapellaServices.TR_OPEN);
+		buffer.append("<td id=\"" + CapellaServices.getAnchorId(physicalLink) + "\">");
+		buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, physicalLink));
+		buffer.append(CapellaServices.TD_CLOSE);
 
+		List<AbstractPhysicalLinkEnd> linkEnds = physicalLink.getLinkEnds();
+		buffer.append(CapellaServices.TD_OPEN);
+		if (!linkEnds.isEmpty()) {
+			buffer.append(CapellaServices.UL_OPEN);
+			for (AbstractPhysicalLinkEnd end : linkEnds) {
+				EObject container = end.eContainer();
+				buffer.append(CapellaServices.LI_OPEN);
+				buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, container));
+				buffer.append(CapellaServices.LI_CLOSE);
+			}
+			buffer.append(CapellaServices.UL_CLOSE);
+		}
+		buffer.append(CapellaServices.TD_CLOSE);
+
+		buffer.append(CapellaServices.TD_OPEN);
+		buffer.append(getDescription(physicalLink, projectName, outputFolder));
+		buffer.append(CapellaServices.TD_CLOSE);
+
+		buffer.append(CapellaServices.TD_OPEN);
+		EList<ComponentExchange> componentExchanges = physicalLink.getAllocatedComponentExchanges();
+		if (!componentExchanges.isEmpty()) {
+			buffer.append(CapellaServices.UL_OPEN);
+
+			for (ComponentExchange currentItem : componentExchanges) {
+				buffer.append(CapellaServices.LI_OPEN);
+				buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, currentItem));
+				buffer.append(CapellaServices.LI_CLOSE);
+			}
+			buffer.append(CapellaServices.UL_CLOSE);
+		}
+		buffer.append(CapellaServices.TD_CLOSE);
+
+		EList<PhysicalLink> realizedPhysicalLinks = physicalLink.getRealizedPhysicalLinks();
+		buffer.append(CapellaServices.TD_OPEN);
+		buffer.append(CapellaServices.UL_OPEN);
+		for (PhysicalLink realizedPhysicalLink : realizedPhysicalLinks) {
+			buffer.append(CapellaServices.LI_OPEN);
+			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, realizedPhysicalLink));
+			buffer.append(CapellaServices.LI_CLOSE);
+		}
+		buffer.append(CapellaServices.UL_CLOSE);
+		buffer.append(CapellaServices.TD_CLOSE);
+
+		EList<PhysicalLink> realizingPhysicalLinks = physicalLink.getRealizingPhysicalLinks();
+		buffer.append(CapellaServices.TD_OPEN);
+		buffer.append(CapellaServices.UL_OPEN);
+		for (PhysicalLink realizingPhysicalLink : realizingPhysicalLinks) {
+			buffer.append(CapellaServices.LI_OPEN);
+			buffer.append(CapellaServices.buildHyperlinkWithIcon(projectName, outputFolder, realizingPhysicalLink));
+			buffer.append(CapellaServices.LI_CLOSE);
+		}
+		buffer.append(CapellaServices.UL_CLOSE);
+		buffer.append(CapellaServices.TD_CLOSE);
+
+		return buffer.toString();
+	}
+	
 	private static Collection<ComponentExchange> deleteDelegations(Collection<ComponentExchange> componentExchanges) {
 		final Collection<ComponentExchange> newComponentExchanges = new ArrayList<>(componentExchanges);
 		for (ComponentExchange currentComponentExchange : componentExchanges) {
@@ -168,6 +235,7 @@ public class CapellaComponentServices {
 		}
 		return candidate;
 	}
+	
 
 	private static ModelElement resolveInformationExchanger(InformationsExchanger informationsExchanger) {
 		if (informationsExchanger instanceof ComponentPort) {
@@ -187,6 +255,13 @@ public class CapellaComponentServices {
 	private static Object getDescription(ComponentExchange componentExchange, String projectName, String outputFolder) {
 		if (componentExchange.getDescription() != null)
 			return StringUtil.transformAREFString(componentExchange, componentExchange.getDescription(), projectName, outputFolder);
+		return "";
+	}
+	
+	private static Object getDescription(PhysicalLink physicalLink, String projectName, String outputFolder) {
+		if (physicalLink.getDescription() != null)
+			return StringUtil.transformAREFString(physicalLink, physicalLink.getDescription(), projectName,
+					outputFolder);
 		return "";
 	}
 
@@ -210,6 +285,8 @@ public class CapellaComponentServices {
 
 		return functionsString;
 	}
+	
+	
 
 	/**
 	 * 

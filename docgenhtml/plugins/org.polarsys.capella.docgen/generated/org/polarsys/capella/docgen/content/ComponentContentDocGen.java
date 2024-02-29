@@ -15,6 +15,9 @@ import org.polarsys.capella.docgen.util.pattern.helper.BlockHelper;
 import org.polarsys.kitalpha.doc.gen.business.core.util.EscapeChars;
 import org.polarsys.capella.docgen.util.CapellaLabelProviderHelper;
 import org.polarsys.capella.core.data.oa.Entity;
+import org.polarsys.capella.docgen.util.*;
+import org.polarsys.kitalpha.doc.gen.business.core.util.*;
+import org.polarsys.capella.core.data.cs.PhysicalLink;
 
 public class ComponentContentDocGen {
   protected static String nl;
@@ -54,6 +57,10 @@ public class ComponentContentDocGen {
       + NL + "\t";
   protected final String TEXT_14 = NL + "<h2>Ports</h2>";
   protected final String TEXT_15 = NL + "<h2>State Machines</h2>";
+  protected final String TEXT_16 = NL + "<h2>Physical Links</h2>" + NL + "<table>" + NL + "\t<tr>" + NL
+      + "\t\t<th>Link</th>" + NL + "\t\t<th>Ends</th>" + NL + "\t\t<th>Description</th>" + NL
+      + "\t\t<th>Allocated Component Exchanges</th>" + NL + "\t\t<th>Realized Physical Links </th>" + NL
+      + "\t\t<th>Realizing Physical Links</th>" + NL + "\t</tr>" + NL + "\t";
 
   public ComponentContentDocGen() {
     //Here is the constructor
@@ -275,6 +282,24 @@ public class ComponentContentDocGen {
       stringBuffer.append(TEXT_15);
       stringBuffer.append(TEXT_2);
       stringBuffer.append(StringUtil.stringListToBulette(stateMachines));
+    }
+
+    String projectName = ctx.getValue("projectName").toString();
+    String outputFolder = ctx.getValue("outputFolder").toString();
+
+    Collection<PhysicalLink> physicalLinks = CapellaComponentServices.getPhysicalLinks((Component) element);
+    if (physicalLinks.size() > 0) {
+
+      stringBuffer.append(TEXT_16);
+      for (PhysicalLink physicalLink : physicalLinks) {
+
+        stringBuffer.append(TEXT_10);
+        stringBuffer.append(CapellaComponentServices.physicalLinkToTableLine(physicalLink, projectName, outputFolder));
+        stringBuffer.append(TEXT_10);
+
+      }
+      stringBuffer.append(TEXT_11);
+
     }
 
     stringBuffer.append(TEXT_2);

@@ -1,0 +1,42 @@
+<%
+super.method_content(new StringBuffer(), ctx); 
+String projectName = ctx.getValue("projectName").toString();
+String outputFolder = ctx.getValue("outputFolder").toString();
+%>
+
+<%
+Map<String,String> providedInterfaces = CapellaComponentPortHelper.getProvidedInterfaces(parameter, projectName, outputFolder);
+if(providedInterfaces.size() > 0) {
+%>
+<h2>Provided Interfaces</h2>
+<%=StringUtil.mapToHTMLTable(providedInterfaces, "Interface", "Exchange Items")%>
+<%
+}
+Map<String,String> requiredInterfaces = CapellaComponentPortHelper.getRequiredInterfaces(parameter, projectName, outputFolder);
+if(requiredInterfaces.size() > 0) {%>
+<h2>Required Interfaces</h2>
+<%=StringUtil.mapToHTMLTable(requiredInterfaces, "Interface", "Exchange Items")%>
+<%
+}
+Collection<PhysicalLink> physicalLinks = CapellaComponentServices.getPhysicalLinks((PhysicalPort)element);
+if(physicalLinks.size() > 0) {
+%>
+<h2>Physical Links</h2>
+<table>
+	<tr>
+		<th>Link</th>
+		<th>Ends</th>
+		<th>Description</th>
+		<th>Allocated Component Exchanges</th>
+		<th>Realized Physical Links </th>
+		<th>Realizing Physical Links</th>
+	</tr>
+	<% for (PhysicalLink physicalLink : physicalLinks) {   	
+%>
+	<%=CapellaComponentServices.physicalLinkToTableLine(physicalLink, projectName, outputFolder)%>
+	<% 	
+}%>
+</table>
+<%
+}
+%>

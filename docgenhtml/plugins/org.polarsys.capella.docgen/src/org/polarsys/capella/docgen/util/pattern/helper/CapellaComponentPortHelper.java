@@ -22,6 +22,7 @@ import org.polarsys.capella.core.data.fa.ComponentExchange;
 import org.polarsys.capella.core.data.fa.ComponentExchangeKind;
 import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.information.ExchangeItem;
+import org.polarsys.capella.core.data.information.Port;
 import org.polarsys.capella.docgen.util.CapellaServices;
 import org.polarsys.capella.docgen.util.StringUtil;
 
@@ -30,14 +31,14 @@ public class CapellaComponentPortHelper {
 	private CapellaComponentPortHelper() {}
 	
 	/**
-	 * Get the provided interfaces of a ComponentPort as html
+	 * Get the provided interfaces of a Port as html
 	 * 
 	 * @param component
 	 * @param projectName
 	 * @param outputFolder
 	 * @return the provided interfaces as Map of Interface Name and List of Exchange Items
 	 */
-	public static Map<String, String> getProvidedInterfaces(ComponentPort component, String projectName,
+	public static Map<String, String> getProvidedInterfaces(Port component, String projectName,
 	    String outputFolder) {
 		final Map<String, String> providedInterfaces = new HashMap<>();
 		for (Interface modelInterface : component.getProvidedInterfaces()) {
@@ -49,14 +50,14 @@ public class CapellaComponentPortHelper {
 	}
 
 	/**
-	 * Get the required interfaces of a componentPort as html
+	 * Get the required interfaces of a Port as html
 	 * 
 	 * @param component
 	 * @param projectName
 	 * @param outputFolder
 	 * @return the required interfaces as Map of Interface Name and List of Exchange Items
 	 */
-	public static Map<String, String> getRequiredInterfaces(ComponentPort component, String projectName,
+	public static Map<String, String> getRequiredInterfaces(Port component, String projectName,
 	    String outputFolder) {
 		final Map<String, String> requiredInterfaces = new HashMap<>();
 		for (Interface modelInterface : component.getRequiredInterfaces()) {
