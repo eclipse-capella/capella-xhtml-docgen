@@ -44,6 +44,9 @@
 	<profiles>
 		<profile>
 			<id>full</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<modules>
 				<module>docgenhtml/features</module>
 				<module>docgenhtml/plugins</module>
