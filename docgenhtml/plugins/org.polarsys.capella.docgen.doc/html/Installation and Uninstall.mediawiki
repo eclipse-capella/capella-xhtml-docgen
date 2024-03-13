@@ -12,7 +12,7 @@
 -->
 =Installation and Uninstallation=
 
-Minimal requirements: Capella. Install Capella as described [[../help/topic/org.polarsys.capella.ui.doc/html/Installation%20Guide/How%20to%20install%20Capella%20and%20Addons.html | here]]<span class="github-link">[[https://github.com/eclipse/capella/blob/master/doc/plugins/org.polarsys.capella.ui.doc/html/Installation%20Guide/How%20to%20install%20Capella%20and%20Addons.mediawiki|(online documentation)]]</span>.
+Minimal requirements: Capella. Install Capella as described [[../help/topic/org.polarsys.capella.ui.doc/html/Installation%20Guide/How%20to%20install%20Capella%20and%20Addons.html | here]]<span class="github-link">[[https://github.com/eclipse-capella/capella/blob/master/doc/plugins/org.polarsys.capella.ui.doc/html/Installation%20Guide/How%20to%20install%20Capella%20and%20Addons.mediawiki|(online documentation)]]</span>.
 
 There are two options to install the Add-On:
 
