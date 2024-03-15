@@ -808,6 +808,8 @@
           id="9e7dc154-82fe-46f0-9448-9d03adc75ee2" name="Interfaces"/>
       <ownedDataPkg xsi:type="org.polarsys.capella.core.data.information:DataPkg"
           id="be6614b7-9512-4113-b3bc-76a3b7e01a4e" name="Data">
+        <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:LiteralNumericValue"
+            id="889c2c29-99f1-4c8c-990a-0f7530d9ab4d" name="LiteralNumericValue 1"/>
         <ownedDataPkgs xsi:type="org.polarsys.capella.core.data.information:DataPkg"
             id="25fe63b8-424c-492e-918c-835cafd785b5" name="Classes"/>
         <ownedStateEvents xsi:type="org.polarsys.capella.core.data.capellacommon:ChangeEvent"
