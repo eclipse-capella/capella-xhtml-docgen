@@ -77,6 +77,8 @@ public class CapellaServices {
 
 	public static final String EMPTY = "";
 
+  public static final String NULL_VALUE = "null";
+
 	public static final String VALUE_PRESENTER = " : ";
 	public static final String VALUE_EQUAL = " = ";
 

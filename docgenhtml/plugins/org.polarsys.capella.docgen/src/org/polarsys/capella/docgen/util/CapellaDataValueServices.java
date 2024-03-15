@@ -22,6 +22,7 @@ import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.capellacore.Type;
 import org.polarsys.capella.core.data.information.CollectionValue;
+import org.polarsys.capella.core.data.information.datavalue.AbstractExpressionValue;
 import org.polarsys.capella.core.data.information.datavalue.BinaryExpression;
 import org.polarsys.capella.core.data.information.datavalue.ComplexValue;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
@@ -66,11 +67,12 @@ public class CapellaDataValueServices {
 			buffer.append(CapellaServices.getHyperlinkFromElement(abstractType) + CapellaServices.SPACE);
 		}
 		String valueString = getValueOfDataValue(dataValue_p);
-		if (!valueString.equals("")) {
-			buffer.append(CapellaServices.VALUE_EQUAL);
-			// Add the value of data value to the buffer
-			buffer.append(valueString);
-		}
+    if (!valueString.equals("")) {
+      buffer.append(CapellaServices.VALUE_EQUAL);
+      // Add the value of data value to the buffer
+      buffer.append(valueString);
+    }
+
 		if (dataValue_p instanceof NumericValue) {
 			if (null != ((NumericValue) dataValue_p).getUnit()) {
 				String unitString = getUnitOfNumericValue((NumericValue) dataValue_p);
@@ -342,21 +344,22 @@ public class CapellaDataValueServices {
 		// Test the type of the Data Value
 		if (dataValue_p instanceof LiteralNumericValue) 
 		{
-			// Return the value
-			return (((LiteralNumericValue) dataValue_p).getValue());
+      String value = (((LiteralNumericValue) dataValue_p).getValue());
+      if (value == null) {
+        return CapellaServices.UNDEFINED_CHEVRON;
+      }
 		} 
 		else 
 		{
-			if (dataValue_p instanceof BinaryExpression) 
+      if (dataValue_p instanceof AbstractExpressionValue)
 			{
-				return (((BinaryExpression) dataValue_p).getExpression());
-			} 
-			else 
-				if (dataValue_p instanceof UnaryExpression) 
-				{
-					return (((UnaryExpression) dataValue_p).getExpression());
-				} 
+        String value = (((AbstractExpressionValue) dataValue_p).getExpression());
+        if (value == null) {
+          return CapellaServices.NULL_VALUE;
+        }
+      }
 				else 
+
 					if (dataValue_p instanceof LiteralBooleanValue) 
 					{
 						return (String.valueOf(((LiteralBooleanValue) dataValue_p).isValue()));
@@ -409,9 +412,13 @@ public class CapellaDataValueServices {
 				
 				return CapellaServices.getHyperlinkFromElement(referencedValue);
 			} 
-			else
 				return CapellaServices.getFullDataPkgHierarchyLink(referencedValue);
-		}
+      }
+
+      if (referencedValue == null) {
+        return CapellaServices.UNDEFINED_CHEVRON;
+      }
+
 		// Return empty if there is no value or if the type is not defined
 		return CapellaServices.EMPTY;
 	}
