@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--Capella_Version_7.0.0-->
+<!--Capella_Version_null-->
 <org.polarsys.capella.core.data.capellamodeller:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:libraries="http://www.polarsys.org/capella/common/libraries/7.0.0"
     xmlns:org.polarsys.capella.core.data.capellacommon="http://www.polarsys.org/capella/core/common/7.0.0"
@@ -809,7 +809,33 @@
       <ownedDataPkg xsi:type="org.polarsys.capella.core.data.information:DataPkg"
           id="be6614b7-9512-4113-b3bc-76a3b7e01a4e" name="Data">
         <ownedDataPkgs xsi:type="org.polarsys.capella.core.data.information:DataPkg"
-            id="25fe63b8-424c-492e-918c-835cafd785b5" name="Classes"/>
+            id="25fe63b8-424c-492e-918c-835cafd785b5" name="Classes">
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:BinaryExpression"
+              id="cde94da0-8680-465a-bd5b-9e3e861c510b" name="BinaryExpression 2"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:BooleanReference"
+              id="92ed5a94-ad34-430c-8289-0abf582d97a8" name="BooleanReference 2"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information:CollectionValue"
+              id="924c029c-448a-4ee4-85d5-dd3dc04df816" name="CollectionValue 3"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information:CollectionValueReference"
+              id="41867f86-ee77-4481-80fb-bf802ef408da" name="CollectionValueReference 4"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:ComplexValue"
+              id="0f5bbd9e-423f-4a42-bff7-f84070bafb30" name="ComplexValue 5"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:ComplexValueReference"
+              id="358b8ad6-f4cb-45fb-b422-afd5a81fd67a" name="ComplexValueReference 6"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:EnumerationReference"
+              id="32224177-45d0-4ff0-a92e-3b326f7e2f56" name="EnumerationReference 7"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:LiteralNumericValue"
+              id="a769e73e-d527-4f67-afd8-8bab2a2e44ed" name="LiteralNumericValue 8"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:LiteralStringValue"
+              id="3d1a655c-6288-4fc0-a339-999048e2242f" name="LiteralStringValue 9"
+              value=""/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:NumericReference"
+              id="1d43e55f-87a3-49bf-99f5-2bc60b2ce30f" name="NumericReference 10"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:StringReference"
+              id="a950b0e8-987c-4e6d-b53a-f510ff543171" name="StringReference 11"/>
+          <ownedDataValues xsi:type="org.polarsys.capella.core.data.information.datavalue:UnaryExpression"
+              id="553839c9-7873-4829-9635-9782253efd3e" name="UnaryExpression 12"/>
+        </ownedDataPkgs>
         <ownedStateEvents xsi:type="org.polarsys.capella.core.data.capellacommon:ChangeEvent"
             id="ebc7485e-718b-4753-93bf-4ee63c5ce81b" name="ChangeEvent 1" expression="#f32488b8-bcc5-4e97-acb7-4e0537b0217f">
           <ownedConstraints xsi:type="org.polarsys.capella.core.data.capellacore:Constraint"
