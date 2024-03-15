@@ -342,8 +342,10 @@ public class CapellaDataValueServices {
 		// Test the type of the Data Value
 		if (dataValue_p instanceof LiteralNumericValue) 
 		{
-			// Return the value
-			return (((LiteralNumericValue) dataValue_p).getValue());
+      String value = ((LiteralNumericValue) dataValue_p).getValue();
+      if (value == null) {
+        return CapellaServices.UNDEFINED_CHEVRON;
+      }
 		} 
 		else 
 		{
