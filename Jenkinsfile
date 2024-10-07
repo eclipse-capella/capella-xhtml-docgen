@@ -3,10 +3,10 @@ pipeline {
 
 	tools {
 		maven 'apache-maven-latest'
-		jdk 'openjdk-jdk14-latest'
+		jdk 'openjdk-jdk17-latest'
 	}
 	environment {
-	    JACOCO_VERSION = "0.8.6"
+	    JACOCO_VERSION = "0.8.8"
 	    MVN_QUALITY_PROFILES = '-P full'
 	    JACOCO_EXEC_FILE_PATH = '${WORKSPACE}/jacoco.exec'
 		BUILD_KEY = (github.isPullRequest() ? CHANGE_TARGET : BRANCH_NAME).replaceFirst(/^v/, '')
@@ -65,7 +65,7 @@ pipeline {
 					script {
 						// Retrieve the IFE sample from capella repository
 						checkout([$class: 'GitSCM', 
-							branches: [[name: '*/master']], 
+							branches: [[name: '*/v6.x']],
 							extensions: [[$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'samples']]], 
 										[$class: 'RelativeTargetDirectory', relativeTargetDir: 'capella']], 
 							userRemoteConfigs: [[credentialsId: '0dea5761-867c-44db-92fa-9304c81a8653', url: 'https://github.com/eclipse/capella']]
