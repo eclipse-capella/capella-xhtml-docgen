@@ -15,10 +15,6 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<prerequisites>
-		<maven>3.0</maven>
-	</prerequisites>
-
 	<name>Capella XHTML DocGen Add-on</name>
 	<groupId>org.polarsys</groupId>
 	<artifactId>org.polarsys.capella.addon.docgen</artifactId>
@@ -26,18 +22,18 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>2.2.0</tycho-version>
-		<tycho-extras-version>2.2.0</tycho-extras-version>
+		<tycho-version>4.0.9</tycho-version>
+		<tycho-extras-version>4.0.9</tycho-extras-version>
 		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
 		<antrun-version>1.7</antrun-version>
-		<jacoco-version>0.8.6</jacoco-version>
+		<jacoco-version>0.8.8</jacoco-version>
 		<sourcePhase>package</sourcePhase>
 
 		<!-- for junit -->
 		<capella-product-id>org.polarsys.capella.core.platform.sirius.ui.perspective.product</capella-product-id>
 		<capella-rcp-product-id>org.polarsys.capella.rcp.product</capella-rcp-product-id>
 		<capella-application-id>org.polarsys.capella.core.platform.sirius.ui.perspective.id</capella-application-id>
-		<tycho.testArgLine>-Xms256m -Xmx1024m</tycho.testArgLine>
+		<tycho.testArgLine>-Xms256m -Xmx3000m</tycho.testArgLine>
 
 		<!-- for packaging -->
 		<platform-name>oxygen/201803211000</platform-name>
@@ -143,6 +139,7 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
+					<executionEnvironment>JavaSE-11</executionEnvironment>
 					<targetDefinitionIncludeSource>honor</targetDefinitionIncludeSource>
 					<pomDependencies>consider</pomDependencies>
 					<target>
@@ -246,9 +243,9 @@
 				</dependencies>
 			</plugin>
 			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
 				<configuration>
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
@@ -260,10 +257,10 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>source-feature</id>
+						<id>feature-source</id>
 						<phase>${sourcePhase}</phase>
 						<goals>
-							<goal>source-feature</goal>
+							<goal>feature-source</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -307,9 +304,9 @@
 
 				<!-- plugins only called if a descendant need them -->
 				<plugin>
-					<groupId>org.eclipse.tycho.extras</groupId>
-					<artifactId>tycho-eclipserun-plugin</artifactId>
-					<version>${tycho-extras-version}</version>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-eclipse-plugin</artifactId>
+					<version>${tycho-version}</version>
 					<configuration>
 						<repositories>
 							<repository>
@@ -336,7 +333,6 @@
 								<type>eclipse-plugin</type>
 							</dependency>
 						</dependencies>
-						<executionEnvironment>JavaSE-1.8</executionEnvironment>
 					</configuration>
 					<executions>
 						<execution>
@@ -346,7 +342,14 @@
 								<goal>eclipse-run</goal>
 							</goals>
 							<configuration>
-								<appArgLine>-application org.eclipse.equinox.p2.repository.repo2runnable -source file:${project.build.directory}/repository -destination ${project.build.directory}/${packagedAddonName}/eclipse</appArgLine>
+								<applicationArgs>
+									<arg>-application</arg>
+									<arg>org.eclipse.equinox.p2.repository.repo2runnable</arg>
+									<arg>-source</arg>
+									<arg>file:${project.build.directory}/repository</arg>
+									<arg>-destination</arg>
+									<arg>${project.build.directory}/${packagedAddonName}/eclipse</arg>
+								</applicationArgs>
 							</configuration>
 						</execution>
 					</executions>
@@ -400,6 +403,31 @@
 							<configuration>
 								<finalName>${packagedAddonName}-updateSite-${unqualifiedVersion}.${buildQualifier}</finalName>
 							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.cyclonedx</groupId>
+					<artifactId>cyclonedx-maven-plugin</artifactId>
+					<version>2.8.1</version>
+					<configuration>
+						<schemaVersion>1.5</schemaVersion>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-sbom</artifactId>
+							<version>${tycho-version}</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>create-bom</id>
+							<phase>package</phase>
+							<goals>
+								<goal>makeBom</goal>
+							</goals>
 						</execution>
 					</executions>
 				</plugin>
