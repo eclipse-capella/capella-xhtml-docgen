@@ -11,17 +11,137 @@
  *******************************************************************************/
 target "CapellaXHTMLDocGenAddon"
 
-include "https://download.eclipse.org/capella/core/updates/releases/7.0.0/targets/capella.target-definition.targetplatform"
-
 with source, requirements
+
+location GMF-Notation-1.13.1 "https://download.eclipse.org/modeling/gmp/gmf-notation/updates/releases/R202211151334" {
+    org.eclipse.gmf.runtime.notation.sdk.feature.group lazy
+}
+
+location GMF-Runtime-1.16 "https://download.eclipse.org/modeling/gmp/gmf-runtime/updates/milestones/S202401081627" {
+    org.eclipse.gmf.runtime.sdk.feature.group lazy
+    org.eclipse.gmf.runtime.thirdparty.feature.group lazy
+}
+
+location GEF-Classic  "https://download.eclipse.org/tools/gef/classic/releases/3.17.0" {
+    org.eclipse.gef.feature.group lazy
+	org.eclipse.gef.source.feature.group
+    org.eclipse.gef.sdk.feature.group lazy
+    org.eclipse.draw2d.sdk.feature.group lazy
+	org.eclipse.draw2d.source.feature.group
+}
+
+location eclipse "https://download.eclipse.org/releases/2023-03" {
+	org.eclipse.sdk.feature.group
+	org.eclipse.platform.feature.group
+	org.eclipse.emf.sdk.feature.group
+	org.eclipse.emf.validation.source.feature.group
+	org.eclipse.emf.transaction.source.feature.group
+	org.eclipse.emf.workspace.source.feature.group
+	org.eclipse.equinox.executable.feature.group
+	com.ibm.icu
+	org.eclipse.viatra.query.runtime.feature.source.feature.group
+	org.eclipse.xtext.xbase.lib.feature.group
+	org.eclipse.jgit.source.feature.group
+	org.eclipse.egit.source.feature.group
+	org.apache.log4j
+	org.apache.commons.lang
+	com.google.guava
+}
+
+location Mylyn-3.26 "https://download.eclipse.org/mylyn/releases/3.26/" {
+	org.eclipse.mylyn_feature.feature.group [3.26.0,3.27.0)
+	org.eclipse.mylyn.commons.feature.group [3.26.0,3.27.0)
+	org.eclipse.mylyn.context_feature.feature.group [3.26.0,3.27.0)
+	org.eclipse.mylyn.monitor.feature.group [3.26.0,3.27.0)
+	org.eclipse.mylyn.team_feature.feature.group [3.26.0,3.27.0)
+	org.eclipse.mylyn.ide_feature.feature.group [3.26.0,3.27.0)
+	org.eclipse.mylyn.help.ui [3.26.0,3.27.0)
+}
+
+location Orbit-2023-03 "https://download.eclipse.org/tools/orbit/downloads/drops/R20230302014618/repository/" {
+	org.slf4j.api
+	ch.qos.logback.slf4j
+    ch.qos.logback.classic
+    ch.qos.logback.core
+}
+
+location sirius "https://download.eclipse.org/sirius/updates/releases/7.4.1/2023-03" {
+	org.eclipse.sirius.doc.feature.feature.group
+	org.eclipse.sirius.doc.feature.source.feature.group
+	org.eclipse.sirius.runtime.source.feature.group
+	org.eclipse.sirius.runtime.aql.source.feature.group
+	org.eclipse.sirius.runtime.ide.ui.source.feature.group
+	org.eclipse.sirius.interpreter.feature.source.feature.group
+	org.eclipse.acceleo.ui.interpreter.source.feature.group
+	org.eclipse.sirius.aql.source.feature.group
+	org.eclipse.acceleo.query.source.feature.group
+	org.eclipse.sirius.runtime.ide.ui.acceleo.source.feature.group
+}
+
+location kitalpha-runtime-core-master "https://download.eclipse.org/kitalpha/updates/nightly/runtime/master/" {
+	org.polarsys.kitalpha.ad.runtime.feature.source.feature.group
+	org.polarsys.kitalpha.cadence.feature.source.feature.group
+	org.polarsys.kitalpha.common.feature.source.feature.group
+	org.polarsys.kitalpha.emde.feature.source.feature.group
+	org.polarsys.kitalpha.emde.ui.feature.source.feature.group
+	org.polarsys.kitalpha.massactions.feature.source.feature.group
+	org.polarsys.kitalpha.model.common.share.feature.source.feature.group
+	org.polarsys.kitalpha.model.common.commands.feature.source.feature.group
+	org.polarsys.kitalpha.model.common.scrutiny.feature.source.feature.group
+	org.polarsys.kitalpha.model.detachment.contrib.viewpoints.feature.source.feature.group
+	org.polarsys.kitalpha.model.detachment.feature.source.feature.group
+	org.polarsys.kitalpha.model.detachment.ui.feature.source.feature.group
+	org.polarsys.kitalpha.report.feature.source.feature.group
+	org.polarsys.kitalpha.report.ui.feature.source.feature.group
+	org.polarsys.kitalpha.resourcereuse.emfscheme.feature.source.feature.group
+	org.polarsys.kitalpha.resourcereuse.emfscheme.ui.feature.source.feature.group
+	org.polarsys.kitalpha.resourcereuse.feature.source.feature.group
+	org.polarsys.kitalpha.resourcereuse.ui.feature.source.feature.group
+	org.polarsys.kitalpha.richtext.widget.feature.source.feature.group
+	org.polarsys.kitalpha.richtext.widget.ext.feature.source.feature.group
+	org.polarsys.kitalpha.transposer.feature.source.feature.group
+	org.polarsys.kitalpha.sirius.rotativeimage.feature.feature.group
+}
+
+
+location diffmerge-core "https://download.eclipse.org/diffmerge/releases/0.15.0/emf-diffmerge-site/" {
+	org.eclipse.emf.diffmerge.feature.source.feature.group
+	org.eclipse.emf.diffmerge.sirius.feature.source.feature.group
+	org.eclipse.emf.diffmerge.gmf.feature.source.feature.group
+	org.eclipse.emf.diffmerge.sdk.feature.source.feature.group
+	org.eclipse.emf.diffmerge.egit.feature.source.feature.group
+}
+
+location amalgam "https://download.eclipse.org/modeling/amalgam/updates/releases/1.14.0/capella/" {
+	org.eclipse.amalgam.explorer.activity.source.feature.group
+}
+
+location egf "https://download.eclipse.org/egf/updates/1.6.4/2023-03/" {
+	org.eclipse.egf.sdk.feature.source.feature.group
+} 
+
+location Nattable "https://download.eclipse.org/nattable/releases/2.1.0/repository/" {
+	org.eclipse.nebula.widgets.nattable.core.feature.feature.group lazy
+	org.eclipse.nebula.widgets.nattable.extension.glazedlists.feature.feature.group lazy
+}
+
+location nebula "https://download.eclipse.org/nebula/releases/3.0.0/" {
+	org.eclipse.nebula.widgets.richtext.feature.feature.group
+}
+
+location eclipse-shared-license "https://download.eclipse.org/cbi/updates/license" {
+	org.eclipse.license.feature.group lazy
+}
 
 location capella-master "https://download.eclipse.org/capella/core/updates/releases/7.0.0/org.polarsys.capella.rcp.site/" {
 	org.polarsys.capella.rcp.feature.group lazy
 }
 
-location kitalpha-docgen-master "https://download.eclipse.org/kitalpha/updates/nightly/sdk/master" {
+location kitalpha-sdk-master "https://download.eclipse.org/kitalpha/updates/nightly/sdk/master" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 	org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group lazy
+	org.polarsys.kitalpha.doc.feature.feature.group lazy
+	org.polarsys.kitalpha.emde.sdk.feature.source.feature.group lazy
 }
 
 location eclipse "https://download.eclipse.org/releases/2023-03" {

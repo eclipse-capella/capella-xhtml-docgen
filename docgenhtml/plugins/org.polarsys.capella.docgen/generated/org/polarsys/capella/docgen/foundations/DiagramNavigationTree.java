@@ -124,9 +124,11 @@ public class DiagramNavigationTree {
     String outputFolder = ctx.getValue("outputFolder").toString();
     String treeID = TreeServices.DIAGRAMS_TREE_ID;
 
+    stringBuffer.append("TEST");
     if (element instanceof BlockArchitecture) {
+      stringBuffer.append("IS BLOCKARCHITECTURE");
       if (CapellaHelper.hostDiagrams((BlockArchitecture) element)) {
-
+        stringBuffer.append("HOSTDIAGRAMS");
         stringBuffer.append(TEXT_1);
         {
           //<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.kitalpha.doc.gen.business.core/egf/HTMLDocGenCommon.fcore#LogicalName=org.polarsys.kitalpha.doc.gen.business.core.doccontent.treeview.TreeViewControlHeader" args="element:parameter, treeID:treeID"%>
