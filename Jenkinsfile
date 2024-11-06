@@ -84,7 +84,7 @@ pipeline {
 			steps {
 				junit allowEmptyResults: true, testResults: '*.xml,**/target/surefire-reports/*.xml'
 				sh "mvn -Djacoco.dataFile=$JACOCO_EXEC_FILE_PATH org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:report $MVN_QUALITY_PROFILES -e -f pom.xml"
-				archiveArtifacts artifacts: 'tests/**/*.ser'
+				archiveArtifacts artifacts: 'tests/**'
       		}
 		}
 	}
