@@ -14403,6 +14403,14 @@
           <ownedDataTypes xsi:type="org.polarsys.capella.core.data.information.datatype:PhysicalQuantity"
               id="7fc204dc-9c56-4b00-a927-82a23b8bb5ca" name="Sample Rate" unit="#c46e193b-42ee-493f-b2b4-fec2022a464a"/>
         </ownedDataPkgs>
+        <ownedClasses xsi:type="org.polarsys.capella.core.data.information:Class"
+            id="03d16b58-3ab3-49df-92e4-91b15b7ea2cf" name="Class 1"/>
+        <ownedClasses xsi:type="org.polarsys.capella.core.data.information:Class"
+            id="02072dd8-fe3e-44a8-8274-0aa086f9b859" name="Class 2">
+          <ownedGeneralizations xsi:type="org.polarsys.capella.core.data.capellacore:Generalization"
+              id="148c289e-9312-4494-90a5-dc74d0618734" super="#03d16b58-3ab3-49df-92e4-91b15b7ea2cf"
+              sub="#02072dd8-fe3e-44a8-8274-0aa086f9b859"/>
+        </ownedClasses>
       </ownedDataPkg>
       <ownedPhysicalComponentPkg xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponentPkg"
           id="30297fd3-87ad-414f-9eb9-4dea48b8280f" name="Structure">
