@@ -115,6 +115,8 @@ public class CapellaServices {
 	public static final String MAX = "MAX  ";
 	public static final String DEFAULT = "DEFAULT  ";
 	public static final String NULL = "NULL  ";
+
+	public static final String NULL_LOWER_CASE = "null";
 	
 	public static final String UNDEFINED = "undefined";
 	public static final String UNDEFINED_CHEVRON = "&lt;undefined&gt;";
