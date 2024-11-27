@@ -338,9 +338,9 @@ public class CapellaDataValueServices {
 		return getValueOfDataValue(dataValue_p, false);
 	}
 
-	private static String normalize(String value) {
+	private static String normalize(String value, String _default) {
 		if (value == null) {
-			return CapellaServices.UNDEFINED_CHEVRON;
+			return _default;
 		}
 		return value;
 	}
@@ -349,15 +349,15 @@ public class CapellaDataValueServices {
 		// Test the type of the Data Value
 		if (dataValue_p instanceof LiteralNumericValue) 
 		{
-			return normalize( ((LiteralNumericValue) dataValue_p).getValue());
+			return normalize( ((LiteralNumericValue) dataValue_p).getValue(), CapellaServices.UNDEFINED_CHEVRON);
 		} 
 		if (dataValue_p instanceof BinaryExpression) 
 		{
-			return normalize((((BinaryExpression) dataValue_p).getExpression()));
+			return normalize((((BinaryExpression) dataValue_p).getExpression()), CapellaServices.NULL_LOWER_CASE);
 		} 
 		if (dataValue_p instanceof UnaryExpression) 
 		{
-			return normalize( (((UnaryExpression) dataValue_p).getExpression()));
+			return normalize( (((UnaryExpression) dataValue_p).getExpression()), CapellaServices.NULL_LOWER_CASE);
 		} 
 		if (dataValue_p instanceof LiteralBooleanValue) 
 		{
