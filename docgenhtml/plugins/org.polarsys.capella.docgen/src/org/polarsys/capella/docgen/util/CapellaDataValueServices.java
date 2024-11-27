@@ -338,67 +338,58 @@ public class CapellaDataValueServices {
 		return getValueOfDataValue(dataValue_p, false);
 	}
 
+	private static String normalize(String value, String _default) {
+		if (value == null) {
+			return _default;
+		}
+		return value;
+	}
+	
 	private static String getValueOfDataValue(DataValue dataValue_p, boolean simple) {
 		// Test the type of the Data Value
 		if (dataValue_p instanceof LiteralNumericValue) 
 		{
-			String value = ((LiteralNumericValue) dataValue_p).getValue();
-			if (value == null) {
+			return normalize( ((LiteralNumericValue) dataValue_p).getValue(), CapellaServices.UNDEFINED_CHEVRON);
+		} 
+		if (dataValue_p instanceof BinaryExpression) 
+		{
+			return normalize((((BinaryExpression) dataValue_p).getExpression()), CapellaServices.NULL_LOWER_CASE);
+		} 
+		if (dataValue_p instanceof UnaryExpression) 
+		{
+			return normalize( (((UnaryExpression) dataValue_p).getExpression()), CapellaServices.NULL_LOWER_CASE);
+		} 
+		if (dataValue_p instanceof LiteralBooleanValue) 
+		{
+			return (String.valueOf(((LiteralBooleanValue) dataValue_p).isValue()));
+		} 
+		if (dataValue_p instanceof LiteralStringValue) 
+		{
+			String value = ((LiteralStringValue) dataValue_p).getValue();
+			if (null == value)
+			{
 				return CapellaServices.UNDEFINED_CHEVRON;
 			}
-			else {
-				return value;
-			}
-		} 
-		else 
-		{
-			if (dataValue_p instanceof BinaryExpression) 
+			if (value.trim().isEmpty())
 			{
-				return (((BinaryExpression) dataValue_p).getExpression());
-			} 
-			else 
-				if (dataValue_p instanceof UnaryExpression) 
-				{
-					return (((UnaryExpression) dataValue_p).getExpression());
-				} 
-				else 
-					if (dataValue_p instanceof LiteralBooleanValue) 
-					{
-						return (String.valueOf(((LiteralBooleanValue) dataValue_p).isValue()));
-					} 
-					else 
-						if (dataValue_p instanceof LiteralStringValue) 
-						{
-							String value = ((LiteralStringValue) dataValue_p).getValue();
-							if (null == value)
-							{
-								value = CapellaServices.UNDEFINED_CHEVRON;
-							}
-							else
-							{
-								if (value.trim().isEmpty())
-								{
-									value = "\"" + value + "\"";
-								}
-							}
-							return (value);
-						}
-						else
-							if (dataValue_p instanceof CollectionValue) 
-							{
-								CollectionValue collectionValue = (CollectionValue) dataValue_p;
-								String collectionName = collectionValue.getName();
-								if (collectionName == null || (collectionName!= null && collectionName.isEmpty()))
-								{
-									collectionName += CapellaServices.NO_NAME;
-								}
-								Type type = collectionValue.getType();
-								if (type != null)
-								{
-									collectionName += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
-								}
-								return collectionName;
-							}
+				value = "\"" + value + "\"";
+			}
+			return (value);
+		}
+		if (dataValue_p instanceof CollectionValue) 
+		{
+			CollectionValue collectionValue = (CollectionValue) dataValue_p;
+			String collectionName = collectionValue.getName();
+			if (collectionName == null || (collectionName!= null && collectionName.isEmpty()))
+			{
+				collectionName += CapellaServices.NO_NAME;
+			}
+			Type type = collectionValue.getType();
+			if (type != null)
+			{
+				collectionName += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
+			}
+			return collectionName;
 		}
 		
 		EObject referencedValue = getReferencedValue(dataValue_p);
@@ -414,8 +405,7 @@ public class CapellaDataValueServices {
 				
 				return CapellaServices.getHyperlinkFromElement(referencedValue);
 			} 
-			else
-				return CapellaServices.getFullDataPkgHierarchyLink(referencedValue);
+			return CapellaServices.getFullDataPkgHierarchyLink(referencedValue);
 		}
 		// Return empty if there is no value or if the type is not defined
 		return CapellaServices.EMPTY;
