@@ -22,14 +22,20 @@ import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.capellacore.Type;
 import org.polarsys.capella.core.data.information.CollectionValue;
+import org.polarsys.capella.core.data.information.CollectionValueReference;
 import org.polarsys.capella.core.data.information.datavalue.BinaryExpression;
+import org.polarsys.capella.core.data.information.datavalue.BooleanReference;
 import org.polarsys.capella.core.data.information.datavalue.ComplexValue;
+import org.polarsys.capella.core.data.information.datavalue.ComplexValueReference;
 import org.polarsys.capella.core.data.information.datavalue.DataValue;
 import org.polarsys.capella.core.data.information.datavalue.EnumerationLiteral;
+import org.polarsys.capella.core.data.information.datavalue.EnumerationReference;
 import org.polarsys.capella.core.data.information.datavalue.LiteralBooleanValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralNumericValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralStringValue;
+import org.polarsys.capella.core.data.information.datavalue.NumericReference;
 import org.polarsys.capella.core.data.information.datavalue.NumericValue;
+import org.polarsys.capella.core.data.information.datavalue.StringReference;
 import org.polarsys.capella.core.data.information.datavalue.UnaryExpression;
 import org.polarsys.capella.core.data.information.datavalue.ValuePart;
 
@@ -67,7 +73,14 @@ public class CapellaDataValueServices {
 		}
 		String valueString = getValueOfDataValue(dataValue_p);
 		if (!valueString.equals("")) {
-			buffer.append(CapellaServices.VALUE_EQUAL);
+      if (isDataValueReference(dataValue_p)) {
+        buffer.append(CapellaServices.VALUE_ARROW);
+      } else if (dataValue_p instanceof ComplexValue) {
+        buffer.append(CapellaServices.VALUE_PRESENTER);
+      } else {
+        buffer.append(CapellaServices.VALUE_EQUAL);
+      }
+
 			// Add the value of data value to the buffer
 			buffer.append(valueString);
 		}
@@ -363,6 +376,22 @@ public class CapellaDataValueServices {
 		{
 			return (String.valueOf(((LiteralBooleanValue) dataValue_p).isValue()));
 		} 
+    if (dataValue_p instanceof ComplexValue) {
+      Type type = ((ComplexValue) dataValue_p).getType();
+      if (type instanceof NamedElement) {
+        if (simple) {
+          String name = ((NamedElement) type).getName();
+          if (name != null && name.length() > 0) {
+            return CapellaServices.getHyperlinkFromElement(type, name);
+          }
+
+          return CapellaServices.getHyperlinkFromElement(type);
+        }
+        return CapellaServices.getFullDataPkgHierarchyLink(type);
+
+      }
+      return CapellaServices.UNDEFINED_CHEVRON;
+    }
 		if (dataValue_p instanceof LiteralStringValue) 
 		{
 			String value = ((LiteralStringValue) dataValue_p).getValue();
@@ -388,27 +417,35 @@ public class CapellaDataValueServices {
 			if (type != null)
 			{
 				collectionName += " : " + CapellaServices.getFullDataPkgHierarchyLink(type);
+        return collectionName;
 			}
-			return collectionName;
+      return CapellaServices.EMPTY;
 		}
+
+    if (isDataValueReference(dataValue_p)) {
+      EObject referencedValue = getReferencedValue(dataValue_p);
+      if (referencedValue instanceof NamedElement) {
+        if (simple) {
+          String name = ((NamedElement) referencedValue).getName();
+          if (name != null && name.length() > 0) {
+            return CapellaServices.getHyperlinkFromElement(referencedValue, name);
+          }
+
+          return CapellaServices.getHyperlinkFromElement(referencedValue);
+        }
+        return CapellaServices.getFullDataPkgHierarchyLink(referencedValue);
+      }
+      // Return undefined if there is no value or if the type is not defined
+      return CapellaServices.UNDEFINED_CHEVRON;
+    }
 		
-		EObject referencedValue = getReferencedValue(dataValue_p);
-		if (referencedValue instanceof NamedElement) 
-		{
-			if (simple) 
-			{
-				String name = ((NamedElement) referencedValue).getName();
-				if (name != null && name.length() > 0) 
-				{
-					return CapellaServices.getHyperlinkFromElement(referencedValue, name);
-				}
-				
-				return CapellaServices.getHyperlinkFromElement(referencedValue);
-			} 
-			return CapellaServices.getFullDataPkgHierarchyLink(referencedValue);
-		}
-		// Return empty if there is no value or if the type is not defined
-		return CapellaServices.EMPTY;
+    return CapellaServices.EMPTY;
+  }
+
+  public static boolean isDataValueReference(DataValue dv) {
+    return (dv instanceof BooleanReference || dv instanceof CollectionValueReference
+        || dv instanceof ComplexValueReference || dv instanceof EnumerationReference || dv instanceof NumericReference
+        || dv instanceof StringReference);
 	}
 
 	public static String getSimpleValueOfDataValue(DataValue dataValue_p) {
