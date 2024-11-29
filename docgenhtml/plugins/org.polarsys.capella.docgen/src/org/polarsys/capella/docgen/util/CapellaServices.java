@@ -79,6 +79,7 @@ public class CapellaServices {
 
 	public static final String VALUE_PRESENTER = " : ";
 	public static final String VALUE_EQUAL = " = ";
+  public static final String VALUE_ARROW = " -> ";
 
 	public static final String IS_ABSTRACT = "Is Abstract\t:\t";
 	public static final String IS_PRIMITIVE = "Is Primitive\t:\t";
