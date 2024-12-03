@@ -86,7 +86,8 @@ public class DefaultImageHandler implements IImageHandler {
       IPath path = new Path(decodedImageSrc);
       IFile iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
       if (!iconFile.exists()) { // Try if image is located in the current folder
-        IPath parentSrcFolder = new Path(eObject.eResource().getURI().segment(1));
+        String unencodedPath = StringUtil.unencodeURIString(eObject.eResource().getURI().segment(1), logger);
+        IPath parentSrcFolder = new Path(unencodedPath);
         path = parentSrcFolder.append(decodedImageSrc);
         iconFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
       }
