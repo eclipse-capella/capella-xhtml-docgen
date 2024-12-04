@@ -10,6 +10,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.polarsys.capella.configuration,
  org.polarsys.capella.configuration.impl,
  org.polarsys.capella.configuration.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

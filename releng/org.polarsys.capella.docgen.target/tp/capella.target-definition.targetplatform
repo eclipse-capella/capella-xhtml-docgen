@@ -13,6 +13,7 @@ target "CapellaXHTMLDocGenAddon"
 
 include "https://download.eclipse.org/capella/core/updates/releases/7.0.0/targets/capella.target-definition.targetplatform"
 
+environment JavaSE-17
 with source, requirements
 
 location capella-master "https://download.eclipse.org/capella/core/updates/releases/7.0.0/org.polarsys.capella.rcp.site/" {
