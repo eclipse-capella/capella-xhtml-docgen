@@ -25,7 +25,7 @@
 		<tycho-version>4.0.9</tycho-version>
 		<tycho-extras-version>4.0.9</tycho-extras-version>
 		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
-		<antrun-version>1.7</antrun-version>
+		<antrun-version>3.0.0</antrun-version>
 		<jacoco-version>0.8.10</jacoco-version>
 		<sourcePhase>package</sourcePhase>
 
@@ -142,8 +142,11 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<targetDefinitionIncludeSource>honor</targetDefinitionIncludeSource>
-					<pomDependencies>consider</pomDependencies>
+					<targetDefinitionIncludeSource>force</targetDefinitionIncludeSource>
+					<resolver>p2</resolver>
+					<dependency-resolution>
+						<optionalDependencies>ignore</optionalDependencies>
+					</dependency-resolution>
 					<target>
 						<artifact>
 							<groupId>org.polarsys</groupId>
@@ -188,25 +191,6 @@
 			</plugin-->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>
-				</configuration>
-				<executions>
-					<execution>
-						<id>plugin-source</id>
-						<phase>${sourcePhase}</phase>
-						<goals>
-							<goal>plugin-source</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
@@ -237,12 +221,19 @@
 				</configuration>
 				<executions>
 					<execution>
+						<id>plugin-source</id>
+						<phase>${sourcePhase}</phase>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+					<execution>
 						<id>feature-source</id>
 						<phase>${sourcePhase}</phase>
 						<goals>
 							<goal>feature-source</goal>
 						</goals>
-					</execution>
+					</execution>					
 				</executions>
 			</plugin>
 			<plugin>
@@ -272,22 +263,13 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-compiler-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-						<compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
-					</configuration>
-				</plugin>
-
 				<!-- plugins only called if a descendant need them -->
 				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-eclipse-plugin</artifactId>
-					<version>${tycho-version}</version>
+					<groupId>org.eclipse.tycho.extras</groupId>
+					<artifactId>tycho-eclipserun-plugin</artifactId>
+					<version>${tycho-extras-version}</version>
 					<configuration>
+						<executionEnvironment>JavaSE-17</executionEnvironment>
 						<repositories>
 							<repository>
 								<id>eclipse-releases-${platform-name}</id>
