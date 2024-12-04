@@ -22,8 +22,8 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>4.0.9</tycho-version>
-		<tycho-extras-version>4.0.9</tycho-extras-version>
+		<tycho-version>4.0.10</tycho-version>
+		<tycho-extras-version>4.0.10</tycho-extras-version>
 		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
 		<antrun-version>3.0.0</antrun-version>
 		<jacoco-version>0.8.10</jacoco-version>
