@@ -14,7 +14,7 @@ pipeline {
 	stages {
 		stage('Generate TP') {
 			steps {
-				sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
+				sh 'mvn verify -X -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
 			}
 		}
 
