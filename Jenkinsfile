@@ -64,16 +64,6 @@ pipeline {
 			steps {
 				wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
 					script {
-						// Retrieve the IFE sample from capella repository
-						checkout([$class: 'GitSCM', 
-							branches: [[name: '*/v6.x']],
-							extensions: [[$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'samples']]], 
-										[$class: 'RelativeTargetDirectory', relativeTargetDir: 'capella']], 
-							userRemoteConfigs: [[credentialsId: '0dea5761-867c-44db-92fa-9304c81a8653', url: 'https://github.com/eclipse/capella']]
-						])
-						
-						sh "cp -r capella/samples/In-Flight\\ Entertainment\\ System/* \"tests/plugins/org.polarsys.capella.docgen.test.ju/model/In-Flight Entertainment System/\""
-						
 						// Launch test
 						sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
 					}
@@ -84,7 +74,7 @@ pipeline {
 			steps {
 				junit allowEmptyResults: true, testResults: '*.xml,**/target/surefire-reports/*.xml'
 				sh "mvn -Djacoco.dataFile=$JACOCO_EXEC_FILE_PATH org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:report $MVN_QUALITY_PROFILES -e -f pom.xml"
-				archiveArtifacts artifacts: 'tests/**/*.ser'
+				archiveArtifacts artifacts: 'tests/**'
       		}
 		}
 	}
