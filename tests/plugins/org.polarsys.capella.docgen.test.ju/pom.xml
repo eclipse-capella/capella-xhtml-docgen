@@ -32,27 +32,7 @@
 	</properties>
 	
 	<build>
-  		<plugins>
-  			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<product>${capella-rcp-product-id}</product>
-					<application>${capella-application-id}</application>
-					<useUIHarness>true</useUIHarness>
-					<useUIThread>true</useUIThread>
-					<includes>**/*TestSuite.java</includes>
-					<dependencies>
-						<!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=462862 -->
-						<dependency>
-							<type>eclipse-plugin</type>
-							<artifactId>org.eclipse.equinox.event</artifactId>
-							<version>0.0.0</version>
-						</dependency>
-					</dependencies>
-				</configuration>
-			</plugin>
+  		<plugins>  			
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
