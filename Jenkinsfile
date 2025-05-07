@@ -12,7 +12,7 @@ pipeline {
 		BUILD_KEY = (github.isPullRequest() ? CHANGE_TARGET : BRANCH_NAME).replaceFirst(/^v/, '')
 		CAPELLA_PRODUCT_PATH = "${WORKSPACE}/capella/capella"
 		CAPELLA_CONFIGURATION_PATH = "${WORKSPACE}/capella/configuration"
-		CAPELLA_BRANCH = 'master'
+		CAPELLA_BRANCH = '7.0.0'
 	}
 	stages {
 		stage('Generate TP') {
@@ -75,16 +75,16 @@ pipeline {
 	     	}
 	    }
 
-    	stage('Install test features') {
+    	stage('Prepare for tests & Install test features') {
         	steps {
         		script {
 	        		sh "chmod 755 ${CAPELLA_PRODUCT_PATH}"
 	        		sh "chmod 755 ${WORKSPACE}/capella/jre/bin/java"
-	        		        		
+	        		sh "mvn verify -P tests -e -f pom.xml"      		
 	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", capella.getTestUpdateSiteURL("${CAPELLA_BRANCH}"), 'org.polarsys.capella.test.feature.feature.group', "-Dlogback.configurationFile=${CAPELLA_CONFIGURATION_PATH}/logback.xml")
 	        		
 	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.docgen.feature.feature.group', "-Dlogback.configurationFile=${CAPELLA_CONFIGURATION_PATH}/logback.xml")
-					eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.docgen.test.ju', "-Dlogback.configurationFile=${CAPELLA_CONFIGURATION_PATH}/logback.xml")
+					eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/tests/plugins/org.polarsys.capella.docgen.test.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.docgen.test.feature.feature.group', "-Dlogback.configurationFile=${CAPELLA_CONFIGURATION_PATH}/logback.xml")
 	       		
 				}         
 	     	}
@@ -95,9 +95,9 @@ pipeline {
         		script {
         			wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
 		        		
-		        		tester.runUITests("${CAPELLA_PRODUCT_PATH}", 'CommandLineTestSuite', 'org.polarsys.capella.docgen.test.ju', 
+		        		tester.runNONUITests("${CAPELLA_PRODUCT_PATH}", 'CommandLineTestSuite', 'org.polarsys.capella.docgen.test.ju', 
 		        			['org.polarsys.capella.docgen.test.ju.suites.CommandLineTestSuite'])		
-						tester.runUITests("${CAPELLA_PRODUCT_PATH}", 'IFESampleTestSuite', 'org.polarsys.capella.docgen.test.ju', 
+						tester.runNONUITests("${CAPELLA_PRODUCT_PATH}", 'IFESampleTestSuite', 'org.polarsys.capella.docgen.test.ju', 
 		        			['org.polarsys.capella.docgen.test.ju.suites.IFESampleTestSuite'])		   							
 	        		}
 	        		

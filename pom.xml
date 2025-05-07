@@ -123,6 +123,7 @@
 				<module>docgenhtml/plugins</module>
 				<module>releng/org.polarsys.capella.docgen.site</module>
 				<module>tests/plugins</module>
+				<module>tests/features</module>
 			</modules>
 		</profile>
 	</profiles>
