@@ -79,7 +79,7 @@ pipeline {
 		stage('Perform Sonar analysis') {
 			steps {
 				script {
-					sonar.runSonar("eclipse-capella_capella-xhtml-docgen", "eclipse/capella-xhtml-docgen", "sonar-token-capella-xhtml-docgen")
+					sonar.runSonar("eclipse-capella_capella-xhtml-docgen", "eclipse/capella-xhtml-docgen", "sonarcloud-token-capella-xhtml-docgen")
 				}
 			}
 		}
