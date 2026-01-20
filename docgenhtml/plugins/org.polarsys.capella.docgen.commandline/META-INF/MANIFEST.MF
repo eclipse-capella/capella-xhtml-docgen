@@ -7,11 +7,7 @@ Bundle-Vendor: %providerName
 Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core.ui,
  org.eclipse.ui,
  org.polarsys.kitalpha.doc.gen.business.core,
- org.polarsys.capella.core.data.gen,
- org.eclipse.sirius,
  org.polarsys.capella.core.commandline.core,
- org.eclipse.egf.core.producer,
- org.eclipse.egf.model,
  org.polarsys.capella.core.sirius.ui
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .

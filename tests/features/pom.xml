@@ -17,7 +17,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.polarsys</groupId>
-	<artifactId>org.polarsys.capella.addon.docgen.tests.plugins</artifactId>
+	<artifactId>org.polarsys.capella.addon.docgen.test.features</artifactId>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -28,7 +28,6 @@
 	</parent>
 
 	<modules>
-		<module>org.polarsys.capella.docgen.test.ju</module>
-		<module>org.polarsys.capella.docgen.test.site</module>
+		<module>org.polarsys.capella.docgen.test.feature</module>
 	</modules>
 </project>

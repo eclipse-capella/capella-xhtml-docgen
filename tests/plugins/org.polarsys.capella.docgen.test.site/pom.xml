@@ -16,12 +16,12 @@
 
 	<parent>
 		<groupId>org.polarsys</groupId>
-		<artifactId>org.polarsys.capella.addon.docgen</artifactId>
+		<artifactId>org.polarsys.capella.addon.docgen.tests.plugins</artifactId>
 		<version>7.0.1-SNAPSHOT</version>
-		<relativePath>../../</relativePath>
+		<relativePath>../</relativePath>
 	</parent>
 
-	<artifactId>org.polarsys.capella.addon.docgen.site</artifactId>
+	<artifactId>org.polarsys.capella.addon.docgen.test.site</artifactId>
 	<packaging>eclipse-repository</packaging>
 
 	<build>
@@ -43,16 +43,6 @@
 				<executions>
 					<execution>
 						<id>package-dropins</id>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.cyclonedx</groupId>
-				<artifactId>cyclonedx-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>create-bom</id>
 					</execution>
 				</executions>
 			</plugin>

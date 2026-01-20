@@ -10,6 +10,9 @@ pipeline {
 	    MVN_QUALITY_PROFILES = '-P full'
 	    JACOCO_EXEC_FILE_PATH = '${WORKSPACE}/jacoco.exec'
 		BUILD_KEY = (github.isPullRequest() ? CHANGE_TARGET : BRANCH_NAME).replaceFirst(/^v/, '')
+		CAPELLA_PRODUCT_PATH = "${WORKSPACE}/capella/capella"
+		CAPELLA_CONFIGURATION_PATH = "${WORKSPACE}/capella/configuration"
+		CAPELLA_BRANCH = '7.0.0'
 	}
 	stages {
 		stage('Generate TP') {
@@ -40,7 +43,8 @@ pipeline {
 					
 					deployer.addonNightlyDropins("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/*-dropins-*.zip", deploymentDirName)
 					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/repository/*", deploymentDirName)	
-					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/*-updateSite-*.zip", deploymentDirName)					
+					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/*-updateSite-*.zip", deploymentDirName)
+					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/bom.json", deploymentDirName)
 					
 					currentBuild.description = "${deploymentDirName} - <a href=\"https://download.eclipse.org/capella/addons/xhtmldocgen/dropins/nightly/${deploymentDirName}\">drop-in</a> - <a href=\"https://download.eclipse.org/capella/addons/xhtmldocgen/updates/nightly/${deploymentDirName}\">update-site</a>"
 				}
@@ -59,23 +63,50 @@ pipeline {
 				}
 			}
 		}
-		stage('Run tests') {
-			steps {
-				wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
-					script {
-						// Launch test
-						sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
-					}
+		stage('Download Capella') {
+        	steps {
+        		script {
+	        		def capellaURL = capella.getDownloadURL("${CAPELLA_BRANCH}", 'linux', '')
+	        		
+	        		sh "curl -k -o capella.tar.gz ${capellaURL}"
+					sh "tar xvzf capella.tar.gz"
+
+	       		}         
+	     	}
+	    }
+
+    	stage('Prepare for tests & Install test features') {
+        	steps {
+        		script {
+	        		sh "chmod 755 ${CAPELLA_PRODUCT_PATH}"
+	        		sh "chmod 755 ${WORKSPACE}/capella/jre/bin/java"
+	        		sh "mvn verify -P tests -e -f pom.xml"      		
+	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", capella.getTestUpdateSiteURL("${CAPELLA_BRANCH}"), 'org.polarsys.capella.test.feature.feature.group', "-Dlogback.configurationFile=${CAPELLA_CONFIGURATION_PATH}/logback.xml")
+	        		
+	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.docgen.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.docgen.feature.feature.group', "-Dlogback.configurationFile=${CAPELLA_CONFIGURATION_PATH}/logback.xml")
+					eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/tests/plugins/org.polarsys.capella.docgen.test.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.docgen.test.feature.feature.group', "-Dlogback.configurationFile=${CAPELLA_CONFIGURATION_PATH}/logback.xml")
+	       		
+				}         
+	     	}
+	    }
+	    
+    	stage('Run tests') {
+        	steps {
+        		script {
+        			wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
+		        		
+		        		tester.runNONUITests("${CAPELLA_PRODUCT_PATH}", 'CommandLineTestSuite', 'org.polarsys.capella.docgen.test.ju', 
+		        			['org.polarsys.capella.docgen.test.ju.suites.CommandLineTestSuite'])		
+						tester.runNONUITests("${CAPELLA_PRODUCT_PATH}", 'IFESampleTestSuite', 'org.polarsys.capella.docgen.test.ju', 
+		        			['org.polarsys.capella.docgen.test.ju.suites.IFESampleTestSuite'])		   							
+	        		}
+	        		
+	        		tester.publishTests()
 				}
 			}
 		}
-		stage('Publish results') {
-			steps {
-				junit allowEmptyResults: true, testResults: '*.xml,**/target/surefire-reports/*.xml'
-				sh "mvn -Djacoco.dataFile=$JACOCO_EXEC_FILE_PATH org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:report $MVN_QUALITY_PROFILES -e -f pom.xml"
-				archiveArtifacts artifacts: 'tests/**'
-      		}
-		}
+		
+		
 		stage('Perform Sonar analysis') {
 			steps {
 				script {
@@ -83,5 +114,12 @@ pipeline {
 				}
 			}
 		}
+		
+		
 	}
+	post {
+    	always {
+       		archiveArtifacts artifacts: '**/*.log, *.log, *.xml, **/*.layout'
+    	}
+		}
 }
