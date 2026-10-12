@@ -37,7 +37,7 @@
 		<tycho.testArgLine>-Xms256m -Xmx3000m</tycho.testArgLine>
 
 		<!-- for packaging -->
-		<platform-name>2023-03</platform-name>
+		<platform-name>2025-09</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
 	</properties>
@@ -170,6 +170,7 @@
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
+					<executionEnvironment>JavaSE-21</executionEnvironment>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -188,6 +189,18 @@
 						<goals>
 							<goal>plugin-source</goal>
 						</goals>
+					</execution>
+					<execution>
+						<id>feature-source</id>
+						<phase>package</phase>
+						<goals>
+							<goal>feature-source</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<addMavenDescriptor>false</addMavenDescriptor>
+							</archive>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
