@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (c) 2017, 2021 THALES GLOBAL SERVICES.
+  Copyright (c) 2017, 2026 THALES GLOBAL SERVICES.
   This program and the accompanying materials are made available under the
   terms of the Eclipse Public License 2.0 which is available at
   http://www.eclipse.org/legal/epl-2.0
@@ -33,26 +33,22 @@
 	</licenses>
 
 	<properties>
-		<tycho-version>2.7.5</tycho-version>
-		<tycho-extras-version>2.7.5</tycho-extras-version>
-		<platform-name>2023-03</platform-name>
-		<targetPlatform.repository>https://download.eclipse.org/cbi/updates/tpd/nightly/latest</targetPlatform.repository>
-		<targetPlatform.name>capella.target-definition.targetplatform</targetPlatform.name>
+		<targetPlatform.name>tp/capella.target-definition.targetplatform</targetPlatform.name>
 		<converterApplication.name>org.eclipse.cbi.targetplatform.tpd.converter</converterApplication.name>
 	</properties>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-eclipserun-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-eclipse-plugin</artifactId>
+				<version>${tycho-version}</version>
 				<configuration>
 					<repositories>
 						<repository>
 							<id>targetplatform-tp</id>
 							<layout>p2</layout>
-							<url>https://download.eclipse.org/releases/2023-03</url>
+							<url>https://download.eclipse.org/releases/2025-09</url>
 						</repository>
 						<repository>
 							<id>targetplatform</id>
@@ -71,17 +67,18 @@
 							<type>eclipse-feature</type>
 						</dependency>
 					</dependencies>
-					<executionEnvironment>JavaSE-17</executionEnvironment>
+					<executionEnvironment>JavaSE-21</executionEnvironment>
 				</configuration>
 				<executions>
 					<execution>
 						<id>generate.target</id>
 						<phase>validate</phase>
 						<configuration>
-							<executionEnvironment>JavaSE-17</executionEnvironment>
-							<applicationsArgs>
-								<args>-application ${converterApplication.name} tp/${targetPlatform.name}</args>
-							</applicationsArgs>
+							<applicationArgs>
+								<arg>-application</arg>
+								<arg>${converterApplication.name}</arg>
+								<arg>${targetPlatform.name}</arg>
+							</applicationArgs>
 						</configuration>
 						<goals>
 							<goal>eclipse-run</goal>
