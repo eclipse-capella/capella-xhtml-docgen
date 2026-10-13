@@ -28,6 +28,8 @@
 		<antrun-version>1.7</antrun-version>
 		<jacoco-version>0.8.10</jacoco-version>
 		<sourcePhase>package</sourcePhase>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- for junit -->
 		<capella-product-id>org.polarsys.capella.core.platform.sirius.ui.perspective.product</capella-product-id>
