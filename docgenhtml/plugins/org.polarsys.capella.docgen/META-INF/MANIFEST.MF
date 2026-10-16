@@ -2,29 +2,29 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.polarsys.capella.docgen;singleton:=true
-Bundle-Version: 7.0.1.qualifier
+Bundle-Version: 7.2.0.qualifier
 Bundle-Activator: org.polarsys.capella.docgen.Activator
 Bundle-Vendor: %providerName
-Require-Bundle: org.polarsys.kitalpha.doc.gen.business.core;visibility:=reexport,
- org.polarsys.capella.core.semantic.queries,
- org.polarsys.capella.common.ui.resources,
- org.polarsys.capella.core.model.helpers,
- org.eclipse.sirius.ui,
+Require-Bundle: org.eclipse.jface.text,
+ org.eclipse.egf.model.ftask;visibility:=reexport,
  org.eclipse.egf.pattern;visibility:=reexport,
  org.eclipse.egf.pattern.ftask;visibility:=reexport,
- org.eclipse.sirius.diagram,
- org.polarsys.capella.core.ui.resources,
- org.eclipse.egf.model.ftask;visibility:=reexport,
- org.polarsys.capella.core.linkedtext.ui,
- org.polarsys.capella.common.linkedtext.ui,
- org.eclipse.jface.text,
+ org.eclipse.sirius.ui;bundle-version="7.5.0",
+ org.eclipse.sirius.diagram;bundle-version="7.5.0",
+ org.eclipse.sirius.table;bundle-version="7.5.0",
+ org.polarsys.kitalpha.doc.gen.business.core;visibility:=reexport,
  org.polarsys.kitalpha.doc.gen.business.core.preference,
- org.polarsys.capella.shared.id.handler,
- org.polarsys.capella.core.diagram.helpers,
- org.polarsys.capella.core.explorer.activity.ui,
- org.polarsys.capella.docgen.preference,
- org.eclipse.sirius.table,
- org.polarsys.capella.core.ui.metric
+ org.polarsys.capella.common.linkedtext.ui;bundle-version="7.2.0",
+ org.polarsys.capella.common.ui.resources;bundle-version="7.2.0",
+ org.polarsys.capella.core.linkedtext.ui;bundle-version="7.2.0",
+ org.polarsys.capella.core.diagram.helpers;bundle-version="7.2.0",
+ org.polarsys.capella.core.explorer.activity.ui;bundle-version="7.2.0",
+ org.polarsys.capella.core.model.helpers;bundle-version="7.2.0",
+ org.polarsys.capella.core.semantic.queries;bundle-version="7.2.0",
+ org.polarsys.capella.core.ui.metric;bundle-version="7.2.0",
+ org.polarsys.capella.core.ui.resources;bundle-version="7.2.0",
+ org.polarsys.capella.docgen.preference;bundle-version="7.2.0",
+ org.polarsys.capella.shared.id.handler;bundle-version="7.2.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin

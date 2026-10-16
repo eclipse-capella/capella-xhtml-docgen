@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (c) 2017, 2021 THALES GLOBAL SERVICES.
+  Copyright (c) 2017, 2026 THALES GLOBAL SERVICES.
   This program and the accompanying materials are made available under the
   terms of the Eclipse Public License 2.0 which is available at
   http://www.eclipse.org/legal/epl-2.0
@@ -18,16 +18,17 @@
 	<name>Capella XHTML DocGen Add-on</name>
 	<groupId>org.polarsys</groupId>
 	<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-	<version>7.0.1-SNAPSHOT</version>
+	<version>7.2.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>2.7.5</tycho-version>
-		<tycho-extras-version>2.7.5</tycho-extras-version>
+		<tycho-extras-version>${tycho-version}</tycho-extras-version>
 		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
-		<antrun-version>1.7</antrun-version>
+		<antrun-version>3.0.0</antrun-version>
 		<jacoco-version>0.8.10</jacoco-version>
 		<sourcePhase>package</sourcePhase>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- for junit -->
 		<capella-product-id>org.polarsys.capella.core.platform.sirius.ui.perspective.product</capella-product-id>
@@ -36,7 +37,7 @@
 		<tycho.testArgLine>-Xms256m -Xmx3000m</tycho.testArgLine>
 
 		<!-- for packaging -->
-		<platform-name>2023-03</platform-name>
+		<platform-name>2025-09</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
 	</properties>
@@ -148,7 +149,7 @@
 						<artifact>
 							<groupId>org.polarsys</groupId>
 							<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-							<version>7.0.1-SNAPSHOT</version>
+							<version>7.2.0-SNAPSHOT</version>
 							<classifier>releng/org.polarsys.capella.docgen.target/tp/capella.target-definition</classifier>
 						</artifact>
 					</target>
@@ -169,23 +170,9 @@
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
+					<executionEnvironment>JavaSE-21</executionEnvironment>
 				</configuration>
 			</plugin>
-			<!-- enable source feature generation -->
-			<!--plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
-				<executions>
-					<execution>
-						<id>source-feature</id>
-						<phase>package</phase>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin-->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
@@ -202,6 +189,18 @@
 						<goals>
 							<goal>plugin-source</goal>
 						</goals>
+					</execution>
+					<execution>
+						<id>feature-source</id>
+						<phase>package</phase>
+						<goals>
+							<goal>feature-source</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<addMavenDescriptor>false</addMavenDescriptor>
+							</archive>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -221,29 +220,6 @@
 						<version>${tycho-extras-version}</version>
 					</dependency>
 				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
-				<configuration>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>
-					<excludes>
-						<plugin id="org.polarsys.capella.docgen.doc"/>
-						<feature id="org.eclipse.egf.feature"/>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<id>source-feature</id>
-						<phase>${sourcePhase}</phase>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -284,9 +260,9 @@
 
 				<!-- plugins only called if a descendant need them -->
 				<plugin>
-					<groupId>org.eclipse.tycho.extras</groupId>
-					<artifactId>tycho-eclipserun-plugin</artifactId>
-					<version>${tycho-extras-version}</version>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-eclipse-plugin</artifactId>
+					<version>${tycho-version}</version>
 					<configuration>
 						<repositories>
 							<repository>
@@ -379,6 +355,13 @@
 						</execution>
 					</executions>
 				</plugin>
+				
+				<!-- This is used by org.eclipse.tycho:tycho-build for the pomless builds -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>3.6.2</version>
+				</plugin>	
 			</plugins>
 		</pluginManagement>
 	</build>

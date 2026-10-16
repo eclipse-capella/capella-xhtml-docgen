@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2022 THALES GLOBAL SERVICES.
+ * Copyright (c) 2017, 2026 THALES GLOBAL SERVICES.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
@@ -11,25 +11,27 @@
  *******************************************************************************/
 target "CapellaXHTMLDocGenAddon"
 
-include "https://download.eclipse.org/capella/core/updates/releases/7.0.0/targets/capella.target-definition.targetplatform"
+include "https://download.eclipse.org/capella/core/updates/nightly/mpo-orbit202509-PR-3048-5/targets/capella.target-definition.targetplatform"
 
 with source, requirements
 
-location capella-master "https://download.eclipse.org/capella/core/updates/releases/7.0.0/org.polarsys.capella.rcp.site/" {
+location capella-master "https://download.eclipse.org/capella/core/updates/nightly/mpo-orbit202509-PR-3048-5/org.polarsys.capella.rcp.site" {
 	org.polarsys.capella.rcp.feature.group lazy
 }
 
-location kitalpha-sdk-master "https://download.eclipse.org/kitalpha/updates/releases/sdk/7.0.0/" {
+location kitalpha-sdk-master "https://download.eclipse.org/kitalpha/updates/nightly/sdk/master/" {
 	org.polarsys.kitalpha.doc.gen.business.core.feature.feature.group lazy
 	org.polarsys.kitalpha.doc.gen.business.core.feature.source.feature.group lazy
 }
 
-location eclipse "https://download.eclipse.org/releases/2023-03" {
-	org.eclipse.emf.query.feature.group lazy
-	org.eclipse.emf.query.source.feature.group lazy
+location Eclipse-2025-09 "https://download.eclipse.org/releases/2025-09/" {
 	org.apache.felix.scr lazy
 }
 
-location capella-test "https://download.eclipse.org/capella/core/updates/releases/7.0.0/org.polarsys.capella.test.site/" {
+location EMF-Query-2022-08 "https://download.eclipse.org/modeling/emf/query/updates/releases/R202208101410/" {
+	org.eclipse.emf.query.source.feature.group lazy
+}
+
+location capella-test "https://download.eclipse.org/capella/core/updates/nightly/mpo-orbit202509-PR-3048-5/org.polarsys.capella.test.site" {
 	org.polarsys.capella.test.feature.feature.group lazy
 }
