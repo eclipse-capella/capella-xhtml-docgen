@@ -32,8 +32,7 @@
 
 		<!-- for junit -->
 		<capella-product-id>org.polarsys.capella.rcp.product</capella-product-id>
-		<capella-rcp-product-id>org.polarsys.capella.rcp.product</capella-rcp-product-id>
-		<capella-application-id>org.polarsys.capella.core.platform.sirius.ui.perspective.id</capella-application-id>
+		<capella-application>org.polarsys.capella.core.platform.sirius.ui.perspective.id</capella-application>
 		<tycho.testArgLine>-Xms256m -Xmx3000m</tycho.testArgLine>
 
 		<!-- for packaging -->

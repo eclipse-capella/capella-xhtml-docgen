@@ -38,8 +38,8 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<product>${capella-rcp-product-id}</product>
-					<application>${capella-application-id}</application>
+					<product>${capella-product-id}</product>
+					<application>${capella-application}</application>
 					<useUIHarness>true</useUIHarness>
 					<useUIThread>true</useUIThread>
 					<includes>**/*TestSuite.java</includes>
