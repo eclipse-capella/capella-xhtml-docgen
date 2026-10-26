@@ -38,7 +38,7 @@
 
 		<!-- for packaging -->
 		<platform-name>2025-09</platform-name>
-		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
+		<eclipse-repo.url>https://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
 	</properties>
 
@@ -271,6 +271,7 @@
 								<url>${eclipse-repo.url}</url>
 							</repository>
 						</repositories>
+						<executionEnvironment>JavaSE-21</executionEnvironment>
 						<dependencies>
 							<dependency>
 								<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
