@@ -24,7 +24,7 @@
 	<properties>
 		<tycho-extras-version>${tycho-version}</tycho-extras-version>
 		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
-		<antrun-version>3.0.0</antrun-version>
+		<antrun-version>3.2.0</antrun-version>
 		<jacoco-version>0.8.10</jacoco-version>
 		<sourcePhase>package</sourcePhase>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,7 +67,7 @@
 					<plugin>
 						<groupId>org.eclipse.cbi.maven.plugins</groupId>
 						<artifactId>eclipse-jarsigner-plugin</artifactId>
-						<version>1.3.2</version>
+						<version>1.5.4</version>
 						<executions>
 							<execution>
 								<id>sign</id>
