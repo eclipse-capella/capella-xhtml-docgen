@@ -9,360 +9,58 @@
 
   Contributors:
        Thales - initial API and implementation
+       Obeo - rehaul
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>Capella XHTML DocGen Add-on</name>
-	<groupId>org.polarsys</groupId>
+	<parent>
+		<groupId>org.polarsys</groupId>
+		<artifactId>org.polarsys.capella.addons-common.releng.parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
 	<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-	<version>7.2.0-SNAPSHOT</version>
+	<version>${releaseVersion}${qualifier}</version>
 	<packaging>pom</packaging>
 
+	<name>Capella Add-on XHTML Documentation Generation</name>
+
+	<modules>
+		<module>docgenhtml/features</module>
+		<module>docgenhtml/plugins</module>
+		<module>releng/org.polarsys.capella.docgen.site</module>
+		<module>tests/plugins</module>
+	</modules>
+
 	<properties>
-		<tycho-extras-version>${tycho-version}</tycho-extras-version>
-		<tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-xhtml-docgen.git</tycho.scmUrl>
-		<antrun-version>3.2.0</antrun-version>
-		<jacoco-version>0.8.15</jacoco-version>
-		<sourcePhase>package</sourcePhase>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<!-- for junit -->
-		<capella-product-id>org.polarsys.capella.rcp.product</capella-product-id>
-		<capella-application>org.polarsys.capella.core.platform.sirius.ui.perspective.id</capella-application>
-		<tycho.testArgLine>-Xms256m -Xmx3000m</tycho.testArgLine>
-
-		<!-- for packaging -->
-		<platform-name>2025-09</platform-name>
-		<eclipse-repo.url>https://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
-		<packagedAddonName>CapellaXHTMLDocGen</packagedAddonName>
+		<addon.name>CapellaXHTMLDocGen</addon.name>
+		<addon.tp.artifactId>org.polarsys.capella.addon.docgen</addon.tp.artifactId>
+		<addon.tp.classifier>releng/org.polarsys.capella.docgen.target/tp/capella.target-definition</addon.tp.classifier>
+		<addon.tp.groupId>org.polarsys</addon.tp.groupId>
+		<addon.tp.version>${addon.version}</addon.tp.version>
+		<addon.tpd.path>tp/capella.target-definition.targetplatform</addon.tpd.path>
+		<addon.version>${releaseVersion}${qualifier}</addon.version>
+		<tycho.sbom.url>https://download.eclipse.org/capella/addons/xhtmldocgen/</tycho.sbom.url>
+		<tycho.scmUrl>scm:git:https://github.com/eclipse-capella/capella-xhtml-docgen.git</tycho.scmUrl>
 	</properties>
 
-	<profiles>
-		<profile>
-			<id>full</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<modules>
-				<module>docgenhtml/features</module>
-				<module>docgenhtml/plugins</module>
-				<module>releng/org.polarsys.capella.docgen.site</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>sign</id>
-			<activation>
-				<property>
-					<name>BUILD_SIGN</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.cbi.maven.plugins</groupId>
-						<artifactId>eclipse-jarsigner-plugin</artifactId>
-						<version>1.5.4</version>
-						<executions>
-							<execution>
-								<id>sign</id>
-								<phase>package</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-p2-plugin</artifactId>
-						<version>${tycho-version}</version>
-						<executions>
-							<execution>
-								<id>default-p2-metadata-default</id>
-								<configuration>
-									<attachP2Metadata>false</attachP2Metadata>
-								</configuration>
-							</execution>
-							<execution>
-								<id>attach-p2-metadata</id>
-								<phase>package</phase>
-								<goals>
-									<goal>p2-metadata</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<defaultP2Metadata>false</defaultP2Metadata>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-
-			<pluginRepositories>
-				<pluginRepository>
-					<id>cbi</id>
-					<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-		<profile>
-			<id>tests</id>
-			<modules>
-				<module>docgenhtml/features</module>
-				<module>docgenhtml/plugins</module>
-				<module>releng/org.polarsys.capella.docgen.site</module>
-				<module>tests/plugins</module>
-			</modules>
-		</profile>
-	</profiles>
-
 	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>src</testSourceDirectory>
 		<plugins>
+			<!-- Ensures this parent module has provided values for all the properties expected by the common parent POM -->
 			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<targetDefinitionIncludeSource>honor</targetDefinitionIncludeSource>
-					<pomDependencies>consider</pomDependencies>
-					<target>
-						<artifact>
-							<groupId>org.polarsys</groupId>
-							<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-							<version>7.2.0-SNAPSHOT</version>
-							<classifier>releng/org.polarsys.capella.docgen.target/tp/capella.target-definition</classifier>
-						</artifact>
-					</target>
-					<environments>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
-							<arch>x86_64</arch>
-						</environment>
-					</environments>
-					<executionEnvironment>JavaSE-21</executionEnvironment>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>
-				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<!-- We do not want to execute this plugin in child modules -->
+				<inherited>false</inherited>
 				<executions>
 					<execution>
-						<id>plugin-source</id>
-						<phase>${sourcePhase}</phase>
-						<goals>
-							<goal>plugin-source</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>feature-source</id>
-						<phase>package</phase>
-						<goals>
-							<goal>feature-source</goal>
-						</goals>
-						<configuration>
-							<archive>
-								<addMavenDescriptor>false</addMavenDescriptor>
-							</archive>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-packaging-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<sourceReferences>
-						<generate>true</generate>
-					</sourceReferences>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-sourceref-jgit</artifactId>
-						<version>${tycho-extras-version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<!-- These two should allow us not to get "duplicate artifact" warnings 
-						during the build. -->
-					<execution>
-						<!-- Don't attach (default) metadata before the source-feature execution. -->
-						<id>default-p2-metadata-default</id>
-						<configuration>
-							<attachP2Metadata>false</attachP2Metadata>
-						</configuration>
-					</execution>
-					<execution>
-						<!-- Do attach metadata after the source-feature execution. -->
-						<id>attach-p2-metadata</id>
-						<phase>${sourcePhase}</phase>
-						<goals>
-							<goal>p2-metadata</goal>
-						</goals>
+						<id>check-addon-properties</id>
+						<phase>validate</phase>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-compiler-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-						<compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
-					</configuration>
-				</plugin>
-
-				<!-- plugins only called if a descendant need them -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-eclipse-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<repositories>
-							<repository>
-								<id>eclipse-releases-${platform-name}</id>
-								<layout>p2</layout>
-								<url>${eclipse-repo.url}</url>
-							</repository>
-						</repositories>
-						<executionEnvironment>JavaSE-21</executionEnvironment>
-						<dependencies>
-							<dependency>
-								<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
-								<type>eclipse-plugin</type>
-							</dependency>
-							<dependency>
-								<artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
-								<type>eclipse-feature</type>
-							</dependency>
-							<dependency>
-								<artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
-								<type>eclipse-feature</type>
-							</dependency>
-							<dependency>
-								<artifactId>org.apache.felix.scr</artifactId>
-								<type>eclipse-plugin</type>
-							</dependency>
-						</dependencies>
-					</configuration>
-					<executions>
-						<execution>
-							<id>create-dropins</id>
-							<phase>package</phase>
-							<goals>
-								<goal>eclipse-run</goal>
-							</goals>
-							<configuration>
-								<appArgLine>-application org.eclipse.equinox.p2.repository.repo2runnable -source file:${project.build.directory}/repository -destination ${project.build.directory}/${packagedAddonName}/eclipse</appArgLine>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<version>${antrun-version}</version>
-					<executions>
-						<execution>
-							<id>package-dropins</id>
-							<phase>package</phase>
-							<goals>
-								<goal>run</goal>
-							</goals>
-							<configuration>
-								<target>
-									<delete
-										file="${project.build.directory}/${packagedAddonName}/eclipse/artifacts.jar" />
-									<delete
-										file="${project.build.directory}/${packagedAddonName}/eclipse/content.jar" />
-									<delete includeemptydirs="true">
-										<fileset
-											dir="${project.build.directory}/${packagedAddonName}/eclipse/features"
-											includes="**/META-INF/**" />
-									</delete>
-									<zip
-										destfile="${project.build.directory}/${packagedAddonName}-dropins-${unqualifiedVersion}.${buildQualifier}.zip">
-										<fileset dir="${project.build.directory}">
-											<include name="${packagedAddonName}/**" />
-										</fileset>
-									</zip>
-								</target>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-p2-repository-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<id>archive-repository</id>
-							<goals>
-								<goal>archive-repository</goal>
-							</goals>
-							<configuration>
-								<finalName>${packagedAddonName}-updateSite-${unqualifiedVersion}.${buildQualifier}</finalName>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				
-				<!-- This is used by org.eclipse.tycho:tycho-build for the pomless builds -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>3.6.2</version>
-				</plugin>	
-			</plugins>
-		</pluginManagement>
 	</build>
+
 </project>

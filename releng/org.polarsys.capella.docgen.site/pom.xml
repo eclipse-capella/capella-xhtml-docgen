@@ -9,33 +9,39 @@
 
   Contributors:
        Thales - initial API and implementation
+       Obeo - rehaul
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.polarsys</groupId>
 		<artifactId>org.polarsys.capella.addon.docgen</artifactId>
-		<version>7.2.0-SNAPSHOT</version>
+		<version>${releaseVersion}${qualifier}</version>
 		<relativePath>../../</relativePath>
 	</parent>
 
 	<artifactId>org.polarsys.capella.addon.docgen.site</artifactId>
 	<packaging>eclipse-repository</packaging>
 
+	<properties>
+		<build.skip.sbom>false</build.skip.sbom>
+	</properties>
+
 	<build>
 		<plugins>
+			<!-- Produces the dropins from the p2 repository. -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-eclipse-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>create-dropins</id>
+						<phase>package</phase>
 					</execution>
 				</executions>
 			</plugin>
-
+			<!-- Packages the dropins. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
