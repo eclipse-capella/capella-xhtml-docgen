@@ -1,28 +1,27 @@
 pipeline {
 	agent { label 'migration' }
-
 	tools {
 		maven 'apache-maven-latest'
 		jdk 'openjdk-jdk21-latest'
 	}
 	environment {
 	    JACOCO_VERSION = "0.8.15"
-	    MVN_QUALITY_PROFILES = '-P full'
+	    MVN_QUALITY_PROFILES = ''
 	    JACOCO_EXEC_FILE_PATH = '${WORKSPACE}/jacoco.exec'
 		BUILD_KEY = (github.isPullRequest() ? CHANGE_TARGET : BRANCH_NAME).replaceFirst(/^v/, '')
 	}
 	stages {
-		stage('Generate TP') {
+		stage('Generate Target Platform') {
 			steps {
 				sh 'mvn verify -e -f releng/org.polarsys.capella.docgen.target/pom.xml'
 			}
 		}
 
-		stage('Build DocGen addon') {
+		stage('Build Addon (with SBOM and jarsign)') {
 			steps {
 				script {
 					def jacocoPrepareAgent = "-Djacoco.destFile=$JACOCO_EXEC_FILE_PATH -Djacoco.append=true org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:prepare-agent"
-					sh "mvn clean verify ${jacocoPrepareAgent} -P full -P sign -e -f pom.xml"
+					sh "mvn clean verify ${jacocoPrepareAgent} -P sbom -P sign -e -f pom.xml"
 				}
 			}
       	}
@@ -63,8 +62,7 @@ pipeline {
 			steps {
 				wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
 					script {
-						// Launch test
-						sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P tests -e -f pom.xml'
+						sh 'mvn -Dmaven.test.failure.ignore=true -Dtycho.localArtifacts=ignore integration-test -P junit -e -f pom.xml'
 					}
 				}
 			}

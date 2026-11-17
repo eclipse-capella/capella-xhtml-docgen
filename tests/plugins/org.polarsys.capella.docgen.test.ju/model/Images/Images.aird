@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description" uid="_sKpW4OyNEeywTbjfxGsLDg" selectedViews="_sf1jwOyNEeywTbjfxGsLDg _sh0gwOyNEeywTbjfxGsLDg _spq1MOyNEeywTbjfxGsLDg _srgoQOyNEeywTbjfxGsLDg _sufq0OyNEeywTbjfxGsLDg _swPXQOyNEeywTbjfxGsLDg _swhrIOyNEeywTbjfxGsLDg" version="15.0.0.202201261500">
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description" uid="_sKpW4OyNEeywTbjfxGsLDg" selectedViews="_sf1jwOyNEeywTbjfxGsLDg _sh0gwOyNEeywTbjfxGsLDg _spq1MOyNEeywTbjfxGsLDg _srgoQOyNEeywTbjfxGsLDg _sufq0OyNEeywTbjfxGsLDg _swPXQOyNEeywTbjfxGsLDg _swhrIOyNEeywTbjfxGsLDg" version="15.4.16.202610070916">
   <semanticResources>Images.afm</semanticResources>
   <semanticResources>Images.capella</semanticResources>
+  <eAnnotations xmi:type="description:DAnnotationEntry" uid="_BUDHoNhUEfGHuN4lryrYXw" source="ImagesDependencies">
+    <details>RichText:ImagesLib</details>
+  </eAnnotations>
   <ownedViews xmi:type="viewpoint:DView" uid="_sf1jwOyNEeywTbjfxGsLDg">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.kitalpha.ad.integration.sirius/description/ad.odesign#//@ownedViewpoints[name='ad']"/>
   </ownedViews>

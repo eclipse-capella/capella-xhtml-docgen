@@ -9,56 +9,28 @@
 
   Contributors:
        Thales - initial API and implementation
-	   Obeo - add support for generation configuration files
+	   Obeo - rehaul
 -->
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>org.polarsys</groupId>
-	<artifactId>org.polarsys.capella.docgen.test.ju</artifactId>
-	<packaging>eclipse-test-plugin</packaging>
 
 	<parent>
 		<groupId>org.polarsys</groupId>
 		<artifactId>org.polarsys.capella.addon.docgen.tests.plugins</artifactId>
-		<version>7.2.0-SNAPSHOT</version>
+		<version>${releaseVersion}${qualifier}</version>
 		<relativePath>../</relativePath>
 	</parent>
-	
-	<properties>
-		<sonar.skip>true</sonar.skip>
-	</properties>
-	
+
+	<artifactId>org.polarsys.capella.docgen.test.ju</artifactId>
+	<packaging>eclipse-test-plugin</packaging>
+
 	<build>
-  		<plugins>
-  			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<product>${capella-product-id}</product>
-					<application>${capella-application}</application>
-					<useUIHarness>true</useUIHarness>
-					<useUIThread>true</useUIThread>
-					<includes>**/*TestSuite.java</includes>
-					<dependencies>
-						<!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=462862 -->
-						<dependency>
-							<type>eclipse-plugin</type>
-							<artifactId>org.eclipse.equinox.event</artifactId>
-							<version>0.0.0</version>
-						</dependency>
-					</dependencies>
-				</configuration>
-			</plugin>
+		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho-version}</version>
 				<configuration>
-					<environments combine.self="override"/>
+					<environments combine.self="override"></environments>
 					<dependency-resolution>
 						<extraRequirements>
 							<requirement>
@@ -75,6 +47,6 @@
 					</dependency-resolution>
 				</configuration>
 			</plugin>
-  		</plugins>
- 	</build>
- </project>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2026 THALES GLOBAL SERVICES.
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0
+
+  SPDX-License-Identifier: EPL-2.0
+
+  Contributors:
+       Obeo - initial API and implementation
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.polarsys</groupId>
+	<artifactId>org.polarsys.capella.addons-common.releng.parent</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Capella Add-ons Common Build Parent</name>
+	<description>The shared Maven parent for the Capella official add-ons.</description>
+	<url>https://github.com/eclipse-capella</url>
+	<inceptionYear>2026</inceptionYear>
+	<organization>
+		<name>Capella</name>
+		<url>https://mbse-capella.org</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>Eclipse Public License v2.0</name>
+			<comments>This program and the accompanying materials are made available under the
+				terms of the Eclipse Public License 2.0 which is available at
+				http://www.eclipse.org/legal/epl-2.0
+
+				SPDX-License-Identifier: EPL-2.0</comments>
+		</license>
+	</licenses>
+
+	<modules>
+		<!-- Children POMs will provide their modules. -->
+	</modules>
+
+	<properties>
+		<!-- Value must be set by child module -->
+		<addon.name></addon.name>
+		<addon.repository.name>${addon.name}-updateSite-${unqualifiedVersion}.${buildQualifier}</addon.repository.name>
+		<!-- Value must be set by child module -->
+		<addon.tp.artifactId></addon.tp.artifactId>
+		<!-- Value must be set by child module -->
+		<addon.tp.classifier></addon.tp.classifier>
+		<!-- Value must be set by child module -->
+		<addon.tp.groupId></addon.tp.groupId>
+		<!-- Value must be set by child module -->
+		<addon.tp.version></addon.tp.version>
+		<!-- Value must be set by child module with the 'generate.target' execution -->
+		<addon.tpd.path></addon.tpd.path>
+		<!-- Value must be set by child module -->
+		<addon.version></addon.version>
+		<build.skip.sbom>true</build.skip.sbom>
+		<build.skip.tests.ju>true</build.skip.tests.ju>
+		<build.skip.tests.rcptt>true</build.skip.tests.rcptt>
+		<capella.application.id>org.polarsys.capella.core.platform.sirius.ui.perspective.id</capella.application.id>
+		<capella.product.id>org.polarsys.capella.rcp.product</capella.product.id>
+		<dep.jre.dropins.creation>JavaSE-21</dep.jre.dropins.creation>
+		<dep.jre.tp.generation>JavaSE-21</dep.jre.tp.generation>
+		<dep.jre.tp.resolution>JavaSE-21</dep.jre.tp.resolution>
+		<dep.maven.version>3.8.5</dep.maven.version>
+		<dep.plugin.antrun.version>3.2.0</dep.plugin.antrun.version>
+		<dep.plugin.build-helper.version>3.6.2</dep.plugin.build-helper.version>
+		<dep.plugin.cyclonedx.schema.version>1.6</dep.plugin.cyclonedx.schema.version>
+		<dep.plugin.cyclonedx.version>2.9.3</dep.plugin.cyclonedx.version>
+		<dep.plugin.enforcer.version>3.6.3</dep.plugin.enforcer.version>
+		<dep.plugin.jacoco.version>0.8.15</dep.plugin.jacoco.version>
+		<dep.plugin.jarsigner.version>1.5.4</dep.plugin.jarsigner.version>
+		<dep.plugin.rcptt.version>2.5.5</dep.plugin.rcptt.version>
+		<dep.plugin.sortpom.version>4.0.0</dep.plugin.sortpom.version>
+		<dep.plugin.tycho.testArgLine>-Xms256m -Xmx3000m</dep.plugin.tycho.testArgLine>
+		<dep.plugin.tycho.version>5.0.4</dep.plugin.tycho.version>
+		<eclipse.cbi.tpd.converter.application.name>org.eclipse.cbi.targetplatform.tpd.converter</eclipse.cbi.tpd.converter.application.name>
+		<eclipse.cbi.tpd.repository.id>eclipse-cbi-tpd-nightly-latest</eclipse.cbi.tpd.repository.id>
+		<eclipse.cbi.tpd.repository.url>https://download.eclipse.org/cbi/updates/tpd/nightly/latest</eclipse.cbi.tpd.repository.url>
+		<eclipse.platform.name>2025-09</eclipse.platform.name>
+		<!-- This ID should be the same as the one used in the add-on's target platform (which comes from Capella's target platform) -->
+		<eclipse.platform.repository.id>Eclipse-${eclipse.platform.name}</eclipse.platform.repository.id>
+		<eclipse.platform.repository.url>https://download.eclipse.org/releases/${eclipse.platform.name}/</eclipse.platform.repository.url>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- Value must be set by child module -->
+		<tycho.sbom.url></tycho.sbom.url>
+		<!-- Value must be set by child module -->
+		<tycho.scmUrl></tycho.scmUrl>
+	</properties>
+
+	<dependencyManagement></dependencyManagement>
+
+	<dependencies></dependencies>
+
+	<repositories></repositories>
+
+	<build>
+		<defaultGoal>clean verify</defaultGoal>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.github.ekryd.sortpom</groupId>
+					<artifactId>sortpom-maven-plugin</artifactId>
+					<version>${dep.plugin.sortpom.version}</version>
+					<configuration>
+						<createBackupFile>false</createBackupFile>
+						<nrOfIndentSpace>-1</nrOfIndentSpace>
+						<sortProperties>true</sortProperties>
+						<verifyFailOn>Strict</verifyFailOn>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>sort</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${dep.plugin.antrun.version}</version>
+					<executions>
+						<execution>
+							<id>package-dropins</id>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<phase>package</phase>
+							<configuration>
+								<target>
+									<delete file="${project.build.directory}/${addon.name}/eclipse/artifacts.jar"></delete>
+									<delete file="${project.build.directory}/${addon.name}/eclipse/content.jar"></delete>
+									<delete includeemptydirs="true">
+										<fileset dir="${project.build.directory}/${addon.name}/eclipse/features" includes="**/META-INF/**"></fileset>
+									</delete>
+									<zip destfile="${project.build.directory}/${addon.name}-dropins-${unqualifiedVersion}.${buildQualifier}.zip">
+										<fileset dir="${project.build.directory}">
+											<include name="${addon.name}/**"></include>
+										</fileset>
+									</zip>
+								</target>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${dep.plugin.enforcer.version}</version>
+					<executions>
+						<execution>
+							<id>enforce-maven</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<phase>validate</phase>
+							<configuration>
+								<rules>
+									<requireMavenVersion>
+										<version>${dep.maven.version}</version>
+									</requireMavenVersion>
+								</rules>
+							</configuration>
+						</execution>
+						<execution>
+							<id>check-addon-properties</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<!-- Child module that is the addon releng parent needs to explicitly enable it. -->
+							<phase>none</phase>
+							<configuration>
+								<rules>
+									<!-- This property must be provided externally because its usage in extensions.xml happens before pom properties are defined. -->
+									<requireProperty>
+										<property>dep.plugin.tycho-build.version</property>
+										<message>Value of property 'dep.plugin.tycho-build.version' must be defined in file '.mvn/maven.config'.</message>
+										<regex>^[0-9]+\.[0-9]+\.[0-9]+$</regex>
+										<regexMessage>Value of property 'dep.plugin.tycho-build.version' must be formatted as 'major.minor.micro'. See 'https://tycho.eclipseprojects.io/doc'.</regexMessage>
+									</requireProperty>
+									<!-- This property must be provided externally because its usage in attribute <version> of pom files happens before pom properties are defined. -->
+									<requireProperty>
+										<property>releaseVersion</property>
+										<message>Value of property 'releaseVersion' must be defined in file '.mvn/maven.config'.</message>
+										<regex>^[0-9]+\.[0-9]+\.[0-9]+$</regex>
+										<regexMessage>Value of property 'releaseVersion' must be formatted as 'major.minor.micro'</regexMessage>
+									</requireProperty>
+									<!-- This property must be provided externally because its usage in attribute <version> of pom files happens before pom properties are defined. -->
+									<requireProperty>
+										<property>qualifier</property>
+										<message>Value of property 'qualifier' must be defined in file '.mvn/maven.config'.</message>
+										<regex>.*\S.*</regex>
+										<regexMessage>Value of property 'qualifier' must be a non-empty string (most likely '-SNAPSHOT').</regexMessage>
+									</requireProperty>
+									<requireProperty>
+										<property>addon.name</property>
+										<message>Value of property 'addon.name' must be defined.</message>
+										<regex>.*\S.*</regex>
+										<regexMessage>Value of property 'addon.name' must be a non-empty string.</regexMessage>
+									</requireProperty>
+									<requireProperty>
+										<property>addon.tpd.path</property>
+										<message>Value of property 'addon.tpd.path' must be set to the relative path from the module with the 'generate.target' execution to the target platform definition file.</message>
+										<regex>.*\S.*</regex>
+										<regexMessage>Value of property 'addon.tpd.path' must be a non-empty string.</regexMessage>
+									</requireProperty>
+									<!-- Tycho expects this property to be set. -->
+									<requireProperty>
+										<property>tycho.scmUrl</property>
+										<message>Value of property 'tycho.scmUrl' must be defined</message>
+										<regex>scm:.*</regex>
+										<regexMessage>Value of property 'tycho.scmUrl' must be a valid SCM URL, see 'https://maven.apache.org/pom-scm-urls.html#scm-url-format'</regexMessage>
+									</requireProperty>
+									<!-- Tycho expects this property to be set. -->
+									<requireProperty>
+										<property>tycho.sbom.url</property>
+										<message>Value of property 'tycho.sbom.url' must be defined</message>
+										<regex>.*\S.*</regex>
+										<regexMessage>Value of property 'tycho.sbom.url' must be a non-empty string.</regexMessage>
+									</requireProperty>
+									<!-- Tycho runs as an extension outside the regular life-cycle, so the target platform resolution should fail before the enforcer plugin has had a chance to run if these are not set. -->
+									<requireProperty>
+										<property>addon.tp.groupId</property>
+										<message>Value of property 'addon.tp.groupId' must be defined</message>
+										<regex>.*\S.*</regex>
+										<regexMessage>Value of property 'addon.tp.groupId' must be a non-empty string.</regexMessage>
+									</requireProperty>
+									<requireProperty>
+										<property>addon.tp.artifactId</property>
+										<message>Value of property 'addon.tp.artifactId' must be defined</message>
+										<regex>.*\S.*</regex>
+										<regexMessage>Value of property 'addon.tp.artifactId' must be a non-empty string.</regexMessage>
+									</requireProperty>
+									<requireProperty>
+										<property>addon.tp.version</property>
+										<message>Value of property 'addon.tp.version' must be defined</message>
+										<regex>.*\S.*</regex>
+										<regexMessage>Value of property 'addon.tp.version' must be a non-empty string.</regexMessage>
+									</requireProperty>
+									<requireProperty>
+										<property>addon.tp.classifier</property>
+										<message>Value of property 'addon.tp.classifier' must be defined</message>
+										<regex>.*\S.*</regex>
+										<regexMessage>Value of property 'addon.tp.classifier' must be a non-empty string.</regexMessage>
+									</requireProperty>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- This is used by org.eclipse.tycho:tycho-build for the pomless builds -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${dep.plugin.build-helper.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>target-platform-configuration</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<configuration>
+						<environments>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>macosx</os>
+								<ws>cocoa</ws>
+								<arch>x86_64</arch>
+							</environment>
+						</environments>
+						<executionEnvironment>${dep.jre.tp.resolution}</executionEnvironment>
+						<target>
+							<artifact>
+								<groupId>${addon.tp.groupId}</groupId>
+								<artifactId>${addon.tp.artifactId}</artifactId>
+								<version>${addon.tp.version}</version>
+								<classifier>${addon.tp.classifier}</classifier>
+							</artifact>
+						</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-eclipse-plugin</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<executions>
+						<!-- Execution that turns a p2 repository into a dropins directory. -->
+						<execution>
+							<id>create-dropins</id>
+							<goals>
+								<goal>eclipse-run</goal>
+							</goals>
+							<!-- Child modules have to set the phase to activate this execution. -->
+							<phase>none</phase>
+							<configuration>
+								<repositories>
+									<repository>
+										<id>${eclipse.platform.repository.id}</id>
+										<layout>p2</layout>
+										<url>${eclipse.platform.repository.url}</url>
+									</repository>
+								</repositories>
+								<dependencies>
+									<dependency>
+										<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
+										<type>eclipse-plugin</type>
+									</dependency>
+									<dependency>
+										<artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
+										<type>eclipse-feature</type>
+									</dependency>
+									<dependency>
+										<artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
+										<type>eclipse-feature</type>
+									</dependency>
+									<dependency>
+										<artifactId>org.apache.felix.scr</artifactId>
+										<type>eclipse-plugin</type>
+									</dependency>
+								</dependencies>
+								<executionEnvironment>${dep.jre.dropins.creation}</executionEnvironment>
+								<applicationArgs>
+									<arg>-application</arg>
+									<arg>org.eclipse.equinox.p2.repository.repo2runnable</arg>
+									<arg>-source</arg>
+									<arg>file:${project.build.directory}/repository</arg>
+									<arg>-destination</arg>
+									<arg>${project.build.directory}/${addon.name}/eclipse</arg>
+								</applicationArgs>
+							</configuration>
+						</execution>
+						<!-- Execution that generates an Eclipse Target Platform file from a Target Platform Definition file. -->
+						<execution>
+							<id>generate.target</id>
+							<goals>
+								<goal>eclipse-run</goal>
+							</goals>
+							<!-- Child modules have to set the phase to activate this execution. -->
+							<phase>none</phase>
+							<configuration>
+								<repositories>
+									<repository>
+										<id>${eclipse.platform.repository.id}</id>
+										<layout>p2</layout>
+										<url>${eclipse.platform.repository.url}</url>
+									</repository>
+									<repository>
+										<id>${eclipse.cbi.tpd.repository.id}</id>
+										<layout>p2</layout>
+										<url>${eclipse.cbi.tpd.repository.url}</url>
+									</repository>
+								</repositories>
+								<dependencies>
+									<dependency>
+										<artifactId>org.eclipse.cbi.targetplatform.feature</artifactId>
+										<type>eclipse-feature</type>
+									</dependency>
+									<dependency>
+										<artifactId>org.eclipse.equinox.p2.sdk</artifactId>
+										<type>eclipse-feature</type>
+									</dependency>
+								</dependencies>
+								<executionEnvironment>${dep.jre.tp.generation}</executionEnvironment>
+								<applicationArgs>
+									<arg>-application</arg>
+									<arg>${eclipse.cbi.tpd.converter.application.name}</arg>
+									<arg>${addon.tpd.path}</arg>
+								</applicationArgs>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-maven-plugin</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<extensions>true</extensions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-plugin</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<executions>
+						<execution>
+							<!-- Don't attach (default) metadata before the source-feature execution. -->
+							<id>default-p2-metadata-default</id>
+							<configuration>
+								<attachP2Metadata>false</attachP2Metadata>
+							</configuration>
+						</execution>
+						<execution>
+							<id>attach-p2-metadata</id>
+							<goals>
+								<goal>p2-metadata</goal>
+							</goals>
+							<phase>package</phase>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-repository-plugin</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<configuration>
+						<includeAllSources>true</includeAllSources>
+						<finalName>${addon.repository.name}</finalName>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-packaging-plugin</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<configuration>
+						<sourceReferences>
+							<generate>true</generate>
+						</sourceReferences>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.eclipse.tycho.extras</groupId>
+							<artifactId>tycho-sourceref-jgit</artifactId>
+							<version>${dep.plugin.tycho.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-source-plugin</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<configuration>
+						<strictSrcIncludes>false</strictSrcIncludes>
+					</configuration>
+					<executions>
+						<execution>
+							<id>plugin-source</id>
+							<goals>
+								<goal>plugin-source</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-surefire-plugin</artifactId>
+					<version>${dep.plugin.tycho.version}</version>
+					<configuration>
+						<skip>${build.skip.tests.ju}</skip>
+						<product>${capella.product.id}</product>
+						<application>${capella.application.id}</application>
+						<useUIHarness>true</useUIHarness>
+						<useUIThread>true</useUIThread>
+						<includes>${addon.tests.patterns}</includes>
+						<dependencies>
+							<!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=462862 -->
+							<dependency>
+								<type>eclipse-plugin</type>
+								<artifactId>org.eclipse.equinox.event</artifactId>
+								<version>0.0.0</version>
+							</dependency>
+						</dependencies>
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+
+		<plugins>
+			<!-- Uses the Target Platform as dependencies -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+			</plugin>
+			<!-- Formats the pom.xml files consistently upon every build. -->
+			<plugin>
+				<groupId>com.github.ekryd.sortpom</groupId>
+				<artifactId>sortpom-maven-plugin</artifactId>
+			</plugin>
+			<!-- Enables Maven extensions, so we can use pomless builds. -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+			</plugin>
+			<!-- Produces artifacts for the sources of our bundles and features. -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+			</plugin>
+			<!-- Produces the p2 metadata for our bundles and features. -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+			</plugin>
+			<!-- Produces the jars of our bundles and features. -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<reporting></reporting>
+
+	<profiles>
+		<profile>
+			<id>junit</id>
+			<properties>
+				<addon.tests.patterns>**/*Tests.java, **/*TestSuite.java</addon.tests.patterns>
+				<build.skip.tests.ju>false</build.skip.tests.ju>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>rcptt</id>
+			<properties>
+				<build.skip.tests.rcptt>false</build.skip.tests.rcptt>
+				<dep.plugin.rcptt.execTimeout>3600</dep.plugin.rcptt.execTimeout>
+				<dep.plugin.rcptt.testExecTimeout>300</dep.plugin.rcptt.testExecTimeout>
+			</properties>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>rcptt-releases</id>
+					<name>RCPTT Maven repository</name>
+					<url>https://repo.eclipse.org/content/repositories/rcptt-releases/</url>
+				</pluginRepository>
+			</pluginRepositories>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.rcptt</groupId>
+							<artifactId>rcptt-maven-plugin</artifactId>
+							<version>${dep.plugin.rcptt.version}</version>
+							<extensions>true</extensions>
+							<configuration>
+								<skip>${build.skip.tests.rcptt}</skip>
+								<testFailureIgnore>true</testFailureIgnore>
+								<runner>
+									<version>${dep.plugin.rcptt.version}</version>
+									<vmArgs>
+										<vmArg>-Xms256m</vmArg>
+										<vmArg>-Xmx3g</vmArg>
+									</vmArgs>
+								</runner>
+								<testOptions>
+									<execTimeout>${dep.plugin.rcptt.execTimeout}</execTimeout>
+									<testExecTimeout>${dep.plugin.rcptt.testExecTimeout}</testExecTimeout>
+								</testOptions>
+								<suites>
+									<suite>AllTestCases</suite>
+								</suites>
+								<aut>
+									<explicit>${maven.multiModuleProjectDirectory}/capella</explicit>
+									<vmArgs>
+										<vmArg>${argLine}</vmArg>
+									</vmArgs>
+								</aut>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.rcptt</groupId>
+						<artifactId>rcptt-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>sbom</id>
+			<properties>
+				<build.skip.sbom>true</build.skip.sbom>
+			</properties>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.cyclonedx</groupId>
+							<artifactId>cyclonedx-maven-plugin</artifactId>
+							<version>${dep.plugin.cyclonedx.version}</version>
+							<configuration>
+								<skip>${build.skip.sbom}</skip>
+								<schemaVersion>${dep.plugin.cyclonedx.schema.version}</schemaVersion>
+							</configuration>
+							<dependencies>
+								<dependency>
+									<groupId>org.eclipse.tycho</groupId>
+									<artifactId>tycho-sbom</artifactId>
+									<version>${dep.plugin.tycho.version}</version>
+								</dependency>
+							</dependencies>
+							<executions>
+								<execution>
+									<id>create-bom</id>
+									<goals>
+										<goal>makeBom</goal>
+									</goals>
+									<phase>package</phase>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.cyclonedx</groupId>
+						<artifactId>cyclonedx-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>sign</id>
+			<activation>
+				<property>
+					<name>sign</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<pluginRepositories>
+				<pluginRepository>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>cbi</id>
+					<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
+				</pluginRepository>
+			</pluginRepositories>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.cbi.maven.plugins</groupId>
+							<artifactId>eclipse-jarsigner-plugin</artifactId>
+							<version>${dep.plugin.jarsigner.version}</version>
+							<executions>
+								<execution>
+									<id>sign</id>
+									<goals>
+										<goal>sign</goal>
+									</goals>
+									<phase>package</phase>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign</id>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
